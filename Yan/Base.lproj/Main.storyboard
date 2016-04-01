@@ -3,12 +3,24 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="LucidaGrande.ttc">
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--Root View Controller-->
         <scene sceneID="9ga-sI-ETx">
             <objects>
-                <viewController storyboardIdentifier="root" id="CTA-Pa-3Kh" customClass="RootViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="root" useStoryboardIdentifierAsRestorationIdentifier="YES" id="CTA-Pa-3Kh" customClass="RootViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DZR-j4-7eq"/>
                         <viewControllerLayoutGuide type="bottom" id="8Jp-xd-cFu"/>
@@ -27,7 +39,7 @@
         <!--Navigation Controller-->
         <scene sceneID="791-Lu-ifa">
             <objects>
-                <navigationController storyboardIdentifier="navigation" id="A6N-26-CCc" customClass="NavigationController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navigation" useStoryboardIdentifierAsRestorationIdentifier="YES" id="A6N-26-CCc" customClass="NavigationController" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VHv-cn-KVZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -43,7 +55,7 @@
         <!--Login View Controller-->
         <scene sceneID="ima-Ka-scU">
             <objects>
-                <viewController id="GYE-FS-QZc" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="login" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GYE-FS-QZc" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9FK-XD-Ecl"/>
                         <viewControllerLayoutGuide type="bottom" id="V9t-SI-71T"/>
@@ -52,19 +64,98 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5l-Oz-hwH">
-                                <rect key="frame" x="120" y="116" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5l-Oz-hwH">
+                                <rect key="frame" x="20" y="130" width="560" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="eCI-gk-SoN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="20"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0wm-Rt-b6b">
-                                <rect key="frame" x="152" y="145" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0wm-Rt-b6b">
+                                <rect key="frame" x="20" y="172" width="560" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="EqT-f7-miR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRK-gL-wTg">
+                                <rect key="frame" x="20" y="220" width="560" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="fNH-4b-b6Y"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="20"/>
+                                <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Ux-D0-hJB">
+                                <rect key="frame" x="20" y="262" width="560" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="aGG-bi-t9T"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UV-eB-qw7">
+                                <rect key="frame" x="20" y="324" width="560" height="40"/>
+                                <color key="backgroundColor" red="0.58431372549019611" green="0.58431372549019611" blue="0.58431372549019611" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="gez-Es-T7J"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="20"/>
+                                <state key="normal" title="LOGIN">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Yan! account yet? Click here to register" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39m-40-aey">
+                                <rect key="frame" x="20" y="420" width="560" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="MS0-TA-Lpp"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="sae-a1-adF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="20"/>
+                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rtf-cf-8sL">
+                                <rect key="frame" x="20" y="372" width="560" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="zJ4-RB-IpX"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="20"/>
+                                <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="39m-40-aey" firstAttribute="top" secondItem="Rtf-cf-8sL" secondAttribute="bottom" constant="8" id="03s-WN-khb"/>
+                            <constraint firstItem="Rtf-cf-8sL" firstAttribute="trailing" secondItem="jtT-8J-wsE" secondAttribute="trailingMargin" id="0iY-MJ-y3e"/>
+                            <constraint firstItem="1Ux-D0-hJB" firstAttribute="trailing" secondItem="jtT-8J-wsE" secondAttribute="trailingMargin" id="4CL-eK-Uw6"/>
+                            <constraint firstItem="Rtf-cf-8sL" firstAttribute="top" secondItem="7UV-eB-qw7" secondAttribute="bottom" constant="8" id="4x5-QV-EQW"/>
+                            <constraint firstItem="0wm-Rt-b6b" firstAttribute="top" secondItem="i5l-Oz-hwH" secondAttribute="bottom" constant="8" id="8tk-Je-7rA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="i5l-Oz-hwH" secondAttribute="trailing" id="LYI-EY-YUF"/>
+                            <constraint firstItem="i5l-Oz-hwH" firstAttribute="top" secondItem="9FK-XD-Ecl" secondAttribute="bottom" constant="66" id="OXk-Ag-lzd"/>
+                            <constraint firstItem="1Ux-D0-hJB" firstAttribute="top" secondItem="hRK-gL-wTg" secondAttribute="bottom" constant="8" id="RNt-fZ-rkS"/>
+                            <constraint firstItem="i5l-Oz-hwH" firstAttribute="leading" secondItem="jtT-8J-wsE" secondAttribute="leadingMargin" id="ZrZ-I8-Kmh"/>
+                            <constraint firstItem="hRK-gL-wTg" firstAttribute="top" secondItem="0wm-Rt-b6b" secondAttribute="bottom" constant="8" id="bQa-q8-hgZ"/>
+                            <constraint firstItem="hRK-gL-wTg" firstAttribute="trailing" secondItem="jtT-8J-wsE" secondAttribute="trailingMargin" id="cdu-RS-ykS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7UV-eB-qw7" secondAttribute="trailing" id="chL-4T-9UM"/>
+                            <constraint firstItem="39m-40-aey" firstAttribute="leading" secondItem="Rtf-cf-8sL" secondAttribute="leading" id="dtq-Od-bs9"/>
+                            <constraint firstItem="Rtf-cf-8sL" firstAttribute="leading" secondItem="jtT-8J-wsE" secondAttribute="leadingMargin" id="f3d-by-HEF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="39m-40-aey" secondAttribute="trailing" id="hI5-yJ-yiQ"/>
+                            <constraint firstItem="1Ux-D0-hJB" firstAttribute="top" secondItem="hRK-gL-wTg" secondAttribute="bottom" constant="8" id="jXd-KK-41w"/>
+                            <constraint firstItem="hRK-gL-wTg" firstAttribute="leading" secondItem="i5l-Oz-hwH" secondAttribute="leading" id="mzD-pu-9wP"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0wm-Rt-b6b" secondAttribute="trailing" id="nWz-Xk-cPA"/>
+                            <constraint firstItem="0wm-Rt-b6b" firstAttribute="leading" secondItem="i5l-Oz-hwH" secondAttribute="leading" id="p0h-OZ-glS"/>
+                            <constraint firstItem="1Ux-D0-hJB" firstAttribute="leading" secondItem="i5l-Oz-hwH" secondAttribute="leading" id="qIY-u5-aGa"/>
+                            <constraint firstItem="7UV-eB-qw7" firstAttribute="leading" secondItem="1Ux-D0-hJB" secondAttribute="leading" id="sNP-vn-ugU"/>
+                            <constraint firstItem="7UV-eB-qw7" firstAttribute="top" secondItem="1Ux-D0-hJB" secondAttribute="bottom" constant="22" id="xbk-Ib-Umh"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cRm-Lj-a7b"/>
                 </viewController>
@@ -75,13 +166,13 @@
         <!--Drawer Table View Controller-->
         <scene sceneID="2Oi-cg-Z9P">
             <objects>
-                <tableViewController storyboardIdentifier="drawer" id="Cz2-eA-rEC" customClass="DrawerTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="drawer" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Cz2-eA-rEC" customClass="DrawerTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Hkh-GO-fOr">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.1647058824" green="0.25490196079999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="F2c-AR-6Uj">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="F2c-AR-6Uj">
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F2c-AR-6Uj" id="dNz-C2-Xbc">

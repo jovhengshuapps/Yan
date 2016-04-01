@@ -10,22 +10,26 @@
 #define Config_h
 
 // IMPORTS
+
+#import <UIKit/UIKit.h>
 #import "AFNetworking.h"
-#import "LGSideMenuController.h"
+#import "REFrostedViewController.h"
 #import "DrawerTableViewController.h"
 #import "RootViewController.h"
+#import "NavigationController.h"
 
 // MACROS
 
-#define UIColorFromRGB(rgbValue)                        [UIColor \
-                                                        colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
-                                                        green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
-                                                        blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+#define UIColorFromRGB(rgbValue)                                        [UIColor \
+                                                                        colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+                                                                        green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
+                                                                        blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-#define TextAttributes(fontName,fontColor, fontSize)    [NSDictionary dictionaryWithObjectsAndKeys: \
-                                                        UIColorFromRGB(fontColor), NSForegroundColorAttributeName,\
-                                                        [UIFont fontWithName:[NSString stringWithFormat:@"%@",fontName] size:fontSize], NSFontAttributeName,\
-                                                        nil]
+#define TextAttributes(fontName, fontColor, fontSize)        [NSDictionary dictionaryWithObjectsAndKeys: \
+                                                                        UIColorFromRGB(fontColor), NSForegroundColorAttributeName,\
+                                                                        [UIFont fontWithName:[NSString stringWithFormat:@"%@",fontName] size:fontSize], NSFontAttributeName,\
+                                                                        \
+                                                                        nil]
 
 // CONFIGURATIONS
 

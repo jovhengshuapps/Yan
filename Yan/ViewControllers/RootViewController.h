@@ -8,6 +8,6 @@
 
 #import "Config.h"
 
-@interface RootViewController : LGSideMenuController
+@interface RootViewController : REFrostedViewController
 
 @end

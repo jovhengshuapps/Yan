@@ -10,50 +10,17 @@
 
 @interface RootViewController ()
 
-@property (strong, nonatomic) DrawerTableViewController *drawerViewController;
 @end
 
 @implementation RootViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    [self setLeftViewAnimationSpeed:0.5f];
-    [self setLeftViewEnabledWithWidth:250.0f presentationStyle:LGSideMenuPresentationStyleSlideAbove alwaysVisibleOptions:LGSideMenuAlwaysVisibleOnNone];
-    
-    _drawerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"drawer"];
-    
-    [_drawerViewController.tableView reloadData];
-    [self.leftView addSubview:_drawerViewController.tableView];
-    
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    
-    UINavigationController *navigationController = [storyboard instantiateViewControllerWithIdentifier:@"navigation"];
-    
-    self.rootViewController = navigationController;
-    
-    UIWindow *window = [UIApplication sharedApplication].delegate.window;
-    
-    window.rootViewController = self;
-    
-    [UIView transitionWithView:window
-                      duration:0.3
-                       options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:nil
-                    completion:nil];
-    
-}
-
-
-- (void)leftViewWillLayoutSubviewsWithSize:(CGSize)size
+- (void)awakeFromNib
 {
-    [super leftViewWillLayoutSubviewsWithSize:size];
-    
-    
-    
-    
+    self.contentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"navigation"];
+    self.menuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"drawer"];
+    self.menuViewSize = CGSizeMake(190.0f, self.view.bounds.size.height);
+    self.limitMenuViewSize = YES;
 }
+
 
 @end

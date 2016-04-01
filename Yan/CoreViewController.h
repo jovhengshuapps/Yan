@@ -11,4 +11,5 @@
 
 @interface CoreViewController : UIViewController
 
+- (void) showTitleBar:(NSString*)title;
 @end

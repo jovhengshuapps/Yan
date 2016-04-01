@@ -35,7 +35,8 @@
 		336424C01CAE313A00E0E156 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424AC1CAE313A00E0E156 /* UIProgressView+AFNetworking.m */; };
 		336424C11CAE313A00E0E156 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424AE1CAE313A00E0E156 /* UIRefreshControl+AFNetworking.m */; };
 		336424C21CAE313A00E0E156 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424B01CAE313A00E0E156 /* UIWebView+AFNetworking.m */; };
-		336424C31CAE313A00E0E156 /* LGConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424B31CAE313A00E0E156 /* LGConnection.m */; };
+		336424E71CAE354F00E0E156 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424C61CAE354F00E0E156 /* Reachability.m */; };
+		336424E81CAE354F00E0E156 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424C91CAE354F00E0E156 /* XMLReader.m */; };
 		3394A39E1CADF66300472030 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A3931CADF66300472030 /* RECommonFunctions.m */; };
 		3394A39F1CADF66300472030 /* REFrostedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A3951CADF66300472030 /* REFrostedContainerViewController.m */; };
 		3394A3A01CADF66300472030 /* REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A3971CADF66300472030 /* REFrostedViewController.m */; };
@@ -122,8 +123,10 @@
 		336424AE1CAE313A00E0E156 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		336424AF1CAE313A00E0E156 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		336424B01CAE313A00E0E156 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
-		336424B21CAE313A00E0E156 /* LGConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGConnection.h; sourceTree = "<group>"; };
-		336424B31CAE313A00E0E156 /* LGConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGConnection.m; sourceTree = "<group>"; };
+		336424C51CAE354F00E0E156 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		336424C61CAE354F00E0E156 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		336424C81CAE354F00E0E156 /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
+		336424C91CAE354F00E0E156 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
 		3394A3921CADF66300472030 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
 		3394A3931CADF66300472030 /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
 		3394A3941CADF66300472030 /* REFrostedContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REFrostedContainerViewController.h; sourceTree = "<group>"; };
@@ -236,8 +239,9 @@
 		33599B791CAD26A900366C34 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				336424C41CAE354F00E0E156 /* Reachability */,
+				336424C71CAE354F00E0E156 /* XMLReader */,
 				3364248E1CAE313A00E0E156 /* AFNetworking */,
-				336424B11CAE313A00E0E156 /* LGConnection */,
 				3394A3911CADF66300472030 /* REFrostedViewController */,
 			);
 			path = Libraries;
@@ -304,13 +308,22 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
-		336424B11CAE313A00E0E156 /* LGConnection */ = {
+		336424C41CAE354F00E0E156 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
-				336424B21CAE313A00E0E156 /* LGConnection.h */,
-				336424B31CAE313A00E0E156 /* LGConnection.m */,
+				336424C51CAE354F00E0E156 /* Reachability.h */,
+				336424C61CAE354F00E0E156 /* Reachability.m */,
 			);
-			path = LGConnection;
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		336424C71CAE354F00E0E156 /* XMLReader */ = {
+			isa = PBXGroup;
+			children = (
+				336424C81CAE354F00E0E156 /* XMLReader.h */,
+				336424C91CAE354F00E0E156 /* XMLReader.m */,
+			);
+			path = XMLReader;
 			sourceTree = "<group>";
 		};
 		3394A3911CADF66300472030 /* REFrostedViewController */ = {
@@ -465,7 +478,6 @@
 			files = (
 				3394A3A31CADF66300472030 /* UIViewController+REFrostedViewController.m in Sources */,
 				336424BF1CAE313A00E0E156 /* UIImageView+AFNetworking.m in Sources */,
-				336424C31CAE313A00E0E156 /* LGConnection.m in Sources */,
 				336424BE1CAE313A00E0E156 /* UIButton+AFNetworking.m in Sources */,
 				33599BBF1CAD444500366C34 /* LoginViewController.m in Sources */,
 				3394A39F1CADF66300472030 /* REFrostedContainerViewController.m in Sources */,
@@ -473,7 +485,9 @@
 				3394A39E1CADF66300472030 /* RECommonFunctions.m in Sources */,
 				336424B91CAE313A00E0E156 /* AFURLSessionManager.m in Sources */,
 				336424BD1CAE313A00E0E156 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				336424E81CAE354F00E0E156 /* XMLReader.m in Sources */,
 				33599BB61CAD2E9A00366C34 /* DrawerTableViewController.m in Sources */,
+				336424E71CAE354F00E0E156 /* Reachability.m in Sources */,
 				336424B51CAE313A00E0E156 /* AFNetworkReachabilityManager.m in Sources */,
 				33599B481CAD259100366C34 /* AppDelegate.m in Sources */,
 				3394A3A01CADF66300472030 /* REFrostedViewController.m in Sources */,

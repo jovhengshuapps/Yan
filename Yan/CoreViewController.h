@@ -6,10 +6,9 @@
 //  Copyright © 2016 JoVhengshua Apps. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "Config.h"
 
-@interface CoreViewController : UIViewController
+@interface CoreViewController : UIViewController <AlertViewDelegate>
 
 - (void) showTitleBar:(NSString*)title;
 @end

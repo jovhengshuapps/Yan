@@ -19,7 +19,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"loaded");
     
     _titlesArray = @[@"LOGOUT",
                      @"SETTINGS",

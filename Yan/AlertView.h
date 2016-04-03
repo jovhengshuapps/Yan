@@ -6,7 +6,7 @@
 //  Copyright © 2016 JoVhengshua Apps. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "Config.h"
 
 @interface AlertView : UIView
 
@@ -14,7 +14,7 @@
 @property(nullable,nonatomic,copy) NSString *message;
 @property(nullable, nonatomic,copy) NSArray *buttonsArray;
 
-+ (instancetype) showAlertWithMessage:(nullable NSString*)message delegate:(nullable id)delegate buttons:(nullable NSArray*)buttonsArray;
+- (instancetype) initAlertWithMessage:(nullable NSString*)aMessage delegate:(nullable id)aDelegate buttons:(nullable NSArray*)aButtonsArray;
 
 - (void) showAlertView;
 

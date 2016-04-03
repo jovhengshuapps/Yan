@@ -17,6 +17,7 @@
 #import "DrawerTableViewController.h"
 #import "RootViewController.h"
 #import "NavigationController.h"
+#import "AlertView.h"
 
 // MACROS
 
@@ -25,11 +26,12 @@
                                                                         green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
                                                                         blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-#define TextAttributes(fontName, fontColor, fontSize)        [NSDictionary dictionaryWithObjectsAndKeys: \
+#define TextAttributes(fontName, fontColor, fontSize)                   [NSDictionary dictionaryWithObjectsAndKeys: \
                                                                         UIColorFromRGB(fontColor), NSForegroundColorAttributeName,\
                                                                         [UIFont fontWithName:[NSString stringWithFormat:@"%@",fontName] size:fontSize], NSFontAttributeName,\
                                                                         \
                                                                         nil]
+#define KEYWINDOW                                                       [UIApplication sharedApplication].keyWindow
 
 // CONFIGURATIONS
 

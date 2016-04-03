@@ -13,8 +13,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.buttonLogin.layer.cornerRadius = 5.0f;
+    
     [self showTitleBar:@"SIGN IN"];
     
+}
+- (IBAction)loginPressed:(id)sender {
+    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"This is a text message\n\nThank you!" delegate:self buttons:@[@"OK",@"Close"]];
+    [alert showAlertView];
+}
+
+- (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSLog(@"Clicked index:%li",(long)buttonIndex);
 }
 
 @end

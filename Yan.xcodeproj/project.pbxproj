@@ -44,6 +44,7 @@
 		3394A3A21CADF66300472030 /* UIView+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A39B1CADF66300472030 /* UIView+REFrostedViewController.m */; };
 		3394A3A31CADF66300472030 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A39D1CADF66300472030 /* UIViewController+REFrostedViewController.m */; };
 		3394A3A51CAE078100472030 /* LucidaGrande.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 3394A3A41CAE078100472030 /* LucidaGrande.ttc */; };
+		33C142451CB1512500B57041 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C142441CB1512500B57041 /* AlertView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +141,8 @@
 		3394A39C1CADF66300472030 /* UIViewController+REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+REFrostedViewController.h"; sourceTree = "<group>"; };
 		3394A39D1CADF66300472030 /* UIViewController+REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+REFrostedViewController.m"; sourceTree = "<group>"; };
 		3394A3A41CAE078100472030 /* LucidaGrande.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = LucidaGrande.ttc; sourceTree = "<group>"; };
+		33C142431CB1512500B57041 /* AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
+		33C142441CB1512500B57041 /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +201,8 @@
 				33599BAD1CAD274E00366C34 /* CoreViewController.m */,
 				33599BC01CAD4CD600366C34 /* NavigationController.h */,
 				33599BC11CAD4CD600366C34 /* NavigationController.m */,
+				33C142431CB1512500B57041 /* AlertView.h */,
+				33C142441CB1512500B57041 /* AlertView.m */,
 				33599B4C1CAD259100366C34 /* Main.storyboard */,
 				33599B521CAD259100366C34 /* Assets.xcassets */,
 				33599B541CAD259100366C34 /* LaunchScreen.storyboard */,
@@ -501,6 +506,7 @@
 				33599BB31CAD2D9000366C34 /* RootViewController.m in Sources */,
 				3394A3A11CADF66300472030 /* UIImage+REFrostedViewController.m in Sources */,
 				336424C11CAE313A00E0E156 /* UIRefreshControl+AFNetworking.m in Sources */,
+				33C142451CB1512500B57041 /* AlertView.m in Sources */,
 				336424C01CAE313A00E0E156 /* UIProgressView+AFNetworking.m in Sources */,
 				336424B41CAE313A00E0E156 /* AFHTTPSessionManager.m in Sources */,
 				336424C21CAE313A00E0E156 /* UIWebView+AFNetworking.m in Sources */,

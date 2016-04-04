@@ -11,4 +11,7 @@
 @interface CoreViewController : UIViewController <AlertViewDelegate>
 
 - (void) showTitleBar:(NSString*)title;
+- (void) hideTitleBar;
+- (BOOL) userLoggedIn;
+
 @end

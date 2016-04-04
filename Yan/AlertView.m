@@ -79,10 +79,12 @@
     if (_buttonsArray == nil || [_buttonsArray count] < 1) {
         //default button close
         UIButton *close = [UIButton buttonWithType:UIButtonTypeCustom];
-        close.backgroundColor = UIColorFromRGB(0xFFAE42);
+        close.backgroundColor = UIColorFromRGB(0x959595);
         
-        close.layer.borderColor = [UIColorFromRGB(0x959595) CGColor];
+        close.layer.borderColor = [UIColorFromRGB(0x727272) CGColor];
         close.layer.borderWidth = 1.0f;
+        
+        close.layer.cornerRadius = 5.0f;
         
         [close setTitle:@"Close" forState:UIControlStateNormal];
         [close setTitleColor:UIColorFromRGB(0x333333) forState:UIControlStateNormal];

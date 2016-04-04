@@ -7,6 +7,7 @@
 //
 
 #import "DrawerTableViewController.h"
+#import "LoginViewController.h"
 
 @interface DrawerTableViewController ()
 
@@ -20,7 +21,7 @@
 {
     [super viewDidLoad];
     
-    _titlesArray = @[@"LOGOUT",
+    _titlesArray = @[([self userLoggedIn])?@"LOGOUT":@"LOGIN",
                      @"SETTINGS",
                      @"FAVORITES",
                      @"RECENT"];
@@ -78,6 +79,14 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     [self.frostedViewController hideMenuViewController];
+    
+    if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"LOGIN"]) {
+        LoginViewController *loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
+        loginViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+        loginViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self.navigationController pushViewController:loginViewController animated:YES];
+//        [self presentViewController:loginViewController animated:YES completion:^{}];
+    }
 }
 
 #pragma mark -
@@ -113,5 +122,12 @@
     return cell;
 }
 
+
+
+
+- (BOOL) userLoggedIn {
+    // This should return the user details not just a boolean
+    return NO;
+}
 
 @end

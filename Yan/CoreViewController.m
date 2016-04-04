@@ -10,6 +10,8 @@
 
 @interface CoreViewController ()
 @property (strong, nonatomic) UILabel *titleLabel;
+@property (strong, nonatomic) UIView *titleBarView;
+@property (strong, nonatomic) UIBarButtonItem *menuBarItem;
 
 @end
 
@@ -23,23 +25,24 @@
     self.title = @"Yan";
     
     //Setup Title Bar
-    UIView *titleBarView = [[UIView alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.view.bounds.size.width, self.navigationController.navigationBar.frame.size.height)];
-    titleBarView.backgroundColor = UIColorFromRGB(0x333333);
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, titleBarView.frame.size.width, titleBarView.frame.size.height)];
+    _titleBarView = [[UIView alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.view.bounds.size.width, self.navigationController.navigationBar.frame.size.height)];
+    _titleBarView.backgroundColor = UIColorFromRGB(0x333333);
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _titleBarView.frame.size.width, _titleBarView.frame.size.height)];
     
     _titleLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:@"..." attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), 24.0f)];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
-    [titleBarView addSubview:_titleLabel];
-    [self.navigationController.navigationBar addSubview:titleBarView];
+    [_titleBarView addSubview:_titleLabel];
+    [self.navigationController.navigationBar addSubview:_titleBarView];
     
     
-    
-    UIBarButtonItem *menuBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"app-menu.png"] style:UIBarButtonItemStyleDone target:self action:@selector(openMenu)];
-    
-    UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"Yan"];
-    [item setLeftBarButtonItem:menuBarItem];
-    
-    [self.navigationController.navigationBar setItems:[NSArray arrayWithObjects:item, nil] animated:YES];
+    if (!_menuBarItem) {
+        _menuBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"app-menu.png"] style:UIBarButtonItemStyleDone target:self action:@selector(openMenu)];
+        
+        UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"Yan"];
+        [item setLeftBarButtonItem:_menuBarItem];
+        
+        [self.navigationController.navigationBar setItems:[NSArray arrayWithObjects:item, nil] animated:YES];
+    }
 }
 
 
@@ -64,7 +67,12 @@
 
 
 - (void) showTitleBar:(NSString*)title {
+    _titleBarView.hidden = NO;
     _titleLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:title attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), 24.0f)];
+}
+
+- (void) hideTitleBar {
+    _titleBarView.hidden = YES;
 }
 
 -(void) openMenu {
@@ -78,5 +86,10 @@
     //
     [self.frostedViewController presentMenuViewController];
     
+}
+
+- (BOOL) userLoggedIn {
+    // This should return the user details not just a boolean
+    return NO;
 }
 @end

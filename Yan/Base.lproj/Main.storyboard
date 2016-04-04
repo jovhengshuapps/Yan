@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CTA-Pa-3Kh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CTA-Pa-3Kh">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="LucidaGrande.ttc">
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
@@ -45,12 +47,72 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="GYE-FS-QZc" kind="relationship" relationship="rootViewController" id="MZh-aN-ffN"/>
+                        <segue destination="jUk-Vx-8B5" kind="relationship" relationship="rootViewController" id="VKM-KQ-L7Y"/>
+                        <segue destination="GYE-FS-QZc" kind="show" identifier="showLogin" id="s3m-xg-2io"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bRc-hS-p3d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="96" y="323"/>
+        </scene>
+        <!--Home View Controller-->
+        <scene sceneID="S5H-SM-Q64">
+            <objects>
+                <viewController storyboardIdentifier="home" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jUk-Vx-8B5" customClass="HomeViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MSb-wK-osH"/>
+                        <viewControllerLayoutGuide type="bottom" id="ecd-tU-mVt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bMm-dl-bE7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p5i-up-veA">
+                                <rect key="frame" x="35" y="390" width="530" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="vu0-bE-xTI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="24"/>
+                                <state key="normal" title="Order"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1d-Aw-aKe">
+                                <rect key="frame" x="35" y="448" width="530" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="oJB-xa-mcf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="24"/>
+                                <state key="normal" title="Make a Reservation"/>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yan-logo" translatesAutoresizingMaskIntoConstraints="NO" id="qge-Y2-2oD">
+                                <rect key="frame" x="35" y="72" width="530" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="hL7-vP-Bcb"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="W1d-Aw-aKe" firstAttribute="leading" secondItem="qge-Y2-2oD" secondAttribute="leading" id="1X4-aY-MEc"/>
+                            <constraint firstItem="W1d-Aw-aKe" firstAttribute="trailing" secondItem="qge-Y2-2oD" secondAttribute="trailing" id="5nU-su-JDX"/>
+                            <constraint firstItem="p5i-up-veA" firstAttribute="top" secondItem="qge-Y2-2oD" secondAttribute="bottom" constant="18" id="KpL-8s-5kw"/>
+                            <constraint firstItem="W1d-Aw-aKe" firstAttribute="centerX" secondItem="bMm-dl-bE7" secondAttribute="centerX" id="LHa-cM-tnQ"/>
+                            <constraint firstItem="p5i-up-veA" firstAttribute="leading" secondItem="qge-Y2-2oD" secondAttribute="leading" id="WYG-41-erw"/>
+                            <constraint firstItem="W1d-Aw-aKe" firstAttribute="top" secondItem="p5i-up-veA" secondAttribute="bottom" constant="8" id="XeK-uP-KMY"/>
+                            <constraint firstItem="p5i-up-veA" firstAttribute="trailing" secondItem="qge-Y2-2oD" secondAttribute="trailing" id="Xsp-Ly-pAL"/>
+                            <constraint firstItem="qge-Y2-2oD" firstAttribute="top" secondItem="MSb-wK-osH" secondAttribute="bottom" constant="8" id="YAI-5D-d66"/>
+                            <constraint firstItem="p5i-up-veA" firstAttribute="centerX" secondItem="bMm-dl-bE7" secondAttribute="centerX" id="Ypb-V5-0kB"/>
+                            <constraint firstItem="qge-Y2-2oD" firstAttribute="leading" secondItem="bMm-dl-bE7" secondAttribute="leadingMargin" constant="15" id="jsz-Ir-6Qa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qge-Y2-2oD" secondAttribute="trailing" constant="15" id="o3p-xT-1bL"/>
+                            <constraint firstItem="qge-Y2-2oD" firstAttribute="centerX" secondItem="bMm-dl-bE7" secondAttribute="centerX" id="tpo-Tt-ZvY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="P7h-xG-Rai"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K90-dR-bdn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="775" y="316"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="ima-Ka-scU">
@@ -167,7 +229,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1pW-32-5xe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="759" y="319"/>
+            <point key="canvasLocation" x="803" y="1121"/>
         </scene>
         <!--Drawer Table View Controller-->
         <scene sceneID="2Oi-cg-Z9P">
@@ -201,4 +263,7 @@
             <point key="canvasLocation" x="-516" y="996"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="yan-logo" width="1024" height="648"/>
+    </resources>
 </document>

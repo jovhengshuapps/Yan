@@ -37,6 +37,7 @@
 		336424C21CAE313A00E0E156 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424B01CAE313A00E0E156 /* UIWebView+AFNetworking.m */; };
 		336424E71CAE354F00E0E156 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424C61CAE354F00E0E156 /* Reachability.m */; };
 		336424E81CAE354F00E0E156 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424C91CAE354F00E0E156 /* XMLReader.m */; };
+		337516DF1CB2AC390065AB7A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337516DE1CB2AC390065AB7A /* HomeViewController.m */; };
 		3394A39E1CADF66300472030 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A3931CADF66300472030 /* RECommonFunctions.m */; };
 		3394A39F1CADF66300472030 /* REFrostedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A3951CADF66300472030 /* REFrostedContainerViewController.m */; };
 		3394A3A01CADF66300472030 /* REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A3971CADF66300472030 /* REFrostedViewController.m */; };
@@ -128,6 +129,8 @@
 		336424C61CAE354F00E0E156 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		336424C81CAE354F00E0E156 /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
 		336424C91CAE354F00E0E156 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
+		337516DD1CB2AC390065AB7A /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		337516DE1CB2AC390065AB7A /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		3394A3921CADF66300472030 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
 		3394A3931CADF66300472030 /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
 		3394A3941CADF66300472030 /* REFrostedContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REFrostedContainerViewController.h; sourceTree = "<group>"; };
@@ -257,6 +260,8 @@
 			children = (
 				33599BB11CAD2D9000366C34 /* RootViewController.h */,
 				33599BB21CAD2D9000366C34 /* RootViewController.m */,
+				337516DD1CB2AC390065AB7A /* HomeViewController.h */,
+				337516DE1CB2AC390065AB7A /* HomeViewController.m */,
 				33599BBD1CAD444500366C34 /* LoginViewController.h */,
 				33599BBE1CAD444500366C34 /* LoginViewController.m */,
 				33599BB41CAD2E9A00366C34 /* DrawerTableViewController.h */,
@@ -498,6 +503,7 @@
 				3394A3A01CADF66300472030 /* REFrostedViewController.m in Sources */,
 				336424B81CAE313A00E0E156 /* AFURLResponseSerialization.m in Sources */,
 				336424B71CAE313A00E0E156 /* AFURLRequestSerialization.m in Sources */,
+				337516DF1CB2AC390065AB7A /* HomeViewController.m in Sources */,
 				336424BC1CAE313A00E0E156 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				336424BA1CAE313A00E0E156 /* AFAutoPurgingImageCache.m in Sources */,
 				336424B61CAE313A00E0E156 /* AFSecurityPolicy.m in Sources */,

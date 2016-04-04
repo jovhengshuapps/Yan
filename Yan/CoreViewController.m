@@ -11,7 +11,6 @@
 @interface CoreViewController ()
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UIView *titleBarView;
-@property (strong, nonatomic) UIBarButtonItem *menuBarItem;
 
 @end
 
@@ -34,21 +33,18 @@
     [_titleBarView addSubview:_titleLabel];
     [self.navigationController.navigationBar addSubview:_titleBarView];
     
-    
-    if (!_menuBarItem) {
-        _menuBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"app-menu.png"] style:UIBarButtonItemStyleDone target:self action:@selector(openMenu)];
-        
-        UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"Yan"];
-        [item setLeftBarButtonItem:_menuBarItem];
-        
-        [self.navigationController.navigationBar setItems:[NSArray arrayWithObjects:item, nil] animated:YES];
-    }
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self hideTitleBar];
 }
 
 /*

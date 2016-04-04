@@ -12,9 +12,16 @@
 @implementation HomeViewController
 
 - (void)viewDidLoad {
+    
+    UIBarButtonItem *menuBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"app-menu.png"] style:UIBarButtonItemStyleDone target:self action:@selector(openMenu)];
+    
+    UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"Yan"];
+    [item setLeftBarButtonItem:menuBarItem];
+    
+    [self.navigationController.navigationBar setItems:[NSArray arrayWithObjects:item, nil] animated:YES];
+    
     [super viewDidLoad];
     
-    [self hideTitleBar];
     
     //check if logged in
     if (![self userLoggedIn]) {

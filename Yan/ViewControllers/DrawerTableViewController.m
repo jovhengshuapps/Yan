@@ -81,11 +81,7 @@
     [self.frostedViewController hideMenuViewController];
     
     if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"LOGIN"]) {
-        LoginViewController *loginViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"login"];
-        loginViewController.modalPresentationStyle = UIModalPresentationFormSheet;
-        loginViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        [self.navigationController pushViewController:loginViewController animated:YES];
-//        [self presentViewController:loginViewController animated:YES completion:^{}];
+        [self.frostedViewController.contentViewController performSegueWithIdentifier:@"showLogin" sender:self];
     }
 }
 

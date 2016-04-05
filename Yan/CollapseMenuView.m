@@ -13,6 +13,7 @@
 
 
 @property (strong, nonatomic) UIView *topBar;
+@property (strong, nonatomic) UIButton *topBarButton;
 @property (strong, nonatomic) UITableView *menuTableView;
 @property (strong, nonatomic) UIView *parentView;
 @property (strong, nonatomic) UIView *viewBackground;
@@ -20,6 +21,9 @@
 @property (assign, nonatomic) CGFloat positionYHidden;
 @property (assign, nonatomic) CGFloat sizeHeightShown;
 @property (assign, nonatomic) CGFloat sizeHeightHidden;
+@property (strong, nonatomic) NSMutableDictionary *subSections;
+@property (strong, nonatomic) NSMutableDictionary *sectionRows;
+@property (strong, nonatomic) NSMutableDictionary *subSectionsItems;
 
 @end
 
@@ -32,10 +36,12 @@
     }
     
     _delegate = nil;
-    _arrayContent = @[];
-        
-    _sectionHeaders = @[];
+    _content = @{};
     
+    _subSections = [NSMutableDictionary new];
+    _sectionRows = [NSMutableDictionary new];
+    _subSectionsItems = [NSMutableDictionary new];
+            
     _position = position;
     _cellHeight = 44.0f;
     
@@ -58,15 +64,15 @@
     
     _topBar = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.bounds.size.width, _cellHeight)];
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setBackgroundColor:[UIColor colorWithWhite:0.3f alpha:0.3f]];
-    [button addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
-    [button setTitle:@"Main Menu" forState:UIControlStateNormal];
+    _topBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_topBarButton setBackgroundColor:[UIColor colorWithWhite:0.3f alpha:0.3f]];
+    [_topBarButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+    [_topBarButton setTitle:@"MAIN MENU" forState:UIControlStateNormal];
     
-    [button setFrame:_topBar.frame];
-    [_topBar addSubview:button];
+    [_topBarButton setFrame:_topBar.frame];
+    [_topBar addSubview:_topBarButton];
     
-    _menuTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, _topBar.frame.size.height, self.frame.size.width, self.frame.size.height - _topBar.bounds.size.height) style:UITableViewStylePlain];
+    _menuTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, _topBar.frame.size.height, self.frame.size.width, _sizeHeightShown - _topBar.bounds.size.height) style:UITableViewStylePlain];
     
     _menuTableView.delegate = self;
     _menuTableView.dataSource = self;
@@ -85,6 +91,9 @@
     _viewBackground.alpha = 0.0f;
     [_parentView addSubview:_viewBackground];
     
+    UITapGestureRecognizer *tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideMenu)];
+    [_viewBackground addGestureRecognizer:tapBackground];
+    
     
     [UIView animateWithDuration:0.3f animations:^{
         _viewBackground.alpha = 1.0f;
@@ -95,7 +104,7 @@
         self.frame = frame;
         
     } completion:^(BOOL finished) {
-        
+        [_topBarButton addTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
         [_menuTableView reloadData];
     }];
 }
@@ -110,6 +119,7 @@
         self.frame = frame;
         
     } completion:^(BOOL finished) {
+        [_topBarButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
         [_viewBackground removeFromSuperview];
     }];
 }
@@ -121,67 +131,82 @@
 
 #pragma mark UITableView DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.arrayContent.count;
+    return [self.content allKeys].count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    NSString *key = (NSString*)[self.arrayContent[(NSUInteger)section] allKeys][(NSUInteger)section];
-    NSArray *subSections = [self.arrayContent[(NSUInteger) section] objectForKey:key];
+    NSString *key = (NSString*)[self.content allKeys][(NSUInteger)section];
+    NSDictionary *subSections = [self.content objectForKey:key];
+    [_subSections setObject:[subSections allKeys] forKey:key];
     
-    NSUInteger numberOfRows = subSections.count; // For second level section headers
-    NSLog(@"111111numberOfRows:%lu",(unsigned long)numberOfRows);
-    for (NSInteger i = 0; i < numberOfRows; i++) {
-        NSString *subSectionKey = (NSString*)[subSections[i] allKeys][i];
-        NSArray *rows = [subSections[i] objectForKey:subSectionKey];
+    NSUInteger numberOfRows = [subSections allKeys].count; // For second level section headers
+    NSUInteger sectionIndex = 0;
+    NSMutableArray *tempArray = [NSMutableArray new];
+    for (NSInteger i = 0; i < [subSections allKeys].count; i++) {
+        NSString *subSectionKey = (NSString*)[subSections allKeys][i];
+        NSArray *rows = [subSections objectForKey:subSectionKey];
+        [_subSectionsItems setObject:rows forKey:subSectionKey];
+        [tempArray addObject:subSectionKey];
+        [tempArray addObjectsFromArray:rows];
+        sectionIndex = rows.count;
         numberOfRows += rows.count; // For actual table rows
         
-        NSLog(@"22222222numberOfRows:%lu",(unsigned long)numberOfRows);
     }
+    [_sectionRows setObject:tempArray forKey:key];
     return numberOfRows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSMutableArray *sectionItems = self.arrayContent[(NSUInteger) indexPath.section];
-    NSMutableArray *sectionHeaders = self.sectionHeaders[(NSUInteger) indexPath.section];
-    NSIndexPath *itemAndSubsectionIndex = [self computeItemAndSubsectionIndexForIndexPath:indexPath];
-    NSUInteger subsectionIndex = (NSUInteger) itemAndSubsectionIndex.section;
-    NSInteger itemIndex = itemAndSubsectionIndex.row;
     
-    if (itemIndex < 0) {
+    NSString *key = (NSString*)[self.content allKeys][(NSUInteger)indexPath.section];
+    BOOL isSubSection = NO;
+    if ([[_subSections objectForKey:key] containsObject:[_sectionRows objectForKey:key][indexPath.row]]) {
+        isSubSection = YES;
+    }
+    
+    if (isSubSection) {
         // Section header
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SECTION_HEADER_CELL" forIndexPath:indexPath];
-        cell.textLabel.text = sectionHeaders[subsectionIndex];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SECTION_HEADER_CELL"];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SECTION_HEADER_CELL"];
+        }
+        cell.textLabel.text = [_sectionRows objectForKey:key][indexPath.row];
+        cell.contentView.backgroundColor = [UIColor colorWithWhite:0.2f alpha:0.1f];
         return cell;
     } else {
         // Row Item
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ROW_CONTENT_CELL" forIndexPath:indexPath];
-        cell.textLabel.text = sectionItems[subsectionIndex][itemIndex];
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ROW_CONTENT_CELL"];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ROW_CONTENT_CELL"];
+        }
+        cell.textLabel.text = [_sectionRows objectForKey:key][indexPath.row];
+        cell.contentView.backgroundColor = [UIColor colorWithWhite:0.8f alpha:0.1f];
         return cell;
     }
+    return nil;
 }
 
-- (NSIndexPath *)computeItemAndSubsectionIndexForIndexPath:(NSIndexPath *)indexPath {
-    NSMutableArray *sectionItems = self.arrayContent[(NSUInteger) indexPath.section];
-    NSInteger itemIndex = indexPath.row;
-    NSUInteger subsectionIndex = 0;
-    for (NSUInteger i = 0; i < sectionItems.count; ++i) {
-        // First row for each section item is header
-        --itemIndex;
-        // Check if the item index is within this subsection's items
-        NSArray *subsectionItems = sectionItems[i];
-        if (itemIndex < (NSInteger) subsectionItems.count) {
-            subsectionIndex = i;
-            break;
-        } else {
-            itemIndex -= subsectionItems.count;
-        }
-    }
-    return [NSIndexPath indexPathForRow:itemIndex inSection:subsectionIndex];
-}
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [self.arrayContent[(NSUInteger)section] allKeys][(NSUInteger)section];
+    return (NSString*)[self.content allKeys][(NSUInteger)section];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *key = (NSString*)[self.content allKeys][(NSUInteger)indexPath.section];
+    BOOL isSubSection = NO;
+    if ([[_subSections objectForKey:key] containsObject:[_sectionRows objectForKey:key][indexPath.row]]) {
+        isSubSection = YES;
+    }
+    
+    if (isSubSection) {
+        // Section header
+        return 1;
+    } else {
+        // Row Item
+        return 2;
+    }
+    return 0;
 }
 
 #pragma mark UITableView Delegate

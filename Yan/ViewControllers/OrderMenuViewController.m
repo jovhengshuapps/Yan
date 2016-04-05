@@ -18,8 +18,9 @@
     // This nested table view only supports two level of sections.
     CollapseMenuView *collapseMenuView = [[CollapseMenuView alloc] initWithPosition:CollapseMenuViewPositionBottom];
 //    collapseMenuView.delegate = self;
-    collapseMenuView.arrayContent = @[@{@"All":@[@{@"Sports":@[@"Baseball", @"Softball", @"Cricket"]}, @{@"Engineering":@[@"Software Engineer", @"Electrical Engineer"]}]}];
-    collapseMenuView.sectionHeaders = @[@{@"All":@[@"Sports", @"Engineering"]}];
+//    collapseMenuView.arrayContent = @[@{@"All":@[@{@"Sports":@[@"Baseball", @"Softball", @"Cricket"]}, @{@"Engineering":@[@"Software Engineer", @"Electrical Engineer"]}]}];
+//    collapseMenuView.sectionHeaders = @[@{@"All":@[@"Sports", @"Engineering"]}];
+    collapseMenuView.content = @{@"DESSERT":@{@"CAKE":@[@"SANZRIVAL",@"CHOCOLATE",@"MOCHA"],@"FRUITS":@[@"PINEAPPLE",@"PEACH"]},@"MAIN COURSE":@{@"BEEF":@[@"STEAK",@"ROAST BEEF"],@"FISH":@[@"FILLET"]},@"DRINKS":@{@"JUICES":@[@"MANGO",@"LEMONADE"],@"COFFEE":@[@"INSTANT COFFEE",@"MOCHACCINO",@"CAPUCCINO",@"FRAPUCCINO"]}};
     collapseMenuView.cellHeight = 44.0f;
     [self.view addSubview:collapseMenuView];
     [self.view layoutSubviews];

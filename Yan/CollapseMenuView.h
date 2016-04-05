@@ -22,8 +22,7 @@ typedef enum {
 @interface CollapseMenuView : UIView <UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) id delegate;
-@property (strong, nonatomic) NSArray *arrayContent;
-@property (strong, nonatomic) NSArray *sectionHeaders;
+@property (strong, nonatomic) NSDictionary *content;
 @property (assign, nonatomic) CollapseMenuViewPosition position;
 @property (assign, nonatomic) CGFloat cellHeight;
 

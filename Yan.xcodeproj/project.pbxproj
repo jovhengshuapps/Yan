@@ -46,6 +46,8 @@
 		3394A3A31CADF66300472030 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A39D1CADF66300472030 /* UIViewController+REFrostedViewController.m */; };
 		3394A3A51CAE078100472030 /* LucidaGrande.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 3394A3A41CAE078100472030 /* LucidaGrande.ttc */; };
 		33C142451CB1512500B57041 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C142441CB1512500B57041 /* AlertView.m */; };
+		442160881CB32C5800BB387F /* CollapseMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 442160871CB32C5800BB387F /* CollapseMenuView.m */; };
+		442160931CB3760A00BB387F /* OrderMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 442160921CB3760A00BB387F /* OrderMenuViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +148,10 @@
 		3394A3A41CAE078100472030 /* LucidaGrande.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = LucidaGrande.ttc; sourceTree = "<group>"; };
 		33C142431CB1512500B57041 /* AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
 		33C142441CB1512500B57041 /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
+		442160861CB32C5800BB387F /* CollapseMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollapseMenuView.h; sourceTree = "<group>"; };
+		442160871CB32C5800BB387F /* CollapseMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollapseMenuView.m; sourceTree = "<group>"; };
+		442160911CB3760A00BB387F /* OrderMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderMenuViewController.h; sourceTree = "<group>"; };
+		442160921CB3760A00BB387F /* OrderMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderMenuViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +212,8 @@
 				33599BC11CAD4CD600366C34 /* NavigationController.m */,
 				33C142431CB1512500B57041 /* AlertView.h */,
 				33C142441CB1512500B57041 /* AlertView.m */,
+				442160861CB32C5800BB387F /* CollapseMenuView.h */,
+				442160871CB32C5800BB387F /* CollapseMenuView.m */,
 				33599B4C1CAD259100366C34 /* Main.storyboard */,
 				33599B521CAD259100366C34 /* Assets.xcassets */,
 				33599B541CAD259100366C34 /* LaunchScreen.storyboard */,
@@ -262,6 +270,8 @@
 				33599BB21CAD2D9000366C34 /* RootViewController.m */,
 				337516DD1CB2AC390065AB7A /* HomeViewController.h */,
 				337516DE1CB2AC390065AB7A /* HomeViewController.m */,
+				442160911CB3760A00BB387F /* OrderMenuViewController.h */,
+				442160921CB3760A00BB387F /* OrderMenuViewController.m */,
 				33599BBD1CAD444500366C34 /* LoginViewController.h */,
 				33599BBE1CAD444500366C34 /* LoginViewController.m */,
 				33599BB41CAD2E9A00366C34 /* DrawerTableViewController.h */,
@@ -490,6 +500,7 @@
 				336424BF1CAE313A00E0E156 /* UIImageView+AFNetworking.m in Sources */,
 				336424BE1CAE313A00E0E156 /* UIButton+AFNetworking.m in Sources */,
 				33599BBF1CAD444500366C34 /* LoginViewController.m in Sources */,
+				442160931CB3760A00BB387F /* OrderMenuViewController.m in Sources */,
 				3394A39F1CADF66300472030 /* REFrostedContainerViewController.m in Sources */,
 				33599B511CAD259100366C34 /* Yan.xcdatamodeld in Sources */,
 				3394A39E1CADF66300472030 /* RECommonFunctions.m in Sources */,
@@ -510,6 +521,7 @@
 				33599BAE1CAD274E00366C34 /* CoreViewController.m in Sources */,
 				33599B451CAD259100366C34 /* main.m in Sources */,
 				33599BB31CAD2D9000366C34 /* RootViewController.m in Sources */,
+				442160881CB32C5800BB387F /* CollapseMenuView.m in Sources */,
 				3394A3A11CADF66300472030 /* UIImage+REFrostedViewController.m in Sources */,
 				336424C11CAE313A00E0E156 /* UIRefreshControl+AFNetworking.m in Sources */,
 				33C142451CB1512500B57041 /* AlertView.m in Sources */,

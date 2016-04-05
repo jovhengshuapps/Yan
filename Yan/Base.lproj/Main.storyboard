@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CTA-Pa-3Kh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CTA-Pa-3Kh">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -75,6 +75,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="24"/>
                                 <state key="normal" title="Order"/>
+                                <connections>
+                                    <segue destination="qUt-L3-tSa" kind="show" identifier="homeToOrder" id="kvM-OU-4lz"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1d-Aw-aKe">
                                 <rect key="frame" x="35" y="448" width="530" height="50"/>
@@ -113,6 +116,29 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K90-dR-bdn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="775" y="316"/>
+        </scene>
+        <!--Order Menu View Controller-->
+        <scene sceneID="H7U-38-RPk">
+            <objects>
+                <viewController storyboardIdentifier="orderMenu" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qUt-L3-tSa" customClass="OrderMenuViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WY8-SH-exR"/>
+                        <viewControllerLayoutGuide type="bottom" id="lbo-XR-REp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CAg-DY-uvb">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ufi-wl-mh7">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Li-7j-i5t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1481" y="49"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="ima-Ka-scU">

@@ -97,7 +97,6 @@
         [_container addSubview:close];
     }
     else {
-        NSLog(@"buttons;%@",self.buttonsArray);
         for (NSInteger i = 0; i < _buttonsArray.count; i++) {
             if (![[_buttonsArray objectAtIndex:i] isKindOfClass:[NSString class]]) {
                 break;
@@ -124,6 +123,8 @@
         }
     }
     
+    UITapGestureRecognizer *tapClose = [[UITapGestureRecognizer alloc] initWithTarget:_instance action:@selector(closeAlertView)];
+    [_background addGestureRecognizer:tapClose];
     
     
     _container.transform = CGAffineTransformMakeScale(0.1, 0.1);

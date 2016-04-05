@@ -30,6 +30,42 @@
     
     _titleLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:@"..." attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), 24.0f)];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    [self hideTitleBar];
+    
+    /*
+     
+     //constraints
+     
+     NSDictionary *viewsDictionary = @{@"button":button,@"customButton":customSignInLinkButton};
+     NSDictionary *metrics = @{@"buttonWidth": @150,
+     @"padding": [NSNumber numberWithFloat:padding],
+     @"topMargin": [NSNumber numberWithFloat:buttonHeight / 2]
+     };
+     
+     NSArray *constraint_SIZE_H = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[button(buttonWidth)]"
+     options:0
+     metrics:metrics
+     views:viewsDictionary];
+     NSArray *constraint_SIZE_H_CUSTOM = [NSLayoutConstraint constraintsWithVisualFormat:@"H:[customButton(buttonWidth)]"
+     options:0
+     metrics:metrics
+     views:viewsDictionary];
+     NSArray *constraint_POS_V = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-topMargin-[button]"
+     options:0
+     metrics:metrics
+     views:viewsDictionary];
+     NSArray *constraint_POS_H = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-padding-[button]-padding-[customButton]-padding-|"
+     options:NSLayoutFormatAlignAllTop
+     metrics:metrics
+     views:viewsDictionary];
+     [button addConstraints:constraint_SIZE_H];
+     [customSignInLinkButton addConstraints:constraint_SIZE_H_CUSTOM];
+     [footerView addConstraints:constraint_POS_H];
+     [footerView addConstraints:constraint_POS_V];
+     
+     */
+    
     [_titleBarView addSubview:_titleLabel];
     [self.navigationController.navigationBar addSubview:_titleBarView];
     

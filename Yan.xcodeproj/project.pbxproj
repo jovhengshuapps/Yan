@@ -152,6 +152,7 @@
 		442160871CB32C5800BB387F /* CollapseMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollapseMenuView.m; sourceTree = "<group>"; };
 		442160911CB3760A00BB387F /* OrderMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderMenuViewController.h; sourceTree = "<group>"; };
 		442160921CB3760A00BB387F /* OrderMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderMenuViewController.m; sourceTree = "<group>"; };
+		4488154E1CB62E84002A066C /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				33599BAF1CAD275F00366C34 /* Config.h */,
+				4488154E1CB62E84002A066C /* Notifications.h */,
 				33599B461CAD259100366C34 /* AppDelegate.h */,
 				33599B471CAD259100366C34 /* AppDelegate.m */,
 				33599BAC1CAD274E00366C34 /* CoreViewController.h */,

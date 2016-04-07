@@ -68,6 +68,8 @@
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
     _parentView = newSuperview;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:name object:self];
 }
 
 - (void) setupTable {
@@ -93,6 +95,8 @@
     [self addSubview:_topBar];
     [self addSubview:_menuTableView];
     
+    NSNotificationCenter *noteCenter = [NSNotificationCenter defaultCenter];
+    [noteCenter addObserver:self selector:@selector(subscriptionChangedNotification:) name:PRSubscriptionUpdatedNotification object:self.accountItem.subscription];
     
 }
 
@@ -164,54 +168,74 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    NSUInteger numberOfRows = 0;
     NSString *key = (NSString*)[self.content allKeys][(NSUInteger)section];
-    NSDictionary *subSections = [self.content objectForKey:key];
-    [_subSections setObject:[subSections allKeys] forKey:key];
-    
-    NSUInteger numberOfRows = [subSections allKeys].count; // For second level section headers
-    NSUInteger sectionIndex = 0;
-    NSMutableArray *tempArray = [NSMutableArray new];
-    for (NSInteger i = 0; i < [subSections allKeys].count; i++) {
-        NSString *subSectionKey = (NSString*)[subSections allKeys][i];
-        NSArray *rows = [subSections objectForKey:subSectionKey];
-        [_subSectionsItems setObject:rows forKey:subSectionKey];
-        [tempArray addObject:subSectionKey];
-        [tempArray addObjectsFromArray:rows];
-        sectionIndex = rows.count;
-        numberOfRows += rows.count; // For actual table rows
+    if ([[self.content objectForKey:key] isKindOfClass:[NSDictionary class]]) {
+        NSDictionary *subSections = (NSDictionary*)[self.content objectForKey:key];
+        [_subSections setObject:[subSections allKeys] forKey:key];
         
+        numberOfRows = [subSections allKeys].count; // For second level section headers
+        NSUInteger sectionIndex = 0;
+        NSMutableArray *tempArray = [NSMutableArray new];
+        for (NSInteger i = 0; i < [subSections allKeys].count; i++) {
+            NSString *subSectionKey = (NSString*)[subSections allKeys][i];
+            NSArray *rows = [subSections objectForKey:subSectionKey];
+            [_subSectionsItems setObject:rows forKey:subSectionKey];
+            [tempArray addObject:subSectionKey];
+            [tempArray addObjectsFromArray:rows];
+            sectionIndex = rows.count;
+            numberOfRows += rows.count; // For actual table rows
+            
+        }
+        [_sectionRows setObject:tempArray forKey:key];
     }
-    [_sectionRows setObject:tempArray forKey:key];
+    else if ([[self.content objectForKey:key] isKindOfClass:[NSArray class]]) {
+        numberOfRows = ((NSArray*)[self.content objectForKey:key]).count;
+    }
+    
+    
     return numberOfRows;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *key = (NSString*)[self.content allKeys][(NSUInteger)indexPath.section];
-    BOOL isSubSection = NO;
-    if ([[_subSections objectForKey:key] containsObject:[_sectionRows objectForKey:key][indexPath.row]]) {
-        isSubSection = YES;
-    }
-    
-    if (isSubSection) {
-        // Section header
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SECTION_HEADER_CELL"];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SECTION_HEADER_CELL"];
-        }
-        cell.textLabel.text = [_sectionRows objectForKey:key][indexPath.row];
-        cell.contentView.backgroundColor = [UIColor colorWithWhite:0.2f alpha:0.1f];
-        return cell;
-    } else {
-        // Row Item
+    if ([[self.content objectForKey:key] isKindOfClass:[NSArray class]]) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ROW_CONTENT_CELL"];
         if (cell == nil) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ROW_CONTENT_CELL"];
         }
-        cell.textLabel.text = [_sectionRows objectForKey:key][indexPath.row];
+        cell.textLabel.text = ((NSArray*)[self.content objectForKey:key])[indexPath.row];
         cell.contentView.backgroundColor = [UIColor colorWithWhite:0.8f alpha:0.1f];
         return cell;
     }
+    else if ([[self.content objectForKey:key] isKindOfClass:[NSDictionary class]]) {
+        BOOL isSubSection = NO;
+        if ([[_subSections objectForKey:key] containsObject:[_sectionRows objectForKey:key][indexPath.row]]) {
+            isSubSection = YES;
+        }
+        
+        if (isSubSection) {
+            // Section header
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SECTION_HEADER_CELL"];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SECTION_HEADER_CELL"];
+            }
+            cell.textLabel.text = [_sectionRows objectForKey:key][indexPath.row];
+            cell.contentView.backgroundColor = [UIColor colorWithWhite:0.2f alpha:0.1f];
+            return cell;
+        } else {
+            // Row Item
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ROW_CONTENT_CELL"];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ROW_CONTENT_CELL"];
+            }
+            cell.textLabel.text = [_sectionRows objectForKey:key][indexPath.row];
+            cell.contentView.backgroundColor = [UIColor colorWithWhite:0.8f alpha:0.1f];
+            return cell;
+        }
+    }
+    
     return nil;
 }
 
@@ -222,18 +246,22 @@
 
 - (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *key = (NSString*)[self.content allKeys][(NSUInteger)indexPath.section];
-    BOOL isSubSection = NO;
-    if ([[_subSections objectForKey:key] containsObject:[_sectionRows objectForKey:key][indexPath.row]]) {
-        isSubSection = YES;
+    
+    if ([[self.content objectForKey:key] isKindOfClass:[NSDictionary class]]) {
+        BOOL isSubSection = NO;
+        if ([[_subSections objectForKey:key] containsObject:[_sectionRows objectForKey:key][indexPath.row]]) {
+            isSubSection = YES;
+        }
+        
+        if (isSubSection) {
+            // Section header
+            return 1;
+        } else {
+            // Row Item
+            return 2;
+        }
     }
     
-    if (isSubSection) {
-        // Section header
-        return 1;
-    } else {
-        // Row Item
-        return 2;
-    }
     return 0;
 }
 

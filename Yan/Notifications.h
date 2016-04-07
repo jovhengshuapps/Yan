@@ -9,7 +9,7 @@
 #ifndef Notifications_h
 #define Notifications_h
 
-extern NSString *const NotificationCollapseMenuShown;
-extern NSString *const NotificationCollapseMenuHidden;
+//extern NSString *const NotificationCollapseMenuShown;
+//extern NSString *const NotificationCollapseMenuHidden;
 
 #endif /* Notifications_h */

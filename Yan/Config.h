@@ -12,13 +12,11 @@
 // IMPORTS
 
 #import <UIKit/UIKit.h>
+#import "Notifications.h"
 #import "AFNetworking.h"
 #import "REFrostedViewController.h"
-#import "DrawerTableViewController.h"
-#import "RootViewController.h"
 #import "NavigationController.h"
 #import "AlertView.h"
-
 // MACROS
 
 #define UIColorFromRGB(rgbValue)                                        [UIColor \

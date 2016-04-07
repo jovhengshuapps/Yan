@@ -68,8 +68,7 @@
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
     _parentView = newSuperview;
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:name object:self];
+
 }
 
 - (void) setupTable {
@@ -95,8 +94,6 @@
     [self addSubview:_topBar];
     [self addSubview:_menuTableView];
     
-    NSNotificationCenter *noteCenter = [NSNotificationCenter defaultCenter];
-    [noteCenter addObserver:self selector:@selector(subscriptionChangedNotification:) name:PRSubscriptionUpdatedNotification object:self.accountItem.subscription];
     
 }
 
@@ -127,6 +124,7 @@
         _topBar.frame = frame;
         
     } completion:^(BOOL finished) {
+        [self.delegate collapsedMenuShown:YES];
         [_topBarButton addTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
         [_menuTableView reloadData];
     }];
@@ -152,6 +150,7 @@
         _topBar.frame = frame;
         
     } completion:^(BOOL finished) {
+        [self.delegate collapsedMenuShown:NO];
         [_topBarButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
         [_viewBackground removeFromSuperview];
     }];
@@ -285,7 +284,8 @@
 
 #pragma mark UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [self.delegate selectedIndex:indexPath.row];
 }
 
 #pragma mark UIScrollView

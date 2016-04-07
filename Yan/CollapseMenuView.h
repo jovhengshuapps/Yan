@@ -16,6 +16,7 @@ typedef enum {
 @protocol CollapseMenuViewDelegate <NSObject>
 
 - (void) selectedIndex:(NSInteger)index;
+- (void) collapsedMenuShown:(BOOL)shown;
 
 @end
 

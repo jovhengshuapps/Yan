@@ -7,6 +7,8 @@
 //
 
 #import "LoginViewController.h"
+#import "RegisterViewController.h"
+
 
 @implementation LoginViewController
 
@@ -25,6 +27,13 @@
 
 - (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSLog(@"Clicked index:%li",(long)buttonIndex);
+}
+
+- (IBAction)showRegister:(id)sender {
+    RegisterViewController *registerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"registerForm"];
+    [self.navigationController pushViewController:registerViewController animated:YES];
+}
+- (IBAction)showForgotPassword:(id)sender {
 }
 
 @end

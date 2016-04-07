@@ -7,7 +7,8 @@
 //
 
 #import "CoreViewController.h"
+#import "CollapseMenuView.h"
 
-@interface OrderMenuViewController : CoreViewController
+@interface OrderMenuViewController : CoreViewController <CollapseMenuViewDelegate>
 
 @end

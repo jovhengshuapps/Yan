@@ -17,6 +17,8 @@
 #import "REFrostedViewController.h"
 #import "NavigationController.h"
 #import "AlertView.h"
+#import <Social/Social.h>
+#import <Accounts/Accounts.h>
 // MACROS
 
 #define UIColorFromRGB(rgbValue)                                        [UIColor \

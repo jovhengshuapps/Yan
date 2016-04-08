@@ -9,6 +9,7 @@
 #ifndef Config_h
 #define Config_h
 
+
 // IMPORTS
 
 #import <UIKit/UIKit.h>
@@ -17,6 +18,12 @@
 #import "REFrostedViewController.h"
 #import "NavigationController.h"
 #import "AlertView.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
+
+static NSString * const kClientId = @"YOUR_CLIENT_ID";
+
 // MACROS
 
 #define UIColorFromRGB(rgbValue)                                        [UIColor \

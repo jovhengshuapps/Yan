@@ -102,7 +102,7 @@
                 break;
             }
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-            button.backgroundColor = UIColorFromRGB(0xFFAE42);
+            button.backgroundColor = UIColorFromRGB(0x959595);
             
             button.layer.borderColor = [UIColorFromRGB(0x959595) CGColor];
             button.layer.borderWidth = 1.0f;

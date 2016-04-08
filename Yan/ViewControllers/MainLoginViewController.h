@@ -8,6 +8,6 @@
 
 #import "CoreViewController.h"
 
-@interface MainLoginViewController : CoreViewController
+@interface MainLoginViewController : CoreViewController <FBSDKLoginButtonDelegate>
 
 @end

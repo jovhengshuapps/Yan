@@ -30,8 +30,8 @@
 }
 
 - (IBAction)showRegister:(id)sender {
-    RegisterViewController *registerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"registerForm"];
-    [self.navigationController pushViewController:registerViewController animated:YES];
+//    RegisterViewController *registerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"registerForm"];
+//    [self.navigationController pushViewController:registerViewController animated:YES];
 }
 - (IBAction)showForgotPassword:(id)sender {
 }

@@ -22,7 +22,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 
-static NSString * const kClientId = @"YOUR_CLIENT_ID";
+static NSString * const kClientId = @"1209936165691687";
 
 // MACROS
 

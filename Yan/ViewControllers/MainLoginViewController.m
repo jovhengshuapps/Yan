@@ -38,6 +38,7 @@
 - (IBAction)loginWithFacebook:(id)sender {
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
     login.loginBehavior = FBSDKLoginBehaviorWeb;
+    
     [login
      logInWithReadPermissions: @[@"public_profile",@"email"]
      fromViewController:self

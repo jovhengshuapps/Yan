@@ -46,13 +46,12 @@
 		3394A3A31CADF66300472030 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A39D1CADF66300472030 /* UIViewController+REFrostedViewController.m */; };
 		3394A3A51CAE078100472030 /* LucidaGrande.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 3394A3A41CAE078100472030 /* LucidaGrande.ttc */; };
 		33C142451CB1512500B57041 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C142441CB1512500B57041 /* AlertView.m */; };
+		33DBA6E31CB8C29000AB0062 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 33DBA6E21CB8C29000AB0062 /* Podfile */; };
 		33E1B8C81CB7DCF000B4207F /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1B8C71CB7DCF000B4207F /* FBSDKCoreKit.framework */; };
 		33E1B8CB1CB7DD4100B4207F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1B8C91CB7DD4100B4207F /* FBSDKLoginKit.framework */; };
 		33E1B8CC1CB7DD4100B4207F /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1B8CA1CB7DD4100B4207F /* FBSDKShareKit.framework */; };
 		33F9FB401CB6841700637A02 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F9FB3F1CB6841700637A02 /* RegisterViewController.m */; };
 		33F9FB431CB68D5600637A02 /* MainLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F9FB421CB68D5600637A02 /* MainLoginViewController.m */; };
-		441D0E721CB734FF00A4E4A6 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 441D0E711CB734FF00A4E4A6 /* Social.framework */; };
-		441D0E741CB7351700A4E4A6 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 441D0E731CB7351700A4E4A6 /* Accounts.framework */; };
 		442160881CB32C5800BB387F /* CollapseMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 442160871CB32C5800BB387F /* CollapseMenuView.m */; };
 		442160931CB3760A00BB387F /* OrderMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 442160921CB3760A00BB387F /* OrderMenuViewController.m */; };
 /* End PBXBuildFile section */
@@ -155,6 +154,7 @@
 		3394A3A41CAE078100472030 /* LucidaGrande.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = LucidaGrande.ttc; sourceTree = "<group>"; };
 		33C142431CB1512500B57041 /* AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
 		33C142441CB1512500B57041 /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
+		33DBA6E21CB8C29000AB0062 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		33E1B8C71CB7DCF000B4207F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		33E1B8C91CB7DD4100B4207F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		33E1B8CA1CB7DD4100B4207F /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -162,8 +162,6 @@
 		33F9FB3F1CB6841700637A02 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		33F9FB411CB68D5600637A02 /* MainLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainLoginViewController.h; sourceTree = "<group>"; };
 		33F9FB421CB68D5600637A02 /* MainLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainLoginViewController.m; sourceTree = "<group>"; };
-		441D0E711CB734FF00A4E4A6 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		441D0E731CB7351700A4E4A6 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		442160861CB32C5800BB387F /* CollapseMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollapseMenuView.h; sourceTree = "<group>"; };
 		442160871CB32C5800BB387F /* CollapseMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollapseMenuView.m; sourceTree = "<group>"; };
 		442160911CB3760A00BB387F /* OrderMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderMenuViewController.h; sourceTree = "<group>"; };
@@ -202,8 +200,6 @@
 		33599B371CAD259000366C34 = {
 			isa = PBXGroup;
 			children = (
-				441D0E731CB7351700A4E4A6 /* Accounts.framework */,
-				441D0E711CB734FF00A4E4A6 /* Social.framework */,
 				33599B791CAD26A900366C34 /* Libraries */,
 				33599B421CAD259000366C34 /* Yan */,
 				33599B5F1CAD259100366C34 /* YanTests */,
@@ -278,6 +274,7 @@
 		33599B791CAD26A900366C34 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				33DBA6E11CB8C23E00AB0062 /* Pods */,
 				33E1B8C91CB7DD4100B4207F /* FBSDKLoginKit.framework */,
 				33E1B8CA1CB7DD4100B4207F /* FBSDKShareKit.framework */,
 				33E1B8C71CB7DCF000B4207F /* FBSDKCoreKit.framework */,
@@ -395,6 +392,14 @@
 			path = REFrostedViewController;
 			sourceTree = "<group>";
 		};
+		33DBA6E11CB8C23E00AB0062 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				33DBA6E21CB8C29000AB0062 /* Podfile */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -498,6 +503,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33DBA6E31CB8C29000AB0062 /* Podfile in Resources */,
 				3394A3A51CAE078100472030 /* LucidaGrande.ttc in Resources */,
 				33599B561CAD259100366C34 /* LaunchScreen.storyboard in Resources */,
 				33599B531CAD259100366C34 /* Assets.xcassets in Resources */,

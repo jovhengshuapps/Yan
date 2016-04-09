@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CTA-Pa-3Kh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CTA-Pa-3Kh">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -24,10 +24,13 @@
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
-            <string>LucidaGrande-Bold</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande-Bold</string>
             <string>LucidaGrande</string>
+            <string>LucidaGrande-Bold</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
@@ -66,7 +69,7 @@
                     </toolbar>
                     <connections>
                         <segue destination="jUk-Vx-8B5" kind="relationship" relationship="rootViewController" id="VKM-KQ-L7Y"/>
-                        <segue destination="Mw9-aB-mWj" kind="show" identifier="showLogin" id="GP6-DT-tUB"/>
+                        <segue destination="uzO-tc-I33" kind="show" identifier="showLogin" id="aga-Eo-0z5"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bRc-hS-p3d" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -147,7 +150,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ufi-wl-mh7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ufi-wl-mh7">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                         </subviews>
@@ -181,62 +184,6 @@
             <point key="canvasLocation" x="1480.5" y="48.75"/>
         </scene>
         <!--Main Login View Controller-->
-        <scene sceneID="eHV-18-ssJ">
-            <objects>
-                <viewController id="Mw9-aB-mWj" customClass="MainLoginViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="5BY-hj-CsB"/>
-                        <viewControllerLayoutGuide type="bottom" id="PE0-MG-GSK"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Vrz-bg-DJ4">
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nv3-uk-PYE">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="177" y="442" width="46" height="30"/>
-                                </variation>
-                                <connections>
-                                    <segue destination="GYE-FS-QZc" kind="show" identifier="mainLoginToYanLogin" id="6jH-MA-EoV"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6E-sK-YEq" customClass="FBSDKLoginButton">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" red="0.1647058824" green="0.25490196079999999" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="18"/>
-                                <state key="normal" title="Sign In with Facebook"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="141" width="360" height="30"/>
-                                </variation>
-                                <connections>
-                                    <action selector="loginWithFacebook:" destination="Mw9-aB-mWj" eventType="touchUpInside" id="cGP-jY-kzA"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="nv3-uk-PYE"/>
-                                <exclude reference="v6E-sK-YEq"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="nv3-uk-PYE"/>
-                                <include reference="v6E-sK-YEq"/>
-                            </mask>
-                        </variation>
-                    </view>
-                    <connections>
-                        <outlet property="loginButton" destination="v6E-sK-YEq" id="unP-3h-d5Q"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Q25-b0-DfI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="154.5" y="1120.5"/>
-        </scene>
-        <!--Main Login View Controller-->
         <scene sceneID="zou-Fy-RJe">
             <objects>
                 <viewController storyboardIdentifier="mainLogin" useStoryboardIdentifierAsRestorationIdentifier="YES" id="uzO-tc-I33" customClass="MainLoginViewController" sceneMemberID="viewController">
@@ -267,7 +214,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="facebook:" destination="uzO-tc-I33" eventType="touchUpInside" id="0fU-Q8-yDJ"/>
+                                    <action selector="loginWithFacebook:" destination="uzO-tc-I33" eventType="touchUpInside" id="PZb-LN-N7I"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6kV-Yc-seY">
@@ -390,18 +337,6 @@
                                 <exclude reference="09l-PN-Lfa"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="3EW-Sy-ZAL"/>
-                                <exclude reference="d1I-qM-Bwm"/>
-                                <exclude reference="pzn-rD-0NJ"/>
-                                <exclude reference="11c-Yk-gnR"/>
-                                <exclude reference="4k4-2a-qAv"/>
-                                <exclude reference="DUT-fR-p9b"/>
-                                <exclude reference="7dE-FO-Jjr"/>
-                                <exclude reference="J7X-NN-XBc"/>
-                                <exclude reference="t4F-Cg-KGT"/>
-                                <exclude reference="W6F-Kb-6rt"/>
-                                <exclude reference="aro-yk-01K"/>
-                                <exclude reference="dEN-8h-aZa"/>
                                 <exclude reference="Emp-wS-gEC"/>
                                 <exclude reference="Hp4-hY-afx"/>
                                 <exclude reference="KW2-ze-sur"/>
@@ -410,6 +345,18 @@
                                 <exclude reference="eoe-dD-uHl"/>
                                 <exclude reference="peV-QV-r2k"/>
                                 <exclude reference="taS-nn-jtR"/>
+                                <exclude reference="W6F-Kb-6rt"/>
+                                <exclude reference="aro-yk-01K"/>
+                                <exclude reference="dEN-8h-aZa"/>
+                                <exclude reference="11c-Yk-gnR"/>
+                                <exclude reference="4k4-2a-qAv"/>
+                                <exclude reference="DUT-fR-p9b"/>
+                                <exclude reference="3EW-Sy-ZAL"/>
+                                <exclude reference="d1I-qM-Bwm"/>
+                                <exclude reference="pzn-rD-0NJ"/>
+                                <exclude reference="7dE-FO-Jjr"/>
+                                <exclude reference="J7X-NN-XBc"/>
+                                <exclude reference="t4F-Cg-KGT"/>
                                 <exclude reference="Mgk-j2-Ru9"/>
                                 <exclude reference="bvt-Sr-Aj8"/>
                                 <exclude reference="hZP-b9-8Eg"/>
@@ -425,18 +372,6 @@
                                 <include reference="09l-PN-Lfa"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="3EW-Sy-ZAL"/>
-                                <include reference="d1I-qM-Bwm"/>
-                                <include reference="pzn-rD-0NJ"/>
-                                <include reference="11c-Yk-gnR"/>
-                                <include reference="4k4-2a-qAv"/>
-                                <include reference="DUT-fR-p9b"/>
-                                <include reference="7dE-FO-Jjr"/>
-                                <include reference="J7X-NN-XBc"/>
-                                <include reference="t4F-Cg-KGT"/>
-                                <include reference="W6F-Kb-6rt"/>
-                                <include reference="aro-yk-01K"/>
-                                <include reference="dEN-8h-aZa"/>
                                 <include reference="Emp-wS-gEC"/>
                                 <include reference="Hp4-hY-afx"/>
                                 <include reference="KW2-ze-sur"/>
@@ -445,16 +380,31 @@
                                 <include reference="eoe-dD-uHl"/>
                                 <include reference="peV-QV-r2k"/>
                                 <include reference="taS-nn-jtR"/>
+                                <include reference="W6F-Kb-6rt"/>
+                                <include reference="aro-yk-01K"/>
+                                <include reference="dEN-8h-aZa"/>
+                                <include reference="11c-Yk-gnR"/>
+                                <include reference="4k4-2a-qAv"/>
+                                <include reference="DUT-fR-p9b"/>
+                                <include reference="3EW-Sy-ZAL"/>
+                                <include reference="d1I-qM-Bwm"/>
+                                <include reference="pzn-rD-0NJ"/>
+                                <include reference="7dE-FO-Jjr"/>
+                                <include reference="J7X-NN-XBc"/>
+                                <include reference="t4F-Cg-KGT"/>
                                 <include reference="Mgk-j2-Ru9"/>
                                 <include reference="bvt-Sr-Aj8"/>
                                 <include reference="hZP-b9-8Eg"/>
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="loginButton" destination="Kdj-O6-80w" id="hil-8i-kBW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C7B-FW-RfU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="147" y="1120.5"/>
+            <point key="canvasLocation" x="178.5" y="1134.75"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="ima-Ka-scU">
@@ -468,7 +418,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5l-Oz-hwH">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5l-Oz-hwH">
                                 <rect key="frame" x="20" y="130" width="560" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="eCI-gk-SoN"/>
@@ -477,7 +427,7 @@
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0wm-Rt-b6b">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0wm-Rt-b6b">
                                 <rect key="frame" x="20" y="172" width="560" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="EqT-f7-miR"/>
@@ -485,7 +435,7 @@
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRK-gL-wTg">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRK-gL-wTg">
                                 <rect key="frame" x="20" y="220" width="560" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="fNH-4b-b6Y"/>
@@ -494,7 +444,7 @@
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Ux-D0-hJB">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Ux-D0-hJB">
                                 <rect key="frame" x="20" y="262" width="560" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="aGG-bi-t9T"/>
@@ -502,7 +452,7 @@
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UV-eB-qw7">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UV-eB-qw7">
                                 <rect key="frame" x="20" y="324" width="560" height="40"/>
                                 <color key="backgroundColor" red="0.58431372549019611" green="0.58431372549019611" blue="0.58431372549019611" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -516,7 +466,7 @@
                                     <action selector="loginPressed:" destination="GYE-FS-QZc" eventType="touchUpInside" id="IjC-YJ-fG7"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Forgot Password?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rtf-cf-8sL">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Forgot Password?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rtf-cf-8sL">
                                 <rect key="frame" x="20" y="372" width="560" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -532,7 +482,7 @@
                                     <action selector="showForgotPassword:" destination="GYE-FS-QZc" eventType="touchUpInside" id="CFT-98-4kb"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Yan! account yet? Click here to register" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39m-40-aey">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No Yan! account yet? Click here to register" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="39m-40-aey">
                                 <rect key="frame" x="20" y="420" width="560" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -624,7 +574,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1pW-32-5xe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="919.5" y="1120.5"/>
+            <point key="canvasLocation" x="897" y="1465.5"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="KoV-zH-aF5">
@@ -648,9 +598,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="90" width="360" height="30"/>
-                                </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="BIRTHDAY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rJq-zN-8xr">
                                 <rect key="frame" x="20" y="206" width="560" height="40"/>
@@ -662,9 +609,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="128" width="360" height="30"/>
-                                </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="EMAIL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MuL-Zc-0qT">
                                 <rect key="frame" x="20" y="262" width="560" height="40"/>
@@ -676,9 +620,6 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="166" width="360" height="30"/>
-                                </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="PASSWORD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lb9-cy-vh5">
                                 <rect key="frame" x="20" y="318" width="560" height="40"/>
@@ -690,11 +631,8 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="204" width="360" height="30"/>
-                                </variation>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="PRIVACY POLICY | TERMS OF USE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Er-Uh-dov">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="PRIVACY POLICY | TERMS OF USE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Er-Uh-dov">
                                 <rect key="frame" x="20" y="504" width="560" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="fWb-op-Xvd"/>
@@ -702,9 +640,6 @@
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="24" y="376" width="360" height="20"/>
-                                </variation>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YRc-jH-Ug8">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -724,9 +659,6 @@
                                         <include reference="tfg-Bb-J2r"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="436" width="360" height="40"/>
-                                </variation>
                                 <connections>
                                     <segue destination="jnJ-ff-z3P" kind="presentation" modalPresentationStyle="formSheet" modalTransitionStyle="crossDissolve" id="COV-x5-qf9"/>
                                 </connections>
@@ -742,15 +674,9 @@
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="242" width="360" height="120"/>
-                                </variation>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LkP-3C-SWt">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="20" y="242" width="360" height="154"/>
-                                </variation>
                                 <connections>
                                     <action selector="viewTermsOfUse:" destination="9eW-Mt-EhP" eventType="touchUpInside" id="Fdw-3v-Pw0"/>
                                 </connections>
@@ -766,7 +692,6 @@
                             <constraint firstItem="LkP-3C-SWt" firstAttribute="top" secondItem="ySN-N5-s3S" secondAttribute="top" id="GuJ-Gi-KM8"/>
                             <constraint firstItem="MuL-Zc-0qT" firstAttribute="leading" secondItem="kyD-8P-sul" secondAttribute="leading" id="IDF-Ip-swh"/>
                             <constraint firstItem="LkP-3C-SWt" firstAttribute="trailing" secondItem="ySN-N5-s3S" secondAttribute="trailing" id="ITr-JX-RCb"/>
-                            <constraint firstItem="7Er-Uh-dov" firstAttribute="top" secondItem="ySN-N5-s3S" secondAttribute="bottom" constant="14" id="Jl3-zv-m3e"/>
                             <constraint firstItem="7Er-Uh-dov" firstAttribute="top" secondItem="ySN-N5-s3S" secondAttribute="bottom" constant="8" id="K64-g8-86j"/>
                             <constraint firstItem="7Er-Uh-dov" firstAttribute="leading" secondItem="593-gt-R8e" secondAttribute="leadingMargin" constant="4" id="KE3-md-cSn"/>
                             <constraint firstItem="Lb9-cy-vh5" firstAttribute="top" secondItem="MuL-Zc-0qT" secondAttribute="bottom" constant="16" id="OjR-8w-qWf">
@@ -789,7 +714,6 @@
                             <constraint firstItem="rJq-zN-8xr" firstAttribute="leading" secondItem="kyD-8P-sul" secondAttribute="leading" id="plb-3V-HJ5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="7Er-Uh-dov" secondAttribute="trailing" constant="-4" id="taP-Sg-g6I"/>
                             <constraint firstItem="ySN-N5-s3S" firstAttribute="top" secondItem="Lb9-cy-vh5" secondAttribute="bottom" constant="8" id="vuV-7d-o7o"/>
-                            <constraint firstItem="7Er-Uh-dov" firstAttribute="leading" secondItem="ySN-N5-s3S" secondAttribute="leading" id="vxW-Rq-j9z"/>
                             <constraint firstItem="MuL-Zc-0qT" firstAttribute="top" secondItem="rJq-zN-8xr" secondAttribute="bottom" constant="16" id="wuX-ij-TS8">
                                 <variation key="heightClass=regular" constant="8"/>
                             </constraint>
@@ -803,15 +727,11 @@
                                 <exclude reference="3kB-Gv-c5T"/>
                                 <exclude reference="GuJ-Gi-KM8"/>
                                 <exclude reference="ITr-JX-RCb"/>
-                                <exclude reference="Jl3-zv-m3e"/>
-                                <exclude reference="KE3-md-cSn"/>
-                                <exclude reference="idN-Zu-cdl"/>
-                                <exclude reference="taP-Sg-g6I"/>
                                 <exclude reference="CeL-hE-9ov"/>
                                 <exclude reference="Okl-Tr-GDX"/>
                                 <exclude reference="dLA-ur-MYE"/>
-                                <exclude reference="Jl3-zv-m3e"/>
                                 <exclude reference="KE3-md-cSn"/>
+                                <exclude reference="idN-Zu-cdl"/>
                                 <exclude reference="taP-Sg-g6I"/>
                             </mask>
                         </variation>
@@ -823,16 +743,8 @@
                                 <include reference="CeL-hE-9ov"/>
                                 <include reference="Okl-Tr-GDX"/>
                                 <include reference="dLA-ur-MYE"/>
-                                <include reference="Jl3-zv-m3e"/>
                                 <include reference="KE3-md-cSn"/>
                                 <include reference="taP-Sg-g6I"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="constraints">
-                                <exclude reference="Jl3-zv-m3e"/>
-                                <exclude reference="KE3-md-cSn"/>
-                                <exclude reference="taP-Sg-g6I"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1067,7 +979,7 @@ You may now start using the app for your favourite restaurant.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4iv-en-Zs4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2346" y="1089"/>
+            <point key="canvasLocation" x="2373" y="1120.5"/>
         </scene>
         <!--Drawer Table View Controller-->
         <scene sceneID="2Oi-cg-Z9P">

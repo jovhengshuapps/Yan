@@ -7,6 +7,7 @@
 //
 
 #import "CoreViewController.h"
+#import "RegistrationCompleteViewController.h"
 
 @interface CoreViewController ()
 @property (strong, nonatomic) UILabel *titleLabel;
@@ -124,4 +125,13 @@
     // This should return the user details not just a boolean
     return NO;
 }
+
+
+- (void)isFromRegistration:(BOOL)fromRegistration {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 30.0f, 30.0f)];
+    view.backgroundColor = [UIColor redColor];
+    view.center = KEYWINDOW.center;
+    [self.view addSubview:view];
+}
+
 @end

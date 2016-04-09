@@ -22,6 +22,7 @@
     collapseMenuView.content = @{@"DESSERT":@[@"SANZRIVAL",@"CHOCOLATE",@"MOCHA",@"PINEAPPLE",@"PEACH"],@"MAIN COURSE":@[@"STEAK",@"ROAST BEEF",@"FILLET"],@"DRINKS":@[@"MANGO",@"LEMONADE",@"INSTANT COFFEE",@"MOCHACCINO",@"CAPUCCINO",@"FRAPUCCINO"]};
     
     collapseMenuView.cellHeight = 44.0f;
+    
     [self.view addSubview:collapseMenuView];
     [self.view layoutSubviews];
 }
@@ -31,6 +32,7 @@
 }
 
 - (void)collapsedMenuShown:(BOOL)shown {
+    
 //    if (shown) {
 //        self.frostedViewController.panGestureEnabled = NO;
 //    }

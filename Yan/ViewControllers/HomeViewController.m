@@ -8,6 +8,7 @@
 
 #import "HomeViewController.h"
 #import "LoginViewController.h"
+#import "RegistrationCompleteViewController.h"
 
 @implementation HomeViewController
 
@@ -15,11 +16,7 @@
     
     UIBarButtonItem *menuBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"app-menu.png"] style:UIBarButtonItemStyleDone target:self action:@selector(openMenu)];
     
-    UINavigationItem *item = [[UINavigationItem alloc] initWithTitle:@"Yan"];
-    [item setLeftBarButtonItem:menuBarItem];
-    
-    [self.navigationController.navigationBar setItems:[NSArray arrayWithObjects:item, nil] animated:YES];
-    
+    [[self navigationItem] setLeftBarButtonItem:menuBarItem];
     [super viewDidLoad];
     
     
@@ -29,5 +26,7 @@
     }
     
 }
+
+
 
 @end

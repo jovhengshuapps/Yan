@@ -21,8 +21,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
-
-static NSString * const kClientId = @"1209936165691687";
+#import <GoogleSignIn/GoogleSignIn.h>
 
 // MACROS
 
@@ -38,7 +37,11 @@ static NSString * const kClientId = @"1209936165691687";
                                                                         nil]
 #define KEYWINDOW                                                       [UIApplication sharedApplication].keyWindow
 
+#define APPINFO(key)                                                    [[NSBundle mainBundle] objectForInfoDictionaryKey:key];
+
 // CONFIGURATIONS
+
+#define GOOGLE_CLIENT_ID                                                @"668953075234-bf7f3vasveo0dj919fp75aj0saoa4vc9.apps.googleusercontent.com"
 
 
 #endif /* Config_h */

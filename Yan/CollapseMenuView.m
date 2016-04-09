@@ -15,7 +15,6 @@
 @property (strong, nonatomic) UIView *topBar;
 @property (strong, nonatomic) UIButton *topBarButton;
 @property (strong, nonatomic) UITableView *menuTableView;
-@property (strong, nonatomic) UIView *parentView;
 @property (strong, nonatomic) UIView *viewBackground;
 @property (assign, nonatomic) CGFloat positionYShown;
 @property (assign, nonatomic) CGFloat positionYHidden;
@@ -66,11 +65,6 @@
     return self;
 }
 
-- (void)willMoveToSuperview:(UIView *)newSuperview {
-    _parentView = newSuperview;
-
-}
-
 - (void) setupTable {
     
     _menuTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, 0.0f) style:UITableViewStylePlain];
@@ -99,16 +93,16 @@
 
 - (void) showMenu {
     
-    _viewBackground = [[UIView alloc] initWithFrame:KEYWINDOW.bounds];
-    _viewBackground.backgroundColor = [UIColor colorWithWhite:0.2f alpha:0.1f];
-    _viewBackground.alpha = 0.0f;
-    [_parentView addSubview:_viewBackground];
+//    _viewBackground = [[UIView alloc] initWithFrame:KEYWINDOW.bounds];
+//    _viewBackground.backgroundColor = [UIColor colorWithWhite:0.2f alpha:0.1f];
+//    _viewBackground.alpha = 0.0f;
+//    [_parentView addSubview:_viewBackground];
     
-    UITapGestureRecognizer *tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideMenu)];
-    [_viewBackground addGestureRecognizer:tapBackground];
+//    UITapGestureRecognizer *tapBackground = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideMenu)];
+//    [_viewBackground addGestureRecognizer:tapBackground];
     
     [UIView animateWithDuration:0.2f animations:^{
-        _viewBackground.alpha = 1.0f;
+//        _viewBackground.alpha = 1.0f;
         
         CGRect frame = self.frame;
         frame.origin.y = _positionYShown;
@@ -134,7 +128,7 @@
     
     
     [UIView animateWithDuration:0.2f animations:^{
-        _viewBackground.alpha = 0.0f;
+//        _viewBackground.alpha = 0.0f;
         
         CGRect frame = self.frame;
         frame.origin.y = _positionYHidden;
@@ -152,7 +146,7 @@
     } completion:^(BOOL finished) {
         [self.delegate collapsedMenuShown:NO];
         [_topBarButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
-        [_viewBackground removeFromSuperview];
+//        [_viewBackground removeFromSuperview];
     }];
 }
 

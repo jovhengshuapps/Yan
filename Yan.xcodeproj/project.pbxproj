@@ -46,7 +46,14 @@
 		3394A3A31CADF66300472030 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A39D1CADF66300472030 /* UIViewController+REFrostedViewController.m */; };
 		3394A3A51CAE078100472030 /* LucidaGrande.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 3394A3A41CAE078100472030 /* LucidaGrande.ttc */; };
 		33C142451CB1512500B57041 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C142441CB1512500B57041 /* AlertView.m */; };
-		33DBA6E31CB8C29000AB0062 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 33DBA6E21CB8C29000AB0062 /* Podfile */; };
+		33DBA6E51CB8CD2100AB0062 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33DBA6E41CB8CD2100AB0062 /* GoogleService-Info.plist */; };
+		33DBA6E71CB8D18D00AB0062 /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DBA6E61CB8D18D00AB0062 /* GoogleSignIn.framework */; };
+		33DBA6E91CB8D1B800AB0062 /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 33DBA6E81CB8D1B800AB0062 /* GoogleSignIn.bundle */; };
+		33DBA6EB1CB8D1D800AB0062 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DBA6EA1CB8D1D800AB0062 /* AddressBook.framework */; };
+		33DBA6ED1CB8D1DD00AB0062 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DBA6EC1CB8D1DD00AB0062 /* SafariServices.framework */; };
+		33DBA6EF1CB8D1E800AB0062 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DBA6EE1CB8D1E800AB0062 /* SystemConfiguration.framework */; };
+		33DBA6F51CB8D31600AB0062 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DBA6F41CB8D31600AB0062 /* libz.tbd */; };
+		33DBA6F81CB8F13A00AB0062 /* RegistrationCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33DBA6F71CB8F13A00AB0062 /* RegistrationCompleteViewController.m */; };
 		33E1B8C81CB7DCF000B4207F /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1B8C71CB7DCF000B4207F /* FBSDKCoreKit.framework */; };
 		33E1B8CB1CB7DD4100B4207F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1B8C91CB7DD4100B4207F /* FBSDKLoginKit.framework */; };
 		33E1B8CC1CB7DD4100B4207F /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1B8CA1CB7DD4100B4207F /* FBSDKShareKit.framework */; };
@@ -154,7 +161,17 @@
 		3394A3A41CAE078100472030 /* LucidaGrande.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = LucidaGrande.ttc; sourceTree = "<group>"; };
 		33C142431CB1512500B57041 /* AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
 		33C142441CB1512500B57041 /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
-		33DBA6E21CB8C29000AB0062 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		33DBA6E41CB8CD2100AB0062 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		33DBA6E61CB8D18D00AB0062 /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
+		33DBA6E81CB8D1B800AB0062 /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
+		33DBA6EA1CB8D1D800AB0062 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		33DBA6EC1CB8D1DD00AB0062 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		33DBA6EE1CB8D1E800AB0062 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		33DBA6F01CB8D2FC00AB0062 /* dylib1.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = dylib1.o; path = usr/lib/dylib1.o; sourceTree = SDKROOT; };
+		33DBA6F21CB8D30500AB0062 /* lazydylib1.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = lazydylib1.o; path = usr/lib/lazydylib1.o; sourceTree = SDKROOT; };
+		33DBA6F41CB8D31600AB0062 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		33DBA6F61CB8F13A00AB0062 /* RegistrationCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationCompleteViewController.h; sourceTree = "<group>"; };
+		33DBA6F71CB8F13A00AB0062 /* RegistrationCompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationCompleteViewController.m; sourceTree = "<group>"; };
 		33E1B8C71CB7DCF000B4207F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		33E1B8C91CB7DD4100B4207F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		33E1B8CA1CB7DD4100B4207F /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -167,6 +184,7 @@
 		442160911CB3760A00BB387F /* OrderMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderMenuViewController.h; sourceTree = "<group>"; };
 		442160921CB3760A00BB387F /* OrderMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderMenuViewController.m; sourceTree = "<group>"; };
 		4488154E1CB62E84002A066C /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
+		7C2D7E2C89DCD2FAEB9DE47F /* libPods-Yan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Yan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,9 +192,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33DBA6F51CB8D31600AB0062 /* libz.tbd in Frameworks */,
+				33DBA6EF1CB8D1E800AB0062 /* SystemConfiguration.framework in Frameworks */,
+				33DBA6ED1CB8D1DD00AB0062 /* SafariServices.framework in Frameworks */,
+				33DBA6EB1CB8D1D800AB0062 /* AddressBook.framework in Frameworks */,
 				33E1B8CB1CB7DD4100B4207F /* FBSDKLoginKit.framework in Frameworks */,
 				33E1B8C81CB7DCF000B4207F /* FBSDKCoreKit.framework in Frameworks */,
 				33E1B8CC1CB7DD4100B4207F /* FBSDKShareKit.framework in Frameworks */,
+				33DBA6E71CB8D18D00AB0062 /* GoogleSignIn.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +228,7 @@
 				33599B5F1CAD259100366C34 /* YanTests */,
 				33599B6A1CAD259100366C34 /* YanUITests */,
 				33599B411CAD259000366C34 /* Products */,
+				B34B5C970B55F0D232BFF620 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -274,7 +298,9 @@
 		33599B791CAD26A900366C34 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				33DBA6E11CB8C23E00AB0062 /* Pods */,
+				33DBA6E81CB8D1B800AB0062 /* GoogleSignIn.bundle */,
+				33DBA6E61CB8D18D00AB0062 /* GoogleSignIn.framework */,
+				33DBA6E41CB8CD2100AB0062 /* GoogleService-Info.plist */,
 				33E1B8C91CB7DD4100B4207F /* FBSDKLoginKit.framework */,
 				33E1B8CA1CB7DD4100B4207F /* FBSDKShareKit.framework */,
 				33E1B8C71CB7DCF000B4207F /* FBSDKCoreKit.framework */,
@@ -301,6 +327,8 @@
 				33599BBE1CAD444500366C34 /* LoginViewController.m */,
 				33F9FB3E1CB6841700637A02 /* RegisterViewController.h */,
 				33F9FB3F1CB6841700637A02 /* RegisterViewController.m */,
+				33DBA6F61CB8F13A00AB0062 /* RegistrationCompleteViewController.h */,
+				33DBA6F71CB8F13A00AB0062 /* RegistrationCompleteViewController.m */,
 				33599BB41CAD2E9A00366C34 /* DrawerTableViewController.h */,
 				33599BB51CAD2E9A00366C34 /* DrawerTableViewController.m */,
 			);
@@ -392,12 +420,18 @@
 			path = REFrostedViewController;
 			sourceTree = "<group>";
 		};
-		33DBA6E11CB8C23E00AB0062 /* Pods */ = {
+		B34B5C970B55F0D232BFF620 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				33DBA6E21CB8C29000AB0062 /* Podfile */,
+				33DBA6F41CB8D31600AB0062 /* libz.tbd */,
+				33DBA6F21CB8D30500AB0062 /* lazydylib1.o */,
+				33DBA6F01CB8D2FC00AB0062 /* dylib1.o */,
+				33DBA6EE1CB8D1E800AB0062 /* SystemConfiguration.framework */,
+				33DBA6EC1CB8D1DD00AB0062 /* SafariServices.framework */,
+				33DBA6EA1CB8D1D800AB0062 /* AddressBook.framework */,
+				7C2D7E2C89DCD2FAEB9DE47F /* libPods-Yan.a */,
 			);
-			path = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -503,11 +537,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33DBA6E31CB8C29000AB0062 /* Podfile in Resources */,
 				3394A3A51CAE078100472030 /* LucidaGrande.ttc in Resources */,
 				33599B561CAD259100366C34 /* LaunchScreen.storyboard in Resources */,
 				33599B531CAD259100366C34 /* Assets.xcassets in Resources */,
 				33599B4E1CAD259100366C34 /* Main.storyboard in Resources */,
+				33DBA6E91CB8D1B800AB0062 /* GoogleSignIn.bundle in Resources */,
+				33DBA6E51CB8CD2100AB0062 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,6 +601,7 @@
 				336424B41CAE313A00E0E156 /* AFHTTPSessionManager.m in Sources */,
 				33F9FB401CB6841700637A02 /* RegisterViewController.m in Sources */,
 				336424C21CAE313A00E0E156 /* UIWebView+AFNetworking.m in Sources */,
+				33DBA6F81CB8F13A00AB0062 /* RegistrationCompleteViewController.m in Sources */,
 				33599BC21CAD4CD600366C34 /* NavigationController.m in Sources */,
 				3394A3A21CADF66300472030 /* UIView+REFrostedViewController.m in Sources */,
 				336424BB1CAE313A00E0E156 /* AFImageDownloader.m in Sources */,

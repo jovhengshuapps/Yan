@@ -13,5 +13,6 @@
 - (void) showTitleBar:(NSString*)title;
 - (void) hideTitleBar;
 - (BOOL) userLoggedIn;
+- (void) isFromRegistration:(BOOL)fromRegistration;
 
 @end

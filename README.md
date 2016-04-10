@@ -11,6 +11,7 @@
 Screenshots are shot from iPhone 6s Plus Simulator
 
 1. Home View 
+&nbsp;
 ![alt tag](http://i.imgur.com/rCXnUIM.png)
 
 2. Drawer Menu 

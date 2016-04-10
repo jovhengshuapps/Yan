@@ -20,7 +20,7 @@
 
 @end
 @protocol AlertViewDelegate <NSObject>
-@optional
+@required
 
 - (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 @end

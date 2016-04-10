@@ -25,7 +25,8 @@
     if ([FBSDKAccessToken currentAccessToken]) {
         // TODO:Token is already available.
     }
-
+    
+    [self showTitleBar:@"SIGN IN"];
     
     [GIDSignIn sharedInstance].uiDelegate = self;
 

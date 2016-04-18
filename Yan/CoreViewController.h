@@ -9,6 +9,7 @@
 #import "Config.h"
 
 @interface CoreViewController : UIViewController <AlertViewDelegate>
+@property (strong, nonatomic) UIView *titleBarView;
 
 - (void) showTitleBar:(NSString*)title;
 - (void) hideTitleBar;

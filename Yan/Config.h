@@ -13,7 +13,6 @@
 // IMPORTS
 
 #import <UIKit/UIKit.h>
-#import "Notifications.h"
 #import "AFNetworking.h"
 #import "REFrostedViewController.h"
 #import "NavigationController.h"
@@ -38,6 +37,12 @@
 #define KEYWINDOW                                                       [UIApplication sharedApplication].keyWindow
 
 #define APPINFO(key)                                                    [[NSBundle mainBundle] objectForInfoDictionaryKey:key];
+
+
+
+// NOTIFICATION OBSERVER NAME
+
+#define ChangeHomeViewToShow                                    @"ChangeHomeViewToShow"
 
 // CONFIGURATIONS
 

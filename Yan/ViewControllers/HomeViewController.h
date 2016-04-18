@@ -8,6 +8,15 @@
 
 #import "CoreViewController.h"
 
+typedef enum {
+    HomeViewDefault,
+    HomeViewRegistrationComplete,
+    HomeViewNotification
+} HomeView_ViewToShow;
+
+
 @interface HomeViewController : CoreViewController
+
+@property (assign, nonatomic) HomeView_ViewToShow viewToShow;
 
 @end

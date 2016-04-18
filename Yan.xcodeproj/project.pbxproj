@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		335834641CC4F1B4008606C8 /* AffiliatedRestoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335834631CC4F1B4008606C8 /* AffiliatedRestoViewController.m */; };
 		33599B451CAD259100366C34 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33599B441CAD259100366C34 /* main.m */; };
 		33599B481CAD259100366C34 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33599B471CAD259100366C34 /* AppDelegate.m */; };
 		33599B4E1CAD259100366C34 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33599B4C1CAD259100366C34 /* Main.storyboard */; };
@@ -81,6 +82,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		335834621CC4F1B4008606C8 /* AffiliatedRestoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AffiliatedRestoViewController.h; sourceTree = "<group>"; };
+		335834631CC4F1B4008606C8 /* AffiliatedRestoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AffiliatedRestoViewController.m; sourceTree = "<group>"; };
 		33599B401CAD259000366C34 /* Yan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33599B441CAD259100366C34 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		33599B461CAD259100366C34 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -183,7 +186,6 @@
 		442160871CB32C5800BB387F /* CollapseMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollapseMenuView.m; sourceTree = "<group>"; };
 		442160911CB3760A00BB387F /* OrderMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderMenuViewController.h; sourceTree = "<group>"; };
 		442160921CB3760A00BB387F /* OrderMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderMenuViewController.m; sourceTree = "<group>"; };
-		4488154E1CB62E84002A066C /* Notifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notifications.h; sourceTree = "<group>"; };
 		7C2D7E2C89DCD2FAEB9DE47F /* libPods-Yan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Yan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -246,7 +248,6 @@
 			isa = PBXGroup;
 			children = (
 				33599BAF1CAD275F00366C34 /* Config.h */,
-				4488154E1CB62E84002A066C /* Notifications.h */,
 				33599B461CAD259100366C34 /* AppDelegate.h */,
 				33599B471CAD259100366C34 /* AppDelegate.m */,
 				33599BAC1CAD274E00366C34 /* CoreViewController.h */,
@@ -321,6 +322,8 @@
 				337516DE1CB2AC390065AB7A /* HomeViewController.m */,
 				442160911CB3760A00BB387F /* OrderMenuViewController.h */,
 				442160921CB3760A00BB387F /* OrderMenuViewController.m */,
+				335834621CC4F1B4008606C8 /* AffiliatedRestoViewController.h */,
+				335834631CC4F1B4008606C8 /* AffiliatedRestoViewController.m */,
 				33F9FB411CB68D5600637A02 /* MainLoginViewController.h */,
 				33F9FB421CB68D5600637A02 /* MainLoginViewController.m */,
 				33599BBD1CAD444500366C34 /* LoginViewController.h */,
@@ -575,6 +578,7 @@
 				3394A39F1CADF66300472030 /* REFrostedContainerViewController.m in Sources */,
 				33599B511CAD259100366C34 /* Yan.xcdatamodeld in Sources */,
 				3394A39E1CADF66300472030 /* RECommonFunctions.m in Sources */,
+				335834641CC4F1B4008606C8 /* AffiliatedRestoViewController.m in Sources */,
 				336424B91CAE313A00E0E156 /* AFURLSessionManager.m in Sources */,
 				336424BD1CAE313A00E0E156 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				336424E81CAE354F00E0E156 /* XMLReader.m in Sources */,

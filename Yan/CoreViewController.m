@@ -11,7 +11,6 @@
 
 @interface CoreViewController ()
 @property (strong, nonatomic) UILabel *titleLabel;
-@property (strong, nonatomic) UIView *titleBarView;
 
 @end
 

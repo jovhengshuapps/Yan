@@ -8,6 +8,8 @@
 
 #import "RegisterViewController.h"
 #import "RegistrationCompleteViewController.h"
+#import "HomeViewController.h"
+
 
 @implementation RegisterViewController
 
@@ -23,13 +25,11 @@
     [alert showAlertView];
 }
 - (IBAction)completeRegistration:(id)sender {
-//    RegistrationCompleteViewController *registrationComplete = [self.storyboard instantiateViewControllerWithIdentifier:@"registrationComplete"];
-//    [self.navigationController setViewControllers:@[registrationComplete]];
+    [self.navigationController popToRootViewControllerAnimated:NO];
     
-//    [self.navigationController popToRootViewControllerAnimated:YES];
-//    [self isFromRegistration:YES];
+    NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
+    [notification postNotificationName:ChangeHomeViewToShow object:@"HomeViewRegistrationComplete"];
 }
-
 
 
 - (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {

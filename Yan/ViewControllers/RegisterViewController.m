@@ -25,14 +25,30 @@
     [alert showAlertView];
 }
 - (IBAction)completeRegistration:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:NO];
     
-    NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
-    [notification postNotificationName:ChangeHomeViewToShow object:@"HomeViewRegistrationComplete"];
+    AlertView *alert = [[AlertView alloc] initVideoAd:@"https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" delegate:self];
+    alert.tag = 1;
+    [alert showAlertView];
+    
 }
 
 
 - (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
+    
+    if (alertView.tag == 1) {
+        [self.navigationController popToRootViewControllerAnimated:NO];
+        
+        NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
+        [notification postNotificationName:ChangeHomeViewToShow object:@"HomeViewRegistrationComplete"];
+    }
+}
+
+- (void)videoAdPlayer:(AVPlayer *)player controller:(AVPlayerViewController *)controller {
+    controller.modalPresentationStyle = UIModalPresentationFullScreen;
+    controller.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:controller animated:YES completion:^{
+        [controller.player play];
+    }];
 }
 @end

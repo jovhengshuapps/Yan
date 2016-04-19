@@ -46,6 +46,10 @@
 		3394A3A21CADF66300472030 /* UIView+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A39B1CADF66300472030 /* UIView+REFrostedViewController.m */; };
 		3394A3A31CADF66300472030 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A39D1CADF66300472030 /* UIViewController+REFrostedViewController.m */; };
 		3394A3A51CAE078100472030 /* LucidaGrande.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 3394A3A41CAE078100472030 /* LucidaGrande.ttc */; };
+		33B36F041CC6496A00AB30C6 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B36F031CC6496A00AB30C6 /* AVKit.framework */; };
+		33B36F061CC649D800AB30C6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B36F051CC649D800AB30C6 /* AVFoundation.framework */; };
+		33B36F091CC65CD900AB30C6 /* ReserveRestoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B36F081CC65CD900AB30C6 /* ReserveRestoViewController.m */; };
+		33B36F0C1CC663BC00AB30C6 /* ReserveCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B36F0B1CC663BC00AB30C6 /* ReserveCompleteViewController.m */; };
 		33C142451CB1512500B57041 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C142441CB1512500B57041 /* AlertView.m */; };
 		33DBA6E51CB8CD2100AB0062 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33DBA6E41CB8CD2100AB0062 /* GoogleService-Info.plist */; };
 		33DBA6E71CB8D18D00AB0062 /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DBA6E61CB8D18D00AB0062 /* GoogleSignIn.framework */; };
@@ -162,6 +166,13 @@
 		3394A39C1CADF66300472030 /* UIViewController+REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+REFrostedViewController.h"; sourceTree = "<group>"; };
 		3394A39D1CADF66300472030 /* UIViewController+REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+REFrostedViewController.m"; sourceTree = "<group>"; };
 		3394A3A41CAE078100472030 /* LucidaGrande.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = LucidaGrande.ttc; sourceTree = "<group>"; };
+		33B36F011CC6486800AB30C6 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		33B36F031CC6496A00AB30C6 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		33B36F051CC649D800AB30C6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		33B36F071CC65CD900AB30C6 /* ReserveRestoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReserveRestoViewController.h; sourceTree = "<group>"; };
+		33B36F081CC65CD900AB30C6 /* ReserveRestoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReserveRestoViewController.m; sourceTree = "<group>"; };
+		33B36F0A1CC663BC00AB30C6 /* ReserveCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReserveCompleteViewController.h; sourceTree = "<group>"; };
+		33B36F0B1CC663BC00AB30C6 /* ReserveCompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReserveCompleteViewController.m; sourceTree = "<group>"; };
 		33C142431CB1512500B57041 /* AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
 		33C142441CB1512500B57041 /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
 		33DBA6E41CB8CD2100AB0062 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -194,6 +205,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33B36F061CC649D800AB30C6 /* AVFoundation.framework in Frameworks */,
+				33B36F041CC6496A00AB30C6 /* AVKit.framework in Frameworks */,
 				33DBA6F51CB8D31600AB0062 /* libz.tbd in Frameworks */,
 				33DBA6EF1CB8D1E800AB0062 /* SystemConfiguration.framework in Frameworks */,
 				33DBA6ED1CB8D1DD00AB0062 /* SafariServices.framework in Frameworks */,
@@ -324,6 +337,10 @@
 				442160921CB3760A00BB387F /* OrderMenuViewController.m */,
 				335834621CC4F1B4008606C8 /* AffiliatedRestoViewController.h */,
 				335834631CC4F1B4008606C8 /* AffiliatedRestoViewController.m */,
+				33B36F071CC65CD900AB30C6 /* ReserveRestoViewController.h */,
+				33B36F081CC65CD900AB30C6 /* ReserveRestoViewController.m */,
+				33B36F0A1CC663BC00AB30C6 /* ReserveCompleteViewController.h */,
+				33B36F0B1CC663BC00AB30C6 /* ReserveCompleteViewController.m */,
 				33F9FB411CB68D5600637A02 /* MainLoginViewController.h */,
 				33F9FB421CB68D5600637A02 /* MainLoginViewController.m */,
 				33599BBD1CAD444500366C34 /* LoginViewController.h */,
@@ -426,6 +443,9 @@
 		B34B5C970B55F0D232BFF620 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				33B36F051CC649D800AB30C6 /* AVFoundation.framework */,
+				33B36F031CC6496A00AB30C6 /* AVKit.framework */,
+				33B36F011CC6486800AB30C6 /* MediaPlayer.framework */,
 				33DBA6F41CB8D31600AB0062 /* libz.tbd */,
 				33DBA6F21CB8D30500AB0062 /* lazydylib1.o */,
 				33DBA6F01CB8D2FC00AB0062 /* dylib1.o */,
@@ -601,10 +621,12 @@
 				3394A3A11CADF66300472030 /* UIImage+REFrostedViewController.m in Sources */,
 				336424C11CAE313A00E0E156 /* UIRefreshControl+AFNetworking.m in Sources */,
 				33C142451CB1512500B57041 /* AlertView.m in Sources */,
+				33B36F091CC65CD900AB30C6 /* ReserveRestoViewController.m in Sources */,
 				336424C01CAE313A00E0E156 /* UIProgressView+AFNetworking.m in Sources */,
 				336424B41CAE313A00E0E156 /* AFHTTPSessionManager.m in Sources */,
 				33F9FB401CB6841700637A02 /* RegisterViewController.m in Sources */,
 				336424C21CAE313A00E0E156 /* UIWebView+AFNetworking.m in Sources */,
+				33B36F0C1CC663BC00AB30C6 /* ReserveCompleteViewController.m in Sources */,
 				33DBA6F81CB8F13A00AB0062 /* RegistrationCompleteViewController.m in Sources */,
 				33599BC21CAD4CD600366C34 /* NavigationController.m in Sources */,
 				3394A3A21CADF66300472030 /* UIView+REFrostedViewController.m in Sources */,

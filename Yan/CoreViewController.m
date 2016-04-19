@@ -28,7 +28,7 @@
     _titleBarView.backgroundColor = UIColorFromRGB(0x333333);
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _titleBarView.frame.size.width, _titleBarView.frame.size.height)];
     
-    _titleLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:@"..." attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), 24.0f)];
+    _titleLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:@"..." attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), 13.0f)];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     
     [self hideTitleBar];
@@ -100,7 +100,7 @@
 
 - (void) showTitleBar:(NSString*)title {
     _titleBarView.hidden = NO;
-    _titleLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:title attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), 24.0f)];
+    _titleLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:title attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), 13.0f)];
 }
 
 - (void) hideTitleBar {

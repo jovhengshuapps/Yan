@@ -7,6 +7,7 @@
 //
 
 #import "AffiliatedRestoViewController.h"
+#import "ReserveRestoViewController.h"
 
 typedef enum {
     AffiliatedRestoOptionAll,
@@ -145,6 +146,16 @@ typedef enum {
 //    cell.detailTextLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:details attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), 24.0f)];
     
     return cell;
+    
+}
+
+#pragma mark UITable Delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    ReserveRestoViewController *reserve = [self.storyboard instantiateViewControllerWithIdentifier:@"reserveResto"];
+    [self.navigationController pushViewController:reserve animated:YES];
     
 }
 

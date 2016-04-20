@@ -14,9 +14,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.buttonLogin.layer.cornerRadius = 5.0f;
-    
+        
     [self showTitleBar:@"SIGN IN"];
     
 }

@@ -51,6 +51,9 @@
 		33B36F091CC65CD900AB30C6 /* ReserveRestoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B36F081CC65CD900AB30C6 /* ReserveRestoViewController.m */; };
 		33B36F0C1CC663BC00AB30C6 /* ReserveCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B36F0B1CC663BC00AB30C6 /* ReserveCompleteViewController.m */; };
 		33C142451CB1512500B57041 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C142441CB1512500B57041 /* AlertView.m */; };
+		33C6E67A1CC7A101001690ED /* RestaurantDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C6E6791CC7A101001690ED /* RestaurantDetailsViewController.m */; };
+		33C6E67D1CC7A1D9001690ED /* CustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C6E67C1CC7A1D9001690ED /* CustomButton.m */; };
+		33C6E6801CC7C6CD001690ED /* ScanLogoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33C6E67F1CC7C6CD001690ED /* ScanLogoViewController.m */; };
 		33DBA6E51CB8CD2100AB0062 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33DBA6E41CB8CD2100AB0062 /* GoogleService-Info.plist */; };
 		33DBA6E71CB8D18D00AB0062 /* GoogleSignIn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DBA6E61CB8D18D00AB0062 /* GoogleSignIn.framework */; };
 		33DBA6E91CB8D1B800AB0062 /* GoogleSignIn.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 33DBA6E81CB8D1B800AB0062 /* GoogleSignIn.bundle */; };
@@ -175,6 +178,12 @@
 		33B36F0B1CC663BC00AB30C6 /* ReserveCompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReserveCompleteViewController.m; sourceTree = "<group>"; };
 		33C142431CB1512500B57041 /* AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
 		33C142441CB1512500B57041 /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
+		33C6E6781CC7A101001690ED /* RestaurantDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantDetailsViewController.h; sourceTree = "<group>"; };
+		33C6E6791CC7A101001690ED /* RestaurantDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantDetailsViewController.m; sourceTree = "<group>"; };
+		33C6E67B1CC7A1D9001690ED /* CustomButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomButton.h; sourceTree = "<group>"; };
+		33C6E67C1CC7A1D9001690ED /* CustomButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomButton.m; sourceTree = "<group>"; };
+		33C6E67E1CC7C6CD001690ED /* ScanLogoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanLogoViewController.h; sourceTree = "<group>"; };
+		33C6E67F1CC7C6CD001690ED /* ScanLogoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanLogoViewController.m; sourceTree = "<group>"; };
 		33DBA6E41CB8CD2100AB0062 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		33DBA6E61CB8D18D00AB0062 /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSignIn.framework; sourceTree = "<group>"; };
 		33DBA6E81CB8D1B800AB0062 /* GoogleSignIn.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleSignIn.bundle; sourceTree = "<group>"; };
@@ -269,6 +278,8 @@
 				33599BC11CAD4CD600366C34 /* NavigationController.m */,
 				33C142431CB1512500B57041 /* AlertView.h */,
 				33C142441CB1512500B57041 /* AlertView.m */,
+				33C6E67B1CC7A1D9001690ED /* CustomButton.h */,
+				33C6E67C1CC7A1D9001690ED /* CustomButton.m */,
 				442160861CB32C5800BB387F /* CollapseMenuView.h */,
 				442160871CB32C5800BB387F /* CollapseMenuView.m */,
 				33599B4C1CAD259100366C34 /* Main.storyboard */,
@@ -335,12 +346,16 @@
 				337516DE1CB2AC390065AB7A /* HomeViewController.m */,
 				442160911CB3760A00BB387F /* OrderMenuViewController.h */,
 				442160921CB3760A00BB387F /* OrderMenuViewController.m */,
+				33C6E67E1CC7C6CD001690ED /* ScanLogoViewController.h */,
+				33C6E67F1CC7C6CD001690ED /* ScanLogoViewController.m */,
 				335834621CC4F1B4008606C8 /* AffiliatedRestoViewController.h */,
 				335834631CC4F1B4008606C8 /* AffiliatedRestoViewController.m */,
 				33B36F071CC65CD900AB30C6 /* ReserveRestoViewController.h */,
 				33B36F081CC65CD900AB30C6 /* ReserveRestoViewController.m */,
 				33B36F0A1CC663BC00AB30C6 /* ReserveCompleteViewController.h */,
 				33B36F0B1CC663BC00AB30C6 /* ReserveCompleteViewController.m */,
+				33C6E6781CC7A101001690ED /* RestaurantDetailsViewController.h */,
+				33C6E6791CC7A101001690ED /* RestaurantDetailsViewController.m */,
 				33F9FB411CB68D5600637A02 /* MainLoginViewController.h */,
 				33F9FB421CB68D5600637A02 /* MainLoginViewController.m */,
 				33599BBD1CAD444500366C34 /* LoginViewController.h */,
@@ -608,6 +623,7 @@
 				33599B481CAD259100366C34 /* AppDelegate.m in Sources */,
 				3394A3A01CADF66300472030 /* REFrostedViewController.m in Sources */,
 				336424B81CAE313A00E0E156 /* AFURLResponseSerialization.m in Sources */,
+				33C6E67A1CC7A101001690ED /* RestaurantDetailsViewController.m in Sources */,
 				33F9FB431CB68D5600637A02 /* MainLoginViewController.m in Sources */,
 				336424B71CAE313A00E0E156 /* AFURLRequestSerialization.m in Sources */,
 				337516DF1CB2AC390065AB7A /* HomeViewController.m in Sources */,
@@ -621,6 +637,7 @@
 				3394A3A11CADF66300472030 /* UIImage+REFrostedViewController.m in Sources */,
 				336424C11CAE313A00E0E156 /* UIRefreshControl+AFNetworking.m in Sources */,
 				33C142451CB1512500B57041 /* AlertView.m in Sources */,
+				33C6E6801CC7C6CD001690ED /* ScanLogoViewController.m in Sources */,
 				33B36F091CC65CD900AB30C6 /* ReserveRestoViewController.m in Sources */,
 				336424C01CAE313A00E0E156 /* UIProgressView+AFNetworking.m in Sources */,
 				336424B41CAE313A00E0E156 /* AFHTTPSessionManager.m in Sources */,
@@ -629,6 +646,7 @@
 				33B36F0C1CC663BC00AB30C6 /* ReserveCompleteViewController.m in Sources */,
 				33DBA6F81CB8F13A00AB0062 /* RegistrationCompleteViewController.m in Sources */,
 				33599BC21CAD4CD600366C34 /* NavigationController.m in Sources */,
+				33C6E67D1CC7A1D9001690ED /* CustomButton.m in Sources */,
 				3394A3A21CADF66300472030 /* UIView+REFrostedViewController.m in Sources */,
 				336424BB1CAE313A00E0E156 /* AFImageDownloader.m in Sources */,
 			);

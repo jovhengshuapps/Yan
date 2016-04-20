@@ -7,6 +7,7 @@
 //
 
 #import "ReserveRestoViewController.h"
+#import "RestaurantDetailsViewController.h"
 
 @interface ReserveRestoViewController ()
 
@@ -49,6 +50,8 @@
 
 - (void) showRestaurantDetails {
     
+    RestaurantDetailsViewController *details = [self.storyboard instantiateViewControllerWithIdentifier:@"restaurantDetails"];
+    [self.navigationController pushViewController:details animated:YES];
 }
 
 @end

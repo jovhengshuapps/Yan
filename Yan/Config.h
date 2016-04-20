@@ -17,6 +17,7 @@
 #import "REFrostedViewController.h"
 #import "NavigationController.h"
 #import "AlertView.h"
+#import "CustomButton.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>

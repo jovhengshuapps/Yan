@@ -19,7 +19,7 @@
     
 }
 - (IBAction)loginPressed:(id)sender {
-    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"This is a text message\n\nThank you!" delegate:self buttons:@[@"OK",@"Close"]];
+    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"This is a test message" delegate:self buttons:nil];
     [alert showAlertView];
 }
 

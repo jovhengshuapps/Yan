@@ -66,7 +66,7 @@
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"regCompleteOrderButton"]) {
+    if ([segue.identifier isEqualToString:@"regCompleteOrderButton"] || [segue.identifier isEqualToString:@"regCompleteReservationButton"]) {
         
         NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
         [notification postNotificationName:ChangeHomeViewToShow object:nil];

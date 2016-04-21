@@ -387,7 +387,7 @@ You may now start using the app for your favourite restaurant.</string>
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <segue destination="Fyn-LN-nGQ" kind="show" identifier="regCompleteOrder" id="Vwc-zK-8Vx"/>
+                                            <segue destination="Fyn-LN-nGQ" kind="show" identifier="regCompleteOrderButton" id="Vwc-zK-8Vx"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What do you want to do next?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Sg-aR-Fof">
@@ -2174,8 +2174,8 @@ You may now start using the app for your favourite restaurant.</string>
         <image name="yan-logo" width="1024" height="648"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7dQ-Ir-nbk"/>
+        <segue reference="Y4r-v0-sWo"/>
         <segue reference="Vwc-zK-8Vx"/>
-        <segue reference="6p0-bQ-mNf"/>
+        <segue reference="7dQ-Ir-nbk"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -99,7 +99,7 @@
 
 - (void) showTitleBar:(NSString*)title {
     _titleBarView.hidden = NO;
-    _titleLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:title attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), 13.0f)];
+    _titleLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:title attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), _titleBarView.frame.size.height - 20.0f)];
 }
 
 - (void) hideTitleBar {

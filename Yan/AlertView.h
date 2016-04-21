@@ -31,4 +31,6 @@
 
 - (void)videoAdPlayer:(AVPlayer*)player controller:(AVPlayerViewController*)controller;
 
+- (void) alertViewDismissed:(AlertView*)alertView;
+
 @end

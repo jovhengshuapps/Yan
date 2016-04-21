@@ -35,13 +35,20 @@
 
 - (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    
     if (alertView.tag == 1) {
         [self.navigationController popToRootViewControllerAnimated:NO];
         
         NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
         [notification postNotificationName:ChangeHomeViewToShow object:@"HomeViewRegistrationComplete"];
     }
+}
+
+- (void)alertViewDismissed:(AlertView *)alertView {
+    
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    
+    NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
+    [notification postNotificationName:ChangeHomeViewToShow object:@"HomeViewRegistrationComplete"];
 }
 
 - (void)videoAdPlayer:(AVPlayer *)player controller:(AVPlayerViewController *)controller {

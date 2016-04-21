@@ -239,13 +239,18 @@
         _container.transform = CGAffineTransformMakeScale(0.1, 0.1);
         
     } completion:^(BOOL finished) {
+        if ([_delegate respondsToSelector:@selector(alertViewDismissed:)]) {
+            [_delegate alertViewDismissed:_instance];
+        }
         [_background removeFromSuperview];
     }];
 }
 
 - (void) clickedAtIndex:(UIButton*)sender {
     NSInteger index = sender.tag;
-    [_delegate alertView:_instance clickedButtonAtIndex:index];
+    if ([_delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
+        [_delegate alertView:_instance clickedButtonAtIndex:index];
+    }
     if (index == 0) {
         [self closeAlertView];
     }

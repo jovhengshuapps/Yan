@@ -33,11 +33,11 @@
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
-            <string>LucidaGrande</string>
             <string>LucidaGrande-Bold</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande-Bold</string>
+            <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
@@ -678,43 +678,40 @@ You may now start using the app for your favourite restaurant.</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gou-LI-WuX">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="70" width="360" height="661"/>
-                                </variation>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u3D-96-qHr">
+                                <rect key="frame" x="20" y="72" width="560" height="450"/>
+                                <color key="backgroundColor" red="0.1764705882" green="0.1764705882" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* The Restaurant logo should be somewhere nearby." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYa-hc-lLz">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* The Restaurant logo should be somewhere nearby." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gca-ju-01a">
+                                <rect key="frame" x="35" y="530" width="530" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="hG3-vP-87f"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="20" y="739" width="360" height="41"/>
-                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="gou-LI-WuX"/>
-                                <exclude reference="JYa-hc-lLz"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="gou-LI-WuX"/>
-                                <include reference="JYa-hc-lLz"/>
-                            </mask>
-                        </variation>
+                        <constraints>
+                            <constraint firstItem="kqa-jE-aBg" firstAttribute="top" secondItem="Gca-ju-01a" secondAttribute="bottom" constant="20" id="Fpq-Xh-Kpk"/>
+                            <constraint firstItem="Gca-ju-01a" firstAttribute="top" secondItem="u3D-96-qHr" secondAttribute="bottom" constant="8" id="Hau-go-F9i"/>
+                            <constraint firstItem="Gca-ju-01a" firstAttribute="trailing" secondItem="ksd-nk-Qga" secondAttribute="trailingMargin" constant="-15" id="Pki-7n-7Ng"/>
+                            <constraint firstItem="u3D-96-qHr" firstAttribute="top" secondItem="QhW-Cb-1yJ" secondAttribute="bottom" constant="8" id="dfu-r6-FVV"/>
+                            <constraint firstItem="u3D-96-qHr" firstAttribute="trailing" secondItem="ksd-nk-Qga" secondAttribute="trailingMargin" id="kbu-oH-JNn"/>
+                            <constraint firstItem="Gca-ju-01a" firstAttribute="leading" secondItem="ksd-nk-Qga" secondAttribute="leadingMargin" constant="15" id="tib-rO-InL"/>
+                            <constraint firstItem="u3D-96-qHr" firstAttribute="leading" secondItem="ksd-nk-Qga" secondAttribute="leadingMargin" id="z5S-PX-Gc7"/>
+                        </constraints>
                     </view>
                     <connections>
-                        <outlet property="imageViewCamera" destination="gou-LI-WuX" id="8k5-xD-z29"/>
+                        <outlet property="imageViewCamera" destination="u3D-96-qHr" id="I26-Jb-3hU"/>
+                        <outlet property="view" destination="ksd-nk-Qga" id="tzx-Th-4BP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uQk-u2-C2P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1492.5" y="-183"/>
+            <point key="canvasLocation" x="1492" y="-183"/>
         </scene>
         <!--Order Menu View Controller-->
         <scene sceneID="H7U-38-RPk">

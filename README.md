@@ -13,14 +13,14 @@
 1. Home View 
 
 
-![alt tag](http://i.imgur.com/rCXnUIM.png)
+![alt tag](http://i.imgur.com/QKiLMXC.png)
 
 ----
 
 2. Drawer Menu 
 
 
-![alt tag](http://i.imgur.com/7qyRiWh.png)
+![alt tag](http://i.imgur.com/vil5FKD.png)
 
 ----
 
@@ -28,7 +28,7 @@
 3. Login View 
 
 
-![alt tag](http://i.imgur.com/721f0SC.png)
+![alt tag](http://i.imgur.com/RLUJ1vQ.png)
 
 ----
 
@@ -49,7 +49,7 @@
 6. Yan! Login 
 
 
-![alt tag](http://i.imgur.com/9Zyq6Y4.png)
+![alt tag](http://i.imgur.com/OkRd60f.png)
 
 ----
 
@@ -57,16 +57,59 @@
 7. Registration View 
 
 
-![alt tag](http://i.imgur.com/QlT81Hc.png)
+![alt tag](http://i.imgur.com/PLJGMUs.png)
 
 ----
 
 8. Registration Complete View 
 
 
-![alt tag](http://i.imgur.com/PD7wf6z.png)
+![alt tag](http://i.imgur.com/VqMgUvS.png)
 
 ----
+
+9. Order Menu
+
+![alt tag](http://i.imgur.com/XJYykyh.png)
+
+not yet functioning correctly
+
+----
+
+
+10. Scan Logo Screen
+
+![alt tag](http://i.imgur.com/UpQ3bUu.png)
+
+----
+
+11. Reservation Screen
+
+![alt tag](http://i.imgur.com/CM5lbar.png)
+
+----
+
+12. Restaurant Details
+
+![alt tag](http://i.imgur.com/pYTTDlM.png)
+
+----
+
+13. Reservation Confirmation
+
+![alt tag](http://i.imgur.com/aRfKsF1.png)
+
+
+----
+
+14. Advertisement Video on Registration
+
+![alt tag](http://i.imgur.com/32gHWvj.png)
+
+— don’t fullscreen :v
+
+----
+
 
 
 ## Issues currently encountered

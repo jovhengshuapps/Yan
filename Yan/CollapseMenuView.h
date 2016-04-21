@@ -28,5 +28,6 @@ typedef enum {
 @property (assign, nonatomic) CGFloat cellHeight;
 
 - (instancetype) initWithPosition:(CollapseMenuViewPosition) position;
+- (instancetype) initWithPosition:(CollapseMenuViewPosition)position content:(NSDictionary*)datasource;
 
 @end

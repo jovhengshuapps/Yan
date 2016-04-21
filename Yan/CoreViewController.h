@@ -15,5 +15,5 @@
 - (void) hideTitleBar;
 - (BOOL) userLoggedIn;
 - (void) isFromRegistration:(BOOL)fromRegistration;
-
+- (NSDictionary*) getMenuForRestaurant:(NSString*)restaurantName;
 @end

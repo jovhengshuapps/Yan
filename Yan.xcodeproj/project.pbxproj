@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0BD6265C2A2E8168C52F9BB9 /* libPods-Yan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C2D7E2C89DCD2FAEB9DE47F /* libPods-Yan.a */; };
 		335834641CC4F1B4008606C8 /* AffiliatedRestoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335834631CC4F1B4008606C8 /* AffiliatedRestoViewController.m */; };
 		33599B451CAD259100366C34 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33599B441CAD259100366C34 /* main.m */; };
 		33599B481CAD259100366C34 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33599B471CAD259100366C34 /* AppDelegate.m */; };
@@ -224,6 +225,7 @@
 				33E1B8C81CB7DCF000B4207F /* FBSDKCoreKit.framework in Frameworks */,
 				33E1B8CC1CB7DD4100B4207F /* FBSDKShareKit.framework in Frameworks */,
 				33DBA6E71CB8D18D00AB0062 /* GoogleSignIn.framework in Frameworks */,
+				0BD6265C2A2E8168C52F9BB9 /* libPods-Yan.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -790,11 +792,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
+					"$(PROJECT_DIR)/Pods/Crashlytics/iOS",
+					"$(PROJECT_DIR)/Pods/Fabric/iOS",
 				);
 				INFOPLIST_FILE = Yan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jovhengshuapps.yan.Yan;
+				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.Yan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -807,11 +811,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
+					"$(PROJECT_DIR)/Pods/Crashlytics/iOS",
+					"$(PROJECT_DIR)/Pods/Fabric/iOS",
 				);
 				INFOPLIST_FILE = Yan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jovhengshuapps.yan.Yan;
+				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.Yan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

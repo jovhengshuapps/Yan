@@ -28,16 +28,16 @@
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
             <string>LucidaGrande-Bold</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande-Bold</string>
-            <string>LucidaGrande</string>
-            <string>LucidaGrande</string>
-            <string>LucidaGrande</string>
-            <string>LucidaGrande</string>
-            <string>LucidaGrande</string>
-            <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
@@ -675,6 +675,7 @@ You may now start using the app for your favourite restaurant.</string>
                         <viewControllerLayoutGuide type="bottom" id="kqa-jE-aBg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ksd-nk-Qga">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gou-LI-WuX">
@@ -727,7 +728,7 @@ You may now start using the app for your favourite restaurant.</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ufi-wl-mh7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yan-logo" translatesAutoresizingMaskIntoConstraints="NO" id="Ufi-wl-mh7">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
                         </subviews>
@@ -736,6 +737,10 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstItem="Ufi-wl-mh7" firstAttribute="top" secondItem="CAg-DY-uvb" secondAttribute="topMargin" id="3gK-TI-qgf"/>
                             <constraint firstItem="lbo-XR-REp" firstAttribute="top" secondItem="Ufi-wl-mh7" secondAttribute="bottom" id="NRa-99-l9a"/>
                             <constraint firstItem="Ufi-wl-mh7" firstAttribute="leading" secondItem="CAg-DY-uvb" secondAttribute="leadingMargin" constant="-20" id="X1c-yw-Kdz"/>
+                            <constraint firstItem="Ufi-wl-mh7" firstAttribute="leading" secondItem="CAg-DY-uvb" secondAttribute="leading" id="aGa-nG-kor"/>
+                            <constraint firstItem="Ufi-wl-mh7" firstAttribute="bottom" secondItem="lbo-XR-REp" secondAttribute="top" id="cdT-AJ-cWd"/>
+                            <constraint firstItem="Ufi-wl-mh7" firstAttribute="top" secondItem="CAg-DY-uvb" secondAttribute="top" id="g2J-GI-9BI"/>
+                            <constraint firstAttribute="trailing" secondItem="Ufi-wl-mh7" secondAttribute="trailing" id="kbC-9u-2Zt"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ufi-wl-mh7" secondAttribute="trailing" constant="-20" id="qak-Jr-BlF"/>
                         </constraints>
                         <variation key="default">
@@ -1153,6 +1158,7 @@ You may now start using the app for your favourite restaurant.</string>
                         <viewControllerLayoutGuide type="bottom" id="n3D-mp-jFl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="JyJ-CU-ee6">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Address" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gdo-dp-KKe">
@@ -1304,12 +1310,6 @@ You may now start using the app for your favourite restaurant.</string>
                                 <exclude reference="a5L-M9-XQJ"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="0uR-QD-P28"/>
-                                <exclude reference="7xU-rc-w0B"/>
-                                <exclude reference="zcz-3B-egE"/>
-                                <exclude reference="Evy-Z2-4Rg"/>
-                                <exclude reference="a6E-Ko-KjD"/>
-                                <exclude reference="vUe-zQ-2kz"/>
                                 <exclude reference="PB9-QP-t7s"/>
                                 <exclude reference="RBD-Ix-sEx"/>
                                 <exclude reference="dxH-JM-swc"/>
@@ -1319,6 +1319,12 @@ You may now start using the app for your favourite restaurant.</string>
                                 <exclude reference="4Kc-SG-k5X"/>
                                 <exclude reference="Z8U-pJ-yD4"/>
                                 <exclude reference="jqZ-ah-djj"/>
+                                <exclude reference="0uR-QD-P28"/>
+                                <exclude reference="7xU-rc-w0B"/>
+                                <exclude reference="zcz-3B-egE"/>
+                                <exclude reference="Evy-Z2-4Rg"/>
+                                <exclude reference="a6E-Ko-KjD"/>
+                                <exclude reference="vUe-zQ-2kz"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1330,12 +1336,6 @@ You may now start using the app for your favourite restaurant.</string>
                                 <include reference="a5L-M9-XQJ"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="0uR-QD-P28"/>
-                                <include reference="7xU-rc-w0B"/>
-                                <include reference="zcz-3B-egE"/>
-                                <include reference="Evy-Z2-4Rg"/>
-                                <include reference="a6E-Ko-KjD"/>
-                                <include reference="vUe-zQ-2kz"/>
                                 <include reference="PB9-QP-t7s"/>
                                 <include reference="RBD-Ix-sEx"/>
                                 <include reference="dxH-JM-swc"/>
@@ -1345,6 +1345,12 @@ You may now start using the app for your favourite restaurant.</string>
                                 <include reference="4Kc-SG-k5X"/>
                                 <include reference="Z8U-pJ-yD4"/>
                                 <include reference="jqZ-ah-djj"/>
+                                <include reference="0uR-QD-P28"/>
+                                <include reference="7xU-rc-w0B"/>
+                                <include reference="zcz-3B-egE"/>
+                                <include reference="Evy-Z2-4Rg"/>
+                                <include reference="a6E-Ko-KjD"/>
+                                <include reference="vUe-zQ-2kz"/>
                             </mask>
                         </variation>
                     </view>
@@ -1956,7 +1962,7 @@ You may now start using the app for your favourite restaurant.</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="FULL NAME" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kyD-8P-sul">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="FULL NAME" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kyD-8P-sul">
                                 <rect key="frame" x="20" y="150" width="560" height="40"/>
                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1967,7 +1973,7 @@ You may now start using the app for your favourite restaurant.</string>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="BIRTHDAY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rJq-zN-8xr">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="BIRTHDAY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rJq-zN-8xr">
                                 <rect key="frame" x="20" y="206" width="560" height="40"/>
                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1978,7 +1984,7 @@ You may now start using the app for your favourite restaurant.</string>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="EMAIL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MuL-Zc-0qT">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="EMAIL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MuL-Zc-0qT">
                                 <rect key="frame" x="20" y="262" width="560" height="40"/>
                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1989,7 +1995,7 @@ You may now start using the app for your favourite restaurant.</string>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="PASSWORD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lb9-cy-vh5">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="PASSWORD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lb9-cy-vh5">
                                 <rect key="frame" x="20" y="318" width="560" height="40"/>
                                 <color key="backgroundColor" red="0.92156862745098034" green="0.92156862745098034" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2000,7 +2006,7 @@ You may now start using the app for your favourite restaurant.</string>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="PRIVACY POLICY | TERMS OF USE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Er-Uh-dov">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PRIVACY POLICY | TERMS OF USE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Er-Uh-dov">
                                 <rect key="frame" x="20" y="504" width="560" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="fWb-op-Xvd"/>
@@ -2031,7 +2037,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     <action selector="completeRegistration:" destination="9eW-Mt-EhP" eventType="touchUpInside" id="j6f-CR-4IW"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySN-N5-s3S">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySN-N5-s3S">
                                 <rect key="frame" x="20" y="366" width="560" height="130"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -2062,7 +2068,7 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstItem="LkP-3C-SWt" firstAttribute="trailing" secondItem="ySN-N5-s3S" secondAttribute="trailing" id="ITr-JX-RCb"/>
                             <constraint firstItem="7Er-Uh-dov" firstAttribute="top" secondItem="ySN-N5-s3S" secondAttribute="bottom" constant="8" id="K64-g8-86j"/>
                             <constraint firstItem="7Er-Uh-dov" firstAttribute="leading" secondItem="593-gt-R8e" secondAttribute="leadingMargin" constant="4" id="KE3-md-cSn"/>
-                            <constraint firstItem="kyD-8P-sul" firstAttribute="top" secondItem="TS5-VP-FOE" secondAttribute="bottom" constant="70" id="Lxt-Zj-3mx"/>
+                            <constraint firstItem="kyD-8P-sul" firstAttribute="top" secondItem="TS5-VP-FOE" secondAttribute="bottom" constant="86" id="Lxt-Zj-3mx"/>
                             <constraint firstItem="Lb9-cy-vh5" firstAttribute="top" secondItem="MuL-Zc-0qT" secondAttribute="bottom" constant="16" id="OjR-8w-qWf">
                                 <variation key="heightClass=regular" constant="8"/>
                             </constraint>
@@ -2074,10 +2080,12 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstItem="Lb9-cy-vh5" firstAttribute="trailing" secondItem="kyD-8P-sul" secondAttribute="trailing" id="VJZ-3J-ODd"/>
                             <constraint firstItem="ySN-N5-s3S" firstAttribute="trailing" secondItem="593-gt-R8e" secondAttribute="trailingMargin" id="ZNa-qQ-rcH"/>
                             <constraint firstItem="YRc-jH-Ug8" firstAttribute="trailing" secondItem="593-gt-R8e" secondAttribute="trailingMargin" id="dLA-ur-MYE"/>
+                            <constraint firstItem="7Er-Uh-dov" firstAttribute="leading" secondItem="ySN-N5-s3S" secondAttribute="leading" id="eo6-up-cXh"/>
                             <constraint firstItem="7Er-Uh-dov" firstAttribute="bottom" secondItem="LkP-3C-SWt" secondAttribute="bottom" id="idN-Zu-cdl"/>
                             <constraint firstItem="MuL-Zc-0qT" firstAttribute="trailing" secondItem="kyD-8P-sul" secondAttribute="trailing" id="lfa-h5-p6V"/>
                             <constraint firstItem="ySN-N5-s3S" firstAttribute="leading" secondItem="593-gt-R8e" secondAttribute="leadingMargin" id="mcX-bF-RzI"/>
                             <constraint firstItem="rJq-zN-8xr" firstAttribute="leading" secondItem="kyD-8P-sul" secondAttribute="leading" id="plb-3V-HJ5"/>
+                            <constraint firstItem="7Er-Uh-dov" firstAttribute="trailing" secondItem="ySN-N5-s3S" secondAttribute="trailing" id="sQE-Bw-89j"/>
                             <constraint firstAttribute="trailingMargin" secondItem="7Er-Uh-dov" secondAttribute="trailing" constant="-4" id="taP-Sg-g6I"/>
                             <constraint firstItem="ySN-N5-s3S" firstAttribute="top" secondItem="Lb9-cy-vh5" secondAttribute="bottom" constant="8" id="vuV-7d-o7o"/>
                             <constraint firstItem="MuL-Zc-0qT" firstAttribute="top" secondItem="rJq-zN-8xr" secondAttribute="bottom" constant="16" id="wuX-ij-TS8">

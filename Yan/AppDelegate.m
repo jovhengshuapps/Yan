@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "RootViewController.h"
 #import "Config.h"
+//#import <Fabric/Fabric.h>
+//#import <Crashlytics/Crashlytics.h>
 
 @interface AppDelegate ()
 
@@ -19,6 +21,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    //[Fabric with:@[[Crashlytics class]]];
     
     [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x660000)];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
@@ -30,7 +33,7 @@
     
     [[UINavigationBar appearance] addSubview:statusBarView];
     
-    [[UINavigationBar appearance] setTitleTextAttributes:TextAttributes(@"LucidaGrande",0xFFFFFF,30.0f)];
+    [[UINavigationBar appearance] setTitleTextAttributes:TextAttributes(@"LucidaGrande",0xFFFFFF,25.0f)];
     
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     

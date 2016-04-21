@@ -27,8 +27,7 @@
     _titleBarView = [[UIView alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.view.bounds.size.width, self.navigationController.navigationBar.frame.size.height)];
     _titleBarView.backgroundColor = UIColorFromRGB(0x333333);
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _titleBarView.frame.size.width, _titleBarView.frame.size.height)];
-    
-    _titleLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:@"..." attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), 13.0f)];
+    _titleLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:@"..." attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), 25.0f)];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
     
     [self hideTitleBar];
@@ -131,6 +130,90 @@
     view.backgroundColor = [UIColor redColor];
     view.center = KEYWINDOW.center;
     [self.view addSubview:view];
+}
+
+
+- (NSDictionary*) getMenuForRestaurant:(NSString*)restaurantName {
+    //dummy data
+    NSDictionary *data = @{};
+    if ([restaurantName isEqualToString:@"dummy"]) {
+        data = @{
+                 @"categories": @[
+                         @{
+                             @"menu": @[
+                                     @{
+                                         @"price": @"120.00",
+                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
+                                         @"id": @1,
+                                         @"name": @"Banana Split",
+                                         @"desc": @""
+                                         }
+                                     ],
+                             @"name": @"Main Course"
+                             },
+                         @{
+                             @"menu": @[
+                                     @{
+                                         @"price": @"120.00",
+                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
+                                         @"id": @1,
+                                         @"name": @"Banana Split",
+                                         @"desc": @""
+                                         },
+                                     @{
+                                         @"price": @"120.00",
+                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
+                                         @"id": @1,
+                                         @"name": @"Banana Split",
+                                         @"desc": @""
+                                         },
+                                     @{
+                                         @"price": @"120.00",
+                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
+                                         @"id": @1,
+                                         @"name": @"Banana Split",
+                                         @"desc": @""
+                                         },
+                                     @{
+                                         @"price": @"120.00",
+                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
+                                         @"id": @1,
+                                         @"name": @"Banana Split",
+                                         @"desc": @""
+                                         }
+                                     ],
+                             @"name": @"Desserts"
+                             },
+                         @{
+                             @"menu": @[
+                                     @{
+                                         @"price": @"120.00",
+                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
+                                         @"id": @1,
+                                         @"name": @"Banana Split",
+                                         @"desc": @""
+                                         },
+                                     @{
+                                         @"price": @"120.00",
+                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
+                                         @"id": @1,
+                                         @"name": @"Banana Split",
+                                         @"desc": @""
+                                         }
+                                     ],
+                             @"name": @"Appetizers"
+                             }
+                         ],
+                 @"restaurant": @{
+                         @"image": @"/uploads/restaurant/default-restaurant.jpg",
+                         @"payment_options": @"",
+                         @"name": @"Pancake House",
+                         @"location": @"Caiptol Commons"
+                         }
+                 };
+    }
+    
+    return data;
 }
 
 @end

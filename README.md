@@ -74,7 +74,6 @@
 
 ![alt tag](http://i.imgur.com/ipC7HLj.gif)
 
-not yet functioning correctly
 
 ----
 

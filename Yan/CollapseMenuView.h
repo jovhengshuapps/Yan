@@ -8,11 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum {
-    CollapseMenuViewPositionTop,
-    CollapseMenuViewPositionBottom
-} CollapseMenuViewPosition;
-
 @protocol CollapseMenuViewDelegate <NSObject>
 
 - (void) selectedIndex:(NSInteger)index;
@@ -24,10 +19,7 @@ typedef enum {
 
 @property (strong, nonatomic) id delegate;
 @property (strong, nonatomic) NSDictionary *content;
-@property (assign, nonatomic) CollapseMenuViewPosition position;
-@property (assign, nonatomic) CGFloat cellHeight;
 
-- (instancetype) initWithPosition:(CollapseMenuViewPosition) position;
-- (instancetype) initWithPosition:(CollapseMenuViewPosition)position content:(NSDictionary*)datasource;
+- (instancetype) initWithContent:(NSDictionary*)datasource;
 
 @end

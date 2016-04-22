@@ -202,6 +202,63 @@
                                          }
                                      ],
                              @"name": @"Appetizers"
+                             },
+                         @{
+                             @"menu": @[
+                                     @{
+                                         @"price": @"120.00",
+                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
+                                         @"id": @1,
+                                         @"name": @"Banana Split",
+                                         @"desc": @""
+                                         },
+                                     @{
+                                         @"price": @"120.00",
+                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
+                                         @"id": @1,
+                                         @"name": @"Banana Split",
+                                         @"desc": @""
+                                         }
+                                     ],
+                             @"name": @"Soup"
+                             },
+                         @{
+                             @"menu": @[
+                                     @{
+                                         @"price": @"120.00",
+                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
+                                         @"id": @1,
+                                         @"name": @"Banana Split",
+                                         @"desc": @""
+                                         },
+                                     @{
+                                         @"price": @"120.00",
+                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
+                                         @"id": @1,
+                                         @"name": @"Banana Split",
+                                         @"desc": @""
+                                         }
+                                     ],
+                             @"name": @"Noodles"
+                             },
+                         @{
+                             @"menu": @[
+                                     @{
+                                         @"price": @"120.00",
+                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
+                                         @"id": @1,
+                                         @"name": @"Banana Split",
+                                         @"desc": @""
+                                         },
+                                     @{
+                                         @"price": @"120.00",
+                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
+                                         @"id": @1,
+                                         @"name": @"Banana Split",
+                                         @"desc": @""
+                                         }
+                                     ],
+                             @"name": @"Beverages"
                              }
                          ],
                  @"restaurant": @{

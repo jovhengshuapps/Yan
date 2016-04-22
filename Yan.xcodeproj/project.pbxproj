@@ -541,6 +541,12 @@
 				TargetAttributes = {
 					33599B3F1CAD259000366C34 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = YSNGH6HTET;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					33599B5B1CAD259100366C34 = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -798,8 +804,9 @@
 				INFOPLIST_FILE = Yan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.Yan;
+				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.yan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b9861c86-e950-48f6-a3ed-54305359c5a0";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -817,8 +824,9 @@
 				INFOPLIST_FILE = Yan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.Yan;
+				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.yan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "b9861c86-e950-48f6-a3ed-54305359c5a0";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

@@ -19,9 +19,12 @@
 @implementation AppDelegate
 
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     //[Fabric with:@[[Crashlytics class]]];
+    
+    
     
     [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x660000)];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
@@ -38,6 +41,11 @@
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     
     [GIDSignIn sharedInstance].clientID = GOOGLE_CLIENT_ID;
+    
+    
+    [application registerForRemoteNotifications];
+    
+    
     
     return YES;
 }
@@ -79,6 +87,24 @@
     }
     return handled;
 }
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSLog(@"success notification");
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"error:%@",error.description);
+}
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

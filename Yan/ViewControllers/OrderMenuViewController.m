@@ -20,14 +20,8 @@
     [super viewDidLoad];
     _rawData = [self getMenuForRestaurant:@"dummy"];
     // Array containing Dictionaries containining Items.
-    // This nested table view only supports two level of sections.
-    CollapseMenuView *collapseMenuView = [[CollapseMenuView alloc] initWithPosition:CollapseMenuViewPositionBottom content:[self extractMenuContent]];
+    CollapseMenuView *collapseMenuView = [[CollapseMenuView alloc] initWithContent:[self extractMenuContent]];
     collapseMenuView.delegate = self;
-//    collapseMenuView.content = @{@"DESSERT":@{@"CAKE":@[@"SANZRIVAL",@"CHOCOLATE",@"MOCHA"],@"FRUITS":@[@"PINEAPPLE",@"PEACH"]},@"MAIN COURSE":@{@"BEEF":@[@"STEAK",@"ROAST BEEF"],@"FISH":@[@"FILLET"]},@"DRINKS":@{@"JUICES":@[@"MANGO",@"LEMONADE"],@"COFFEE":@[@"INSTANT COFFEE",@"MOCHACCINO",@"CAPUCCINO",@"FRAPUCCINO"]}};
-    
-//    collapseMenuView.content = [self extractMenuContent];
-    
-    collapseMenuView.cellHeight = 44.0f;
     
     [self.view addSubview:collapseMenuView];
     [self.view layoutSubviews];

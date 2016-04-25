@@ -25,7 +25,6 @@
 			<string>com.jovhengshuapps.yan.Yan</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>yan://</string>
 				<string>fb1209936165691687</string>
 				<string>fbauth2</string>
 				<string>com.jovhengshuapps.yan.Yan</string>

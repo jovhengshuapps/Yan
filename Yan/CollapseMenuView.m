@@ -30,7 +30,7 @@
 @implementation CollapseMenuView
 
 
-- (instancetype) initWithContent:(NSDictionary*)datasource {
+- (instancetype) initWithContent:(NSDictionary*)datasource screenSize:(CGSize)screenSize {
     self = [super init];
     if (!self) {
         return nil;
@@ -46,12 +46,12 @@
     
     _cellHeight = 44.0f;
     
-    _positionYHidden = KEYWINDOW.bounds.size.height - _cellHeight;
+    _positionYHidden = screenSize.height - _cellHeight;
     
-    _positionYShown = KEYWINDOW.bounds.size.height - _cellHeight;
+    _positionYShown = screenSize.height - _cellHeight;
     
     _sizeHeightHidden = _cellHeight;
-    _sizeHeightShown = KEYWINDOW.bounds.size.height - _positionYShown;
+    _sizeHeightShown = screenSize.height - _positionYShown;
     
     
     self.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.2f];
@@ -65,9 +65,9 @@
     
     _positionYShown -= (_cellHeight * _collapsedSectionRows.count);
     
-    _sizeHeightShown = KEYWINDOW.bounds.size.height - _positionYShown;
+    _sizeHeightShown = screenSize.height - _positionYShown;
     
-    self.frame = CGRectMake(0.0f, _positionYShown, KEYWINDOW.bounds.size.width, _sizeHeightShown);
+    self.frame = CGRectMake(0.0f, _positionYShown, screenSize.width, _sizeHeightShown);
     
     [self setupTable];
     [_menuTableView reloadData];
@@ -212,7 +212,7 @@
         
         CGRect frame = self.frame;
         frame.origin.y = 30.0f + 44.0f;//top
-        frame.size.height = KEYWINDOW.bounds.size.height - (30.0f + 44.0f);
+        frame.size.height = _windowSize.height - (30.0f + 44.0f);
         self.frame = frame;
         
         frame = _menuTableView.frame;

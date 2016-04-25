@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0BD6265C2A2E8168C52F9BB9 /* libPods-Yan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C2D7E2C89DCD2FAEB9DE47F /* libPods-Yan.a */; };
 		335834641CC4F1B4008606C8 /* AffiliatedRestoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335834631CC4F1B4008606C8 /* AffiliatedRestoViewController.m */; };
 		33599B451CAD259100366C34 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33599B441CAD259100366C34 /* main.m */; };
 		33599B481CAD259100366C34 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33599B471CAD259100366C34 /* AppDelegate.m */; };
@@ -22,6 +21,11 @@
 		33599BB61CAD2E9A00366C34 /* DrawerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33599BB51CAD2E9A00366C34 /* DrawerTableViewController.m */; };
 		33599BBF1CAD444500366C34 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33599BBE1CAD444500366C34 /* LoginViewController.m */; };
 		33599BC21CAD4CD600366C34 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33599BC11CAD4CD600366C34 /* NavigationController.m */; };
+		335AB8FB1CCE4AE90037D66F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335AB8FA1CCE4AE90037D66F /* CoreMedia.framework */; };
+		335AB8FD1CCE4B130037D66F /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335AB8FC1CCE4B130037D66F /* ImageIO.framework */; };
+		335AB8FF1CCE4B1D0037D66F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335AB8FE1CCE4B1D0037D66F /* QuartzCore.framework */; };
+		335AB9011CCE4B280037D66F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335AB9001CCE4B280037D66F /* CoreVideo.framework */; };
+		335AB9031CCE4B4F0037D66F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335AB9021CCE4B4F0037D66F /* CoreGraphics.framework */; };
 		336424B41CAE313A00E0E156 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424901CAE313A00E0E156 /* AFHTTPSessionManager.m */; };
 		336424B51CAE313A00E0E156 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424931CAE313A00E0E156 /* AFNetworkReachabilityManager.m */; };
 		336424B61CAE313A00E0E156 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424951CAE313A00E0E156 /* AFSecurityPolicy.m */; };
@@ -47,7 +51,6 @@
 		3394A3A21CADF66300472030 /* UIView+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A39B1CADF66300472030 /* UIView+REFrostedViewController.m */; };
 		3394A3A31CADF66300472030 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A39D1CADF66300472030 /* UIViewController+REFrostedViewController.m */; };
 		3394A3A51CAE078100472030 /* LucidaGrande.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 3394A3A41CAE078100472030 /* LucidaGrande.ttc */; };
-		33B36F041CC6496A00AB30C6 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B36F031CC6496A00AB30C6 /* AVKit.framework */; };
 		33B36F061CC649D800AB30C6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B36F051CC649D800AB30C6 /* AVFoundation.framework */; };
 		33B36F091CC65CD900AB30C6 /* ReserveRestoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B36F081CC65CD900AB30C6 /* ReserveRestoViewController.m */; };
 		33B36F0C1CC663BC00AB30C6 /* ReserveCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B36F0B1CC663BC00AB30C6 /* ReserveCompleteViewController.m */; };
@@ -118,6 +121,11 @@
 		33599BBE1CAD444500366C34 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		33599BC01CAD4CD600366C34 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
 		33599BC11CAD4CD600366C34 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
+		335AB8FA1CCE4AE90037D66F /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		335AB8FC1CCE4B130037D66F /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		335AB8FE1CCE4B1D0037D66F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		335AB9001CCE4B280037D66F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		335AB9021CCE4B4F0037D66F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3364248F1CAE313A00E0E156 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		336424901CAE313A00E0E156 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		336424911CAE313A00E0E156 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -207,7 +215,6 @@
 		442160871CB32C5800BB387F /* CollapseMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollapseMenuView.m; sourceTree = "<group>"; };
 		442160911CB3760A00BB387F /* OrderMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderMenuViewController.h; sourceTree = "<group>"; };
 		442160921CB3760A00BB387F /* OrderMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderMenuViewController.m; sourceTree = "<group>"; };
-		7C2D7E2C89DCD2FAEB9DE47F /* libPods-Yan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Yan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,8 +222,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				335AB9031CCE4B4F0037D66F /* CoreGraphics.framework in Frameworks */,
+				335AB9011CCE4B280037D66F /* CoreVideo.framework in Frameworks */,
+				335AB8FF1CCE4B1D0037D66F /* QuartzCore.framework in Frameworks */,
+				335AB8FD1CCE4B130037D66F /* ImageIO.framework in Frameworks */,
+				335AB8FB1CCE4AE90037D66F /* CoreMedia.framework in Frameworks */,
 				33B36F061CC649D800AB30C6 /* AVFoundation.framework in Frameworks */,
-				33B36F041CC6496A00AB30C6 /* AVKit.framework in Frameworks */,
 				33DBA6F51CB8D31600AB0062 /* libz.tbd in Frameworks */,
 				33DBA6EF1CB8D1E800AB0062 /* SystemConfiguration.framework in Frameworks */,
 				33DBA6ED1CB8D1DD00AB0062 /* SafariServices.framework in Frameworks */,
@@ -225,7 +236,6 @@
 				33E1B8C81CB7DCF000B4207F /* FBSDKCoreKit.framework in Frameworks */,
 				33E1B8CC1CB7DD4100B4207F /* FBSDKShareKit.framework in Frameworks */,
 				33DBA6E71CB8D18D00AB0062 /* GoogleSignIn.framework in Frameworks */,
-				0BD6265C2A2E8168C52F9BB9 /* libPods-Yan.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,6 +470,11 @@
 		B34B5C970B55F0D232BFF620 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				335AB9021CCE4B4F0037D66F /* CoreGraphics.framework */,
+				335AB9001CCE4B280037D66F /* CoreVideo.framework */,
+				335AB8FE1CCE4B1D0037D66F /* QuartzCore.framework */,
+				335AB8FC1CCE4B130037D66F /* ImageIO.framework */,
+				335AB8FA1CCE4AE90037D66F /* CoreMedia.framework */,
 				33B36F051CC649D800AB30C6 /* AVFoundation.framework */,
 				33B36F031CC6496A00AB30C6 /* AVKit.framework */,
 				33B36F011CC6486800AB30C6 /* MediaPlayer.framework */,
@@ -469,7 +484,6 @@
 				33DBA6EE1CB8D1E800AB0062 /* SystemConfiguration.framework */,
 				33DBA6EC1CB8D1DD00AB0062 /* SafariServices.framework */,
 				33DBA6EA1CB8D1D800AB0062 /* AddressBook.framework */,
-				7C2D7E2C89DCD2FAEB9DE47F /* libPods-Yan.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -541,7 +555,7 @@
 				TargetAttributes = {
 					33599B3F1CAD259000366C34 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = YSNGH6HTET;
+						DevelopmentTeam = HYQZQ5CH3N;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -798,15 +812,13 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
-					"$(PROJECT_DIR)/Pods/Crashlytics/iOS",
-					"$(PROJECT_DIR)/Pods/Fabric/iOS",
 				);
 				INFOPLIST_FILE = Yan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.yan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b9861c86-e950-48f6-a3ed-54305359c5a0";
+				PROVISIONING_PROFILE = "1d9d107f-d8a7-4262-9b59-5ba84f999184";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -815,18 +827,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bilinear Inc. (YSNGH6HTET)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
-					"$(PROJECT_DIR)/Pods/Crashlytics/iOS",
-					"$(PROJECT_DIR)/Pods/Fabric/iOS",
 				);
 				INFOPLIST_FILE = Yan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.yan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b9861c86-e950-48f6-a3ed-54305359c5a0";
+				PROVISIONING_PROFILE = "1d9d107f-d8a7-4262-9b59-5ba84f999184";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CTA-Pa-3Kh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CTA-Pa-3Kh">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -38,6 +38,8 @@
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande-Bold</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
@@ -680,9 +682,12 @@ You may now start using the app for your favourite restaurant.</string>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u3D-96-qHr">
                                 <rect key="frame" x="20" y="72" width="560" height="450"/>
-                                <color key="backgroundColor" red="0.1764705882" green="0.1764705882" blue="0.18823529410000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Q9-fB-d55">
+                                <rect key="frame" x="20" y="72" width="560" height="450"/>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* The Restaurant logo should be somewhere nearby." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gca-ju-01a">
                                 <rect key="frame" x="35" y="530" width="530" height="50"/>
                                 <constraints>
@@ -692,20 +697,37 @@ You may now start using the app for your favourite restaurant.</string>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q1d-eH-eDm">
+                                <rect key="frame" x="35" y="530" width="530" height="50"/>
+                                <connections>
+                                    <action selector="scanLogo:" destination="Fyn-LN-nGQ" eventType="touchUpInside" id="kXW-dz-2Qh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="q1d-eH-eDm" firstAttribute="leading" secondItem="Gca-ju-01a" secondAttribute="leading" id="4Es-6n-5c2"/>
+                            <constraint firstItem="q1d-eH-eDm" firstAttribute="top" secondItem="Gca-ju-01a" secondAttribute="top" id="55R-tv-Hak"/>
+                            <constraint firstItem="6Q9-fB-d55" firstAttribute="top" secondItem="u3D-96-qHr" secondAttribute="top" id="AC3-Qz-u5a"/>
                             <constraint firstItem="kqa-jE-aBg" firstAttribute="top" secondItem="Gca-ju-01a" secondAttribute="bottom" constant="20" id="Fpq-Xh-Kpk"/>
                             <constraint firstItem="Gca-ju-01a" firstAttribute="top" secondItem="u3D-96-qHr" secondAttribute="bottom" constant="8" id="Hau-go-F9i"/>
+                            <constraint firstItem="q1d-eH-eDm" firstAttribute="trailing" secondItem="Gca-ju-01a" secondAttribute="trailing" id="J6k-s7-DV2"/>
                             <constraint firstItem="Gca-ju-01a" firstAttribute="trailing" secondItem="ksd-nk-Qga" secondAttribute="trailingMargin" constant="-15" id="Pki-7n-7Ng"/>
+                            <constraint firstItem="6Q9-fB-d55" firstAttribute="trailing" secondItem="u3D-96-qHr" secondAttribute="trailing" id="W9d-eR-9m2"/>
+                            <constraint firstItem="q1d-eH-eDm" firstAttribute="bottom" secondItem="Gca-ju-01a" secondAttribute="bottom" id="cIW-pc-ae0"/>
                             <constraint firstItem="u3D-96-qHr" firstAttribute="top" secondItem="QhW-Cb-1yJ" secondAttribute="bottom" constant="8" id="dfu-r6-FVV"/>
                             <constraint firstItem="u3D-96-qHr" firstAttribute="trailing" secondItem="ksd-nk-Qga" secondAttribute="trailingMargin" id="kbu-oH-JNn"/>
                             <constraint firstItem="Gca-ju-01a" firstAttribute="leading" secondItem="ksd-nk-Qga" secondAttribute="leadingMargin" constant="15" id="tib-rO-InL"/>
+                            <constraint firstItem="6Q9-fB-d55" firstAttribute="bottom" secondItem="u3D-96-qHr" secondAttribute="bottom" id="xhi-8m-hVh"/>
+                            <constraint firstItem="6Q9-fB-d55" firstAttribute="leading" secondItem="u3D-96-qHr" secondAttribute="leading" id="yc7-J8-3yM"/>
                             <constraint firstItem="u3D-96-qHr" firstAttribute="leading" secondItem="ksd-nk-Qga" secondAttribute="leadingMargin" id="z5S-PX-Gc7"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="buttonContinue" destination="q1d-eH-eDm" id="MQV-HM-lna"/>
+                        <outlet property="imageButton" destination="6Q9-fB-d55" id="s0n-kk-vbt"/>
                         <outlet property="imageViewCamera" destination="u3D-96-qHr" id="I26-Jb-3hU"/>
+                        <outlet property="labelInstructions" destination="Gca-ju-01a" id="piQ-69-k7u"/>
                         <outlet property="view" destination="ksd-nk-Qga" id="tzx-Th-4BP"/>
                     </connections>
                 </viewController>
@@ -726,38 +748,56 @@ You may now start using the app for your favourite restaurant.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yan-logo" translatesAutoresizingMaskIntoConstraints="NO" id="Ufi-wl-mh7">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="548"/>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jfm-hB-mgX">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Edi-dF-Jro">
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="44"/>
+                                        <color key="backgroundColor" red="1" green="0.48119571940185124" blue="0.23686868003515393" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="22"/>
+                                        <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="   Orders: Table 9" image="tray-icon-resized"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLB-8Q-53y">
+                                        <rect key="frame" x="300" y="0.0" width="300" height="44"/>
+                                        <color key="backgroundColor" red="1" green="0.4811957194" blue="0.23686868" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="22"/>
+                                        <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" title="   PHP 1,400.00" image="bill-icon-resized"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="1QX-G7-LSo"/>
+                                    <constraint firstItem="Edi-dF-Jro" firstAttribute="leading" secondItem="Jfm-hB-mgX" secondAttribute="leading" id="GRC-W1-qVb"/>
+                                    <constraint firstItem="XLB-8Q-53y" firstAttribute="height" secondItem="Edi-dF-Jro" secondAttribute="height" id="KUg-mC-3O4"/>
+                                    <constraint firstItem="XLB-8Q-53y" firstAttribute="centerY" secondItem="Jfm-hB-mgX" secondAttribute="centerY" id="MvP-Fw-fs6"/>
+                                    <constraint firstAttribute="trailing" secondItem="XLB-8Q-53y" secondAttribute="trailing" id="QnM-2Q-qdS"/>
+                                    <constraint firstItem="XLB-8Q-53y" firstAttribute="width" secondItem="Edi-dF-Jro" secondAttribute="width" id="ggG-Tm-OEw"/>
+                                    <constraint firstItem="Edi-dF-Jro" firstAttribute="centerY" secondItem="Jfm-hB-mgX" secondAttribute="centerY" id="hFO-xT-tNZ"/>
+                                    <constraint firstItem="XLB-8Q-53y" firstAttribute="leading" secondItem="Edi-dF-Jro" secondAttribute="trailing" id="nmc-h9-cIm"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Ufi-wl-mh7" firstAttribute="top" secondItem="CAg-DY-uvb" secondAttribute="topMargin" id="3gK-TI-qgf"/>
-                            <constraint firstItem="lbo-XR-REp" firstAttribute="top" secondItem="Ufi-wl-mh7" secondAttribute="bottom" id="NRa-99-l9a"/>
-                            <constraint firstItem="Ufi-wl-mh7" firstAttribute="leading" secondItem="CAg-DY-uvb" secondAttribute="leadingMargin" constant="-20" id="X1c-yw-Kdz"/>
+                            <constraint firstItem="lbo-XR-REp" firstAttribute="top" secondItem="Jfm-hB-mgX" secondAttribute="bottom" id="2tU-y7-Ipj"/>
+                            <constraint firstItem="Jfm-hB-mgX" firstAttribute="top" secondItem="Ufi-wl-mh7" secondAttribute="bottom" constant="8" id="Oet-V3-jtO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Jfm-hB-mgX" secondAttribute="trailing" constant="-20" id="QCn-4L-5Mq"/>
                             <constraint firstItem="Ufi-wl-mh7" firstAttribute="leading" secondItem="CAg-DY-uvb" secondAttribute="leading" id="aGa-nG-kor"/>
-                            <constraint firstItem="Ufi-wl-mh7" firstAttribute="bottom" secondItem="lbo-XR-REp" secondAttribute="top" id="cdT-AJ-cWd"/>
                             <constraint firstItem="Ufi-wl-mh7" firstAttribute="top" secondItem="CAg-DY-uvb" secondAttribute="top" id="g2J-GI-9BI"/>
+                            <constraint firstItem="Jfm-hB-mgX" firstAttribute="leading" secondItem="CAg-DY-uvb" secondAttribute="leadingMargin" constant="-20" id="g5S-GD-zbn"/>
                             <constraint firstAttribute="trailing" secondItem="Ufi-wl-mh7" secondAttribute="trailing" id="kbC-9u-2Zt"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Ufi-wl-mh7" secondAttribute="trailing" constant="-20" id="qak-Jr-BlF"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="3gK-TI-qgf"/>
-                                <exclude reference="X1c-yw-Kdz"/>
-                                <exclude reference="qak-Jr-BlF"/>
-                                <exclude reference="NRa-99-l9a"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="3gK-TI-qgf"/>
-                                <include reference="X1c-yw-Kdz"/>
-                                <include reference="qak-Jr-BlF"/>
-                                <include reference="NRa-99-l9a"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="mWb-I8-UsP"/>
+                    <connections>
+                        <outlet property="orderCheckoutView" destination="Jfm-hB-mgX" id="bMn-q1-HyT"/>
+                        <outlet property="orderCostButton" destination="XLB-8Q-53y" id="hEW-oI-S84"/>
+                        <outlet property="orderTableButton" destination="Edi-dF-Jro" id="3Vk-ve-dKh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Li-7j-i5t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -2168,6 +2208,8 @@ You may now start using the app for your favourite restaurant.</string>
         </scene>
     </scenes>
     <resources>
+        <image name="bill-icon-resized" width="44" height="44"/>
+        <image name="tray-icon-resized" width="44" height="44"/>
         <image name="yan-logo" width="1024" height="648"/>
     </resources>
     <inferredMetricsTieBreakers>

@@ -19,7 +19,8 @@
 
 @property (strong, nonatomic) id delegate;
 @property (strong, nonatomic) NSDictionary *content;
+@property (assign, nonatomic) CGSize windowSize;
 
-- (instancetype) initWithContent:(NSDictionary*)datasource;
+- (instancetype) initWithContent:(NSDictionary*)datasource screenSize:(CGSize)screenSize;
 
 @end

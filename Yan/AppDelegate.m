@@ -42,8 +42,8 @@
     
     [GIDSignIn sharedInstance].clientID = GOOGLE_CLIENT_ID;
     
-    
-    [application registerForRemoteNotifications];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil]];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
     
     
     

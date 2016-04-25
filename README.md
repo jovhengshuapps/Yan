@@ -111,6 +111,11 @@
 
 ----
 
+15. Notification Screen
+
+![alt tag](http://i.imgur.com/zdfKcsW.png)
+
+-----
 
 
 ## Issues currently encountered

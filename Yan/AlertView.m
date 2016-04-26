@@ -158,7 +158,7 @@
     CGFloat buttonHeight = 30.0f;
     
     _background = [[UIView alloc] initWithFrame:KEYWINDOW.bounds];
-    _background.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.3f];
+    _background.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.8f];
     _background.center = KEYWINDOW.center;
     
     
@@ -182,12 +182,9 @@
     _moviePlayerController = [[AVPlayerViewController alloc] init];
     [_moviePlayerController.view setFrame:CGRectMake(10, 10, _container.bounds.size.width - 20.0f, _container.bounds.size.height - 10.0f - buttonHeight)];
     _moviePlayerController.player = _moviePlayer;
+    _moviePlayerController.showsPlaybackControls = NO;
+    _moviePlayerController.delegate = self;
     [_container addSubview:_moviePlayerController.view];
-    
-//    UIButton *overlay = [UIButton buttonWithType:UIButtonTypeCustom];
-//    overlay.frame = _moviePlayerController.view.bounds;
-//    [overlay addTarget:self action:@selector(playVideo) forControlEvents:UIControlEventTouchUpInside];
-//    [_container addSubview:overlay];
     
     
     UIButton *close = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -223,6 +220,7 @@
         _container.userInteractionEnabled = YES;
         
         if (_moviePlayerController && _moviePlayer) {
+           
             [_moviePlayer play];
         }
     }];
@@ -256,9 +254,14 @@
     }
 }
 
+- (void)playerViewControllerWillStartPictureInPicture:(AVPlayerViewController *)playerViewController {
+    NSLog(@"playing");
+}
+
 - (void) playVideo {
     [_delegate videoAdPlayer:_moviePlayer controller:_moviePlayerController];
 }
+
 
 
 @end

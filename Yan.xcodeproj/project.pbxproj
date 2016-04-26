@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		333FEEF71CCF7205004D4B5B /* MenuListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FEEF61CCF7205004D4B5B /* MenuListViewController.m */; };
+		333FEEFA1CCF7AFE004D4B5B /* MenuDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FEEF91CCF7AFE004D4B5B /* MenuDetailsViewController.m */; };
 		335834641CC4F1B4008606C8 /* AffiliatedRestoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335834631CC4F1B4008606C8 /* AffiliatedRestoViewController.m */; };
 		33599B451CAD259100366C34 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33599B441CAD259100366C34 /* main.m */; };
 		33599B481CAD259100366C34 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33599B471CAD259100366C34 /* AppDelegate.m */; };
@@ -93,6 +95,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		333FEEF51CCF7205004D4B5B /* MenuListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuListViewController.h; sourceTree = "<group>"; };
+		333FEEF61CCF7205004D4B5B /* MenuListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuListViewController.m; sourceTree = "<group>"; };
+		333FEEF81CCF7AFE004D4B5B /* MenuDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuDetailsViewController.h; sourceTree = "<group>"; };
+		333FEEF91CCF7AFE004D4B5B /* MenuDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuDetailsViewController.m; sourceTree = "<group>"; };
 		335834621CC4F1B4008606C8 /* AffiliatedRestoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AffiliatedRestoViewController.h; sourceTree = "<group>"; };
 		335834631CC4F1B4008606C8 /* AffiliatedRestoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AffiliatedRestoViewController.m; sourceTree = "<group>"; };
 		33599B401CAD259000366C34 /* Yan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yan.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -358,6 +364,10 @@
 				337516DE1CB2AC390065AB7A /* HomeViewController.m */,
 				442160911CB3760A00BB387F /* OrderMenuViewController.h */,
 				442160921CB3760A00BB387F /* OrderMenuViewController.m */,
+				333FEEF51CCF7205004D4B5B /* MenuListViewController.h */,
+				333FEEF61CCF7205004D4B5B /* MenuListViewController.m */,
+				333FEEF81CCF7AFE004D4B5B /* MenuDetailsViewController.h */,
+				333FEEF91CCF7AFE004D4B5B /* MenuDetailsViewController.m */,
 				33C6E67E1CC7C6CD001690ED /* ScanLogoViewController.h */,
 				33C6E67F1CC7C6CD001690ED /* ScanLogoViewController.m */,
 				335834621CC4F1B4008606C8 /* AffiliatedRestoViewController.h */,
@@ -639,6 +649,7 @@
 				336424B91CAE313A00E0E156 /* AFURLSessionManager.m in Sources */,
 				336424BD1CAE313A00E0E156 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				336424E81CAE354F00E0E156 /* XMLReader.m in Sources */,
+				333FEEF71CCF7205004D4B5B /* MenuListViewController.m in Sources */,
 				33599BB61CAD2E9A00366C34 /* DrawerTableViewController.m in Sources */,
 				336424E71CAE354F00E0E156 /* Reachability.m in Sources */,
 				336424B51CAE313A00E0E156 /* AFNetworkReachabilityManager.m in Sources */,
@@ -650,6 +661,7 @@
 				336424B71CAE313A00E0E156 /* AFURLRequestSerialization.m in Sources */,
 				337516DF1CB2AC390065AB7A /* HomeViewController.m in Sources */,
 				336424BC1CAE313A00E0E156 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				333FEEFA1CCF7AFE004D4B5B /* MenuDetailsViewController.m in Sources */,
 				336424BA1CAE313A00E0E156 /* AFAutoPurgingImageCache.m in Sources */,
 				336424B61CAE313A00E0E156 /* AFSecurityPolicy.m in Sources */,
 				33599BAE1CAD274E00366C34 /* CoreViewController.m in Sources */,
@@ -809,6 +821,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Eugene Leoncio (9GZUYUT7E4)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
@@ -818,7 +831,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.yan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1d9d107f-d8a7-4262-9b59-5ba84f999184";
+				PROVISIONING_PROFILE = "b9861c86-e950-48f6-a3ed-54305359c5a0";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;

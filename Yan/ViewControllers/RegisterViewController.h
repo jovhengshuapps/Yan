@@ -8,6 +8,6 @@
 
 #import "CoreViewController.h"
 
-@interface RegisterViewController : CoreViewController
+@interface RegisterViewController : CoreViewController 
 
 @end

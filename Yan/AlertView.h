@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 
-@interface AlertView : UIView
+@interface AlertView : UIView <AVPlayerViewControllerDelegate>
 
 @property(nullable,nonatomic,weak) id  delegate;
 @property(nullable,nonatomic,copy) NSString *message;

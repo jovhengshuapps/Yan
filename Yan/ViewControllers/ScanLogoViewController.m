@@ -12,6 +12,7 @@
 
 @interface ScanLogoViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewCamera;
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewSnapshot;
 @property (strong,nonatomic) UIImagePickerController *picker;
 @property(nonatomic, retain) AVCaptureStillImageOutput *stillImageOutput;
 @property (strong, nonatomic) AVCaptureSession *session;
@@ -27,6 +28,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+//    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+//        
+//        UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+//                                                              message:@"Device has no camera"
+//                                                             delegate:self
+//                                                    cancelButtonTitle:@"OK"
+//                                                    otherButtonTitles: nil];
+//        
+//        [myAlertView show];
+//        
+//    }
+//    else {
+//        _picker = [[UIImagePickerController alloc] init];
+//        _picker.delegate = self;
+//        _picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        _picker.cameraOverlayView = KEYWINDOW;
+//        _picker.navigationBarHidden = NO;
+//        _picker.showsCameraControls = NO;
+//        
+//        [self presentViewController:_picker animated:YES completion:^{
+//            
+//        }];
+//        
+//    }
+}
+
+-(void) viewDidAppear:(BOOL)animated
+{
     if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         
         UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -39,26 +68,8 @@
         
     }
     else {
-//        _picker = [[UIImagePickerController alloc] init];
-//        _picker.delegate = self;
-//        _picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-//        _picker.cameraOverlayView = KEYWINDOW;
-//        _picker.navigationBarHidden = NO;
-//        _picker.showsCameraControls = NO;
-//        
-//        [self presentViewController:_picker animated:YES completion:^{
-//            
-//        }];
-        
+        [self startCamera];
     }
-}
-
--(void) viewDidAppear:(BOOL)animated
-{
-    [self startCamera];
-    
-    
-    
     
     
 }
@@ -71,10 +82,20 @@
 
 - (void) startCamera {
     _imageViewCamera.image = nil;
+    _imageViewCamera.hidden = NO;
+    _imageViewSnapshot.image = nil;
+    _imageViewSnapshot.hidden = YES;
     _buttonContinue.hidden = YES;
     _labelInstructions.text = @"* The Restaurant logo should be somewhere nearby.";
+    _imageButton.enabled = YES;
     [_imageButton addTarget:self action:@selector(captureNow) forControlEvents:UIControlEventTouchUpInside];
     [_session stopRunning];
+    for (AVCaptureConnection *connection in _stillImageOutput.connections)
+    {
+        [_session removeConnection:connection];
+    }
+    
+    [_session removeOutput:_stillImageOutput];
     _session = nil;
     _session = [[AVCaptureSession alloc] init];
     _session.sessionPreset = AVCaptureSessionPresetHigh;
@@ -103,17 +124,23 @@
     }
     _stillImageOutput = nil;
     _stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
-    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
-    [_stillImageOutput setOutputSettings:outputSettings];
+//    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
+//    [_stillImageOutput setOutputSettings:outputSettings];
+//    [_session addOutput:_stillImageOutput];
     
-    [_session addOutput:_stillImageOutput];
+    _stillImageOutput.outputSettings = @{AVVideoCodecKey: AVVideoCodecJPEG};
+    
+    if ([_session canAddOutput:_stillImageOutput]) {
+        [_session addOutput:_stillImageOutput];
+    }
+    
     
     [_session startRunning];
 }
 
 -(void) captureNow
 {
-    
+    _imageButton.enabled = NO;
     AVCaptureConnection *videoConnection = nil;
     for (AVCaptureConnection *connection in _stillImageOutput.connections)
     {
@@ -145,10 +172,14 @@
              NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
              UIImage *image = [[UIImage alloc] initWithData:imageData];
              
-             _imageViewCamera.image = image;
+             _imageViewSnapshot.image = image;
+             _imageViewSnapshot.hidden = NO;
+             _imageViewCamera.hidden = YES;
              
              [_session stopRunning];
              
+             
+             _imageButton.enabled = YES;
              [_imageButton addTarget:self action:@selector(startCamera) forControlEvents:UIControlEventTouchUpInside];
              _buttonContinue.hidden = NO;
              _labelInstructions.text = @"Tap here to Continue.";

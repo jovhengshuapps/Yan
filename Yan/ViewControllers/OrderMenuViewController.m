@@ -7,6 +7,9 @@
 //
 
 #import "OrderMenuViewController.h"
+#import "MenuListViewController.h"
+#import "MenuDetailsViewController.h"
+
 
 @interface OrderMenuViewController()
 
@@ -17,6 +20,7 @@
 @property (assign, nonatomic) BOOL menuShown;
 @property (weak, nonatomic) IBOutlet UIButton *orderTableButton;
 @property (weak, nonatomic) IBOutlet UIButton *orderCostButton;
+@property (weak, nonatomic) IBOutlet UIView *loadedControllerView;
 
 @end
 
@@ -185,7 +189,35 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    [self showTitleBar:[_arrayCategories[indexPath.row] uppercaseString]];
+    NSString *category = _arrayCategories[indexPath.row];
+    [self showTitleBar:category];
+    MenuListViewController *menuListView = [self.storyboard instantiateViewControllerWithIdentifier:@"menuList"];
+    menuListView.category = category;
+    menuListView.menuList = [_rawData objectForKey:category];
+    menuListView.delegate = self;
+    
+    menuListView.view.frame = self.loadedControllerView.bounds;
+    [self.loadedControllerView addSubview:menuListView.view];
+    [self addChildViewController:menuListView];
+    [menuListView didMoveToParentViewController:self];
+                             
+    [self hideMenu];
+    
+    
+}
+
+
+#pragma mark MenuListDelegate
+- (void) selectedItem:(NSDictionary *)item {
+    
+    MenuDetailsViewController *itemDetails = [self.storyboard instantiateViewControllerWithIdentifier:@"menuDetails"];
+    itemDetails.item = item;
+    
+    itemDetails.view.frame = self.loadedControllerView.bounds;
+    [self.loadedControllerView addSubview:itemDetails.view];
+    [self addChildViewController:itemDetails];
+    [itemDetails didMoveToParentViewController:self];
+    
 }
 
 @end

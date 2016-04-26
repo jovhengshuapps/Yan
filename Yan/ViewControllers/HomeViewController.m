@@ -43,6 +43,14 @@
     
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
+    [notification postNotificationName:ChangeHomeViewToShow object:nil];
+    
+}
+
 - (void) changeView:(NSNotification*)notification {
     if ([notification.object isEqualToString:@"HomeViewNotification"]) {
         self.viewToShow = HomeViewNotification;
@@ -66,11 +74,11 @@
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"regCompleteOrderButton"] || [segue.identifier isEqualToString:@"regCompleteReservationButton"]) {
-        
-        NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
-        [notification postNotificationName:ChangeHomeViewToShow object:nil];
-    }
+//    if ([segue.identifier isEqualToString:@"regCompleteOrderButton"] || [segue.identifier isEqualToString:@"regCompleteReservationButton"]) {
+//        
+//        NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
+//        [notification postNotificationName:ChangeHomeViewToShow object:nil];
+//    }
 }
 
 @end

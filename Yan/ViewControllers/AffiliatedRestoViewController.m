@@ -32,7 +32,6 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self showTitleBar:@"AFFILIATED RESTAURANT"];
     
 //    _resultsBarView = [[UIView alloc] initWithFrame:CGRectMake(0, self.titleBarView.frame.size.height, self.view.bounds.size.width, self.titleBarView.frame.size.height)];
     _resultsBarView.backgroundColor = UIColorFromRGB(0x969696);
@@ -45,6 +44,12 @@ typedef enum {
     [_resultsBarView addSubview:_resultsBarLabel];
     
     [self getData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self showTitleBar:@"AFFILIATED RESTAURANT"];
 }
 
 - (void)didReceiveMemoryWarning {

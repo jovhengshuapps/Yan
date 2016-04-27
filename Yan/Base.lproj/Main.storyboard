@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CTA-Pa-3Kh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CTA-Pa-3Kh">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -993,7 +993,7 @@ You may now start using the app for your favourite restaurant.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CqX-7G-e7y">
-                                <rect key="frame" x="0.0" y="70" width="600" height="530"/>
+                                <rect key="frame" x="0.0" y="114" width="600" height="486"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Gj6-bN-g6r" id="JB1-p4-9AZ"/>
@@ -1005,7 +1005,7 @@ You may now start using the app for your favourite restaurant.</string>
                         <constraints>
                             <constraint firstItem="CqX-7G-e7y" firstAttribute="leading" secondItem="2Pu-Xf-4HS" secondAttribute="leadingMargin" constant="-20" id="KQy-Fd-5BV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CqX-7G-e7y" secondAttribute="trailing" constant="-20" id="Q3J-9D-tzD"/>
-                            <constraint firstItem="CqX-7G-e7y" firstAttribute="top" secondItem="r88-Xx-Odz" secondAttribute="bottom" constant="50" id="qHU-wp-VHW"/>
+                            <constraint firstItem="CqX-7G-e7y" firstAttribute="top" secondItem="r88-Xx-Odz" secondAttribute="bottom" constant="94" id="qHU-wp-VHW"/>
                             <constraint firstItem="alA-vE-04X" firstAttribute="top" secondItem="CqX-7G-e7y" secondAttribute="bottom" id="t9e-Y1-sTJ"/>
                         </constraints>
                     </view>
@@ -1031,7 +1031,7 @@ You may now start using the app for your favourite restaurant.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QRv-CM-FTw">
-                                <rect key="frame" x="0.0" y="70" width="600" height="530"/>
+                                <rect key="frame" x="0.0" y="114" width="600" height="486"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="02n-Re-rqK">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="330"/>
@@ -1047,7 +1047,7 @@ You may now start using the app for your favourite restaurant.</string>
                         <constraints>
                             <constraint firstItem="QRv-CM-FTw" firstAttribute="leading" secondItem="t9A-2Q-EXZ" secondAttribute="leadingMargin" constant="-20" id="SKV-vb-L5j"/>
                             <constraint firstAttribute="trailingMargin" secondItem="QRv-CM-FTw" secondAttribute="trailing" constant="-20" id="WH6-4Z-oNd"/>
-                            <constraint firstItem="QRv-CM-FTw" firstAttribute="top" secondItem="cO5-3e-vBU" secondAttribute="bottom" constant="50" id="hdd-eH-3Jc"/>
+                            <constraint firstItem="QRv-CM-FTw" firstAttribute="top" secondItem="cO5-3e-vBU" secondAttribute="bottom" constant="94" id="hdd-eH-3Jc"/>
                             <constraint firstItem="D3O-0e-tbt" firstAttribute="top" secondItem="QRv-CM-FTw" secondAttribute="bottom" id="mJv-zF-5QD"/>
                         </constraints>
                     </view>
@@ -1306,7 +1306,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -1327,7 +1327,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -1518,7 +1518,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     <constraint firstAttribute="height" constant="45" id="PvQ-Me-OlX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande-Bold" family="Lucida Grande" pointSize="30"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -1537,7 +1537,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     <constraint firstAttribute="height" constant="45" id="85X-KL-e9E"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -1556,7 +1556,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     <constraint firstAttribute="height" constant="81" id="nfn-ir-dHu"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="16"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -1575,7 +1575,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     <constraint firstAttribute="height" constant="45" id="pmv-d0-n6O"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande-Bold" family="Lucida Grande" pointSize="22"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -2081,6 +2081,8 @@ You may now start using the app for your favourite restaurant.</string>
                     <navigationItem key="navigationItem" id="cRm-Lj-a7b"/>
                     <connections>
                         <outlet property="buttonLogin" destination="7UV-eB-qw7" id="3kg-sJ-HUg"/>
+                        <outlet property="textFieldPassword" destination="1Ux-D0-hJB" id="lJA-Pe-sBx"/>
+                        <outlet property="textFieldUsername" destination="0wm-Rt-b6b" id="Rr7-Cp-4gJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1pW-32-5xe" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2152,28 +2154,6 @@ You may now start using the app for your favourite restaurant.</string>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YRc-jH-Ug8" customClass="CustomButton">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="tfg-Bb-J2r"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="18"/>
-                                <state key="normal" title="REGISTER"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="tfg-Bb-J2r"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular">
-                                    <mask key="constraints">
-                                        <include reference="tfg-Bb-J2r"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="completeRegistration:" destination="9eW-Mt-EhP" eventType="touchUpInside" id="j6f-CR-4IW"/>
-                                </connections>
-                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySN-N5-s3S">
                                 <rect key="frame" x="20" y="366" width="560" height="130"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2186,94 +2166,70 @@ You may now start using the app for your favourite restaurant.</string>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LkP-3C-SWt">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="32t-KX-Afd">
+                                <rect key="frame" x="20" y="366" width="560" height="158"/>
                                 <connections>
-                                    <action selector="viewTermsOfUse:" destination="9eW-Mt-EhP" eventType="touchUpInside" id="Fdw-3v-Pw0"/>
+                                    <action selector="viewTermsOfUse:" destination="9eW-Mt-EhP" eventType="touchUpInside" id="GEP-l5-TWc"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9s-NL-eF5" customClass="CustomButton">
+                                <rect key="frame" x="20" y="540" width="560" height="40"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="xGR-cL-g5q"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="20"/>
+                                <state key="normal" title="REGISTER"/>
+                                <connections>
+                                    <action selector="completeRegistration:" destination="9eW-Mt-EhP" eventType="touchUpInside" id="EsK-t2-Kph"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="LkP-3C-SWt" firstAttribute="leading" secondItem="ySN-N5-s3S" secondAttribute="leading" id="3kB-Gv-c5T"/>
+                            <constraint firstItem="32t-KX-Afd" firstAttribute="top" secondItem="ySN-N5-s3S" secondAttribute="top" id="2L1-ox-7M9"/>
+                            <constraint firstItem="32t-KX-Afd" firstAttribute="trailing" secondItem="ySN-N5-s3S" secondAttribute="trailing" id="5Xi-F8-uFi"/>
                             <constraint firstItem="kyD-8P-sul" firstAttribute="trailing" secondItem="593-gt-R8e" secondAttribute="trailingMargin" id="9Wt-qF-HcH"/>
                             <constraint firstItem="kyD-8P-sul" firstAttribute="leading" secondItem="593-gt-R8e" secondAttribute="leadingMargin" id="AIr-pN-g49"/>
+                            <constraint firstItem="C9s-NL-eF5" firstAttribute="leading" secondItem="593-gt-R8e" secondAttribute="leadingMargin" id="Blv-FS-ZaH"/>
                             <constraint firstItem="Lb9-cy-vh5" firstAttribute="leading" secondItem="kyD-8P-sul" secondAttribute="leading" id="Cbb-ak-hbK"/>
-                            <constraint firstItem="YRc-jH-Ug8" firstAttribute="leading" secondItem="593-gt-R8e" secondAttribute="leadingMargin" id="CeL-hE-9ov"/>
-                            <constraint firstItem="LkP-3C-SWt" firstAttribute="top" secondItem="ySN-N5-s3S" secondAttribute="top" id="GuJ-Gi-KM8"/>
                             <constraint firstItem="MuL-Zc-0qT" firstAttribute="leading" secondItem="kyD-8P-sul" secondAttribute="leading" id="IDF-Ip-swh"/>
-                            <constraint firstItem="LkP-3C-SWt" firstAttribute="trailing" secondItem="ySN-N5-s3S" secondAttribute="trailing" id="ITr-JX-RCb"/>
                             <constraint firstItem="7Er-Uh-dov" firstAttribute="top" secondItem="ySN-N5-s3S" secondAttribute="bottom" constant="8" id="K64-g8-86j"/>
-                            <constraint firstItem="7Er-Uh-dov" firstAttribute="leading" secondItem="593-gt-R8e" secondAttribute="leadingMargin" constant="4" id="KE3-md-cSn"/>
                             <constraint firstItem="kyD-8P-sul" firstAttribute="top" secondItem="TS5-VP-FOE" secondAttribute="bottom" constant="86" id="Lxt-Zj-3mx"/>
                             <constraint firstItem="Lb9-cy-vh5" firstAttribute="top" secondItem="MuL-Zc-0qT" secondAttribute="bottom" constant="16" id="OjR-8w-qWf">
                                 <variation key="heightClass=regular" constant="8"/>
                             </constraint>
-                            <constraint firstItem="YRc-jH-Ug8" firstAttribute="top" secondItem="7Er-Uh-dov" secondAttribute="bottom" constant="40" id="Okl-Tr-GDX"/>
                             <constraint firstItem="rJq-zN-8xr" firstAttribute="top" secondItem="kyD-8P-sul" secondAttribute="bottom" constant="16" id="Spi-eK-sLO">
                                 <variation key="heightClass=regular" constant="8"/>
                             </constraint>
                             <constraint firstItem="rJq-zN-8xr" firstAttribute="trailing" secondItem="kyD-8P-sul" secondAttribute="trailing" id="U8g-oV-eVt"/>
                             <constraint firstItem="Lb9-cy-vh5" firstAttribute="trailing" secondItem="kyD-8P-sul" secondAttribute="trailing" id="VJZ-3J-ODd"/>
                             <constraint firstItem="ySN-N5-s3S" firstAttribute="trailing" secondItem="593-gt-R8e" secondAttribute="trailingMargin" id="ZNa-qQ-rcH"/>
-                            <constraint firstItem="YRc-jH-Ug8" firstAttribute="trailing" secondItem="593-gt-R8e" secondAttribute="trailingMargin" id="dLA-ur-MYE"/>
+                            <constraint firstItem="C9s-NL-eF5" firstAttribute="trailing" secondItem="593-gt-R8e" secondAttribute="trailingMargin" id="d3Y-1t-gET"/>
                             <constraint firstItem="7Er-Uh-dov" firstAttribute="leading" secondItem="ySN-N5-s3S" secondAttribute="leading" id="eo6-up-cXh"/>
-                            <constraint firstItem="7Er-Uh-dov" firstAttribute="bottom" secondItem="LkP-3C-SWt" secondAttribute="bottom" id="idN-Zu-cdl"/>
+                            <constraint firstItem="7Er-Uh-dov" firstAttribute="leading" secondItem="32t-KX-Afd" secondAttribute="leading" id="jhu-fE-siL"/>
                             <constraint firstItem="MuL-Zc-0qT" firstAttribute="trailing" secondItem="kyD-8P-sul" secondAttribute="trailing" id="lfa-h5-p6V"/>
                             <constraint firstItem="ySN-N5-s3S" firstAttribute="leading" secondItem="593-gt-R8e" secondAttribute="leadingMargin" id="mcX-bF-RzI"/>
                             <constraint firstItem="rJq-zN-8xr" firstAttribute="leading" secondItem="kyD-8P-sul" secondAttribute="leading" id="plb-3V-HJ5"/>
                             <constraint firstItem="7Er-Uh-dov" firstAttribute="trailing" secondItem="ySN-N5-s3S" secondAttribute="trailing" id="sQE-Bw-89j"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="7Er-Uh-dov" secondAttribute="trailing" constant="-4" id="taP-Sg-g6I"/>
                             <constraint firstItem="ySN-N5-s3S" firstAttribute="top" secondItem="Lb9-cy-vh5" secondAttribute="bottom" constant="8" id="vuV-7d-o7o"/>
                             <constraint firstItem="MuL-Zc-0qT" firstAttribute="top" secondItem="rJq-zN-8xr" secondAttribute="bottom" constant="16" id="wuX-ij-TS8">
                                 <variation key="heightClass=regular" constant="8"/>
                             </constraint>
+                            <constraint firstItem="mZu-2F-hX1" firstAttribute="top" secondItem="C9s-NL-eF5" secondAttribute="bottom" constant="20" id="yml-B4-oIZ"/>
+                            <constraint firstItem="7Er-Uh-dov" firstAttribute="bottom" secondItem="32t-KX-Afd" secondAttribute="bottom" id="zPv-Nd-fFQ"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="YRc-jH-Ug8"/>
-                                <exclude reference="LkP-3C-SWt"/>
-                            </mask>
-                            <mask key="constraints">
-                                <exclude reference="3kB-Gv-c5T"/>
-                                <exclude reference="GuJ-Gi-KM8"/>
-                                <exclude reference="ITr-JX-RCb"/>
-                                <exclude reference="CeL-hE-9ov"/>
-                                <exclude reference="Okl-Tr-GDX"/>
-                                <exclude reference="dLA-ur-MYE"/>
-                                <exclude reference="KE3-md-cSn"/>
-                                <exclude reference="idN-Zu-cdl"/>
-                                <exclude reference="taP-Sg-g6I"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular">
-                            <mask key="subviews">
-                                <include reference="YRc-jH-Ug8"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="CeL-hE-9ov"/>
-                                <include reference="Okl-Tr-GDX"/>
-                                <include reference="dLA-ur-MYE"/>
-                                <include reference="KE3-md-cSn"/>
-                                <include reference="taP-Sg-g6I"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="LkP-3C-SWt"/>
-                            </mask>
-                            <mask key="constraints">
-                                <include reference="3kB-Gv-c5T"/>
-                                <include reference="GuJ-Gi-KM8"/>
-                                <include reference="ITr-JX-RCb"/>
-                                <include reference="idN-Zu-cdl"/>
-                            </mask>
-                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="textFieldBirthday" destination="rJq-zN-8xr" id="8PR-u6-7ay"/>
+                        <outlet property="textFieldEmail" destination="MuL-Zc-0qT" id="tF5-Vi-kdP"/>
+                        <outlet property="textFieldName" destination="kyD-8P-sul" id="u7j-Zo-08m"/>
+                        <outlet property="textFieldPassword" destination="Lb9-cy-vh5" id="YtT-AM-ixR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P1H-dI-R2I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1636.5" y="1134.75"/>
+            <point key="canvasLocation" x="1636" y="1134"/>
         </scene>
         <!--Drawer Table View Controller-->
         <scene sceneID="2Oi-cg-Z9P">

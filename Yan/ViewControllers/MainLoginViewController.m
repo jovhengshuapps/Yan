@@ -26,10 +26,14 @@
         // TODO:Token is already available.
     }
     
-    [self showTitleBar:@"SIGN IN"];
-    
     [GIDSignIn sharedInstance].uiDelegate = self;
 
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self showTitleBar:@"SIGN IN"];
 }
 
 - (void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error {

@@ -46,6 +46,8 @@
 		336424E71CAE354F00E0E156 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424C61CAE354F00E0E156 /* Reachability.m */; };
 		336424E81CAE354F00E0E156 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424C91CAE354F00E0E156 /* XMLReader.m */; };
 		337516DF1CB2AC390065AB7A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337516DE1CB2AC390065AB7A /* HomeViewController.m */; };
+		338567ED1CD0FC310099BDD0 /* Account+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 338567EA1CD0FC310099BDD0 /* Account+CoreDataProperties.m */; };
+		338567EE1CD0FC310099BDD0 /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 338567EC1CD0FC310099BDD0 /* Account.m */; };
 		3394A39E1CADF66300472030 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A3931CADF66300472030 /* RECommonFunctions.m */; };
 		3394A39F1CADF66300472030 /* REFrostedContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A3951CADF66300472030 /* REFrostedContainerViewController.m */; };
 		3394A3A01CADF66300472030 /* REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A3971CADF66300472030 /* REFrostedViewController.m */; };
@@ -171,6 +173,10 @@
 		336424C91CAE354F00E0E156 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
 		337516DD1CB2AC390065AB7A /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		337516DE1CB2AC390065AB7A /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		338567E91CD0FC310099BDD0 /* Account+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Account+CoreDataProperties.h"; sourceTree = "<group>"; };
+		338567EA1CD0FC310099BDD0 /* Account+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Account+CoreDataProperties.m"; sourceTree = "<group>"; };
+		338567EB1CD0FC310099BDD0 /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
+		338567EC1CD0FC310099BDD0 /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
 		3394A3921CADF66300472030 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
 		3394A3931CADF66300472030 /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
 		3394A3941CADF66300472030 /* REFrostedContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = REFrostedContainerViewController.h; sourceTree = "<group>"; };
@@ -300,6 +306,10 @@
 				33C6E67C1CC7A1D9001690ED /* CustomButton.m */,
 				442160861CB32C5800BB387F /* CollapseMenuView.h */,
 				442160871CB32C5800BB387F /* CollapseMenuView.m */,
+				338567E91CD0FC310099BDD0 /* Account+CoreDataProperties.h */,
+				338567EA1CD0FC310099BDD0 /* Account+CoreDataProperties.m */,
+				338567EB1CD0FC310099BDD0 /* Account.h */,
+				338567EC1CD0FC310099BDD0 /* Account.m */,
 				33599B4C1CAD259100366C34 /* Main.storyboard */,
 				33599B521CAD259100366C34 /* Assets.xcassets */,
 				33599B541CAD259100366C34 /* LaunchScreen.storyboard */,
@@ -648,6 +658,7 @@
 				335834641CC4F1B4008606C8 /* AffiliatedRestoViewController.m in Sources */,
 				336424B91CAE313A00E0E156 /* AFURLSessionManager.m in Sources */,
 				336424BD1CAE313A00E0E156 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				338567ED1CD0FC310099BDD0 /* Account+CoreDataProperties.m in Sources */,
 				336424E81CAE354F00E0E156 /* XMLReader.m in Sources */,
 				333FEEF71CCF7205004D4B5B /* MenuListViewController.m in Sources */,
 				33599BB61CAD2E9A00366C34 /* DrawerTableViewController.m in Sources */,
@@ -669,6 +680,7 @@
 				33599BB31CAD2D9000366C34 /* RootViewController.m in Sources */,
 				442160881CB32C5800BB387F /* CollapseMenuView.m in Sources */,
 				3394A3A11CADF66300472030 /* UIImage+REFrostedViewController.m in Sources */,
+				338567EE1CD0FC310099BDD0 /* Account.m in Sources */,
 				336424C11CAE313A00E0E156 /* UIRefreshControl+AFNetworking.m in Sources */,
 				33C142451CB1512500B57041 /* AlertView.m in Sources */,
 				33C6E6801CC7C6CD001690ED /* ScanLogoViewController.m in Sources */,

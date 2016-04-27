@@ -32,15 +32,20 @@
     
     _viewDefaultHome.hidden = NO;
     
-    //check if logged in
-    if (![self userLoggedIn]) {
-        [self.navigationController performSegueWithIdentifier:@"showLogin" sender:self];
-    }
     
     [super viewDidLoad];
     
     
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //check if logged in
+    if (![self userLoggedIn]) {
+        [self.navigationController performSegueWithIdentifier:@"showLogin" sender:self];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

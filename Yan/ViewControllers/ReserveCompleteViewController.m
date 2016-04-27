@@ -18,8 +18,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self showTitleBar:@"CONFIRMATION"];
-    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     
     [button setFrame:CGRectMake(0.0f, 0.0f, 45.0f, 30.0f)];
@@ -33,8 +31,15 @@
     
     [[self navigationItem] setRightBarButtonItem:waiterItem];
     
-    
 }
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self showTitleBar:@"CONFIRMATION"];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

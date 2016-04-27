@@ -81,22 +81,9 @@
 }
 
 - (void) startCamera {
-    _imageViewCamera.image = nil;
-    _imageViewCamera.hidden = NO;
-    _imageViewSnapshot.image = nil;
-    _imageViewSnapshot.hidden = YES;
-    _buttonContinue.hidden = YES;
-    _labelInstructions.text = @"* The Restaurant logo should be somewhere nearby.";
     _imageButton.enabled = YES;
-    [_imageButton addTarget:self action:@selector(captureNow) forControlEvents:UIControlEventTouchUpInside];
-    [_session stopRunning];
-    for (AVCaptureConnection *connection in _stillImageOutput.connections)
-    {
-        [_session removeConnection:connection];
-    }
-    
-    [_session removeOutput:_stillImageOutput];
-    _session = nil;
+    [self setButtonTarget:@selector(captureNow)];
+
     _session = [[AVCaptureSession alloc] init];
     _session.sessionPreset = AVCaptureSessionPresetHigh;
     
@@ -112,6 +99,7 @@
     
     NSError *error = nil;
     AVCaptureDeviceInput *input = [AVCaptureDeviceInput deviceInputWithDevice:device error:&error];
+    
     if (!input) {
         // Handle the error appropriately.
         NSLog(@"ERROR: trying to open camera: %@", error);
@@ -124,15 +112,9 @@
     }
     _stillImageOutput = nil;
     _stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
-//    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
-//    [_stillImageOutput setOutputSettings:outputSettings];
-//    [_session addOutput:_stillImageOutput];
-    
-    _stillImageOutput.outputSettings = @{AVVideoCodecKey: AVVideoCodecJPEG};
-    
-    if ([_session canAddOutput:_stillImageOutput]) {
-        [_session addOutput:_stillImageOutput];
-    }
+    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
+    [_stillImageOutput setOutputSettings:outputSettings];
+    [_session addOutput:_stillImageOutput];
     
     
     [_session startRunning];
@@ -171,20 +153,37 @@
              
              NSData *imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageSampleBuffer];
              UIImage *image = [[UIImage alloc] initWithData:imageData];
-             
-             _imageViewSnapshot.image = image;
-             _imageViewSnapshot.hidden = NO;
-             _imageViewCamera.hidden = YES;
-             
-             [_session stopRunning];
-             
-             
-             _imageButton.enabled = YES;
-             [_imageButton addTarget:self action:@selector(startCamera) forControlEvents:UIControlEventTouchUpInside];
-             _buttonContinue.hidden = NO;
-             _labelInstructions.text = @"Tap here to Continue.";
+             [_imageButton removeTarget:self action:@selector(captureNow) forControlEvents:UIControlEventTouchUpInside];
+             [self updateSnapshot:image];
          }
      }];
+}
+
+- (void) updateSnapshot:(UIImage*)image {
+    
+    _imageViewSnapshot.image = image;
+    _imageViewSnapshot.hidden = NO;
+    _imageViewCamera.hidden = YES;
+    
+    _imageButton.enabled = YES;
+    [self setButtonTarget:@selector(retakePhoto)];
+    _buttonContinue.hidden = NO;
+    _labelInstructions.text = @"Tap here to Continue.";
+}
+
+- (void) retakePhoto {
+    _imageViewSnapshot.hidden = YES;
+    _imageViewCamera.hidden = NO;
+    _imageViewSnapshot.image = nil;
+    _buttonContinue.hidden = YES;
+    _labelInstructions.text = @"* The Restaurant logo should be somewhere nearby.";
+    
+    [self setButtonTarget:@selector(captureNow)];
+}
+
+- (void)setButtonTarget:(SEL)action {
+    
+    [_imageButton addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
@@ -200,7 +199,6 @@
 }
 - (IBAction)scanLogo:(id)sender {
     //scan logo algorithm
-    NSLog(@"yoh");
     [self proceedToOrderViewMenu];
 }
 

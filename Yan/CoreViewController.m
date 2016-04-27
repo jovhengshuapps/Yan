@@ -8,6 +8,7 @@
 
 #import "CoreViewController.h"
 #import "RegistrationCompleteViewController.h"
+#import "AppDelegate.h"
 
 @interface CoreViewController ()
 @property (strong, nonatomic) UILabel *titleLabel;
@@ -119,9 +120,22 @@
     
 }
 
-- (BOOL) userLoggedIn {
-    // This should return the user details not just a boolean
-    return NO;
+- (Account*) userLoggedIn {
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Account"];
+    
+    NSError *error = nil;
+    
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    
+    if (result.count) {
+        return ((Account*)result[0]);
+    }
+    
+    return nil;
+    
 }
 
 
@@ -132,6 +146,67 @@
     [self.view addSubview:view];
 }
 
+- (void)callAPI:(NSString*)method withParameters:(NSDictionary*)parameters completionNotification:(NSString*)notificationName{
+    
+    NSURL *baseURL = [NSURL URLWithString:BASE_API_URL];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    if (@"token") {
+        
+        [manager.requestSerializer setValue:@"token" forHTTPHeaderField:@"x-yan-resto-api"];
+    }
+    
+    [self callPostSessionManager:manager :method :parameters :notificationName];
+}
+
+- (void)callPostSessionManager:(AFHTTPSessionManager*)manager :(NSString*)method :(NSDictionary*)parameters :(NSString*)notificationName {
+    
+    NETWORK_INDICATOR(YES)
+    
+    [manager POST:method parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"response:%@",responseObject);
+        NETWORK_INDICATOR(NO)
+        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NETWORK_INDICATOR(NO)
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }];
+}
+
+- (BOOL)saveLoggedInAccount:(NSString*)username :(NSString*)password :(NSString*)fullname :(NSString*)birthday :(NSString*)token {
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    Account *account = [[Account alloc] initWithEntity:[NSEntityDescription entityForName:@"Account" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
+    account.username = username;
+    account.password = password;
+    account.birthday = birthday;
+    account.fullname = fullname;
+    account.token = token;
+    
+    NSError *error = nil;
+    if ([context save:&error]) {
+        return YES;
+    }
+    else {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+    return NO;
+}
 
 - (NSDictionary*) getMenuForRestaurant:(NSString*)restaurantName {
     //dummy data

@@ -19,9 +19,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self showTitleBar:@"RESERVATION"];
-
-    
     UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoLight];
     
     [button addTarget:self action:@selector(showRestaurantDetails) forControlEvents:UIControlEventTouchUpInside];
@@ -32,6 +29,14 @@
 
 
 }
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self showTitleBar:@"RESERVATION"];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

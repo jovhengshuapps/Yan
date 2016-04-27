@@ -23,6 +23,8 @@
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import <GoogleSignIn/GoogleSignIn.h>
 
+#import "Account.h"
+
 // MACROS
 
 #define UIColorFromRGB(rgbValue)                                        [UIColor \
@@ -39,15 +41,24 @@
 
 #define APPINFO(key)                                                    [[NSBundle mainBundle] objectForInfoDictionaryKey:key];
 
-
+#define NETWORK_INDICATOR(bool)                                         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:bool];
 
 // NOTIFICATION OBSERVER NAME
 
-#define ChangeHomeViewToShow                                    @"ChangeHomeViewToShow"
+#define ChangeHomeViewToShow                                            @"ChangeHomeViewToShow"
 
 // CONFIGURATIONS
 
 #define GOOGLE_CLIENT_ID                                                @"668953075234-bf7f3vasveo0dj919fp75aj0saoa4vc9.apps.googleusercontent.com"
 
+
+
+
+// API CALLS
+#define BASE_API_URL                                                    @"http://yan.cybernetics-it.info/api_v1/"
+
+#define API_USER_REGISTER                                               @"user/register"
+
+#define API_USER_LOGIN                                                  @"user/login"
 
 #endif /* Config_h */

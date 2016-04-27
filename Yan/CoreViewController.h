@@ -13,7 +13,10 @@
 
 - (void) showTitleBar:(NSString*)title;
 - (void) hideTitleBar;
-- (BOOL) userLoggedIn;
+- (Account*) userLoggedIn;
 - (void) isFromRegistration:(BOOL)fromRegistration;
+- (void)callAPI:(NSString*)method withParameters:(NSDictionary*)parameters completionNotification:(NSString*)notificationName;
 - (NSDictionary*) getMenuForRestaurant:(NSString*)restaurantName;
+
+- (BOOL)saveLoggedInAccount:(NSString*)username :(NSString*)password :(NSString*)fullname :(NSString*)birthday :(NSString*)token;
 @end

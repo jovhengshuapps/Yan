@@ -48,7 +48,7 @@
     positionY -= sizeHeight;
     
     _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, positionY, self.view.frame.size.width, sizeHeight) style:UITableViewStylePlain];
-    _mainTableView.backgroundColor = [UIColor clearColor];
+    _mainTableView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.3f];
     _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _mainTableView.bounces = NO;
     _mainTableView.dataSource = self;
@@ -92,7 +92,7 @@
     positionY -= sizeHeight;
     
     
-    [UIView animateWithDuration:0.3f animations:^{
+    [UIView animateWithDuration:0.2f animations:^{
         _mainTableView.frame = CGRectMake(_mainTableView.frame.origin.x, positionY, _mainTableView.frame.size.width, sizeHeight);
     } completion:^(BOOL finished) {
         _menuShown = NO;
@@ -106,7 +106,7 @@
     positionY -= sizeHeight;
     
     
-    [UIView animateWithDuration:0.3f animations:^{
+    [UIView animateWithDuration:0.2f animations:^{
         _mainTableView.frame = CGRectMake(_mainTableView.frame.origin.x, positionY, _mainTableView.frame.size.width, sizeHeight);
     } completion:^(BOOL finished) {
         _menuShown = YES;
@@ -136,7 +136,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        cell.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.3f];
+        cell.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.0f];
     }
     if (_menuShown) {
         cell.textLabel.text = [_arrayCategories[indexPath.row] uppercaseString];
@@ -163,7 +163,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIButton *buttonMenu = [UIButton buttonWithType:UIButtonTypeCustom];
     buttonMenu.frame = CGRectMake(0.0f, 0.0f, _mainTableView.bounds.size.width, [self tableView:tableView heightForHeaderInSection:section]);
-    buttonMenu.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.3f];
+    buttonMenu.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.0f];
     
     [buttonMenu setTitle:@"MAIN MENU" forState:UIControlStateNormal];
     [buttonMenu setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

@@ -37,6 +37,8 @@
     
     [_detailsTable reloadData];
     
+    self.detailsTable.contentSize = CGSizeMake(self.detailsTable.contentSize.width, self.detailsTable.contentSize.height + 110.0f); //allowance for the menu and checkout
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -68,7 +68,7 @@
     NSDictionary *item = _menuList[indexPath.row];
     NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"name"] uppercaseString],item[@"price"]];
     
-    CGFloat nameSize = [self tableView:tableView heightForRowAtIndexPath:indexPath] - 10.0f;
+    CGFloat nameSize = [self tableView:tableView heightForRowAtIndexPath:indexPath] - 20.0f;
     CGFloat priceSize = nameSize / 2.0f;
     
     NSArray *components = [text componentsSeparatedByString:@" PHP"];

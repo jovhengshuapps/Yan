@@ -8,6 +8,8 @@
 
 #import "DrawerTableViewController.h"
 #import "LoginViewController.h"
+#import "AppDelegate.h"
+
 
 @interface DrawerTableViewController ()
 
@@ -21,10 +23,6 @@
 {
     [super viewDidLoad];
     
-    _titlesArray = @[([self userLoggedIn])?@"LOGOUT":@"LOGIN",
-                     @"SETTINGS",
-                     @"FAVORITES",
-                     @"RECENT"];
 
     self.tableView.separatorColor = [UIColor colorWithRed:150/255.0f green:161/255.0f blue:177/255.0f alpha:0.0f];
     self.tableView.delegate = self;
@@ -52,11 +50,18 @@
         view;
     });
 
-
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    
+    _titlesArray = @[([self userLoggedIn])?@"LOGOUT":@"LOGIN",
+                     @"SETTINGS",
+                     @"FAVORITES",
+                     @"RECENT"];
+    
+    [self.tableView reloadData];
 }
 
 
@@ -82,6 +87,10 @@
     
     if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"LOGIN"]) {
         [self.frostedViewController.contentViewController performSegueWithIdentifier:@"showLogin" sender:self];
+    }
+    else if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"LOGOUT"]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Logout" message:@"Are you sure?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
+        [alert show];
     }
 }
 
@@ -118,12 +127,46 @@
     return cell;
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == 1) {
+        
+        NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Account"];
+        
+        NSError *error = nil;
+        
+        NSArray *result = [context executeFetchRequest:request error:&error];
+        
+        
+        for (Account *account in result) {
+            [context deleteObject:account];
+        }
+        
+        error = nil;
+        if ([context save:&error]) {
+            return;
+        }
+    }
+}
 
 
-
-- (BOOL) userLoggedIn {
-    // This should return the user details not just a boolean
-    return NO;
+- (Account*) userLoggedIn {
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Account"];
+    
+    NSError *error = nil;
+    
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    
+    if (result.count) {
+        return ((Account*)result[0]);
+    }
+    
+    return nil;
+    
 }
 
 @end

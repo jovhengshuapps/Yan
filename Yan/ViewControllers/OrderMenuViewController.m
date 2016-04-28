@@ -9,6 +9,7 @@
 #import "OrderMenuViewController.h"
 #import "MenuListViewController.h"
 #import "MenuDetailsViewController.h"
+#import "ConfirmOrderViewController.h"
 
 
 @interface OrderMenuViewController()
@@ -218,6 +219,14 @@
     [self addChildViewController:itemDetails];
     [itemDetails didMoveToParentViewController:self];
     
+}
+
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"tableConfirmOrder"] || [segue.identifier isEqualToString:@"priceConfirmOrder"]) {
+        ((ConfirmOrderViewController*)segue.destinationViewController).arrayOrderList = @[];
+    }
 }
 
 @end

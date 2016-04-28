@@ -78,10 +78,6 @@
 }
 
 - (void)videoAdPlayer:(AVPlayer *)player controller:(AVPlayerViewController *)controller {
-    controller.modalPresentationStyle = UIModalPresentationFullScreen;
-    controller.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    [self presentViewController:controller animated:YES completion:^{
-        [controller.player play];
-    }];
+    
 }
 @end

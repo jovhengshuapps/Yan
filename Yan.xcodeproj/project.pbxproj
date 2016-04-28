@@ -73,6 +73,7 @@
 		33E1B8C81CB7DCF000B4207F /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1B8C71CB7DCF000B4207F /* FBSDKCoreKit.framework */; };
 		33E1B8CB1CB7DD4100B4207F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1B8C91CB7DD4100B4207F /* FBSDKLoginKit.framework */; };
 		33E1B8CC1CB7DD4100B4207F /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1B8CA1CB7DD4100B4207F /* FBSDKShareKit.framework */; };
+		33ED27811CD22F5E0013FADD /* ConfirmOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ED27801CD22F5E0013FADD /* ConfirmOrderViewController.m */; };
 		33F9FB401CB6841700637A02 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F9FB3F1CB6841700637A02 /* RegisterViewController.m */; };
 		33F9FB431CB68D5600637A02 /* MainLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F9FB421CB68D5600637A02 /* MainLoginViewController.m */; };
 		442160881CB32C5800BB387F /* CollapseMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 442160871CB32C5800BB387F /* CollapseMenuView.m */; };
@@ -219,6 +220,8 @@
 		33E1B8C71CB7DCF000B4207F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		33E1B8C91CB7DD4100B4207F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		33E1B8CA1CB7DD4100B4207F /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		33ED277F1CD22F5E0013FADD /* ConfirmOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmOrderViewController.h; sourceTree = "<group>"; };
+		33ED27801CD22F5E0013FADD /* ConfirmOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmOrderViewController.m; sourceTree = "<group>"; };
 		33F9FB3E1CB6841700637A02 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		33F9FB3F1CB6841700637A02 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		33F9FB411CB68D5600637A02 /* MainLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainLoginViewController.h; sourceTree = "<group>"; };
@@ -378,6 +381,8 @@
 				333FEEF61CCF7205004D4B5B /* MenuListViewController.m */,
 				333FEEF81CCF7AFE004D4B5B /* MenuDetailsViewController.h */,
 				333FEEF91CCF7AFE004D4B5B /* MenuDetailsViewController.m */,
+				33ED277F1CD22F5E0013FADD /* ConfirmOrderViewController.h */,
+				33ED27801CD22F5E0013FADD /* ConfirmOrderViewController.m */,
 				33C6E67E1CC7C6CD001690ED /* ScanLogoViewController.h */,
 				33C6E67F1CC7C6CD001690ED /* ScanLogoViewController.m */,
 				335834621CC4F1B4008606C8 /* AffiliatedRestoViewController.h */,
@@ -575,7 +580,7 @@
 				TargetAttributes = {
 					33599B3F1CAD259000366C34 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = HYQZQ5CH3N;
+						DevelopmentTeam = YSNGH6HTET;
 						SystemCapabilities = {
 							com.apple.Push = {
 								enabled = 1;
@@ -695,6 +700,7 @@
 				33C6E67D1CC7A1D9001690ED /* CustomButton.m in Sources */,
 				3394A3A21CADF66300472030 /* UIView+REFrostedViewController.m in Sources */,
 				336424BB1CAE313A00E0E156 /* AFImageDownloader.m in Sources */,
+				33ED27811CD22F5E0013FADD /* ConfirmOrderViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -833,7 +839,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Eugene Leoncio (9GZUYUT7E4)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
@@ -852,7 +858,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Bilinear Inc. (YSNGH6HTET)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",

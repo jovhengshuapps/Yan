@@ -769,6 +769,9 @@ You may now start using the app for your favourite restaurant.</string>
                                         <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="22"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="   Orders: Table 9" image="tray-icon-resized"/>
+                                        <connections>
+                                            <segue destination="YmN-hE-WHQ" kind="show" identifier="tableConfirmOrder" id="E6g-jX-hjS"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLB-8Q-53y">
                                         <rect key="frame" x="300" y="0.0" width="300" height="44"/>
@@ -776,6 +779,9 @@ You may now start using the app for your favourite restaurant.</string>
                                         <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="22"/>
                                         <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="   PHP 1,400.00" image="bill-icon-resized"/>
+                                        <connections>
+                                            <segue destination="YmN-hE-WHQ" kind="show" identifier="priceConfirmOrder" id="e0B-c5-pXU"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -979,6 +985,44 @@ You may now start using the app for your favourite restaurant.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eN3-Ph-Iss" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2467.5" y="628.5"/>
+        </scene>
+        <!--Confirm Order View Controller-->
+        <scene sceneID="u2P-WJ-ar4">
+            <objects>
+                <viewController storyboardIdentifier="confirmOrder" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YmN-hE-WHQ" customClass="ConfirmOrderViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0cF-mY-3Nx"/>
+                        <viewControllerLayoutGuide type="bottom" id="Otr-Im-cbp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DiS-oI-sLU">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="C88-9h-G0Z">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="YmN-hE-WHQ" id="vhV-km-Sy5"/>
+                                    <outlet property="delegate" destination="YmN-hE-WHQ" id="iLG-db-Rs1"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="C88-9h-G0Z" firstAttribute="top" secondItem="0cF-mY-3Nx" secondAttribute="bottom" constant="-20" id="1zW-qg-CeJ"/>
+                            <constraint firstItem="C88-9h-G0Z" firstAttribute="leading" secondItem="DiS-oI-sLU" secondAttribute="leadingMargin" constant="-20" id="25j-YZ-qdk"/>
+                            <constraint firstItem="Otr-Im-cbp" firstAttribute="top" secondItem="C88-9h-G0Z" secondAttribute="bottom" id="96j-Zu-1Dh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="C88-9h-G0Z" secondAttribute="trailing" constant="-20" id="iul-AC-nqq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mainTable" destination="C88-9h-G0Z" id="ea6-6o-u3N"/>
+                        <outlet property="view" destination="DiS-oI-sLU" id="4St-v5-hco"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rmf-7p-jcE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2479" y="-855"/>
         </scene>
         <!--Menu List View Controller-->
         <scene sceneID="1el-r6-2FA">
@@ -2269,8 +2313,9 @@ You may now start using the app for your favourite restaurant.</string>
         <image name="yan-logo" width="1024" height="648"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="7dQ-Ir-nbk"/>
         <segue reference="Y4r-v0-sWo"/>
         <segue reference="Vwc-zK-8Vx"/>
-        <segue reference="7dQ-Ir-nbk"/>
+        <segue reference="E6g-jX-hjS"/>
     </inferredMetricsTieBreakers>
 </document>

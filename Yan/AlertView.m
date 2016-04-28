@@ -258,6 +258,10 @@
     NSLog(@"playing");
 }
 
+- (void)playerViewControllerDidStopPictureInPicture:(AVPlayerViewController *)playerViewController {
+    NSLog(@"player END");
+}
+
 - (void) playVideo {
     [_delegate videoAdPlayer:_moviePlayer controller:_moviePlayerController];
 }

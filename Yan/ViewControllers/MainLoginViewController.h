@@ -9,6 +9,6 @@
 #import "CoreViewController.h"
 #import <GoogleSignIn/GoogleSignIn.h>
 
-@interface MainLoginViewController : CoreViewController <FBSDKLoginButtonDelegate, GIDSignInUIDelegate>
+@interface MainLoginViewController : CoreViewController <FBSDKLoginButtonDelegate, GIDSignInUIDelegate, GIDSignInDelegate>
 
 @end

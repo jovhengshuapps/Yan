@@ -55,6 +55,7 @@
 		3394A3A21CADF66300472030 /* UIView+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A39B1CADF66300472030 /* UIView+REFrostedViewController.m */; };
 		3394A3A31CADF66300472030 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A39D1CADF66300472030 /* UIViewController+REFrostedViewController.m */; };
 		3394A3A51CAE078100472030 /* LucidaGrande.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 3394A3A41CAE078100472030 /* LucidaGrande.ttc */; };
+		33A276B71CD46A8400FAE9C8 /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A276B61CD46A8400FAE9C8 /* DatePickerViewController.m */; };
 		33B36F061CC649D800AB30C6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B36F051CC649D800AB30C6 /* AVFoundation.framework */; };
 		33B36F091CC65CD900AB30C6 /* ReserveRestoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B36F081CC65CD900AB30C6 /* ReserveRestoViewController.m */; };
 		33B36F0C1CC663BC00AB30C6 /* ReserveCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B36F0B1CC663BC00AB30C6 /* ReserveCompleteViewController.m */; };
@@ -69,7 +70,6 @@
 		33DBA6ED1CB8D1DD00AB0062 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DBA6EC1CB8D1DD00AB0062 /* SafariServices.framework */; };
 		33DBA6EF1CB8D1E800AB0062 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DBA6EE1CB8D1E800AB0062 /* SystemConfiguration.framework */; };
 		33DBA6F51CB8D31600AB0062 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DBA6F41CB8D31600AB0062 /* libz.tbd */; };
-		33DBA6F81CB8F13A00AB0062 /* RegistrationCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33DBA6F71CB8F13A00AB0062 /* RegistrationCompleteViewController.m */; };
 		33E1B8C81CB7DCF000B4207F /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1B8C71CB7DCF000B4207F /* FBSDKCoreKit.framework */; };
 		33E1B8CB1CB7DD4100B4207F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1B8C91CB7DD4100B4207F /* FBSDKLoginKit.framework */; };
 		33E1B8CC1CB7DD4100B4207F /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1B8CA1CB7DD4100B4207F /* FBSDKShareKit.framework */; };
@@ -191,6 +191,8 @@
 		3394A39C1CADF66300472030 /* UIViewController+REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+REFrostedViewController.h"; sourceTree = "<group>"; };
 		3394A39D1CADF66300472030 /* UIViewController+REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+REFrostedViewController.m"; sourceTree = "<group>"; };
 		3394A3A41CAE078100472030 /* LucidaGrande.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = LucidaGrande.ttc; sourceTree = "<group>"; };
+		33A276B51CD46A8400FAE9C8 /* DatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController.h; sourceTree = "<group>"; };
+		33A276B61CD46A8400FAE9C8 /* DatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController.m; sourceTree = "<group>"; };
 		33B36F011CC6486800AB30C6 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		33B36F031CC6496A00AB30C6 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		33B36F051CC649D800AB30C6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -215,8 +217,6 @@
 		33DBA6F01CB8D2FC00AB0062 /* dylib1.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = dylib1.o; path = usr/lib/dylib1.o; sourceTree = SDKROOT; };
 		33DBA6F21CB8D30500AB0062 /* lazydylib1.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = lazydylib1.o; path = usr/lib/lazydylib1.o; sourceTree = SDKROOT; };
 		33DBA6F41CB8D31600AB0062 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		33DBA6F61CB8F13A00AB0062 /* RegistrationCompleteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegistrationCompleteViewController.h; sourceTree = "<group>"; };
-		33DBA6F71CB8F13A00AB0062 /* RegistrationCompleteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegistrationCompleteViewController.m; sourceTree = "<group>"; };
 		33E1B8C71CB7DCF000B4207F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		33E1B8C91CB7DD4100B4207F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		33E1B8CA1CB7DD4100B4207F /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -296,29 +296,11 @@
 		33599B421CAD259000366C34 /* Yan */ = {
 			isa = PBXGroup;
 			children = (
-				33599BAF1CAD275F00366C34 /* Config.h */,
 				33599B461CAD259100366C34 /* AppDelegate.h */,
 				33599B471CAD259100366C34 /* AppDelegate.m */,
-				33599BAC1CAD274E00366C34 /* CoreViewController.h */,
-				33599BAD1CAD274E00366C34 /* CoreViewController.m */,
-				33599BC01CAD4CD600366C34 /* NavigationController.h */,
-				33599BC11CAD4CD600366C34 /* NavigationController.m */,
-				33C142431CB1512500B57041 /* AlertView.h */,
-				33C142441CB1512500B57041 /* AlertView.m */,
-				33C6E67B1CC7A1D9001690ED /* CustomButton.h */,
-				33C6E67C1CC7A1D9001690ED /* CustomButton.m */,
-				442160861CB32C5800BB387F /* CollapseMenuView.h */,
-				442160871CB32C5800BB387F /* CollapseMenuView.m */,
-				338567E91CD0FC310099BDD0 /* Account+CoreDataProperties.h */,
-				338567EA1CD0FC310099BDD0 /* Account+CoreDataProperties.m */,
-				338567EB1CD0FC310099BDD0 /* Account.h */,
-				338567EC1CD0FC310099BDD0 /* Account.m */,
-				33599B4C1CAD259100366C34 /* Main.storyboard */,
-				33599B521CAD259100366C34 /* Assets.xcassets */,
-				33599B541CAD259100366C34 /* LaunchScreen.storyboard */,
+				33A276AB1CD4684800FAE9C8 /* Core */,
+				33A276AC1CD4685400FAE9C8 /* Custom */,
 				33599BB01CAD2D6C00366C34 /* ViewControllers */,
-				33599B571CAD259100366C34 /* Info.plist */,
-				33599B4F1CAD259100366C34 /* Yan.xcdatamodeld */,
 				33599B431CAD259000366C34 /* Supporting Files */,
 			);
 			path = Yan;
@@ -327,6 +309,8 @@
 		33599B431CAD259000366C34 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				33A276AD1CD4686200FAE9C8 /* CoreData Objects */,
+				33A276B41CD46A2A00FAE9C8 /* Resources */,
 				3394A3A41CAE078100472030 /* LucidaGrande.ttc */,
 				33599B441CAD259100366C34 /* main.m */,
 			);
@@ -371,38 +355,12 @@
 		33599BB01CAD2D6C00366C34 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				33599BB11CAD2D9000366C34 /* RootViewController.h */,
-				33599BB21CAD2D9000366C34 /* RootViewController.m */,
-				337516DD1CB2AC390065AB7A /* HomeViewController.h */,
-				337516DE1CB2AC390065AB7A /* HomeViewController.m */,
-				442160911CB3760A00BB387F /* OrderMenuViewController.h */,
-				442160921CB3760A00BB387F /* OrderMenuViewController.m */,
-				333FEEF51CCF7205004D4B5B /* MenuListViewController.h */,
-				333FEEF61CCF7205004D4B5B /* MenuListViewController.m */,
-				333FEEF81CCF7AFE004D4B5B /* MenuDetailsViewController.h */,
-				333FEEF91CCF7AFE004D4B5B /* MenuDetailsViewController.m */,
-				33ED277F1CD22F5E0013FADD /* ConfirmOrderViewController.h */,
-				33ED27801CD22F5E0013FADD /* ConfirmOrderViewController.m */,
-				33C6E67E1CC7C6CD001690ED /* ScanLogoViewController.h */,
-				33C6E67F1CC7C6CD001690ED /* ScanLogoViewController.m */,
-				335834621CC4F1B4008606C8 /* AffiliatedRestoViewController.h */,
-				335834631CC4F1B4008606C8 /* AffiliatedRestoViewController.m */,
-				33B36F071CC65CD900AB30C6 /* ReserveRestoViewController.h */,
-				33B36F081CC65CD900AB30C6 /* ReserveRestoViewController.m */,
-				33B36F0A1CC663BC00AB30C6 /* ReserveCompleteViewController.h */,
-				33B36F0B1CC663BC00AB30C6 /* ReserveCompleteViewController.m */,
-				33C6E6781CC7A101001690ED /* RestaurantDetailsViewController.h */,
-				33C6E6791CC7A101001690ED /* RestaurantDetailsViewController.m */,
-				33F9FB411CB68D5600637A02 /* MainLoginViewController.h */,
-				33F9FB421CB68D5600637A02 /* MainLoginViewController.m */,
-				33599BBD1CAD444500366C34 /* LoginViewController.h */,
-				33599BBE1CAD444500366C34 /* LoginViewController.m */,
-				33F9FB3E1CB6841700637A02 /* RegisterViewController.h */,
-				33F9FB3F1CB6841700637A02 /* RegisterViewController.m */,
-				33DBA6F61CB8F13A00AB0062 /* RegistrationCompleteViewController.h */,
-				33DBA6F71CB8F13A00AB0062 /* RegistrationCompleteViewController.m */,
-				33599BB41CAD2E9A00366C34 /* DrawerTableViewController.h */,
-				33599BB51CAD2E9A00366C34 /* DrawerTableViewController.m */,
+				33A276AE1CD4687700FAE9C8 /* Root */,
+				33A276AF1CD4687E00FAE9C8 /* Home */,
+				33A276B01CD4688C00FAE9C8 /* Order */,
+				33A276B11CD468C000FAE9C8 /* Reservation */,
+				33A276B21CD468DD00FAE9C8 /* LoginRegistration */,
+				33A276B31CD468EA00FAE9C8 /* Drawer */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -490,6 +448,128 @@
 				3394A39D1CADF66300472030 /* UIViewController+REFrostedViewController.m */,
 			);
 			path = REFrostedViewController;
+			sourceTree = "<group>";
+		};
+		33A276AB1CD4684800FAE9C8 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				33599BAF1CAD275F00366C34 /* Config.h */,
+				33599BAC1CAD274E00366C34 /* CoreViewController.h */,
+				33599BAD1CAD274E00366C34 /* CoreViewController.m */,
+				33599BC01CAD4CD600366C34 /* NavigationController.h */,
+				33599BC11CAD4CD600366C34 /* NavigationController.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		33A276AC1CD4685400FAE9C8 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				33C142431CB1512500B57041 /* AlertView.h */,
+				33C142441CB1512500B57041 /* AlertView.m */,
+				33C6E67B1CC7A1D9001690ED /* CustomButton.h */,
+				33C6E67C1CC7A1D9001690ED /* CustomButton.m */,
+				442160861CB32C5800BB387F /* CollapseMenuView.h */,
+				442160871CB32C5800BB387F /* CollapseMenuView.m */,
+			);
+			name = Custom;
+			sourceTree = "<group>";
+		};
+		33A276AD1CD4686200FAE9C8 /* CoreData Objects */ = {
+			isa = PBXGroup;
+			children = (
+				338567E91CD0FC310099BDD0 /* Account+CoreDataProperties.h */,
+				338567EA1CD0FC310099BDD0 /* Account+CoreDataProperties.m */,
+				338567EB1CD0FC310099BDD0 /* Account.h */,
+				338567EC1CD0FC310099BDD0 /* Account.m */,
+			);
+			name = "CoreData Objects";
+			sourceTree = "<group>";
+		};
+		33A276AE1CD4687700FAE9C8 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				33599BB11CAD2D9000366C34 /* RootViewController.h */,
+				33599BB21CAD2D9000366C34 /* RootViewController.m */,
+			);
+			name = Root;
+			sourceTree = "<group>";
+		};
+		33A276AF1CD4687E00FAE9C8 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				337516DD1CB2AC390065AB7A /* HomeViewController.h */,
+				337516DE1CB2AC390065AB7A /* HomeViewController.m */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		33A276B01CD4688C00FAE9C8 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				33C6E67E1CC7C6CD001690ED /* ScanLogoViewController.h */,
+				33C6E67F1CC7C6CD001690ED /* ScanLogoViewController.m */,
+				442160911CB3760A00BB387F /* OrderMenuViewController.h */,
+				442160921CB3760A00BB387F /* OrderMenuViewController.m */,
+				333FEEF51CCF7205004D4B5B /* MenuListViewController.h */,
+				333FEEF61CCF7205004D4B5B /* MenuListViewController.m */,
+				333FEEF81CCF7AFE004D4B5B /* MenuDetailsViewController.h */,
+				333FEEF91CCF7AFE004D4B5B /* MenuDetailsViewController.m */,
+				33ED277F1CD22F5E0013FADD /* ConfirmOrderViewController.h */,
+				33ED27801CD22F5E0013FADD /* ConfirmOrderViewController.m */,
+			);
+			name = Order;
+			sourceTree = "<group>";
+		};
+		33A276B11CD468C000FAE9C8 /* Reservation */ = {
+			isa = PBXGroup;
+			children = (
+				335834621CC4F1B4008606C8 /* AffiliatedRestoViewController.h */,
+				335834631CC4F1B4008606C8 /* AffiliatedRestoViewController.m */,
+				33B36F071CC65CD900AB30C6 /* ReserveRestoViewController.h */,
+				33B36F081CC65CD900AB30C6 /* ReserveRestoViewController.m */,
+				33B36F0A1CC663BC00AB30C6 /* ReserveCompleteViewController.h */,
+				33B36F0B1CC663BC00AB30C6 /* ReserveCompleteViewController.m */,
+				33C6E6781CC7A101001690ED /* RestaurantDetailsViewController.h */,
+				33C6E6791CC7A101001690ED /* RestaurantDetailsViewController.m */,
+				33A276B51CD46A8400FAE9C8 /* DatePickerViewController.h */,
+				33A276B61CD46A8400FAE9C8 /* DatePickerViewController.m */,
+			);
+			name = Reservation;
+			sourceTree = "<group>";
+		};
+		33A276B21CD468DD00FAE9C8 /* LoginRegistration */ = {
+			isa = PBXGroup;
+			children = (
+				33F9FB411CB68D5600637A02 /* MainLoginViewController.h */,
+				33F9FB421CB68D5600637A02 /* MainLoginViewController.m */,
+				33599BBD1CAD444500366C34 /* LoginViewController.h */,
+				33599BBE1CAD444500366C34 /* LoginViewController.m */,
+				33F9FB3E1CB6841700637A02 /* RegisterViewController.h */,
+				33F9FB3F1CB6841700637A02 /* RegisterViewController.m */,
+			);
+			name = LoginRegistration;
+			sourceTree = "<group>";
+		};
+		33A276B31CD468EA00FAE9C8 /* Drawer */ = {
+			isa = PBXGroup;
+			children = (
+				33599BB41CAD2E9A00366C34 /* DrawerTableViewController.h */,
+				33599BB51CAD2E9A00366C34 /* DrawerTableViewController.m */,
+			);
+			name = Drawer;
+			sourceTree = "<group>";
+		};
+		33A276B41CD46A2A00FAE9C8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				33599B4C1CAD259100366C34 /* Main.storyboard */,
+				33599B521CAD259100366C34 /* Assets.xcassets */,
+				33599B541CAD259100366C34 /* LaunchScreen.storyboard */,
+				33599B571CAD259100366C34 /* Info.plist */,
+				33599B4F1CAD259100366C34 /* Yan.xcdatamodeld */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		B34B5C970B55F0D232BFF620 /* Frameworks */ = {
@@ -674,6 +754,7 @@
 				336424B81CAE313A00E0E156 /* AFURLResponseSerialization.m in Sources */,
 				33C6E67A1CC7A101001690ED /* RestaurantDetailsViewController.m in Sources */,
 				33F9FB431CB68D5600637A02 /* MainLoginViewController.m in Sources */,
+				33A276B71CD46A8400FAE9C8 /* DatePickerViewController.m in Sources */,
 				336424B71CAE313A00E0E156 /* AFURLRequestSerialization.m in Sources */,
 				337516DF1CB2AC390065AB7A /* HomeViewController.m in Sources */,
 				336424BC1CAE313A00E0E156 /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -695,7 +776,6 @@
 				33F9FB401CB6841700637A02 /* RegisterViewController.m in Sources */,
 				336424C21CAE313A00E0E156 /* UIWebView+AFNetworking.m in Sources */,
 				33B36F0C1CC663BC00AB30C6 /* ReserveCompleteViewController.m in Sources */,
-				33DBA6F81CB8F13A00AB0062 /* RegistrationCompleteViewController.m in Sources */,
 				33599BC21CAD4CD600366C34 /* NavigationController.m in Sources */,
 				33C6E67D1CC7A1D9001690ED /* CustomButton.m in Sources */,
 				3394A3A21CADF66300472030 /* UIView+REFrostedViewController.m in Sources */,

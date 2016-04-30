@@ -102,7 +102,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, [self tableView:tableView heightForHeaderInSection:section])];
-    headerView.backgroundColor = [UIColor greenColor];
+    headerView.backgroundColor = [UIColor whiteColor];
     
     UILabel *label = [[UILabel alloc] initWithFrame:headerView.frame];
     label.center = headerView.center;

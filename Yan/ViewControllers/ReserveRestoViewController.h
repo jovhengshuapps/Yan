@@ -8,6 +8,6 @@
 
 #import "CoreViewController.h"
 
-@interface ReserveRestoViewController : CoreViewController
+@interface ReserveRestoViewController : CoreViewController <UIPopoverPresentationControllerDelegate, UITextFieldDelegate>
 
 @end

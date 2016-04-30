@@ -145,6 +145,9 @@
         
         error = nil;
         if ([context save:&error]) {
+//            [[GIDSignIn sharedInstance] signOut];
+//            FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+//            [login logOut];
             return;
         }
     }

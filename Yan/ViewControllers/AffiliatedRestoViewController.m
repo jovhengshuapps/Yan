@@ -24,6 +24,9 @@ typedef enum {
 @property (strong, nonatomic) NSMutableArray *dataListRecent;
 @property (strong, nonatomic) NSMutableArray *dataListNearby;
 @property (assign,nonatomic) AffiliatedRestoOption tabBarOption;
+@property (weak, nonatomic) IBOutlet UIButton *barItemRecents;
+@property (weak, nonatomic) IBOutlet UIButton *barItemRestaurants;
+@property (weak, nonatomic) IBOutlet UIButton *barItemNearby;
 
 @end
 
@@ -43,13 +46,20 @@ typedef enum {
     _resultsBarLabel.backgroundColor = [UIColor clearColor];
     [_resultsBarView addSubview:_resultsBarLabel];
     
-    [self getData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getRestaurants:) name:@"getRestaurantsObserver" object:nil];
+    [self callGETAPI:API_RESTAURANTS withParameters:@{} completionNotification:@"getRestaurantsObserver"];
+    
+    //set restaurants as selected
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self showTitleBar:@"AFFILIATED RESTAURANT"];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,37 +72,17 @@ typedef enum {
     _resultsBarLabel.text = text;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void) getRestaurants:(NSNotification*)notification {
+    id response = notification.object;
+    NSLog(@"response:%@",response);
+    _dataListAll = [NSMutableArray arrayWithArray:((NSArray*) response)];
+    
+    _dataListNearby = [NSMutableArray new];
+    _dataListRecent = [NSMutableArray new];
+    
+    [self reloadTableWithButton:nil];
 }
-*/
 
-- (void) getData {
-    
-    if (_tabBarOption == AffiliatedRestoOptionNearby) {
-        if (!_dataListNearby) {
-            _dataListNearby = [NSMutableArray new];
-        }
-    }
-    else if (_tabBarOption == AffiliatedRestoOptionRecent) {
-        if (!_dataListRecent) {
-            _dataListRecent = [NSMutableArray new];
-        }
-    }
-    else {
-        if (!_dataListAll) {
-            _dataListAll = [NSMutableArray new];
-        }
-        [_dataListAll setArray:@[@{@"name":@"Restaurant Name 0001", @"area":@"Restaurant Area", @"foodtype":@"Restaurant Food Types"},@{@"name":@"Restaurant Name 0002", @"area":@"Restaurant Area", @"foodtype":@"Restaurant Food Types"},@{@"name":@"Restaurant Name 0003", @"area":@"Restaurant Area", @"foodtype":@"Restaurant Food Types"},@{@"name":@"Restaurant Name 0001", @"area":@"Restaurant Area", @"foodtype":@"Restaurant Food Types"},@{@"name":@"Restaurant Name 0002", @"area":@"Restaurant Area", @"foodtype":@"Restaurant Food Types"},@{@"name":@"Restaurant Name 0003", @"area":@"Restaurant Area", @"foodtype":@"Restaurant Food Types"},@{@"name":@"Restaurant Name 0001", @"area":@"Restaurant Area", @"foodtype":@"Restaurant Food Types"},@{@"name":@"Restaurant Name 0002", @"area":@"Restaurant Area", @"foodtype":@"Restaurant Food Types"},@{@"name":@"Restaurant Name 0003", @"area":@"Restaurant Area", @"foodtype":@"Restaurant Food Types"},@{@"name":@"Restaurant Name 0001", @"area":@"Restaurant Area", @"foodtype":@"Restaurant Food Types"},@{@"name":@"Restaurant Name 0002", @"area":@"Restaurant Area", @"foodtype":@"Restaurant Food Types"},@{@"name":@"Restaurant Name 0003", @"area":@"Restaurant Area", @"foodtype":@"Restaurant Food Types"}]];
-    }
-    
-    
-}
 
 # pragma mark UITableView DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -133,16 +123,16 @@ typedef enum {
     
     if (_tabBarOption == AffiliatedRestoOptionAll) {
         name = [_dataListAll[indexPath.row] objectForKey:@"name"];
-        details = [NSString stringWithFormat:@"%@ | %@",[_dataListAll[indexPath.row] objectForKey:@"area"],[_dataListAll[indexPath.row] objectForKey:@"foodtype"]];
+        details = [NSString stringWithFormat:@"%@ | %@",[_dataListAll[indexPath.row] objectForKey:@"location"],[_dataListAll[indexPath.row] objectForKey:@"website"]];
     }
     else if (_tabBarOption == AffiliatedRestoOptionRecent) {
         name = [_dataListRecent[indexPath.row] objectForKey:@"name"];
-        details = [NSString stringWithFormat:@"%@ | %@",[_dataListRecent[indexPath.row] objectForKey:@"area"],[_dataListRecent[indexPath.row] objectForKey:@"foodtype"]];
+        details = [NSString stringWithFormat:@"%@ | %@",[_dataListRecent[indexPath.row] objectForKey:@"location"],[_dataListRecent[indexPath.row] objectForKey:@"website"]];
         
     }
     else if (_tabBarOption == AffiliatedRestoOptionNearby) {
         name = [_dataListNearby[indexPath.row] objectForKey:@"name"];
-        details = [NSString stringWithFormat:@"%@ | %@",[_dataListNearby[indexPath.row] objectForKey:@"area"],[_dataListNearby[indexPath.row] objectForKey:@"foodtype"]];
+        details = [NSString stringWithFormat:@"%@ | %@",[_dataListNearby[indexPath.row] objectForKey:@"location"],[_dataListNearby[indexPath.row] objectForKey:@"website"]];
         
     }
     cell.textLabel.text = name;
@@ -165,15 +155,33 @@ typedef enum {
 }
 
 - (IBAction)reloadTableWithButton:(id)sender {
-    if ([sender tag] == AffiliatedRestoOptionNearby) {
-        _tabBarOption = AffiliatedRestoOptionNearby;
-    }
-    else if ([sender tag] == AffiliatedRestoOptionRecent) {
-        _tabBarOption = AffiliatedRestoOptionRecent;
+    if (sender) {
+        if ([sender tag] == AffiliatedRestoOptionNearby) {
+            _tabBarOption = AffiliatedRestoOptionNearby;
+            [_barItemRecents setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
+            [_barItemNearby setBackgroundColor:UIColorFromRGB(0xFF7B3C)];
+            [_barItemRestaurants setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
+        }
+        else if ([sender tag] == AffiliatedRestoOptionRecent) {
+            _tabBarOption = AffiliatedRestoOptionRecent;
+            [_barItemRecents setBackgroundColor:UIColorFromRGB(0xFF7B3C)];
+            [_barItemNearby setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
+            [_barItemRestaurants setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
+        }
+        else {
+            _tabBarOption = AffiliatedRestoOptionAll;
+            [_barItemRecents setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
+            [_barItemNearby setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
+            [_barItemRestaurants setBackgroundColor:UIColorFromRGB(0xFF7B3C)];
+        }
     }
     else {
         _tabBarOption = AffiliatedRestoOptionAll;
+        [_barItemRecents setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
+        [_barItemNearby setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
+        [_barItemRestaurants setBackgroundColor:UIColorFromRGB(0xFF7B3C)];
     }
+    
     [self.mainTableView reloadData];
 }
 

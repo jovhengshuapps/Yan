@@ -7,7 +7,6 @@
 //
 
 #import "CoreViewController.h"
-#import "RegistrationCompleteViewController.h"
 #import "AppDelegate.h"
 
 @interface CoreViewController ()
@@ -146,15 +145,31 @@
     [self.view addSubview:view];
 }
 
+- (void)callGETAPI:(NSString*)method withParameters:(NSDictionary*)parameters completionNotification:(NSString*)notificationName{
+    
+    NSURL *baseURL = [NSURL URLWithString:BASE_API_URL];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    Account *user = [self userLoggedIn];
+    if (user.token) {
+        
+        [manager.requestSerializer setValue:user.token forHTTPHeaderField:@"x-yan-resto-api"];
+    }
+    
+    [self callGetSessionManager:manager :method :parameters :notificationName];
+}
+
 - (void)callAPI:(NSString*)method withParameters:(NSDictionary*)parameters completionNotification:(NSString*)notificationName{
     
     NSURL *baseURL = [NSURL URLWithString:BASE_API_URL];
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    if (@"token") {
+    Account *user = [self userLoggedIn];
+    if (user.token) {
         
-        [manager.requestSerializer setValue:@"token" forHTTPHeaderField:@"x-yan-resto-api"];
+        [manager.requestSerializer setValue:user.token forHTTPHeaderField:@"x-yan-resto-api"];
     }
     
     [self callPostSessionManager:manager :method :parameters :notificationName];
@@ -166,13 +181,39 @@
     
     [manager POST:method parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
-        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
+//        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"response:%@",responseObject);
+//        NSLog(@"response:%@",responseObject);
         NETWORK_INDICATOR(NO)
         [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        NSLog(@"task:%@\n\n[%@]",task,[error description]);
         NETWORK_INDICATOR(NO)
+        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:error];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }];
+}
+
+- (void)callGetSessionManager:(AFHTTPSessionManager*)manager :(NSString*)method :(NSDictionary*)parameters :(NSString*)notificationName {
+    
+    NETWORK_INDICATOR(YES)
+    
+    [manager GET:method parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+//        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        NSLog(@"response:%@",responseObject);
+        NETWORK_INDICATOR(NO)
+        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        NSLog(@"task:%@\n\n[%@]",task,[error description]);
+        NETWORK_INDICATOR(NO)
+        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:error];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
                                                             message:[error localizedDescription]
                                                            delegate:nil

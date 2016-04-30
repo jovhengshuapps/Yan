@@ -7,7 +7,6 @@
 //
 
 #import "RegisterViewController.h"
-#import "RegistrationCompleteViewController.h"
 #import "HomeViewController.h"
 
 @interface RegisterViewController()

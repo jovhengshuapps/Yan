@@ -10,6 +10,8 @@
 #import "RestaurantDetailsViewController.h"
 
 @interface ReserveRestoViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *textFieldDate;
+@property (weak, nonatomic) IBOutlet UITextField *textFieldTime;
 
 @end
 
@@ -43,20 +45,26 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    // Assuming you've hooked this all up in a Storyboard with a popover presentation style
+    if ([segue.identifier isEqualToString:@"datePopover"]) {
+        UIViewController *destNav = segue.destinationViewController;
+        
+        // This is the important part
+        UIPopoverPresentationController *popPC = destNav.popoverPresentationController;
+        popPC.delegate = self;
+    }
 }
-*/
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
+    return UIModalPresentationNone;
+}
 
 - (void) showRestaurantDetails {
     
     RestaurantDetailsViewController *details = [self.storyboard instantiateViewControllerWithIdentifier:@"restaurantDetails"];
     [self.navigationController pushViewController:details animated:YES];
 }
+
+
 
 @end

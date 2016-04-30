@@ -8,7 +8,6 @@
 
 #import "HomeViewController.h"
 #import "LoginViewController.h"
-#import "RegistrationCompleteViewController.h"
 
 @interface HomeViewController()
 @property (weak, nonatomic) IBOutlet UIView *viewDefaultHome;
@@ -42,10 +41,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //check if logged in
-    if (![self userLoggedIn]) {
-        [self.navigationController performSegueWithIdentifier:@"showLogin" sender:self];
-    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -78,12 +73,20 @@
 }
 
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    if ([segue.identifier isEqualToString:@"regCompleteOrderButton"] || [segue.identifier isEqualToString:@"regCompleteReservationButton"]) {
-//        
-//        NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
-//        [notification postNotificationName:ChangeHomeViewToShow object:nil];
-//    }
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    if (![identifier isEqualToString:@"showLogin"]) {
+        
+        //check if logged in
+        if (![self userLoggedIn]) {
+            [self.navigationController performSegueWithIdentifier:@"showLogin" sender:self];
+            return NO;
+        }
+        else {
+            return YES;
+        }
+    }
+    return YES;
 }
+
 
 @end

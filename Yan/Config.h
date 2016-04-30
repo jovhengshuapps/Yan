@@ -55,10 +55,12 @@
 
 
 // API CALLS
-#define BASE_API_URL                                                    @"http://yan.cybernetics-it.info/api_v1/"
+#define BASE_API_URL                                                    @"http://yan.bilinear.ph/"
 
 #define API_USER_REGISTER                                               @"user/register"
 
 #define API_USER_LOGIN                                                  @"user/login"
+
+#define API_RESTAURANTS                                                 @"restaurant"
 
 #endif /* Config_h */

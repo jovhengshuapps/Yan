@@ -195,7 +195,10 @@
 
 - (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    [self proceedToOrderViewMenu];
+//    [self proceedToOrderViewMenu];
+    
+    _buttonContinue.hidden = NO;
+    _labelInstructions.text = @"Tap here to Continue.";
 }
 - (IBAction)scanLogo:(id)sender {
     //scan logo algorithm

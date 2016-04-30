@@ -14,6 +14,7 @@
 - (void) showTitleBar:(NSString*)title;
 - (void) hideTitleBar;
 - (Account*) userLoggedIn;
+- (void) logoutUser;
 - (void) isFromRegistration:(BOOL)fromRegistration;
 - (void)callAPI:(NSString*)method withParameters:(NSDictionary*)parameters completionNotification:(NSString*)notificationName;
 - (void)callGETAPI:(NSString*)method withParameters:(NSDictionary*)parameters completionNotification:(NSString*)notificationName;

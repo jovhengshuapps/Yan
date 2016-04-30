@@ -17,9 +17,9 @@
 @property(nullable, nonatomic, copy) NSString *videoURLstring;
 @property(nullable, nonatomic,copy) NSArray *buttonsArray;
 
-- (instancetype) initAlertWithMessage:(nullable NSString*)aMessage delegate:(nullable id)aDelegate buttons:(nullable NSArray*)aButtonsArray;
+- (nonnull instancetype) initAlertWithMessage:(nullable NSString*)aMessage delegate:(nullable id)aDelegate buttons:(nullable NSArray*)aButtonsArray;
 
-- (instancetype) initVideoAd:(nullable NSString*)videoURL delegate:(nullable id)aDelegate;
+- (nonnull instancetype) initVideoAd:(nullable NSString*)videoURL delegate:(nullable id)aDelegate;
 
 - (void) showAlertView;
 
@@ -27,10 +27,10 @@
 @protocol AlertViewDelegate <NSObject>
 @required
 
-- (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
+- (void)alertView:(nonnull AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 
-- (void)videoAdPlayer:(AVPlayer*)player controller:(AVPlayerViewController*)controller;
+- (void)videoAdPlayer:(nonnull AVPlayer*)player controller:(nonnull AVPlayerViewController*)controller;
 
-- (void) alertViewDismissed:(AlertView*)alertView;
+- (void) alertViewDismissed:(nonnull AlertView*)alertView;
 
 @end

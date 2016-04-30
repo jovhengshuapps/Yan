@@ -47,8 +47,9 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Assuming you've hooked this all up in a Storyboard with a popover presentation style
-    if ([segue.identifier isEqualToString:@"datePopover"]) {
-        UIViewController *destNav = segue.destinationViewController;
+    if ([segue.identifier isEqualToString:@"reserveDatePicker"]) {
+        DatePickerViewController *destNav = segue.destinationViewController;
+        destNav.delegate = self;
         
         // This is the important part
         UIPopoverPresentationController *popPC = destNav.popoverPresentationController;
@@ -57,6 +58,10 @@
 }
 - (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
     return UIModalPresentationNone;
+}
+
+- (void)dateSelected:(NSString *)dateString {
+    self.textFieldDate.text = dateString;
 }
 
 - (void) showRestaurantDetails {

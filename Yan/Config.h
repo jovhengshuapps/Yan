@@ -55,7 +55,7 @@
 
 
 // API CALLS
-#define BASE_API_URL                                                    @"http://yan.bilinear.ph/"
+#define BASE_API_URL                                                    @"http://yan.bilinear.ph/api_v1/"
 
 #define API_USER_REGISTER                                               @"user/register"
 

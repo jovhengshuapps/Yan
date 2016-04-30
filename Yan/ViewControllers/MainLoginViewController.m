@@ -95,11 +95,11 @@
 //            NSLog(@"fetched user:%@\n\naccount:%@", result,_socialAccount);
             [self showTitleBar:@"Logging in to Yan!"];
             self.view.userInteractionEnabled = NO;
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessful:) name:@"loginCompletedObserver" object:nil];
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessful:) name:@"socialLoginObserver" object:nil];
             [self callAPI:API_USER_LOGIN withParameters:@{
                                                           @"username": _socialAccount[@"username"],
                                                           @"password": _socialAccount[@"password"]
-                                                          } completionNotification:@"loginCompletedObserver"];
+                                                          } completionNotification:@"socialLoginObserver"];
         }
     }];
 }
@@ -168,17 +168,17 @@
     _socialAccount = [[NSMutableDictionary alloc] init];
     _socialAccount[@"fullname"] = user.profile.name;
     _socialAccount[@"username"] = user.profile.email;
-    _socialAccount[@"birthday"] = @"";
+    _socialAccount[@"birthday"] = @"01/01/1970";
     _socialAccount[@"password"] = [self passwordForName:user.profile.name email:user.profile.email birthday:@"01/01/1970" gender:@"unknown"];
     
     NSLog(@"account:%@", _socialAccount);
     [self showTitleBar:@"Logging in to Yan!"];
     self.view.userInteractionEnabled = NO;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessful:) name:@"loginCompletedObserver" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessful:) name:@"socialLoginObserver" object:nil];
     [self callAPI:API_USER_LOGIN withParameters:@{
                                                   @"username": _socialAccount[@"username"],
                                                   @"password": _socialAccount[@"password"]
-                                                  } completionNotification:@"loginCompletedObserver"];
+                                                  } completionNotification:@"socialLoginObserver"];
 }
 
 

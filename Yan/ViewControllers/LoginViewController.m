@@ -39,8 +39,18 @@
 
 - (void)loginSuccessful:(NSNotification*)notification {
     id response = notification.object;
-    if ([self saveLoggedInAccount:self.textFieldUsername.text :self.textFieldPassword.text :@"" :@"" :response[@"token"]]) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+    if ([response isMemberOfClass:[NSError class]]) {
+        
+        [self showTitleBar:@"SIGN IN"];
+        return;
+    }
+    if (response[@"token"]) {
+        if ([self saveLoggedInAccount:self.textFieldUsername.text :self.textFieldPassword.text :@"" :@"" :response[@"token"]]) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    }
+    else {
+        
     }
     
 }

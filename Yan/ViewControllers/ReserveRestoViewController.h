@@ -7,7 +7,8 @@
 //
 
 #import "CoreViewController.h"
+#import "DatePickerViewController.h"
 
-@interface ReserveRestoViewController : CoreViewController <UIPopoverPresentationControllerDelegate, UITextFieldDelegate>
+@interface ReserveRestoViewController : CoreViewController <UIPopoverPresentationControllerDelegate, UITextFieldDelegate, DatePickerViewControllerDelegate>
 
 @end

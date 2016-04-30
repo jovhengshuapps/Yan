@@ -39,6 +39,7 @@
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
             <string>LucidaGrande-Bold</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
@@ -1211,6 +1212,14 @@ You may now start using the app for your favourite restaurant.</string>
                                     <outlet property="delegate" destination="FR8-OO-KIF" id="2li-Md-JxU"/>
                                 </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyc-0n-682">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <connections>
+                                    <segue destination="fzX-QJ-dop" kind="popoverPresentation" identifier="reserveDatePicker" popoverAnchorView="dyc-0n-682" id="rPF-AT-35v">
+                                        <popoverArrowDirection key="popoverArrowDirection" down="YES" left="YES"/>
+                                    </segue>
+                                </connections>
+                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="TIME" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7TY-4G-teG">
                                 <rect key="frame" x="20" y="206" width="560" height="40"/>
                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1320,11 +1329,14 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstItem="7TY-4G-teG" firstAttribute="trailing" secondItem="XcC-LO-Zwk" secondAttribute="trailingMargin" id="0hC-eP-dtu"/>
                             <constraint firstItem="7TY-4G-teG" firstAttribute="leading" secondItem="XcC-LO-Zwk" secondAttribute="leadingMargin" id="17y-jG-o2z"/>
                             <constraint firstItem="JdI-dd-xhF" firstAttribute="leading" secondItem="XcC-LO-Zwk" secondAttribute="leadingMargin" id="1kw-on-Cfh"/>
+                            <constraint firstItem="dyc-0n-682" firstAttribute="leading" secondItem="aXN-8F-aOO" secondAttribute="leading" id="5Z3-Cz-03l"/>
                             <constraint firstItem="asU-Qk-3eu" firstAttribute="trailing" secondItem="XcC-LO-Zwk" secondAttribute="trailingMargin" id="GFD-vI-Rab"/>
                             <constraint firstItem="aXN-8F-aOO" firstAttribute="top" secondItem="fAX-cM-oHE" secondAttribute="bottom" constant="90" id="ILI-zR-Mrc">
                                 <variation key="heightClass=regular-widthClass=compact" constant="70"/>
                             </constraint>
+                            <constraint firstItem="dyc-0n-682" firstAttribute="top" secondItem="aXN-8F-aOO" secondAttribute="top" id="O6t-56-dIL"/>
                             <constraint firstItem="aXN-8F-aOO" firstAttribute="leading" secondItem="XcC-LO-Zwk" secondAttribute="leadingMargin" id="Rey-Vi-FLq"/>
+                            <constraint firstItem="dyc-0n-682" firstAttribute="bottom" secondItem="aXN-8F-aOO" secondAttribute="bottom" id="Rt8-Ko-EFG"/>
                             <constraint firstItem="3CI-xP-ZUd" firstAttribute="top" secondItem="asU-Qk-3eu" secondAttribute="bottom" constant="20" id="XU1-pK-MZA"/>
                             <constraint firstItem="vqD-kw-5Ns" firstAttribute="leading" secondItem="XcC-LO-Zwk" secondAttribute="leadingMargin" constant="4" id="XdK-vd-vzD"/>
                             <constraint firstItem="vqD-kw-5Ns" firstAttribute="top" secondItem="47T-J4-Rpa" secondAttribute="bottom" constant="8" id="aEi-3H-OaE"/>
@@ -1338,6 +1350,7 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstItem="47T-J4-Rpa" firstAttribute="trailing" secondItem="XcC-LO-Zwk" secondAttribute="trailingMargin" id="isZ-2d-SOg"/>
                             <constraint firstItem="JdI-dd-xhF" firstAttribute="trailing" secondItem="XcC-LO-Zwk" secondAttribute="trailingMargin" id="knz-NH-aVc"/>
                             <constraint firstItem="47T-J4-Rpa" firstAttribute="leading" secondItem="XcC-LO-Zwk" secondAttribute="leadingMargin" id="lyn-z5-H0U"/>
+                            <constraint firstItem="dyc-0n-682" firstAttribute="trailing" secondItem="aXN-8F-aOO" secondAttribute="trailing" id="qYG-96-e5F"/>
                             <constraint firstItem="47T-J4-Rpa" firstAttribute="top" secondItem="JdI-dd-xhF" secondAttribute="bottom" constant="8" id="rK4-Hk-NSy">
                                 <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                             </constraint>
@@ -1347,6 +1360,7 @@ You may now start using the app for your favourite restaurant.</string>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="aXN-8F-aOO"/>
+                                <exclude reference="dyc-0n-682"/>
                                 <exclude reference="7TY-4G-teG"/>
                                 <exclude reference="4of-uP-Zoy"/>
                                 <exclude reference="JdI-dd-xhF"/>
@@ -1356,13 +1370,13 @@ You may now start using the app for your favourite restaurant.</string>
                                 <exclude reference="W0u-tY-RRZ"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="XU1-pK-MZA"/>
-                                <exclude reference="GFD-vI-Rab"/>
-                                <exclude reference="eGv-CJ-3dM"/>
-                                <exclude reference="s9i-MD-qtj"/>
                                 <exclude reference="ILI-zR-Mrc"/>
                                 <exclude reference="Rey-Vi-FLq"/>
                                 <exclude reference="gwZ-9O-c2y"/>
+                                <exclude reference="5Z3-Cz-03l"/>
+                                <exclude reference="O6t-56-dIL"/>
+                                <exclude reference="Rt8-Ko-EFG"/>
+                                <exclude reference="qYG-96-e5F"/>
                                 <exclude reference="0hC-eP-dtu"/>
                                 <exclude reference="17y-jG-o2z"/>
                                 <exclude reference="gBx-S0-ycE"/>
@@ -1378,11 +1392,16 @@ You may now start using the app for your favourite restaurant.</string>
                                 <exclude reference="XdK-vd-vzD"/>
                                 <exclude reference="aEi-3H-OaE"/>
                                 <exclude reference="cZ8-c0-PvL"/>
+                                <exclude reference="GFD-vI-Rab"/>
+                                <exclude reference="eGv-CJ-3dM"/>
+                                <exclude reference="s9i-MD-qtj"/>
+                                <exclude reference="XU1-pK-MZA"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="aXN-8F-aOO"/>
+                                <include reference="dyc-0n-682"/>
                                 <include reference="7TY-4G-teG"/>
                                 <include reference="4of-uP-Zoy"/>
                                 <include reference="JdI-dd-xhF"/>
@@ -1392,13 +1411,13 @@ You may now start using the app for your favourite restaurant.</string>
                                 <include reference="W0u-tY-RRZ"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="XU1-pK-MZA"/>
-                                <include reference="GFD-vI-Rab"/>
-                                <include reference="eGv-CJ-3dM"/>
-                                <include reference="s9i-MD-qtj"/>
                                 <include reference="ILI-zR-Mrc"/>
                                 <include reference="Rey-Vi-FLq"/>
                                 <include reference="gwZ-9O-c2y"/>
+                                <include reference="5Z3-Cz-03l"/>
+                                <include reference="O6t-56-dIL"/>
+                                <include reference="Rt8-Ko-EFG"/>
+                                <include reference="qYG-96-e5F"/>
                                 <include reference="0hC-eP-dtu"/>
                                 <include reference="17y-jG-o2z"/>
                                 <include reference="gBx-S0-ycE"/>
@@ -1414,6 +1433,10 @@ You may now start using the app for your favourite restaurant.</string>
                                 <include reference="XdK-vd-vzD"/>
                                 <include reference="aEi-3H-OaE"/>
                                 <include reference="cZ8-c0-PvL"/>
+                                <include reference="GFD-vI-Rab"/>
+                                <include reference="eGv-CJ-3dM"/>
+                                <include reference="s9i-MD-qtj"/>
+                                <include reference="XU1-pK-MZA"/>
                             </mask>
                         </variation>
                     </view>
@@ -1650,6 +1673,7 @@ You may now start using the app for your favourite restaurant.</string>
                         <viewControllerLayoutGuide type="bottom" id="J7n-Hc-qsN"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" placeholderIntrinsicWidth="400" placeholderIntrinsicHeight="216" id="bTS-f0-xje">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="hbx-hT-pdX">
@@ -1664,11 +1688,13 @@ You may now start using the app for your favourite restaurant.</string>
                                     <!--2037-12-31 11:00:00 +0000-->
                                 </date>
                             </datePicker>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WdO-Fa-eMO">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WdO-Fa-eMO" customClass="CustomButton">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="2Jc-1n-SGX"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="18"/>
                                 <state key="normal" title="DONE"/>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -1680,6 +1706,9 @@ You may now start using the app for your favourite restaurant.</string>
                                         <include reference="2Jc-1n-SGX"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="donePressed:" destination="fzX-QJ-dop" eventType="touchUpInside" id="DZA-Y9-ODb"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1698,13 +1727,13 @@ You may now start using the app for your favourite restaurant.</string>
                                 <exclude reference="WdO-Fa-eMO"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="1UL-Zz-xsX"/>
-                                <exclude reference="NSm-h9-Sqe"/>
-                                <exclude reference="Vpq-mf-6vk"/>
+                                <exclude reference="kDL-EY-RUk"/>
                                 <exclude reference="Kg2-F8-WZq"/>
                                 <exclude reference="R04-fK-8VM"/>
                                 <exclude reference="nNr-d8-W4w"/>
-                                <exclude reference="kDL-EY-RUk"/>
+                                <exclude reference="1UL-Zz-xsX"/>
+                                <exclude reference="NSm-h9-Sqe"/>
+                                <exclude reference="Vpq-mf-6vk"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1713,16 +1742,21 @@ You may now start using the app for your favourite restaurant.</string>
                                 <include reference="WdO-Fa-eMO"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="1UL-Zz-xsX"/>
-                                <include reference="NSm-h9-Sqe"/>
-                                <include reference="Vpq-mf-6vk"/>
+                                <include reference="kDL-EY-RUk"/>
                                 <include reference="Kg2-F8-WZq"/>
                                 <include reference="R04-fK-8VM"/>
                                 <include reference="nNr-d8-W4w"/>
-                                <include reference="kDL-EY-RUk"/>
+                                <include reference="1UL-Zz-xsX"/>
+                                <include reference="NSm-h9-Sqe"/>
+                                <include reference="Vpq-mf-6vk"/>
                             </mask>
                         </variation>
                     </view>
+                    <connections>
+                        <outlet property="buttonDone" destination="WdO-Fa-eMO" id="Xaw-4c-iSh"/>
+                        <outlet property="datePicker" destination="hbx-hT-pdX" id="jQ7-Si-ZYV"/>
+                        <outlet property="view" destination="bTS-f0-xje" id="xOg-Ev-08Y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KQb-mb-qR8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

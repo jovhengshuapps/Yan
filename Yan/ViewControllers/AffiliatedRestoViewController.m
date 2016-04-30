@@ -47,12 +47,37 @@ typedef enum {
     [_resultsBarView addSubview:_resultsBarLabel];
     
     
+    
+    [_barItemRestaurants setTitleEdgeInsets:UIEdgeInsetsMake(0.0f, 5.0f, 0.0f, 5.0f)];
+    _barItemRestaurants.titleLabel.minimumScaleFactor = -5.0f;
+    _barItemRestaurants.titleLabel.adjustsFontSizeToFitWidth = YES;
+    NSString *fontName = _barItemRestaurants.titleLabel.font.fontName;
+//    CGFloat actualFontSize;
+//    [_barItemRestaurants.titleLabel.text sizeWithFont:_barItemRestaurants.titleLabel.font
+//                 minFontSize:_barItemRestaurants.titleLabel.minimumFontSize
+//              actualFontSize:&actualFontSize
+//                    forWidth:_barItemRestaurants.titleLabel.bounds.size.width
+//               lineBreakMode:_barItemRestaurants.titleLabel.lineBreakMode];
+    
+    // Get the size of the text with no scaling (one line)
+    CGSize sizeOneLine = [_barItemRestaurants.titleLabel.text sizeWithFont:_barItemRestaurants.titleLabel.font];
+    
+    // Get the size of the text enforcing the scaling based on label width
+    CGSize sizeOneLineConstrained = [_barItemRestaurants.titleLabel.text sizeWithFont:_barItemRestaurants.titleLabel.font constrainedToSize:_barItemRestaurants.titleLabel.frame.size];
+    
+    // Approximate scaling factor
+    CGFloat approxScaleFactor = sizeOneLineConstrained.width / sizeOneLine.width;
+    
+    // Approximate new point size
+    NSInteger approxScaledPointSize = approxScaleFactor * _barItemRestaurants.titleLabel.font.pointSize;
+    
+    NSLog(@"scale:%f",approxScaleFactor);
+//    NSLog(@"name:%@ :%li",fontName,(long)approxScaledPointSize);
+    _barItemNearby.titleLabel.font = [UIFont fontWithName:fontName size:approxScaledPointSize-2];
+    _barItemRecents.titleLabel.font = [UIFont fontWithName:fontName size:approxScaledPointSize-2];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getRestaurants:) name:@"getRestaurantsObserver" object:nil];
     [self callGETAPI:API_RESTAURANTS withParameters:@{} completionNotification:@"getRestaurantsObserver"];
-    
-    //set restaurants as selected
-    
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -74,7 +99,12 @@ typedef enum {
 
 - (void) getRestaurants:(NSNotification*)notification {
     id response = notification.object;
-    NSLog(@"response:%@",response);
+    if ([response isMemberOfClass:[NSError class]]) {
+        
+        [self showTitleBar:@"AFFILIATED RESTAURANT"];
+        return;
+    }
+//    NSLog(@"response:%@",response);
     _dataListAll = [NSMutableArray arrayWithArray:((NSArray*) response)];
     
     _dataListNearby = [NSMutableArray new];

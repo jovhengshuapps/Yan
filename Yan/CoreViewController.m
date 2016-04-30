@@ -181,21 +181,36 @@
     
     [manager POST:method parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
-//        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
+        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSLog(@"response:%@",responseObject);
+        
         NETWORK_INDICATOR(NO)
-        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
+        NSLog(@"response:%@",responseObject);
+        if ([responseObject isKindOfClass:[NSArray class]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
+        }
+        else if ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject allKeys] containsObject:@"error"]) {
+            if([responseObject[@"error"] integerValue] == 404 && [notificationName isEqualToString:@"socialLoginObserver"]){
+                [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
+            }else {
+                [self resolveErrorResponse:responseObject];
+            }
+            
+        }else {
+        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        NSLog(@"task:%@\n\n[%@]",task,[error description]);
+        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
         NETWORK_INDICATOR(NO)
         [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:error];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                            message:[error localizedDescription]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
-        [alertView show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
     }];
 }
 
@@ -205,21 +220,34 @@
     
     [manager GET:method parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
-//        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
+        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        NSLog(@"response:%@",responseObject);
         NETWORK_INDICATOR(NO)
-        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
+        NSLog(@"response:%@",responseObject);
+        if ([responseObject isKindOfClass:[NSArray class]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
+        }
+        else if ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject allKeys] containsObject:@"error"]) {
+            if([responseObject[@"error"] integerValue] == 404 && [notificationName isEqualToString:@"socialLoginObserver"]){
+                [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
+            }else {
+                [self resolveErrorResponse:responseObject];
+            }
+        }else {
+        }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        NSLog(@"task:%@\n\n[%@]",task,[error description]);
+        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
         NETWORK_INDICATOR(NO)
         [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:error];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                            message:[error localizedDescription]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
-        [alertView show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
     }];
 }
 
@@ -248,6 +276,67 @@
     }
     return NO;
 }
+
+- (void) resolveErrorResponse:(NSDictionary*)response {
+    NSString *title = @"";
+    NSString *message = @"";
+    UIAlertAction *actionOK = nil;
+    if ([response[@"error"] integerValue] == 404) {
+        title = @"Error Login";
+        message = response[@"message"];
+    }
+    else if ([response[@"error"] integerValue] == 403) {
+        title = @"Error User Profile";
+        message = response[@"detail"];
+        
+    }
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    if ([response[@"error"] integerValue] == 404) {
+        actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:^{
+            }];
+        }];
+    }
+    else if ([response[@"error"] integerValue] == 403) {
+        actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [self logoutUser];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            [alert dismissViewControllerAnimated:YES completion:^{
+            }];
+        }];
+    }
+    
+    
+    [alert addAction:actionOK];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        
+    }];
+}
+
+- (void) logoutUser {
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Account"];
+    
+    NSError *error = nil;
+    
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    
+    
+    for (Account *account in result) {
+        [context deleteObject:account];
+    }
+    
+    error = nil;
+    if ([context save:&error]) {
+        //            [[GIDSignIn sharedInstance] signOut];
+        //            FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+        //            [login logOut];
+        return;
+    }
+}
+
 
 - (NSDictionary*) getMenuForRestaurant:(NSString*)restaurantName {
     //dummy data

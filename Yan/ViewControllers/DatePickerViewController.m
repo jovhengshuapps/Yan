@@ -9,9 +9,19 @@
 #import "DatePickerViewController.h"
 
 @interface DatePickerViewController()
+@property (weak, nonatomic) IBOutlet UIButton *buttonDone;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 
 @end
 
 @implementation DatePickerViewController
+- (IBAction)donePressed:(id)sender {
+    NSDate *myDate = self.datePicker.date;
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"MM/dd/YYYY"];
+    NSString *stringDate = [dateFormat stringFromDate:myDate];
+    [self.delegate dateSelected:stringDate];
+}
 
 @end

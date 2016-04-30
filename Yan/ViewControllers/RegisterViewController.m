@@ -50,6 +50,11 @@
 
 - (void)registerCompletedMethod:(NSNotification*)notification {
     id response = notification.object;
+    if ([response isMemberOfClass:[NSError class]]) {
+        
+        [self showTitleBar:@"REGISTRATION"];
+        return;
+    }
     if ([self saveLoggedInAccount:self.textFieldEmail.text :self.textFieldPassword.text :self.textFieldName.text :self.textFieldBirthday.text :response[@"token"]]) {
         
         AlertView *alert = [[AlertView alloc] initVideoAd:@"https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" delegate:self];

@@ -8,6 +8,6 @@
 
 #import "Config.h"
 
-@interface DrawerTableViewController : UITableViewController <UIAlertViewDelegate>
+@interface DrawerTableViewController : UITableViewController 
 
 @end

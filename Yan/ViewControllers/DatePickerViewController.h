@@ -10,10 +10,11 @@
 
 @protocol  DatePickerViewControllerDelegate <NSObject>
 
--(void)dateSelected:(NSString*)dateString;
+-(void)dateSelected:(NSString*)dateString mode:(UIDatePickerMode)mode;
 
 @end
 
 @interface DatePickerViewController : UIViewController
 @property (strong,nonatomic) id<DatePickerViewControllerDelegate> delegate;
+@property (assign, nonatomic) UIDatePickerMode datePickerMode;
 @end

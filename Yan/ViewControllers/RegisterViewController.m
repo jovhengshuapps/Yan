@@ -37,14 +37,10 @@
     [alert showAlertView];
 }
 - (IBAction)completeRegistration:(id)sender {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerCompletedMethod:) name:@"registerCompletedObserver" object:nil];
-    [self callAPI:API_USER_REGISTER withParameters:@{
-                                                     @"user_email": self.textFieldEmail.text,
-                                                     @"user_password": self.textFieldPassword.text,
-                                                     @"full_name": self.textFieldName.text,
-                                                     @"birthday": self.textFieldBirthday.text
-                                                     } completionNotification:@"registerCompletedObserver"];
     
+    AlertView *alert = [[AlertView alloc] initVideoAd:@"https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" delegate:self];
+    alert.tag = 1;
+    [alert showAlertView];
     
 }
 
@@ -57,9 +53,10 @@
     }
     if ([self saveLoggedInAccount:self.textFieldEmail.text :self.textFieldPassword.text :self.textFieldName.text :self.textFieldBirthday.text :response[@"token"]]) {
         
-        AlertView *alert = [[AlertView alloc] initVideoAd:@"https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" delegate:self];
-        alert.tag = 1;
-        [alert showAlertView];
+        [self.navigationController popToRootViewControllerAnimated:NO];
+        
+        NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
+        [notification postNotificationName:ChangeHomeViewToShow object:@"HomeViewRegistrationComplete"];
     }
 }
 
@@ -75,13 +72,40 @@
 
 - (void)alertViewDismissed:(AlertView *)alertView {
     
-    [self.navigationController popToRootViewControllerAnimated:NO];
-    
-    NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
-    [notification postNotificationName:ChangeHomeViewToShow object:@"HomeViewRegistrationComplete"];
 }
 
-- (void)videoAdPlayer:(AVPlayer *)player controller:(AVPlayerViewController *)controller {
-    
+- (void)videoAdPlayer:(AlertView *)alertView{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerCompletedMethod:) name:@"registerCompletedObserver" object:nil];
+    [self callAPI:API_USER_REGISTER withParameters:@{
+                                                     @"user_email": self.textFieldEmail.text,
+                                                     @"user_password": self.textFieldPassword.text,
+                                                     @"full_name": self.textFieldName.text,
+                                                     @"birthday": self.textFieldBirthday.text
+                                                     } completionNotification:@"registerCompletedObserver"];
+    [alertView dismissAlertView];
+}
+
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Assuming you've hooked this all up in a Storyboard with a popover presentation style
+    if ([segue.identifier isEqualToString:@"registerDatePicker"]) {
+        DatePickerViewController *destNav = segue.destinationViewController;
+        destNav.delegate = self;
+        destNav.datePickerMode = UIDatePickerModeDate;
+        
+        // This is the important part
+        UIPopoverPresentationController *popPC = destNav.popoverPresentationController;
+        popPC.delegate = self;
+    }
+}
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
+    return UIModalPresentationNone;
+}
+
+-(void)dateSelected:(NSString*)dateString mode:(UIDatePickerMode)mode {
+    if (mode == UIDatePickerModeDate) {
+        self.textFieldBirthday.text = dateString;
+    }
 }
 @end

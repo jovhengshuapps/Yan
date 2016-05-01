@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 
-@interface AlertView : UIView <AVPlayerViewControllerDelegate>
+@interface AlertView : UIView
 
 @property(nullable,nonatomic,weak) id  delegate;
 @property(nullable,nonatomic,copy) NSString *message;
@@ -22,6 +22,7 @@
 - (nonnull instancetype) initVideoAd:(nullable NSString*)videoURL delegate:(nullable id)aDelegate;
 
 - (void) showAlertView;
+- (void) dismissAlertView;
 
 @end
 @protocol AlertViewDelegate <NSObject>
@@ -29,7 +30,8 @@
 
 - (void)alertView:(nonnull AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 
-- (void)videoAdPlayer:(nonnull AVPlayer*)player controller:(nonnull AVPlayerViewController*)controller;
+@optional
+- (void)videoAdPlayer:(nonnull AlertView*)alertView;
 
 - (void) alertViewDismissed:(nonnull AlertView*)alertView;
 

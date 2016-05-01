@@ -177,13 +177,15 @@
     //setup video
    
     NSURL *fileURL = [NSURL URLWithString:videoURL];
+    AVPlayerItem* playerItem = [AVPlayerItem playerItemWithURL:fileURL];
     
-    _moviePlayer = [[AVPlayer alloc] initWithURL:fileURL];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(videoPlayerFinished:) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+
+    _moviePlayer = [[AVPlayer alloc] initWithPlayerItem:playerItem];
     _moviePlayerController = [[AVPlayerViewController alloc] init];
     [_moviePlayerController.view setFrame:CGRectMake(10, 10, _container.bounds.size.width - 20.0f, _container.bounds.size.height - 10.0f - buttonHeight)];
     _moviePlayerController.player = _moviePlayer;
     _moviePlayerController.showsPlaybackControls = NO;
-    _moviePlayerController.delegate = self;
     [_container addSubview:_moviePlayerController.view];
     
     
@@ -212,6 +214,7 @@
 
 
 - (void) showAlertView {
+    
     [UIView animateWithDuration:0.1f animations:^{
         _container.transform = CGAffineTransformMakeScale(1.0, 1.0);
         
@@ -227,11 +230,17 @@
     
 }
 
+- (void) dismissAlertView {
+    [self closeAlertView];
+}
+
 - (void) closeAlertView {
     _background.userInteractionEnabled = NO;
     _container.userInteractionEnabled = NO;
     if (_moviePlayerController && _moviePlayer) {
         [_moviePlayer pause];
+        _moviePlayer = nil;
+        _moviePlayerController = nil;
     }
     [UIView animateWithDuration:0.1f animations:^{
         _container.transform = CGAffineTransformMakeScale(0.1, 0.1);
@@ -254,16 +263,11 @@
     }
 }
 
-- (void)playerViewControllerWillStartPictureInPicture:(AVPlayerViewController *)playerViewController {
-    NSLog(@"playing");
-}
-
-- (void)playerViewControllerDidStopPictureInPicture:(AVPlayerViewController *)playerViewController {
-    NSLog(@"player END");
-}
-
-- (void) playVideo {
-    [_delegate videoAdPlayer:_moviePlayer controller:_moviePlayerController];
+- (void) videoPlayerFinished:(NSNotification*)notification {
+    if ([_delegate respondsToSelector:@selector(alertViewDismissed:)]) {
+        [_delegate videoAdPlayer:_instance];
+    }
+    
 }
 
 

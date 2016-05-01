@@ -197,6 +197,7 @@
             }
             
         }else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
@@ -234,6 +235,7 @@
                 [self resolveErrorResponse:responseObject];
             }
         }else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
@@ -267,12 +269,15 @@
     }
     else {
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                            message:[error localizedDescription]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
-        [alertView show];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
     }
     return NO;
 }
@@ -337,6 +342,9 @@
     }
 }
 
+- (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+}
 
 - (NSDictionary*) getMenuForRestaurant:(NSString*)restaurantName {
     //dummy data

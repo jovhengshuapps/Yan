@@ -7,7 +7,8 @@
 //
 
 #import "CoreViewController.h"
+#import "DatePickerViewController.h"
 
-@interface RegisterViewController : CoreViewController 
+@interface RegisterViewController : CoreViewController <UIPopoverPresentationControllerDelegate, DatePickerViewControllerDelegate>
 
 @end

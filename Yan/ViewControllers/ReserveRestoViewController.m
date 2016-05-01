@@ -50,6 +50,16 @@
     if ([segue.identifier isEqualToString:@"reserveDatePicker"]) {
         DatePickerViewController *destNav = segue.destinationViewController;
         destNav.delegate = self;
+            destNav.datePickerMode = UIDatePickerModeDate;
+        
+        // This is the important part
+        UIPopoverPresentationController *popPC = destNav.popoverPresentationController;
+        popPC.delegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"reserveTimePicker"]) {
+        DatePickerViewController *destNav = segue.destinationViewController;
+        destNav.delegate = self;
+        destNav.datePickerMode = UIDatePickerModeTime;
         
         // This is the important part
         UIPopoverPresentationController *popPC = destNav.popoverPresentationController;
@@ -60,13 +70,19 @@
     return UIModalPresentationNone;
 }
 
-- (void)dateSelected:(NSString *)dateString {
-    self.textFieldDate.text = dateString;
+-(void)dateSelected:(NSString*)dateString mode:(UIDatePickerMode)mode {
+    if (mode == UIDatePickerModeDate) {
+        self.textFieldDate.text = dateString;
+    }
+    else if (mode == UIDatePickerModeTime) {
+        self.textFieldTime.text = dateString;
+    }
 }
 
 - (void) showRestaurantDetails {
     
     RestaurantDetailsViewController *details = [self.storyboard instantiateViewControllerWithIdentifier:@"restaurantDetails"];
+    details.restaurantDetails = _restaurantDetails;
     [self.navigationController pushViewController:details animated:YES];
 }
 

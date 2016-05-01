@@ -1212,11 +1212,11 @@ You may now start using the app for your favourite restaurant.</string>
                                     <outlet property="delegate" destination="FR8-OO-KIF" id="2li-Md-JxU"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyc-0n-682">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyc-0n-682">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <connections>
                                     <segue destination="fzX-QJ-dop" kind="popoverPresentation" identifier="reserveDatePicker" popoverAnchorView="dyc-0n-682" id="rPF-AT-35v">
-                                        <popoverArrowDirection key="popoverArrowDirection" down="YES" left="YES"/>
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
                                     </segue>
                                 </connections>
                             </button>
@@ -1234,6 +1234,14 @@ You may now start using the app for your favourite restaurant.</string>
                                     <outlet property="delegate" destination="FR8-OO-KIF" id="1B9-3a-BC1"/>
                                 </connections>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yy2-Pg-XdO">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <connections>
+                                    <segue destination="fzX-QJ-dop" kind="popoverPresentation" identifier="reserveTimePicker" popoverAnchorView="yy2-Pg-XdO" id="Q3B-uT-Aey">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
+                                    </segue>
+                                </connections>
+                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="NUMBER OF PERSON" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4of-uP-Zoy">
                                 <rect key="frame" x="20" y="262" width="560" height="40"/>
                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -1329,12 +1337,15 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstItem="7TY-4G-teG" firstAttribute="trailing" secondItem="XcC-LO-Zwk" secondAttribute="trailingMargin" id="0hC-eP-dtu"/>
                             <constraint firstItem="7TY-4G-teG" firstAttribute="leading" secondItem="XcC-LO-Zwk" secondAttribute="leadingMargin" id="17y-jG-o2z"/>
                             <constraint firstItem="JdI-dd-xhF" firstAttribute="leading" secondItem="XcC-LO-Zwk" secondAttribute="leadingMargin" id="1kw-on-Cfh"/>
+                            <constraint firstItem="yy2-Pg-XdO" firstAttribute="top" secondItem="7TY-4G-teG" secondAttribute="top" id="4yM-1Q-1Um"/>
+                            <constraint firstItem="yy2-Pg-XdO" firstAttribute="bottom" secondItem="7TY-4G-teG" secondAttribute="bottom" id="52O-wg-0h8"/>
                             <constraint firstItem="dyc-0n-682" firstAttribute="leading" secondItem="aXN-8F-aOO" secondAttribute="leading" id="5Z3-Cz-03l"/>
                             <constraint firstItem="asU-Qk-3eu" firstAttribute="trailing" secondItem="XcC-LO-Zwk" secondAttribute="trailingMargin" id="GFD-vI-Rab"/>
                             <constraint firstItem="aXN-8F-aOO" firstAttribute="top" secondItem="fAX-cM-oHE" secondAttribute="bottom" constant="90" id="ILI-zR-Mrc">
                                 <variation key="heightClass=regular-widthClass=compact" constant="70"/>
                             </constraint>
                             <constraint firstItem="dyc-0n-682" firstAttribute="top" secondItem="aXN-8F-aOO" secondAttribute="top" id="O6t-56-dIL"/>
+                            <constraint firstItem="yy2-Pg-XdO" firstAttribute="leading" secondItem="7TY-4G-teG" secondAttribute="leading" id="Or5-J1-gn3"/>
                             <constraint firstItem="aXN-8F-aOO" firstAttribute="leading" secondItem="XcC-LO-Zwk" secondAttribute="leadingMargin" id="Rey-Vi-FLq"/>
                             <constraint firstItem="dyc-0n-682" firstAttribute="bottom" secondItem="aXN-8F-aOO" secondAttribute="bottom" id="Rt8-Ko-EFG"/>
                             <constraint firstItem="3CI-xP-ZUd" firstAttribute="top" secondItem="asU-Qk-3eu" secondAttribute="bottom" constant="20" id="XU1-pK-MZA"/>
@@ -1356,12 +1367,14 @@ You may now start using the app for your favourite restaurant.</string>
                             </constraint>
                             <constraint firstItem="asU-Qk-3eu" firstAttribute="top" secondItem="vqD-kw-5Ns" secondAttribute="bottom" constant="40" id="s9i-MD-qtj"/>
                             <constraint firstItem="4of-uP-Zoy" firstAttribute="leading" secondItem="XcC-LO-Zwk" secondAttribute="leadingMargin" id="uMW-og-3Ow"/>
+                            <constraint firstItem="yy2-Pg-XdO" firstAttribute="trailing" secondItem="7TY-4G-teG" secondAttribute="trailing" id="xTz-Pg-qOW"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="aXN-8F-aOO"/>
                                 <exclude reference="dyc-0n-682"/>
                                 <exclude reference="7TY-4G-teG"/>
+                                <exclude reference="yy2-Pg-XdO"/>
                                 <exclude reference="4of-uP-Zoy"/>
                                 <exclude reference="JdI-dd-xhF"/>
                                 <exclude reference="47T-J4-Rpa"/>
@@ -1380,6 +1393,10 @@ You may now start using the app for your favourite restaurant.</string>
                                 <exclude reference="0hC-eP-dtu"/>
                                 <exclude reference="17y-jG-o2z"/>
                                 <exclude reference="gBx-S0-ycE"/>
+                                <exclude reference="4yM-1Q-1Um"/>
+                                <exclude reference="52O-wg-0h8"/>
+                                <exclude reference="Or5-J1-gn3"/>
+                                <exclude reference="xTz-Pg-qOW"/>
                                 <exclude reference="eij-s5-cMB"/>
                                 <exclude reference="gd1-2S-tOo"/>
                                 <exclude reference="uMW-og-3Ow"/>
@@ -1403,6 +1420,7 @@ You may now start using the app for your favourite restaurant.</string>
                                 <include reference="aXN-8F-aOO"/>
                                 <include reference="dyc-0n-682"/>
                                 <include reference="7TY-4G-teG"/>
+                                <include reference="yy2-Pg-XdO"/>
                                 <include reference="4of-uP-Zoy"/>
                                 <include reference="JdI-dd-xhF"/>
                                 <include reference="47T-J4-Rpa"/>
@@ -1421,6 +1439,10 @@ You may now start using the app for your favourite restaurant.</string>
                                 <include reference="0hC-eP-dtu"/>
                                 <include reference="17y-jG-o2z"/>
                                 <include reference="gBx-S0-ycE"/>
+                                <include reference="4yM-1Q-1Um"/>
+                                <include reference="52O-wg-0h8"/>
+                                <include reference="Or5-J1-gn3"/>
+                                <include reference="xTz-Pg-qOW"/>
                                 <include reference="eij-s5-cMB"/>
                                 <include reference="gd1-2S-tOo"/>
                                 <include reference="uMW-og-3Ow"/>
@@ -1662,7 +1684,7 @@ You may now start using the app for your favourite restaurant.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oet-Kb-T3L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3316.5" y="1290.75"/>
+            <point key="canvasLocation" x="3694.5" y="1370.25"/>
         </scene>
         <!--Date Picker View Controller-->
         <scene sceneID="ihc-kR-lsq">
@@ -1760,7 +1782,7 @@ You may now start using the app for your favourite restaurant.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KQb-mb-qR8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4098" y="1273.5"/>
+            <point key="canvasLocation" x="2701.5" y="1329"/>
         </scene>
         <!--Reserve Complete View Controller-->
         <scene sceneID="J9t-pS-GFA">
@@ -2385,6 +2407,14 @@ You may now start using the app for your favourite restaurant.</string>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M55-RH-Ksg">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <connections>
+                                    <segue destination="fzX-QJ-dop" kind="popoverPresentation" identifier="registerDatePicker" popoverAnchorView="M55-RH-Ksg" id="Jyy-jT-Sb2">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
+                                    </segue>
+                                </connections>
+                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="EMAIL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MuL-Zc-0qT">
                                 <rect key="frame" x="20" y="262" width="560" height="40"/>
                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -2452,6 +2482,7 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstItem="32t-KX-Afd" firstAttribute="top" secondItem="ySN-N5-s3S" secondAttribute="top" id="2L1-ox-7M9"/>
                             <constraint firstItem="32t-KX-Afd" firstAttribute="trailing" secondItem="ySN-N5-s3S" secondAttribute="trailing" id="5Xi-F8-uFi"/>
                             <constraint firstItem="kyD-8P-sul" firstAttribute="trailing" secondItem="593-gt-R8e" secondAttribute="trailingMargin" id="9Wt-qF-HcH"/>
+                            <constraint firstItem="M55-RH-Ksg" firstAttribute="leading" secondItem="rJq-zN-8xr" secondAttribute="leading" id="9yw-in-z2O"/>
                             <constraint firstItem="kyD-8P-sul" firstAttribute="leading" secondItem="593-gt-R8e" secondAttribute="leadingMargin" id="AIr-pN-g49"/>
                             <constraint firstItem="C9s-NL-eF5" firstAttribute="leading" secondItem="593-gt-R8e" secondAttribute="leadingMargin" id="Blv-FS-ZaH"/>
                             <constraint firstItem="Lb9-cy-vh5" firstAttribute="leading" secondItem="kyD-8P-sul" secondAttribute="leading" id="Cbb-ak-hbK"/>
@@ -2473,14 +2504,39 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstItem="MuL-Zc-0qT" firstAttribute="trailing" secondItem="kyD-8P-sul" secondAttribute="trailing" id="lfa-h5-p6V"/>
                             <constraint firstItem="ySN-N5-s3S" firstAttribute="leading" secondItem="593-gt-R8e" secondAttribute="leadingMargin" id="mcX-bF-RzI"/>
                             <constraint firstItem="rJq-zN-8xr" firstAttribute="leading" secondItem="kyD-8P-sul" secondAttribute="leading" id="plb-3V-HJ5"/>
+                            <constraint firstItem="M55-RH-Ksg" firstAttribute="trailing" secondItem="rJq-zN-8xr" secondAttribute="trailing" id="s3K-qC-iMN"/>
                             <constraint firstItem="7Er-Uh-dov" firstAttribute="trailing" secondItem="ySN-N5-s3S" secondAttribute="trailing" id="sQE-Bw-89j"/>
                             <constraint firstItem="ySN-N5-s3S" firstAttribute="top" secondItem="Lb9-cy-vh5" secondAttribute="bottom" constant="8" id="vuV-7d-o7o"/>
+                            <constraint firstItem="M55-RH-Ksg" firstAttribute="top" secondItem="rJq-zN-8xr" secondAttribute="top" id="wH2-BQ-Hwr"/>
+                            <constraint firstItem="M55-RH-Ksg" firstAttribute="bottom" secondItem="rJq-zN-8xr" secondAttribute="bottom" id="wHt-u8-ChF"/>
                             <constraint firstItem="MuL-Zc-0qT" firstAttribute="top" secondItem="rJq-zN-8xr" secondAttribute="bottom" constant="16" id="wuX-ij-TS8">
                                 <variation key="heightClass=regular" constant="8"/>
                             </constraint>
                             <constraint firstItem="mZu-2F-hX1" firstAttribute="top" secondItem="C9s-NL-eF5" secondAttribute="bottom" constant="20" id="yml-B4-oIZ"/>
                             <constraint firstItem="7Er-Uh-dov" firstAttribute="bottom" secondItem="32t-KX-Afd" secondAttribute="bottom" id="zPv-Nd-fFQ"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="M55-RH-Ksg"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="9yw-in-z2O"/>
+                                <exclude reference="s3K-qC-iMN"/>
+                                <exclude reference="wH2-BQ-Hwr"/>
+                                <exclude reference="wHt-u8-ChF"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="M55-RH-Ksg"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="9yw-in-z2O"/>
+                                <include reference="s3K-qC-iMN"/>
+                                <include reference="wH2-BQ-Hwr"/>
+                                <include reference="wHt-u8-ChF"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="textFieldBirthday" destination="rJq-zN-8xr" id="8PR-u6-7ay"/>
@@ -2491,7 +2547,7 @@ You may now start using the app for your favourite restaurant.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P1H-dI-R2I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1636" y="1134"/>
+            <point key="canvasLocation" x="1635" y="1134"/>
         </scene>
         <!--Drawer Table View Controller-->
         <scene sceneID="2Oi-cg-Z9P">
@@ -2531,9 +2587,10 @@ You may now start using the app for your favourite restaurant.</string>
         <image name="yan-red-gold" width="4519" height="4513"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7dQ-Ir-nbk"/>
+        <segue reference="E6g-jX-hjS"/>
         <segue reference="Y4r-v0-sWo"/>
         <segue reference="Vwc-zK-8Vx"/>
-        <segue reference="E6g-jX-hjS"/>
+        <segue reference="7dQ-Ir-nbk"/>
+        <segue reference="Jyy-jT-Sb2"/>
     </inferredMetricsTieBreakers>
 </document>

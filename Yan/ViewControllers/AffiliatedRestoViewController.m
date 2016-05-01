@@ -52,27 +52,15 @@ typedef enum {
     _barItemRestaurants.titleLabel.minimumScaleFactor = -5.0f;
     _barItemRestaurants.titleLabel.adjustsFontSizeToFitWidth = YES;
     NSString *fontName = _barItemRestaurants.titleLabel.font.fontName;
-//    CGFloat actualFontSize;
-//    [_barItemRestaurants.titleLabel.text sizeWithFont:_barItemRestaurants.titleLabel.font
-//                 minFontSize:_barItemRestaurants.titleLabel.minimumFontSize
-//              actualFontSize:&actualFontSize
-//                    forWidth:_barItemRestaurants.titleLabel.bounds.size.width
-//               lineBreakMode:_barItemRestaurants.titleLabel.lineBreakMode];
     
-    // Get the size of the text with no scaling (one line)
     CGSize sizeOneLine = [_barItemRestaurants.titleLabel.text sizeWithFont:_barItemRestaurants.titleLabel.font];
     
-    // Get the size of the text enforcing the scaling based on label width
     CGSize sizeOneLineConstrained = [_barItemRestaurants.titleLabel.text sizeWithFont:_barItemRestaurants.titleLabel.font constrainedToSize:_barItemRestaurants.titleLabel.frame.size];
     
-    // Approximate scaling factor
     CGFloat approxScaleFactor = sizeOneLineConstrained.width / sizeOneLine.width;
     
-    // Approximate new point size
     NSInteger approxScaledPointSize = approxScaleFactor * _barItemRestaurants.titleLabel.font.pointSize;
     
-    NSLog(@"scale:%f",approxScaleFactor);
-//    NSLog(@"name:%@ :%li",fontName,(long)approxScaledPointSize);
     _barItemNearby.titleLabel.font = [UIFont fontWithName:fontName size:approxScaledPointSize-2];
     _barItemRecents.titleLabel.font = [UIFont fontWithName:fontName size:approxScaledPointSize-2];
     
@@ -180,6 +168,17 @@ typedef enum {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     ReserveRestoViewController *reserve = [self.storyboard instantiateViewControllerWithIdentifier:@"reserveResto"];
+    if (_tabBarOption == AffiliatedRestoOptionAll) {
+        reserve.restaurantDetails = _dataListAll[indexPath.row];
+    }
+    else if (_tabBarOption == AffiliatedRestoOptionRecent) {
+        reserve.restaurantDetails = _dataListRecent[indexPath.row];
+        
+    }
+    else if (_tabBarOption == AffiliatedRestoOptionNearby) {
+        reserve.restaurantDetails = _dataListNearby[indexPath.row];
+        
+    }
     [self.navigationController pushViewController:reserve animated:YES];
     
 }

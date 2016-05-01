@@ -15,13 +15,25 @@
 @end
 
 @implementation DatePickerViewController
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    _datePicker.datePickerMode = _datePickerMode;
+}
 - (IBAction)donePressed:(id)sender {
     NSDate *myDate = self.datePicker.date;
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"MM/dd/YYYY"];
+    if (_datePickerMode == UIDatePickerModeDate) {
+        [dateFormat setDateFormat:@"MM/dd/YYYY"];
+    }
+    else if (_datePickerMode == UIDatePickerModeTime) {
+        [dateFormat setDateFormat:@"HH:mm"];
+    }
     NSString *stringDate = [dateFormat stringFromDate:myDate];
-    [self.delegate dateSelected:stringDate];
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self.delegate dateSelected:stringDate mode:_datePickerMode];
+    }];
 }
 
 @end

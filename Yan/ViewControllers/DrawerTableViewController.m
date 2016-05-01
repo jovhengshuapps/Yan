@@ -89,8 +89,38 @@
         [self.frostedViewController.contentViewController performSegueWithIdentifier:@"showLogin" sender:self];
     }
     else if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"LOGOUT"]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Logout" message:@"Are you sure?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
-        [alert show];
+
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Logout"] message:@"Are you sure?" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionNO = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        UIAlertAction *actionYES = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+            NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Account"];
+            
+            NSError *error = nil;
+            
+            NSArray *result = [context executeFetchRequest:request error:&error];
+            
+            
+            for (Account *account in result) {
+                [context deleteObject:account];
+            }
+            
+            error = nil;
+            if ([context save:&error]) {
+                //            [[GIDSignIn sharedInstance] signOut];
+                //            FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+                //            [login logOut];
+                return;
+            }
+        }];
+        [alert addAction:actionNO];
+        [alert addAction:actionYES];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
     }
 }
 
@@ -127,31 +157,6 @@
     return cell;
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    
-    if (buttonIndex == 1) {
-        
-        NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
-        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Account"];
-        
-        NSError *error = nil;
-        
-        NSArray *result = [context executeFetchRequest:request error:&error];
-        
-        
-        for (Account *account in result) {
-            [context deleteObject:account];
-        }
-        
-        error = nil;
-        if ([context save:&error]) {
-//            [[GIDSignIn sharedInstance] signOut];
-//            FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-//            [login logOut];
-            return;
-        }
-    }
-}
 
 
 - (Account*) userLoggedIn {

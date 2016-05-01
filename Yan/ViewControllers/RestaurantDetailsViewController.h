@@ -9,5 +9,5 @@
 #import "CoreViewController.h"
 
 @interface RestaurantDetailsViewController : CoreViewController
-
+@property (strong, nonatomic) NSDictionary *restaurantDetails;
 @end

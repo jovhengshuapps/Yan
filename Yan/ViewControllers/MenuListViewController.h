@@ -7,13 +7,14 @@
 //
 
 #import "CoreViewController.h"
+#import "MenuListTableViewCell.h"
 
 @protocol MenuListDelegate <NSObject>
 
 - (void) selectedItem:(NSDictionary*)item;
 
 @end
-@interface MenuListViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate>
+@interface MenuListViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate, MenuListTableViewCellDelegate>
 
 @property (strong, nonatomic) NSString *category;
 @property (strong, nonatomic) NSArray *menuList;

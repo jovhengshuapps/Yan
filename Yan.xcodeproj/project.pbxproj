@@ -28,6 +28,8 @@
 		335AB8FF1CCE4B1D0037D66F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335AB8FE1CCE4B1D0037D66F /* QuartzCore.framework */; };
 		335AB9011CCE4B280037D66F /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335AB9001CCE4B280037D66F /* CoreVideo.framework */; };
 		335AB9031CCE4B4F0037D66F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335AB9021CCE4B4F0037D66F /* CoreGraphics.framework */; };
+		335B7AC91CD76C48000E9D9F /* MenuListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335B7AC81CD76C48000E9D9F /* MenuListTableViewCell.m */; };
+		335B7ACC1CD7A156000E9D9F /* MenuOptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335B7ACB1CD7A156000E9D9F /* MenuOptionTableViewCell.m */; };
 		336424B41CAE313A00E0E156 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424901CAE313A00E0E156 /* AFHTTPSessionManager.m */; };
 		336424B51CAE313A00E0E156 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424931CAE313A00E0E156 /* AFNetworkReachabilityManager.m */; };
 		336424B61CAE313A00E0E156 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424951CAE313A00E0E156 /* AFSecurityPolicy.m */; };
@@ -135,6 +137,10 @@
 		335AB8FE1CCE4B1D0037D66F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		335AB9001CCE4B280037D66F /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		335AB9021CCE4B4F0037D66F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		335B7AC71CD76C48000E9D9F /* MenuListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuListTableViewCell.h; sourceTree = "<group>"; };
+		335B7AC81CD76C48000E9D9F /* MenuListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuListTableViewCell.m; sourceTree = "<group>"; };
+		335B7ACA1CD7A156000E9D9F /* MenuOptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuOptionTableViewCell.h; sourceTree = "<group>"; };
+		335B7ACB1CD7A156000E9D9F /* MenuOptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuOptionTableViewCell.m; sourceTree = "<group>"; };
 		3364248F1CAE313A00E0E156 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		336424901CAE313A00E0E156 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		336424911CAE313A00E0E156 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -517,6 +523,10 @@
 				333FEEF91CCF7AFE004D4B5B /* MenuDetailsViewController.m */,
 				33ED277F1CD22F5E0013FADD /* ConfirmOrderViewController.h */,
 				33ED27801CD22F5E0013FADD /* ConfirmOrderViewController.m */,
+				335B7AC71CD76C48000E9D9F /* MenuListTableViewCell.h */,
+				335B7AC81CD76C48000E9D9F /* MenuListTableViewCell.m */,
+				335B7ACA1CD7A156000E9D9F /* MenuOptionTableViewCell.h */,
+				335B7ACB1CD7A156000E9D9F /* MenuOptionTableViewCell.m */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -767,6 +777,7 @@
 				442160881CB32C5800BB387F /* CollapseMenuView.m in Sources */,
 				3394A3A11CADF66300472030 /* UIImage+REFrostedViewController.m in Sources */,
 				338567EE1CD0FC310099BDD0 /* Account.m in Sources */,
+				335B7ACC1CD7A156000E9D9F /* MenuOptionTableViewCell.m in Sources */,
 				336424C11CAE313A00E0E156 /* UIRefreshControl+AFNetworking.m in Sources */,
 				33C142451CB1512500B57041 /* AlertView.m in Sources */,
 				33C6E6801CC7C6CD001690ED /* ScanLogoViewController.m in Sources */,
@@ -780,6 +791,7 @@
 				33C6E67D1CC7A1D9001690ED /* CustomButton.m in Sources */,
 				3394A3A21CADF66300472030 /* UIView+REFrostedViewController.m in Sources */,
 				336424BB1CAE313A00E0E156 /* AFImageDownloader.m in Sources */,
+				335B7AC91CD76C48000E9D9F /* MenuListTableViewCell.m in Sources */,
 				33ED27811CD22F5E0013FADD /* ConfirmOrderViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

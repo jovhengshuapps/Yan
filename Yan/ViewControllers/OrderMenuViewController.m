@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *orderTableButton;
 @property (weak, nonatomic) IBOutlet UIButton *orderCostButton;
 @property (weak, nonatomic) IBOutlet UIView *loadedControllerView;
+@property (strong, nonatomic) NSString *categoryString;
 
 @end
 
@@ -58,7 +59,13 @@
     
     
     [self showMenu];
+    _categoryString = @"";
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
+    [self showTitleBar:_categoryString];
 }
 
 - (NSDictionary*) extractMenuContent {
@@ -190,7 +197,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    for (UIView *subviews in self.loadedControllerView.subviews) {
+        [subviews removeFromSuperview];
+    }
+    
+    for (UIViewController *viewControllers in self.childViewControllers) {
+        [viewControllers removeFromParentViewController];
+    }
+    
     NSString *category = _arrayCategories[indexPath.row];
+    _categoryString = category;
     [self showTitleBar:category];
     MenuListViewController *menuListView = [self.storyboard instantiateViewControllerWithIdentifier:@"menuList"];
     menuListView.category = category;

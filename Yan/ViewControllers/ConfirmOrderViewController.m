@@ -73,8 +73,8 @@
 }
 
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     
     [self showTitleBar:@"Orders: Table 9"];
 }
@@ -101,8 +101,8 @@
 //}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, [self tableView:tableView heightForHeaderInSection:section])];
-    headerView.backgroundColor = [UIColor whiteColor];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, 22.0f)];
+    headerView.backgroundColor = [UIColor greenColor];
     
     UILabel *label = [[UILabel alloc] initWithFrame:headerView.frame];
     label.center = headerView.center;

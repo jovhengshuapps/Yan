@@ -48,50 +48,65 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44.0f;
+    return 60.0f;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *identifier = @"menuCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [detailButton addTarget:self action:@selector(detailButtonTapped:withEvent:) forControlEvents:UIControlEventTouchUpInside];
-        [detailButton setImage:[UIImage imageNamed:@"plus-icon-resized"] forState:UIControlStateNormal];
-        [detailButton setFrame:CGRectMake(0.0f, 0.0f, 32.0f, 32.0f)];
-        cell.accessoryView = detailButton;
-    }
+//    NSString *identifier = @"menuCell";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+//    
+//    if (cell == nil) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+//        UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [detailButton addTarget:self action:@selector(detailButtonTapped:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+//        [detailButton setImage:[UIImage imageNamed:@"plus-icon-resized"] forState:UIControlStateNormal];
+//        [detailButton setFrame:CGRectMake(0.0f, 0.0f, 32.0f, 32.0f)];
+//        cell.accessoryView = detailButton;
+//    }
+//    
+//    NSDictionary *item = _menuList[indexPath.row];
+//    NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"name"] uppercaseString],item[@"price"]];
+//    
+//    CGFloat nameSize = [self tableView:tableView heightForRowAtIndexPath:indexPath] - 20.0f;
+//    CGFloat priceSize = nameSize / 2.0f;
+//    
+//    NSArray *components = [text componentsSeparatedByString:@" PHP"];
+//    NSRange nameRange = [text rangeOfString:[components objectAtIndex:0]];
+//    NSRange priceRange = [text rangeOfString:[components objectAtIndex:1]];
+//    
+//    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text];
+//    
+//    [attrString beginEditing];
+//    [attrString addAttribute: NSFontAttributeName
+//                       value:[UIFont fontWithName:@"LucidaGrande" size:nameSize]
+//                       range:nameRange];
+//    
+//    [attrString addAttribute: NSFontAttributeName
+//                       value:[UIFont fontWithName:@"LucidaGrande" size:priceSize]
+//                       range:priceRange];
+//    
+//    [attrString endEditing];
+//    
+//    cell.textLabel.attributedText = attrString;
+
+    NSString *identifier = @"menuListCell";
     
     NSDictionary *item = _menuList[indexPath.row];
-    NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"name"] uppercaseString],item[@"price"]];
+    MenuListTableViewCell *cell = (MenuListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:identifier];
+    cell.delegateMenuCell = self;
+    cell.menu = item;
+    [cell setMenuName:item[@"name"] withPrice:item[@"price"]];
     
-    CGFloat nameSize = [self tableView:tableView heightForRowAtIndexPath:indexPath] - 20.0f;
-    CGFloat priceSize = nameSize / 2.0f;
     
-    NSArray *components = [text componentsSeparatedByString:@" PHP"];
-    NSRange nameRange = [text rangeOfString:[components objectAtIndex:0]];
-    NSRange priceRange = [text rangeOfString:[components objectAtIndex:1]];
-    
-    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text];
-    
-    [attrString beginEditing];
-    [attrString addAttribute: NSFontAttributeName
-                       value:[UIFont fontWithName:@"LucidaGrande" size:nameSize]
-                       range:nameRange];
-    
-    [attrString addAttribute: NSFontAttributeName
-                       value:[UIFont fontWithName:@"LucidaGrande" size:priceSize]
-                       range:priceRange];
-    
-    [attrString endEditing];
-    
-    cell.textLabel.attributedText = attrString;
     
     return cell;
 }
+
+- (void)addThisMenu:(NSDictionary *)menu {
+    NSLog(@"This menu should be added :%@", menu);
+}
+
 
 - (void) detailButtonTapped: (UIControl *) button withEvent: (UIEvent *) event
 {

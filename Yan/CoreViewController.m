@@ -11,6 +11,7 @@
 
 @interface CoreViewController ()
 @property (strong, nonatomic) UILabel *titleLabel;
+@property (assign, nonatomic) CGFloat defaultHeight;
 
 @end
 
@@ -66,10 +67,22 @@
      */
     
     [_titleBarView addSubview:_titleLabel];
+    
     [self.navigationController.navigationBar addSubview:_titleBarView];
+    
+    _defaultHeight = self.view.frame.size.height;
     
 }
 
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//    self.view.alpha = 0.0f;
+//}
+//
+//- (void)viewDidAppear:(BOOL)animated {
+//    [super viewDidAppear:animated];
+//    self.view.alpha = 1.0f;
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -77,6 +90,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+//    self.view.alpha = 0.0f;
     [super viewWillDisappear:animated];
     
     [self hideTitleBar];
@@ -98,8 +112,26 @@
 
 
 - (void) showTitleBar:(NSString*)title {
+    if (title.length == 0){
+        return;
+    }
+        
     _titleBarView.hidden = NO;
+    _titleBarView.alpha = 0.0f;
+//    self.view.alpha = 0.0f;
+    self.view.userInteractionEnabled = NO;
     _titleLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:[title uppercaseString] attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), _titleBarView.frame.size.height - 20.0f)];
+    [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        _titleBarView.alpha = 1.0f;
+        CGRect frame = self.view.frame;
+        frame.origin.y = _titleBarView.frame.size.height + self.navigationController.navigationBar.frame.size.height + 20.0f;
+        frame.size.height = _defaultHeight - (_titleBarView.frame.size.height + self.navigationController.navigationBar.frame.size.height + 20.0f);
+        self.view.frame = frame;
+        self.view.alpha = 1.0f;
+    } completion:^(BOOL finished) {
+        
+        self.view.userInteractionEnabled = YES;
+    }];
 }
 
 - (void) hideTitleBar {
@@ -295,6 +327,12 @@
         message = response[@"detail"];
         
     }
+    else if ([response[@"error"] integerValue] == 503) {
+        title = @"Error User";
+        message = response[@"message"];
+        
+    }
+    else {}
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
     if ([response[@"error"] integerValue] == 404) {
@@ -311,6 +349,7 @@
             }];
         }];
     }
+    else {}
     
     
     [alert addAction:actionOK];

@@ -63,6 +63,10 @@
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -807,18 +811,32 @@ You may now start using the app for your favourite restaurant.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="hBB-BI-RNz" firstAttribute="leading" secondItem="CAg-DY-uvb" secondAttribute="leadingMargin" constant="-20" id="28e-sh-CDm"/>
                             <constraint firstItem="lbo-XR-REp" firstAttribute="top" secondItem="Jfm-hB-mgX" secondAttribute="bottom" id="2tU-y7-Ipj"/>
+                            <constraint firstAttribute="trailing" secondItem="hBB-BI-RNz" secondAttribute="trailing" id="NTG-2c-Nmx"/>
                             <constraint firstItem="Jfm-hB-mgX" firstAttribute="top" secondItem="Ufi-wl-mh7" secondAttribute="bottom" constant="8" id="Oet-V3-jtO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Jfm-hB-mgX" secondAttribute="trailing" constant="-20" id="QCn-4L-5Mq"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hBB-BI-RNz" secondAttribute="trailing" constant="-20" id="Sjf-ja-kFL"/>
                             <constraint firstItem="Ufi-wl-mh7" firstAttribute="leading" secondItem="CAg-DY-uvb" secondAttribute="leading" id="aGa-nG-kor"/>
-                            <constraint firstItem="hBB-BI-RNz" firstAttribute="top" secondItem="CAg-DY-uvb" secondAttribute="topMargin" id="et3-lR-Beo"/>
+                            <constraint firstItem="hBB-BI-RNz" firstAttribute="leading" secondItem="CAg-DY-uvb" secondAttribute="leading" id="fx6-4m-FSL"/>
                             <constraint firstItem="Ufi-wl-mh7" firstAttribute="top" secondItem="CAg-DY-uvb" secondAttribute="top" id="g2J-GI-9BI"/>
                             <constraint firstItem="Jfm-hB-mgX" firstAttribute="leading" secondItem="CAg-DY-uvb" secondAttribute="leadingMargin" constant="-20" id="g5S-GD-zbn"/>
                             <constraint firstAttribute="trailing" secondItem="Ufi-wl-mh7" secondAttribute="trailing" id="kbC-9u-2Zt"/>
                             <constraint firstItem="Jfm-hB-mgX" firstAttribute="top" secondItem="hBB-BI-RNz" secondAttribute="bottom" id="tyc-IV-hEI"/>
+                            <constraint firstItem="hBB-BI-RNz" firstAttribute="top" secondItem="CAg-DY-uvb" secondAttribute="top" id="wdq-Fo-DJb"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="NTG-2c-Nmx"/>
+                                <exclude reference="fx6-4m-FSL"/>
+                                <exclude reference="wdq-Fo-DJb"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="NTG-2c-Nmx"/>
+                                <include reference="fx6-4m-FSL"/>
+                                <include reference="wdq-Fo-DJb"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="mWb-I8-UsP"/>
                     <connections>
@@ -826,6 +844,7 @@ You may now start using the app for your favourite restaurant.</string>
                         <outlet property="orderCheckoutView" destination="Jfm-hB-mgX" id="bMn-q1-HyT"/>
                         <outlet property="orderCostButton" destination="XLB-8Q-53y" id="hEW-oI-S84"/>
                         <outlet property="orderTableButton" destination="Edi-dF-Jro" id="3Vk-ve-dKh"/>
+                        <outlet property="view" destination="CAg-DY-uvb" id="fic-gj-Qfa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Li-7j-i5t" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -856,11 +875,11 @@ You may now start using the app for your favourite restaurant.</string>
                                 </subviews>
                                 <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="2o3-wK-zQz" secondAttribute="trailing" constant="8" id="TqC-7h-FHL"/>
-                                    <constraint firstItem="2o3-wK-zQz" firstAttribute="top" secondItem="PRf-WG-Pz4" secondAttribute="top" constant="4" id="d38-Oa-fHy"/>
+                                    <constraint firstAttribute="trailing" secondItem="2o3-wK-zQz" secondAttribute="trailing" id="TqC-7h-FHL"/>
+                                    <constraint firstItem="2o3-wK-zQz" firstAttribute="top" secondItem="PRf-WG-Pz4" secondAttribute="top" id="d38-Oa-fHy"/>
                                     <constraint firstAttribute="height" constant="30" id="dTn-X1-HhV"/>
-                                    <constraint firstItem="2o3-wK-zQz" firstAttribute="leading" secondItem="PRf-WG-Pz4" secondAttribute="leading" constant="8" id="hxY-wp-mOJ"/>
-                                    <constraint firstAttribute="bottom" secondItem="2o3-wK-zQz" secondAttribute="bottom" constant="5" id="wlk-tj-7eR"/>
+                                    <constraint firstItem="2o3-wK-zQz" firstAttribute="leading" secondItem="PRf-WG-Pz4" secondAttribute="leading" id="hxY-wp-mOJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="2o3-wK-zQz" secondAttribute="bottom" id="wlk-tj-7eR"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
@@ -1007,10 +1026,10 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstItem="ROe-dU-UWB" firstAttribute="top" secondItem="YHW-XT-18e" secondAttribute="bottom" id="Afb-Vw-BfY"/>
                             <constraint firstAttribute="trailingMargin" secondItem="6ea-dD-7p4" secondAttribute="trailing" constant="-20" id="Lfj-FA-F5r"/>
                             <constraint firstItem="YHW-XT-18e" firstAttribute="top" secondItem="6ea-dD-7p4" secondAttribute="bottom" id="Mar-L7-99V"/>
-                            <constraint firstItem="PRf-WG-Pz4" firstAttribute="top" secondItem="4MC-SR-0Jt" secondAttribute="bottom" constant="48" id="cCQ-pF-VRj"/>
-                            <constraint firstItem="6ea-dD-7p4" firstAttribute="top" secondItem="0gN-xu-gYg" secondAttribute="topMargin" id="cCw-IY-tVn">
-                                <variation key="heightClass=regular-widthClass=compact" constant="150"/>
+                            <constraint firstItem="PRf-WG-Pz4" firstAttribute="top" secondItem="4MC-SR-0Jt" secondAttribute="bottom" constant="48" id="cCQ-pF-VRj">
+                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
                             </constraint>
+                            <constraint firstItem="6ea-dD-7p4" firstAttribute="top" secondItem="PRf-WG-Pz4" secondAttribute="bottom" constant="8" id="hEV-jz-fBz"/>
                             <constraint firstItem="6ea-dD-7p4" firstAttribute="leading" secondItem="0gN-xu-gYg" secondAttribute="leadingMargin" constant="-20" id="kfQ-4U-PQL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PRf-WG-Pz4" secondAttribute="trailing" constant="-20" id="kkd-ce-oPg"/>
                             <constraint firstItem="YHW-XT-18e" firstAttribute="leading" secondItem="0gN-xu-gYg" secondAttribute="leadingMargin" constant="-20" id="ylY-Xk-5Xf"/>
@@ -1022,16 +1041,16 @@ You may now start using the app for your favourite restaurant.</string>
                                 <exclude reference="YHW-XT-18e"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Afb-Vw-BfY"/>
-                                <exclude reference="Lfj-FA-F5r"/>
-                                <exclude reference="cCw-IY-tVn"/>
-                                <exclude reference="kfQ-4U-PQL"/>
                                 <exclude reference="0s8-l5-d7c"/>
                                 <exclude reference="cCQ-pF-VRj"/>
                                 <exclude reference="kkd-ce-oPg"/>
+                                <exclude reference="Lfj-FA-F5r"/>
+                                <exclude reference="hEV-jz-fBz"/>
+                                <exclude reference="kfQ-4U-PQL"/>
                                 <exclude reference="0Rx-Bn-YrK"/>
                                 <exclude reference="Mar-L7-99V"/>
                                 <exclude reference="ylY-Xk-5Xf"/>
+                                <exclude reference="Afb-Vw-BfY"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1041,16 +1060,16 @@ You may now start using the app for your favourite restaurant.</string>
                                 <include reference="YHW-XT-18e"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Afb-Vw-BfY"/>
-                                <include reference="Lfj-FA-F5r"/>
-                                <include reference="cCw-IY-tVn"/>
-                                <include reference="kfQ-4U-PQL"/>
                                 <include reference="0s8-l5-d7c"/>
                                 <include reference="cCQ-pF-VRj"/>
                                 <include reference="kkd-ce-oPg"/>
+                                <include reference="Lfj-FA-F5r"/>
+                                <include reference="hEV-jz-fBz"/>
+                                <include reference="kfQ-4U-PQL"/>
                                 <include reference="0Rx-Bn-YrK"/>
                                 <include reference="Mar-L7-99V"/>
                                 <include reference="ylY-Xk-5Xf"/>
+                                <include reference="Afb-Vw-BfY"/>
                             </mask>
                         </variation>
                     </view>
@@ -1090,7 +1109,9 @@ You may now start using the app for your favourite restaurant.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="C88-9h-G0Z" firstAttribute="top" secondItem="0cF-mY-3Nx" secondAttribute="bottom" constant="-20" id="1zW-qg-CeJ"/>
+                            <constraint firstItem="C88-9h-G0Z" firstAttribute="top" secondItem="0cF-mY-3Nx" secondAttribute="bottom" constant="-20" id="1zW-qg-CeJ">
+                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                            </constraint>
                             <constraint firstItem="C88-9h-G0Z" firstAttribute="leading" secondItem="DiS-oI-sLU" secondAttribute="leadingMargin" constant="-20" id="25j-YZ-qdk"/>
                             <constraint firstItem="Otr-Im-cbp" firstAttribute="top" secondItem="C88-9h-G0Z" secondAttribute="bottom" id="96j-Zu-1Dh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="C88-9h-G0Z" secondAttribute="trailing" constant="-20" id="iul-AC-nqq"/>
@@ -1105,6 +1126,64 @@ You may now start using the app for your favourite restaurant.</string>
             </objects>
             <point key="canvasLocation" x="2479" y="-855"/>
         </scene>
+        <!--Table View Controller-->
+        <scene sceneID="5Ua-cB-lVt">
+            <objects>
+                <tableViewController id="iis-hD-NZe" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="87" sectionHeaderHeight="28" sectionFooterHeight="28" id="Px1-6f-A5E">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="menuOptionCell" rowHeight="87" id="io4-3K-3n0">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="io4-3K-3n0" id="XHB-Rk-R0b">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nFG-V9-P8N">
+                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                <rect key="frame" x="49" y="8" width="303" height="21"/>
+                                            </variation>
+                                        </label>
+                                        <button opaque="NO" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CN1-fA-irG">
+                                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                            <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="18"/>
+                                            <state key="normal" backgroundImage="drop">
+                                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            </state>
+                                            <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                <rect key="frame" x="49" y="37" width="303" height="30"/>
+                                            </variation>
+                                        </button>
+                                    </subviews>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="nFG-V9-P8N"/>
+                                            <exclude reference="CN1-fA-irG"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="subviews">
+                                            <include reference="nFG-V9-P8N"/>
+                                            <include reference="CN1-fA-irG"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="iis-hD-NZe" id="sfM-Vk-XUb"/>
+                            <outlet property="delegate" destination="iis-hD-NZe" id="34r-XU-ry8"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hPL-8b-ZS2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3247.5" y="-755.25"/>
+        </scene>
         <!--Menu List View Controller-->
         <scene sceneID="1el-r6-2FA">
             <objects>
@@ -1117,22 +1196,149 @@ You may now start using the app for your favourite restaurant.</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CqX-7G-e7y">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CqX-7G-e7y">
                                 <rect key="frame" x="0.0" y="114" width="600" height="486"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="menuListCell" rowHeight="60" id="184-kR-1Sh" customClass="MenuListTableViewCell">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="184-kR-1Sh" id="beV-e9-icx">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q58-Id-E78">
+                                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="ERC-sS-Iq1"/>
+                                                        <constraint firstAttribute="width" constant="32" id="YAr-Hu-ebC"/>
+                                                    </constraints>
+                                                    <state key="normal" image="plus-icon-resized"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="ERC-sS-Iq1"/>
+                                                            <exclude reference="YAr-Hu-ebC"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="ERC-sS-Iq1"/>
+                                                            <include reference="YAr-Hu-ebC"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <connections>
+                                                        <action selector="addMenuPressed:" destination="184-kR-1Sh" eventType="touchUpInside" id="um8-an-8Bw"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXf-Qx-7o5">
+                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="UTt-vX-9rY"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="20"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="UTt-vX-9rY"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="UTt-vX-9rY"/>
+                                                        </mask>
+                                                    </variation>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgs-05-caT">
+                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="18" id="S6z-tl-20B"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="13"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="S6z-tl-20B"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="S6z-tl-20B"/>
+                                                        </mask>
+                                                    </variation>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Q58-Id-E78" secondAttribute="trailing" constant="6" id="AQn-7q-reu"/>
+                                                <constraint firstItem="Q58-Id-E78" firstAttribute="top" secondItem="beV-e9-icx" secondAttribute="topMargin" constant="6" id="Ei1-4B-ggj"/>
+                                                <constraint firstItem="Sgs-05-caT" firstAttribute="leading" secondItem="OXf-Qx-7o5" secondAttribute="trailing" constant="8" id="bkb-Fd-G7O"/>
+                                                <constraint firstItem="OXf-Qx-7o5" firstAttribute="top" secondItem="beV-e9-icx" secondAttribute="topMargin" constant="6" id="eac-zv-1GE"/>
+                                                <constraint firstItem="Sgs-05-caT" firstAttribute="baseline" secondItem="OXf-Qx-7o5" secondAttribute="baseline" id="iss-s1-1dX"/>
+                                                <constraint firstItem="OXf-Qx-7o5" firstAttribute="leading" secondItem="beV-e9-icx" secondAttribute="leadingMargin" constant="10" id="sC1-IH-ok1"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="Q58-Id-E78"/>
+                                                    <exclude reference="OXf-Qx-7o5"/>
+                                                    <exclude reference="Sgs-05-caT"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="eac-zv-1GE"/>
+                                                    <exclude reference="sC1-IH-ok1"/>
+                                                    <exclude reference="bkb-Fd-G7O"/>
+                                                    <exclude reference="iss-s1-1dX"/>
+                                                    <exclude reference="AQn-7q-reu"/>
+                                                    <exclude reference="Ei1-4B-ggj"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="subviews">
+                                                    <include reference="Q58-Id-E78"/>
+                                                    <include reference="OXf-Qx-7o5"/>
+                                                    <include reference="Sgs-05-caT"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="eac-zv-1GE"/>
+                                                    <include reference="sC1-IH-ok1"/>
+                                                    <include reference="bkb-Fd-G7O"/>
+                                                    <include reference="iss-s1-1dX"/>
+                                                    <include reference="AQn-7q-reu"/>
+                                                    <include reference="Ei1-4B-ggj"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="buttonAddMenu" destination="Q58-Id-E78" id="cy0-j5-Akf"/>
+                                            <outlet property="labelMenuName" destination="OXf-Qx-7o5" id="qz8-c9-Hiw"/>
+                                            <outlet property="labelPrice" destination="Sgs-05-caT" id="Flj-Zh-W4c"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Gj6-bN-g6r" id="JB1-p4-9AZ"/>
                                     <outlet property="delegate" destination="Gj6-bN-g6r" id="CqD-En-VKt"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="CqX-7G-e7y" firstAttribute="leading" secondItem="2Pu-Xf-4HS" secondAttribute="leadingMargin" constant="-20" id="KQy-Fd-5BV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CqX-7G-e7y" secondAttribute="trailing" constant="-20" id="Q3J-9D-tzD"/>
-                            <constraint firstItem="CqX-7G-e7y" firstAttribute="top" secondItem="r88-Xx-Odz" secondAttribute="bottom" constant="94" id="qHU-wp-VHW"/>
+                            <constraint firstItem="CqX-7G-e7y" firstAttribute="top" secondItem="2Pu-Xf-4HS" secondAttribute="top" id="fcH-um-zVa">
+                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                            </constraint>
                             <constraint firstItem="alA-vE-04X" firstAttribute="top" secondItem="CqX-7G-e7y" secondAttribute="bottom" id="t9e-Y1-sTJ"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="fcH-um-zVa"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="fcH-um-zVa"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="menuListTable" destination="CqX-7G-e7y" id="Idx-D2-FSo"/>
@@ -1141,7 +1347,7 @@ You may now start using the app for your favourite restaurant.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OrN-hm-EbP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2791" y="-183"/>
+            <point key="canvasLocation" x="2790" y="-183"/>
         </scene>
         <!--Menu Details View Controller-->
         <scene sceneID="PG8-iL-imv">
@@ -1172,7 +1378,9 @@ You may now start using the app for your favourite restaurant.</string>
                         <constraints>
                             <constraint firstItem="QRv-CM-FTw" firstAttribute="leading" secondItem="t9A-2Q-EXZ" secondAttribute="leadingMargin" constant="-20" id="SKV-vb-L5j"/>
                             <constraint firstAttribute="trailingMargin" secondItem="QRv-CM-FTw" secondAttribute="trailing" constant="-20" id="WH6-4Z-oNd"/>
-                            <constraint firstItem="QRv-CM-FTw" firstAttribute="top" secondItem="cO5-3e-vBU" secondAttribute="bottom" constant="94" id="hdd-eH-3Jc"/>
+                            <constraint firstItem="QRv-CM-FTw" firstAttribute="top" secondItem="cO5-3e-vBU" secondAttribute="bottom" constant="94" id="hdd-eH-3Jc">
+                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                            </constraint>
                             <constraint firstItem="D3O-0e-tbt" firstAttribute="top" secondItem="QRv-CM-FTw" secondAttribute="bottom" id="mJv-zF-5QD"/>
                         </constraints>
                     </view>
@@ -1342,7 +1550,7 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstItem="dyc-0n-682" firstAttribute="leading" secondItem="aXN-8F-aOO" secondAttribute="leading" id="5Z3-Cz-03l"/>
                             <constraint firstItem="asU-Qk-3eu" firstAttribute="trailing" secondItem="XcC-LO-Zwk" secondAttribute="trailingMargin" id="GFD-vI-Rab"/>
                             <constraint firstItem="aXN-8F-aOO" firstAttribute="top" secondItem="fAX-cM-oHE" secondAttribute="bottom" constant="90" id="ILI-zR-Mrc">
-                                <variation key="heightClass=regular-widthClass=compact" constant="70"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="16"/>
                             </constraint>
                             <constraint firstItem="dyc-0n-682" firstAttribute="top" secondItem="aXN-8F-aOO" secondAttribute="top" id="O6t-56-dIL"/>
                             <constraint firstItem="yy2-Pg-XdO" firstAttribute="leading" secondItem="7TY-4G-teG" secondAttribute="leading" id="Or5-J1-gn3"/>
@@ -1383,20 +1591,24 @@ You may now start using the app for your favourite restaurant.</string>
                                 <exclude reference="W0u-tY-RRZ"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="ILI-zR-Mrc"/>
-                                <exclude reference="Rey-Vi-FLq"/>
-                                <exclude reference="gwZ-9O-c2y"/>
+                                <exclude reference="XU1-pK-MZA"/>
+                                <exclude reference="GFD-vI-Rab"/>
+                                <exclude reference="eGv-CJ-3dM"/>
+                                <exclude reference="s9i-MD-qtj"/>
                                 <exclude reference="5Z3-Cz-03l"/>
                                 <exclude reference="O6t-56-dIL"/>
                                 <exclude reference="Rt8-Ko-EFG"/>
                                 <exclude reference="qYG-96-e5F"/>
-                                <exclude reference="0hC-eP-dtu"/>
-                                <exclude reference="17y-jG-o2z"/>
-                                <exclude reference="gBx-S0-ycE"/>
                                 <exclude reference="4yM-1Q-1Um"/>
                                 <exclude reference="52O-wg-0h8"/>
                                 <exclude reference="Or5-J1-gn3"/>
                                 <exclude reference="xTz-Pg-qOW"/>
+                                <exclude reference="ILI-zR-Mrc"/>
+                                <exclude reference="Rey-Vi-FLq"/>
+                                <exclude reference="gwZ-9O-c2y"/>
+                                <exclude reference="0hC-eP-dtu"/>
+                                <exclude reference="17y-jG-o2z"/>
+                                <exclude reference="gBx-S0-ycE"/>
                                 <exclude reference="eij-s5-cMB"/>
                                 <exclude reference="gd1-2S-tOo"/>
                                 <exclude reference="uMW-og-3Ow"/>
@@ -1409,10 +1621,6 @@ You may now start using the app for your favourite restaurant.</string>
                                 <exclude reference="XdK-vd-vzD"/>
                                 <exclude reference="aEi-3H-OaE"/>
                                 <exclude reference="cZ8-c0-PvL"/>
-                                <exclude reference="GFD-vI-Rab"/>
-                                <exclude reference="eGv-CJ-3dM"/>
-                                <exclude reference="s9i-MD-qtj"/>
-                                <exclude reference="XU1-pK-MZA"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1429,20 +1637,24 @@ You may now start using the app for your favourite restaurant.</string>
                                 <include reference="W0u-tY-RRZ"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="ILI-zR-Mrc"/>
-                                <include reference="Rey-Vi-FLq"/>
-                                <include reference="gwZ-9O-c2y"/>
+                                <include reference="XU1-pK-MZA"/>
+                                <include reference="GFD-vI-Rab"/>
+                                <include reference="eGv-CJ-3dM"/>
+                                <include reference="s9i-MD-qtj"/>
                                 <include reference="5Z3-Cz-03l"/>
                                 <include reference="O6t-56-dIL"/>
                                 <include reference="Rt8-Ko-EFG"/>
                                 <include reference="qYG-96-e5F"/>
-                                <include reference="0hC-eP-dtu"/>
-                                <include reference="17y-jG-o2z"/>
-                                <include reference="gBx-S0-ycE"/>
                                 <include reference="4yM-1Q-1Um"/>
                                 <include reference="52O-wg-0h8"/>
                                 <include reference="Or5-J1-gn3"/>
                                 <include reference="xTz-Pg-qOW"/>
+                                <include reference="ILI-zR-Mrc"/>
+                                <include reference="Rey-Vi-FLq"/>
+                                <include reference="gwZ-9O-c2y"/>
+                                <include reference="0hC-eP-dtu"/>
+                                <include reference="17y-jG-o2z"/>
+                                <include reference="gBx-S0-ycE"/>
                                 <include reference="eij-s5-cMB"/>
                                 <include reference="gd1-2S-tOo"/>
                                 <include reference="uMW-og-3Ow"/>
@@ -1455,10 +1667,6 @@ You may now start using the app for your favourite restaurant.</string>
                                 <include reference="XdK-vd-vzD"/>
                                 <include reference="aEi-3H-OaE"/>
                                 <include reference="cZ8-c0-PvL"/>
-                                <include reference="GFD-vI-Rab"/>
-                                <include reference="eGv-CJ-3dM"/>
-                                <include reference="s9i-MD-qtj"/>
-                                <include reference="XU1-pK-MZA"/>
                             </mask>
                         </variation>
                     </view>
@@ -2030,7 +2238,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     <action selector="loginWithGoogle:" destination="uzO-tc-I33" eventType="touchUpInside" id="tdY-fm-hga"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WGr-0L-oAD">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orLine" translatesAutoresizingMaskIntoConstraints="NO" id="WGr-0L-oAD">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="fs4-to-1FM"/>
@@ -2306,7 +2514,9 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstItem="0wm-Rt-b6b" firstAttribute="top" secondItem="i5l-Oz-hwH" secondAttribute="bottom" constant="8" id="8tk-Je-7rA"/>
                             <constraint firstItem="JAQ-pE-saY" firstAttribute="top" secondItem="Rtf-cf-8sL" secondAttribute="top" id="E2b-Vd-qCv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="i5l-Oz-hwH" secondAttribute="trailing" id="LYI-EY-YUF"/>
-                            <constraint firstItem="i5l-Oz-hwH" firstAttribute="top" secondItem="9FK-XD-Ecl" secondAttribute="bottom" constant="66" id="OXk-Ag-lzd"/>
+                            <constraint firstItem="i5l-Oz-hwH" firstAttribute="top" secondItem="9FK-XD-Ecl" secondAttribute="bottom" constant="66" id="OXk-Ag-lzd">
+                                <variation key="heightClass=regular-widthClass=compact" constant="26"/>
+                            </constraint>
                             <constraint firstItem="1Ux-D0-hJB" firstAttribute="top" secondItem="hRK-gL-wTg" secondAttribute="bottom" constant="8" id="RNt-fZ-rkS"/>
                             <constraint firstItem="i5l-Oz-hwH" firstAttribute="leading" secondItem="jtT-8J-wsE" secondAttribute="leadingMargin" id="ZrZ-I8-Kmh"/>
                             <constraint firstItem="hRK-gL-wTg" firstAttribute="top" secondItem="0wm-Rt-b6b" secondAttribute="bottom" constant="8" id="bQa-q8-hgZ"/>
@@ -2488,7 +2698,9 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstItem="Lb9-cy-vh5" firstAttribute="leading" secondItem="kyD-8P-sul" secondAttribute="leading" id="Cbb-ak-hbK"/>
                             <constraint firstItem="MuL-Zc-0qT" firstAttribute="leading" secondItem="kyD-8P-sul" secondAttribute="leading" id="IDF-Ip-swh"/>
                             <constraint firstItem="7Er-Uh-dov" firstAttribute="top" secondItem="ySN-N5-s3S" secondAttribute="bottom" constant="8" id="K64-g8-86j"/>
-                            <constraint firstItem="kyD-8P-sul" firstAttribute="top" secondItem="TS5-VP-FOE" secondAttribute="bottom" constant="86" id="Lxt-Zj-3mx"/>
+                            <constraint firstItem="kyD-8P-sul" firstAttribute="top" secondItem="TS5-VP-FOE" secondAttribute="bottom" constant="86" id="Lxt-Zj-3mx">
+                                <variation key="heightClass=regular-widthClass=compact" constant="16"/>
+                            </constraint>
                             <constraint firstItem="Lb9-cy-vh5" firstAttribute="top" secondItem="MuL-Zc-0qT" secondAttribute="bottom" constant="16" id="OjR-8w-qWf">
                                 <variation key="heightClass=regular" constant="8"/>
                             </constraint>
@@ -2583,14 +2795,17 @@ You may now start using the app for your favourite restaurant.</string>
     </scenes>
     <resources>
         <image name="bill-icon-resized" width="44" height="44"/>
+        <image name="drop" width="300" height="30"/>
+        <image name="orLine" width="1272" height="219"/>
+        <image name="plus-icon-resized" width="44" height="44"/>
         <image name="tray-icon-resized" width="44" height="44"/>
         <image name="yan-red-gold" width="4519" height="4513"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="E6g-jX-hjS"/>
+        <segue reference="7dQ-Ir-nbk"/>
         <segue reference="Y4r-v0-sWo"/>
         <segue reference="Vwc-zK-8Vx"/>
-        <segue reference="7dQ-Ir-nbk"/>
-        <segue reference="Jyy-jT-Sb2"/>
+        <segue reference="rPF-AT-35v"/>
+        <segue reference="E6g-jX-hjS"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -72,17 +72,11 @@
     
     _defaultHeight = self.view.frame.size.height;
     
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
 }
 
-//- (void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:animated];
-//    self.view.alpha = 0.0f;
-//}
-//
-//- (void)viewDidAppear:(BOOL)animated {
-//    [super viewDidAppear:animated];
-//    self.view.alpha = 1.0f;
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -90,21 +84,19 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-//    self.view.alpha = 0.0f;
     [super viewWillDisappear:animated];
     
     [self hideTitleBar];
 }
 
-/*
-#pragma mark - Navigation
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//}
+//
+//- (void)viewDidAppear:(BOOL)animated {
+//    [super viewDidAppear:animated];
+//}
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
@@ -117,8 +109,6 @@
     }
         
     _titleBarView.hidden = NO;
-    _titleBarView.alpha = 0.0f;
-//    self.view.alpha = 0.0f;
     self.view.userInteractionEnabled = NO;
     _titleLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:[title uppercaseString] attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), _titleBarView.frame.size.height - 20.0f)];
     [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -385,144 +375,5 @@
     
 }
 
-- (NSDictionary*) getMenuForRestaurant:(NSString*)restaurantName {
-    //dummy data
-    NSDictionary *data = @{};
-    if ([restaurantName isEqualToString:@"dummy"]) {
-        data = @{
-                 @"categories": @[
-                         @{
-                             @"menu": @[
-                                     @{
-                                         @"price": @"120.00",
-                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
-                                         @"id": @1,
-                                         @"name": @"Banana Split",
-                                         @"desc": @""
-                                         }
-                                     ],
-                             @"name": @"Main Course"
-                             },
-                         @{
-                             @"menu": @[
-                                     @{
-                                         @"price": @"120.00",
-                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
-                                         @"id": @1,
-                                         @"name": @"Banana Split",
-                                         @"desc": @""
-                                         },
-                                     @{
-                                         @"price": @"120.00",
-                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
-                                         @"id": @1,
-                                         @"name": @"Banana Split",
-                                         @"desc": @""
-                                         },
-                                     @{
-                                         @"price": @"120.00",
-                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
-                                         @"id": @1,
-                                         @"name": @"Banana Split",
-                                         @"desc": @""
-                                         },
-                                     @{
-                                         @"price": @"120.00",
-                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
-                                         @"id": @1,
-                                         @"name": @"Banana Split",
-                                         @"desc": @""
-                                         }
-                                     ],
-                             @"name": @"Desserts"
-                             },
-                         @{
-                             @"menu": @[
-                                     @{
-                                         @"price": @"120.00",
-                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
-                                         @"id": @1,
-                                         @"name": @"Banana Split",
-                                         @"desc": @""
-                                         },
-                                     @{
-                                         @"price": @"120.00",
-                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
-                                         @"id": @1,
-                                         @"name": @"Banana Split",
-                                         @"desc": @""
-                                         }
-                                     ],
-                             @"name": @"Appetizers"
-                             },
-                         @{
-                             @"menu": @[
-                                     @{
-                                         @"price": @"120.00",
-                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
-                                         @"id": @1,
-                                         @"name": @"Banana Split",
-                                         @"desc": @""
-                                         },
-                                     @{
-                                         @"price": @"120.00",
-                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
-                                         @"id": @1,
-                                         @"name": @"Banana Split",
-                                         @"desc": @""
-                                         }
-                                     ],
-                             @"name": @"Soup"
-                             },
-                         @{
-                             @"menu": @[
-                                     @{
-                                         @"price": @"120.00",
-                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
-                                         @"id": @1,
-                                         @"name": @"Banana Split",
-                                         @"desc": @""
-                                         },
-                                     @{
-                                         @"price": @"120.00",
-                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
-                                         @"id": @1,
-                                         @"name": @"Banana Split",
-                                         @"desc": @""
-                                         }
-                                     ],
-                             @"name": @"Noodles"
-                             },
-                         @{
-                             @"menu": @[
-                                     @{
-                                         @"price": @"120.00",
-                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
-                                         @"id": @1,
-                                         @"name": @"Banana Split",
-                                         @"desc": @""
-                                         },
-                                     @{
-                                         @"price": @"120.00",
-                                         @"image": @"/uploads/yan_uploads/V6YSF2IZMZ72/menu/banana-split.jpg",
-                                         @"id": @1,
-                                         @"name": @"Banana Split",
-                                         @"desc": @""
-                                         }
-                                     ],
-                             @"name": @"Beverages"
-                             }
-                         ],
-                 @"restaurant": @{
-                         @"image": @"/uploads/restaurant/default-restaurant.jpg",
-                         @"payment_options": @"",
-                         @"name": @"Pancake House",
-                         @"location": @"Caiptol Commons"
-                         }
-                 };
-    }
-    
-    return data;
-}
 
 @end

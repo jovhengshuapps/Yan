@@ -33,8 +33,8 @@
 
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     [self showTitleBar:@"SIGN IN"];
 }
@@ -104,49 +104,6 @@
     }];
 }
 
-- (void)loginSuccessful:(NSNotification*)notification {
-    id response = notification.object;
-    if ([response isMemberOfClass:[NSError class]]) {
-        
-        [self showTitleBar:@"SIGN IN"];
-        self.view.userInteractionEnabled = YES;
-        return;
-    }
-    if (response[@"token"]){
-        if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"]]) {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
-    } else {
-        
-        [self showTitleBar:@"Creating Yan! account"];
-        self.view.userInteractionEnabled = NO;
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerCompletedMethod:) name:@"registerCompletedObserver" object:nil];
-        [self callAPI:API_USER_REGISTER withParameters:@{
-                                                         @"user_email": _socialAccount[@"username"],
-                                                         @"user_password": _socialAccount[@"password"],
-                                                         @"full_name": _socialAccount[@"fullname"],
-                                                         @"birthday": _socialAccount[@"birthday"]
-                                                         } completionNotification:@"registerCompletedObserver"];
-    }
-    
-    
-}
-
-
-- (void)registerCompletedMethod:(NSNotification*)notification {
-    id response = notification.object;
-    if ([response isMemberOfClass:[NSError class]]) {
-        
-        [self showTitleBar:@"SIGN IN"];
-        self.view.userInteractionEnabled = YES;
-        return;
-    }
-    if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"]]) {
-        self.view.userInteractionEnabled = YES;
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
-}
 
 - (IBAction)loginWithGoogle:(id)sender {
     GIDSignIn *google = [GIDSignIn sharedInstance];
@@ -182,30 +139,50 @@
 }
 
 
+- (void)loginSuccessful:(NSNotification*)notification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
+    id response = notification.object;
+    if ([response isMemberOfClass:[NSError class]]) {
+        
+        [self showTitleBar:@"SIGN IN"];
+        self.view.userInteractionEnabled = YES;
+        return;
+    }
+    if (response[@"token"]){
+        if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"]]) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    } else {
+        
+        [self showTitleBar:@"Creating Yan! account"];
+        self.view.userInteractionEnabled = NO;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerCompletedMethod:) name:@"registerCompletedObserver" object:nil];
+        [self callAPI:API_USER_REGISTER withParameters:@{
+                                                         @"user_email": _socialAccount[@"username"],
+                                                         @"user_password": _socialAccount[@"password"],
+                                                         @"full_name": _socialAccount[@"fullname"],
+                                                         @"birthday": _socialAccount[@"birthday"]
+                                                         } completionNotification:@"registerCompletedObserver"];
+    }
+    
+    
+}
 
-//// Stop the UIActivityIndicatorView animation that was started when the user
-//// pressed the Sign In button
-//- (void)signInWillDispatch:(GIDSignIn *)signIn error:(NSError *)error {
-////    [myActivityIndicator stopAnimating];
-//    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-//}
-//
-//// Present a view that prompts the user to sign in with Google
-//- (void)signIn:(GIDSignIn *)signIn
-//presentViewController:(UIViewController *)viewController {
-//    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-//    [self presentViewController:viewController animated:YES completion:nil];
-//}
-//
-//// Dismiss the "Sign in with Google" view
-//- (void)signIn:(GIDSignIn *)signIn
-//dismissViewController:(UIViewController *)viewController {
-//    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-//    [self dismissViewControllerAnimated:YES completion:nil];
-//}
 
-- (IBAction)didTapSignOut:(id)sender {
-    [[GIDSignIn sharedInstance] signOut];
+- (void)registerCompletedMethod:(NSNotification*)notification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
+    id response = notification.object;
+    if ([response isMemberOfClass:[NSError class]]) {
+        
+        [self showTitleBar:@"SIGN IN"];
+        self.view.userInteractionEnabled = YES;
+        return;
+    }
+    if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"]]) {
+        self.view.userInteractionEnabled = YES;
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 - (NSString*)passwordForName:(NSString*)name email:(NSString*)email birthday:(NSString*)birthday gender:(NSString*)gender{

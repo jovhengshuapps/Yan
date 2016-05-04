@@ -22,16 +22,7 @@
     [super awakeFromNib];
     // Initialization code
     
-//    UIView *bottomBorder = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 6.0f, KEYWINDOW.frame.size.width, 2.0f)];
-//    bottomBorder.backgroundColor = UIColorFromRGB(0x9F9F9F);
-//    [self.contentView addSubview:bottomBorder];
 
-}
-
-- (void)layoutSubviews {
-    UIView *bottomBorder = [[UIView alloc] initWithFrame:CGRectMake(0.0f, self.contentView.frame.size.height-2.0f, KEYWINDOW.frame.size.width, 2.0f)];
-    bottomBorder.backgroundColor = UIColorFromRGB(0x9F9F9F);
-    [self.contentView addSubview:bottomBorder];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -41,10 +32,17 @@
 }
 
 
+- (void)layoutSubviews {
+    UIView *bottomBorder = [[UIView alloc] initWithFrame:CGRectMake(0.0f, self.contentView.frame.size.height-2.0f, KEYWINDOW.frame.size.width, 2.0f)];
+    bottomBorder.backgroundColor = UIColorFromRGB(0xFFFFFF);
+    [self.contentView addSubview:bottomBorder];
+}
+
+
 - (void) setMenuName:(NSString*)name withPrice:(NSString*)price {
     
     _labelMenuName.text = [name uppercaseString];
-    _labelPrice.text = [price uppercaseString];
+    _labelPrice.text = [NSString stringWithFormat:@"PHP %@",[price uppercaseString]];
     
     CGSize nameSize = [_labelMenuName.text sizeWithAttributes:TextAttributes(_labelMenuName.font.fontName, 0x000000, _labelMenuName.font.pointSize)];
     CGSize priceSize = [_labelPrice.text sizeWithAttributes:TextAttributes(_labelPrice.font.fontName, 0x000000, _labelPrice.font.pointSize)];

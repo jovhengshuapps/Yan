@@ -40,10 +40,15 @@
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
             <string>LucidaGrande-Bold</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande-Bold</string>
+            <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
@@ -534,7 +539,9 @@ You may now start using the app for your favourite restaurant.</string>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yan-red-gold" translatesAutoresizingMaskIntoConstraints="NO" id="mpH-Ht-MZf">
                                         <rect key="frame" x="35" y="72" width="530" height="300"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="350" id="5Yz-8Z-Rop"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="350" id="5Yz-8Z-Rop">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="300"/>
+                                            </constraint>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -606,11 +613,254 @@ You may now start using the app for your favourite restaurant.</string>
                                     </mask>
                                 </variation>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tgp-Gg-M5s">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yan-red-gold" translatesAutoresizingMaskIntoConstraints="NO" id="Tb7-qF-VlY">
+                                        <rect key="frame" x="35" y="72" width="530" height="300"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="350" id="Q8y-7W-UMq">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="300"/>
+                                            </constraint>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Q8y-7W-UMq"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="Q8y-7W-UMq"/>
+                                            </mask>
+                                        </variation>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jl4-oh-96a" customClass="CustomButton">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <color key="backgroundColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="deviceRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="U4K-b6-U1X">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="30"/>
+                                            </constraint>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="18"/>
+                                        <state key="normal" title="Sign In with Facebook"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="U4K-b6-U1X"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="U4K-b6-U1X"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="loginWithFacebook:" destination="jUk-Vx-8B5" eventType="touchUpInside" id="n5q-MF-Cld"/>
+                                            <action selector="loginWithFacebook:" destination="uzO-tc-I33" eventType="touchUpInside" id="wIy-EQ-O7N"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NB5-Ks-W5G" customClass="CustomButton">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <color key="backgroundColor" red="0.28235294119999998" green="0.52156862749999999" blue="0.92941176469999998" alpha="1" colorSpace="deviceRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="Hye-tT-agG">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="30"/>
+                                            </constraint>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="18"/>
+                                        <state key="normal" title="Sign In with Google"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Hye-tT-agG"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="Hye-tT-agG"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="loginWithGoogle:" destination="uzO-tc-I33" eventType="touchUpInside" id="2mK-TZ-vHX"/>
+                                            <action selector="loginWithGoogle:" destination="jUk-Vx-8B5" eventType="touchUpInside" id="cHS-Bn-wP7"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orLine" translatesAutoresizingMaskIntoConstraints="NO" id="6Qm-A0-viu">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="Q0l-8l-Dd1">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="45"/>
+                                            </constraint>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Q0l-8l-Dd1"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="Q0l-8l-Dd1"/>
+                                            </mask>
+                                        </variation>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T9G-O8-pvI" customClass="CustomButton">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <color key="backgroundColor" red="0.97254901959999995" green="0.72549019609999998" blue="0.23921568630000001" alpha="1" colorSpace="deviceRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="UPB-OA-EF9">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="30"/>
+                                            </constraint>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="18"/>
+                                        <state key="normal" title="Sign In with Yan!"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="UPB-OA-EF9"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="UPB-OA-EF9"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <segue destination="GYE-FS-QZc" kind="show" identifier="viewLoginToLogin" id="iwi-F0-UhZ"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Yan! account yet? Click here to register" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ijs-HE-ZE3">
+                                        <rect key="frame" x="20" y="420" width="560" height="40"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="30" id="uEe-cB-fcn"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="20"/>
+                                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="uEe-cB-fcn"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="uEe-cB-fcn"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ys0-bx-rZi">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <segue destination="9eW-Mt-EhP" kind="show" identifier="viewLoginToRegister" id="YJZ-bv-B1B"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="6Qm-A0-viu" secondAttribute="trailing" constant="20" id="04d-tQ-ba6"/>
+                                    <constraint firstItem="ys0-bx-rZi" firstAttribute="trailing" secondItem="ijs-HE-ZE3" secondAttribute="trailing" id="5dW-7C-vmz"/>
+                                    <constraint firstItem="6Qm-A0-viu" firstAttribute="leading" secondItem="tgp-Gg-M5s" secondAttribute="leading" constant="20" id="AQy-5P-zS8"/>
+                                    <constraint firstAttribute="trailing" secondItem="NB5-Ks-W5G" secondAttribute="trailing" constant="20" id="AmT-wM-cLa"/>
+                                    <constraint firstAttribute="trailing" secondItem="T9G-O8-pvI" secondAttribute="trailing" constant="20" id="Ju7-e5-o04"/>
+                                    <constraint firstItem="ijs-HE-ZE3" firstAttribute="leading" secondItem="tgp-Gg-M5s" secondAttribute="leading" constant="20" id="PbD-FQ-Tev"/>
+                                    <constraint firstItem="6Qm-A0-viu" firstAttribute="top" secondItem="NB5-Ks-W5G" secondAttribute="bottom" constant="8" id="Qds-JW-jQT"/>
+                                    <constraint firstAttribute="trailing" secondItem="jl4-oh-96a" secondAttribute="trailing" constant="20" id="Rhc-R0-7bQ"/>
+                                    <constraint firstItem="jl4-oh-96a" firstAttribute="top" secondItem="Tb7-qF-VlY" secondAttribute="bottom" constant="10" id="c5R-Rr-5GZ"/>
+                                    <constraint firstItem="T9G-O8-pvI" firstAttribute="top" secondItem="6Qm-A0-viu" secondAttribute="bottom" constant="8" id="dlh-hZ-2bD"/>
+                                    <constraint firstItem="T9G-O8-pvI" firstAttribute="leading" secondItem="tgp-Gg-M5s" secondAttribute="leading" constant="20" id="fhR-Iw-U86"/>
+                                    <constraint firstAttribute="trailing" secondItem="Tb7-qF-VlY" secondAttribute="trailing" constant="15" id="gIx-Do-Lv6"/>
+                                    <constraint firstItem="ys0-bx-rZi" firstAttribute="leading" secondItem="ijs-HE-ZE3" secondAttribute="leading" id="gzZ-WP-V4I"/>
+                                    <constraint firstItem="ys0-bx-rZi" firstAttribute="bottom" secondItem="ijs-HE-ZE3" secondAttribute="bottom" id="ixK-Nr-X73"/>
+                                    <constraint firstAttribute="trailing" secondItem="ijs-HE-ZE3" secondAttribute="trailing" constant="20" id="kqN-lu-2cU"/>
+                                    <constraint firstItem="NB5-Ks-W5G" firstAttribute="leading" secondItem="tgp-Gg-M5s" secondAttribute="leading" constant="20" id="mHN-A0-WoD"/>
+                                    <constraint firstItem="ys0-bx-rZi" firstAttribute="top" secondItem="ijs-HE-ZE3" secondAttribute="top" id="mNW-BP-oyI"/>
+                                    <constraint firstItem="NB5-Ks-W5G" firstAttribute="top" secondItem="jl4-oh-96a" secondAttribute="bottom" constant="8" id="q2q-wW-DYg"/>
+                                    <constraint firstItem="Tb7-qF-VlY" firstAttribute="centerX" secondItem="tgp-Gg-M5s" secondAttribute="centerX" id="qmp-xO-25g"/>
+                                    <constraint firstItem="Tb7-qF-VlY" firstAttribute="leading" secondItem="tgp-Gg-M5s" secondAttribute="leading" constant="15" id="rlT-Hh-I7q"/>
+                                    <constraint firstItem="Tb7-qF-VlY" firstAttribute="top" secondItem="tgp-Gg-M5s" secondAttribute="top" constant="8" id="sQY-d0-9RO"/>
+                                    <constraint firstItem="jl4-oh-96a" firstAttribute="leading" secondItem="tgp-Gg-M5s" secondAttribute="leading" constant="20" id="ufv-Ks-6YE"/>
+                                    <constraint firstItem="ijs-HE-ZE3" firstAttribute="top" secondItem="T9G-O8-pvI" secondAttribute="bottom" constant="8" id="vWZ-B8-iYY"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="Tb7-qF-VlY"/>
+                                        <exclude reference="jl4-oh-96a"/>
+                                        <exclude reference="NB5-Ks-W5G"/>
+                                        <exclude reference="6Qm-A0-viu"/>
+                                        <exclude reference="T9G-O8-pvI"/>
+                                        <exclude reference="ijs-HE-ZE3"/>
+                                        <exclude reference="ys0-bx-rZi"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="gIx-Do-Lv6"/>
+                                        <exclude reference="qmp-xO-25g"/>
+                                        <exclude reference="rlT-Hh-I7q"/>
+                                        <exclude reference="sQY-d0-9RO"/>
+                                        <exclude reference="Rhc-R0-7bQ"/>
+                                        <exclude reference="c5R-Rr-5GZ"/>
+                                        <exclude reference="ufv-Ks-6YE"/>
+                                        <exclude reference="AmT-wM-cLa"/>
+                                        <exclude reference="mHN-A0-WoD"/>
+                                        <exclude reference="q2q-wW-DYg"/>
+                                        <exclude reference="04d-tQ-ba6"/>
+                                        <exclude reference="AQy-5P-zS8"/>
+                                        <exclude reference="Qds-JW-jQT"/>
+                                        <exclude reference="Ju7-e5-o04"/>
+                                        <exclude reference="dlh-hZ-2bD"/>
+                                        <exclude reference="fhR-Iw-U86"/>
+                                        <exclude reference="PbD-FQ-Tev"/>
+                                        <exclude reference="kqN-lu-2cU"/>
+                                        <exclude reference="vWZ-B8-iYY"/>
+                                        <exclude reference="5dW-7C-vmz"/>
+                                        <exclude reference="gzZ-WP-V4I"/>
+                                        <exclude reference="ixK-Nr-X73"/>
+                                        <exclude reference="mNW-BP-oyI"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="Tb7-qF-VlY"/>
+                                        <include reference="jl4-oh-96a"/>
+                                        <include reference="NB5-Ks-W5G"/>
+                                        <include reference="6Qm-A0-viu"/>
+                                        <include reference="T9G-O8-pvI"/>
+                                        <include reference="ijs-HE-ZE3"/>
+                                        <include reference="ys0-bx-rZi"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <include reference="gIx-Do-Lv6"/>
+                                        <include reference="qmp-xO-25g"/>
+                                        <include reference="rlT-Hh-I7q"/>
+                                        <include reference="sQY-d0-9RO"/>
+                                        <include reference="Rhc-R0-7bQ"/>
+                                        <include reference="c5R-Rr-5GZ"/>
+                                        <include reference="ufv-Ks-6YE"/>
+                                        <include reference="AmT-wM-cLa"/>
+                                        <include reference="mHN-A0-WoD"/>
+                                        <include reference="q2q-wW-DYg"/>
+                                        <include reference="04d-tQ-ba6"/>
+                                        <include reference="AQy-5P-zS8"/>
+                                        <include reference="Qds-JW-jQT"/>
+                                        <include reference="Ju7-e5-o04"/>
+                                        <include reference="dlh-hZ-2bD"/>
+                                        <include reference="fhR-Iw-U86"/>
+                                        <include reference="PbD-FQ-Tev"/>
+                                        <include reference="kqN-lu-2cU"/>
+                                        <include reference="vWZ-B8-iYY"/>
+                                        <include reference="5dW-7C-vmz"/>
+                                        <include reference="gzZ-WP-V4I"/>
+                                        <include reference="ixK-Nr-X73"/>
+                                        <include reference="mNW-BP-oyI"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ecd-tU-mVt" firstAttribute="top" secondItem="zuP-t9-tV0" secondAttribute="bottom" id="2Ar-0J-jXs"/>
+                            <constraint firstItem="tgp-Gg-M5s" firstAttribute="leading" secondItem="bMm-dl-bE7" secondAttribute="leadingMargin" constant="-20" id="2xB-qN-TtA"/>
+                            <constraint firstItem="tgp-Gg-M5s" firstAttribute="top" secondItem="bMm-dl-bE7" secondAttribute="topMargin" id="6N3-7L-gXG"/>
                             <constraint firstItem="ecd-tU-mVt" firstAttribute="top" secondItem="SUj-ZD-lwQ" secondAttribute="bottom" id="7kW-Nb-mPw"/>
+                            <constraint firstItem="ecd-tU-mVt" firstAttribute="top" secondItem="tgp-Gg-M5s" secondAttribute="bottom" id="7tv-e2-1G1"/>
                             <constraint firstItem="zuP-t9-tV0" firstAttribute="leading" secondItem="bMm-dl-bE7" secondAttribute="leadingMargin" constant="-20" id="7yf-bL-tvB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DIE-ny-INK" secondAttribute="trailing" constant="-20" id="FH2-co-Uwe"/>
                             <constraint firstItem="SUj-ZD-lwQ" firstAttribute="top" secondItem="MSb-wK-osH" secondAttribute="bottom" id="Fd8-U4-Ysn"/>
@@ -618,6 +868,7 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstItem="ecd-tU-mVt" firstAttribute="top" secondItem="DIE-ny-INK" secondAttribute="bottom" id="Mef-bq-UO2"/>
                             <constraint firstItem="SUj-ZD-lwQ" firstAttribute="leading" secondItem="bMm-dl-bE7" secondAttribute="leadingMargin" constant="-20" id="PBc-0f-X4u"/>
                             <constraint firstItem="DIE-ny-INK" firstAttribute="top" secondItem="bMm-dl-bE7" secondAttribute="topMargin" id="dUK-Mx-8TR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tgp-Gg-M5s" secondAttribute="trailing" constant="-20" id="fAc-yK-sKj"/>
                             <constraint firstAttribute="trailingMargin" secondItem="SUj-ZD-lwQ" secondAttribute="trailing" constant="-20" id="fq7-M4-OcH"/>
                             <constraint firstItem="zuP-t9-tV0" firstAttribute="top" secondItem="MSb-wK-osH" secondAttribute="bottom" id="gga-4l-iTu"/>
                             <constraint firstItem="DIE-ny-INK" firstAttribute="leading" secondItem="bMm-dl-bE7" secondAttribute="leadingMargin" constant="-20" id="nSN-o9-4up"/>
@@ -627,20 +878,25 @@ You may now start using the app for your favourite restaurant.</string>
                                 <exclude reference="DIE-ny-INK"/>
                                 <exclude reference="SUj-ZD-lwQ"/>
                                 <exclude reference="zuP-t9-tV0"/>
+                                <exclude reference="tgp-Gg-M5s"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="2Ar-0J-jXs"/>
-                                <exclude reference="7kW-Nb-mPw"/>
-                                <exclude reference="Mef-bq-UO2"/>
                                 <exclude reference="FH2-co-Uwe"/>
                                 <exclude reference="dUK-Mx-8TR"/>
                                 <exclude reference="nSN-o9-4up"/>
+                                <exclude reference="2xB-qN-TtA"/>
+                                <exclude reference="6N3-7L-gXG"/>
+                                <exclude reference="fAc-yK-sKj"/>
                                 <exclude reference="Fd8-U4-Ysn"/>
                                 <exclude reference="PBc-0f-X4u"/>
                                 <exclude reference="fq7-M4-OcH"/>
                                 <exclude reference="7yf-bL-tvB"/>
                                 <exclude reference="LsA-UM-hZk"/>
                                 <exclude reference="gga-4l-iTu"/>
+                                <exclude reference="2Ar-0J-jXs"/>
+                                <exclude reference="7kW-Nb-mPw"/>
+                                <exclude reference="7tv-e2-1G1"/>
+                                <exclude reference="Mef-bq-UO2"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -648,26 +904,35 @@ You may now start using the app for your favourite restaurant.</string>
                                 <include reference="DIE-ny-INK"/>
                                 <include reference="SUj-ZD-lwQ"/>
                                 <include reference="zuP-t9-tV0"/>
+                                <include reference="tgp-Gg-M5s"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="2Ar-0J-jXs"/>
-                                <include reference="7kW-Nb-mPw"/>
-                                <include reference="Mef-bq-UO2"/>
                                 <include reference="FH2-co-Uwe"/>
                                 <include reference="dUK-Mx-8TR"/>
                                 <include reference="nSN-o9-4up"/>
+                                <include reference="2xB-qN-TtA"/>
+                                <include reference="6N3-7L-gXG"/>
+                                <include reference="fAc-yK-sKj"/>
                                 <include reference="Fd8-U4-Ysn"/>
                                 <include reference="PBc-0f-X4u"/>
                                 <include reference="fq7-M4-OcH"/>
                                 <include reference="7yf-bL-tvB"/>
                                 <include reference="LsA-UM-hZk"/>
                                 <include reference="gga-4l-iTu"/>
+                                <include reference="2Ar-0J-jXs"/>
+                                <include reference="7kW-Nb-mPw"/>
+                                <include reference="7tv-e2-1G1"/>
+                                <include reference="Mef-bq-UO2"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="P7h-xG-Rai"/>
                     <connections>
+                        <outlet property="googleLoginButton" destination="NB5-Ks-W5G" id="qOA-l0-9oV"/>
+                        <outlet property="loginButton" destination="jl4-oh-96a" id="uLb-D8-jGm"/>
+                        <outlet property="view" destination="bMm-dl-bE7" id="o5a-iK-0HO"/>
                         <outlet property="viewDefaultHome" destination="zuP-t9-tV0" id="LqA-em-Rv2"/>
+                        <outlet property="viewLogin" destination="tgp-Gg-M5s" id="ptK-r8-szj"/>
                         <outlet property="viewNotificationReminder" destination="DIE-ny-INK" id="pNB-4P-nra"/>
                         <outlet property="viewRegistrationComplete" destination="SUj-ZD-lwQ" id="nFH-7P-oXN"/>
                     </connections>
@@ -804,7 +1069,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     <constraint firstItem="XLB-8Q-53y" firstAttribute="leading" secondItem="Edi-dF-Jro" secondAttribute="trailing" id="nmc-h9-cIm"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hBB-BI-RNz">
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hBB-BI-RNz">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -1027,7 +1292,7 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstAttribute="trailingMargin" secondItem="6ea-dD-7p4" secondAttribute="trailing" constant="-20" id="Lfj-FA-F5r"/>
                             <constraint firstItem="YHW-XT-18e" firstAttribute="top" secondItem="6ea-dD-7p4" secondAttribute="bottom" id="Mar-L7-99V"/>
                             <constraint firstItem="PRf-WG-Pz4" firstAttribute="top" secondItem="4MC-SR-0Jt" secondAttribute="bottom" constant="48" id="cCQ-pF-VRj">
-                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="50"/>
                             </constraint>
                             <constraint firstItem="6ea-dD-7p4" firstAttribute="top" secondItem="PRf-WG-Pz4" secondAttribute="bottom" constant="8" id="hEV-jz-fBz"/>
                             <constraint firstItem="6ea-dD-7p4" firstAttribute="leading" secondItem="0gN-xu-gYg" secondAttribute="leadingMargin" constant="-20" id="kfQ-4U-PQL"/>
@@ -1041,16 +1306,16 @@ You may now start using the app for your favourite restaurant.</string>
                                 <exclude reference="YHW-XT-18e"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="0s8-l5-d7c"/>
-                                <exclude reference="cCQ-pF-VRj"/>
-                                <exclude reference="kkd-ce-oPg"/>
+                                <exclude reference="Afb-Vw-BfY"/>
                                 <exclude reference="Lfj-FA-F5r"/>
                                 <exclude reference="hEV-jz-fBz"/>
                                 <exclude reference="kfQ-4U-PQL"/>
+                                <exclude reference="0s8-l5-d7c"/>
+                                <exclude reference="cCQ-pF-VRj"/>
+                                <exclude reference="kkd-ce-oPg"/>
                                 <exclude reference="0Rx-Bn-YrK"/>
                                 <exclude reference="Mar-L7-99V"/>
                                 <exclude reference="ylY-Xk-5Xf"/>
-                                <exclude reference="Afb-Vw-BfY"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1060,16 +1325,16 @@ You may now start using the app for your favourite restaurant.</string>
                                 <include reference="YHW-XT-18e"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="0s8-l5-d7c"/>
-                                <include reference="cCQ-pF-VRj"/>
-                                <include reference="kkd-ce-oPg"/>
+                                <include reference="Afb-Vw-BfY"/>
                                 <include reference="Lfj-FA-F5r"/>
                                 <include reference="hEV-jz-fBz"/>
                                 <include reference="kfQ-4U-PQL"/>
+                                <include reference="0s8-l5-d7c"/>
+                                <include reference="cCQ-pF-VRj"/>
+                                <include reference="kkd-ce-oPg"/>
                                 <include reference="0Rx-Bn-YrK"/>
                                 <include reference="Mar-L7-99V"/>
                                 <include reference="ylY-Xk-5Xf"/>
-                                <include reference="Afb-Vw-BfY"/>
                             </mask>
                         </variation>
                     </view>
@@ -1110,10 +1375,12 @@ You may now start using the app for your favourite restaurant.</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="C88-9h-G0Z" firstAttribute="top" secondItem="0cF-mY-3Nx" secondAttribute="bottom" constant="-20" id="1zW-qg-CeJ">
-                                <variation key="heightClass=regular-widthClass=compact" constant="5"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="-16"/>
                             </constraint>
                             <constraint firstItem="C88-9h-G0Z" firstAttribute="leading" secondItem="DiS-oI-sLU" secondAttribute="leadingMargin" constant="-20" id="25j-YZ-qdk"/>
-                            <constraint firstItem="Otr-Im-cbp" firstAttribute="top" secondItem="C88-9h-G0Z" secondAttribute="bottom" id="96j-Zu-1Dh"/>
+                            <constraint firstItem="Otr-Im-cbp" firstAttribute="top" secondItem="C88-9h-G0Z" secondAttribute="bottom" id="96j-Zu-1Dh">
+                                <variation key="heightClass=regular-widthClass=compact" constant="21"/>
+                            </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="C88-9h-G0Z" secondAttribute="trailing" constant="-20" id="iul-AC-nqq"/>
                         </constraints>
                     </view>
@@ -1131,12 +1398,15 @@ You may now start using the app for your favourite restaurant.</string>
             <objects>
                 <tableViewController id="iis-hD-NZe" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="87" sectionHeaderHeight="28" sectionFooterHeight="28" id="Px1-6f-A5E">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="menuOptionCell" rowHeight="87" id="io4-3K-3n0">
+                                <rect key="frame" x="0.0" y="28" width="600" height="87"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="io4-3K-3n0" id="XHB-Rk-R0b">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="86"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nFG-V9-P8N">
@@ -1196,14 +1466,16 @@ You may now start using the app for your favourite restaurant.</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CqX-7G-e7y">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CqX-7G-e7y">
                                 <rect key="frame" x="0.0" y="114" width="600" height="486"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="menuListCell" rowHeight="60" id="184-kR-1Sh" customClass="MenuListTableViewCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="menuListCell" rowHeight="55" id="184-kR-1Sh" customClass="MenuListTableViewCell">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="184-kR-1Sh" id="beV-e9-icx">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q58-Id-E78">
@@ -1268,12 +1540,15 @@ You may now start using the app for your favourite restaurant.</string>
                                                     </variation>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Q58-Id-E78" secondAttribute="trailing" constant="6" id="AQn-7q-reu"/>
                                                 <constraint firstItem="Q58-Id-E78" firstAttribute="top" secondItem="beV-e9-icx" secondAttribute="topMargin" constant="6" id="Ei1-4B-ggj"/>
                                                 <constraint firstItem="Sgs-05-caT" firstAttribute="leading" secondItem="OXf-Qx-7o5" secondAttribute="trailing" constant="8" id="bkb-Fd-G7O"/>
                                                 <constraint firstItem="OXf-Qx-7o5" firstAttribute="top" secondItem="beV-e9-icx" secondAttribute="topMargin" constant="6" id="eac-zv-1GE"/>
-                                                <constraint firstItem="Sgs-05-caT" firstAttribute="baseline" secondItem="OXf-Qx-7o5" secondAttribute="baseline" id="iss-s1-1dX"/>
+                                                <constraint firstItem="Sgs-05-caT" firstAttribute="baseline" secondItem="OXf-Qx-7o5" secondAttribute="baseline" id="iss-s1-1dX">
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="1"/>
+                                                </constraint>
                                                 <constraint firstItem="OXf-Qx-7o5" firstAttribute="leading" secondItem="beV-e9-icx" secondAttribute="leadingMargin" constant="10" id="sC1-IH-ok1"/>
                                             </constraints>
                                             <variation key="default">
@@ -1283,12 +1558,12 @@ You may now start using the app for your favourite restaurant.</string>
                                                     <exclude reference="Sgs-05-caT"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <exclude reference="AQn-7q-reu"/>
+                                                    <exclude reference="Ei1-4B-ggj"/>
                                                     <exclude reference="eac-zv-1GE"/>
                                                     <exclude reference="sC1-IH-ok1"/>
                                                     <exclude reference="bkb-Fd-G7O"/>
                                                     <exclude reference="iss-s1-1dX"/>
-                                                    <exclude reference="AQn-7q-reu"/>
-                                                    <exclude reference="Ei1-4B-ggj"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -1298,12 +1573,12 @@ You may now start using the app for your favourite restaurant.</string>
                                                     <include reference="Sgs-05-caT"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <include reference="AQn-7q-reu"/>
+                                                    <include reference="Ei1-4B-ggj"/>
                                                     <include reference="eac-zv-1GE"/>
                                                     <include reference="sC1-IH-ok1"/>
                                                     <include reference="bkb-Fd-G7O"/>
                                                     <include reference="iss-s1-1dX"/>
-                                                    <include reference="AQn-7q-reu"/>
-                                                    <include reference="Ei1-4B-ggj"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -1361,13 +1636,72 @@ You may now start using the app for your favourite restaurant.</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QRv-CM-FTw">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QRv-CM-FTw">
                                 <rect key="frame" x="0.0" y="114" width="600" height="486"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="02n-Re-rqK">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="330"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="menuOptionCell" rowHeight="55" id="o88-XA-LM2" customClass="MenuOptionTableViewCell">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o88-XA-LM2" id="gqA-3e-MuO">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rgO-Sd-TDr">
+                                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                    <state key="normal" image="remove-icon-resized"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="17" y="11" width="32" height="32"/>
+                                                    </variation>
+                                                    <connections>
+                                                        <action selector="removeMenuPressed:" destination="o88-XA-LM2" eventType="touchUpInside" id="Ovo-QM-FiE"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gsN-To-Da3">
+                                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                    <state key="normal" image="option-icon-resized"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="347" y="11" width="32" height="32"/>
+                                                    </variation>
+                                                    <connections>
+                                                        <action selector="menuOptionPressed:" destination="o88-XA-LM2" eventType="touchUpInside" id="9DN-Um-V7A"/>
+                                                    </connections>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kk7-Q3-Ao8">
+                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="22"/>
+                                                    <color key="textColor" red="0.13933024613086969" green="0.39841704842931935" blue="0.13862998960778664" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                                        <rect key="frame" x="57" y="11" width="282" height="32"/>
+                                                    </variation>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.87450980392156863" green="0.87450980392156863" blue="0.87450980392156863" alpha="1" colorSpace="calibratedRGB"/>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="rgO-Sd-TDr"/>
+                                                    <exclude reference="gsN-To-Da3"/>
+                                                    <exclude reference="Kk7-Q3-Ao8"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="subviews">
+                                                    <include reference="rgO-Sd-TDr"/>
+                                                    <include reference="gsN-To-Da3"/>
+                                                    <include reference="Kk7-Q3-Ao8"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="buttonMenuOption" destination="gsN-To-Da3" id="RSQ-rQ-FuI"/>
+                                            <outlet property="buttonRemoveMenu" destination="rgO-Sd-TDr" id="fXE-VO-v0R"/>
+                                            <outlet property="labelMenuName" destination="Kk7-Q3-Ao8" id="QHC-Wf-4CK"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="OYV-v8-jXH" id="aa8-8u-34d"/>
                                     <outlet property="delegate" destination="OYV-v8-jXH" id="f7C-4b-QD0"/>
@@ -1392,7 +1726,7 @@ You may now start using the app for your favourite restaurant.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qlx-Yh-2fa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3413" y="-183"/>
+            <point key="canvasLocation" x="3412.5" y="-183"/>
         </scene>
         <!--Reserve Resto View Controller-->
         <scene sceneID="dbO-KR-ZWv">
@@ -1459,7 +1793,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
                                     <outlet property="delegate" destination="FR8-OO-KIF" id="rUN-30-u2E"/>
                                 </connections>
@@ -1473,7 +1807,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                 <connections>
                                     <outlet property="delegate" destination="FR8-OO-KIF" id="zki-eK-GIZ"/>
                                 </connections>
@@ -1550,7 +1884,7 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstItem="dyc-0n-682" firstAttribute="leading" secondItem="aXN-8F-aOO" secondAttribute="leading" id="5Z3-Cz-03l"/>
                             <constraint firstItem="asU-Qk-3eu" firstAttribute="trailing" secondItem="XcC-LO-Zwk" secondAttribute="trailingMargin" id="GFD-vI-Rab"/>
                             <constraint firstItem="aXN-8F-aOO" firstAttribute="top" secondItem="fAX-cM-oHE" secondAttribute="bottom" constant="90" id="ILI-zR-Mrc">
-                                <variation key="heightClass=regular-widthClass=compact" constant="16"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="50"/>
                             </constraint>
                             <constraint firstItem="dyc-0n-682" firstAttribute="top" secondItem="aXN-8F-aOO" secondAttribute="top" id="O6t-56-dIL"/>
                             <constraint firstItem="yy2-Pg-XdO" firstAttribute="leading" secondItem="7TY-4G-teG" secondAttribute="leading" id="Or5-J1-gn3"/>
@@ -2515,7 +2849,7 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstItem="JAQ-pE-saY" firstAttribute="top" secondItem="Rtf-cf-8sL" secondAttribute="top" id="E2b-Vd-qCv"/>
                             <constraint firstAttribute="trailingMargin" secondItem="i5l-Oz-hwH" secondAttribute="trailing" id="LYI-EY-YUF"/>
                             <constraint firstItem="i5l-Oz-hwH" firstAttribute="top" secondItem="9FK-XD-Ecl" secondAttribute="bottom" constant="66" id="OXk-Ag-lzd">
-                                <variation key="heightClass=regular-widthClass=compact" constant="26"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="55"/>
                             </constraint>
                             <constraint firstItem="1Ux-D0-hJB" firstAttribute="top" secondItem="hRK-gL-wTg" secondAttribute="bottom" constant="8" id="RNt-fZ-rkS"/>
                             <constraint firstItem="i5l-Oz-hwH" firstAttribute="leading" secondItem="jtT-8J-wsE" secondAttribute="leadingMargin" id="ZrZ-I8-Kmh"/>
@@ -2604,7 +2938,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="BIRTHDAY" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rJq-zN-8xr">
                                 <rect key="frame" x="20" y="206" width="560" height="40"/>
@@ -2634,7 +2968,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="PASSWORD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lb9-cy-vh5">
                                 <rect key="frame" x="20" y="318" width="560" height="40"/>
@@ -2699,7 +3033,7 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstItem="MuL-Zc-0qT" firstAttribute="leading" secondItem="kyD-8P-sul" secondAttribute="leading" id="IDF-Ip-swh"/>
                             <constraint firstItem="7Er-Uh-dov" firstAttribute="top" secondItem="ySN-N5-s3S" secondAttribute="bottom" constant="8" id="K64-g8-86j"/>
                             <constraint firstItem="kyD-8P-sul" firstAttribute="top" secondItem="TS5-VP-FOE" secondAttribute="bottom" constant="86" id="Lxt-Zj-3mx">
-                                <variation key="heightClass=regular-widthClass=compact" constant="16"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="55"/>
                             </constraint>
                             <constraint firstItem="Lb9-cy-vh5" firstAttribute="top" secondItem="MuL-Zc-0qT" secondAttribute="bottom" constant="16" id="OjR-8w-qWf">
                                 <variation key="heightClass=regular" constant="8"/>
@@ -2796,13 +3130,16 @@ You may now start using the app for your favourite restaurant.</string>
     <resources>
         <image name="bill-icon-resized" width="44" height="44"/>
         <image name="drop" width="300" height="30"/>
+        <image name="option-icon-resized" width="44" height="44"/>
         <image name="orLine" width="1272" height="219"/>
         <image name="plus-icon-resized" width="44" height="44"/>
+        <image name="remove-icon-resized" width="44" height="44"/>
         <image name="tray-icon-resized" width="44" height="44"/>
         <image name="yan-red-gold" width="4519" height="4513"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7dQ-Ir-nbk"/>
+        <segue reference="iwi-F0-UhZ"/>
+        <segue reference="YJZ-bv-B1B"/>
         <segue reference="Y4r-v0-sWo"/>
         <segue reference="Vwc-zK-8Vx"/>
         <segue reference="rPF-AT-35v"/>

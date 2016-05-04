@@ -10,11 +10,13 @@
 
 @protocol MenuOptionTableViewCellDelegate <NSObject>
 
-- (void)optionSelectedIndex:(NSInteger)index inMenu:(NSDictionary*)menu;
+- (void)optionSelectedIndex:(NSInteger)index;
+- (void)removeSelectedIndex:(NSInteger)index;
 
 @end
 @interface MenuOptionTableViewCell : UITableViewCell
-@property (strong, nonatomic) NSDictionary *menu;
+@property (strong, nonatomic) IBOutlet UILabel  *labelMenuName;
+@property (assign, nonatomic) NSInteger index;
 @property (assign, nonatomic) id<MenuOptionTableViewCellDelegate> delegateOptionCell;
 
 @end

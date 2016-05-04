@@ -17,4 +17,6 @@
 @interface DatePickerViewController : UIViewController
 @property (strong,nonatomic) id<DatePickerViewControllerDelegate> delegate;
 @property (assign, nonatomic) UIDatePickerMode datePickerMode;
+@property (assign, nonatomic) BOOL birthdayValidation;
+@property (assign, nonatomic) BOOL todayValidation;
 @end

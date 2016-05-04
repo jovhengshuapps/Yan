@@ -33,8 +33,8 @@
 }
 
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     [self showTitleBar:@"RESERVATION"];
 }
@@ -50,7 +50,8 @@
     if ([segue.identifier isEqualToString:@"reserveDatePicker"]) {
         DatePickerViewController *destNav = segue.destinationViewController;
         destNav.delegate = self;
-            destNav.datePickerMode = UIDatePickerModeDate;
+        destNav.datePickerMode = UIDatePickerModeDate;
+        destNav.todayValidation = YES;
         
         // This is the important part
         UIPopoverPresentationController *popPC = destNav.popoverPresentationController;
@@ -60,6 +61,7 @@
         DatePickerViewController *destNav = segue.destinationViewController;
         destNav.delegate = self;
         destNav.datePickerMode = UIDatePickerModeTime;
+        destNav.todayValidation = YES;
         
         // This is the important part
         UIPopoverPresentationController *popPC = destNav.popoverPresentationController;

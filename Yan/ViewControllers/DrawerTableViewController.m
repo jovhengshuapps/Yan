@@ -112,6 +112,8 @@
                 //            [[GIDSignIn sharedInstance] signOut];
                 //            FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
                 //            [login logOut];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:@"HomeViewLogin"];
                 return;
             }
         }];

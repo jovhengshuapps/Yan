@@ -22,8 +22,8 @@
     
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     [self showTitleBar:@"SIGN IN"];
 }
@@ -38,6 +38,7 @@
 }
 
 - (void)loginSuccessful:(NSNotification*)notification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     id response = notification.object;
     if ([response isMemberOfClass:[NSError class]]) {
         

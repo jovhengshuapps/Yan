@@ -7,8 +7,10 @@
 //
 
 #import "CoreViewController.h"
+#import "MenuOptionTableViewCell.h"
 
-@interface MenuDetailsViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate>
+
+@interface MenuDetailsViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate, MenuOptionTableViewCellDelegate>
 
 @property (strong, nonatomic) NSDictionary *item;
 

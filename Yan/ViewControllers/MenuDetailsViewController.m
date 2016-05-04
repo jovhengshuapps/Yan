@@ -67,32 +67,43 @@
     return _arrayOrders.count;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44.0f;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return 44.0f;
+//}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *identifier = @"menuCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+//    NSString *identifier = @"menuCell";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+//    
+//    if (cell == nil) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+//        UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [detailButton addTarget:self action:@selector(optionButtonTapped:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+//        [detailButton setImage:[UIImage imageNamed:@"option-icon-resized"] forState:UIControlStateNormal];
+//        [detailButton setFrame:CGRectMake(0.0f, 0.0f, 32.0f, 32.0f)];
+//        cell.accessoryView = detailButton;
+//        
+//        UIButton *removeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [removeButton addTarget:self action:@selector(removeButtonTapped:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+//        [removeButton setImage:[UIImage imageNamed:@"remove-icon-resized"] forState:UIControlStateNormal];
+//        [removeButton setFrame:CGRectMake(0.0f, 0.0f, 32.0f, 32.0f)];
+//        [cell.imageView addSubview:removeButton];
+//    }
+//        
+//    cell.textLabel.text = [_item[@"name"] uppercaseString];
+//    
+//    return cell;
+
+
     
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [detailButton addTarget:self action:@selector(optionButtonTapped:withEvent:) forControlEvents:UIControlEventTouchUpInside];
-        [detailButton setImage:[UIImage imageNamed:@"option-icon-resized"] forState:UIControlStateNormal];
-        [detailButton setFrame:CGRectMake(0.0f, 0.0f, 32.0f, 32.0f)];
-        cell.accessoryView = detailButton;
-        
-        UIButton *removeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [removeButton addTarget:self action:@selector(removeButtonTapped:withEvent:) forControlEvents:UIControlEventTouchUpInside];
-        [removeButton setImage:[UIImage imageNamed:@"remove-icon-resized"] forState:UIControlStateNormal];
-        [removeButton setFrame:CGRectMake(0.0f, 0.0f, 32.0f, 32.0f)];
-        [cell.imageView addSubview:removeButton];
-    }
-        
-    cell.textLabel.text = [_item[@"name"] uppercaseString];
+    NSString *identifier = @"menuOptionCell";
     
+    MenuOptionTableViewCell *cell = (MenuOptionTableViewCell*)[tableView dequeueReusableCellWithIdentifier:identifier];
+    cell.delegateOptionCell = self;
+    cell.labelMenuName = _item[@"name"];
+    cell.index = indexPath.row;
+
     return cell;
 }
 
@@ -132,7 +143,7 @@
     labelName.attributedText = attrString;
     
     UIButton *addMoreButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [addMoreButton addTarget:self action:@selector(optionButtonTapped:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+    [addMoreButton addTarget:self action:@selector(addMoreMenu) forControlEvents:UIControlEventTouchUpInside];
     [addMoreButton setImage:[UIImage imageNamed:@"plus-icon-resized"] forState:UIControlStateNormal];
     [addMoreButton setFrame:CGRectMake(labelName.bounds.origin.y + labelName.bounds.size.width, 0.0f, 32.0f, 32.0f)];
     
@@ -165,26 +176,37 @@
 
 }
 
-
-
-
-
-- (void) optionButtonTapped: (UIControl *) button withEvent: (UIEvent *) event
-{
-    NSIndexPath * indexPath = [_detailsTable indexPathForRowAtPoint: [[[event touchesForView: button] anyObject] locationInView: _detailsTable]];
-    if ( indexPath == nil )
-        return;
+- (void) addMoreMenu {
     
-//    [_detailsTable.delegate tableView: _detailsTable accessoryButtonTappedForRowWithIndexPath: indexPath];
 }
 
-- (void) removeButtonTapped: (UIControl *) button withEvent: (UIEvent *) event
-{
-    NSIndexPath * indexPath = [_detailsTable indexPathForRowAtPoint: [[[event touchesForView: button] anyObject] locationInView: _detailsTable]];
-    if ( indexPath == nil )
-        return;
+- (void)optionSelectedIndex:(NSInteger)index {
     
-//    [_detailsTable.delegate tableView: _detailsTable accessoryButtonTappedForRowWithIndexPath: indexPath];
 }
+
+- (void)removeSelectedIndex:(NSInteger)index {
+    
+}
+
+
+
+
+//- (void) optionButtonTapped: (UIControl *) button withEvent: (UIEvent *) event
+//{
+//    NSIndexPath * indexPath = [_detailsTable indexPathForRowAtPoint: [[[event touchesForView: button] anyObject] locationInView: _detailsTable]];
+//    if ( indexPath == nil )
+//        return;
+//    
+////    [_detailsTable.delegate tableView: _detailsTable accessoryButtonTappedForRowWithIndexPath: indexPath];
+//}
+//
+//- (void) removeButtonTapped: (UIControl *) button withEvent: (UIEvent *) event
+//{
+//    NSIndexPath * indexPath = [_detailsTable indexPathForRowAtPoint: [[[event touchesForView: button] anyObject] locationInView: _detailsTable]];
+//    if ( indexPath == nil )
+//        return;
+//    
+////    [_detailsTable.delegate tableView: _detailsTable accessoryButtonTappedForRowWithIndexPath: indexPath];
+//}
 
 @end

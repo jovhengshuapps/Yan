@@ -30,7 +30,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _rawData = [self getMenuForRestaurant:@"dummy"];
     // Array containing Dictionaries containining Items.
 //    CollapseMenuView *collapseMenuView = [[CollapseMenuView alloc] initWithContent:[self extractMenuContent] screenSize:CGSizeMake(KEYWINDOW.frame.size.width, KEYWINDOW.bounds.size.height - _orderCheckoutView.bounds.size.height)];
 //    collapseMenuView.delegate = self;
@@ -62,8 +61,8 @@
     _categoryString = @"";
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     [self showTitleBar:_categoryString];
 }
@@ -72,7 +71,7 @@
     NSMutableDictionary *data = [NSMutableDictionary new];
     NSMutableArray *categories = [NSMutableArray new];
     
-    for (NSDictionary *category in [_rawData objectForKey:@"categories"]) {
+    for (NSDictionary *category in self.categories) {
         NSString *categoryName = [category objectForKey:@"name"];
         [categories addObject:categoryName];
         NSMutableArray *categoryItems = [NSMutableArray new];
@@ -129,7 +128,9 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSLog(@"count:%i",_arrayCategories.count);
     return _arrayCategories.count;
+    
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -210,7 +211,7 @@
     [self showTitleBar:category];
     MenuListViewController *menuListView = [self.storyboard instantiateViewControllerWithIdentifier:@"menuList"];
     menuListView.category = category;
-    menuListView.menuList = [_rawData objectForKey:category];
+    menuListView.menuList = _rawData[category];
     menuListView.delegate = self;
     
     menuListView.view.frame = self.loadedControllerView.bounds;

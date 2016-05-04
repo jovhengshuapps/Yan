@@ -63,4 +63,6 @@
 
 #define API_RESTAURANTS                                                 @"restaurant"
 
+#define API_MENU(RESTAURANT_ID)                                                 [NSString stringWithFormat:@"restaurant/menus/%i",RESTAURANT_ID]
+
 #endif /* Config_h */

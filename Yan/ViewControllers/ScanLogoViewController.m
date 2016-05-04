@@ -207,10 +207,21 @@
 }
 
 - (void)proceedToOrderViewMenu {
-    OrderMenuViewController *orderMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"orderMenu"];
-    [self.navigationController pushViewController:orderMenu animated:YES];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuForRestaurant:) name:@"getMenuForRestaurantObserver" object:nil];
+    [self callGETAPI:API_MENU(5) withParameters:@{} completionNotification:@"getMenuForRestaurantObserver"];
+    
 }
 
+- (void) menuForRestaurant:(NSNotification*)notification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
+    NSDictionary *response = (NSDictionary*)notification.object;
+    NSArray *categories = response[@"categories"];
+    OrderMenuViewController *orderMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"orderMenu"];
+    orderMenu.categories = categories;
+    [self.navigationController pushViewController:orderMenu animated:YES];
+}
 /*
 #pragma mark - Navigation
 

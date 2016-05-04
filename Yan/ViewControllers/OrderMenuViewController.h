@@ -12,4 +12,5 @@
 
 @interface OrderMenuViewController : CoreViewController </*CollapseMenuViewDelegate*/UITableViewDataSource, UITableViewDelegate, MenuListDelegate>
 
+@property(strong,nonatomic) NSArray *categories;
 @end

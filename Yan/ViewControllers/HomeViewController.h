@@ -7,15 +7,17 @@
 //
 
 #import "CoreViewController.h"
+#import <GoogleSignIn/GoogleSignIn.h>
 
 typedef enum {
     HomeViewDefault,
     HomeViewRegistrationComplete,
-    HomeViewNotification
+    HomeViewNotification,
+    HomeViewLogin
 } HomeView_ViewToShow;
 
 
-@interface HomeViewController : CoreViewController
+@interface HomeViewController : CoreViewController <FBSDKLoginButtonDelegate, GIDSignInUIDelegate, GIDSignInDelegate>
 
 @property (assign, nonatomic) HomeView_ViewToShow viewToShow;
 

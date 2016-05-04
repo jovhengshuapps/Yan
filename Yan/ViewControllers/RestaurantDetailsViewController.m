@@ -22,8 +22,8 @@
     _labelRestaurantAddress.text = _restaurantDetails[@"location"];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     [self showTitleBar:@"DETAILS"];
     

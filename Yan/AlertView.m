@@ -264,6 +264,7 @@
 }
 
 - (void) videoPlayerFinished:(NSNotification*)notification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     if ([_delegate respondsToSelector:@selector(alertViewDismissed:)]) {
         [_delegate videoAdPlayer:_instance];
     }

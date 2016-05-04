@@ -25,8 +25,8 @@
 }
 
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     [self showTitleBar:@"REGISTRATION"];
 }
@@ -45,6 +45,7 @@
 }
 
 - (void)registerCompletedMethod:(NSNotification*)notification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     id response = notification.object;
     if ([response isMemberOfClass:[NSError class]]) {
         
@@ -93,6 +94,7 @@
         DatePickerViewController *destNav = segue.destinationViewController;
         destNav.delegate = self;
         destNav.datePickerMode = UIDatePickerModeDate;
+        destNav.birthdayValidation = YES;
         
         // This is the important part
         UIPopoverPresentationController *popPC = destNav.popoverPresentationController;

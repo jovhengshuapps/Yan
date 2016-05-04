@@ -2006,6 +2006,8 @@ You may now start using the app for your favourite restaurant.</string>
                     </view>
                     <connections>
                         <outlet property="textFieldDate" destination="aXN-8F-aOO" id="r5q-WN-GHo"/>
+                        <outlet property="textFieldNumberPerson" destination="4of-uP-Zoy" id="raQ-9I-TSa"/>
+                        <outlet property="textFieldTableNumber" destination="JdI-dd-xhF" id="5Li-wS-PWS"/>
                         <outlet property="textFieldTime" destination="7TY-4G-teG" id="ChZ-oe-kyO"/>
                         <outlet property="view" destination="XcC-LO-Zwk" id="Rlg-AF-bde"/>
                     </connections>

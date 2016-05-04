@@ -72,8 +72,8 @@
     
     _defaultHeight = self.view.frame.size.height;
     
-    
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
     
 }
 
@@ -102,6 +102,17 @@
     return UIStatusBarStyleLightContent;
 }
 
+- (void) addDoneToolbar:(UITextField*)textfield {
+    UIToolbar *accessoryView = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, KEYWINDOW.bounds.size.width, 44.0f)];
+    accessoryView.backgroundColor = [UIColor colorWithWhite:1.0f alpha:0.5f];
+    
+    UIBarButtonItem *barItem = [[UIBarButtonItem alloc] initWithTitle:@"DONE" style:UIBarButtonItemStyleDone target:textfield action:@selector(resignFirstResponder)];
+    
+    UIBarButtonItem *flex = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    [accessoryView setItems:@[flex,barItem]];
+    textfield.inputAccessoryView = accessoryView;
+}
 
 - (void) showTitleBar:(NSString*)title {
     if (title.length == 0){

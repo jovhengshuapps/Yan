@@ -22,4 +22,6 @@
 
 - (BOOL)saveLoggedInAccount:(NSString*)username :(NSString*)password :(NSString*)fullname :(NSString*)birthday :(NSString*)token;
 -(void) openMenu;
+
+- (void) addDoneToolbar:(UITextField*)textfield;
 @end

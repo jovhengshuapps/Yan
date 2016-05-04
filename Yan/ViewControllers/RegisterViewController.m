@@ -22,6 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self addDoneToolbar:_textFieldName];
+    [self addDoneToolbar:_textFieldEmail];
+    [self addDoneToolbar:_textFieldPassword];
 }
 
 
@@ -89,7 +92,9 @@
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Assuming you've hooked this all up in a Storyboard with a popover presentation style
+    [_textFieldName resignFirstResponder];
+    [_textFieldEmail resignFirstResponder];
+    [_textFieldPassword resignFirstResponder];
     if ([segue.identifier isEqualToString:@"registerDatePicker"]) {
         DatePickerViewController *destNav = segue.destinationViewController;
         destNav.delegate = self;

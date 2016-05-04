@@ -12,6 +12,8 @@
 @interface ReserveRestoViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *textFieldDate;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldTime;
+@property (weak, nonatomic) IBOutlet UITextField *textFieldNumberPerson;
+@property (weak, nonatomic) IBOutlet UITextField *textFieldTableNumber;
 
 @end
 
@@ -29,6 +31,8 @@
     
     [[self navigationItem] setRightBarButtonItem:detailsItem];
 
+    [self addDoneToolbar:_textFieldNumberPerson];
+    [self addDoneToolbar:_textFieldTableNumber];
 
 }
 
@@ -46,7 +50,10 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Assuming you've hooked this all up in a Storyboard with a popover presentation style
+    
+    [_textFieldTableNumber resignFirstResponder];
+    [_textFieldNumberPerson resignFirstResponder];
+    
     if ([segue.identifier isEqualToString:@"reserveDatePicker"]) {
         DatePickerViewController *destNav = segue.destinationViewController;
         destNav.delegate = self;

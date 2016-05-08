@@ -7,16 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MenuItem.h"
 
 @protocol MenuListTableViewCellDelegate <NSObject>
 
-- (void)addThisMenu:(NSDictionary*)menu;
+- (void)addThisMenu:(MenuItem*)menu;
 
 @end
 
 
 @interface MenuListTableViewCell : UITableViewCell
-@property (strong, nonatomic) NSDictionary *menu;
+@property (strong, nonatomic) MenuItem *menu;
 @property (assign, nonatomic) id<MenuListTableViewCellDelegate> delegateMenuCell;
 - (void) setMenuName:(NSString*)name withPrice:(NSString*)price;
 @end

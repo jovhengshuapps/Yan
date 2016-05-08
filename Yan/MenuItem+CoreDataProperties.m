@@ -14,10 +14,12 @@
 @implementation MenuItem (CoreDataProperties)
 
 @dynamic desc;
-@dynamic id;
+@dynamic identifier;
 @dynamic image;
 @dynamic name;
 @dynamic price;
 @dynamic options;
+@dynamic imageData;
+@dynamic restaurantID;
 
 @end

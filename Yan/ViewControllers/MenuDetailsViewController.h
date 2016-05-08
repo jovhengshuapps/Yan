@@ -12,6 +12,6 @@
 
 @interface MenuDetailsViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate, MenuOptionTableViewCellDelegate>
 
-@property (strong, nonatomic) NSDictionary *item;
+@property (strong, nonatomic) MenuItem *item;
 
 @end

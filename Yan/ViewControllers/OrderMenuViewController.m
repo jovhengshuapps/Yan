@@ -11,6 +11,7 @@
 #import "MenuDetailsViewController.h"
 #import "ConfirmOrderViewController.h"
 #import "WaiterTableViewController.h"
+#import "AppDelegate.h"
 
 
 @interface OrderMenuViewController()
@@ -41,6 +42,23 @@
     
     _orderTableNumber = @"1";
     [self.orderTableButton setTitle:[NSString stringWithFormat:@"Order Table: %@",_orderTableNumber] forState:UIControlStateNormal];
+    
+    
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+    
+    NSError *error = nil;
+    
+    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    
+    _totalOrderPrice = 0.0f;
+    for (OrderList *orders in result) {
+        _totalOrderPrice += [orders.itemPrice floatValue];
+    }
+    
+    [self setTotalPrice:_totalOrderPrice];
     _orderTableButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     _orderCostButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     _orderCostButton.titleLabel.minimumScaleFactor = -5.0f;
@@ -61,7 +79,6 @@
     [self.view addSubview:_mainTableView];
     
     
-    [self showMenu];
     _categoryString = @"";
 }
 
@@ -69,11 +86,21 @@
     [super viewWillAppear:animated];
     
     [self showTitleBar:_categoryString];
+    [self showMenu];
 }
 
 - (void) callWaiter {
     WaiterTableViewController *waiter = (WaiterTableViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"waiterOptions"];
     [self.navigationController pushViewController:waiter animated:YES];
+}
+
+- (void) setTotalPrice:(CGFloat)price {
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [numberFormatter setCurrencySymbol:@"PHP:"];
+    
+    NSString *string = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:price]];
+    [self.orderCostButton setTitle:string forState:UIControlStateNormal];
 }
 
 - (NSDictionary*) extractMenuContent {
@@ -85,7 +112,8 @@
         [categories addObject:categoryName];
         NSMutableArray *categoryItems = [NSMutableArray new];
         for (NSDictionary *item in [category objectForKey:@"menu"]) {
-            [categoryItems addObject:item];
+            MenuItem *menuItem = [self insertMenuToDatabase:item];
+            [categoryItems addObject:menuItem];
         }
         [data setObject:(NSArray*)categoryItems forKey:categoryName];
     }
@@ -94,13 +122,48 @@
     
     return data;
 }
-//- (void)selectedIndex:(NSInteger)index {
-//    NSLog(@"SELECTED:%li",(long)index);
-//}
-//
-//- (void)collapsedMenuShown:(BOOL)shown {
-//    
-//}
+
+- (MenuItem*) insertMenuToDatabase:(NSDictionary*)item {
+    
+    //checkDB
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MenuItem"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@", item[@"name"]]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"price == %@", item[@"price"]]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"desc == %@", item[@"desc"]]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"image == %@", item[@"image"]]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"identifier == %@", item[@"id"]]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"restaurantID == 5"]];
+    NSError *error = nil;
+    
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    
+    if (result.count) {
+        return ((MenuItem*)result[0]);
+    }
+    
+    
+    
+    //insert
+    MenuItem *menuItem = [[MenuItem alloc] initWithEntity:[NSEntityDescription entityForName:@"MenuItem" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
+    
+    
+    menuItem.name = item[@"name"];
+    menuItem.price = item[@"price"];
+    menuItem.desc = item[@"desc"];
+    menuItem.image = item[@"image"];
+    menuItem.identifier = item[@"id"];
+    menuItem.restaurantID = @5;
+    NSDictionary *tempOptions = @{@"Steak":@[@"Well Done", @"Rare", @"Normal"], @"Sauce":@[@"Barbeque",@"Spicy"]};
+    menuItem.options = [self encodeData:tempOptions withKey:@"options"];
+    
+    error = nil;
+    if([context save:&error])
+        return menuItem;
+    
+    return nil;
+}
 
 - (void) hideMenu {
     CGFloat positionY = self.view.frame.size.height - _orderCheckoutView.bounds.size.height;
@@ -234,7 +297,7 @@
 
 
 #pragma mark MenuListDelegate
-- (void) selectedItem:(NSDictionary *)item {
+- (void) selectedItem:(MenuItem *)item {
     
     MenuDetailsViewController *itemDetails = [self.storyboard instantiateViewControllerWithIdentifier:@"menuDetails"];
     itemDetails.item = item;
@@ -246,6 +309,33 @@
     
 }
 
+- (void)addThisMenuToOrder:(MenuItem *)menu {
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    OrderList *order = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
+    
+    
+    order.itemName = menu.name;
+    order.itemPrice = menu.price;
+    order.itemOptions = menu.options;
+    order.itemQuantity = @"1";
+    
+    NSError *error = nil;
+    if (![context save:&error]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
+    
+    _totalOrderPrice += [menu.price floatValue];
+    [self setTotalPrice:_totalOrderPrice];
+}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"priceConfirmOrder"]) {

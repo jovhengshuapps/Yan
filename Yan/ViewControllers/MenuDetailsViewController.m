@@ -7,6 +7,8 @@
 //
 
 #import "MenuDetailsViewController.h"
+#import "AppDelegate.h"
+#import "OptionListTableViewController.h"
 
 @interface MenuDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *detailsTable;
@@ -22,23 +24,29 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSData *imageData = nil;
+    NSData *imageData = _item.imageData;
     if (imageData) {
         
         self.itemImage.image = [UIImage imageWithData:imageData];
     }
     else {
         self.itemImage.image = [UIImage imageNamed:@"yan-logo"];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateImage:) name:@"MenuImageFromURL" object:nil];
+        
+        [self getImageFromURL:_item.image completionNotification:@"MenuImageFromURL"];
+
     }
     
     [self.itemImage setFrame:CGRectMake(0.0f, 0.0f, _detailsTable.bounds.size.width, 330.0f)];
     
     [_detailsTable setTableHeaderView:self.itemImage];
     
-    [_detailsTable reloadData];
+    
     
     self.detailsTable.contentSize = CGSizeMake(self.detailsTable.contentSize.width, self.detailsTable.contentSize.height + 110.0f); //allowance for the menu and checkout
     
+    [self fetchOrderData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,6 +54,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void) updateImage:(NSNotification*)notification {
+    self.itemImage.image = notification.object;
+}
 /*
 #pragma mark - Navigation
 
@@ -56,6 +68,18 @@
 }
 */
 
+- (void) fetchOrderData {
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+    
+    NSError *error = nil;
+    
+    _arrayOrders = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    
+    [_detailsTable reloadData];
+    [_detailsTable setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
+}
 
 
 # pragma mark Data Source
@@ -67,41 +91,13 @@
     return _arrayOrders.count;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return 44.0f;
-//}
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSString *identifier = @"menuCell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-//    
-//    if (cell == nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-//        UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [detailButton addTarget:self action:@selector(optionButtonTapped:withEvent:) forControlEvents:UIControlEventTouchUpInside];
-//        [detailButton setImage:[UIImage imageNamed:@"option-icon-resized"] forState:UIControlStateNormal];
-//        [detailButton setFrame:CGRectMake(0.0f, 0.0f, 32.0f, 32.0f)];
-//        cell.accessoryView = detailButton;
-//        
-//        UIButton *removeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [removeButton addTarget:self action:@selector(removeButtonTapped:withEvent:) forControlEvents:UIControlEventTouchUpInside];
-//        [removeButton setImage:[UIImage imageNamed:@"remove-icon-resized"] forState:UIControlStateNormal];
-//        [removeButton setFrame:CGRectMake(0.0f, 0.0f, 32.0f, 32.0f)];
-//        [cell.imageView addSubview:removeButton];
-//    }
-//        
-//    cell.textLabel.text = [_item[@"name"] uppercaseString];
-//    
-//    return cell;
-
-
     
     NSString *identifier = @"menuOptionCell";
     
     MenuOptionTableViewCell *cell = (MenuOptionTableViewCell*)[tableView dequeueReusableCellWithIdentifier:identifier];
     cell.delegateOptionCell = self;
-    cell.labelMenuName = _item[@"name"];
+    cell.labelMenuName.text = ((OrderList*)_arrayOrders[indexPath.row]).itemName;
     cell.index = indexPath.row;
 
     return cell;
@@ -118,7 +114,7 @@
     UIView *nameHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, contentView.bounds.size.width, 44.0f)];
     
     UILabel *labelName = [[UILabel alloc] initWithFrame:CGRectMake(15.0f, 0.0f, nameHeaderView.bounds.size.width - 15.0f - 40.0f, 44.0f)];
-    NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[_item[@"name"] uppercaseString],_item[@"price"]];
+    NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[_item.name uppercaseString],_item.price];
     
     CGFloat nameSize = labelName.frame.size.height - 10.0f;
     CGFloat priceSize = nameSize / 2.0f;
@@ -156,7 +152,7 @@
     
     UILabel *descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(35.0f, 0.0f, descriptionView.bounds.size.width - 35.0f - 10.0f, 80.0f)];
     descriptionLabel.numberOfLines = 0;
-    descriptionLabel.text = _item[@"desc"];
+    descriptionLabel.text = _item.desc;
     descriptionLabel.font = [UIFont fontWithName:@"LucidaGrande" size:18.0f];
     descriptionLabel.textColor = UIColorFromRGB(0x333333);
     
@@ -177,10 +173,37 @@
 }
 
 - (void) addMoreMenu {
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
+    OrderList *order = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
+    
+    
+    order.itemName = _item.name;
+    order.itemPrice = _item.price;
+    order.itemOptions = _item.options;
+    order.itemQuantity = @"1";
+    
+    NSError *error = nil;
+    if (![context save:&error]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
+    
+    [self fetchOrderData];
 }
 
 - (void)optionSelectedIndex:(NSInteger)index {
+    OptionListTableViewController *optionsTVC = (OptionListTableViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"optionListTVC"];
+    
+    optionsTVC.optionList = [self decodeData:((OrderList*)_arrayOrders[index]).itemOptions forKey:@"options"];
+    [self.navigationController pushViewController:optionsTVC animated:YES];
     
 }
 

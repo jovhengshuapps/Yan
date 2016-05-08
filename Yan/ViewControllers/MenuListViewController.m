@@ -92,19 +92,20 @@
 
     NSString *identifier = @"menuListCell";
     
-    NSDictionary *item = _menuList[indexPath.row];
+    MenuItem *item = _menuList[indexPath.row];
     MenuListTableViewCell *cell = (MenuListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:identifier];
     cell.delegateMenuCell = self;
     cell.menu = item;
-    [cell setMenuName:item[@"name"] withPrice:item[@"price"]];
+    [cell setMenuName:item.name withPrice:item.price];
     
     
     
     return cell;
 }
 
-- (void)addThisMenu:(NSDictionary *)menu {
+- (void)addThisMenu:(MenuItem *)menu {
     NSLog(@"This menu should be added :%@", menu);
+    [self.delegate addThisMenuToOrder:menu];
 }
 
 

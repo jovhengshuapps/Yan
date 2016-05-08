@@ -9,11 +9,13 @@
     </entity>
     <entity name="MenuItem" representedClassName="MenuItem" syncable="YES">
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="options" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="restaurantID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="OrderList" representedClassName="OrderList" syncable="YES">
         <attribute name="itemName" optional="YES" attributeType="String" syncable="YES"/>
@@ -31,7 +33,7 @@
     </entity>
     <elements>
         <element name="Account" positionX="-63" positionY="-18" width="128" height="120"/>
-        <element name="MenuItem" positionX="-63" positionY="18" width="128" height="135"/>
+        <element name="MenuItem" positionX="-63" positionY="18" width="128" height="165"/>
         <element name="OrderList" positionX="-54" positionY="45" width="128" height="120"/>
         <element name="Reservation" positionX="-36" positionY="72" width="128" height="120"/>
     </elements>

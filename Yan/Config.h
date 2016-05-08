@@ -24,6 +24,9 @@
 #import <GoogleSignIn/GoogleSignIn.h>
 
 #import "Account.h"
+#import "Reservation.h"
+#import "MenuItem.h"
+#import "OrderList.h"
 
 // MACROS
 

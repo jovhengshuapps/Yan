@@ -9,9 +9,11 @@
 #import "CoreViewController.h"
 #import "MenuListTableViewCell.h"
 
+@class MenuItem;
 @protocol MenuListDelegate <NSObject>
 
-- (void) selectedItem:(NSDictionary*)item;
+- (void) selectedItem:(MenuItem*)item;
+- (void) addThisMenuToOrder:(MenuItem*)menu;
 
 @end
 @interface MenuListViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate, MenuListTableViewCellDelegate>

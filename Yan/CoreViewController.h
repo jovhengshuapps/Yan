@@ -24,4 +24,10 @@
 -(void) openMenu;
 
 - (void) addDoneToolbar:(UITextField*)textfield;
+
+- (void)getImageFromURL:(NSString*)urlPath completionNotification:(NSString*)notificationName;
+
+- (NSData*)encodeData:(id)object withKey:(NSString*)key;
+
+- (id)decodeData:(NSData*)data forKey:(NSString*)key;
 @end

@@ -16,11 +16,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MenuItem (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSString *desc;
-@property (nullable, nonatomic, retain) NSString *id;
+@property (nullable, nonatomic, retain) NSNumber *identifier;
 @property (nullable, nonatomic, retain) NSString *image;
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSString *price;
 @property (nullable, nonatomic, retain) NSData *options;
+@property (nullable, nonatomic, retain) NSData *imageData;
+@property (nullable, nonatomic, retain) NSNumber *restaurantID;
 
 @end
 

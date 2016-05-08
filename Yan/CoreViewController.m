@@ -180,6 +180,37 @@
     [self.view addSubview:view];
 }
 
+- (void)getImageFromURL:(NSString*)urlPath completionNotification:(NSString*)notificationName {
+    
+    NSURL *baseURL = [NSURL URLWithString:BASE_API_URL];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+     manager.responseSerializer = [AFImageResponseSerializer serializer];
+    
+    [manager GET:urlPath parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NETWORK_INDICATOR(NO)
+        NSLog(@"response:%@",responseObject);
+        
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
+        NETWORK_INDICATOR(NO)
+        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:error];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }];
+}
+
 - (void)callGETAPI:(NSString*)method withParameters:(NSDictionary*)parameters completionNotification:(NSString*)notificationName{
     
     NSURL *baseURL = [NSURL URLWithString:BASE_API_URL];
@@ -353,7 +384,12 @@
             }];
         }];
     }
-    else {}
+    else {
+        actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:^{
+            }];
+        }];
+    }
     
     
     [alert addAction:actionOK];
@@ -389,5 +425,20 @@
     
 }
 
+- (NSData*)encodeData:(id)object withKey:(NSString*)key {
+    NSMutableData *data = [NSMutableData new];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    [archiver encodeObject:object forKey:key];
+    [archiver finishEncoding];
+    return data;
+}
+
+- (id)decodeData:(NSData*)data forKey:(NSString*)key {
+    id object = nil;
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+    object = [unarchiver decodeObjectForKey:key];
+    [unarchiver finishDecoding];
+    return object;
+}
 
 @end

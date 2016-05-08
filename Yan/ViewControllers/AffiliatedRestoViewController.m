@@ -12,8 +12,8 @@
 typedef enum {
     AffiliatedRestoOptionAll,
     AffiliatedRestoOptionRecent,
-    AffiliatedRestoOptionNearby,
-    AffiliatedRestoOptionFavorites
+    AffiliatedRestoOptionFavorites,
+    AffiliatedRestoOptionNearby
 } AffiliatedRestoOption;
 
 @interface AffiliatedRestoViewController ()
@@ -118,8 +118,9 @@ typedef enum {
     _dataListNearby = [NSMutableArray new];
     _dataListRecent = [NSMutableArray new];
     _dataListFavorites = [NSMutableArray new];
-    
-    [self reloadTableWithButton:nil];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.tag = _showAffiliatedRestaurant;
+    [self reloadTableWithButton:button];
 }
 
 

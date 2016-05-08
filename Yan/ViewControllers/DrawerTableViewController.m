@@ -128,12 +128,12 @@
     else if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"RECENT"]) {
         AffiliatedRestoViewController *affiliated = (AffiliatedRestoViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"affiliatedResto"];
         affiliated.showAffiliatedRestaurant = AffiliatedRestaurantsRecents;
-        [self.navigationController pushViewController:affiliated animated:YES];
+        [((UINavigationController*)self.frostedViewController.contentViewController) pushViewController:affiliated animated:YES];
     }
     else if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"FAVORITES"]) {
         AffiliatedRestoViewController *affiliated = (AffiliatedRestoViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"affiliatedResto"];
         affiliated.showAffiliatedRestaurant = AffiliatedRestaurantsFavorites;
-        [self.navigationController pushViewController:affiliated animated:YES];
+        [((UINavigationController*)self.frostedViewController.contentViewController) pushViewController:affiliated animated:YES];
     }
     
 }

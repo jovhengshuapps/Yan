@@ -10,6 +10,7 @@
 #import "MenuListViewController.h"
 #import "MenuDetailsViewController.h"
 #import "ConfirmOrderViewController.h"
+#import "WaiterTableViewController.h"
 
 
 @interface OrderMenuViewController()
@@ -23,20 +24,22 @@
 @property (weak, nonatomic) IBOutlet UIButton *orderCostButton;
 @property (weak, nonatomic) IBOutlet UIView *loadedControllerView;
 @property (strong, nonatomic) NSString *categoryString;
+@property (strong, nonatomic) NSString *orderTableNumber;
 
 @end
 
 @implementation OrderMenuViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Array containing Dictionaries containining Items.
-//    CollapseMenuView *collapseMenuView = [[CollapseMenuView alloc] initWithContent:[self extractMenuContent] screenSize:CGSizeMake(KEYWINDOW.frame.size.width, KEYWINDOW.bounds.size.height - _orderCheckoutView.bounds.size.height)];
-//    collapseMenuView.delegate = self;
-//    
-//    [self.view addSubview:collapseMenuView];
-//    [self.view layoutSubviews];
+    [super viewDidLoad];    
     
+    UIBarButtonItem *waiterBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"waiter-icon-resized.png"] style:UIBarButtonItemStyleDone target:self action:@selector(callWaiter)];
+    
+    [[self navigationItem] setRightBarButtonItem:waiterBarItem];
+    
+    
+    _orderTableNumber = @"1";
+    [self.orderTableButton setTitle:[NSString stringWithFormat:@"Order Table: %@",_orderTableNumber] forState:UIControlStateNormal];
     _orderTableButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     _orderCostButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     _orderCostButton.titleLabel.minimumScaleFactor = -5.0f;
@@ -65,6 +68,11 @@
     [super viewWillAppear:animated];
     
     [self showTitleBar:_categoryString];
+}
+
+- (void) callWaiter {
+    WaiterTableViewController *waiter = (WaiterTableViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"waiterOptions"];
+    [self.navigationController pushViewController:waiter animated:YES];
 }
 
 - (NSDictionary*) extractMenuContent {
@@ -128,7 +136,6 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"count:%i",_arrayCategories.count);
     return _arrayCategories.count;
     
 }
@@ -239,11 +246,21 @@
 }
 
 
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"tableConfirmOrder"] || [segue.identifier isEqualToString:@"priceConfirmOrder"]) {
+    if ([segue.identifier isEqualToString:@"priceConfirmOrder"]) {
         ((ConfirmOrderViewController*)segue.destinationViewController).arrayOrderList = @[];
     }
+    else if ([segue.identifier isEqualToString:@"showTableNumber"]) {
+        ((TableNumberViewController*)segue.destinationViewController).delegate = self;
+        ((TableNumberViewController*)segue.destinationViewController).tableNumber = _orderTableNumber;
+    }
+}
+
+
+- (void)setTableNumber:(NSString *)tableNumber {
+    [self.orderTableButton setTitle:[NSString stringWithFormat:@"Order Table: %@",tableNumber] forState:UIControlStateNormal];
+    
+    self.orderTableNumber = tableNumber;
 }
 
 @end

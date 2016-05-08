@@ -8,6 +8,14 @@
 
 #import "CoreViewController.h"
 
+typedef enum {
+    AffiliatedRestaurantsAll,
+    AffiliatedRestaurantsRecents,
+    AffiliatedRestaurantsFavorites
+} AffiliatedRestaurants;
+
 @interface AffiliatedRestoViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (assign, nonatomic) AffiliatedRestaurants showAffiliatedRestaurant;
 
 @end

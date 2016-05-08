@@ -9,6 +9,7 @@
 #import "DrawerTableViewController.h"
 #import "LoginViewController.h"
 #import "AppDelegate.h"
+#import "AffiliatedRestoViewController.h"
 
 
 @interface DrawerTableViewController ()
@@ -124,6 +125,17 @@
             
         }];
     }
+    else if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"RECENT"]) {
+        AffiliatedRestoViewController *affiliated = (AffiliatedRestoViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"affiliatedResto"];
+        affiliated.showAffiliatedRestaurant = AffiliatedRestaurantsRecents;
+        [self.navigationController pushViewController:affiliated animated:YES];
+    }
+    else if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"FAVORITES"]) {
+        AffiliatedRestoViewController *affiliated = (AffiliatedRestoViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"affiliatedResto"];
+        affiliated.showAffiliatedRestaurant = AffiliatedRestaurantsFavorites;
+        [self.navigationController pushViewController:affiliated animated:YES];
+    }
+    
 }
 
 #pragma mark -

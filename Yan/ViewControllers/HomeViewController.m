@@ -233,13 +233,14 @@
     id response = notification.object;
     if ([response isMemberOfClass:[NSError class]]) {
         
-        [self showTitleBar:@"SIGN IN"];
+//        [self showTitleBar:@"SIGN IN"];
         self.view.userInteractionEnabled = YES;
         return;
     }
     if (response[@"token"]){
         if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"]]) {
             [self.navigationController popToRootViewControllerAnimated:YES];
+            self.view.userInteractionEnabled = YES;
             [self changeView:nil];
         }
     } else {
@@ -265,13 +266,14 @@
     id response = notification.object;
     if ([response isMemberOfClass:[NSError class]]) {
         
-        [self showTitleBar:@"SIGN IN"];
+//        [self showTitleBar:@"SIGN IN"];
         self.view.userInteractionEnabled = YES;
         return;
     }
     if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"]]) {
         self.view.userInteractionEnabled = YES;
         [self.navigationController popToRootViewControllerAnimated:YES];
+        self.view.userInteractionEnabled = YES;
         [self changeView:nil];
     }
 }

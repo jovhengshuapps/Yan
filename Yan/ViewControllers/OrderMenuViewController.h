@@ -7,10 +7,10 @@
 //
 
 #import "CoreViewController.h"
-//#import "CollapseMenuView.h"
 #import "MenuListViewController.h"
+#import "TableNumberViewController.h"
 
-@interface OrderMenuViewController : CoreViewController </*CollapseMenuViewDelegate*/UITableViewDataSource, UITableViewDelegate, MenuListDelegate>
+@interface OrderMenuViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate, MenuListDelegate, TableNumberViewControllerDelegate>
 
 @property(strong,nonatomic) NSArray *categories;
 @end

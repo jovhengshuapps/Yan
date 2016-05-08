@@ -212,6 +212,7 @@
     
     NETWORK_INDICATOR(YES)
     
+    NSLog(@"parameters:%@",parameters);
     [manager POST:method parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
         NSLog(@"progress:%f",[uploadProgress fractionCompleted]);

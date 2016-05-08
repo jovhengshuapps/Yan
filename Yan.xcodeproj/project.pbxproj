@@ -9,6 +9,16 @@
 /* Begin PBXBuildFile section */
 		333FEEF71CCF7205004D4B5B /* MenuListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FEEF61CCF7205004D4B5B /* MenuListViewController.m */; };
 		333FEEFA1CCF7AFE004D4B5B /* MenuDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FEEF91CCF7AFE004D4B5B /* MenuDetailsViewController.m */; };
+		33446AEC1CDB486F00F46EE1 /* OptionListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33446AEB1CDB486F00F46EE1 /* OptionListTableViewController.m */; };
+		33446AEF1CDB488600F46EE1 /* OptionListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33446AEE1CDB488600F46EE1 /* OptionListTableViewCell.m */; };
+		33446AF21CDB524100F46EE1 /* CustomPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33446AF11CDB524100F46EE1 /* CustomPickerViewController.m */; };
+		33446AFF1CDB613300F46EE1 /* Reservation+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 33446AF41CDB613300F46EE1 /* Reservation+CoreDataProperties.m */; };
+		33446B001CDB613300F46EE1 /* Reservation.m in Sources */ = {isa = PBXBuildFile; fileRef = 33446AF61CDB613300F46EE1 /* Reservation.m */; };
+		33446B011CDB613300F46EE1 /* MenuItem+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 33446AF81CDB613300F46EE1 /* MenuItem+CoreDataProperties.m */; };
+		33446B021CDB613300F46EE1 /* MenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 33446AFA1CDB613300F46EE1 /* MenuItem.m */; };
+		33446B031CDB613300F46EE1 /* OrderList+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 33446AFC1CDB613300F46EE1 /* OrderList+CoreDataProperties.m */; };
+		33446B041CDB613300F46EE1 /* OrderList.m in Sources */ = {isa = PBXBuildFile; fileRef = 33446AFE1CDB613300F46EE1 /* OrderList.m */; };
+		3345EF691CDE5127008A0A13 /* WaiterOptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3345EF681CDE5127008A0A13 /* WaiterOptionTableViewCell.m */; };
 		335834641CC4F1B4008606C8 /* AffiliatedRestoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335834631CC4F1B4008606C8 /* AffiliatedRestoViewController.m */; };
 		33599B451CAD259100366C34 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33599B441CAD259100366C34 /* main.m */; };
 		33599B481CAD259100366C34 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33599B471CAD259100366C34 /* AppDelegate.m */; };
@@ -48,6 +58,7 @@
 		336424E71CAE354F00E0E156 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424C61CAE354F00E0E156 /* Reachability.m */; };
 		336424E81CAE354F00E0E156 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424C91CAE354F00E0E156 /* XMLReader.m */; };
 		337516DF1CB2AC390065AB7A /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 337516DE1CB2AC390065AB7A /* HomeViewController.m */; };
+		3381D35D1CDD84D7006BBAEF /* WaiterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3381D35C1CDD84D7006BBAEF /* WaiterTableViewController.m */; };
 		338567ED1CD0FC310099BDD0 /* Account+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 338567EA1CD0FC310099BDD0 /* Account+CoreDataProperties.m */; };
 		338567EE1CD0FC310099BDD0 /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 338567EC1CD0FC310099BDD0 /* Account.m */; };
 		3394A39E1CADF66300472030 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A3931CADF66300472030 /* RECommonFunctions.m */; };
@@ -58,6 +69,7 @@
 		3394A3A31CADF66300472030 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A39D1CADF66300472030 /* UIViewController+REFrostedViewController.m */; };
 		3394A3A51CAE078100472030 /* LucidaGrande.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 3394A3A41CAE078100472030 /* LucidaGrande.ttc */; };
 		33A276B71CD46A8400FAE9C8 /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A276B61CD46A8400FAE9C8 /* DatePickerViewController.m */; };
+		33A2D30F1CDEED0B00D86794 /* TableNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A2D30E1CDEED0B00D86794 /* TableNumberViewController.m */; };
 		33B36F061CC649D800AB30C6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33B36F051CC649D800AB30C6 /* AVFoundation.framework */; };
 		33B36F091CC65CD900AB30C6 /* ReserveRestoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B36F081CC65CD900AB30C6 /* ReserveRestoViewController.m */; };
 		33B36F0C1CC663BC00AB30C6 /* ReserveCompleteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33B36F0B1CC663BC00AB30C6 /* ReserveCompleteViewController.m */; };
@@ -104,6 +116,26 @@
 		333FEEF61CCF7205004D4B5B /* MenuListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuListViewController.m; sourceTree = "<group>"; };
 		333FEEF81CCF7AFE004D4B5B /* MenuDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuDetailsViewController.h; sourceTree = "<group>"; };
 		333FEEF91CCF7AFE004D4B5B /* MenuDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuDetailsViewController.m; sourceTree = "<group>"; };
+		33446AEA1CDB486F00F46EE1 /* OptionListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionListTableViewController.h; sourceTree = "<group>"; };
+		33446AEB1CDB486F00F46EE1 /* OptionListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionListTableViewController.m; sourceTree = "<group>"; };
+		33446AED1CDB488600F46EE1 /* OptionListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionListTableViewCell.h; sourceTree = "<group>"; };
+		33446AEE1CDB488600F46EE1 /* OptionListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionListTableViewCell.m; sourceTree = "<group>"; };
+		33446AF01CDB524100F46EE1 /* CustomPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPickerViewController.h; sourceTree = "<group>"; };
+		33446AF11CDB524100F46EE1 /* CustomPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPickerViewController.m; sourceTree = "<group>"; };
+		33446AF31CDB613300F46EE1 /* Reservation+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Reservation+CoreDataProperties.h"; sourceTree = "<group>"; };
+		33446AF41CDB613300F46EE1 /* Reservation+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Reservation+CoreDataProperties.m"; sourceTree = "<group>"; };
+		33446AF51CDB613300F46EE1 /* Reservation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reservation.h; sourceTree = "<group>"; };
+		33446AF61CDB613300F46EE1 /* Reservation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reservation.m; sourceTree = "<group>"; };
+		33446AF71CDB613300F46EE1 /* MenuItem+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MenuItem+CoreDataProperties.h"; sourceTree = "<group>"; };
+		33446AF81CDB613300F46EE1 /* MenuItem+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MenuItem+CoreDataProperties.m"; sourceTree = "<group>"; };
+		33446AF91CDB613300F46EE1 /* MenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuItem.h; sourceTree = "<group>"; };
+		33446AFA1CDB613300F46EE1 /* MenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuItem.m; sourceTree = "<group>"; };
+		33446AFB1CDB613300F46EE1 /* OrderList+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "OrderList+CoreDataProperties.h"; sourceTree = "<group>"; };
+		33446AFC1CDB613300F46EE1 /* OrderList+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "OrderList+CoreDataProperties.m"; sourceTree = "<group>"; };
+		33446AFD1CDB613300F46EE1 /* OrderList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderList.h; sourceTree = "<group>"; };
+		33446AFE1CDB613300F46EE1 /* OrderList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderList.m; sourceTree = "<group>"; };
+		3345EF671CDE5127008A0A13 /* WaiterOptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaiterOptionTableViewCell.h; sourceTree = "<group>"; };
+		3345EF681CDE5127008A0A13 /* WaiterOptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaiterOptionTableViewCell.m; sourceTree = "<group>"; };
 		335834621CC4F1B4008606C8 /* AffiliatedRestoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AffiliatedRestoViewController.h; sourceTree = "<group>"; };
 		335834631CC4F1B4008606C8 /* AffiliatedRestoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AffiliatedRestoViewController.m; sourceTree = "<group>"; };
 		33599B401CAD259000366C34 /* Yan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yan.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +212,8 @@
 		336424C91CAE354F00E0E156 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
 		337516DD1CB2AC390065AB7A /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		337516DE1CB2AC390065AB7A /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		3381D35B1CDD84D7006BBAEF /* WaiterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaiterTableViewController.h; sourceTree = "<group>"; };
+		3381D35C1CDD84D7006BBAEF /* WaiterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaiterTableViewController.m; sourceTree = "<group>"; };
 		338567E91CD0FC310099BDD0 /* Account+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Account+CoreDataProperties.h"; sourceTree = "<group>"; };
 		338567EA1CD0FC310099BDD0 /* Account+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Account+CoreDataProperties.m"; sourceTree = "<group>"; };
 		338567EB1CD0FC310099BDD0 /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
@@ -199,6 +233,8 @@
 		3394A3A41CAE078100472030 /* LucidaGrande.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = LucidaGrande.ttc; sourceTree = "<group>"; };
 		33A276B51CD46A8400FAE9C8 /* DatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController.h; sourceTree = "<group>"; };
 		33A276B61CD46A8400FAE9C8 /* DatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController.m; sourceTree = "<group>"; };
+		33A2D30D1CDEED0B00D86794 /* TableNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableNumberViewController.h; sourceTree = "<group>"; };
+		33A2D30E1CDEED0B00D86794 /* TableNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableNumberViewController.m; sourceTree = "<group>"; };
 		33B36F011CC6486800AB30C6 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		33B36F031CC6496A00AB30C6 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		33B36F051CC649D800AB30C6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -484,6 +520,18 @@
 		33A276AD1CD4686200FAE9C8 /* CoreData Objects */ = {
 			isa = PBXGroup;
 			children = (
+				33446AF31CDB613300F46EE1 /* Reservation+CoreDataProperties.h */,
+				33446AF41CDB613300F46EE1 /* Reservation+CoreDataProperties.m */,
+				33446AF51CDB613300F46EE1 /* Reservation.h */,
+				33446AF61CDB613300F46EE1 /* Reservation.m */,
+				33446AF71CDB613300F46EE1 /* MenuItem+CoreDataProperties.h */,
+				33446AF81CDB613300F46EE1 /* MenuItem+CoreDataProperties.m */,
+				33446AF91CDB613300F46EE1 /* MenuItem.h */,
+				33446AFA1CDB613300F46EE1 /* MenuItem.m */,
+				33446AFB1CDB613300F46EE1 /* OrderList+CoreDataProperties.h */,
+				33446AFC1CDB613300F46EE1 /* OrderList+CoreDataProperties.m */,
+				33446AFD1CDB613300F46EE1 /* OrderList.h */,
+				33446AFE1CDB613300F46EE1 /* OrderList.m */,
 				338567E91CD0FC310099BDD0 /* Account+CoreDataProperties.h */,
 				338567EA1CD0FC310099BDD0 /* Account+CoreDataProperties.m */,
 				338567EB1CD0FC310099BDD0 /* Account.h */,
@@ -527,6 +575,18 @@
 				335B7AC81CD76C48000E9D9F /* MenuListTableViewCell.m */,
 				335B7ACA1CD7A156000E9D9F /* MenuOptionTableViewCell.h */,
 				335B7ACB1CD7A156000E9D9F /* MenuOptionTableViewCell.m */,
+				33446AEA1CDB486F00F46EE1 /* OptionListTableViewController.h */,
+				33446AEB1CDB486F00F46EE1 /* OptionListTableViewController.m */,
+				33446AED1CDB488600F46EE1 /* OptionListTableViewCell.h */,
+				33446AEE1CDB488600F46EE1 /* OptionListTableViewCell.m */,
+				33446AF01CDB524100F46EE1 /* CustomPickerViewController.h */,
+				33446AF11CDB524100F46EE1 /* CustomPickerViewController.m */,
+				3381D35B1CDD84D7006BBAEF /* WaiterTableViewController.h */,
+				3381D35C1CDD84D7006BBAEF /* WaiterTableViewController.m */,
+				3345EF671CDE5127008A0A13 /* WaiterOptionTableViewCell.h */,
+				3345EF681CDE5127008A0A13 /* WaiterOptionTableViewCell.m */,
+				33A2D30D1CDEED0B00D86794 /* TableNumberViewController.h */,
+				33A2D30E1CDEED0B00D86794 /* TableNumberViewController.m */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -743,15 +803,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				3394A3A31CADF66300472030 /* UIViewController+REFrostedViewController.m in Sources */,
+				33446B011CDB613300F46EE1 /* MenuItem+CoreDataProperties.m in Sources */,
+				3345EF691CDE5127008A0A13 /* WaiterOptionTableViewCell.m in Sources */,
 				336424BF1CAE313A00E0E156 /* UIImageView+AFNetworking.m in Sources */,
 				336424BE1CAE313A00E0E156 /* UIButton+AFNetworking.m in Sources */,
 				33599BBF1CAD444500366C34 /* LoginViewController.m in Sources */,
+				33446AF21CDB524100F46EE1 /* CustomPickerViewController.m in Sources */,
 				442160931CB3760A00BB387F /* OrderMenuViewController.m in Sources */,
+				33446B021CDB613300F46EE1 /* MenuItem.m in Sources */,
 				3394A39F1CADF66300472030 /* REFrostedContainerViewController.m in Sources */,
 				33599B511CAD259100366C34 /* Yan.xcdatamodeld in Sources */,
+				3381D35D1CDD84D7006BBAEF /* WaiterTableViewController.m in Sources */,
 				3394A39E1CADF66300472030 /* RECommonFunctions.m in Sources */,
+				33A2D30F1CDEED0B00D86794 /* TableNumberViewController.m in Sources */,
 				335834641CC4F1B4008606C8 /* AffiliatedRestoViewController.m in Sources */,
 				336424B91CAE313A00E0E156 /* AFURLSessionManager.m in Sources */,
+				33446B031CDB613300F46EE1 /* OrderList+CoreDataProperties.m in Sources */,
 				336424BD1CAE313A00E0E156 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				338567ED1CD0FC310099BDD0 /* Account+CoreDataProperties.m in Sources */,
 				336424E81CAE354F00E0E156 /* XMLReader.m in Sources */,
@@ -769,9 +836,11 @@
 				337516DF1CB2AC390065AB7A /* HomeViewController.m in Sources */,
 				336424BC1CAE313A00E0E156 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				333FEEFA1CCF7AFE004D4B5B /* MenuDetailsViewController.m in Sources */,
+				33446AFF1CDB613300F46EE1 /* Reservation+CoreDataProperties.m in Sources */,
 				336424BA1CAE313A00E0E156 /* AFAutoPurgingImageCache.m in Sources */,
 				336424B61CAE313A00E0E156 /* AFSecurityPolicy.m in Sources */,
 				33599BAE1CAD274E00366C34 /* CoreViewController.m in Sources */,
+				33446AEC1CDB486F00F46EE1 /* OptionListTableViewController.m in Sources */,
 				33599B451CAD259100366C34 /* main.m in Sources */,
 				33599BB31CAD2D9000366C34 /* RootViewController.m in Sources */,
 				442160881CB32C5800BB387F /* CollapseMenuView.m in Sources */,
@@ -779,7 +848,9 @@
 				338567EE1CD0FC310099BDD0 /* Account.m in Sources */,
 				335B7ACC1CD7A156000E9D9F /* MenuOptionTableViewCell.m in Sources */,
 				336424C11CAE313A00E0E156 /* UIRefreshControl+AFNetworking.m in Sources */,
+				33446AEF1CDB488600F46EE1 /* OptionListTableViewCell.m in Sources */,
 				33C142451CB1512500B57041 /* AlertView.m in Sources */,
+				33446B001CDB613300F46EE1 /* Reservation.m in Sources */,
 				33C6E6801CC7C6CD001690ED /* ScanLogoViewController.m in Sources */,
 				33B36F091CC65CD900AB30C6 /* ReserveRestoViewController.m in Sources */,
 				336424C01CAE313A00E0E156 /* UIProgressView+AFNetworking.m in Sources */,
@@ -788,6 +859,7 @@
 				336424C21CAE313A00E0E156 /* UIWebView+AFNetworking.m in Sources */,
 				33B36F0C1CC663BC00AB30C6 /* ReserveCompleteViewController.m in Sources */,
 				33599BC21CAD4CD600366C34 /* NavigationController.m in Sources */,
+				33446B041CDB613300F46EE1 /* OrderList.m in Sources */,
 				33C6E67D1CC7A1D9001690ED /* CustomButton.m in Sources */,
 				3394A3A21CADF66300472030 /* UIView+REFrostedViewController.m in Sources */,
 				336424BB1CAE313A00E0E156 /* AFImageDownloader.m in Sources */,

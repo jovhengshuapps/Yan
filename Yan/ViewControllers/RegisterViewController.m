@@ -80,11 +80,14 @@
 
 - (void)videoAdPlayer:(AlertView *)alertView{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerCompletedMethod:) name:@"registerCompletedObserver" object:nil];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM/dd/YYYY"];
+    NSDate *formattedDate = [dateFormatter dateFromString:self.textFieldBirthday.text];
     [self callAPI:API_USER_REGISTER withParameters:@{
                                                      @"user_email": self.textFieldEmail.text,
                                                      @"user_password": self.textFieldPassword.text,
                                                      @"full_name": self.textFieldName.text,
-                                                     @"birthday": self.textFieldBirthday.text
+                                                     @"birthday": [dateFormatter stringFromDate:formattedDate]
                                                      } completionNotification:@"registerCompletedObserver"];
     [alertView dismissAlertView];
 }

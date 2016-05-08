@@ -12,7 +12,8 @@
 typedef enum {
     AffiliatedRestoOptionAll,
     AffiliatedRestoOptionRecent,
-    AffiliatedRestoOptionNearby
+    AffiliatedRestoOptionNearby,
+    AffiliatedRestoOptionFavorites
 } AffiliatedRestoOption;
 
 @interface AffiliatedRestoViewController ()
@@ -23,10 +24,16 @@ typedef enum {
 @property (strong, nonatomic) NSMutableArray *dataListAll;
 @property (strong, nonatomic) NSMutableArray *dataListRecent;
 @property (strong, nonatomic) NSMutableArray *dataListNearby;
+@property (strong, nonatomic) NSMutableArray *dataListFavorites;
+
 @property (assign,nonatomic) AffiliatedRestoOption tabBarOption;
 @property (weak, nonatomic) IBOutlet UIButton *barItemRecents;
 @property (weak, nonatomic) IBOutlet UIButton *barItemRestaurants;
 @property (weak, nonatomic) IBOutlet UIButton *barItemNearby;
+@property (weak, nonatomic) IBOutlet UIView *viewMainBar;
+@property (weak, nonatomic) IBOutlet UIView *viewFromDrawerBar;
+@property (weak, nonatomic) IBOutlet UIButton *drawerBarItemRecents;
+@property (weak, nonatomic) IBOutlet UIButton *drawerBarItemFavorites;
 
 @end
 
@@ -34,38 +41,49 @@ typedef enum {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
-//    _resultsBarView = [[UIView alloc] initWithFrame:CGRectMake(0, self.titleBarView.frame.size.height, self.view.bounds.size.width, self.titleBarView.frame.size.height)];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getRestaurants:) name:@"getRestaurantsObserver" object:nil];
+    [self callGETAPI:API_RESTAURANTS withParameters:@{} completionNotification:@"getRestaurantsObserver"];
+    
     _resultsBarView.backgroundColor = UIColorFromRGB(0x969696);
-//    _resultsBarLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _resultsBarView.frame.size.width, _resultsBarView.frame.size.height)];
-    
     _resultsBarLabel.font = [UIFont fontWithName:@"LucidaGrande" size:15.0f];
     _resultsBarLabel.textColor = UIColorFromRGB(0xFFFFFF);
     _resultsBarLabel.textAlignment = NSTextAlignmentCenter;
     _resultsBarLabel.backgroundColor = [UIColor clearColor];
     [_resultsBarView addSubview:_resultsBarLabel];
     
+
+    
+    if (_showAffiliatedRestaurant == AffiliatedRestaurantsAll) {
+        
+        [_barItemRestaurants setTitleEdgeInsets:UIEdgeInsetsMake(0.0f, 5.0f, 0.0f, 5.0f)];
+        _barItemRestaurants.titleLabel.minimumScaleFactor = -5.0f;
+        _barItemRestaurants.titleLabel.adjustsFontSizeToFitWidth = YES;
+        NSString *fontName = _barItemRestaurants.titleLabel.font.fontName;
+        
+        CGSize sizeOneLine = [_barItemRestaurants.titleLabel.text sizeWithFont:_barItemRestaurants.titleLabel.font];
+        
+        CGSize sizeOneLineConstrained = [_barItemRestaurants.titleLabel.text sizeWithFont:_barItemRestaurants.titleLabel.font constrainedToSize:_barItemRestaurants.titleLabel.frame.size];
+        
+        CGFloat approxScaleFactor = sizeOneLineConstrained.width / sizeOneLine.width;
+        
+        NSInteger approxScaledPointSize = approxScaleFactor * _barItemRestaurants.titleLabel.font.pointSize;
+        
+        _barItemNearby.titleLabel.font = [UIFont fontWithName:fontName size:approxScaledPointSize-2];
+        _barItemRecents.titleLabel.font = [UIFont fontWithName:fontName size:approxScaledPointSize-2];
+        
+        self.viewMainBar.hidden = NO;
+        self.viewFromDrawerBar.hidden = YES;
+    }
+    else {
+        
+        self.viewMainBar.hidden = YES;
+        self.viewFromDrawerBar.hidden = NO;
+    }
     
     
-    [_barItemRestaurants setTitleEdgeInsets:UIEdgeInsetsMake(0.0f, 5.0f, 0.0f, 5.0f)];
-    _barItemRestaurants.titleLabel.minimumScaleFactor = -5.0f;
-    _barItemRestaurants.titleLabel.adjustsFontSizeToFitWidth = YES;
-    NSString *fontName = _barItemRestaurants.titleLabel.font.fontName;
     
-    CGSize sizeOneLine = [_barItemRestaurants.titleLabel.text sizeWithFont:_barItemRestaurants.titleLabel.font];
-    
-    CGSize sizeOneLineConstrained = [_barItemRestaurants.titleLabel.text sizeWithFont:_barItemRestaurants.titleLabel.font constrainedToSize:_barItemRestaurants.titleLabel.frame.size];
-    
-    CGFloat approxScaleFactor = sizeOneLineConstrained.width / sizeOneLine.width;
-    
-    NSInteger approxScaledPointSize = approxScaleFactor * _barItemRestaurants.titleLabel.font.pointSize;
-    
-    _barItemNearby.titleLabel.font = [UIFont fontWithName:fontName size:approxScaledPointSize-2];
-    _barItemRecents.titleLabel.font = [UIFont fontWithName:fontName size:approxScaledPointSize-2];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getRestaurants:) name:@"getRestaurantsObserver" object:nil];
-    [self callGETAPI:API_RESTAURANTS withParameters:@{} completionNotification:@"getRestaurantsObserver"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -99,6 +117,7 @@ typedef enum {
     
     _dataListNearby = [NSMutableArray new];
     _dataListRecent = [NSMutableArray new];
+    _dataListFavorites = [NSMutableArray new];
     
     [self reloadTableWithButton:nil];
 }
@@ -111,17 +130,27 @@ typedef enum {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSInteger result = 0;
+    
+    NSString *appendedType = @"";
+    
     if (_tabBarOption == AffiliatedRestoOptionAll) {
         result = _dataListAll.count;
+        appendedType = @"";
     }
     else if (_tabBarOption == AffiliatedRestoOptionRecent) {
         result = _dataListRecent.count;
+        appendedType = @" (RECENT)";
     }
     else if (_tabBarOption == AffiliatedRestoOptionNearby) {
         result = _dataListNearby.count;
+        appendedType = @" NEARBY";
+    }
+    else if (_tabBarOption == AffiliatedRestoOptionFavorites) {
+        result = _dataListFavorites.count;
+        appendedType = @" (FAVORITES)";
     }
     
-    [self setResultsBarText:[NSString stringWithFormat:@"%li Results Found",(long)result]];
+    [self setResultsBarText:[NSString stringWithFormat:@"%li RESTAURANT AVAILABLE%@",(long)result, appendedType]];
     
     return result;
 }
@@ -155,6 +184,11 @@ typedef enum {
         details = [NSString stringWithFormat:@"%@ | %@",[_dataListNearby[indexPath.row] objectForKey:@"location"],[_dataListNearby[indexPath.row] objectForKey:@"website"]];
         
     }
+    else if (_tabBarOption == AffiliatedRestoOptionFavorites) {
+        name = [_dataListFavorites[indexPath.row] objectForKey:@"name"];
+        details = [NSString stringWithFormat:@"%@ | %@",[_dataListFavorites[indexPath.row] objectForKey:@"location"],[_dataListFavorites[indexPath.row] objectForKey:@"website"]];
+        
+    }
     cell.textLabel.text = name;
     cell.detailTextLabel.text = details;
 //    cell.textLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:name attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), 24.0f)];
@@ -181,6 +215,10 @@ typedef enum {
         reserve.restaurantDetails = _dataListNearby[indexPath.row];
         
     }
+    else if (_tabBarOption == AffiliatedRestoOptionFavorites) {
+        reserve.restaurantDetails = _dataListFavorites[indexPath.row];
+        
+    }
     [self.navigationController pushViewController:reserve animated:YES];
     
 }
@@ -195,9 +233,19 @@ typedef enum {
         }
         else if ([sender tag] == AffiliatedRestoOptionRecent) {
             _tabBarOption = AffiliatedRestoOptionRecent;
-            [_barItemRecents setBackgroundColor:UIColorFromRGB(0xFF7B3C)];
-            [_barItemNearby setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
-            [_barItemRestaurants setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
+            if (_showAffiliatedRestaurant == AffiliatedRestaurantsRecents) {
+                [_drawerBarItemRecents setBackgroundColor:UIColorFromRGB(0xFF7B3C)];
+                [_drawerBarItemFavorites setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
+            }
+            else {[_barItemRecents setBackgroundColor:UIColorFromRGB(0xFF7B3C)];
+                [_barItemNearby setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
+                [_barItemRestaurants setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
+            }
+        }else if ([sender tag] == AffiliatedRestoOptionFavorites) {
+            _tabBarOption = AffiliatedRestoOptionFavorites;
+                [_drawerBarItemRecents setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
+                [_drawerBarItemFavorites setBackgroundColor:UIColorFromRGB(0xFF7B3C)];
+            
         }
         else {
             _tabBarOption = AffiliatedRestoOptionAll;

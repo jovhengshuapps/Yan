@@ -7,7 +7,32 @@
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="MenuItem" representedClassName="MenuItem" syncable="YES">
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="options" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="OrderList" representedClassName="OrderList" syncable="YES">
+        <attribute name="itemName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="itemOptions" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="itemPrice" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="itemQuantity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tableNumber" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Reservation" representedClassName="Reservation" syncable="YES">
+        <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="numberOfPerson" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reservationDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reservationTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tableNumber" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="Account" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="MenuItem" positionX="-63" positionY="18" width="128" height="135"/>
+        <element name="OrderList" positionX="-54" positionY="45" width="128" height="120"/>
+        <element name="Reservation" positionX="-36" positionY="72" width="128" height="120"/>
     </elements>
 </model>

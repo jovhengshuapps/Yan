@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UIView *loadedControllerView;
 @property (strong, nonatomic) NSString *categoryString;
 @property (strong, nonatomic) NSString *orderTableNumber;
+@property (assign, nonatomic) CGFloat totalOrderPrice;
 
 @end
 

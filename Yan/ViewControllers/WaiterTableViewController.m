@@ -26,6 +26,7 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    
     _waiterOptions = [[NSMutableDictionary alloc] initWithDictionary:@{@"Toothpick":@0,
                                                                       @"Table Napkin":@0,
                                                                       @"Extra Utensils":@0,
@@ -39,6 +40,12 @@
     self.mainTableView.allowsSelection = NO;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self showTitleBar:@"WAITER"];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -66,14 +73,14 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 88.0f;
+    return 66.0f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, 44.0f)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, 66.0f)];
     view.backgroundColor = [UIColor clearColor];
     CustomButton *button = [CustomButton buttonWithType:UIButtonTypeCustom];
-    [button setFrame:CGRectMake(10.0f, 5.0f, view.frame.size.width - 20.0f, view.frame.size.height - 10.0f)];
+    [button setFrame:CGRectMake(30.0f, 5.0f, view.frame.size.width - 60.0f, view.frame.size.height - 10.0f)];
     [button setTitle:@"Continue" forState:UIControlStateNormal];
     [button  addTarget:self action:@selector(sendWaiterRequestAndDismiss) forControlEvents:UIControlEventTouchUpInside];
     [button setBackgroundColor:UIColorFromRGB(0x000000)];

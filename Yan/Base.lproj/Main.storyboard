@@ -2115,10 +2115,14 @@ You may now start using the app for your favourite restaurant.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="w4n-Fd-SA4" firstAttribute="top" secondItem="tu1-MN-4z5" secondAttribute="bottom" id="Qfr-Ka-NZG"/>
+                            <constraint firstItem="w4n-Fd-SA4" firstAttribute="top" secondItem="tu1-MN-4z5" secondAttribute="bottom" id="Qfr-Ka-NZG">
+                                <variation key="heightClass=regular-widthClass=compact" constant="-115"/>
+                            </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="tu1-MN-4z5" secondAttribute="trailing" constant="-20" id="Qwz-fl-Qas"/>
                             <constraint firstItem="tu1-MN-4z5" firstAttribute="leading" secondItem="wmS-mj-BUo" secondAttribute="leadingMargin" constant="-20" id="YnP-b0-LPs"/>
-                            <constraint firstItem="tu1-MN-4z5" firstAttribute="top" secondItem="wmS-mj-BUo" secondAttribute="topMargin" id="mkZ-Rd-R2X"/>
+                            <constraint firstItem="tu1-MN-4z5" firstAttribute="top" secondItem="wmS-mj-BUo" secondAttribute="topMargin" id="mkZ-Rd-R2X">
+                                <variation key="heightClass=regular-widthClass=compact" constant="115"/>
+                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
@@ -2143,8 +2147,6 @@ You may now start using the app for your favourite restaurant.</string>
                             </mask>
                         </variation>
                     </view>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="mainTableView" destination="tu1-MN-4z5" id="WW3-ZI-9sm"/>
                         <outlet property="view" destination="wmS-mj-BUo" id="iya-nW-RcE"/>

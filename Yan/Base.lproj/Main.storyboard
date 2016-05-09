@@ -92,6 +92,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="w0e-d1-hH5"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j6Z-eu-1zj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -102,6 +103,7 @@
         <scene sceneID="791-Lu-ifa">
             <objects>
                 <navigationController storyboardIdentifier="navigation" useStoryboardIdentifierAsRestorationIdentifier="YES" id="A6N-26-CCc" customClass="NavigationController" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VHv-cn-KVZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -930,6 +932,7 @@ You may now start using the app for your favourite restaurant.</string>
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="P7h-xG-Rai"/>
                     <connections>
                         <outlet property="googleLoginButton" destination="NB5-Ks-W5G" id="qOA-l0-9oV"/>
@@ -1009,6 +1012,7 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstItem="u3D-96-qHr" firstAttribute="leading" secondItem="ksd-nk-Qga" secondAttribute="leadingMargin" id="z5S-PX-Gc7"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="buttonContinue" destination="q1d-eH-eDm" id="MQV-HM-lna"/>
                         <outlet property="imageButton" destination="6Q9-fB-d55" id="s0n-kk-vbt"/>
@@ -1107,6 +1111,7 @@ You may now start using the app for your favourite restaurant.</string>
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="mWb-I8-UsP"/>
                     <connections>
                         <outlet property="loadedControllerView" destination="hBB-BI-RNz" id="fi1-ch-vH0"/>
@@ -1129,6 +1134,7 @@ You may now start using the app for your favourite restaurant.</string>
                         <viewControllerLayoutGuide type="bottom" id="Pbf-IF-Qaz"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="zVA-nh-7Lz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FG3-Gx-nMC">
@@ -1219,12 +1225,12 @@ You may now start using the app for your favourite restaurant.</string>
                                     <mask key="constraints">
                                         <exclude reference="BRc-pE-h6e"/>
                                         <exclude reference="w3P-fD-aQM"/>
-                                        <exclude reference="VFj-hd-3XE"/>
-                                        <exclude reference="rD3-GI-Wlu"/>
                                         <exclude reference="mVB-Rv-ypq"/>
                                         <exclude reference="oSJ-7l-y58"/>
                                         <exclude reference="684-QP-k47"/>
                                         <exclude reference="dPu-Dj-dHP"/>
+                                        <exclude reference="VFj-hd-3XE"/>
+                                        <exclude reference="rD3-GI-Wlu"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -1236,12 +1242,12 @@ You may now start using the app for your favourite restaurant.</string>
                                     <mask key="constraints">
                                         <include reference="BRc-pE-h6e"/>
                                         <include reference="w3P-fD-aQM"/>
-                                        <include reference="VFj-hd-3XE"/>
-                                        <include reference="rD3-GI-Wlu"/>
                                         <include reference="mVB-Rv-ypq"/>
                                         <include reference="oSJ-7l-y58"/>
                                         <include reference="684-QP-k47"/>
                                         <include reference="dPu-Dj-dHP"/>
+                                        <include reference="VFj-hd-3XE"/>
+                                        <include reference="rD3-GI-Wlu"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -1270,6 +1276,7 @@ You may now start using the app for your favourite restaurant.</string>
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="containerView" destination="FG3-Gx-nMC" id="ENJ-UL-JZj"/>
                         <outlet property="imageView" destination="uCf-Bc-zvo" id="HqM-44-YUo"/>
@@ -1605,6 +1612,7 @@ You may now start using the app for your favourite restaurant.</string>
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="barItemNearby" destination="ULb-00-24d" id="Mwm-Gm-SqR"/>
                         <outlet property="barItemRecents" destination="Rju-Ks-DaF" id="nMU-qL-4mf"/>
@@ -1655,6 +1663,7 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstAttribute="trailingMargin" secondItem="C88-9h-G0Z" secondAttribute="trailing" constant="-20" id="iul-AC-nqq"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="mainTable" destination="C88-9h-G0Z" id="ea6-6o-u3N"/>
                         <outlet property="view" destination="DiS-oI-sLU" id="4St-v5-hco"/>
@@ -1727,6 +1736,7 @@ You may now start using the app for your favourite restaurant.</string>
                             <outlet property="delegate" destination="iis-hD-NZe" id="34r-XU-ry8"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hPL-8b-ZS2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1792,8 +1802,7 @@ You may now start using the app for your favourite restaurant.</string>
                                                             <exclude reference="UTt-vX-9rY"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="18" y="14" width="49" height="32"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="UTt-vX-9rY"/>
                                                         </mask>
@@ -1812,8 +1821,7 @@ You may now start using the app for your favourite restaurant.</string>
                                                             <exclude reference="S6z-tl-20B"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="75" y="28" width="32" height="18"/>
+                                                    <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
                                                             <include reference="S6z-tl-20B"/>
                                                         </mask>
@@ -1827,7 +1835,7 @@ You may now start using the app for your favourite restaurant.</string>
                                                 <constraint firstItem="Sgs-05-caT" firstAttribute="leading" secondItem="OXf-Qx-7o5" secondAttribute="trailing" constant="8" id="bkb-Fd-G7O"/>
                                                 <constraint firstItem="OXf-Qx-7o5" firstAttribute="top" secondItem="beV-e9-icx" secondAttribute="topMargin" constant="6" id="eac-zv-1GE"/>
                                                 <constraint firstItem="Sgs-05-caT" firstAttribute="baseline" secondItem="OXf-Qx-7o5" secondAttribute="baseline" id="iss-s1-1dX">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="1"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" constant="2"/>
                                                 </constraint>
                                                 <constraint firstItem="OXf-Qx-7o5" firstAttribute="leading" secondItem="beV-e9-icx" secondAttribute="leadingMargin" constant="10" id="sC1-IH-ok1"/>
                                             </constraints>
@@ -1895,6 +1903,7 @@ You may now start using the app for your favourite restaurant.</string>
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="menuListTable" destination="CqX-7G-e7y" id="Idx-D2-FSo"/>
                         <outlet property="view" destination="2Pu-Xf-4HS" id="IFW-zy-MOG"/>
@@ -2000,6 +2009,7 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstItem="D3O-0e-tbt" firstAttribute="top" secondItem="QRv-CM-FTw" secondAttribute="bottom" id="mJv-zF-5QD"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="detailsTable" destination="QRv-CM-FTw" id="Bby-px-nkC"/>
                         <outlet property="itemImage" destination="02n-Re-rqK" id="5da-Zf-Cq0"/>
@@ -2019,6 +2029,7 @@ You may now start using the app for your favourite restaurant.</string>
                         <viewControllerLayoutGuide type="bottom" id="w4n-Fd-SA4"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wmS-mj-BUo">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tu1-MN-4z5">
@@ -2048,14 +2059,14 @@ You may now start using the app for your favourite restaurant.</string>
                                                     <state key="highlighted" image="check"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="vfi-hz-jVo"/>
                                                             <exclude reference="R5s-SS-9Ux"/>
+                                                            <exclude reference="vfi-hz-jVo"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
-                                                            <include reference="vfi-hz-jVo"/>
                                                             <include reference="R5s-SS-9Ux"/>
+                                                            <include reference="vfi-hz-jVo"/>
                                                         </mask>
                                                     </variation>
                                                     <connections>
@@ -2077,12 +2088,12 @@ You may now start using the app for your favourite restaurant.</string>
                                                     <exclude reference="jZg-6Y-6aT"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="YyM-St-ayQ"/>
-                                                    <exclude reference="Odu-xb-quw"/>
-                                                    <exclude reference="1Qe-b6-Xd4"/>
                                                     <exclude reference="GtW-Fp-LSq"/>
-                                                    <exclude reference="hmG-IE-JGo"/>
                                                     <exclude reference="M1D-mP-ga8"/>
+                                                    <exclude reference="hmG-IE-JGo"/>
+                                                    <exclude reference="1Qe-b6-Xd4"/>
+                                                    <exclude reference="Odu-xb-quw"/>
+                                                    <exclude reference="YyM-St-ayQ"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -2091,12 +2102,12 @@ You may now start using the app for your favourite restaurant.</string>
                                                     <include reference="jZg-6Y-6aT"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="YyM-St-ayQ"/>
-                                                    <include reference="Odu-xb-quw"/>
-                                                    <include reference="1Qe-b6-Xd4"/>
                                                     <include reference="GtW-Fp-LSq"/>
-                                                    <include reference="hmG-IE-JGo"/>
                                                     <include reference="M1D-mP-ga8"/>
+                                                    <include reference="hmG-IE-JGo"/>
+                                                    <include reference="1Qe-b6-Xd4"/>
+                                                    <include reference="Odu-xb-quw"/>
+                                                    <include reference="YyM-St-ayQ"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -2121,7 +2132,7 @@ You may now start using the app for your favourite restaurant.</string>
                             <constraint firstAttribute="trailingMargin" secondItem="tu1-MN-4z5" secondAttribute="trailing" constant="-20" id="Qwz-fl-Qas"/>
                             <constraint firstItem="tu1-MN-4z5" firstAttribute="leading" secondItem="wmS-mj-BUo" secondAttribute="leadingMargin" constant="-20" id="YnP-b0-LPs"/>
                             <constraint firstItem="tu1-MN-4z5" firstAttribute="top" secondItem="wmS-mj-BUo" secondAttribute="topMargin" id="mkZ-Rd-R2X">
-                                <variation key="heightClass=regular-widthClass=compact" constant="115"/>
+                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                         </constraints>
                         <variation key="default">
@@ -2129,10 +2140,10 @@ You may now start using the app for your favourite restaurant.</string>
                                 <exclude reference="tu1-MN-4z5"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="Qfr-Ka-NZG"/>
                                 <exclude reference="Qwz-fl-Qas"/>
                                 <exclude reference="YnP-b0-LPs"/>
                                 <exclude reference="mkZ-Rd-R2X"/>
-                                <exclude reference="Qfr-Ka-NZG"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2140,13 +2151,14 @@ You may now start using the app for your favourite restaurant.</string>
                                 <include reference="tu1-MN-4z5"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="Qfr-Ka-NZG"/>
                                 <include reference="Qwz-fl-Qas"/>
                                 <include reference="YnP-b0-LPs"/>
                                 <include reference="mkZ-Rd-R2X"/>
-                                <include reference="Qfr-Ka-NZG"/>
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="mainTableView" destination="tu1-MN-4z5" id="WW3-ZI-9sm"/>
                         <outlet property="view" destination="wmS-mj-BUo" id="iya-nW-RcE"/>
@@ -2432,6 +2444,7 @@ You may now start using the app for your favourite restaurant.</string>
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="textFieldDate" destination="aXN-8F-aOO" id="r5q-WN-GHo"/>
                         <outlet property="textFieldNumberPerson" destination="4of-uP-Zoy" id="raQ-9I-TSa"/>
@@ -2649,6 +2662,7 @@ You may now start using the app for your favourite restaurant.</string>
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="labelRestaurantAddress" destination="Gdo-dp-KKe" id="rFG-Mf-fri"/>
                         <outlet property="labelRestaurantOpeningHoursDays" destination="L79-DH-XJa" id="gjC-xw-fZD"/>
@@ -2746,6 +2760,7 @@ You may now start using the app for your favourite restaurant.</string>
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="buttonDone" destination="WdO-Fa-eMO" id="Xaw-4c-iSh"/>
                         <outlet property="datePicker" destination="hbx-hT-pdX" id="jQ7-Si-ZYV"/>
@@ -2941,6 +2956,7 @@ You may now start using the app for your favourite restaurant.</string>
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PkM-hM-4CS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3164,6 +3180,7 @@ You may now start using the app for your favourite restaurant.</string>
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="googleLoginButton" destination="6kV-Yc-seY" id="hzX-bo-1cL"/>
                         <outlet property="loginButton" destination="Kdj-O6-80w" id="hil-8i-kBW"/>
@@ -3336,6 +3353,7 @@ You may now start using the app for your favourite restaurant.</string>
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="cRm-Lj-a7b"/>
                     <connections>
                         <outlet property="buttonLogin" destination="7UV-eB-qw7" id="3kg-sJ-HUg"/>
@@ -3514,6 +3532,7 @@ You may now start using the app for your favourite restaurant.</string>
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="textFieldBirthday" destination="rJq-zN-8xr" id="8PR-u6-7ay"/>
                         <outlet property="textFieldEmail" destination="MuL-Zc-0qT" id="tF5-Vi-kdP"/>
@@ -3548,6 +3567,7 @@ You may now start using the app for your favourite restaurant.</string>
                             <outlet property="delegate" destination="Cz2-eA-rEC" id="DeN-UR-uLt"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="view" destination="Hkh-GO-fOr" id="et4-01-Eg7"/>
                     </connections>
@@ -3640,6 +3660,7 @@ You may now start using the app for your favourite restaurant.</string>
                             </mask>
                         </variation>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
                         <outlet property="buttonDone" destination="zDj-7G-trH" id="Fcu-Lv-9tH"/>
                         <outlet property="doneButton" destination="zDj-7G-trH" id="LRw-tn-Zsk"/>
@@ -3666,10 +3687,10 @@ You may now start using the app for your favourite restaurant.</string>
         <image name="yan-red-gold" width="4519" height="4513"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="G7S-qi-ftF"/>
         <segue reference="Y4r-v0-sWo"/>
-        <segue reference="iwi-F0-UhZ"/>
-        <segue reference="YJZ-bv-B1B"/>
         <segue reference="Vwc-zK-8Vx"/>
+        <segue reference="7dQ-Ir-nbk"/>
         <segue reference="Jyy-jT-Sb2"/>
     </inferredMetricsTieBreakers>
 </document>

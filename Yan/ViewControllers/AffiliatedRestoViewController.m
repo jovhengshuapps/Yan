@@ -234,7 +234,7 @@ typedef enum {
         }
         else if ([sender tag] == AffiliatedRestoOptionRecent) {
             _tabBarOption = AffiliatedRestoOptionRecent;
-            if (_showAffiliatedRestaurant == AffiliatedRestaurantsRecents) {
+            if (_showAffiliatedRestaurant == AffiliatedRestaurantsRecents || _showAffiliatedRestaurant == AffiliatedRestaurantsFavorites) {
                 [_drawerBarItemRecents setBackgroundColor:UIColorFromRGB(0xFF7B3C)];
                 [_drawerBarItemFavorites setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
             }

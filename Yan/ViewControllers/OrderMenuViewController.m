@@ -66,7 +66,7 @@
     
     _rawData = [self extractMenuContent];
     
-    CGFloat positionY = self.view.frame.size.height - _orderCheckoutView.bounds.size.height;
+    CGFloat positionY = self.view.frame.size.height - (_orderCheckoutView.bounds.origin.y +  _orderCheckoutView.bounds.size.height);
     CGFloat sizeHeight = (44.0f * _arrayCategories.count) + 44.0f; /*height of row and section*/
     positionY -= sizeHeight;
     

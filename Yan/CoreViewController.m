@@ -92,7 +92,7 @@
 //- (void)viewWillAppear:(BOOL)animated {
 //    [super viewWillAppear:animated];
 //    
-//    NSLog(@"view:%@",NSStringFromCGRect(self.view.frame));
+//    
 //}
 //
 //- (void)viewDidAppear:(BOOL)animated {
@@ -122,8 +122,10 @@
     }
         
     _titleBarView.hidden = NO;
-    self.view.userInteractionEnabled = NO;
     _titleLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:[title uppercaseString] attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), _titleBarView.frame.size.height - 20.0f)];
+    
+    
+    self.view.userInteractionEnabled = NO;
     [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
         _titleBarView.alpha = 1.0f;
         CGRect frame = self.view.frame;
@@ -131,10 +133,14 @@
         frame.size.height = _defaultHeight - (_titleBarView.frame.size.height + self.navigationController.navigationBar.frame.size.height + 20.0f);
         self.view.frame = frame;
         self.view.alpha = 1.0f;
-    } completion:^(BOOL finished) {
+    } completion:^
+     (BOOL finished) {
         
         self.view.userInteractionEnabled = YES;
     }];
+    
+    
+    
 }
 
 - (void) hideTitleBar {

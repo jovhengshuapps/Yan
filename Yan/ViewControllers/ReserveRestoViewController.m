@@ -92,6 +92,7 @@
     
     RestaurantDetailsViewController *details = [self.storyboard instantiateViewControllerWithIdentifier:@"restaurantDetails"];
     details.restaurantDetails = _restaurantDetails;
+    details.reservedTableNumber = _textFieldTableNumber.text;
     [self.navigationController pushViewController:details animated:YES];
 }
 

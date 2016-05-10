@@ -7,7 +7,7 @@
 //
 
 #import "CoreViewController.h"
-#import "AppDelegate.h"
+
 
 @interface CoreViewController ()
 @property (strong, nonatomic) UILabel *titleLabel;
@@ -25,13 +25,21 @@
     self.title = @"Yan";
     
     //Setup Title Bar
-    _titleBarView = [[UIView alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.view.bounds.size.width, self.navigationController.navigationBar.frame.size.height)];
+//    _titleBarView = [[UIView alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.view.bounds.size.width, self.navigationController.navigationBar.frame.size.height)];
     _titleBarView.backgroundColor = UIColorFromRGB(0x333333);
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _titleBarView.frame.size.width, _titleBarView.frame.size.height)];
-    _titleLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:@"..." attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), 25.0f)];
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KEYWINDOW.frame.size.width, 44.0f)];
     _titleLabel.textAlignment = NSTextAlignmentCenter;
-    
+    _titleLabel.text = @"...";
+    _titleLabel.font = [UIFont fontWithName:@"LucidaGrande" size:25.0f];
+    _titleLabel.textColor = UIColorFromRGB(0xFFFFFF);
     [self hideTitleBar];
+    
+    
+    [_titleBarView addSubview:_titleLabel];
+        
+    _defaultHeight = self.view.frame.size.height;
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     /*
      
@@ -65,15 +73,6 @@
      [footerView addConstraints:constraint_POS_V];
      
      */
-    
-    [_titleBarView addSubview:_titleLabel];
-    
-    [self.navigationController.navigationBar addSubview:_titleBarView];
-    
-    _defaultHeight = self.view.frame.size.height;
-    
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    
     
 }
 
@@ -122,22 +121,24 @@
     }
         
     _titleBarView.hidden = NO;
-    _titleLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:[title uppercaseString] attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), _titleBarView.frame.size.height - 20.0f)];
+    _titleLabel.text = [title uppercaseString];
+//    _titleBarView.alpha = 1.0f;
+//    _titleLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:[title uppercaseString] attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), _titleBarView.frame.size.height - 20.0f)];
     
     
-    self.view.userInteractionEnabled = NO;
-    [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        _titleBarView.alpha = 1.0f;
-        CGRect frame = self.view.frame;
-        frame.origin.y = _titleBarView.frame.size.height + self.navigationController.navigationBar.frame.size.height + 20.0f;
-        frame.size.height = _defaultHeight - (_titleBarView.frame.size.height + self.navigationController.navigationBar.frame.size.height + 20.0f);
-        self.view.frame = frame;
-        self.view.alpha = 1.0f;
-    } completion:^
-     (BOOL finished) {
-        
-        self.view.userInteractionEnabled = YES;
-    }];
+//    self.view.userInteractionEnabled = NO;
+//    [UIView animateWithDuration:0.2f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//        _titleBarView.alpha = 1.0f;
+//        CGRect frame = self.view.frame;
+//        frame.origin.y = _titleBarView.frame.size.height + self.navigationController.navigationBar.frame.size.height + 20.0f;
+//        frame.size.height = _defaultHeight - (_titleBarView.frame.size.height + self.navigationController.navigationBar.frame.size.height + 20.0f);
+//        self.view.frame = frame;
+//        self.view.alpha = 1.0f;
+//    } completion:^
+//     (BOOL finished) {
+//        
+//        self.view.userInteractionEnabled = YES;
+//    }];
     
     
     

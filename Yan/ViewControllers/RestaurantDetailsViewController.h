@@ -10,4 +10,5 @@
 
 @interface RestaurantDetailsViewController : CoreViewController
 @property (strong, nonatomic) NSDictionary *restaurantDetails;
+@property (strong, nonatomic) NSString *reservedTableNumber;
 @end

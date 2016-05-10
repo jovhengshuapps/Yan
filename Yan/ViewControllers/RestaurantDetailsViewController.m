@@ -7,6 +7,7 @@
 //
 
 #import "RestaurantDetailsViewController.h"
+#import "ShareTableViewController.h"
 
 @interface RestaurantDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *labelRestaurantAddress;
@@ -35,15 +36,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"shareTableFacebook"]) {
+        ((ShareTableViewController*)segue.destinationViewController).tableNumber = _reservedTableNumber.length?_reservedTableNumber:@"??";
+        ((ShareTableViewController*)segue.destinationViewController).restaurant = _restaurantDetails[@"name"];
+        
+    }
 }
-*/
+
 - (IBAction)directionsWaze:(id)sender {
     
 //    waze://?ll=37.331689,-122.030731&navigate=yes

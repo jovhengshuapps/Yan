@@ -6,10 +6,12 @@
 //  Copyright © 2016 JoVhengshua Apps. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "CoreViewController.h"
+#import "CustomPickerViewController.h"
 
-@interface OptionListTableViewController : UITableViewController
+@interface OptionListTableViewController : CoreViewController <UITableViewDelegate, UITableViewDataSource, CustomPickerViewControllerDelegate>
 
-@property (strong,nonatomic) NSArray *optionList;
+@property (strong, nonatomic) NSString *menuName;
+@property (strong,nonatomic) NSDictionary *optionList;
 
 @end

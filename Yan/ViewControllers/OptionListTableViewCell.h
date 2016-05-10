@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "CustomPickerViewController.h"
 
-@interface OptionListTableViewCell : UITableViewCell<UIPopoverPresentationControllerDelegate, CustomPickerViewControllerDelegate>
+@interface OptionListTableViewCell : UITableViewCell<UIPopoverPresentationControllerDelegate>
 @property (strong, nonatomic) NSString *optionLabel;
 @property (strong, nonatomic) NSArray *optionChoices;
+@property (strong, nonatomic) NSString *selectedOption;
+@property (weak, nonatomic) IBOutlet UIButton *buttonChoices;
+@property (nonatomic, copy) void (^tapHandler)(id sender);
 @end

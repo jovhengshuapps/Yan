@@ -1,27 +1,27 @@
 //
-//  ConfirmOrderViewController.m
+//  PayScreenViewController.m
 //  Yan
 //
-//  Created by Joshua Jose Pecson on 28/04/2016.
+//  Created by Joshua Jose Pecson on 10/05/2016.
 //  Copyright © 2016 JoVhengshua Apps. All rights reserved.
 //
 
-#import "ConfirmOrderViewController.h"
-#import "PaymentSelectViewController.h"
+#import "PayScreenViewController.h"
 
-@interface ConfirmOrderViewController ()
+@interface PayScreenViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
-@property (assign, nonatomic) BOOL billoutOrder;
+@property (strong, nonatomic) NSArray *arrayOrderList;
+@property (assign, nonatomic) BOOL showSubTotal;
 
 @end
 
-@implementation ConfirmOrderViewController
+@implementation PayScreenViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _billoutOrder = YES;
+    _showSubTotal = NO;
     _mainTable.allowsSelection = NO;
     
     [self fetchOrderDataList];
@@ -59,14 +59,9 @@
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setFrame:CGRectMake(20.0f, footerView.bounds.size.height - 44.0f - 10.0f, footerView.bounds.size.width - 20.0f - 20.0f, 44.0f)];
-    if (_billoutOrder) {
-        [button setTitle:@"Billout" forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(callBillout) forControlEvents:UIControlEventTouchUpInside];
-    }
-    else {
-        [button setTitle:@"Confirm Orders" forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(orderSentToServer) forControlEvents:UIControlEventTouchUpInside];
-    }
+        [button setTitle:@"Pay" forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(submitPayment) forControlEvents:UIControlEventTouchUpInside];
+    
     
     button.titleLabel.font = [UIFont fontWithName:@"LucidaGrande" size:20.0f];
     button.titleLabel.textColor = UIColorFromRGB(0xFFFFFF);
@@ -75,8 +70,6 @@
     [footerView addSubview:button];
     
     [_mainTable setTableFooterView:footerView];
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -88,8 +81,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self showTitleBar:[NSString stringWithFormat:@"Orders: Table %@",_tableNumber]];
+    [self showTitleBar:[NSString stringWithFormat:@"Bill: Table %@",_tableNumber]];
 }
+
 
 - (void) fetchOrderDataList {
     
@@ -101,40 +95,17 @@
     
     _arrayOrderList = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     
-    //check if billout
-    for (OrderList *item in _arrayOrderList) {
-        if ([item.orderSent boolValue] == NO) {
-            NSLog(@"item:%@",item.itemName);
-            _billoutOrder = NO;
-            break;
-        }
-    }
     
 }
 
-- (void) orderSentToServer {
-    //call api
-    
-    
-    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
-    
-    //update orders
-    for (OrderList *item in _arrayOrderList) {
-        item.orderSent = @YES;
-    }
-    
-    NSError *error = nil;
-    [context save:&error];
-    
-    [self.navigationController popToViewController:[self.navigationController viewControllers][2] animated:YES];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderSentNotification" object:nil];
+- (void) submitPayment {
+    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Our restaurant representative will see you to receive payment.\n\n Thank you!" delegate:self buttons:@[@"CLOSE"]];
+    [alert showAlertView];
 }
 
-- (void) callBillout {
-    PaymentSelectViewController *paymentSelect = (PaymentSelectViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"paymentSelection"];
-    paymentSelect.tableNumber = _tableNumber;
-    [self.navigationController pushViewController:paymentSelect animated:YES];
+
+- (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark Table Data Source
@@ -151,11 +122,17 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return 0;
+    }
     return 64.0f;
 }
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return nil;
+    }
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, 64.0f)];
     headerView.backgroundColor = [UIColor whiteColor];
     
@@ -165,12 +142,7 @@
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont fontWithName:@"LucidaGrande" size:22.0f];
     label.textColor = [UIColor blackColor];
-    if (!_arrayOrderList.count) {
-        label.text = @"You have no orders yet.";
-    }
-    else {
-        label.text = @"Your Orders";
-    }
+        label.text = @"Sub-total:";
     
     [headerView addSubview:label];
     
@@ -219,6 +191,5 @@
     
     return cell;
 }
-
 
 @end

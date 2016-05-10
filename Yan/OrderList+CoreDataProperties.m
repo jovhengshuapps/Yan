@@ -18,5 +18,6 @@
 @dynamic itemOptions;
 @dynamic tableNumber;
 @dynamic itemPrice;
+@dynamic orderSent;
 
 @end

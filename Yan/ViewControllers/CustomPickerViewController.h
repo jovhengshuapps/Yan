@@ -10,10 +10,12 @@
 
 @protocol  CustomPickerViewControllerDelegate <NSObject>
 
--(void)selectedItem:(NSString*)item;
+-(void)selectedItem:(NSString*)item withButton:(UIButton*)button;
 
 @end
 @interface CustomPickerViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
+
+@property (strong, nonatomic) UIButton *button;
 
 @property (strong,nonatomic) NSArray *choices;
 

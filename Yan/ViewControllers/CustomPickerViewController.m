@@ -30,8 +30,9 @@
 
 - (IBAction)doneButtonPressed:(id)sender {
     NSInteger row = [_pickerView selectedRowInComponent:0];
-    [_delegatePicker selectedItem:_choices[row]];
-    
+    [self dismissViewControllerAnimated:YES completion:^{        
+        [_delegatePicker selectedItem:_choices[row] withButton:_button];
+    }];
 }
 
 

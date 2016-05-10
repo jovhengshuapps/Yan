@@ -87,6 +87,10 @@
 		33E1B8C81CB7DCF000B4207F /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1B8C71CB7DCF000B4207F /* FBSDKCoreKit.framework */; };
 		33E1B8CB1CB7DD4100B4207F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1B8C91CB7DD4100B4207F /* FBSDKLoginKit.framework */; };
 		33E1B8CC1CB7DD4100B4207F /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1B8CA1CB7DD4100B4207F /* FBSDKShareKit.framework */; };
+		33E2C58F1CE1F44C00B28935 /* PaymentSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E2C58E1CE1F44C00B28935 /* PaymentSelectViewController.m */; };
+		33E2C5921CE1FBB200B28935 /* PaymentSelectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E2C5911CE1FBB200B28935 /* PaymentSelectionTableViewCell.m */; };
+		33E2C5951CE2015400B28935 /* PayScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E2C5941CE2015400B28935 /* PayScreenViewController.m */; };
+		33E2C5981CE222FB00B28935 /* ShareTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E2C5971CE222FB00B28935 /* ShareTableViewController.m */; };
 		33ED27811CD22F5E0013FADD /* ConfirmOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ED27801CD22F5E0013FADD /* ConfirmOrderViewController.m */; };
 		33F9FB401CB6841700637A02 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F9FB3F1CB6841700637A02 /* RegisterViewController.m */; };
 		33F9FB431CB68D5600637A02 /* MainLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F9FB421CB68D5600637A02 /* MainLoginViewController.m */; };
@@ -262,6 +266,14 @@
 		33E1B8C71CB7DCF000B4207F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		33E1B8C91CB7DD4100B4207F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		33E1B8CA1CB7DD4100B4207F /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		33E2C58D1CE1F44C00B28935 /* PaymentSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentSelectViewController.h; sourceTree = "<group>"; };
+		33E2C58E1CE1F44C00B28935 /* PaymentSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentSelectViewController.m; sourceTree = "<group>"; };
+		33E2C5901CE1FBB200B28935 /* PaymentSelectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaymentSelectionTableViewCell.h; sourceTree = "<group>"; };
+		33E2C5911CE1FBB200B28935 /* PaymentSelectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaymentSelectionTableViewCell.m; sourceTree = "<group>"; };
+		33E2C5931CE2015400B28935 /* PayScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayScreenViewController.h; sourceTree = "<group>"; };
+		33E2C5941CE2015400B28935 /* PayScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayScreenViewController.m; sourceTree = "<group>"; };
+		33E2C5961CE222FB00B28935 /* ShareTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareTableViewController.h; sourceTree = "<group>"; };
+		33E2C5971CE222FB00B28935 /* ShareTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareTableViewController.m; sourceTree = "<group>"; };
 		33ED277F1CD22F5E0013FADD /* ConfirmOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmOrderViewController.h; sourceTree = "<group>"; };
 		33ED27801CD22F5E0013FADD /* ConfirmOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmOrderViewController.m; sourceTree = "<group>"; };
 		33F9FB3E1CB6841700637A02 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
@@ -587,6 +599,12 @@
 				3345EF681CDE5127008A0A13 /* WaiterOptionTableViewCell.m */,
 				33A2D30D1CDEED0B00D86794 /* TableNumberViewController.h */,
 				33A2D30E1CDEED0B00D86794 /* TableNumberViewController.m */,
+				33E2C58D1CE1F44C00B28935 /* PaymentSelectViewController.h */,
+				33E2C58E1CE1F44C00B28935 /* PaymentSelectViewController.m */,
+				33E2C5901CE1FBB200B28935 /* PaymentSelectionTableViewCell.h */,
+				33E2C5911CE1FBB200B28935 /* PaymentSelectionTableViewCell.m */,
+				33E2C5931CE2015400B28935 /* PayScreenViewController.h */,
+				33E2C5941CE2015400B28935 /* PayScreenViewController.m */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -604,6 +622,8 @@
 				33C6E6791CC7A101001690ED /* RestaurantDetailsViewController.m */,
 				33A276B51CD46A8400FAE9C8 /* DatePickerViewController.h */,
 				33A276B61CD46A8400FAE9C8 /* DatePickerViewController.m */,
+				33E2C5961CE222FB00B28935 /* ShareTableViewController.h */,
+				33E2C5971CE222FB00B28935 /* ShareTableViewController.m */,
 			);
 			name = Reservation;
 			sourceTree = "<group>";
@@ -815,6 +835,7 @@
 				33599B511CAD259100366C34 /* Yan.xcdatamodeld in Sources */,
 				3381D35D1CDD84D7006BBAEF /* WaiterTableViewController.m in Sources */,
 				3394A39E1CADF66300472030 /* RECommonFunctions.m in Sources */,
+				33E2C5951CE2015400B28935 /* PayScreenViewController.m in Sources */,
 				33A2D30F1CDEED0B00D86794 /* TableNumberViewController.m in Sources */,
 				335834641CC4F1B4008606C8 /* AffiliatedRestoViewController.m in Sources */,
 				336424B91CAE313A00E0E156 /* AFURLSessionManager.m in Sources */,
@@ -838,6 +859,7 @@
 				333FEEFA1CCF7AFE004D4B5B /* MenuDetailsViewController.m in Sources */,
 				33446AFF1CDB613300F46EE1 /* Reservation+CoreDataProperties.m in Sources */,
 				336424BA1CAE313A00E0E156 /* AFAutoPurgingImageCache.m in Sources */,
+				33E2C5921CE1FBB200B28935 /* PaymentSelectionTableViewCell.m in Sources */,
 				336424B61CAE313A00E0E156 /* AFSecurityPolicy.m in Sources */,
 				33599BAE1CAD274E00366C34 /* CoreViewController.m in Sources */,
 				33446AEC1CDB486F00F46EE1 /* OptionListTableViewController.m in Sources */,
@@ -855,6 +877,7 @@
 				33B36F091CC65CD900AB30C6 /* ReserveRestoViewController.m in Sources */,
 				336424C01CAE313A00E0E156 /* UIProgressView+AFNetworking.m in Sources */,
 				336424B41CAE313A00E0E156 /* AFHTTPSessionManager.m in Sources */,
+				33E2C58F1CE1F44C00B28935 /* PaymentSelectViewController.m in Sources */,
 				33F9FB401CB6841700637A02 /* RegisterViewController.m in Sources */,
 				336424C21CAE313A00E0E156 /* UIWebView+AFNetworking.m in Sources */,
 				33B36F0C1CC663BC00AB30C6 /* ReserveCompleteViewController.m in Sources */,
@@ -863,6 +886,7 @@
 				33C6E67D1CC7A1D9001690ED /* CustomButton.m in Sources */,
 				3394A3A21CADF66300472030 /* UIView+REFrostedViewController.m in Sources */,
 				336424BB1CAE313A00E0E156 /* AFImageDownloader.m in Sources */,
+				33E2C5981CE222FB00B28935 /* ShareTableViewController.m in Sources */,
 				335B7AC91CD76C48000E9D9F /* MenuListTableViewCell.m in Sources */,
 				33ED27811CD22F5E0013FADD /* ConfirmOrderViewController.m in Sources */,
 			);

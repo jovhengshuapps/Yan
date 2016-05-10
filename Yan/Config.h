@@ -23,6 +23,7 @@
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import <GoogleSignIn/GoogleSignIn.h>
 
+#import "AppDelegate.h"
 #import "Account.h"
 #import "Reservation.h"
 #import "MenuItem.h"

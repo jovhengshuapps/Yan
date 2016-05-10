@@ -11,8 +11,9 @@
 #import "MenuDetailsViewController.h"
 #import "ConfirmOrderViewController.h"
 #import "WaiterTableViewController.h"
-#import "AppDelegate.h"
 
+
+BOOL hackFromLoad = NO;
 
 @interface OrderMenuViewController()
 
@@ -27,6 +28,7 @@
 @property (strong, nonatomic) NSString *categoryString;
 @property (strong, nonatomic) NSString *orderTableNumber;
 @property (assign, nonatomic) CGFloat totalOrderPrice;
+@property (weak, nonatomic) IBOutlet UIView *orderSentView;
 
 @end
 
@@ -55,6 +57,7 @@
     
     _totalOrderPrice = 0.0f;
     for (OrderList *orders in result) {
+        NSLog(@"[%@ : %@",orders.itemName, orders.orderSent);
         _totalOrderPrice += [orders.itemPrice floatValue];
     }
     
@@ -66,7 +69,9 @@
     
     _rawData = [self extractMenuContent];
     
-    CGFloat positionY = self.view.frame.size.height - (_orderCheckoutView.bounds.origin.y +  _orderCheckoutView.bounds.size.height);
+    CGFloat hackHeight = self.view.frame.size.height - 64.0f; //nav plus status bar
+    
+    CGFloat positionY = hackHeight - (_orderCheckoutView.bounds.origin.y +  _orderCheckoutView.bounds.size.height);
     CGFloat sizeHeight = (44.0f * _arrayCategories.count) + 44.0f; /*height of row and section*/
     positionY -= sizeHeight;
     
@@ -77,16 +82,33 @@
     _mainTableView.dataSource = self;
     _mainTableView.delegate = self;
     [self.view addSubview:_mainTableView];
-    
-    
+    _menuShown = YES;
+    [_mainTableView reloadData];
+    hackFromLoad = YES;
     _categoryString = @"";
+    
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showOrderSentView) name:@"OrderSentNotification" object:nil];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [self showTitleBar:_categoryString];
-    [self showMenu];
+    if (hackFromLoad) {
+        
+    }
+    else {
+        [self showMenu];
+        hackFromLoad = NO;
+    }
+}
+
+- (void) showOrderSentView {
+    self.orderSentView.hidden = NO;
+    [self showTitleBar:@""];
 }
 
 - (void) callWaiter {
@@ -96,8 +118,8 @@
 
 - (void) setTotalPrice:(CGFloat)price {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    [numberFormatter setCurrencySymbol:@"PHP:"];
+    numberFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"en_PH"];
+    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyISOCodeStyle];
     
     NSString *string = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:price]];
     [self.orderCostButton setTitle:string forState:UIControlStateNormal];
@@ -166,6 +188,8 @@
 }
 
 - (void) hideMenu {
+    self.orderSentView.hidden = YES;
+    [self showTitleBar:_categoryString];
     CGFloat positionY = self.view.frame.size.height - _orderCheckoutView.bounds.size.height;
     CGFloat sizeHeight = 44.0f; /*height of section*/
     positionY -= sizeHeight;
@@ -180,10 +204,11 @@
 }
 
 - (void) showMenu {
+    self.orderSentView.hidden = YES;
+    [self showTitleBar:_categoryString];
     CGFloat positionY = self.view.frame.size.height - _orderCheckoutView.bounds.size.height;
     CGFloat sizeHeight = (44.0f * _arrayCategories.count) + 44.0f; /*height of row and section*/
     positionY -= sizeHeight;
-    
     
     [UIView animateWithDuration:0.2f animations:^{
         _mainTableView.frame = CGRectMake(_mainTableView.frame.origin.x, positionY, _mainTableView.frame.size.width, sizeHeight);
@@ -319,6 +344,7 @@
     order.itemPrice = menu.price;
     order.itemOptions = menu.options;
     order.itemQuantity = @"1";
+    order.orderSent = @NO;
     
     NSError *error = nil;
     if (![context save:&error]) {
@@ -338,8 +364,11 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    self.orderSentView.hidden = YES;
+    [self showTitleBar:_categoryString];
     if ([segue.identifier isEqualToString:@"priceConfirmOrder"]) {
         ((ConfirmOrderViewController*)segue.destinationViewController).arrayOrderList = @[];
+        ((ConfirmOrderViewController*)segue.destinationViewController).tableNumber = _orderTableNumber;
     }
     else if ([segue.identifier isEqualToString:@"showTableNumber"]) {
         ((TableNumberViewController*)segue.destinationViewController).delegate = self;

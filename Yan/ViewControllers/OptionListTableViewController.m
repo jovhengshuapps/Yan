@@ -10,7 +10,9 @@
 #import "OptionListTableViewCell.h"
 
 @interface OptionListTableViewController ()
-
+@property (strong, nonatomic) IBOutlet UITableView *mainTableView;
+@property (strong, nonatomic) NSArray *optionTitles;
+@property (strong, nonatomic) CustomPickerViewController *pickerController;
 @end
 
 @implementation OptionListTableViewController
@@ -24,7 +26,15 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    self.tableView.allowsSelection = NO;
+    self.mainTableView.allowsSelection = NO;
+    
+    self.optionTitles = [NSArray arrayWithArray:[_optionList allKeys]];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self showTitleBar:[_menuName uppercaseString]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,14 +49,35 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _optionList.count;
+    return _optionTitles.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 88.0f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     OptionListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"menuOptionCell"];
     
-    cell.optionLabel = _optionList[indexPath.row][@"title"];
-    cell.optionChoices = _optionList[indexPath.row][@"choices"];
+    NSString *key = _optionTitles[indexPath.row];
+    cell.optionLabel = key;
+    cell.optionChoices = _optionList[key];
+    UIButton *button = cell.buttonChoices;
+    cell.tapHandler = ^(id sender) {
+        // do something
+        _pickerController = (CustomPickerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"pickerView"];
+        _pickerController.delegatePicker = self;
+        _pickerController.choices = _optionList[key];
+        _pickerController.button = button;
+        
+        _pickerController.modalPresentationStyle = UIModalPresentationPopover;
+        _pickerController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionLeft;
+        
+        [self presentViewController:_pickerController animated:YES completion:^{
+            
+        }];
+    };
+
     
     return cell;
 }
@@ -55,6 +86,14 @@
     return @"Choose your options:";
 }
 
+
+- (void)selectedItem:(NSString *)item withButton:(UIButton *)button{
+    [button setTitle:item forState:UIControlStateNormal];
+}
+
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
+    return UIModalPresentationNone;
+}
 
 /*
 // Override to support conditional editing of the table view.

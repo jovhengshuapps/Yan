@@ -78,4 +78,19 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+- (void)sharerDidCancel:(id<FBSDKSharing>)sharer {
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
+    
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error {
+    
+}
+
+
 @end

@@ -157,7 +157,7 @@
     
     UILabel *descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(35.0f, 0.0f, descriptionView.bounds.size.width - 35.0f - 10.0f, 80.0f)];
     descriptionLabel.numberOfLines = 0;
-    descriptionLabel.text = _item.desc;
+    descriptionLabel.text = _item.desc.length?_item.desc:@"Placeholder Text Description.";
     descriptionLabel.font = [UIFont fontWithName:@"LucidaGrande" size:18.0f];
     descriptionLabel.textColor = UIColorFromRGB(0x333333);
     

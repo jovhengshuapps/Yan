@@ -267,7 +267,7 @@
             if([responseObject[@"error"] integerValue] == 404 && [notificationName isEqualToString:@"socialLoginObserver"]){
                 [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
             }else {
-                [self resolveErrorResponse:responseObject];
+                [self resolveErrorResponse:responseObject withNotification:notificationName];
             }
             
         }else {
@@ -306,7 +306,7 @@
             if([responseObject[@"error"] integerValue] == 404 && [notificationName isEqualToString:@"socialLoginObserver"]){
                 [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
             }else {
-                [self resolveErrorResponse:responseObject];
+                [self resolveErrorResponse:responseObject withNotification:notificationName];
             }
         }else {
             [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
@@ -356,7 +356,7 @@
     return NO;
 }
 
-- (void) resolveErrorResponse:(NSDictionary*)response {
+- (void) resolveErrorResponse:(NSDictionary*)response withNotification:(NSString*)notificationName {
     NSString *title = @"";
     NSString *message = @"";
     UIAlertAction *actionOK = nil;
@@ -403,6 +403,7 @@
     
     [self presentViewController:alert animated:YES completion:^{
         
+        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:response];
     }];
 }
 

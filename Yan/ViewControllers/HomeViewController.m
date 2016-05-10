@@ -220,7 +220,7 @@
 //    NSLog(@"account:%@", _socialAccount);
     [self.navigationItem setPrompt:@"Logging in to Yan!"];
     self.view.userInteractionEnabled = NO;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessful:) name:@"socialLoginObserver" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gloginSuccessful:) name:@"socialLoginObserver" object:nil];
     [self callAPI:API_USER_LOGIN withParameters:@{
                                                   @"username": _socialAccount[@"username"],
                                                   @"password": _socialAccount[@"password"]
@@ -233,7 +233,7 @@
     id response = notification.object;
     if ([response isMemberOfClass:[NSError class]]) {
         
-//        [self showTitleBar:@"SIGN IN"];
+        //        [self showTitleBar:@"SIGN IN"];
         self.view.userInteractionEnabled = YES;
         return;
     }
@@ -264,9 +264,61 @@
 - (void)registerCompletedMethod:(NSNotification*)notification {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     id response = notification.object;
+    [self.navigationItem setPrompt:nil];
     if ([response isMemberOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
         
+        //        [self showTitleBar:@"SIGN IN"];
+        self.view.userInteractionEnabled = YES;
+        return;
+    }
+    if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"]]) {
+        self.view.userInteractionEnabled = YES;
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        self.view.userInteractionEnabled = YES;
+        [self changeView:nil];
+    }
+}
+
+- (void)gloginSuccessful:(NSNotification*)notification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
+    id response = notification.object;
+    if ([response isMemberOfClass:[NSError class]]) {
+        
 //        [self showTitleBar:@"SIGN IN"];
+        self.view.userInteractionEnabled = YES;
+        return;
+    }
+    if (response[@"token"]){
+        if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"]]) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            self.view.userInteractionEnabled = YES;
+            [self changeView:nil];
+        }
+    } else {
+        
+        [self.navigationItem setPrompt:@"Creating Yan! account"];
+        self.view.userInteractionEnabled = NO;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gregisterCompletedMethod:) name:@"registerCompletedObserver" object:nil];
+        [self callAPI:API_USER_REGISTER withParameters:@{
+                                                         @"user_email": _socialAccount[@"username"],
+                                                         @"user_password": _socialAccount[@"password"],
+                                                         @"full_name": _socialAccount[@"fullname"],
+                                                         @"birthday": _socialAccount[@"birthday"]
+                                                         } completionNotification:@"registerCompletedObserver"];
+    }
+    
+    
+}
+
+
+- (void)gregisterCompletedMethod:(NSNotification*)notification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
+    id response = notification.object;
+    [self.navigationItem setPrompt:nil];
+    if ([response isMemberOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
+        
+        //        [self showTitleBar:@"SIGN IN"];
         self.view.userInteractionEnabled = YES;
         return;
     }

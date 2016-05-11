@@ -112,8 +112,28 @@ typedef enum {
         [self showTitleBar:@"AFFILIATED RESTAURANT"];
         return;
     }
+    
+    
+    NSArray *dummy = @[
+                            @{@"name":@"Mcdonalds",
+                              @"location":@"Right in the corner",
+                              @"website":@"http://www.google.com/"
+                              },
+                            @{@"name":@"Jollibee",
+                              @"location":@"Bee happy",
+                              @"website":@"http://www.google.com/"
+                              },
+                            @{@"name":@"Racks",
+                              @"location":@"Ohhh baby!",
+                              @"website":@"http://www.google.com/"
+                              }
+                            ];
+    
+    
+    
 //    NSLog(@"response:%@",response);
-    _dataListAll = [NSMutableArray arrayWithArray:((NSArray*) response)];
+//    _dataListAll = [NSMutableArray arrayWithArray:((NSArray*) response)];
+    _dataListAll = [NSMutableArray arrayWithArray:dummy];
     
     _dataListNearby = [NSMutableArray new];
     _dataListRecent = [NSMutableArray new];

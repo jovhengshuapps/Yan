@@ -32,9 +32,13 @@
     else {
         self.itemImage.image = [UIImage imageNamed:@"yan-logo"];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateImage:) name:@"MenuImageFromURL" object:nil];
+        if (_item.image.length) {
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateImage:) name:@"MenuImageFromURL" object:nil];
+            
+            [self getImageFromURL:_item.image completionNotification:@"MenuImageFromURL"];
+            
+        }
         
-        [self getImageFromURL:_item.image completionNotification:@"MenuImageFromURL"];
 
     }
     

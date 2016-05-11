@@ -45,8 +45,11 @@
         UIBarButtonItem *menuBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"app-menu.png"] style:UIBarButtonItemStyleDone target:self action:@selector(openMenu)];
         
         [[self navigationItem] setLeftBarButtonItem:menuBarItem];
-        _viewDefaultHome.hidden = NO;
-        self.frostedViewController.panGestureEnabled = YES;
+        if (!(self.viewToShow == HomeViewRegistrationComplete || self.viewToShow == HomeViewNotification || self.viewToShow == HomeViewLogin)) {
+            
+            self.frostedViewController.panGestureEnabled = YES;
+            _viewDefaultHome.hidden = NO;
+        }
     }
     else {
         [self.navigationItem setLeftBarButtonItem:nil];

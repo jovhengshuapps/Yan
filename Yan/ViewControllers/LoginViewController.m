@@ -47,6 +47,7 @@
     }
     if (response[@"token"]) {
         if ([self saveLoggedInAccount:self.textFieldUsername.text :self.textFieldPassword.text :@"" :@"" :response[@"token"]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:nil];
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
     }

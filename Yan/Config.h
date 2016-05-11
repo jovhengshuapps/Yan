@@ -22,6 +22,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import <GoogleSignIn/GoogleSignIn.h>
+#import "UIImage+animatedGIF.h"
 
 #import "AppDelegate.h"
 #import "Account.h"

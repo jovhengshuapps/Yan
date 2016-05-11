@@ -135,6 +135,7 @@ BOOL hackFromLoad = NO;
         NSMutableArray *categoryItems = [NSMutableArray new];
         for (NSDictionary *item in [category objectForKey:@"menu"]) {
             MenuItem *menuItem = [self insertMenuToDatabase:item];
+            NSLog(@"item:%@ | menu:%@",item[@"name"],menuItem.name);
             [categoryItems addObject:menuItem];
         }
         [data setObject:(NSArray*)categoryItems forKey:categoryName];
@@ -151,12 +152,8 @@ BOOL hackFromLoad = NO;
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MenuItem"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@", item[@"name"]]];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"price == %@", item[@"price"]]];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"desc == %@", item[@"desc"]]];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"image == %@", item[@"image"]]];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"identifier == %@", item[@"id"]]];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"restaurantID == 5"]];
+    
+    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ AND price == %@ AND  desc == %@ AND image == %@ AND identifier == %@ AND restaurantID == 5", item[@"name"], item[@"price"], item[@"desc"], item[@"image"], item[@"id"]]];
     NSError *error = nil;
     
     NSArray *result = [context executeFetchRequest:request error:&error];

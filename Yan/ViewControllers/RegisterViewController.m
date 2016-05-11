@@ -41,9 +41,30 @@
 }
 - (IBAction)completeRegistration:(id)sender {
     
-    AlertView *alert = [[AlertView alloc] initVideoAd:@"https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" delegate:self];
-    alert.tag = 1;
-    [alert showAlertView];
+//    AlertView *alert = [[AlertView alloc] initVideoAd:@"https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" delegate:self];
+//    alert.tag = 1;
+//    [alert showAlertView];
+    if (self.textFieldName.text.length && self.textFieldBirthday.text.length && self.textFieldEmail.text.length && self.textFieldPassword.text.length) {
+//        NSURL *url = [[NSBundle mainBundle] URLForResource:@"imageGIF" withExtension:@"gif"];
+//        AlertView *alert = [[AlertView alloc] initWithImageGIF:url duration:19.0f delegate:self];
+//        [alert showAlertViewWithDuration:19.0f];
+        NSURL *url = [[NSBundle mainBundle] URLForResource:@"apple" withExtension:@"mp4"];
+        AlertView *alert = [[AlertView alloc] initVideoAd:url delegate:self];
+        alert.tag = 1;
+        [alert showAlertView];
+
+    }
+    else {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Incomplete Details" message:@"Please complete all information" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
     
 }
 
@@ -56,22 +77,22 @@
         return;
     }
     if ([self saveLoggedInAccount:self.textFieldEmail.text :self.textFieldPassword.text :self.textFieldName.text :self.textFieldBirthday.text :response[@"token"]]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:@"HomeViewRegistrationComplete"];
         
-        [self.navigationController popToRootViewControllerAnimated:NO];
+        [self.navigationController popToRootViewControllerAnimated:YES];
         
-        NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
-        [notification postNotificationName:ChangeHomeViewToShow object:@"HomeViewRegistrationComplete"];
+        
     }
 }
 
 - (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    if (alertView.tag == 1) {
-        [self.navigationController popToRootViewControllerAnimated:NO];
-        
-        NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
-        [notification postNotificationName:ChangeHomeViewToShow object:@"HomeViewRegistrationComplete"];
-    }
+//    if (alertView.tag == 1) {
+//        [self.navigationController popToRootViewControllerAnimated:NO];
+//        
+//        NSNotificationCenter *notification = [NSNotificationCenter defaultCenter];
+//        [notification postNotificationName:ChangeHomeViewToShow object:@"HomeViewRegistrationComplete"];
+//    }
 }
 
 - (void)alertViewDismissed:(AlertView *)alertView {
@@ -82,7 +103,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerCompletedMethod:) name:@"registerCompletedObserver" object:nil];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM/dd/YYYY"];
-    NSDate *formattedDate = [dateFormatter dateFromString:self.textFieldBirthday.text];
+    NSDate *formattedDate = [dateFormatter dateFromString:[self.textFieldBirthday.text substringToIndex:[self.textFieldBirthday.text rangeOfString:@","].location-1]];
+//    NSLog(@"formattedDate:%@",[dateFormatter stringFromDate:formattedDate]);
     [self callAPI:API_USER_REGISTER withParameters:@{
                                                      @"user_email": self.textFieldEmail.text,
                                                      @"user_password": self.textFieldPassword.text,
@@ -92,6 +114,21 @@
     [alertView dismissAlertView];
 }
 
+- (void)imageGIFEnded:(AlertView *)alertView {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerCompletedMethod:) name:@"registerCompletedObserver" object:nil];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM/dd/YYYY"];
+    NSDate *formattedDate = [dateFormatter dateFromString:[self.textFieldBirthday.text substringToIndex:[self.textFieldBirthday.text rangeOfString:@","].location-1]];
+    NSLog(@"formattedDate:%@",[dateFormatter stringFromDate:formattedDate]);
+    [self callAPI:API_USER_REGISTER withParameters:@{
+                                                     @"user_email": self.textFieldEmail.text,
+                                                     @"user_password": self.textFieldPassword.text,
+                                                     @"full_name": self.textFieldName.text,
+                                                     @"birthday": [dateFormatter stringFromDate:formattedDate]
+                                                     } completionNotification:@"registerCompletedObserver"];
+    [alertView dismissAlertView];
+}
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

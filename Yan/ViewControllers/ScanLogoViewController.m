@@ -207,10 +207,47 @@
 }
 
 - (void)proceedToOrderViewMenu {
+    NSArray *categories = @[
+                            @{@"name":@"Main Course",
+                                    @"menu":@[
+                                            @{@"id":@1,
+                                              @"name":@"Pininyahan",
+                                              @"price":@"120.00",
+                                              @"desc":@"Chicken meat swimming in milk oil and pineapple",
+                                              @"image":@""},
+                                            @{@"id":@2,
+                                              @"name":@"Pork Adobo",
+                                              @"price":@"160.00",
+                                              @"desc":@"Pork marinated in soy sauce oil and pineapple",
+                                              @"image":@""}
+                                            ]
+                              },
+                            @{@"name":@"Dessert",
+                              @"menu":@[
+                                      @{@"id":@3,
+                                        @"name":@"Ice Cream (Cookies & Cream)",
+                                        @"price":@"75.00",
+                                        @"desc":@"Oh sweet classic cookies and cream flavor YUM!",
+                                        @"image":@""},
+                                      @{@"id":@4,
+                                        @"name":@"Leche Flan",
+                                        @"price":@"45.00",
+                                        @"desc":@"Sweet Egg Pudding",
+                                        @"image":@""},
+                                      @{@"id":@5,
+                                        @"name":@"Sanzrival Cake",
+                                        @"price":@"145.00",
+                                        @"desc":@"Multi-layered cake sure to fill your crunchy, nutty sweet cravings.",
+                                        @"image":@""}
+                                      ]
+                              }
+                            ];
+    OrderMenuViewController *orderMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"orderMenu"];
+    orderMenu.categories = categories;
+    [self.navigationController pushViewController:orderMenu animated:YES];
     
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuForRestaurant:) name:@"getMenuForRestaurantObserver" object:nil];
-    [self callGETAPI:API_MENU(5) withParameters:@{} completionNotification:@"getMenuForRestaurantObserver"];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuForRestaurant:) name:@"getMenuForRestaurantObserver" object:nil];
+//    [self callGETAPI:API_MENU(5) withParameters:@{} completionNotification:@"getMenuForRestaurantObserver"];
     
 }
 

@@ -91,6 +91,8 @@
 		33E2C5921CE1FBB200B28935 /* PaymentSelectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E2C5911CE1FBB200B28935 /* PaymentSelectionTableViewCell.m */; };
 		33E2C5951CE2015400B28935 /* PayScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E2C5941CE2015400B28935 /* PayScreenViewController.m */; };
 		33E2C5981CE222FB00B28935 /* ShareTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E2C5971CE222FB00B28935 /* ShareTableViewController.m */; };
+		33E44CE31CE3442C002272EA /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E44CE21CE3442C002272EA /* UIImage+animatedGIF.m */; };
+		33E44CE71CE34ADC002272EA /* apple.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 33E44CE61CE34ADC002272EA /* apple.mp4 */; };
 		33ED27811CD22F5E0013FADD /* ConfirmOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ED27801CD22F5E0013FADD /* ConfirmOrderViewController.m */; };
 		33F9FB401CB6841700637A02 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F9FB3F1CB6841700637A02 /* RegisterViewController.m */; };
 		33F9FB431CB68D5600637A02 /* MainLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F9FB421CB68D5600637A02 /* MainLoginViewController.m */; };
@@ -274,6 +276,9 @@
 		33E2C5941CE2015400B28935 /* PayScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayScreenViewController.m; sourceTree = "<group>"; };
 		33E2C5961CE222FB00B28935 /* ShareTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareTableViewController.h; sourceTree = "<group>"; };
 		33E2C5971CE222FB00B28935 /* ShareTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareTableViewController.m; sourceTree = "<group>"; };
+		33E44CE11CE3442C002272EA /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
+		33E44CE21CE3442C002272EA /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
+		33E44CE61CE34ADC002272EA /* apple.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = apple.mp4; sourceTree = "<group>"; };
 		33ED277F1CD22F5E0013FADD /* ConfirmOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmOrderViewController.h; sourceTree = "<group>"; };
 		33ED27801CD22F5E0013FADD /* ConfirmOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmOrderViewController.m; sourceTree = "<group>"; };
 		33F9FB3E1CB6841700637A02 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
@@ -392,6 +397,7 @@
 		33599B791CAD26A900366C34 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				33E44CE01CE3442C002272EA /* AnimatedGIF */,
 				33DBA6E81CB8D1B800AB0062 /* GoogleSignIn.bundle */,
 				33DBA6E61CB8D18D00AB0062 /* GoogleSignIn.framework */,
 				33DBA6E41CB8CD2100AB0062 /* GoogleService-Info.plist */,
@@ -657,9 +663,19 @@
 				33599B521CAD259100366C34 /* Assets.xcassets */,
 				33599B541CAD259100366C34 /* LaunchScreen.storyboard */,
 				33599B571CAD259100366C34 /* Info.plist */,
+				33E44CE61CE34ADC002272EA /* apple.mp4 */,
 				33599B4F1CAD259100366C34 /* Yan.xcdatamodeld */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		33E44CE01CE3442C002272EA /* AnimatedGIF */ = {
+			isa = PBXGroup;
+			children = (
+				33E44CE11CE3442C002272EA /* UIImage+animatedGIF.h */,
+				33E44CE21CE3442C002272EA /* UIImage+animatedGIF.m */,
+			);
+			path = AnimatedGIF;
 			sourceTree = "<group>";
 		};
 		B34B5C970B55F0D232BFF620 /* Frameworks */ = {
@@ -793,6 +809,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3394A3A51CAE078100472030 /* LucidaGrande.ttc in Resources */,
+				33E44CE71CE34ADC002272EA /* apple.mp4 in Resources */,
 				33599B561CAD259100366C34 /* LaunchScreen.storyboard in Resources */,
 				33599B531CAD259100366C34 /* Assets.xcassets in Resources */,
 				33599B4E1CAD259100366C34 /* Main.storyboard in Resources */,
@@ -883,6 +900,7 @@
 				33B36F0C1CC663BC00AB30C6 /* ReserveCompleteViewController.m in Sources */,
 				33599BC21CAD4CD600366C34 /* NavigationController.m in Sources */,
 				33446B041CDB613300F46EE1 /* OrderList.m in Sources */,
+				33E44CE31CE3442C002272EA /* UIImage+animatedGIF.m in Sources */,
 				33C6E67D1CC7A1D9001690ED /* CustomButton.m in Sources */,
 				3394A3A21CADF66300472030 /* UIView+REFrostedViewController.m in Sources */,
 				336424BB1CAE313A00E0E156 /* AFImageDownloader.m in Sources */,

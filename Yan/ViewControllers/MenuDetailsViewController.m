@@ -207,7 +207,10 @@
     }
     
     [self fetchOrderData];
-    [_detailsTable setContentOffset:CGPointMake(0, CGFLOAT_MAX)];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_arrayOrders.count-1 inSection:0];
+    [_detailsTable scrollToRowAtIndexPath:indexPath
+                          atScrollPosition:UITableViewScrollPositionTop
+                                  animated:YES];
 }
 
 - (void)optionSelectedIndex:(NSInteger)index {

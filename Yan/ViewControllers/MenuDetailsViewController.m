@@ -114,12 +114,12 @@
     
     UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, _detailsTable.bounds.size.width, [self tableView:tableView heightForHeaderInSection:section])];
     
-    UIView *nameHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, contentView.bounds.size.width, 44.0f)];
+    UIView *nameHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, contentView.bounds.size.width, 55.0f)];
     nameHeaderView.backgroundColor = UIColorFromRGB(0xDFDFDF);
     nameHeaderView.layer.borderColor = [UIColor whiteColor].CGColor;
     nameHeaderView.layer.borderWidth = 1.0f;
     
-    UILabel *labelName = [[UILabel alloc] initWithFrame:CGRectMake(15.0f, 0.0f, nameHeaderView.bounds.size.width - 15.0f - 40.0f, 44.0f)];
+    UILabel *labelName = [[UILabel alloc] initWithFrame:CGRectMake(15.0f, 5.0f, nameHeaderView.bounds.size.width - 15.0f - 40.0f, 44.0f)];
     NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[_item.name uppercaseString],_item.price];
     
     CGFloat nameSize = labelName.frame.size.height - 10.0f;
@@ -147,7 +147,7 @@
     UIButton *addMoreButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [addMoreButton addTarget:self action:@selector(addMoreMenu) forControlEvents:UIControlEventTouchUpInside];
     [addMoreButton setImage:[UIImage imageNamed:@"plus-icon-resized"] forState:UIControlStateNormal];
-    [addMoreButton setFrame:CGRectMake(labelName.bounds.origin.y + labelName.bounds.size.width, 0.0f, 32.0f, 32.0f)];
+    [addMoreButton setFrame:CGRectMake(labelName.bounds.origin.y + labelName.bounds.size.width, 11.0f, 32.0f, 32.0f)];
     
     [nameHeaderView addSubview:labelName];
     [nameHeaderView addSubview:addMoreButton];
@@ -213,11 +213,15 @@
                                   animated:YES];
 }
 
-- (void)optionSelectedIndex:(NSInteger)index {
+- (void)optionSelectedIndex:(NSInteger)index sender:(id)sender {
     OptionListTableViewController *optionsTVC = (OptionListTableViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"optionListController"];
     optionsTVC.menuName = ((OrderList*)_arrayOrders[index]).itemName;
     optionsTVC.optionList = [self decodeData:((OrderList*)_arrayOrders[index]).itemOptions forKey:@"options"];
     [self.navigationController pushViewController:optionsTVC animated:YES];
+    
+    
+    
+    
     
 }
 

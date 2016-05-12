@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FPPopoverController.h"
 
 @protocol  CustomPickerViewControllerDelegate <NSObject>
 
 -(void)selectedItem:(NSString*)item withButton:(UIButton*)button;
 
 @end
-@interface CustomPickerViewController : UIViewController <UIPickerViewDelegate, UIPickerViewDataSource>
+@interface CustomPickerViewController : FPPopoverController <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (strong, nonatomic) UIButton *button;
 

@@ -23,6 +23,7 @@
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import <GoogleSignIn/GoogleSignIn.h>
 #import "UIImage+animatedGIF.h"
+#import "FPPopoverController.h"
 
 #import "AppDelegate.h"
 #import "Account.h"

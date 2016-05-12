@@ -22,11 +22,11 @@
 
 - (nonnull instancetype) initVideoAd:(nullable NSURL*)videoURL delegate:(nullable id)aDelegate;
 
-- (nonnull instancetype) initWithImageGIF:(nullable NSURL*)url duration:(CGFloat)duration delegate:(nullable id)aDelegate;
+//- (nonnull instancetype) initWithImageGIF:(nullable NSURL*)url duration:(CGFloat)duration delegate:(nullable id)aDelegate;
 
 - (void) showAlertView;
 - (void) dismissAlertView;
-- (void) showAlertViewWithDuration:(CGFloat)duration;
+//- (void) showAlertViewWithDuration:(CGFloat)duration;
 
 @end
 @protocol AlertViewDelegate <NSObject>

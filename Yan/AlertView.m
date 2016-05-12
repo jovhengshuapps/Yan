@@ -59,22 +59,22 @@
     return object;
 }
 
-- (nonnull instancetype) initWithImageGIF:(nullable NSURL*)url duration:(CGFloat)duration delegate:(nullable id)aDelegate {
-    id object = [self init];
-    if (!object) {
-        return nil;
-    }
-    
-    //initialize
-    
-    _delegate = aDelegate;
-    _imageGIFURL = url;
-    _instance = object;
-    
-    [object setupImage:aDelegate :url :duration];
-    
-    return object;
-}
+//- (nonnull instancetype) initWithImageGIF:(nullable NSURL*)url duration:(CGFloat)duration delegate:(nullable id)aDelegate {
+//    id object = [self init];
+//    if (!object) {
+//        return nil;
+//    }
+//    
+//    //initialize
+//    
+//    _delegate = aDelegate;
+//    _imageGIFURL = url;
+//    _instance = object;
+//    
+//    [object setupImage:aDelegate :url :duration];
+//    
+//    return object;
+//}
 
 
 - (void)setupAlertView:(nullable id)aDelegate :(nullable NSString*)aMessage :(nullable NSArray*)aButtonsArray {
@@ -229,59 +229,59 @@
     [self showAlertView];
 }
 
-- (void)setupImage:(nullable id)aDelegate :(nullable NSURL*)imageURL :(CGFloat)duration {
-    
-    CGFloat height = KEYWINDOW.bounds.size.height - 60.0f;
-    CGFloat buttonHeight = 30.0f;
-    
-    _background = [[UIView alloc] initWithFrame:KEYWINDOW.bounds];
-    _background.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.8f];
-    _background.center = KEYWINDOW.center;
-    
-    
-    _container = [[UIView alloc ] initWithFrame:CGRectMake(0.0f, 0.0f, _background.frame.size.width - 30.0f, height)];
-    _container.center = _background.center;
-    _container.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
-    
-    _container.layer.borderColor = [UIColorFromRGB(0x959595) CGColor];
-    _container.layer.borderWidth = 2.0f;
-    
-    [_background addSubview:_container];
-    
-    _background.userInteractionEnabled = NO;
-    _container.userInteractionEnabled = NO;
-    
-    //setup imageView
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, _container.bounds.size.width - 20.0f, _container.bounds.size.height - 10.0f - buttonHeight)];
-    imageView.image = [UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:imageURL]];
-    [_container addSubview:imageView];
-    
-    
-    
-    
-    UIButton *close = [UIButton buttonWithType:UIButtonTypeCustom];
-    close.backgroundColor = [UIColor clearColor];//UIColorFromRGB(0x959595);
-    
-    [close setTitle:@"Skip" forState:UIControlStateNormal];
-    [close setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [close setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
-    
-    close.frame = CGRectMake(10.0f, _moviePlayerController.view.bounds.size.height + _moviePlayerController.view.bounds.origin.y + 8.0f, _moviePlayerController.view.bounds.size.width, buttonHeight);
-    
-    [close addTarget:_instance action:@selector(closeAlertView) forControlEvents:UIControlEventTouchUpInside];
-    
-    [_container addSubview:close];
-    
-    //    UITapGestureRecognizer *tapClose = [[UITapGestureRecognizer alloc] initWithTarget:_instance action:@selector(closeAlertView)];
-    //    [_background addGestureRecognizer:tapClose];
-    
-    
-    _container.transform = CGAffineTransformMakeScale(0.1, 0.1);
-    [KEYWINDOW addSubview:_background];
-    
-//    [self showAlertViewWithDuration:duration];
-}
+//- (void)setupImage:(nullable id)aDelegate :(nullable NSURL*)imageURL :(CGFloat)duration {
+//    
+//    CGFloat height = KEYWINDOW.bounds.size.height - 60.0f;
+//    CGFloat buttonHeight = 30.0f;
+//    
+//    _background = [[UIView alloc] initWithFrame:KEYWINDOW.bounds];
+//    _background.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.8f];
+//    _background.center = KEYWINDOW.center;
+//    
+//    
+//    _container = [[UIView alloc ] initWithFrame:CGRectMake(0.0f, 0.0f, _background.frame.size.width - 30.0f, height)];
+//    _container.center = _background.center;
+//    _container.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
+//    
+//    _container.layer.borderColor = [UIColorFromRGB(0x959595) CGColor];
+//    _container.layer.borderWidth = 2.0f;
+//    
+//    [_background addSubview:_container];
+//    
+//    _background.userInteractionEnabled = NO;
+//    _container.userInteractionEnabled = NO;
+//    
+//    //setup imageView
+//    
+//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, _container.bounds.size.width - 20.0f, _container.bounds.size.height - 10.0f - buttonHeight)];
+//    imageView.image = [UIImage animatedImageWithAnimatedGIFData:[NSData dataWithContentsOfURL:imageURL]];
+//    [_container addSubview:imageView];
+//    
+//    
+//    
+//    
+//    UIButton *close = [UIButton buttonWithType:UIButtonTypeCustom];
+//    close.backgroundColor = [UIColor clearColor];//UIColorFromRGB(0x959595);
+//    
+//    [close setTitle:@"Skip" forState:UIControlStateNormal];
+//    [close setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+//    [close setTitleColor:[UIColor lightGrayColor] forState:UIControlStateHighlighted];
+//    
+//    close.frame = CGRectMake(10.0f, _moviePlayerController.view.bounds.size.height + _moviePlayerController.view.bounds.origin.y + 8.0f, _moviePlayerController.view.bounds.size.width, buttonHeight);
+//    
+//    [close addTarget:_instance action:@selector(closeAlertView) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [_container addSubview:close];
+//    
+//    //    UITapGestureRecognizer *tapClose = [[UITapGestureRecognizer alloc] initWithTarget:_instance action:@selector(closeAlertView)];
+//    //    [_background addGestureRecognizer:tapClose];
+//    
+//    
+//    _container.transform = CGAffineTransformMakeScale(0.1, 0.1);
+//    [KEYWINDOW addSubview:_background];
+//    
+////    [self showAlertViewWithDuration:duration];
+//}
 
 - (void) showAlertView {
     
@@ -301,22 +301,22 @@
 }
 
 
-- (void) showAlertViewWithDuration:(CGFloat)duration {
-    
-    [UIView animateWithDuration:0.1f animations:^{
-        _container.transform = CGAffineTransformMakeScale(1.0, 1.0);
-        
-    } completion:^(BOOL finished) {
-        _background.userInteractionEnabled = YES;
-        _container.userInteractionEnabled = YES;
-        
-        NSTimer *timer = [NSTimer timerWithTimeInterval:duration*100.0f target:self selector:@selector(timerEnded) userInfo:nil repeats:NO];
-        
-        [timer fire];
-        
-    }];
-    
-}
+//- (void) showAlertViewWithDuration:(CGFloat)duration {
+//    
+//    [UIView animateWithDuration:0.1f animations:^{
+//        _container.transform = CGAffineTransformMakeScale(1.0, 1.0);
+//        
+//    } completion:^(BOOL finished) {
+//        _background.userInteractionEnabled = YES;
+//        _container.userInteractionEnabled = YES;
+//        
+//        NSTimer *timer = [NSTimer timerWithTimeInterval:duration*100.0f target:self selector:@selector(timerEnded) userInfo:nil repeats:NO];
+//        
+//        [timer fire];
+//        
+//    }];
+//    
+//}
 
 - (void)timerEnded {
 //    [_delegate imageGIFEnded:_instance];

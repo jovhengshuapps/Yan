@@ -10,7 +10,7 @@
 
 @protocol MenuOptionTableViewCellDelegate <NSObject>
 
-- (void)optionSelectedIndex:(NSInteger)index;
+- (void)optionSelectedIndex:(NSInteger)index sender:(id)sender;
 - (void)removeSelectedIndex:(NSInteger)index;
 
 @end

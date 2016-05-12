@@ -9,7 +9,7 @@
 #import "CoreViewController.h"
 #import "CustomPickerViewController.h"
 
-@interface OptionListTableViewController : CoreViewController <UITableViewDelegate, UITableViewDataSource, CustomPickerViewControllerDelegate>
+@interface OptionListTableViewController : CoreViewController <UITableViewDelegate, UITableViewDataSource, CustomPickerViewControllerDelegate, FPPopoverControllerDelegate>
 
 @property (strong, nonatomic) NSString *menuName;
 @property (strong,nonatomic) NSDictionary *optionList;

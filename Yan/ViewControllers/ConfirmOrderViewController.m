@@ -59,20 +59,29 @@
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setFrame:CGRectMake(20.0f, footerView.bounds.size.height - 44.0f - 10.0f, footerView.bounds.size.width - 20.0f - 20.0f, 44.0f)];
-    if (_billoutOrder) {
-        [button setTitle:@"Billout" forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(callBillout) forControlEvents:UIControlEventTouchUpInside];
+    if (!_arrayOrderList.count) {
+        button.enabled = NO;
+        [button setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
+        [button setTitle:@". . ." forState:UIControlStateNormal];
     }
     else {
-        [button setTitle:@"Confirm Orders" forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(orderSentToServer) forControlEvents:UIControlEventTouchUpInside];
+        button.enabled = YES;
+        [button setBackgroundColor:UIColorFromRGB(0x000000)];
+        if (_billoutOrder) {
+            [button setTitle:@"Billout" forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(callBillout) forControlEvents:UIControlEventTouchUpInside];
+        }
+        else {
+            [button setTitle:@"Confirm Orders" forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(orderSentToServer) forControlEvents:UIControlEventTouchUpInside];
+        }
     }
     
     button.titleLabel.font = [UIFont fontWithName:@"LucidaGrande" size:20.0f];
     button.titleLabel.textColor = UIColorFromRGB(0xFFFFFF);
     
-    [button setBackgroundColor:UIColorFromRGB(0x000000)];
     [footerView addSubview:button];
+    
     
     [_mainTable setTableFooterView:footerView];
     
@@ -104,7 +113,6 @@
     //check if billout
     for (OrderList *item in _arrayOrderList) {
         if ([item.orderSent boolValue] == NO) {
-            NSLog(@"item:%@",item.itemName);
             _billoutOrder = NO;
             break;
         }

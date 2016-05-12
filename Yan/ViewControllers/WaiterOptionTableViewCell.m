@@ -37,9 +37,16 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+        
     // Configure the view for the selected state
 }
+
+- (void) selectThisItem {
+    self.isChecked = !_isChecked;
+    [self.delegateOption optionKey:_labelText.text checked:_isChecked];
+}
+
+
 - (IBAction)controlButtonPressed:(id)sender {
     self.isChecked = !_isChecked;
     [self.delegateOption optionKey:_labelText.text checked:_isChecked];

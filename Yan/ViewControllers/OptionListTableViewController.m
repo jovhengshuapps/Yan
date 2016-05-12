@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
 @property (strong, nonatomic) NSArray *optionTitles;
 @property (strong, nonatomic) CustomPickerViewController *pickerController;
+@property (strong, nonnull) FPPopoverController *popover;
 @end
 
 @implementation OptionListTableViewController
@@ -70,12 +71,28 @@
         _pickerController.choices = _optionList[key];
         _pickerController.button = button;
         
-        _pickerController.modalPresentationStyle = UIModalPresentationPopover;
-        _pickerController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionLeft;
+//        _pickerController.modalPresentationStyle = UIModalPresentationPopover;
+//        _pickerController.popoverPresentationController.permittedArrowDirections = UIPopoverArrowDirectionLeft;
+//        
+//        [self presentViewController:_pickerController animated:YES completion:^{
+//            
+//        }];
         
-        [self presentViewController:_pickerController animated:YES completion:^{
-            
-        }];
+        
+        self.popover = [[FPPopoverController alloc] initWithViewController:_pickerController];
+        
+        self.popover.tint = FPPopoverDefaultTint;
+        self.popover.border = NO;
+        self.popover.delegate = self;
+        
+//        if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+//        {
+//            self.popover.contentSize = CGSizeMake(300, 500);
+//        }
+        self.popover.arrowDirection = FPPopoverArrowDirectionUp;
+        
+        //sender is the UIButton view
+        [self.popover presentPopoverFromView:sender];
     };
 
     
@@ -89,10 +106,15 @@
 
 - (void)selectedItem:(NSString *)item withButton:(UIButton *)button{
     [button setTitle:item forState:UIControlStateNormal];
+    [self.popover dismissPopoverAnimated:YES];
 }
 
 - (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
     return UIModalPresentationNone;
+}
+
+- (void)popoverControllerDidDismissPopover:(FPPopoverController *)popoverController {
+    NSLog(@"dismiss");
 }
 
 /*

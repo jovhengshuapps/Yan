@@ -19,6 +19,14 @@
 		33446B031CDB613300F46EE1 /* OrderList+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 33446AFC1CDB613300F46EE1 /* OrderList+CoreDataProperties.m */; };
 		33446B041CDB613300F46EE1 /* OrderList.m in Sources */ = {isa = PBXBuildFile; fileRef = 33446AFE1CDB613300F46EE1 /* OrderList.m */; };
 		3345EF691CDE5127008A0A13 /* WaiterOptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3345EF681CDE5127008A0A13 /* WaiterOptionTableViewCell.m */; };
+		3346B31E1CE49F6C008E8B96 /* FPPopoverController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3346B3191CE49F6C008E8B96 /* FPPopoverController.m */; };
+		3346B31F1CE49F6C008E8B96 /* FPPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3346B31B1CE49F6C008E8B96 /* FPPopoverView.m */; };
+		3346B3201CE49F6C008E8B96 /* FPTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3346B31D1CE49F6C008E8B96 /* FPTouchView.m */; };
+		3346B3231CE4B52C008E8B96 /* DiscountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3346B3221CE4B52C008E8B96 /* DiscountViewController.m */; };
+		3346B3261CE4B7F7008E8B96 /* DiscountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3346B3251CE4B7F7008E8B96 /* DiscountTableViewCell.m */; };
+		3346B3291CE4CDC7008E8B96 /* CardTypeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3346B3281CE4CDC7008E8B96 /* CardTypeTableViewCell.m */; };
+		3346B32C1CE4CE88008E8B96 /* CardTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3346B32B1CE4CE88008E8B96 /* CardTextTableViewCell.m */; };
+		3346B32F1CE4D140008E8B96 /* CardDateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3346B32E1CE4D140008E8B96 /* CardDateTableViewCell.m */; };
 		335834641CC4F1B4008606C8 /* AffiliatedRestoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335834631CC4F1B4008606C8 /* AffiliatedRestoViewController.m */; };
 		33599B451CAD259100366C34 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 33599B441CAD259100366C34 /* main.m */; };
 		33599B481CAD259100366C34 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 33599B471CAD259100366C34 /* AppDelegate.m */; };
@@ -142,6 +150,23 @@
 		33446AFE1CDB613300F46EE1 /* OrderList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderList.m; sourceTree = "<group>"; };
 		3345EF671CDE5127008A0A13 /* WaiterOptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaiterOptionTableViewCell.h; sourceTree = "<group>"; };
 		3345EF681CDE5127008A0A13 /* WaiterOptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaiterOptionTableViewCell.m; sourceTree = "<group>"; };
+		3346B3171CE49F6C008E8B96 /* ARCMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCMacros.h; sourceTree = "<group>"; };
+		3346B3181CE49F6C008E8B96 /* FPPopoverController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPPopoverController.h; sourceTree = "<group>"; };
+		3346B3191CE49F6C008E8B96 /* FPPopoverController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPPopoverController.m; sourceTree = "<group>"; };
+		3346B31A1CE49F6C008E8B96 /* FPPopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPPopoverView.h; sourceTree = "<group>"; };
+		3346B31B1CE49F6C008E8B96 /* FPPopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPPopoverView.m; sourceTree = "<group>"; };
+		3346B31C1CE49F6C008E8B96 /* FPTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FPTouchView.h; sourceTree = "<group>"; };
+		3346B31D1CE49F6C008E8B96 /* FPTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FPTouchView.m; sourceTree = "<group>"; };
+		3346B3211CE4B52C008E8B96 /* DiscountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscountViewController.h; sourceTree = "<group>"; };
+		3346B3221CE4B52C008E8B96 /* DiscountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscountViewController.m; sourceTree = "<group>"; };
+		3346B3241CE4B7F7008E8B96 /* DiscountTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscountTableViewCell.h; sourceTree = "<group>"; };
+		3346B3251CE4B7F7008E8B96 /* DiscountTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscountTableViewCell.m; sourceTree = "<group>"; };
+		3346B3271CE4CDC7008E8B96 /* CardTypeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTypeTableViewCell.h; sourceTree = "<group>"; };
+		3346B3281CE4CDC7008E8B96 /* CardTypeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTypeTableViewCell.m; sourceTree = "<group>"; };
+		3346B32A1CE4CE88008E8B96 /* CardTextTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardTextTableViewCell.h; sourceTree = "<group>"; };
+		3346B32B1CE4CE88008E8B96 /* CardTextTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardTextTableViewCell.m; sourceTree = "<group>"; };
+		3346B32D1CE4D140008E8B96 /* CardDateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardDateTableViewCell.h; sourceTree = "<group>"; };
+		3346B32E1CE4D140008E8B96 /* CardDateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardDateTableViewCell.m; sourceTree = "<group>"; };
 		335834621CC4F1B4008606C8 /* AffiliatedRestoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AffiliatedRestoViewController.h; sourceTree = "<group>"; };
 		335834631CC4F1B4008606C8 /* AffiliatedRestoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AffiliatedRestoViewController.m; sourceTree = "<group>"; };
 		33599B401CAD259000366C34 /* Yan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yan.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -330,6 +355,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3346B3161CE49F6C008E8B96 /* FPPopover */ = {
+			isa = PBXGroup;
+			children = (
+				3346B3171CE49F6C008E8B96 /* ARCMacros.h */,
+				3346B3181CE49F6C008E8B96 /* FPPopoverController.h */,
+				3346B3191CE49F6C008E8B96 /* FPPopoverController.m */,
+				3346B31A1CE49F6C008E8B96 /* FPPopoverView.h */,
+				3346B31B1CE49F6C008E8B96 /* FPPopoverView.m */,
+				3346B31C1CE49F6C008E8B96 /* FPTouchView.h */,
+				3346B31D1CE49F6C008E8B96 /* FPTouchView.m */,
+			);
+			path = FPPopover;
+			sourceTree = "<group>";
+		};
 		33599B371CAD259000366C34 = {
 			isa = PBXGroup;
 			children = (
@@ -397,6 +436,7 @@
 		33599B791CAD26A900366C34 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3346B3161CE49F6C008E8B96 /* FPPopover */,
 				33E44CE01CE3442C002272EA /* AnimatedGIF */,
 				33DBA6E81CB8D1B800AB0062 /* GoogleSignIn.bundle */,
 				33DBA6E61CB8D18D00AB0062 /* GoogleSignIn.framework */,
@@ -609,8 +649,18 @@
 				33E2C58E1CE1F44C00B28935 /* PaymentSelectViewController.m */,
 				33E2C5901CE1FBB200B28935 /* PaymentSelectionTableViewCell.h */,
 				33E2C5911CE1FBB200B28935 /* PaymentSelectionTableViewCell.m */,
+				3346B3271CE4CDC7008E8B96 /* CardTypeTableViewCell.h */,
+				3346B3281CE4CDC7008E8B96 /* CardTypeTableViewCell.m */,
+				3346B32A1CE4CE88008E8B96 /* CardTextTableViewCell.h */,
+				3346B32B1CE4CE88008E8B96 /* CardTextTableViewCell.m */,
+				3346B32D1CE4D140008E8B96 /* CardDateTableViewCell.h */,
+				3346B32E1CE4D140008E8B96 /* CardDateTableViewCell.m */,
 				33E2C5931CE2015400B28935 /* PayScreenViewController.h */,
 				33E2C5941CE2015400B28935 /* PayScreenViewController.m */,
+				3346B3211CE4B52C008E8B96 /* DiscountViewController.h */,
+				3346B3221CE4B52C008E8B96 /* DiscountViewController.m */,
+				3346B3241CE4B7F7008E8B96 /* DiscountTableViewCell.h */,
+				3346B3251CE4B7F7008E8B96 /* DiscountTableViewCell.m */,
 			);
 			name = Order;
 			sourceTree = "<group>";
@@ -840,6 +890,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3394A3A31CADF66300472030 /* UIViewController+REFrostedViewController.m in Sources */,
+				3346B3261CE4B7F7008E8B96 /* DiscountTableViewCell.m in Sources */,
 				33446B011CDB613300F46EE1 /* MenuItem+CoreDataProperties.m in Sources */,
 				3345EF691CDE5127008A0A13 /* WaiterOptionTableViewCell.m in Sources */,
 				336424BF1CAE313A00E0E156 /* UIImageView+AFNetworking.m in Sources */,
@@ -864,6 +915,7 @@
 				33599BB61CAD2E9A00366C34 /* DrawerTableViewController.m in Sources */,
 				336424E71CAE354F00E0E156 /* Reachability.m in Sources */,
 				336424B51CAE313A00E0E156 /* AFNetworkReachabilityManager.m in Sources */,
+				3346B3201CE49F6C008E8B96 /* FPTouchView.m in Sources */,
 				33599B481CAD259100366C34 /* AppDelegate.m in Sources */,
 				3394A3A01CADF66300472030 /* REFrostedViewController.m in Sources */,
 				336424B81CAE313A00E0E156 /* AFURLResponseSerialization.m in Sources */,
@@ -873,22 +925,28 @@
 				336424B71CAE313A00E0E156 /* AFURLRequestSerialization.m in Sources */,
 				337516DF1CB2AC390065AB7A /* HomeViewController.m in Sources */,
 				336424BC1CAE313A00E0E156 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				3346B3231CE4B52C008E8B96 /* DiscountViewController.m in Sources */,
 				333FEEFA1CCF7AFE004D4B5B /* MenuDetailsViewController.m in Sources */,
 				33446AFF1CDB613300F46EE1 /* Reservation+CoreDataProperties.m in Sources */,
+				3346B31E1CE49F6C008E8B96 /* FPPopoverController.m in Sources */,
 				336424BA1CAE313A00E0E156 /* AFAutoPurgingImageCache.m in Sources */,
 				33E2C5921CE1FBB200B28935 /* PaymentSelectionTableViewCell.m in Sources */,
 				336424B61CAE313A00E0E156 /* AFSecurityPolicy.m in Sources */,
 				33599BAE1CAD274E00366C34 /* CoreViewController.m in Sources */,
 				33446AEC1CDB486F00F46EE1 /* OptionListTableViewController.m in Sources */,
+				3346B3291CE4CDC7008E8B96 /* CardTypeTableViewCell.m in Sources */,
 				33599B451CAD259100366C34 /* main.m in Sources */,
 				33599BB31CAD2D9000366C34 /* RootViewController.m in Sources */,
+				3346B31F1CE49F6C008E8B96 /* FPPopoverView.m in Sources */,
 				442160881CB32C5800BB387F /* CollapseMenuView.m in Sources */,
 				3394A3A11CADF66300472030 /* UIImage+REFrostedViewController.m in Sources */,
+				3346B32C1CE4CE88008E8B96 /* CardTextTableViewCell.m in Sources */,
 				338567EE1CD0FC310099BDD0 /* Account.m in Sources */,
 				335B7ACC1CD7A156000E9D9F /* MenuOptionTableViewCell.m in Sources */,
 				336424C11CAE313A00E0E156 /* UIRefreshControl+AFNetworking.m in Sources */,
 				33446AEF1CDB488600F46EE1 /* OptionListTableViewCell.m in Sources */,
 				33C142451CB1512500B57041 /* AlertView.m in Sources */,
+				3346B32F1CE4D140008E8B96 /* CardDateTableViewCell.m in Sources */,
 				33446B001CDB613300F46EE1 /* Reservation.m in Sources */,
 				33C6E6801CC7C6CD001690ED /* ScanLogoViewController.m in Sources */,
 				33B36F091CC65CD900AB30C6 /* ReserveRestoViewController.m in Sources */,

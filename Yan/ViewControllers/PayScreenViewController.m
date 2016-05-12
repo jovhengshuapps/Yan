@@ -105,7 +105,29 @@
 
 
 - (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    for (OrderList *item in _arrayOrderList) {
+        [context deleteObject:item];
+    }
+    
+    NSError *error = nil;
+    if ([context save:&error]) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    else {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Technical Data Error" message:@"Please try again." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
 }
 
 #pragma mark Table Data Source

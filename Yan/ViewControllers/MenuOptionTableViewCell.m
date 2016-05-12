@@ -41,7 +41,7 @@
     [_delegateOptionCell removeSelectedIndex:_index];
 }
 - (IBAction)menuOptionPressed:(id)sender {
-    [_delegateOptionCell optionSelectedIndex:_index];
+    [_delegateOptionCell optionSelectedIndex:_index sender:sender];
 }
 
 @end

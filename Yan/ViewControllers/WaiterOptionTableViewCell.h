@@ -20,4 +20,7 @@
 
 @property (assign, nonatomic) id<WaiterOptionTableViewCellDelegate> delegateOption;
 
+
+- (void) selectThisItem;
+
 @end

@@ -10,7 +10,7 @@
 
 @interface CardTextTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *labelOption;
-@property (weak, nonatomic) IBOutlet UITextField *textField;
-@property (weak, nonatomic) IBOutlet UIView *containerView;
+@property (strong, nonatomic, nonnull) IBOutlet UILabel *titleLabel;
+@property (strong, nonatomic, nonnull) IBOutlet UITextField *textField;
+@property (strong, nonatomic, nonnull) IBOutlet UIView *containerView;
 @end

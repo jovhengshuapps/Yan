@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface CardDateTableViewCell : UITableViewCell
+@property (strong, nonatomic, nonnull) IBOutlet UILabel *titleLabel;
+
 @property (strong, nonatomic, nonnull) IBOutlet UILabel *labelMonth;
 @property (strong, nonatomic, nonnull) IBOutlet UIImageView *arrowMonth;
 @property (strong, nonatomic, nonnull) IBOutlet UIView *containerViewMonth;

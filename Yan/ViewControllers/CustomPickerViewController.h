@@ -22,4 +22,10 @@
 
 @property (assign,nonatomic) id<CustomPickerViewControllerDelegate> delegatePicker;
 
+
+//if multiple
+@property (assign, nonatomic) NSInteger components;
+
+@property (strong, nonatomic) NSDictionary *dictionaryChoices; //components as key
+
 @end

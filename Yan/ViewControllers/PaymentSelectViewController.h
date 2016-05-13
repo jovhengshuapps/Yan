@@ -9,6 +9,6 @@
 #import "CoreViewController.h"
 #import "CustomPickerViewController.h"
 
-@interface PaymentSelectViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate, CustomPickerViewControllerDelegate, FPPopoverControllerDelegate>
+@interface PaymentSelectViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate, CustomPickerViewControllerDelegate, FPPopoverControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate>
 @property (strong,nonatomic) NSString *tableNumber;
 @end

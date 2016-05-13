@@ -28,7 +28,7 @@
     
     UITapGestureRecognizer *tapYear = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureYear)];
     
-    [self.containerViewMonth addGestureRecognizer:tapYear];
+    [self.containerViewYear addGestureRecognizer:tapYear];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

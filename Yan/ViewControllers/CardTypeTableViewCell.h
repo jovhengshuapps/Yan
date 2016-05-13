@@ -13,5 +13,5 @@
 @property (strong, nonatomic, nonnull) IBOutlet UIImageView *arrowImage;
 @property (strong, nonatomic, nonnull) IBOutlet UIView *containerView;
 @property (nonatomic, copy, nonnull) void (^tapHandler)(_Nonnull id sender);
-
+@property (strong, nonatomic, nonnull) IBOutlet UILabel *titleLabel;
 @end

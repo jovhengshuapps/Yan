@@ -132,10 +132,16 @@
 
 #pragma mark Table Data Source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (_discountDetails) {
+        return 2;
+    }
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (_discountDetails) {
+        
+    }
     return _arrayOrderList.count;
 }
 

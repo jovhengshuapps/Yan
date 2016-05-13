@@ -20,7 +20,8 @@
 @property (strong, nonatomic) NSArray *arrayOptions;
 @property (assign, nonatomic) NSInteger selectedOptionIndex;
 @property (assign, nonatomic) BOOL expand;
-@property (strong, nonnull) FPPopoverController *popover;
+@property (strong, nonatomic, nonnull) FPPopoverController *popover;
+@property (strong, nonatomic) UITextField *textfield;
 
 @end
 
@@ -66,6 +67,7 @@
     self.arrayOptions = @[@"Pay Cash to Restaurant Rep.", @"Pay CreditCard to Restaurant Rep.", @"Push bill to other user", @"Pay with GC/Discount"];
     self.selectedOptionIndex = -1;
     self.expand = NO;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -84,9 +86,17 @@
 //    paymentSelect.tableNumber = _tableNumber;
 //    [self.navigationController pushViewController:paymentSelect animated:YES];
     
-    DiscountViewController *discountView = (DiscountViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"discountView"];
-    discountView.tableNumber = _tableNumber;
-    [self.navigationController pushViewController:discountView animated:YES];
+    if (self.selectedOptionIndex == 2) {
+        NSString *name = @"Jay Medina";
+        AlertView *alert = [[AlertView alloc] initAlertWithMessage:[NSString stringWithFormat:@"Your request has been sent to %@ to join bill.\n\nPlease wait for his approval.",name] delegate:self buttons:@[@"CLOSE"]];
+        [alert showAlertView];
+    }
+    else {
+        DiscountViewController *discountView = (DiscountViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"discountView"];
+        discountView.tableNumber = _tableNumber;
+        [self.navigationController pushViewController:discountView animated:YES];
+    }
+    
 
 }
 
@@ -135,7 +145,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(15.0f, 5.0f, tableView.bounds.size.width-30.0f, 44.0f)];
-    headerView.backgroundColor = [UIColor clearColor];
+    headerView.backgroundColor = UIColorFromRGB(0xDFDFDF);
     
     UILabel *label = [[UILabel alloc] initWithFrame:headerView.frame];
     label.center = headerView.center;
@@ -190,11 +200,12 @@
             
             CardTypeTableViewCell *cell = (CardTypeTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"cardTypeCell"];
             
+            cell.contentView.backgroundColor = [UIColor clearColor];
             cell.containerView.layer.borderWidth = 2.0f;
             
             cell.labelOption.text = @"Visa";
             
-            cell.contentView.backgroundColor = [UIColor clearColor];
+            cell.titleLabel.text = @"Credit Card";
             
             id objSender = cell.containerView;
             
@@ -220,22 +231,43 @@
             return cell;
         }
         else if (indexPath.row == 3) {
+            
+            NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+            NSDate *currentDate = [NSDate date];
+            NSDateComponents *comps = [[NSDateComponents alloc] init];
+            
+            [comps setYear:30];
+            NSDate *maxDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+            NSInteger currentYear = [calendar component:NSCalendarUnitYear fromDate:currentDate];
+            NSInteger maximumYear = [calendar component:NSCalendarUnitYear fromDate:maxDate];
+            
+            NSMutableArray *arrayYears = [NSMutableArray new];
+            for (NSInteger year = currentYear; year <= maximumYear; year++) {
+                [arrayYears addObject:[NSString stringWithFormat:@"%li",(long)year]];
+            }
+            
             CardDateTableViewCell *cell = (CardDateTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"cardDateCell"];
             
             cell.contentView.backgroundColor = [UIColor clearColor];
             cell.containerViewMonth.layer.borderWidth = 2.0f;
             
+            cell.titleLabel.text = @"Card Expiration";
+            
             cell.labelMonth.text = @"01";
             
             
-            id objSender = cell.containerViewMonth;
+            id objSenderM = cell.containerViewMonth;
             
             cell.tapHandlerMonth = ^(id sender) {
                 // do something
                 CustomPickerViewController *pickerController = (CustomPickerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"pickerView"];
                 pickerController.delegatePicker = self;
-                pickerController.choices = @[@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12"];
-                pickerController.button = objSender;
+//                pickerController.choices = @[@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12"];
+                pickerController.components = 2;
+                pickerController.dictionaryChoices = @{@"0":@[@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12"],
+                                                       @"1":arrayYears
+                                                       };
+                pickerController.button = objSenderM;
                 
                 self.popover = [[FPPopoverController alloc] initWithViewController:pickerController];
                 
@@ -250,22 +282,20 @@
             };
             cell.containerViewYear.layer.borderWidth = 2.0f;
             
+            cell.labelYear.text = [NSString stringWithFormat:@"%li",(long)currentYear];
             
-            NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-            NSDate *currentDate = [NSDate date];
-            NSDateComponents *comps = [[NSDateComponents alloc] init];
-            
-            cell.labelYear.text = [NSString stringWithFormat:@"%li",(long)[calendar component:NSCalendarUnitYear fromDate:currentDate]];
-            
-            
-            id objSender = cell.containerViewYear;
+            id objSenderY = cell.containerViewYear;
             
             cell.tapHandlerYear = ^(id sender) {
                 // do something
                 CustomPickerViewController *pickerController = (CustomPickerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"pickerView"];
                 pickerController.delegatePicker = self;
-                pickerController.choices = @[@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12"];
-                pickerController.button = objSender;
+//                pickerController.choices = arrayYears;
+                pickerController.components = 2;
+                pickerController.dictionaryChoices = @{@"0":@[@"01",@"02",@"03",@"04",@"05",@"06",@"07",@"08",@"09",@"10",@"11",@"12"],
+                                                       @"1":arrayYears
+                                                       };
+                pickerController.button = objSenderY;
                 
                 self.popover = [[FPPopoverController alloc] initWithViewController:pickerController];
                 
@@ -283,6 +313,22 @@
         }
         else {
             
+            CardTextTableViewCell *cell = (CardTextTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"cardTextCell"];
+            
+            cell.containerView.layer.borderWidth = 2.0f;
+            
+            cell.contentView.backgroundColor = [UIColor clearColor];
+            
+            cell.textField.delegate = self;
+            
+            if (indexPath.row == 1) {
+                cell.titleLabel.text = @"Cardholder Name";
+            }
+            else if (indexPath.row == 2) {
+                cell.titleLabel.text = @"Card Number";
+            }
+            
+            return cell;
         }
     }
     
@@ -291,15 +337,28 @@
 }
 
 - (void)selectedItem:(NSString *)item withButton:(UIButton *)button {
-    UIView *view = (UIView*)button;
-    
-    for (UIView *subviews in [view subviews]) {
-        if([subviews isKindOfClass:[UILabel class]]){
-            ((UILabel*)subviews).text = item;
-            break;
-        }
-        
+    //hack
+    if ([item rangeOfString:@"|"].location != NSNotFound) {
+        NSString *month = [item substringToIndex:[item rangeOfString:@"|"].location];
+        NSString *year = [item substringFromIndex:[item rangeOfString:@"|"].location+1];
+        NSLog(@"[%@]m:%@ y:%@",item,month,year);
+        CardDateTableViewCell *cell = [_mainTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:1]];
+        cell.labelMonth.text = month;
+        cell.labelYear.text = year;
     }
+    else {
+        
+        UIView *view = (UIView*)button;
+        
+        for (UIView *subviews in [view subviews]) {
+            if([subviews isKindOfClass:[UILabel class]]){
+                ((UILabel*)subviews).text = item;
+                break;
+            }
+            
+        }
+    }
+    
     
     [self.popover dismissPopoverAnimated:YES];
 }
@@ -308,10 +367,38 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    self.selectedOptionIndex = indexPath.row;
-    self.expand = !_expand;
+    if (indexPath.section == 0) {
+        self.selectedOptionIndex = indexPath.row;
+        self.expand = !_expand;
+        
+        [self.mainTable reloadData];
+        if (self.selectedOptionIndex == 1) {
+            
+            _mainTable.contentSize = CGSizeMake(_mainTable.contentSize.width, _mainTable.contentSize.height + 150.0f);
+        }
+    }
     
-    [self.mainTable reloadData];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    float scrollViewHeight = scrollView.frame.size.height;
+    float scrollContentSizeHeight = scrollView.contentSize.height;
+    float scrollOffset = scrollView.contentOffset.y;
+    
+    if ((scrollOffset < -30) || (scrollOffset + scrollViewHeight > scrollContentSizeHeight+30))
+    {
+        //bouncing
+        [self.textfield resignFirstResponder];
+    }
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.textfield = textField;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
 }
 
 @end

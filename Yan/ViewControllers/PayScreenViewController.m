@@ -104,7 +104,7 @@
         OrderList *order = (OrderList*)result[0];
         
         NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
-        
+        NSLog(@"stored:%@",storedOrders);
         for (NSDictionary *items in storedOrders) {
             self.totalValue += [items[@"price"] floatValue];
         }
@@ -163,7 +163,6 @@
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-    [request setReturnsObjectsAsFaults:NO];
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];

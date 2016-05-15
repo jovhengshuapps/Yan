@@ -183,11 +183,10 @@
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     OrderList *order = (OrderList*)result[0];
     
-    NSArray *list = [[NSArray alloc] initWithArray:_arrayOrderList copyItems:YES];
-    
-    order.items = [self encodeData:list withKey:@"orderItems"];
+//    NSArray *list = [[NSArray alloc] initWithArray:_arrayOrderList copyItems:YES];
+//    order.items = [self encodeData:list withKey:@"orderItems"];
+//    order.tableNumber = _tableNumber;
     order.orderSent = @YES;
-    order.tableNumber = _tableNumber;
     
     error = nil;
     if ([context save:&error]) {

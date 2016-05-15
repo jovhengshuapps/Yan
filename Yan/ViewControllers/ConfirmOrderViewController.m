@@ -107,6 +107,7 @@
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    NSLog(@"lsit:%@",result);
     if (result.count) {
         OrderList *order = (OrderList*)result[0];
         
@@ -124,10 +125,11 @@
         
         for (MenuItem *item in storedOrders) {
             NSInteger index = 0;
+            NSLog(@"content:%@ == %@",_arrayOrderList[index][@"identifier"],item.identifier);
             if ([self containsMenuItem:item index:&index]) {
-                NSMutableDictionary *content = _arrayOrderList[index];
+                NSMutableDictionary *content = [_arrayOrderList[index] mutableCopy];
                 NSNumber *quantity = @([content[@"quantity"] integerValue] + 1);
-                content[@"quantity"] = quantity;
+                [content setObject:quantity forKey:@"quantity"];
                 [_arrayOrderList replaceObjectAtIndex:index withObject:content];
             }
             else {
@@ -164,12 +166,17 @@
     
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
-    //update orders
-    for (OrderList *item in _arrayOrderList) {
-        item.orderSent = @YES;
-    }
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     
     NSError *error = nil;
+    
+    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    OrderList *order = (OrderList*)result[0];
+    order.items = [self encodeData:_arrayOrderList withKey:@"orderListComplete"];
+    order.orderSent = @YES;
+    order.tableNumber = _tableNumber;
+    
+    error = nil;
     [context save:&error];
     
     [self.navigationController popToViewController:[self.navigationController viewControllers][2] animated:YES];

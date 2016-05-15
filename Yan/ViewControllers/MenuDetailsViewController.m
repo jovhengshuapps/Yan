@@ -213,9 +213,17 @@
     if (result.count) {
         OrderList *order = (OrderList*)result[0];
         
-        NSMutableArray *storedOrders = [NSMutableArray arrayWithArray:(NSArray*)[self decodeMenuList:order.items forKey:@"orderItems"]];
+//        NSMutableArray *storedOrders = [NSMutableArray arrayWithArray:(NSArray*)[self decodeMenuList:order.items forKey:@"orderItems"]];
         
-        [storedOrders addObject:_item];
+        NSMutableArray *storedOrders = [NSMutableArray new];
+        
+        NSArray *decodedList = (NSArray*)[self decodeMenuList:order.items forKey:@"orderItems"];
+        
+        for (MenuItem *item in decodedList) {
+            [storedOrders addObject:[self menuItemToDictionary:item]];
+        }
+        
+        [storedOrders addObject:[self menuItemToDictionary:_item]];
         
         order.items = [self encodeMenuList:storedOrders withKey:@"orderItems"];
         order.orderSent = @NO;

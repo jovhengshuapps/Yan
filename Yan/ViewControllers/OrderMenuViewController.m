@@ -352,11 +352,18 @@ BOOL hackFromLoad = NO;
     if (result.count) {
         OrderList *order = (OrderList*)result[0];
         
-        NSMutableArray *storedOrders = [NSMutableArray arrayWithArray:(NSArray*)[self decodeMenuList:order.items forKey:@"orderItems"]];
+        NSMutableArray *storedOrders = [NSMutableArray new];
+        
+        NSArray *decodedList = (NSArray*)[self decodeMenuList:order.items forKey:@"orderItems"];
+        
+        for (MenuItem *item in decodedList) {
+            [storedOrders addObject:[self menuItemToDictionary:item]];
+        }
         
         [storedOrders addObject:[self menuItemToDictionary:menu]];
         
 //        order.items = [self encodeMenuList:storedOrders withKey:@"orderItems"];
+        NSLog(@"stored:%@",storedOrders);
         order.items = [self encodeData:storedOrders withKey:@"orderItems"];
         order.orderSent = @NO;
         

@@ -181,9 +181,18 @@
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     OrderList *order = (OrderList*)result[0];
-    order.items = [self encodeData:_arrayOrderList withKey:@"orderItems"];
-    order.orderSent = @YES;
-    order.tableNumber = _tableNumber;
+    
+    [context deleteObject:order];
+    
+    error = nil;
+    [context save:&error];
+    
+    
+    OrderList *updatedOrder = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
+    NSArray *items = [NSArray arrayWithArray:_arrayOrderList];
+    updatedOrder.items = [self encodeData:items withKey:@"orderItems"];
+    updatedOrder.orderSent = @YES;
+    updatedOrder.tableNumber = _tableNumber;
     
     error = nil;
     if ([context save:&error]) {

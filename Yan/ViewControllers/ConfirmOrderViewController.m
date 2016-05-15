@@ -107,38 +107,45 @@
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
-    NSLog(@"lsit:%@",result);
+    NSLog(@"list:%@",result);
     if (result.count) {
         OrderList *order = (OrderList*)result[0];
         
         //check if billout
         self.billoutOrder = [order.orderSent boolValue];
         
-        NSArray *storedOrders = [self decodeMenuList:order.items forKey:@"orderItems"];
+        NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
         
-        for (MenuItem *items in storedOrders) {
-            NSLog(@"item:%@ | %@",items.name, items.price);
-            self.totalValue += [items.price floatValue];
+        for (NSDictionary *items in storedOrders) {
+            NSLog(@"item:%@ | %@",items[@"name"], items[@"price"]);
+            self.totalValue += [items[@"price"] floatValue];
         }
         
         _arrayOrderList = [NSMutableArray new];
         
-        for (MenuItem *item in storedOrders) {
+        for (NSDictionary *item in storedOrders) {
             NSInteger index = 0;
-            NSLog(@"content:%@ == %@",_arrayOrderList[index][@"identifier"],item.identifier);
-            if ([self containsMenuItem:item index:&index]) {
+            if ([self containsMenuItemIdentifier:item[@"identifier"] index:&index]) {
                 NSMutableDictionary *content = [_arrayOrderList[index] mutableCopy];
                 NSNumber *quantity = @([content[@"quantity"] integerValue] + 1);
                 [content setObject:quantity forKey:@"quantity"];
+                
+                NSMutableArray *details = [NSMutableArray arrayWithArray:(NSArray*)content[@"details"]];
+                
+                [details addObject:item];
+                [content setObject:details forKey:@"details"];
+                
+                
                 [_arrayOrderList replaceObjectAtIndex:index withObject:content];
             }
             else {
-                NSDictionary *content = @{@"identifier":item.identifier,
-                                          @"details":item,
+                NSDictionary *content = @{@"identifier":item[@"identifier"],
+                                          @"details":@[item],
                                           @"quantity":@1
                                           };
                 [_arrayOrderList addObject:content];
             }
+            NSLog(@"content:%@ == %@",_arrayOrderList[index][@"identifier"],item[@"identifier"]);
         }
     }
     
@@ -146,13 +153,14 @@
     
 }
 
-- (BOOL) containsMenuItem:(MenuItem*)item index:(NSInteger*)index{
+- (BOOL) containsMenuItemIdentifier:(NSNumber*)itemIdentifier index:(NSInteger*)index{
     BOOL result = NO;
     for (NSInteger i = 0; i < _arrayOrderList.count; i++) {
         NSDictionary *content = (NSDictionary*)_arrayOrderList[i];
-        if ([content[@"identifier"] isEqualToNumber:item.identifier]) {
+        if ([content[@"identifier"] integerValue] == [itemIdentifier integerValue]) {
             result = YES;
-            index = &i;
+            NSLog(@"index->%li",(long)i);
+            *index = i;
             break;
         }
     }
@@ -163,6 +171,7 @@
 - (void) orderSentToServer {
     //call api
     
+    NSLog(@"####orderList:%@",_arrayOrderList);
     
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
@@ -172,16 +181,30 @@
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     OrderList *order = (OrderList*)result[0];
-    order.items = [self encodeData:_arrayOrderList withKey:@"orderListComplete"];
+    order.items = [self encodeData:_arrayOrderList withKey:@"orderItems"];
     order.orderSent = @YES;
     order.tableNumber = _tableNumber;
     
     error = nil;
-    [context save:&error];
+    if ([context save:&error]) {
+        
+        [self.navigationController popToViewController:[self.navigationController viewControllers][2] animated:YES];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderSentNotification" object:nil];
+    }
+    else {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
     
-    [self.navigationController popToViewController:[self.navigationController viewControllers][2] animated:YES];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderSentNotification" object:nil];
 }
 
 - (void) callBillout {
@@ -233,8 +256,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSDictionary *content = _arrayOrderList[indexPath.row];
-    MenuItem *item = content[@"details"];
-    NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[item.name uppercaseString],item.price];
+    NSArray *details = content[@"details"];
+    NSDictionary *item = details[0];//doesn't matter which one
+    NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"name"] uppercaseString],item[@"price"]];
     
     CGFloat nameSize = [self tableView:tableView heightForRowAtIndexPath:indexPath] - 20.0f;
     CGFloat priceSize = nameSize / 2.0f;

@@ -60,11 +60,11 @@ BOOL hackFromLoad = NO;
     if (result.count) {
         OrderList *order = (OrderList*)result[0];
         
-        NSArray *storedOrders = [self decodeMenuList:order.items forKey:@"orderItems"];
+        NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
         
-        for (MenuItem *items in storedOrders) {
-            NSLog(@"MENU[%@ : %@]",items.name, order.orderSent);
-            _totalOrderPrice += [items.price floatValue];
+        for (NSDictionary *items in storedOrders) {
+            NSLog(@"MENU[%@ : %@]",items[@"name"], order.orderSent);
+            _totalOrderPrice += [items[@"price"] floatValue];
         }
 
     }
@@ -143,7 +143,7 @@ BOOL hackFromLoad = NO;
         NSMutableArray *categoryItems = [NSMutableArray new];
         for (NSDictionary *item in [category objectForKey:@"menu"]) {
             MenuItem *menuItem = [self insertMenuToDatabase:item];
-            NSLog(@"item:%@ | menu:%@",item[@"name"],menuItem.name);
+//            NSLog(@"item:%@ | menu:%@",item[@"name"],menuItem.name);
             [categoryItems addObject:menuItem];
         }
         [data setObject:(NSArray*)categoryItems forKey:categoryName];
@@ -354,15 +354,14 @@ BOOL hackFromLoad = NO;
         
         NSMutableArray *storedOrders = [NSMutableArray new];
         
-        NSArray *decodedList = (NSArray*)[self decodeMenuList:order.items forKey:@"orderItems"];
+        NSArray *decodedList = (NSArray*)[self decodeData:order.items forKey:@"orderItems"];
         
-        for (MenuItem *item in decodedList) {
-            [storedOrders addObject:[self menuItemToDictionary:item]];
+        for (NSDictionary *item in decodedList) {
+            [storedOrders addObject:item];
         }
         
         [storedOrders addObject:[self menuItemToDictionary:menu]];
         
-//        order.items = [self encodeMenuList:storedOrders withKey:@"orderItems"];
         NSLog(@"stored:%@",storedOrders);
         order.items = [self encodeData:storedOrders withKey:@"orderItems"];
         order.orderSent = @NO;
@@ -382,7 +381,9 @@ BOOL hackFromLoad = NO;
     }
     else {
         OrderList *order = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
-        order.items = [self encodeMenuList:@[menu] withKey:@"orderItems"];
+        NSDictionary *menuItem = [self menuItemToDictionary:menu];
+        NSArray *items = @[menuItem];
+        order.items = [self encodeData:items withKey:@"orderItems"];
         order.orderSent = @NO;
         order.tableNumber = _orderTableNumber;
     }

@@ -84,13 +84,13 @@
     if (result.count) {
         OrderList *order = (OrderList*)result[0];
         
-        NSArray *storedOrders = [self decodeMenuList:order.items forKey:@"orderItems"];
+        NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
         
         _arrayOrders = [NSMutableArray new];
         
-        for (MenuItem *item in storedOrders) {
+        for (NSDictionary *item in storedOrders) {
             
-            NSDictionary *content = @{@"identifier":item.identifier,
+            NSDictionary *content = @{@"identifier":item[@"identifier"],
                                       @"details":item,
                                       @"quantity":@1
                                       };
@@ -120,7 +120,8 @@
     
     MenuOptionTableViewCell *cell = (MenuOptionTableViewCell*)[tableView dequeueReusableCellWithIdentifier:identifier];
     cell.delegateOptionCell = self;
-    cell.labelMenuName.text = [((MenuItem*)_arrayOrders[indexPath.row][@"details"]).name uppercaseString];
+    NSDictionary *item = (NSDictionary*)_arrayOrders[indexPath.row][@"details"];
+    cell.labelMenuName.text = [item[@"name"] uppercaseString];
     cell.index = indexPath.row;
 
     return cell;
@@ -213,19 +214,17 @@
     if (result.count) {
         OrderList *order = (OrderList*)result[0];
         
-//        NSMutableArray *storedOrders = [NSMutableArray arrayWithArray:(NSArray*)[self decodeMenuList:order.items forKey:@"orderItems"]];
-        
         NSMutableArray *storedOrders = [NSMutableArray new];
         
-        NSArray *decodedList = (NSArray*)[self decodeMenuList:order.items forKey:@"orderItems"];
+        NSArray *decodedList = (NSArray*)[self decodeData:order.items forKey:@"orderItems"];
         
-        for (MenuItem *item in decodedList) {
-            [storedOrders addObject:[self menuItemToDictionary:item]];
+        for (NSDictionary *item in decodedList) {
+            [storedOrders addObject:item];
         }
         
         [storedOrders addObject:[self menuItemToDictionary:_item]];
         
-        order.items = [self encodeMenuList:storedOrders withKey:@"orderItems"];
+        order.items = [self encodeData:storedOrders withKey:@"orderItems"];
         order.orderSent = @NO;
         
         error = nil;
@@ -243,7 +242,9 @@
     }
     else {
         OrderList *order = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
-        order.items = [self encodeMenuList:@[_item] withKey:@"orderItems"];
+        NSDictionary *menuItem = [self menuItemToDictionary:_item];
+        NSArray *items = @[menuItem];
+        order.items = [self encodeData:items withKey:@"orderItems"];
         order.orderSent = @NO;
         order.tableNumber = _tableNumber;
         ;
@@ -264,8 +265,9 @@
 
 - (void)optionSelectedIndex:(NSInteger)index sender:(id)sender {
     OptionListTableViewController *optionsTVC = (OptionListTableViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"optionListController"];
-    optionsTVC.menuName = ((MenuItem*)_arrayOrders[index][@"details"]).name;
-    optionsTVC.optionList = [self decodeData:((MenuItem*)_arrayOrders[index][@"details"]).options forKey:@"options"];
+    NSDictionary *item = (NSDictionary*)_arrayOrders[index][@"details"];
+    optionsTVC.menuName = item[@"name"];
+    optionsTVC.optionList = [self decodeData:item[@"options"] forKey:@"options"];
     [self.navigationController pushViewController:optionsTVC animated:YES];
     
     
@@ -275,14 +277,38 @@
 }
 
 - (void)removeSelectedIndex:(NSInteger)index {
-    OrderList *item = ((OrderList*)_arrayOrders[index]);
+    
+    [_arrayOrders removeObjectAtIndex:index];
+    
+    [_detailsTable reloadData];
     
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
-    [context deleteObject:item];
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     
     NSError *error = nil;
-    [context save:&error];
+    
+    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    if (result.count) {
+        OrderList *order = (OrderList*)result[0];
+        
+        order.items = [self encodeData:_arrayOrders withKey:@"orderItems"];
+        order.orderSent = @NO;
+        
+        error = nil;
+        if (![context save:&error]) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alert dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alert addAction:actionOK];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+        }
+    }
+    
 }
 
 

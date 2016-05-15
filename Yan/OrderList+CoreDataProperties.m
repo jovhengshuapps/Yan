@@ -13,11 +13,8 @@
 
 @implementation OrderList (CoreDataProperties)
 
-@dynamic itemName;
-@dynamic itemQuantity;
-@dynamic itemOptions;
+@dynamic items;
 @dynamic tableNumber;
-@dynamic itemPrice;
 @dynamic orderSent;
 
 @end

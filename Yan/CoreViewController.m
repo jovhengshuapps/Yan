@@ -449,4 +449,57 @@
     return object;
 }
 
+
+- (NSData*)encodeMenuList:(NSArray*)list withKey:(NSString*)key {
+    
+    NSMutableArray *encodedList = [NSMutableArray new];
+    
+    for (MenuItem *item in list) {
+        [encodedList addObject:[self menuItemToDictionary:item]];
+    }
+    
+    NSMutableData *data = [NSMutableData new];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    [archiver encodeObject:encodedList forKey:key];
+    [archiver finishEncoding];
+    return data;
+}
+
+- (NSArray*)decodeMenuList:(NSData*)data forKey:(NSString*)key {
+    NSMutableArray *decodedList = [NSMutableArray new];
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+    NSArray *objectList = [unarchiver decodeObjectForKey:key];
+    [unarchiver finishDecoding];
+    
+    for (NSDictionary *object in objectList) {
+        //checkDB
+        NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+        
+        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MenuItem"];
+        
+//        [request setPredicate:[NSPredicate predicateWithFormat:@"identifier == \"%@\"",object[@"identifier"]]];
+        NSError *error = nil;
+        
+        NSArray *result = [context executeFetchRequest:request error:&error];
+        
+        NSLog(@"\n\n####### object:%@\n\nresult:%@\n\n",object,result);
+        if (result.count) {
+            [decodedList addObject:(MenuItem*)result[0]];
+        }
+    }
+    
+    NSLog(@"objectsList:%@\n\ndecoded:%@",objectList,decodedList);
+    return decodedList;
+}
+
+
+
+- (NSDictionary*)menuItemToDictionary:(MenuItem*)menuItem {
+    NSArray *keys = [[[menuItem entity] attributesByName] allKeys];
+    NSDictionary *dictionary = [menuItem dictionaryWithValuesForKeys:keys];
+    NSLog(@"\n\nsaved MENU:%@\n\n",dictionary);
+    return dictionary;
+}
+
+
 @end

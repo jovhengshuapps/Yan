@@ -8,10 +8,13 @@
 
 #import "ConfirmOrderViewController.h"
 #import "PaymentSelectViewController.h"
+#import "OrderListTableViewCell.h"
 
 @interface ConfirmOrderViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
 @property (assign, nonatomic) BOOL billoutOrder;
+@property (assign, nonatomic) CGFloat totalValue;
+@property (strong, nonatomic) NSMutableArray *arrayOrderList;
 
 @end
 
@@ -24,14 +27,9 @@
     _billoutOrder = YES;
     _mainTable.allowsSelection = NO;
     
+    self.totalValue = 0.0f;
+    
     [self fetchOrderDataList];
-    
-    CGFloat totalValue = 0.0f;
-    
-    for (OrderList *item in _arrayOrderList) {
-        totalValue += ([item.itemPrice floatValue] * [item.itemQuantity floatValue]);
-    }
-    
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, KEYWINDOW.frame.size.width+5.0f, 110.0f)];
     footerView.backgroundColor = UIColorFromRGB(0xDFDFDF);
@@ -52,7 +50,7 @@
     labelTotalValue.font = [UIFont fontWithName:@"LucidaGrande" size:20.0f];
     labelTotalValue.textColor = UIColorFromRGB(0x666666);
     labelTotalValue.textAlignment = NSTextAlignmentRight;
-    labelTotalValue.text = [NSString stringWithFormat:@"PHP: %.2f",totalValue];
+    labelTotalValue.text = [NSString stringWithFormat:@"PHP: %.2f",_totalValue];
     [totalView addSubview:labelTotalValue];
     
     [footerView addSubview:totalView];
@@ -108,16 +106,56 @@
     
     NSError *error = nil;
     
-    _arrayOrderList = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    if (result.count) {
+        OrderList *order = (OrderList*)result[0];
+        
+        //check if billout
+        self.billoutOrder = [order.orderSent boolValue];
+        
+        NSArray *storedOrders = [self decodeMenuList:order.items forKey:@"orderItems"];
+        
+        for (MenuItem *items in storedOrders) {
+            NSLog(@"item:%@ | %@",items.name, items.price);
+            self.totalValue += [items.price floatValue];
+        }
+        
+        _arrayOrderList = [NSMutableArray new];
+        
+        for (MenuItem *item in storedOrders) {
+            NSInteger index = 0;
+            if ([self containsMenuItem:item index:&index]) {
+                NSMutableDictionary *content = _arrayOrderList[index];
+                NSNumber *quantity = @([content[@"quantity"] integerValue] + 1);
+                content[@"quantity"] = quantity;
+                [_arrayOrderList replaceObjectAtIndex:index withObject:content];
+            }
+            else {
+                NSDictionary *content = @{@"identifier":item.identifier,
+                                          @"details":item,
+                                          @"quantity":@1
+                                          };
+                [_arrayOrderList addObject:content];
+            }
+        }
+    }
     
-    //check if billout
-    for (OrderList *item in _arrayOrderList) {
-        if ([item.orderSent boolValue] == NO) {
-            _billoutOrder = NO;
+    
+    
+}
+
+- (BOOL) containsMenuItem:(MenuItem*)item index:(NSInteger*)index{
+    BOOL result = NO;
+    for (NSInteger i = 0; i < _arrayOrderList.count; i++) {
+        NSDictionary *content = (NSDictionary*)_arrayOrderList[i];
+        if ([content[@"identifier"] isEqualToNumber:item.identifier]) {
+            result = YES;
+            index = &i;
             break;
         }
     }
     
+    return result;
 }
 
 - (void) orderSentToServer {
@@ -186,21 +224,10 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *identifier = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(cell.contentView.bounds.size.width - 35.0f, 0.0f, 32.0f, 32.0f)];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.font = [UIFont fontWithName:@"LucidaGrande" size:22.0f];
-        label.textColor = [UIColor blackColor];
-        label.tag = 1;
-        cell.accessoryView = label;
-    }
-    
-    OrderList *item = _arrayOrderList[indexPath.row];
-    NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[item.itemName uppercaseString],item.itemPrice];
+    NSDictionary *content = _arrayOrderList[indexPath.row];
+    MenuItem *item = content[@"details"];
+    NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[item.name uppercaseString],item.price];
     
     CGFloat nameSize = [self tableView:tableView heightForRowAtIndexPath:indexPath] - 20.0f;
     CGFloat priceSize = nameSize / 2.0f;
@@ -222,10 +249,12 @@
     
     [attrString endEditing];
     
-    cell.textLabel.attributedText = attrString;
-    ((UILabel*)cell.accessoryView).text = [NSString stringWithFormat:@"x%@",item.itemQuantity];
+    OrderListTableViewCell *cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"orderListCell"];
+    cell.labelItemNamePrice.attributedText = attrString;
+    cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",content[@"quantity"]];
     
     return cell;
+    
 }
 
 

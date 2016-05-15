@@ -56,9 +56,17 @@ BOOL hackFromLoad = NO;
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     
     _totalOrderPrice = 0.0f;
-    for (OrderList *orders in result) {
-        NSLog(@"[%@ : %@",orders.itemName, orders.orderSent);
-        _totalOrderPrice += [orders.itemPrice floatValue];
+    
+    if (result.count) {
+        OrderList *order = (OrderList*)result[0];
+        
+        NSArray *storedOrders = [self decodeMenuList:order.items forKey:@"orderItems"];
+        
+        for (MenuItem *items in storedOrders) {
+            NSLog(@"MENU[%@ : %@]",items.name, order.orderSent);
+            _totalOrderPrice += [items.price floatValue];
+        }
+
     }
     
     [self setTotalPrice:_totalOrderPrice];
@@ -323,6 +331,7 @@ BOOL hackFromLoad = NO;
     
     MenuDetailsViewController *itemDetails = [self.storyboard instantiateViewControllerWithIdentifier:@"menuDetails"];
     itemDetails.item = item;
+    itemDetails.tableNumber = _orderTableNumber;
     
     itemDetails.view.frame = self.loadedControllerView.bounds;
     [self.loadedControllerView addSubview:itemDetails.view];
@@ -332,29 +341,46 @@ BOOL hackFromLoad = NO;
 }
 
 - (void)addThisMenuToOrder:(MenuItem *)menu {
+    
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
-    OrderList *order = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
-    
-    
-    order.itemName = menu.name;
-    order.itemPrice = menu.price;
-    order.itemOptions = menu.options;
-    order.itemQuantity = @"1";
-    order.orderSent = @NO;
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     
     NSError *error = nil;
-    if (![context save:&error]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            [alert dismissViewControllerAnimated:YES completion:nil];
-        }];
-        [alert addAction:actionOK];
+    
+    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    if (result.count) {
+        OrderList *order = (OrderList*)result[0];
         
-        [self presentViewController:alert animated:YES completion:^{
+        NSMutableArray *storedOrders = [NSMutableArray arrayWithArray:(NSArray*)[self decodeMenuList:order.items forKey:@"orderItems"]];
+        
+        [storedOrders addObject:[self menuItemToDictionary:menu]];
+        
+//        order.items = [self encodeMenuList:storedOrders withKey:@"orderItems"];
+        order.items = [self encodeData:storedOrders withKey:@"orderItems"];
+        order.orderSent = @NO;
+        
+        error = nil;
+        if (![context save:&error]) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alert dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alert addAction:actionOK];
             
-        }];
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+        }
     }
+    else {
+        OrderList *order = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
+        order.items = [self encodeMenuList:@[menu] withKey:@"orderItems"];
+        order.orderSent = @NO;
+        order.tableNumber = _orderTableNumber;
+    }
+    
+    [context save:&error];
     
     _totalOrderPrice += [menu.price floatValue];
     [self setTotalPrice:_totalOrderPrice];
@@ -364,7 +390,6 @@ BOOL hackFromLoad = NO;
     self.orderSentView.hidden = YES;
     [self showTitleBar:_categoryString];
     if ([segue.identifier isEqualToString:@"priceConfirmOrder"]) {
-        ((ConfirmOrderViewController*)segue.destinationViewController).arrayOrderList = @[];
         ((ConfirmOrderViewController*)segue.destinationViewController).tableNumber = _orderTableNumber;
     }
     else if ([segue.identifier isEqualToString:@"showTableNumber"]) {

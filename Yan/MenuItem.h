@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MenuItem : NSManagedObject
+@interface MenuItem : NSManagedObject //<NSCoding>
 
 // Insert code here to declare functionality of your managed object subclass
 

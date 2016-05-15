@@ -13,5 +13,6 @@
 @interface MenuDetailsViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate, MenuOptionTableViewCellDelegate>
 
 @property (strong, nonatomic) MenuItem *item;
+@property (strong, nonatomic) NSString *tableNumber;
 
 @end

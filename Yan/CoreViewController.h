@@ -29,4 +29,11 @@
 - (NSData*)encodeData:(id)object withKey:(NSString*)key;
 
 - (id)decodeData:(NSData*)data forKey:(NSString*)key;
+
+
+- (NSData*)encodeMenuList:(NSArray*)list withKey:(NSString*)key;
+- (NSArray*)decodeMenuList:(NSData*)data forKey:(NSString*)key;
+
+- (NSDictionary*)menuItemToDictionary:(MenuItem*)menuItem;
+
 @end

@@ -9,6 +9,5 @@
 #import "CoreViewController.h"
 
 @interface ConfirmOrderViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate>
-@property (strong, nonatomic) NSArray *arrayOrderList;
 @property (strong, nonatomic) NSString *tableNumber;
 @end

@@ -15,11 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface OrderList (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSString *itemName;
-@property (nullable, nonatomic, retain) NSString *itemQuantity;
-@property (nullable, nonatomic, retain) NSData *itemOptions;
+@property (nullable, nonatomic, retain) NSData *items;
 @property (nullable, nonatomic, retain) NSString *tableNumber;
-@property (nullable, nonatomic, retain) NSString *itemPrice;
 @property (nullable, nonatomic, retain) NSNumber *orderSent;
 
 @end

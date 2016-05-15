@@ -82,6 +82,7 @@
     
     PayScreenViewController *paymentSelect = (PayScreenViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"payScreenView"];
     paymentSelect.tableNumber = _tableNumber;
+    paymentSelect.discountDetails = @{@"senior":@"1"};
     [self.navigationController pushViewController:paymentSelect animated:YES];
 }
 

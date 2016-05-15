@@ -103,7 +103,7 @@
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-    
+    [request setReturnsObjectsAsFaults:NO];
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
@@ -176,23 +176,18 @@
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+    [request setReturnsObjectsAsFaults:NO];
     
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     OrderList *order = (OrderList*)result[0];
     
-    [context deleteObject:order];
+    NSArray *list = [[NSArray alloc] initWithArray:_arrayOrderList copyItems:YES];
     
-    error = nil;
-    [context save:&error];
-    
-    
-    OrderList *updatedOrder = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
-    NSArray *items = [NSArray arrayWithArray:_arrayOrderList];
-    updatedOrder.items = [self encodeData:items withKey:@"orderItems"];
-    updatedOrder.orderSent = @YES;
-    updatedOrder.tableNumber = _tableNumber;
+    order.items = [self encodeData:list withKey:@"orderItems"];
+    order.orderSent = @YES;
+    order.tableNumber = _tableNumber;
     
     error = nil;
     if ([context save:&error]) {

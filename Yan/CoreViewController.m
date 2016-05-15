@@ -436,7 +436,7 @@
 - (NSData*)encodeData:(id)object withKey:(NSString*)key {
     NSMutableData *data = [NSMutableData new];
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-    [archiver encodeObject:[object copy] forKey:key];
+    [archiver encodeObject:object forKey:key];
     [archiver finishEncoding];
     return data;
 }

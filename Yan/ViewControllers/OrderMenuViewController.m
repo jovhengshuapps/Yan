@@ -8,7 +8,6 @@
 
 #import "OrderMenuViewController.h"
 #import "MenuListViewController.h"
-#import "MenuDetailsViewController.h"
 #import "ConfirmOrderViewController.h"
 #import "WaiterTableViewController.h"
 
@@ -333,6 +332,7 @@ BOOL hackFromLoad = NO;
     MenuDetailsViewController *itemDetails = [self.storyboard instantiateViewControllerWithIdentifier:@"menuDetails"];
     itemDetails.item = item;
     itemDetails.tableNumber = _orderTableNumber;
+    itemDetails.delegate = self;
     
     itemDetails.view.frame = self.loadedControllerView.bounds;
     [self.loadedControllerView addSubview:itemDetails.view];
@@ -417,6 +417,12 @@ BOOL hackFromLoad = NO;
     [self.orderTableButton setTitle:[NSString stringWithFormat:@"Order Table: %@",tableNumber] forState:UIControlStateNormal];
     
     self.orderTableNumber = tableNumber;
+}
+
+
+- (void)resolveTotalPrice:(NSInteger)price {
+    _totalOrderPrice += price;
+    [self setTotalPrice:_totalOrderPrice];
 }
 
 @end

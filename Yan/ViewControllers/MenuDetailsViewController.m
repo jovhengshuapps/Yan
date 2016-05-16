@@ -254,6 +254,7 @@
     
     [self addMenuItem:_item tableNumber:_tableNumber];
     
+    [self.delegate resolveTotalPrice:[_item.price integerValue]];
     [self fetchOrderData];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_arrayOrders.count-1 inSection:0];
     [_detailsTable scrollToRowAtIndexPath:indexPath
@@ -275,7 +276,7 @@
 }
 
 - (void)removeSelectedIndex:(NSInteger)index {
-    
+    NSDictionary *itemToRemove = [_arrayOrders objectAtIndex:index];
     [_arrayOrders removeObjectAtIndex:index];
     
     [_detailsTable reloadData];
@@ -289,9 +290,41 @@
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     if (result.count) {
         OrderList *order = (OrderList*)result[0];
+        NSMutableArray *newOrderList = [NSMutableArray new];
+        NSArray *decodedList = (NSArray*)[self decodeData:order.items forKey:@"orderItems"];
         
-        order.items = [self encodeData:_arrayOrders withKey:@"orderItems"];
+        
+        [newOrderList addObjectsFromArray:decodedList];
+        
+        for (NSInteger index = 0; index < decodedList.count; index++) {
+            NSMutableDictionary *bundle = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
+        
+            if ([bundle[@"identifier"] integerValue] == [itemToRemove[@"identifier"] integerValue]) {
+        
+                NSMutableArray *itemDetails = [NSMutableArray arrayWithArray:(NSArray*)bundle[@"details"]];
+                [itemDetails removeObject:itemToRemove];
+                
+                [bundle setObject:itemDetails forKey:@"details"];
+                
+                NSInteger diff = [bundle[@"quantity"] integerValue] - 1;
+                if (diff > 0) {
+                    NSNumber *quantity = [NSNumber numberWithInteger:diff];
+                    [bundle setObject:quantity forKey:@"quantity"];
+                    
+                    [newOrderList replaceObjectAtIndex:index withObject:bundle];
+                }
+                else {
+                    [newOrderList removeObjectAtIndex:index];
+                }
+                break;
+            }
+        }
+        
+        
+        order.items = [self encodeData:newOrderList withKey:@"orderItems"];
+
         order.orderSent = @NO;
+        order.tableNumber = _tableNumber;
         
         error = nil;
         if (![context save:&error]) {
@@ -306,6 +339,8 @@
             }];
         }
     }
+    
+    [self.delegate resolveTotalPrice:-[itemToRemove[@"price"] integerValue]];
     
 }
 

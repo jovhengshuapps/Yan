@@ -9,10 +9,15 @@
 #import "CoreViewController.h"
 #import "MenuOptionTableViewCell.h"
 
+@protocol MenuDetailsViewControllerDelegate <NSObject>
 
+- (void)resolveTotalPrice:(NSInteger)price;
+
+@end
 @interface MenuDetailsViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate, MenuOptionTableViewCellDelegate>
 
-@property (strong, nonatomic) MenuItem *item;
-@property (strong, nonatomic) NSString *tableNumber;
+@property (strong, nonnull, nonatomic) MenuItem *item;
+@property (strong, nonnull, nonatomic) NSString *tableNumber;
+@property (assign, nonnull, nonatomic) id<MenuDetailsViewControllerDelegate> delegate;
 
 @end

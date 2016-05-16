@@ -9,8 +9,9 @@
 #import "CoreViewController.h"
 #import "MenuListViewController.h"
 #import "TableNumberViewController.h"
+#import "MenuDetailsViewController.h"
 
-@interface OrderMenuViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate, MenuListDelegate, TableNumberViewControllerDelegate>
+@interface OrderMenuViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate, MenuListDelegate, TableNumberViewControllerDelegate, MenuDetailsViewControllerDelegate>
 
 @property(strong,nonatomic) NSArray *categories;
 @end

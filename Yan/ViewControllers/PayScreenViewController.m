@@ -29,11 +29,7 @@
     
     self.totalValue = 0.0f;
     [self fetchOrderDataList];
-    
-    
-    
-    
-    
+        
     
     if (_discountDetails) {
         _showSubTotal = YES;
@@ -76,6 +72,10 @@
     [footerView addSubview:button];
     
     [_mainTable setTableFooterView:footerView];
+    
+    self.totalValue = self.totalValue - (self.totalValue * 0.2);
+    self.totalValue = self.totalValue - (self.totalValue * ([_discountDetails[@"gc"] floatValue]/100.0f));
+    [self setTotalValue:self.totalValue];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -104,34 +104,19 @@
         OrderList *order = (OrderList*)result[0];
         
         NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
-        NSLog(@"stored:%@",storedOrders);
-        for (NSDictionary *items in storedOrders) {
-            self.totalValue += [items[@"price"] floatValue];
+        
+        for (NSDictionary *bundle in storedOrders) {
+            self.totalValue += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
         }
         
         _arrayOrderList = [NSMutableArray new];
 
         
         for (NSDictionary *item in storedOrders) {
+            NSLog(@"storedITEM:%@",item);
             [_arrayOrderList addObject:item];
         }
         
-//        for (NSDictionary *item in storedOrders) {
-//            NSInteger index = 0;
-//            if ([self containsMenuItem:item index:&index]) {
-//                NSMutableDictionary *content = _arrayOrderList[index];
-//                NSNumber *quantity = @([content[@"quantity"] integerValue] + 1);
-//                content[@"quantity"] = quantity;
-//                [_arrayOrderList replaceObjectAtIndex:index withObject:content];
-//            }
-//            else {
-//                NSDictionary *content = @{@"identifier":item.identifier,
-//                                          @"details":item,
-//                                          @"quantity":@1
-//                                          };
-//                [_arrayOrderList addObject:content];
-//            }
-//        }
 
     }
     
@@ -191,20 +176,21 @@
 
 #pragma mark Table Data Source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (_discountDetails) {
+    if (![_discountDetails[@"senior"] isEqualToString:@"0"] || ![_discountDetails[@"gc"] isEqualToString:@"0%"]) {
         return 2;
     }
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (_discountDetails) {
+    if (section == 1) {
         NSInteger count = 0;
-        if (_discountDetails[@"senior"]) {
-            count+=1;
+        if (_discountDetails[@"senior"] && ![_discountDetails[@"senior"] isEqualToString:@"0"]) {
+            count = count + 1;
         }
-        else if (_discountDetails[@"gc"]) {
-            count+=1;
+        
+        if (_discountDetails[@"gc"] && ![_discountDetails[@"gc"] isEqualToString:@"0%"]) {
+            count = count + 1;
         }
         return count;
     }
@@ -257,9 +243,9 @@
     
     if (indexPath.section == 0) {
         
-        NSDictionary *content = _arrayOrderList[indexPath.row];
-        NSArray *details = content[@"details"];
-        NSDictionary *item = details[0];
+        NSDictionary *bundle = _arrayOrderList[indexPath.row];
+        NSArray *details = bundle[@"details"];
+        NSDictionary *item = details[0]; //doesn't matter which one
         NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"name"] uppercaseString],item[@"price"]];
         
         CGFloat nameSize = [self tableView:tableView heightForRowAtIndexPath:indexPath] - 20.0f;
@@ -284,21 +270,28 @@
         
         OrderListTableViewCell *cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"orderListCell"];
         cell.labelItemNamePrice.attributedText = attrString;
-        cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",content[@"quantity"]];
+        cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",bundle[@"quantity"]];
         
         return cell;
     }
     else {
 
         DiscountListTableViewCell *cell = (DiscountListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"discountListCell"];
-        cell.labelDiscountTitle.text = [NSString stringWithFormat:@"Senior Citizen: x%@",_discountDetails[@"senior"]];
+        
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         numberFormatter.locale = [NSLocale localeWithLocaleIdentifier:@"en_PH"];
         [numberFormatter setNumberStyle:NSNumberFormatterCurrencyISOCodeStyle];
         
-        NSString *string = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:(self.totalValue * 0.2)]];
+        NSString *string = @"";
+        if (![_discountDetails[@"senior"] isEqualToString:@"0"] && indexPath.row == 0) {
+            cell.labelDiscountTitle.text = [NSString stringWithFormat:@"Senior Citizen: x%@",_discountDetails[@"senior"]];
+            string = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:(self.totalValue * 0.2)]];
+        }
+        else if (![_discountDetails[@"gc"] isEqualToString:@"0%"]) {
+            cell.labelDiscountTitle.text = [NSString stringWithFormat:@"Gift Certificate: %@",_discountDetails[@"gc"]];
+            string = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:(self.totalValue * ([_discountDetails[@"gc"] floatValue]/100.0f))]];
+        }
         cell.labelDiscountValue.text = [NSString stringWithFormat:@"-%@",string];
-        
         return cell;
     }
     

@@ -48,7 +48,6 @@
     
     
     
-    self.detailsTable.contentSize = CGSizeMake(self.detailsTable.contentSize.width, self.detailsTable.contentSize.height + 110.0f); //allowance for the menu and checkout
     
     [self fetchOrderData];
 }
@@ -88,13 +87,10 @@
         
         _arrayOrders = [NSMutableArray new];
         
-        for (NSDictionary *item in storedOrders) {
-            
-            NSDictionary *content = @{@"identifier":item[@"identifier"],
-                                      @"details":item,
-                                      @"quantity":@1
-                                      };
-            [_arrayOrders addObject:content];
+        for (NSDictionary *bundle in storedOrders) {
+            for (NSDictionary *item in bundle[@"details"]) {
+                [_arrayOrders addObject:item];
+            }
         }
     }
     
@@ -102,6 +98,8 @@
     
     
     [_detailsTable reloadData];
+    
+    self.detailsTable.contentSize = CGSizeMake(_detailsTable.contentSize.width, _detailsTable.contentSize.height + 110.0f); //allowance for the menu and checkout
 }
 
 
@@ -120,7 +118,7 @@
     
     MenuOptionTableViewCell *cell = (MenuOptionTableViewCell*)[tableView dequeueReusableCellWithIdentifier:identifier];
     cell.delegateOptionCell = self;
-    NSDictionary *item = (NSDictionary*)_arrayOrders[indexPath.row][@"details"];
+    NSDictionary *item = (NSDictionary*)_arrayOrders[indexPath.row];
     cell.labelMenuName.text = [item[@"name"] uppercaseString];
     cell.index = indexPath.row;
 
@@ -204,57 +202,57 @@
 
 - (void) addMoreMenu {
     
-    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+//    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+//    
+//    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+//    [request setReturnsObjectsAsFaults:NO];
+//    NSError *error = nil;
+//    
+//    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+//    if (result.count) {
+//        OrderList *order = (OrderList*)result[0];
+//        
+//        NSMutableArray *storedOrders = [NSMutableArray new];
+//        
+//        NSArray *decodedList = (NSArray*)[self decodeData:order.items forKey:@"orderItems"];
+//        
+//        for (NSDictionary *item in decodedList) {
+//            [storedOrders addObject:item];
+//        }
+//        
+//        [storedOrders addObject:[self menuItemToDictionary:_item]];
+//        
+//        order.items = [self encodeData:storedOrders withKey:@"orderItems"];
+//        order.orderSent = @NO;
+//        
+//        error = nil;
+//        if (![context save:&error]) {
+//            UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//                [alert dismissViewControllerAnimated:YES completion:nil];
+//            }];
+//            [alert addAction:actionOK];
+//            
+//            [self presentViewController:alert animated:YES completion:^{
+//                
+//            }];
+//        }
+//    }
+//    else {
+//        OrderList *order = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
+//        NSDictionary *menuItem = [self menuItemToDictionary:_item];
+//        NSArray *items = @[menuItem];
+//        order.items = [self encodeData:items withKey:@"orderItems"];
+//        order.orderSent = @NO;
+//        order.tableNumber = _tableNumber;
+//        ;
+//    }
+//   
+//    
+//    
+//    [context save:&error];
     
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-    [request setReturnsObjectsAsFaults:NO];
-    NSError *error = nil;
-    
-    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
-    if (result.count) {
-        OrderList *order = (OrderList*)result[0];
-        
-        NSMutableArray *storedOrders = [NSMutableArray new];
-        
-        NSArray *decodedList = (NSArray*)[self decodeData:order.items forKey:@"orderItems"];
-        
-        for (NSDictionary *item in decodedList) {
-            [storedOrders addObject:item];
-        }
-        
-        [storedOrders addObject:[self menuItemToDictionary:_item]];
-        
-        order.items = [self encodeData:storedOrders withKey:@"orderItems"];
-        order.orderSent = @NO;
-        
-        error = nil;
-        if (![context save:&error]) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                [alert dismissViewControllerAnimated:YES completion:nil];
-            }];
-            [alert addAction:actionOK];
-            
-            [self presentViewController:alert animated:YES completion:^{
-                
-            }];
-        }
-    }
-    else {
-        OrderList *order = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
-        NSDictionary *menuItem = [self menuItemToDictionary:_item];
-        NSArray *items = @[menuItem];
-        order.items = [self encodeData:items withKey:@"orderItems"];
-        order.orderSent = @NO;
-        order.tableNumber = _tableNumber;
-        ;
-    }
-   
-    
-    
-    [context save:&error];
-    
-    
+    [self addMenuItem:_item tableNumber:_tableNumber];
     
     [self fetchOrderData];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_arrayOrders.count-1 inSection:0];

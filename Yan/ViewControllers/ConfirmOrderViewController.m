@@ -107,7 +107,6 @@
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
-    NSLog(@"list:%@",result);
     if (result.count) {
         OrderList *order = (OrderList*)result[0];
         
@@ -116,36 +115,14 @@
         
         NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
         
-        for (NSDictionary *items in storedOrders) {
-            NSLog(@"item:%@ | %@",items[@"name"], items[@"price"]);
-            self.totalValue += [items[@"price"] floatValue];
+        for (NSDictionary *bundle in storedOrders) {
+            self.totalValue += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
         }
         
         _arrayOrderList = [NSMutableArray new];
         
-        for (NSDictionary *item in storedOrders) {
-            NSInteger index = 0;
-            if ([self containsMenuItemIdentifier:item[@"identifier"] index:&index]) {
-                NSMutableDictionary *content = [_arrayOrderList[index] mutableCopy];
-                NSNumber *quantity = @([content[@"quantity"] integerValue] + 1);
-                [content setObject:quantity forKey:@"quantity"];
-                
-                NSMutableArray *details = [NSMutableArray arrayWithArray:(NSArray*)content[@"details"]];
-                
-                [details addObject:item];
-                [content setObject:details forKey:@"details"];
-                
-                
-                [_arrayOrderList replaceObjectAtIndex:index withObject:content];
-            }
-            else {
-                NSDictionary *content = @{@"identifier":item[@"identifier"],
-                                          @"details":@[item],
-                                          @"quantity":@1
-                                          };
-                [_arrayOrderList addObject:content];
-            }
-            NSLog(@"content:%@ == %@",_arrayOrderList[index][@"identifier"],item[@"identifier"]);
+        for (NSDictionary *bundle in storedOrders) {
+            [_arrayOrderList addObject:bundle];
         }
     }
     
@@ -153,20 +130,20 @@
     
 }
 
-- (BOOL) containsMenuItemIdentifier:(NSNumber*)itemIdentifier index:(NSInteger*)index{
-    BOOL result = NO;
-    for (NSInteger i = 0; i < _arrayOrderList.count; i++) {
-        NSDictionary *content = (NSDictionary*)_arrayOrderList[i];
-        if ([content[@"identifier"] integerValue] == [itemIdentifier integerValue]) {
-            result = YES;
-            NSLog(@"index->%li",(long)i);
-            *index = i;
-            break;
-        }
-    }
-    
-    return result;
-}
+//- (BOOL) containsMenuItemIdentifier:(NSNumber*)itemIdentifier index:(NSInteger*)index{
+//    BOOL result = NO;
+//    for (NSInteger i = 0; i < _arrayOrderList.count; i++) {
+//        NSDictionary *content = (NSDictionary*)_arrayOrderList[i];
+//        if ([content[@"identifier"] integerValue] == [itemIdentifier integerValue]) {
+//            result = YES;
+//            NSLog(@"index->%li",(long)i);
+//            *index = i;
+//            break;
+//        }
+//    }
+//    
+//    return result;
+//}
 
 - (void) orderSentToServer {
     //call api
@@ -183,9 +160,6 @@
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     OrderList *order = (OrderList*)result[0];
     
-//    NSArray *list = [[NSArray alloc] initWithArray:_arrayOrderList copyItems:YES];
-//    order.items = [self encodeData:list withKey:@"orderItems"];
-//    order.tableNumber = _tableNumber;
     order.orderSent = @YES;
     
     error = nil;
@@ -258,8 +232,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSDictionary *content = _arrayOrderList[indexPath.row];
-    NSArray *details = content[@"details"];
+    NSDictionary *bundle = _arrayOrderList[indexPath.row];
+    NSArray *details = bundle[@"details"];
     NSDictionary *item = details[0];//doesn't matter which one
     NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"name"] uppercaseString],item[@"price"]];
     
@@ -285,7 +259,7 @@
     
     OrderListTableViewCell *cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"orderListCell"];
     cell.labelItemNamePrice.attributedText = attrString;
-    cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",content[@"quantity"]];
+    cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",bundle[@"quantity"]];
     
     return cell;
     

@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *mainTableView;
 @property (strong, nonnull) NSArray *discounts;
 @property (strong, nonnull) FPPopoverController *popover;
+@property (strong, nonatomic) NSMutableDictionary *discountDetails;
 @end
 
 @implementation DiscountViewController
@@ -66,6 +67,9 @@
                             @"options":@[@"0\%",@"10\%",@"20\%",@"30\%",@"40\%",@"50\%",@"60\%",@"70\%",@"80\%",@"90\%",@"100\%"]
                             }
                           ];
+    
+    self.discountDetails = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"0",@"senior",@"0%",@"gc", nil];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -82,7 +86,8 @@
     
     PayScreenViewController *paymentSelect = (PayScreenViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"payScreenView"];
     paymentSelect.tableNumber = _tableNumber;
-    paymentSelect.discountDetails = @{@"senior":@"1"};
+    paymentSelect.discountDetails = @{@"senior":_discountDetails[@"senior"],
+                                      @"gc":_discountDetails[@"gc"]};
     [self.navigationController pushViewController:paymentSelect animated:YES];
 }
 
@@ -129,6 +134,12 @@
     cell.discountSubTitle = _discounts[indexPath.row][@"subtitle"];
     cell.discountDesc = _discounts[indexPath.row][@"desc"];
     cell.options = _discounts[indexPath.row][@"options"];
+    if ([_discounts[indexPath.row][@"title"] isEqualToString:@"Senior Citizen"]) {
+        cell.button.tag = 1;
+    }
+    else {
+        cell.button.tag = 2;
+    }
     UIButton *button = cell.button;
     cell.tapHandler = ^(id sender) {
         // do something
@@ -153,6 +164,12 @@
 }
 - (void)selectedItem:(NSString *)item withButton:(UIButton *)button{
     [button setTitle:item forState:UIControlStateNormal];
+    if (button.tag == 1) {
+        [self.discountDetails setObject:item forKey:@"senior"];
+    }
+    else if (button.tag == 2){
+        [self.discountDetails setObject:item forKey:@"gc"];
+    }
     [self.popover dismissPopoverAnimated:YES];
 }
 

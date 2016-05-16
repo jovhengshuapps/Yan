@@ -493,6 +493,103 @@
 //}
 
 
+- (void) addMenuItem:(MenuItem*)menu tableNumber:(NSString*)tableNumber{
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+    [request setReturnsObjectsAsFaults:NO];
+    NSError *error = nil;
+    
+    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    
+    if (result.count == 0) {
+        NSDictionary *item = [self menuItemToDictionary:menu];
+        NSDictionary *bundle = @{@"identifier":item[@"identifier"],
+                                  @"details":@[item],
+                                  @"quantity":@1
+                                  };
+        NSArray *orderItems = [NSArray arrayWithObjects:bundle, nil];
+        
+        OrderList *order = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
+
+        order.items = [self encodeData:orderItems withKey:@"orderItems"];
+        order.orderSent = @NO;
+        order.tableNumber = tableNumber;
+        
+        error = nil;
+        if (![context save:&error]) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alert dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alert addAction:actionOK];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+        }
+    }
+    else {
+        
+        OrderList *order = (OrderList*)result[0];
+        NSMutableArray *newOrderList = [NSMutableArray new];
+        NSArray *decodedList = (NSArray*)[self decodeData:order.items forKey:@"orderItems"];
+        
+        BOOL isNewIdentifier = YES;
+        
+        [newOrderList addObjectsFromArray:decodedList];
+        
+        for (NSInteger index = 0; index < decodedList.count; index++) {
+            NSMutableDictionary *bundle = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
+            isNewIdentifier = YES;
+            if ([bundle[@"identifier"] integerValue] == [menu.identifier integerValue]) {
+                isNewIdentifier = NO;
+                NSMutableArray *itemDetails = [NSMutableArray arrayWithArray:(NSArray*)bundle[@"details"]];
+                NSDictionary *item = [self menuItemToDictionary:menu];
+                [itemDetails addObject:item];
+                
+                [bundle setObject:itemDetails forKey:@"details"];
+                
+                NSInteger sum = [bundle[@"quantity"] integerValue] + 1;
+                NSNumber *quantity = [NSNumber numberWithInteger:sum];
+                [bundle setObject:quantity forKey:@"quantity"];
+                
+                [newOrderList replaceObjectAtIndex:index withObject:bundle];
+            }
+        }
+        
+        
+        if (isNewIdentifier == YES) {
+            NSDictionary *item = [self menuItemToDictionary:menu];
+            NSDictionary *bundle = @{@"identifier":item[@"identifier"],
+                                     @"details":@[item],
+                                     @"quantity":@1
+                                     };
+            [newOrderList addObject:bundle];
+        }
+        
+        order.items = [self encodeData:newOrderList withKey:@"orderItems"];
+        order.orderSent = @NO;
+        order.tableNumber = tableNumber;
+        
+        error = nil;
+        if (![context save:&error]) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alert dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alert addAction:actionOK];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+        }
+        
+    }
+    
+}
+
 
 - (NSDictionary*)menuItemToDictionary:(MenuItem*)menuItem {
     NSArray *keys = [[[menuItem entity] attributesByName] allKeys];

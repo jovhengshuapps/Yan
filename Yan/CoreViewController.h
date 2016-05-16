@@ -34,6 +34,7 @@
 //- (NSData*)encodeMenuList:(NSArray*)list withKey:(NSString*)key;
 //- (NSArray*)decodeMenuList:(NSData*)data forKey:(NSString*)key;
 
+- (void) addMenuItem:(MenuItem*)menu tableNumber:(NSString*)tableNumber;
 - (NSDictionary*)menuItemToDictionary:(MenuItem*)menuItem;
 
 @end

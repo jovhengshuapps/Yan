@@ -62,9 +62,10 @@ BOOL hackFromLoad = NO;
         
         NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
         
-        for (NSDictionary *items in storedOrders) {
-            NSLog(@"MENU[%@ : %@]",items[@"name"], order.orderSent);
-            _totalOrderPrice += [items[@"price"] floatValue];
+        
+        for (NSDictionary *bundle in storedOrders) {
+            NSLog(@"bundle:%@",bundle);
+            self.totalOrderPrice += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
         }
 
     }
@@ -342,53 +343,58 @@ BOOL hackFromLoad = NO;
 
 - (void)addThisMenuToOrder:(MenuItem *)menu {
     
-    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+//    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+//    
+//    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+//    [request setReturnsObjectsAsFaults:NO];
+//    NSError *error = nil;
+//    
+//    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+//    if (result.count) {
+//        OrderList *order = (OrderList*)result[0];
+//        
+//        NSMutableArray *storedOrders = [NSMutableArray new];
+//        
+//        NSArray *decodedList = (NSArray*)[self decodeData:order.items forKey:@"orderItems"];
+//        
+//        for (NSDictionary *item in decodedList) {
+//            [storedOrders addObject:item];
+//        }
+//        
+//        [storedOrders addObject:[self menuItemToDictionary:menu]];
+//        
+//        NSLog(@"stored:%@",storedOrders);
+//        order.items = [self encodeData:storedOrders withKey:@"orderItems"];
+//        order.orderSent = @NO;
+//        
+//        error = nil;
+//        if (![context save:&error]) {
+//            UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//                [alert dismissViewControllerAnimated:YES completion:nil];
+//            }];
+//            [alert addAction:actionOK];
+//            
+//            [self presentViewController:alert animated:YES completion:^{
+//                
+//            }];
+//        }
+//    }
+//    else {
+//        OrderList *order = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
+//        NSDictionary *menuItem = [self menuItemToDictionary:menu];
+//        NSArray *items = @[menuItem];
+//        order.items = [self encodeData:items withKey:@"orderItems"];
+//        order.orderSent = @NO;
+//        order.tableNumber = _orderTableNumber;
+//    }
+//    
+//    [context save:&error];
     
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-    [request setReturnsObjectsAsFaults:NO];
-    NSError *error = nil;
     
-    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
-    if (result.count) {
-        OrderList *order = (OrderList*)result[0];
-        
-        NSMutableArray *storedOrders = [NSMutableArray new];
-        
-        NSArray *decodedList = (NSArray*)[self decodeData:order.items forKey:@"orderItems"];
-        
-        for (NSDictionary *item in decodedList) {
-            [storedOrders addObject:item];
-        }
-        
-        [storedOrders addObject:[self menuItemToDictionary:menu]];
-        
-        NSLog(@"stored:%@",storedOrders);
-        order.items = [self encodeData:storedOrders withKey:@"orderItems"];
-        order.orderSent = @NO;
-        
-        error = nil;
-        if (![context save:&error]) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                [alert dismissViewControllerAnimated:YES completion:nil];
-            }];
-            [alert addAction:actionOK];
-            
-            [self presentViewController:alert animated:YES completion:^{
-                
-            }];
-        }
-    }
-    else {
-        OrderList *order = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
-        NSDictionary *menuItem = [self menuItemToDictionary:menu];
-        NSArray *items = @[menuItem];
-        order.items = [self encodeData:items withKey:@"orderItems"];
-        order.orderSent = @NO;
-        order.tableNumber = _orderTableNumber;
-    }
     
-    [context save:&error];
+    [self addMenuItem:menu tableNumber:_orderTableNumber];
+    
     
     _totalOrderPrice += [menu.price floatValue];
     [self setTotalPrice:_totalOrderPrice];

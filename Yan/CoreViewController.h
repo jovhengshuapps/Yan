@@ -35,6 +35,7 @@
 //- (NSArray*)decodeMenuList:(NSData*)data forKey:(NSString*)key;
 
 - (void) addMenuItem:(MenuItem*)menu tableNumber:(NSString*)tableNumber;
-- (NSDictionary*)menuItemToDictionary:(MenuItem*)menuItem;
+
+- (NSDictionary*)menuItemToDictionary:(MenuItem*)menuItem itemNumber:(NSInteger)itemNumber;
 
 @end

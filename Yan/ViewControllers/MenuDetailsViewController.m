@@ -280,10 +280,10 @@
 
 - (void)removeSelectedIndex:(NSInteger)index {
     NSDictionary *itemToRemove = [_arrayOrders objectAtIndex:index];
+    
     [_arrayOrders removeObjectAtIndex:index];
     
     [_detailsTable reloadData];
-    
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
@@ -305,6 +305,7 @@
             if ([bundle[@"identifier"] integerValue] == [itemToRemove[@"identifier"] integerValue]) {
         
                 NSMutableArray *itemDetails = [NSMutableArray arrayWithArray:(NSArray*)bundle[@"details"]];
+                
                 [itemDetails removeObject:itemToRemove];
                 
                 [bundle setObject:itemDetails forKey:@"details"];
@@ -342,6 +343,7 @@
             }];
         }
     }
+    
     
     [self.delegate resolveTotalPrice:-[itemToRemove[@"price"] integerValue]];
     

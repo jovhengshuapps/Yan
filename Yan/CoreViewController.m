@@ -504,7 +504,7 @@
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     
     if (result.count == 0) {
-        NSDictionary *item = [self menuItemToDictionary:menu];
+        NSDictionary *item = [self menuItemToDictionary:menu itemNumber:1];
         NSDictionary *bundle = @{@"identifier":item[@"identifier"],
                                   @"details":@[item],
                                   @"quantity":@1
@@ -545,13 +545,14 @@
             isNewIdentifier = YES;
             if ([bundle[@"identifier"] integerValue] == [menu.identifier integerValue]) {
                 isNewIdentifier = NO;
+                NSInteger sum = [bundle[@"quantity"] integerValue] + 1;
+                
                 NSMutableArray *itemDetails = [NSMutableArray arrayWithArray:(NSArray*)bundle[@"details"]];
-                NSDictionary *item = [self menuItemToDictionary:menu];
+                NSDictionary *item = [self menuItemToDictionary:menu itemNumber:sum];
                 [itemDetails addObject:item];
                 
                 [bundle setObject:itemDetails forKey:@"details"];
                 
-                NSInteger sum = [bundle[@"quantity"] integerValue] + 1;
                 NSNumber *quantity = [NSNumber numberWithInteger:sum];
                 [bundle setObject:quantity forKey:@"quantity"];
                 
@@ -561,7 +562,7 @@
         
         
         if (isNewIdentifier == YES) {
-            NSDictionary *item = [self menuItemToDictionary:menu];
+            NSDictionary *item = [self menuItemToDictionary:menu itemNumber:1];
             NSDictionary *bundle = @{@"identifier":item[@"identifier"],
                                      @"details":@[item],
                                      @"quantity":@1
@@ -591,10 +592,11 @@
 }
 
 
-- (NSDictionary*)menuItemToDictionary:(MenuItem*)menuItem {
+- (NSDictionary*)menuItemToDictionary:(MenuItem*)menuItem itemNumber:(NSInteger)itemNumber {
     NSArray *keys = [[[menuItem entity] attributesByName] allKeys];
-    NSDictionary *dictionary = [menuItem dictionaryWithValuesForKeys:keys];
-    NSLog(@"\n\nsaved MENU:%@\n\n",dictionary);
+    NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[menuItem dictionaryWithValuesForKeys:keys]];
+    [dictionary setObject:[NSNumber numberWithInteger:itemNumber] forKey:@"itemnumber"];
+    
     return dictionary;
 }
 

@@ -46,7 +46,7 @@
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     if (_datePickerMode == UIDatePickerModeDate) {
-        [dateFormat setDateFormat:@"MM/dd/YYYY, EEEE"];
+        [dateFormat setDateFormat:@"MM/dd/YYYY"];
     }
     else if (_datePickerMode == UIDatePickerModeTime) {
         [dateFormat setDateFormat:@"hh:mm aa"];

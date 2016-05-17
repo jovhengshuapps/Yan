@@ -76,6 +76,10 @@
 		3394A3A21CADF66300472030 /* UIView+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A39B1CADF66300472030 /* UIView+REFrostedViewController.m */; };
 		3394A3A31CADF66300472030 /* UIViewController+REFrostedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3394A39D1CADF66300472030 /* UIViewController+REFrostedViewController.m */; };
 		3394A3A51CAE078100472030 /* LucidaGrande.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 3394A3A41CAE078100472030 /* LucidaGrande.ttc */; };
+		339E3F251CEB35C30073873B /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339E3F241CEB35C30073873B /* SettingTableViewController.m */; };
+		339E3F281CEB49B00073873B /* ProfileBirthdayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339E3F271CEB49B00073873B /* ProfileBirthdayViewController.m */; };
+		339E3F2B1CEB49D60073873B /* ProfileTextFieldViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339E3F2A1CEB49D60073873B /* ProfileTextFieldViewController.m */; };
+		339E3F2E1CEB49F10073873B /* ProfilePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 339E3F2D1CEB49F10073873B /* ProfilePasswordViewController.m */; };
 		33A276B71CD46A8400FAE9C8 /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A276B61CD46A8400FAE9C8 /* DatePickerViewController.m */; };
 		33A2D30F1CDEED0B00D86794 /* TableNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A2D30E1CDEED0B00D86794 /* TableNumberViewController.m */; };
 		33A5BCE51CE80E2A00FB7A17 /* OrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 33A5BCE41CE80E2A00FB7A17 /* OrderListTableViewCell.m */; };
@@ -264,6 +268,14 @@
 		3394A39C1CADF66300472030 /* UIViewController+REFrostedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+REFrostedViewController.h"; sourceTree = "<group>"; };
 		3394A39D1CADF66300472030 /* UIViewController+REFrostedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+REFrostedViewController.m"; sourceTree = "<group>"; };
 		3394A3A41CAE078100472030 /* LucidaGrande.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = LucidaGrande.ttc; sourceTree = "<group>"; };
+		339E3F231CEB35C30073873B /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
+		339E3F241CEB35C30073873B /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
+		339E3F261CEB49B00073873B /* ProfileBirthdayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileBirthdayViewController.h; sourceTree = "<group>"; };
+		339E3F271CEB49B00073873B /* ProfileBirthdayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileBirthdayViewController.m; sourceTree = "<group>"; };
+		339E3F291CEB49D60073873B /* ProfileTextFieldViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileTextFieldViewController.h; sourceTree = "<group>"; };
+		339E3F2A1CEB49D60073873B /* ProfileTextFieldViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileTextFieldViewController.m; sourceTree = "<group>"; };
+		339E3F2C1CEB49F10073873B /* ProfilePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfilePasswordViewController.h; sourceTree = "<group>"; };
+		339E3F2D1CEB49F10073873B /* ProfilePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfilePasswordViewController.m; sourceTree = "<group>"; };
 		33A276B51CD46A8400FAE9C8 /* DatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController.h; sourceTree = "<group>"; };
 		33A276B61CD46A8400FAE9C8 /* DatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController.m; sourceTree = "<group>"; };
 		33A2D30D1CDEED0B00D86794 /* TableNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableNumberViewController.h; sourceTree = "<group>"; };
@@ -712,6 +724,14 @@
 			children = (
 				33599BB41CAD2E9A00366C34 /* DrawerTableViewController.h */,
 				33599BB51CAD2E9A00366C34 /* DrawerTableViewController.m */,
+				339E3F231CEB35C30073873B /* SettingTableViewController.h */,
+				339E3F241CEB35C30073873B /* SettingTableViewController.m */,
+				339E3F261CEB49B00073873B /* ProfileBirthdayViewController.h */,
+				339E3F271CEB49B00073873B /* ProfileBirthdayViewController.m */,
+				339E3F291CEB49D60073873B /* ProfileTextFieldViewController.h */,
+				339E3F2A1CEB49D60073873B /* ProfileTextFieldViewController.m */,
+				339E3F2C1CEB49F10073873B /* ProfilePasswordViewController.h */,
+				339E3F2D1CEB49F10073873B /* ProfilePasswordViewController.m */,
 			);
 			name = Drawer;
 			sourceTree = "<group>";
@@ -939,6 +959,7 @@
 				333FEEFA1CCF7AFE004D4B5B /* MenuDetailsViewController.m in Sources */,
 				33446AFF1CDB613300F46EE1 /* Reservation+CoreDataProperties.m in Sources */,
 				3346B31E1CE49F6C008E8B96 /* FPPopoverController.m in Sources */,
+				339E3F251CEB35C30073873B /* SettingTableViewController.m in Sources */,
 				336424BA1CAE313A00E0E156 /* AFAutoPurgingImageCache.m in Sources */,
 				33E2C5921CE1FBB200B28935 /* PaymentSelectionTableViewCell.m in Sources */,
 				336424B61CAE313A00E0E156 /* AFSecurityPolicy.m in Sources */,
@@ -956,6 +977,7 @@
 				335B7ACC1CD7A156000E9D9F /* MenuOptionTableViewCell.m in Sources */,
 				336424C11CAE313A00E0E156 /* UIRefreshControl+AFNetworking.m in Sources */,
 				33446AEF1CDB488600F46EE1 /* OptionListTableViewCell.m in Sources */,
+				339E3F2B1CEB49D60073873B /* ProfileTextFieldViewController.m in Sources */,
 				33C142451CB1512500B57041 /* AlertView.m in Sources */,
 				3346B32F1CE4D140008E8B96 /* CardDateTableViewCell.m in Sources */,
 				33446B001CDB613300F46EE1 /* Reservation.m in Sources */,
@@ -963,6 +985,7 @@
 				33B36F091CC65CD900AB30C6 /* ReserveRestoViewController.m in Sources */,
 				336424C01CAE313A00E0E156 /* UIProgressView+AFNetworking.m in Sources */,
 				336424B41CAE313A00E0E156 /* AFHTTPSessionManager.m in Sources */,
+				339E3F281CEB49B00073873B /* ProfileBirthdayViewController.m in Sources */,
 				33A5BCE81CE80E8100FB7A17 /* DiscountListTableViewCell.m in Sources */,
 				33E2C58F1CE1F44C00B28935 /* PaymentSelectViewController.m in Sources */,
 				33F9FB401CB6841700637A02 /* RegisterViewController.m in Sources */,
@@ -975,6 +998,7 @@
 				3394A3A21CADF66300472030 /* UIView+REFrostedViewController.m in Sources */,
 				336424BB1CAE313A00E0E156 /* AFImageDownloader.m in Sources */,
 				33E2C5981CE222FB00B28935 /* ShareTableViewController.m in Sources */,
+				339E3F2E1CEB49F10073873B /* ProfilePasswordViewController.m in Sources */,
 				335B7AC91CD76C48000E9D9F /* MenuListTableViewCell.m in Sources */,
 				33ED27811CD22F5E0013FADD /* ConfirmOrderViewController.m in Sources */,
 			);

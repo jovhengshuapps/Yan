@@ -118,21 +118,21 @@
     [alertView dismissAlertView];
 }
 
-- (void)imageGIFEnded:(AlertView *)alertView {
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerCompletedMethod:) name:@"registerCompletedObserver" object:nil];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM/dd/YYYY"];
-    NSDate *formattedDate = [dateFormatter dateFromString:[self.textFieldBirthday.text substringToIndex:[self.textFieldBirthday.text rangeOfString:@","].location-1]];
-    NSLog(@"formattedDate:%@",[dateFormatter stringFromDate:formattedDate]);
-    [self callAPI:API_USER_REGISTER withParameters:@{
-                                                     @"user_email": self.textFieldEmail.text,
-                                                     @"user_password": self.textFieldPassword.text,
-                                                     @"full_name": self.textFieldName.text,
-                                                     @"birthday": [dateFormatter stringFromDate:formattedDate]
-                                                     } completionNotification:@"registerCompletedObserver"];
-    [alertView dismissAlertView];
-}
+//- (void)imageGIFEnded:(AlertView *)alertView {
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerCompletedMethod:) name:@"registerCompletedObserver" object:nil];
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"MM/dd/YYYY"];
+//    NSDate *formattedDate = [dateFormatter dateFromString:[self.textFieldBirthday.text substringToIndex:[self.textFieldBirthday.text rangeOfString:@","].location-1]];
+//    NSLog(@"formattedDate:%@",[dateFormatter stringFromDate:formattedDate]);
+//    [self callAPI:API_USER_REGISTER withParameters:@{
+//                                                     @"user_email": self.textFieldEmail.text,
+//                                                     @"user_password": self.textFieldPassword.text,
+//                                                     @"full_name": self.textFieldName.text,
+//                                                     @"birthday": [dateFormatter stringFromDate:formattedDate]
+//                                                     } completionNotification:@"registerCompletedObserver"];
+//    [alertView dismissAlertView];
+//}
 
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

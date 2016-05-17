@@ -46,8 +46,11 @@
     
     [_detailsTable setTableHeaderView:self.itemImage];
     
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, KEYWINDOW.frame.size.width, 40.0f)];
+    footerView.backgroundColor = [UIColor clearColor];
+    [_detailsTable setTableFooterView:footerView];
     
-    
+    _detailsTable.scrollsToTop = YES;
     
     [self fetchOrderData];
 }
@@ -61,15 +64,11 @@
 - (void) updateImage:(NSNotification*)notification {
     self.itemImage.image = notification.object;
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+//- (void)viewDidAppear:(BOOL)animated {
+//    [super viewDidAppear:animated];
+//    
+//}
 
 - (void) fetchOrderData {
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
@@ -98,8 +97,10 @@
     
     
     [_detailsTable reloadData];
+//    [_detailsTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//    
+//    _detailsTable.contentSize = CGSizeMake(_detailsTable.contentSize.width, _detailsTable.contentSize.height + 110.0f); //allowance for the menu and checkout
     
-    self.detailsTable.contentSize = CGSizeMake(_detailsTable.contentSize.width, _detailsTable.contentSize.height + 110.0f); //allowance for the menu and checkout
 }
 
 
@@ -126,7 +127,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 150.0f;
+    return 160.0f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -139,6 +140,8 @@
     nameHeaderView.layer.borderWidth = 1.0f;
     
     UILabel *labelName = [[UILabel alloc] initWithFrame:CGRectMake(15.0f, 5.0f, nameHeaderView.bounds.size.width - 15.0f - 40.0f, 44.0f)];
+    labelName.adjustsFontSizeToFitWidth = YES;
+    labelName.minimumScaleFactor = -15.0f;
     NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[_item.name uppercaseString],_item.price];
     
     CGFloat nameSize = labelName.frame.size.height - 10.0f;
@@ -166,14 +169,14 @@
     UIButton *addMoreButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [addMoreButton addTarget:self action:@selector(addMoreMenu) forControlEvents:UIControlEventTouchUpInside];
     [addMoreButton setImage:[UIImage imageNamed:@"plus-icon-resized"] forState:UIControlStateNormal];
-    [addMoreButton setFrame:CGRectMake(labelName.bounds.origin.y + labelName.bounds.size.width, 11.0f, 32.0f, 32.0f)];
+    [addMoreButton setFrame:CGRectMake(labelName.bounds.origin.y + labelName.bounds.size.width + 15.0f, 11.0f, 32.0f, 32.0f)];
     
     [nameHeaderView addSubview:labelName];
     [nameHeaderView addSubview:addMoreButton];
     
     [contentView addSubview:nameHeaderView];
     
-    UIView *descriptionView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, nameHeaderView.bounds.size.height + 3.0f, contentView.bounds.size.width, 100.0f)];
+    UIView *descriptionView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, nameHeaderView.bounds.size.height + 3.0f, contentView.bounds.size.width, 110.0f)];
     descriptionView.backgroundColor = UIColorFromRGB(0xDFDFDF);
     descriptionView.layer.borderColor = [UIColor whiteColor].CGColor;
     descriptionView.layer.borderWidth = 1.0f;
@@ -184,7 +187,7 @@
     descriptionLabel.font = [UIFont fontWithName:@"LucidaGrande" size:18.0f];
     descriptionLabel.textColor = UIColorFromRGB(0x333333);
     
-    UILabel *orderLabels = [[UILabel alloc] initWithFrame:CGRectMake(5.0f, descriptionLabel.frame.size.height, descriptionView.bounds.size.width - 5.0f - 10.0f, 20.0f)];
+    UILabel *orderLabels = [[UILabel alloc] initWithFrame:CGRectMake(5.0f, descriptionLabel.frame.size.height, descriptionView.bounds.size.width - 5.0f - 10.0f, 30.0f)];
     orderLabels.text = @"Your Orders:";
     orderLabels.font = [UIFont fontWithName:@"LucidaGrande" size:18.0f];
     orderLabels.textColor = UIColorFromRGB(0x333333);

@@ -8,7 +8,7 @@
 
 #import "DrawerTableViewController.h"
 #import "LoginViewController.h"
-
+#import "SettingTableViewController.h"
 #import "AffiliatedRestoViewController.h"
 
 
@@ -57,7 +57,7 @@
     [super viewWillAppear:animated];
     
     
-    _titlesArray = @[([self userLoggedIn])?@"LOGOUT":@"LOGIN",
+    _titlesArray = @[/*([self userLoggedIn])?@"LOGOUT":@"LOGIN",*/
                      @"SETTINGS",
                      @"FAVORITES",
                      @"RECENT"];
@@ -134,6 +134,11 @@
         AffiliatedRestoViewController *affiliated = (AffiliatedRestoViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"affiliatedResto"];
         affiliated.showAffiliatedRestaurant = AffiliatedRestaurantsFavorites;
         [((UINavigationController*)self.frostedViewController.contentViewController) pushViewController:affiliated animated:YES];
+    }
+    else if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"SETTINGS"]) {
+        SettingTableViewController *settings = (SettingTableViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"settingTable"];
+        
+        [((UINavigationController*)self.frostedViewController.contentViewController) pushViewController:settings animated:YES];
     }
     
 }

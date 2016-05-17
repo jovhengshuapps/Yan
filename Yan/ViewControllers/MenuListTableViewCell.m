@@ -12,7 +12,6 @@
 @interface MenuListTableViewCell ()
 
 @property (strong, nonatomic) IBOutlet UILabel  *labelMenuName;
-@property (strong, nonatomic) IBOutlet  UILabel *labelPrice;
 @property (strong, nonatomic) IBOutlet  UIButton *buttonAddMenu;
 @end
 
@@ -40,21 +39,30 @@
 
 
 - (void) setMenuName:(NSString*)name withPrice:(NSString*)price {
+    NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[name uppercaseString],price];
     
-    _labelMenuName.text = [name uppercaseString];
-    _labelPrice.text = [NSString stringWithFormat:@"PHP %@",[price uppercaseString]];
+    CGFloat nameSize = _labelMenuName.font.pointSize;
+    CGFloat priceSize = nameSize / 2.0f;
     
-    CGSize nameSize = [_labelMenuName.text sizeWithAttributes:TextAttributes(_labelMenuName.font.fontName, 0x000000, _labelMenuName.font.pointSize)];
-    CGSize priceSize = [_labelPrice.text sizeWithAttributes:TextAttributes(_labelPrice.font.fontName, 0x000000, _labelPrice.font.pointSize)];
+    NSArray *components = [text componentsSeparatedByString:@" PHP"];
+    NSRange nameRange = [text rangeOfString:[components objectAtIndex:0]];
+    NSRange priceRange = [text rangeOfString:[components objectAtIndex:1]];
     
-    CGRect frame = _labelMenuName.frame;
-    frame.size.width = nameSize.width;
-    _labelMenuName.frame = frame;
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text];
     
-    frame = _labelPrice.frame;
-    frame.origin.x = _labelMenuName.bounds.origin.x + _labelMenuName.bounds.size.width + 8.0f;
-    frame.size.width = priceSize.width;
-    _labelPrice.frame = frame;
+    [attrString beginEditing];
+    [attrString addAttribute: NSFontAttributeName
+                       value:[UIFont fontWithName:@"LucidaGrande" size:nameSize]
+                       range:nameRange];
+    
+    [attrString addAttribute: NSFontAttributeName
+                       value:[UIFont fontWithName:@"LucidaGrande" size:priceSize]
+                       range:priceRange];
+    
+    [attrString endEditing];
+    
+    _labelMenuName.attributedText = attrString;
+    
 }
 
 - (IBAction)addMenuPressed:(id)sender {

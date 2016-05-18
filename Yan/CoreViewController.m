@@ -542,7 +542,7 @@
         
         for (NSInteger index = 0; index < decodedList.count; index++) {
             NSMutableDictionary *bundle = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
-            isNewIdentifier = YES;
+//            isNewIdentifier = YES;
             if ([bundle[@"identifier"] integerValue] == [menu.identifier integerValue]) {
                 isNewIdentifier = NO;
                 NSInteger sum = [bundle[@"quantity"] integerValue] + 1;

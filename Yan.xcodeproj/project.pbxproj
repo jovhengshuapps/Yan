@@ -48,6 +48,14 @@
 		335AB9031CCE4B4F0037D66F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335AB9021CCE4B4F0037D66F /* CoreGraphics.framework */; };
 		335B7AC91CD76C48000E9D9F /* MenuListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335B7AC81CD76C48000E9D9F /* MenuListTableViewCell.m */; };
 		335B7ACC1CD7A156000E9D9F /* MenuOptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335B7ACB1CD7A156000E9D9F /* MenuOptionTableViewCell.m */; };
+		335DC0EF1CEDEE67001183DD /* DeepBelief.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335DC0E91CEDEE67001183DD /* DeepBelief.framework */; };
+		335DC0F01CEDEE67001183DD /* jetpac.ntwk in Resources */ = {isa = PBXBuildFile; fileRef = 335DC0EA1CEDEE67001183DD /* jetpac.ntwk */; };
+		335DC0F11CEDEE67001183DD /* jollibee.txt in Resources */ = {isa = PBXBuildFile; fileRef = 335DC0EB1CEDEE67001183DD /* jollibee.txt */; };
+		335DC0F21CEDEE67001183DD /* mcdonalds.txt in Resources */ = {isa = PBXBuildFile; fileRef = 335DC0EC1CEDEE67001183DD /* mcdonalds.txt */; };
+		335DC0F31CEDEE67001183DD /* SquareCamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335DC0EE1CEDEE67001183DD /* SquareCamViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		335DC0F51CEDEFCB001183DD /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335DC0F41CEDEFCB001183DD /* Accelerate.framework */; };
+		335DC0F71CEDEFD4001183DD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335DC0F61CEDEFD4001183DD /* UIKit.framework */; };
+		335DC0F91CEDEFE3001183DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335DC0F81CEDEFE3001183DD /* Foundation.framework */; };
 		336424B41CAE313A00E0E156 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424901CAE313A00E0E156 /* AFHTTPSessionManager.m */; };
 		336424B51CAE313A00E0E156 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424931CAE313A00E0E156 /* AFNetworkReachabilityManager.m */; };
 		336424B61CAE313A00E0E156 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 336424951CAE313A00E0E156 /* AFSecurityPolicy.m */; };
@@ -210,6 +218,15 @@
 		335B7AC81CD76C48000E9D9F /* MenuListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuListTableViewCell.m; sourceTree = "<group>"; };
 		335B7ACA1CD7A156000E9D9F /* MenuOptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuOptionTableViewCell.h; sourceTree = "<group>"; };
 		335B7ACB1CD7A156000E9D9F /* MenuOptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuOptionTableViewCell.m; sourceTree = "<group>"; };
+		335DC0E91CEDEE67001183DD /* DeepBelief.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DeepBelief.framework; sourceTree = "<group>"; };
+		335DC0EA1CEDEE67001183DD /* jetpac.ntwk */ = {isa = PBXFileReference; lastKnownFileType = file; path = jetpac.ntwk; sourceTree = "<group>"; };
+		335DC0EB1CEDEE67001183DD /* jollibee.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = jollibee.txt; sourceTree = "<group>"; };
+		335DC0EC1CEDEE67001183DD /* mcdonalds.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mcdonalds.txt; sourceTree = "<group>"; };
+		335DC0ED1CEDEE67001183DD /* SquareCamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareCamViewController.h; sourceTree = "<group>"; };
+		335DC0EE1CEDEE67001183DD /* SquareCamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareCamViewController.m; sourceTree = "<group>"; };
+		335DC0F41CEDEFCB001183DD /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		335DC0F61CEDEFD4001183DD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		335DC0F81CEDEFE3001183DD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3364248F1CAE313A00E0E156 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		336424901CAE313A00E0E156 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		336424911CAE313A00E0E156 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -339,6 +356,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				335DC0EF1CEDEE67001183DD /* DeepBelief.framework in Frameworks */,
+				335DC0F91CEDEFE3001183DD /* Foundation.framework in Frameworks */,
+				335DC0F71CEDEFD4001183DD /* UIKit.framework in Frameworks */,
+				335DC0F51CEDEFCB001183DD /* Accelerate.framework in Frameworks */,
 				335AB9031CCE4B4F0037D66F /* CoreGraphics.framework in Frameworks */,
 				335AB9011CCE4B280037D66F /* CoreVideo.framework in Frameworks */,
 				335AB8FF1CCE4B1D0037D66F /* QuartzCore.framework in Frameworks */,
@@ -454,6 +475,7 @@
 		33599B791CAD26A900366C34 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				335DC0E81CEDEE67001183DD /* DeepBelief */,
 				3346B3161CE49F6C008E8B96 /* FPPopover */,
 				33E44CE01CE3442C002272EA /* AnimatedGIF */,
 				33DBA6E81CB8D1B800AB0062 /* GoogleSignIn.bundle */,
@@ -481,6 +503,19 @@
 				33A276B31CD468EA00FAE9C8 /* Drawer */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		335DC0E81CEDEE67001183DD /* DeepBelief */ = {
+			isa = PBXGroup;
+			children = (
+				335DC0E91CEDEE67001183DD /* DeepBelief.framework */,
+				335DC0EA1CEDEE67001183DD /* jetpac.ntwk */,
+				335DC0EB1CEDEE67001183DD /* jollibee.txt */,
+				335DC0EC1CEDEE67001183DD /* mcdonalds.txt */,
+				335DC0ED1CEDEE67001183DD /* SquareCamViewController.h */,
+				335DC0EE1CEDEE67001183DD /* SquareCamViewController.m */,
+			);
+			path = DeepBelief;
 			sourceTree = "<group>";
 		};
 		3364248E1CAE313A00E0E156 /* AFNetworking */ = {
@@ -761,6 +796,9 @@
 		B34B5C970B55F0D232BFF620 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				335DC0F81CEDEFE3001183DD /* Foundation.framework */,
+				335DC0F61CEDEFD4001183DD /* UIKit.framework */,
+				335DC0F41CEDEFCB001183DD /* Accelerate.framework */,
 				335AB9021CCE4B4F0037D66F /* CoreGraphics.framework */,
 				335AB9001CCE4B280037D66F /* CoreVideo.framework */,
 				335AB8FE1CCE4B1D0037D66F /* QuartzCore.framework */,
@@ -891,9 +929,12 @@
 				3394A3A51CAE078100472030 /* LucidaGrande.ttc in Resources */,
 				33E44CE71CE34ADC002272EA /* apple.mp4 in Resources */,
 				33599B561CAD259100366C34 /* LaunchScreen.storyboard in Resources */,
+				335DC0F11CEDEE67001183DD /* jollibee.txt in Resources */,
 				33599B531CAD259100366C34 /* Assets.xcassets in Resources */,
+				335DC0F01CEDEE67001183DD /* jetpac.ntwk in Resources */,
 				33599B4E1CAD259100366C34 /* Main.storyboard in Resources */,
 				33DBA6E91CB8D1B800AB0062 /* GoogleSignIn.bundle in Resources */,
+				335DC0F21CEDEE67001183DD /* mcdonalds.txt in Resources */,
 				33DBA6E51CB8CD2100AB0062 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -965,6 +1006,7 @@
 				336424B61CAE313A00E0E156 /* AFSecurityPolicy.m in Sources */,
 				33599BAE1CAD274E00366C34 /* CoreViewController.m in Sources */,
 				33446AEC1CDB486F00F46EE1 /* OptionListTableViewController.m in Sources */,
+				335DC0F31CEDEE67001183DD /* SquareCamViewController.m in Sources */,
 				3346B3291CE4CDC7008E8B96 /* CardTypeTableViewCell.m in Sources */,
 				33599B451CAD259100366C34 /* main.m in Sources */,
 				33599BB31CAD2D9000366C34 /* RootViewController.m in Sources */,
@@ -1141,13 +1183,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Eugene Leoncio (9GZUYUT7E4)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eugene Leoncio (9GZUYUT7E4)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
+					"$(PROJECT_DIR)/Libraries/DeepBelief",
 				);
 				INFOPLIST_FILE = Yan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.yan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8b992c42-233a-4eb3-a2dd-efe29fcdce64";
@@ -1160,13 +1207,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Bilinear Inc. (YSNGH6HTET)";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Libraries",
+					"$(PROJECT_DIR)/Libraries/DeepBelief",
 				);
 				INFOPLIST_FILE = Yan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.yan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "de331b5c-e005-41b7-becd-46014c2a7fbd";

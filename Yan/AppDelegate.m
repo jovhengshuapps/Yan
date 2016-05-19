@@ -27,6 +27,7 @@
     
     
     [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x660000)];
+    [[UINavigationBar appearance] setTintColor:UIColorFromRGB(0xFFFFFF)];
     [[UINavigationBar appearance] setBarStyle:UIBarStyleBlack];
     
     UIApplication *app = [UIApplication sharedApplication];

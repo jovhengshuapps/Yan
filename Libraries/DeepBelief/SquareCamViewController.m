@@ -156,7 +156,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 	
     // Make a still image output
 	stillImageOutput = [AVCaptureStillImageOutput new];
-	[stillImageOutput addObserver:self forKeyPath:@"capturingStillImage" options:NSKeyValueObservingOptionNew context:AVCaptureStillImageIsCapturingStillImageContext];
+	[stillImageOutput addObserver:self forKeyPath:@"isCapturingStillImage" options:NSKeyValueObservingOptionNew context:AVCaptureStillImageIsCapturingStillImageContext];
 	if ( [session canAddOutput:stillImageOutput] )
 		[session addOutput:stillImageOutput];
 	
@@ -182,7 +182,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
   
 	effectiveScale = 1.0;
 	previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
-	[previewLayer setBackgroundColor:[[UIColor blackColor] CGColor]];
+	[previewLayer setBackgroundColor:[[UIColor clearColor] CGColor]];
 	[previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
 	CALayer *rootLayer = [previewView layer];
 	[rootLayer setMasksToBounds:YES];
@@ -722,8 +722,6 @@ bail:
     buttonTakePicture.titleLabel.adjustsFontSizeToFitWidth = YES;
     buttonTakePicture.titleLabel.minimumScaleFactor = -3.0f;
     
-    self.title = @"Yan";
-    
   NSString* networkPath = [[NSBundle mainBundle] pathForResource:@"jetpac" ofType:@"ntwk"];
   if (networkPath == NULL) {
     fprintf(stderr, "Couldn't find the neural network parameters file - did you add it as a resource to your application?\n");
@@ -775,6 +773,7 @@ bail:
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.title = @"Yan";
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -784,7 +783,8 @@ bail:
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	[super viewWillDisappear:animated];
+    [super viewWillDisappear:animated];
+    self.title = @"";
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -965,18 +965,18 @@ bail:
 //  [[self.view layer] addSublayer: background];
 //  [labelLayers addObject: background];
 
-  CATextLayer *layer = [CATextLayer layer];
-  [layer setForegroundColor: [UIColor whiteColor].CGColor];
-  [layer setFrame: textBounds];
-  [layer setAlignmentMode: alignment];
-  [layer setWrapped: YES];
-  [layer setFont: font];
-  [layer setFontSize: fontSize];
-  layer.contentsScale = [[UIScreen mainScreen] scale];
-  [layer setString: text];
-
-  [[self.view layer] addSublayer: layer];
-  [labelLayers addObject: layer];
+//  CATextLayer *layer = [CATextLayer layer];
+//  [layer setForegroundColor: [UIColor whiteColor].CGColor];
+//  [layer setFrame: textBounds];
+//  [layer setAlignmentMode: alignment];
+//  [layer setWrapped: YES];
+//  [layer setFont: font];
+//  [layer setFontSize: fontSize];
+//  layer.contentsScale = [[UIScreen mainScreen] scale];
+//  [layer setString: text];
+//
+//  [[self.view layer] addSublayer: layer];
+//  [labelLayers addObject: layer];
 }
 
 - (void) setPredictionText: (NSString*) text withDuration: (float) duration {

@@ -218,7 +218,7 @@
     }];
 }
 
-- (void)callGETAPI:(NSString*)method withParameters:(NSDictionary*)parameters completionHandler:(void (^)(id _Nullable response))completion{
+- (void)callPOSTAPI:(NSString*)method withParameters:(NSDictionary*)parameters completionHandler:(void (^)(id _Nullable response))completion{
     
     NSURL *baseURL = [NSURL URLWithString:BASE_API_URL];
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
@@ -231,7 +231,7 @@
     }
     NETWORK_INDICATOR(YES)
     
-    [manager GET:method parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+    [manager POST:method parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
         NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -363,7 +363,7 @@
     }];
 }
 
-- (BOOL)saveLoggedInAccount:(NSString*)username :(NSString*)password :(NSString*)fullname :(NSString*)birthday :(NSString*)token :(NSString*)identifier {
+- (BOOL)saveLoggedInAccount:(NSString*)username :(NSString*)password :(NSString*)fullname :(NSString*)birthday :(NSString*)token :(NSNumber*)identifier {
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     Account *account = [[Account alloc] initWithEntity:[NSEntityDescription entityForName:@"Account" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
@@ -372,8 +372,8 @@
     account.birthday = birthday;
     account.fullname = fullname;
     account.token = token;
-    account.identifier = identifier;
-    
+    account.identifier = [NSString stringWithFormat:@"%@",identifier];
+    NSLog(@"identifier USER:%@",identifier);
     NSError *error = nil;
     if ([context save:&error]) {
         return YES;

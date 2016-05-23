@@ -9,35 +9,35 @@
 #import "Config.h"
 
 @interface CoreViewController : UIViewController <AlertViewDelegate>
-@property (strong, nonatomic) IBOutlet UIView *titleBarView;
+@property (strong, nonatomic, nullable) IBOutlet UIView *titleBarView;
 
-- (void) showTitleBar:(NSString*)title;
+- (void) showTitleBar:( nullable NSString*)title;
 - (void) hideTitleBar;
-- (Account*) userLoggedIn;
+- ( nonnull Account*) userLoggedIn;
 - (void) logoutUser;
 - (void) isFromRegistration:(BOOL)fromRegistration;
-- (void)callAPI:(NSString*)method withParameters:(NSDictionary*)parameters completionNotification:(NSString*)notificationName;
-- (void)callGETAPI:(NSString*)method withParameters:(NSDictionary*)parameters completionNotification:(NSString*)notificationName;
+- (void)callAPI:( nullable NSString*)method withParameters:( nullable NSDictionary*)parameters completionNotification:( nullable NSString*)notificationName;
+- (void)callGETAPI:( nullable NSString*)method withParameters:( nullable NSDictionary*)parameters completionNotification:( nullable NSString*)notificationName;
 
-- (void)callGETAPI:(NSString*)method withParameters:(NSDictionary*)parameters completionHandler:(void  (^_Nullable)(id _Nullable response))completion;
+- (void)callPOSTAPI:( nullable NSString*)method withParameters:( nullable NSDictionary*)parameters completionHandler:(void  (^_Nullable)(id _Nullable response))completion;
 
-- (BOOL)saveLoggedInAccount:(NSString*)username :(NSString*)password :(NSString*)fullname :(NSString*)birthday :(NSString*)token :(NSString*)identifier;
+- (BOOL)saveLoggedInAccount:( nullable NSString*)username :( nullable NSString*)password :( nullable NSString*)fullname :( nullable NSString*)birthday :( nullable NSString*)token :( nullable NSNumber*)identifier;
 -(void) openMenu;
 
-- (void) addDoneToolbar:(UITextField*)textfield;
+- (void) addDoneToolbar:( nullable UITextField*)textfield;
 
-- (void)getImageFromURL:(NSString*)urlPath completionNotification:(NSString*)notificationName;
+- (void)getImageFromURL:( nullable NSString*)urlPath completionNotification:( nullable NSString*)notificationName;
 
-- (NSData*)encodeData:(id)object withKey:(NSString*)key;
+- ( nullable NSData*)encodeData:( nullable id)object withKey:( nullable NSString*)key;
 
-- (id)decodeData:(NSData*)data forKey:(NSString*)key;
+- ( nullable id)decodeData:( nullable NSData*)data forKey:( nullable NSString*)key;
 
 
 //- (NSData*)encodeMenuList:(NSArray*)list withKey:(NSString*)key;
 //- (NSArray*)decodeMenuList:(NSData*)data forKey:(NSString*)key;
 
-- (void) addMenuItem:(MenuItem*)menu tableNumber:(NSString*)tableNumber;
+- (void) addMenuItem:( nullable MenuItem*)menu tableNumber:( nullable NSString*)tableNumber;
 
-- (NSDictionary*)menuItemToDictionary:(MenuItem*)menuItem itemNumber:(NSInteger)itemNumber;
+- ( nullable NSDictionary*)menuItemToDictionary:( nullable MenuItem*)menuItem itemNumber:(NSInteger)itemNumber;
 
 @end

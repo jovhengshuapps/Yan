@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *textFieldTime;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldNumberPerson;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldTableNumber;
+@property (weak, nonatomic) IBOutlet CustomButton *buttonReserve;
 
 @end
 
@@ -62,8 +63,17 @@
                                      @"table":_textFieldTableNumber.text,
                                      @"persons":_textFieldNumberPerson.text
                                      };
-        [self callGETAPI:API_RESERVATION(_restaurantDetails.identifier, account.identifier) withParameters:parameters completionHandler:^(id  _Nullable response) {
-            
+//        NSDictionary *parameters = @{@"reserve_date":@"05/23/2016",
+//                                     @"reserve_time":@"10:33 PM",
+//                                     @"table":@"9",
+//                                     @"persons":@"12"
+//                                     };
+        self.buttonReserve.enabled = NO;
+        [self.buttonReserve setTitle:@"Sending Reservation" forState:UIControlStateNormal];
+        [self callPOSTAPI:API_RESERVATION(_restaurantDetails.identifier, account.identifier) withParameters:parameters completionHandler:^(id  _Nullable response) {
+            self.buttonReserve.enabled = YES;
+            [self.buttonReserve setTitle:@"RESERVE" forState:UIControlStateNormal];
+            [self performSegueWithIdentifier:@"reservationComplete" sender:sender];
         }];
         return NO;
     }

@@ -149,7 +149,7 @@
         return;
     }
     if (response[@"token"]){
-        if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"] :response[@"id"]]) {
+        if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"] :response[@"uid"]]) {
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
     } else {
@@ -179,7 +179,7 @@
         self.view.userInteractionEnabled = YES;
         return;
     }
-    if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"] :response[@"id"]]) {
+    if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"] :response[@"uid"]]) {
         self.view.userInteractionEnabled = YES;
         [self.navigationController popToRootViewControllerAnimated:YES];
     }

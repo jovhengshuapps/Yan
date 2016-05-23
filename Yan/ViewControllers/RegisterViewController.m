@@ -76,7 +76,7 @@
         [self showTitleBar:@"REGISTRATION"];
         return;
     }
-    if ([self saveLoggedInAccount:self.textFieldEmail.text :self.textFieldPassword.text :self.textFieldName.text :self.textFieldBirthday.text :response[@"token"] :response[@"id"]]) {
+    if ([self saveLoggedInAccount:self.textFieldEmail.text :self.textFieldPassword.text :self.textFieldName.text :self.textFieldBirthday.text :response[@"token"] :response[@"uid"]]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:@"HomeViewRegistrationComplete"];
         
         [self.navigationController popToRootViewControllerAnimated:YES];

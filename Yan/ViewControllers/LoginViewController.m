@@ -40,13 +40,13 @@
 - (void)loginSuccessful:(NSNotification*)notification {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     id response = notification.object;
-    if ([response isMemberOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
+    if ([response isMemberOfClass:[NSError class]] || [response isMemberOfClass:[NSURLErrorDomain class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
         
         [self showTitleBar:@"SIGN IN"];
         return;
     }
     if (response[@"token"]) {
-        if ([self saveLoggedInAccount:self.textFieldUsername.text :self.textFieldPassword.text :@"" :@"" :response[@"token"] :response[@"id"]]) {
+        if ([self saveLoggedInAccount:self.textFieldUsername.text :self.textFieldPassword.text :@"" :@"" :response[@"token"] :response[@"uid"]]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:nil];
             [self.navigationController popToRootViewControllerAnimated:YES];
         }

@@ -45,7 +45,7 @@
     if ([segue.identifier isEqualToString:@"shareTableFacebook"]) {
         ((ShareTableViewController*)segue.destinationViewController).tableNumber = _reservedTableNumber.length?_reservedTableNumber:@"??";
         ((ShareTableViewController*)segue.destinationViewController).restaurant = _restaurantDetails.name;
-        ((ShareTableViewController*)segue.destinationViewController).restaurant = _restaurantDetails.website;
+        ((ShareTableViewController*)segue.destinationViewController).restaurantURL = _restaurantDetails.website;
         
     }
 }

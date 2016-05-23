@@ -18,5 +18,5 @@
 @dynamic token;
 @dynamic fullname;
 @dynamic birthday;
-
+@dynamic identifier;
 @end

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15E65" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Automatic">
     <entity name="Account" representedClassName="Account" syncable="YES">
         <attribute name="birthday" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fullname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
@@ -29,10 +30,24 @@
         <attribute name="reservationTime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tableNumber" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Restaurant" representedClassName="Restaurant" syncable="YES">
+        <attribute name="contact" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="logo_model" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="payment_options" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Account" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Account" positionX="-63" positionY="-18" width="128" height="135"/>
         <element name="MenuItem" positionX="-63" positionY="18" width="128" height="165"/>
         <element name="OrderList" positionX="-54" positionY="45" width="128" height="90"/>
         <element name="Reservation" positionX="-36" positionY="72" width="128" height="120"/>
+        <element name="Restaurant" positionX="-45" positionY="63" width="128" height="210"/>
     </elements>
 </model>

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3302B04F1CF1FE970033BAA1 /* Restaurant+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3302B04C1CF1FE970033BAA1 /* Restaurant+CoreDataProperties.m */; };
+		3302B0501CF1FE970033BAA1 /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 3302B04E1CF1FE970033BAA1 /* Restaurant.m */; };
 		333FEEF71CCF7205004D4B5B /* MenuListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FEEF61CCF7205004D4B5B /* MenuListViewController.m */; };
 		333FEEFA1CCF7AFE004D4B5B /* MenuDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FEEF91CCF7AFE004D4B5B /* MenuDetailsViewController.m */; };
 		33446AEC1CDB486F00F46EE1 /* OptionListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33446AEB1CDB486F00F46EE1 /* OptionListTableViewController.m */; };
@@ -140,6 +142,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3302B04B1CF1FE970033BAA1 /* Restaurant+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Restaurant+CoreDataProperties.h"; sourceTree = "<group>"; };
+		3302B04C1CF1FE970033BAA1 /* Restaurant+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Restaurant+CoreDataProperties.m"; sourceTree = "<group>"; };
+		3302B04D1CF1FE970033BAA1 /* Restaurant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Restaurant.h; sourceTree = "<group>"; };
+		3302B04E1CF1FE970033BAA1 /* Restaurant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Restaurant.m; sourceTree = "<group>"; };
 		333FEEF51CCF7205004D4B5B /* MenuListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuListViewController.h; sourceTree = "<group>"; };
 		333FEEF61CCF7205004D4B5B /* MenuListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuListViewController.m; sourceTree = "<group>"; };
 		333FEEF81CCF7AFE004D4B5B /* MenuDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuDetailsViewController.h; sourceTree = "<group>"; };
@@ -647,6 +653,10 @@
 				338567EA1CD0FC310099BDD0 /* Account+CoreDataProperties.m */,
 				338567EB1CD0FC310099BDD0 /* Account.h */,
 				338567EC1CD0FC310099BDD0 /* Account.m */,
+				3302B04B1CF1FE970033BAA1 /* Restaurant+CoreDataProperties.h */,
+				3302B04C1CF1FE970033BAA1 /* Restaurant+CoreDataProperties.m */,
+				3302B04D1CF1FE970033BAA1 /* Restaurant.h */,
+				3302B04E1CF1FE970033BAA1 /* Restaurant.m */,
 			);
 			name = "CoreData Objects";
 			sourceTree = "<group>";
@@ -961,6 +971,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3394A3A31CADF66300472030 /* UIViewController+REFrostedViewController.m in Sources */,
+				3302B0501CF1FE970033BAA1 /* Restaurant.m in Sources */,
 				3346B3261CE4B7F7008E8B96 /* DiscountTableViewCell.m in Sources */,
 				33446B011CDB613300F46EE1 /* MenuItem+CoreDataProperties.m in Sources */,
 				3345EF691CDE5127008A0A13 /* WaiterOptionTableViewCell.m in Sources */,
@@ -994,6 +1005,7 @@
 				33F9FB431CB68D5600637A02 /* MainLoginViewController.m in Sources */,
 				33A276B71CD46A8400FAE9C8 /* DatePickerViewController.m in Sources */,
 				336424B71CAE313A00E0E156 /* AFURLRequestSerialization.m in Sources */,
+				3302B04F1CF1FE970033BAA1 /* Restaurant+CoreDataProperties.m in Sources */,
 				337516DF1CB2AC390065AB7A /* HomeViewController.m in Sources */,
 				336424BC1CAE313A00E0E156 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				3346B3231CE4B52C008E8B96 /* DiscountViewController.m in Sources */,

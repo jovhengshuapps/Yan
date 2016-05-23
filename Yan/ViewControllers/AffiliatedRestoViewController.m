@@ -112,28 +112,84 @@ typedef enum {
         [self showTitleBar:@"AFFILIATED RESTAURANT"];
         return;
     }
-    
-    
-    NSArray *dummy = @[
-                            @{@"name":@"Mcdonalds",
-                              @"location":@"Right in the corner",
-                              @"website":@"http://www.google.com/"
-                              },
-                            @{@"name":@"Jollibee",
-                              @"location":@"Bee happy",
-                              @"website":@"http://www.google.com/"
-                              },
-                            @{@"name":@"Racks",
-                              @"location":@"Ohhh baby!",
-                              @"website":@"http://www.google.com/"
-                              }
-                            ];
-    
-    
-    
-//    NSLog(@"response:%@",response);
+    NSLog(@"response:%@",response);
 //    _dataListAll = [NSMutableArray arrayWithArray:((NSArray*) response)];
-    _dataListAll = [NSMutableArray arrayWithArray:dummy];
+
+    _dataListAll = [NSMutableArray new];
+    
+    for (NSDictionary *restaurantDetails in ((NSArray*) response)) {
+        NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+        
+        Restaurant *restaurant = [[Restaurant alloc] initWithEntity:[NSEntityDescription entityForName:@"Restaurant" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
+        
+        restaurant.contact = restaurantDetails[@"contact"];
+        restaurant.identifier = [NSString stringWithFormat:@"%@",restaurantDetails[@"id"]];
+        restaurant.imageURL = restaurantDetails[@"image"];
+//        restaurant.imageData;
+        restaurant.latitude = restaurantDetails[@"lat"];
+        restaurant.longitude = restaurantDetails[@"lng"];
+        restaurant.location = restaurantDetails[@"location"];
+        restaurant.name = restaurantDetails[@"name"];
+        restaurant.payment_options = restaurantDetails[@"payment_options"];
+        restaurant.website = restaurantDetails[@"website"];
+        restaurant.logo_model = restaurantDetails[@"logo_model"];
+        
+//        NSData *imageData = _item.imageData;
+//        if (imageData) {
+//            
+//            self.itemImage.image = [UIImage imageWithData:imageData];
+//        }
+//        else {
+//            self.itemImage.image = [UIImage imageNamed:@"yan-logo"];
+//            
+//            if (_item.image.length) {
+//                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateImage:) name:@"MenuImageFromURL" object:nil];
+//                
+//                [self getImageFromURL:_item.image completionNotification:@"MenuImageFromURL"];
+//                
+//            }
+//            
+//            
+//        }
+        
+        NSError *error = nil;
+        if ([context save:&error]) {
+            
+            [_dataListAll addObject:restaurant];
+            
+        }
+        else {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alert dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alert addAction:actionOK];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+        }
+    }
+    
+    
+//    NSArray *dummy = @[
+//                            @{@"name":@"Mcdonalds",
+//                              @"location":@"Right in the corner",
+//                              @"website":@"http://www.google.com/"
+//                              },
+//                            @{@"name":@"Jollibee",
+//                              @"location":@"Bee happy",
+//                              @"website":@"http://www.google.com/"
+//                              },
+//                            @{@"name":@"Racks",
+//                              @"location":@"Ohhh baby!",
+//                              @"website":@"http://www.google.com/"
+//                              }
+//                            ];
+//    
+//    
+//    
+//    _dataListAll = [NSMutableArray arrayWithArray:dummy];
     
     _dataListNearby = [NSMutableArray new];
     _dataListRecent = [NSMutableArray new];
@@ -192,22 +248,22 @@ typedef enum {
     NSString *details = @"";
     
     if (_tabBarOption == AffiliatedRestoOptionAll) {
-        name = [_dataListAll[indexPath.row] objectForKey:@"name"];
-        details = [NSString stringWithFormat:@"%@ | %@",[_dataListAll[indexPath.row] objectForKey:@"location"],[_dataListAll[indexPath.row] objectForKey:@"website"]];
+        name = ((Restaurant*)_dataListAll[indexPath.row]).name;
+        details = [NSString stringWithFormat:@"%@ | %@",((Restaurant*)_dataListAll[indexPath.row]).location,((Restaurant*)_dataListAll[indexPath.row]).website];
     }
     else if (_tabBarOption == AffiliatedRestoOptionRecent) {
-        name = [_dataListRecent[indexPath.row] objectForKey:@"name"];
-        details = [NSString stringWithFormat:@"%@ | %@",[_dataListRecent[indexPath.row] objectForKey:@"location"],[_dataListRecent[indexPath.row] objectForKey:@"website"]];
+        name = ((Restaurant*)_dataListRecent[indexPath.row]).name;
+        details = [NSString stringWithFormat:@"%@ | %@",((Restaurant*)_dataListRecent[indexPath.row]).location,((Restaurant*)_dataListRecent[indexPath.row]).website];
         
     }
     else if (_tabBarOption == AffiliatedRestoOptionNearby) {
-        name = [_dataListNearby[indexPath.row] objectForKey:@"name"];
-        details = [NSString stringWithFormat:@"%@ | %@",[_dataListNearby[indexPath.row] objectForKey:@"location"],[_dataListNearby[indexPath.row] objectForKey:@"website"]];
+        name = ((Restaurant*)_dataListNearby[indexPath.row]).name;
+        details = [NSString stringWithFormat:@"%@ | %@",((Restaurant*)_dataListNearby[indexPath.row]).location,((Restaurant*)_dataListNearby[indexPath.row]).website];
         
     }
     else if (_tabBarOption == AffiliatedRestoOptionFavorites) {
-        name = [_dataListFavorites[indexPath.row] objectForKey:@"name"];
-        details = [NSString stringWithFormat:@"%@ | %@",[_dataListFavorites[indexPath.row] objectForKey:@"location"],[_dataListFavorites[indexPath.row] objectForKey:@"website"]];
+        name = ((Restaurant*)_dataListFavorites[indexPath.row]).name;
+        details = [NSString stringWithFormat:@"%@ | %@",((Restaurant*)_dataListFavorites[indexPath.row]).location,((Restaurant*)_dataListFavorites[indexPath.row]).website];
         
     }
     cell.textLabel.text = name;

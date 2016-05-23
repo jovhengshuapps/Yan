@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _labelRestaurantAddress.text = _restaurantDetails[@"location"];
+    _labelRestaurantAddress.text = _restaurantDetails.location;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -44,7 +44,8 @@
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"shareTableFacebook"]) {
         ((ShareTableViewController*)segue.destinationViewController).tableNumber = _reservedTableNumber.length?_reservedTableNumber:@"??";
-        ((ShareTableViewController*)segue.destinationViewController).restaurant = _restaurantDetails[@"name"];
+        ((ShareTableViewController*)segue.destinationViewController).restaurant = _restaurantDetails.name;
+        ((ShareTableViewController*)segue.destinationViewController).restaurant = _restaurantDetails.website;
         
     }
 }
@@ -55,7 +56,7 @@
     
 // http://waze.to/?ll=latitude,longitude&navigate=yes
     
-    NSString *parameters = @"?ll=37.331689,-122.030731&navigate=yes";
+    NSString *parameters = [NSString stringWithFormat:@"?ll=%@,%@&navigate=yes",_restaurantDetails.latitude, _restaurantDetails.longitude];
     NSURL *wazeURL = [NSURL URLWithString:[NSString  stringWithFormat:@"waze://%@",parameters]];
     
     if ([[UIApplication sharedApplication] canOpenURL:wazeURL]) {
@@ -74,7 +75,7 @@
     }
 }
 - (IBAction)callRestaurant:(id)sender {
-    NSString *phNo = @"+919876543210";
+    NSString *phNo = _restaurantDetails.contact;
     NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"telprompt:%@",phNo]];
     
     if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {

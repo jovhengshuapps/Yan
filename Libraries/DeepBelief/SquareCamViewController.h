@@ -47,14 +47,17 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import "CoreViewController.h"
+
 @class CIDetector;
 
-@interface SquareCamViewController : UIViewController <UIGestureRecognizerDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
+@interface SquareCamViewController : CoreViewController <UIGestureRecognizerDelegate, AVCaptureVideoDataOutputSampleBufferDelegate>
 {
 	IBOutlet UIView *previewView;
 	IBOutlet UISegmentedControl *camerasControl;
     IBOutlet UIButton *buttonTakePicture;
-	AVCaptureVideoPreviewLayer *previewLayer;
+    IBOutlet UIView *titleBar;
+    AVCaptureVideoPreviewLayer *previewLayer;
 	AVCaptureVideoDataOutput *videoDataOutput;
 	BOOL detectFaces;
 	dispatch_queue_t videoDataOutputQueue;

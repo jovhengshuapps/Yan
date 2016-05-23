@@ -200,6 +200,7 @@ bail:
 												  otherButtonTitles:nil];
 		[alertView show];
 		[alertView release];
+        session = nil;
 		[self teardownAVCapture];
 	}
 }
@@ -376,86 +377,101 @@ bail:
 
 
 - (void)proceedToOrderViewMenu {
-    NSArray *categories = @[
-                            @{@"name":@"Main Course",
-                              @"menu":@[
-                                      @{@"id":@1,
-                                        @"name":@"Pininyahan",
-                                        @"price":@"120.00",
-                                        @"desc":@"Chicken meat swimming in milk oil and pineapple",
-                                        @"image":@""},
-                                      @{@"id":@2,
-                                        @"name":@"Pork Adobo",
-                                        @"price":@"160.00",
-                                        @"desc":@"Pork marinated in soy sauce oil and pineapple",
-                                        @"image":@""}
-                                      ]
-                              },
-                            @{@"name":@"Dessert",
-                              @"menu":@[
-                                      @{@"id":@3,
-                                        @"name":@"Ice Cream (Cookies & Cream)",
-                                        @"price":@"75.00",
-                                        @"desc":@"Oh sweet classic cookies and cream flavor YUM!",
-                                        @"image":@""},
-                                      @{@"id":@4,
-                                        @"name":@"Leche Flan",
-                                        @"price":@"45.00",
-                                        @"desc":@"Sweet Egg Pudding",
-                                        @"image":@""},
-                                      @{@"id":@5,
-                                        @"name":@"Sanzrival Cake",
-                                        @"price":@"145.00",
-                                        @"desc":@"Multi-layered cake sure to fill your crunchy, nutty sweet cravings.",
-                                        @"image":@""}
-                                      ]
-                              }
-                            ];
-    OrderMenuViewController *orderMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"orderMenu"];
-    orderMenu.categories = categories;
-    [self.navigationController pushViewController:orderMenu animated:YES];
+//    NSArray *categories = @[
+//                            @{@"name":@"Main Course",
+//                              @"menu":@[
+//                                      @{@"id":@1,
+//                                        @"name":@"Pininyahan",
+//                                        @"price":@"120.00",
+//                                        @"desc":@"Chicken meat swimming in milk oil and pineapple",
+//                                        @"image":@""},
+//                                      @{@"id":@2,
+//                                        @"name":@"Pork Adobo",
+//                                        @"price":@"160.00",
+//                                        @"desc":@"Pork marinated in soy sauce oil and pineapple",
+//                                        @"image":@""}
+//                                      ]
+//                              },
+//                            @{@"name":@"Dessert",
+//                              @"menu":@[
+//                                      @{@"id":@3,
+//                                        @"name":@"Ice Cream (Cookies & Cream)",
+//                                        @"price":@"75.00",
+//                                        @"desc":@"Oh sweet classic cookies and cream flavor YUM!",
+//                                        @"image":@""},
+//                                      @{@"id":@4,
+//                                        @"name":@"Leche Flan",
+//                                        @"price":@"45.00",
+//                                        @"desc":@"Sweet Egg Pudding",
+//                                        @"image":@""},
+//                                      @{@"id":@5,
+//                                        @"name":@"Sanzrival Cake",
+//                                        @"price":@"145.00",
+//                                        @"desc":@"Multi-layered cake sure to fill your crunchy, nutty sweet cravings.",
+//                                        @"image":@""}
+//                                      ]
+//                              }
+//                            ];
+//    OrderMenuViewController *orderMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"orderMenu"];
+//    orderMenu.categories = categories;
+//    [self.navigationController pushViewController:orderMenu animated:YES];
     
-    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuForRestaurant:) name:@"getMenuForRestaurantObserver" object:nil];
-    //    [self callGETAPI:API_MENU(5) withParameters:@{} completionNotification:@"getMenuForRestaurantObserver"];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuForRestaurant:) name:@"getMenuForRestaurantObserver" object:nil];
+        [self callGETAPI:API_MENU(2) withParameters:@{} completionNotification:@"getMenuForRestaurantObserver"];
     
 }
 
 
+- (void) menuForRestaurant:(NSNotification*)notification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
+    NSDictionary *response = (NSDictionary*)notification.object;
+    NSArray *categories = response[@"categories"];
+    OrderMenuViewController *orderMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"orderMenu"];
+    orderMenu.categories = categories;
+    [self.navigationController pushViewController:orderMenu animated:YES];
+}
+
 - (IBAction)takePicture:(id)sender
 {
-  if ([session isRunning]) {
-    [session stopRunning];
-    [sender setTitle: @"Continue" forState:UIControlStateNormal];
-      [((UIButton*)sender) addTarget:self action:@selector(proceedToOrderViewMenu) forControlEvents:UIControlEventTouchUpInside];
-
-    flashView = [[UIView alloc] initWithFrame:[previewView frame]];
-    [flashView setBackgroundColor:[UIColor whiteColor]];
-    [flashView setAlpha:0.f];
-    [[[self view] window] addSubview:flashView];
-    
-    [UIView animateWithDuration:.2f
-      animations:^{
-        [flashView setAlpha:1.f];
-      }
-      completion:^(BOOL finished){
-        [UIView animateWithDuration:.2f
-          animations:^{
+    if (session) {
+        if ([session isRunning]) {
+            [session stopRunning];
+            [sender setTitle: @"Continue" forState:UIControlStateNormal];
+            [((UIButton*)sender) addTarget:self action:@selector(proceedToOrderViewMenu) forControlEvents:UIControlEventTouchUpInside];
+            
+            flashView = [[UIView alloc] initWithFrame:[previewView frame]];
+            [flashView setBackgroundColor:[UIColor whiteColor]];
             [flashView setAlpha:0.f];
-          }
-          completion:^(BOOL finished){
-            [flashView removeFromSuperview];
-            [flashView release];
-            flashView = nil;
-              
-          }
-        ];
-      }
-    ];
-
-  } else {
-    [session startRunning];
-    [sender setTitle: @"* The Restaurant logo should be somewhere nearby." forState:UIControlStateNormal];
-  }
+            [[[self view] window] addSubview:flashView];
+            
+            [UIView animateWithDuration:.2f
+                             animations:^{
+                                 [flashView setAlpha:1.f];
+                             }
+                             completion:^(BOOL finished){
+                                 [UIView animateWithDuration:.2f
+                                                  animations:^{
+                                                      [flashView setAlpha:0.f];
+                                                  }
+                                                  completion:^(BOOL finished){
+                                                      [flashView removeFromSuperview];
+                                                      [flashView release];
+                                                      flashView = nil;
+                                                      
+                                                  }
+                                  ];
+                             }
+             ];
+            
+        } else {
+            [session startRunning];
+            [sender setTitle: @"* The Restaurant logo should be somewhere nearby." forState:UIControlStateNormal];
+        }
+    }
+    else {
+        [self proceedToOrderViewMenu];
+    }
+  
 }
 
 
@@ -716,11 +732,28 @@ bail:
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-
+    [self setNeedsStatusBarAppearanceUpdate];
+    
+    UIApplication *app = [UIApplication sharedApplication];
+    UIView *statusBarView = [[UIView alloc] initWithFrame:CGRectMake(0, -app.statusBarFrame.size.height, KEYWINDOW.rootViewController.view.bounds.size.width, app.statusBarFrame.size.height)];
+    statusBarView.backgroundColor = [UIColor blackColor];
+    
+    [[UINavigationBar appearance] addSubview:statusBarView];
+    
     buttonTakePicture.titleLabel.numberOfLines = 0;
     buttonTakePicture.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
     buttonTakePicture.titleLabel.adjustsFontSizeToFitWidth = YES;
     buttonTakePicture.titleLabel.minimumScaleFactor = -3.0f;
+    
+    titleBar.backgroundColor = UIColorFromRGB(0x333333);
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KEYWINDOW.frame.size.width, 44.0f)];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.text = @"SCAN LOGO";
+    titleLabel.font = [UIFont fontWithName:@"LucidaGrande" size:25.0f];
+    titleLabel.textColor = UIColorFromRGB(0xFFFFFF);
+    
+    
+    [titleBar addSubview:titleLabel];
     
   NSString* networkPath = [[NSBundle mainBundle] pathForResource:@"jetpac" ofType:@"ntwk"];
   if (networkPath == NULL) {
@@ -790,6 +823,11 @@ bail:
 - (void)viewDidDisappear:(BOOL)animated
 {
 	[super viewDidDisappear:animated];
+}
+
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

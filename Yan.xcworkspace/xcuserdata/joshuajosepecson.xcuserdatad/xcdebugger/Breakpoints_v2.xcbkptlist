@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Yan/CoreViewController.m"
-            timestampString = "485258091.520908"
+            timestampString = "485657263.310137"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "498"
-            endingLineNumber = "498"
+            startingLineNumber = "535"
+            endingLineNumber = "535"
             landmarkName = "-addMenuItem:tableNumber:"
             landmarkType = "5">
          </BreakpointContent>

@@ -51,7 +51,7 @@
         FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
         content.contentDescription = [NSString stringWithFormat:@"We are at table %@ at %@",_tableNumber, _restaurant];
         content.contentTitle = @"Share a Table";
-        content.contentURL = [NSURL URLWithString:@"http://yan.bilinear.ph"];
+        content.contentURL = [NSURL URLWithString:_restaurantURL];//[NSURL URLWithString:@"http://yan.bilinear.ph"];
         
         //    FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
         //    dialog.fromViewController = self;

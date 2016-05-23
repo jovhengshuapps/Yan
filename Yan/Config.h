@@ -30,6 +30,7 @@
 #import "Reservation.h"
 #import "MenuItem.h"
 #import "OrderList.h"
+#import "Restaurant.h"
 
 // MACROS
 
@@ -70,5 +71,7 @@
 #define API_RESTAURANTS                                                 @"restaurant"
 
 #define API_MENU(RESTAURANT_ID)                                                 [NSString stringWithFormat:@"restaurant/menus/%i",RESTAURANT_ID]
+
+#define API_RESERVATION(RESTAURANT_ID,USER_ID)                          [NSString stringWithFormat:@"/api_v1/reservation/%@/user/%@",RESTAURANT_ID,USER_ID]
 
 #endif /* Config_h */

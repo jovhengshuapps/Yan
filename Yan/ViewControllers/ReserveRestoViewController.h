@@ -11,6 +11,6 @@
 
 @interface ReserveRestoViewController : CoreViewController <UIPopoverPresentationControllerDelegate, UITextFieldDelegate, DatePickerViewControllerDelegate>
 
-@property (strong,nonatomic) NSDictionary *restaurantDetails;
+@property (strong,nonatomic) Restaurant *restaurantDetails;
 
 @end

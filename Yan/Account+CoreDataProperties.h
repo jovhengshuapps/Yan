@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *token;
 @property (nullable, nonatomic, retain) NSString *fullname;
 @property (nullable, nonatomic, retain) NSString *birthday;
+@property (nullable, nonatomic, retain) NSString *identifier;
 
 @end
 

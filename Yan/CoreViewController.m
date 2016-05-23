@@ -218,6 +218,42 @@
     }];
 }
 
+- (void)callGETAPI:(NSString*)method withParameters:(NSDictionary*)parameters completionHandler:(void (^)(id _Nullable response))completion{
+    
+    NSURL *baseURL = [NSURL URLWithString:BASE_API_URL];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    Account *user = [self userLoggedIn];
+    if (user.token) {
+        
+        [manager.requestSerializer setValue:user.token forHTTPHeaderField:@"x-yan-resto-api"];
+    }
+    NETWORK_INDICATOR(YES)
+    
+    [manager GET:method parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NETWORK_INDICATOR(NO)
+        completion(responseObject);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
+        NETWORK_INDICATOR(NO)
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }];
+}
+
+
 - (void)callGETAPI:(NSString*)method withParameters:(NSDictionary*)parameters completionNotification:(NSString*)notificationName{
     
     NSURL *baseURL = [NSURL URLWithString:BASE_API_URL];
@@ -327,7 +363,7 @@
     }];
 }
 
-- (BOOL)saveLoggedInAccount:(NSString*)username :(NSString*)password :(NSString*)fullname :(NSString*)birthday :(NSString*)token {
+- (BOOL)saveLoggedInAccount:(NSString*)username :(NSString*)password :(NSString*)fullname :(NSString*)birthday :(NSString*)token :(NSString*)identifier {
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     Account *account = [[Account alloc] initWithEntity:[NSEntityDescription entityForName:@"Account" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
@@ -336,6 +372,7 @@
     account.birthday = birthday;
     account.fullname = fullname;
     account.token = token;
+    account.identifier = identifier;
     
     NSError *error = nil;
     if ([context save:&error]) {

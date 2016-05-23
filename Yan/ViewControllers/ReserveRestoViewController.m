@@ -49,6 +49,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) completeReservation:(NSNotification*)notification {
+    
+}
+
+- (BOOL) shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
+    if ([identifier isEqualToString:@"reservationComplete"]){
+        Account *account = (Account*)[self userLoggedIn];
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completeReservation:) name:@"reservationRequest" object:nil];
+        NSDictionary *parameters = @{@"reserve_date":_textFieldDate.text,
+                                     @"reserve_time":_textFieldTime.text,
+                                     @"table":_textFieldTableNumber.text,
+                                     @"persons":_textFieldNumberPerson.text
+                                     };
+        [self callGETAPI:API_RESERVATION(_restaurantDetails.identifier, account.identifier) withParameters:parameters completionHandler:^(id  _Nullable response) {
+            
+        }];
+        return NO;
+    }
+    return YES;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     [_textFieldTableNumber resignFirstResponder];
@@ -74,6 +95,7 @@
         UIPopoverPresentationController *popPC = destNav.popoverPresentationController;
         popPC.delegate = self;
     }
+    
 }
 - (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
     return UIModalPresentationNone;

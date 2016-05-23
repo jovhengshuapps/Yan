@@ -19,7 +19,9 @@
 - (void)callAPI:(NSString*)method withParameters:(NSDictionary*)parameters completionNotification:(NSString*)notificationName;
 - (void)callGETAPI:(NSString*)method withParameters:(NSDictionary*)parameters completionNotification:(NSString*)notificationName;
 
-- (BOOL)saveLoggedInAccount:(NSString*)username :(NSString*)password :(NSString*)fullname :(NSString*)birthday :(NSString*)token;
+- (void)callGETAPI:(NSString*)method withParameters:(NSDictionary*)parameters completionHandler:(void  (^_Nullable)(id _Nullable response))completion;
+
+- (BOOL)saveLoggedInAccount:(NSString*)username :(NSString*)password :(NSString*)fullname :(NSString*)birthday :(NSString*)token :(NSString*)identifier;
 -(void) openMenu;
 
 - (void) addDoneToolbar:(UITextField*)textfield;

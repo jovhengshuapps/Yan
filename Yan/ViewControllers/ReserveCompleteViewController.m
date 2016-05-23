@@ -18,18 +18,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    [button setFrame:CGRectMake(0.0f, 0.0f, 45.0f, 30.0f)];
-    
-    [button setImage:[UIImage imageNamed:@"waiter-icon-normal"] forState:UIControlStateNormal];
-    [button setImage:[UIImage imageNamed:@"waiter-icon-highlighted"] forState:UIControlStateHighlighted];
-        
-    [button addTarget:self action:@selector(showWaiterView) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *waiterItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    
-    [[self navigationItem] setRightBarButtonItem:waiterItem];
+//    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+//    
+//    [button setFrame:CGRectMake(0.0f, 0.0f, 45.0f, 30.0f)];
+//    
+//    [button setImage:[UIImage imageNamed:@"waiter-icon-normal"] forState:UIControlStateNormal];
+//    [button setImage:[UIImage imageNamed:@"waiter-icon-highlighted"] forState:UIControlStateHighlighted];
+//        
+//    [button addTarget:self action:@selector(showWaiterView) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    UIBarButtonItem *waiterItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+//    
+//    [[self navigationItem] setRightBarButtonItem:waiterItem];
     
 }
 

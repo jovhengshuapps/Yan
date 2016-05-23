@@ -241,7 +241,7 @@
         return;
     }
     if (response[@"token"]){
-        if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"]]) {
+        if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"] :response[@"id"]]) {
             [self.navigationController popToRootViewControllerAnimated:YES];
             self.view.userInteractionEnabled = YES;
             [self changeView:nil];
@@ -274,7 +274,7 @@
         self.view.userInteractionEnabled = YES;
         return;
     }
-    if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"]]) {
+    if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"] :response[@"id"]]) {
         self.view.userInteractionEnabled = YES;
         [self.navigationController popToRootViewControllerAnimated:YES];
         self.view.userInteractionEnabled = YES;
@@ -292,7 +292,7 @@
         return;
     }
     if (response[@"token"]){
-        if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"]]) {
+        if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"] :response[@"id"]]) {
             [self.navigationController popToRootViewControllerAnimated:YES];
             self.view.userInteractionEnabled = YES;
             [self changeView:nil];
@@ -325,7 +325,7 @@
         self.view.userInteractionEnabled = YES;
         return;
     }
-    if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"]]) {
+    if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"] :response[@"id"]]) {
         self.view.userInteractionEnabled = YES;
         [self.navigationController popToRootViewControllerAnimated:YES];
         self.view.userInteractionEnabled = YES;

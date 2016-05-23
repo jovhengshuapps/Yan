@@ -13,5 +13,6 @@
 
 @property (strong, nonatomic) NSString *tableNumber;
 @property (strong, nonatomic) NSString *restaurant;
+@property (strong, nonatomic) NSString *restaurantURL;
 
 @end

@@ -8,7 +8,7 @@
 
 #import "CoreViewController.h"
 
-@interface LoginViewController : CoreViewController
+@interface LoginViewController : CoreViewController <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *buttonLogin;
 
 @end

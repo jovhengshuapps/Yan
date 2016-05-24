@@ -4573,7 +4573,10 @@ You may now start using the app for your favourite restaurant.</string>
                                     <constraint firstAttribute="height" constant="40" id="EqT-f7-miR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                <connections>
+                                    <outlet property="delegate" destination="GYE-FS-QZc" id="SV6-XF-H07"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Password:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRK-gL-wTg">
                                 <rect key="frame" x="20" y="220" width="560" height="34"/>
@@ -4591,6 +4594,9 @@ You may now start using the app for your favourite restaurant.</string>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="GYE-FS-QZc" id="daZ-Me-W1O"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7UV-eB-qw7" customClass="CustomButton">
                                 <rect key="frame" x="20" y="324" width="560" height="40"/>
@@ -6691,10 +6697,10 @@ You may now start using the app for your favourite restaurant.</string>
         <image name="yan-red-gold" width="4519" height="4513"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YJZ-bv-B1B"/>
-        <segue reference="iwi-F0-UhZ"/>
-        <segue reference="Y4r-v0-sWo"/>
-        <segue reference="lc2-s0-6Be"/>
         <segue reference="rPF-AT-35v"/>
+        <segue reference="lc2-s0-6Be"/>
+        <segue reference="Y4r-v0-sWo"/>
+        <segue reference="iwi-F0-UhZ"/>
+        <segue reference="7dQ-Ir-nbk"/>
     </inferredMetricsTieBreakers>
 </document>

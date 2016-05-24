@@ -90,15 +90,22 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    NSLog(@"success notification");
+    NSLog(@"success notification:%@",deviceToken);
+    NSMutableString *string = [NSMutableString stringWithFormat:@"%@",deviceToken];
+    [string replaceOccurrencesOfString:@"<" withString:@"" options:NSLiteralSearch range:NSMakeRange(0, string.length)];
+    [string replaceOccurrencesOfString:@">" withString:@"" options:NSLiteralSearch range:NSMakeRange(0, string.length)];
+    [string replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:NSMakeRange(0, string.length)];
+    self.deviceToken = string;
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
+    NSLog(@"received notification:%@",userInfo);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
+    NSLog(@"completion received notification:%@",userInfo);
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {

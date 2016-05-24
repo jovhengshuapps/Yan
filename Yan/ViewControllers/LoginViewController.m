@@ -31,9 +31,11 @@
 - (IBAction)loginPressed:(id)sender {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessful:) name:@"loginCompletedObserver" object:nil];
+    NSString *deviceToken = ((AppDelegate*)[UIApplication sharedApplication].delegate).deviceToken;
     [self callAPI:API_USER_LOGIN withParameters:@{
                                                      @"username": self.textFieldUsername.text,
-                                                     @"password": self.textFieldPassword.text
+                                                     @"password": self.textFieldPassword.text,
+                                                     @"device_token": deviceToken
                                                      } completionNotification:@"loginCompletedObserver"];
 }
 
@@ -46,7 +48,7 @@
         return;
     }
     if (response[@"token"]) {
-        if ([self saveLoggedInAccount:self.textFieldUsername.text :self.textFieldPassword.text :@"" :@"" :response[@"token"] :response[@"uid"]]) {
+        if ([self saveLoggedInAccount:self.textFieldUsername.text :self.textFieldPassword.text :response[@"name"] :response[@"birthday"] :response[@"token"] :response[@"uid"]]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:nil];
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
@@ -66,6 +68,11 @@
 //    [self.navigationController pushViewController:registerViewController animated:YES];
 }
 - (IBAction)showForgotPassword:(id)sender {
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
 }
 
 @end

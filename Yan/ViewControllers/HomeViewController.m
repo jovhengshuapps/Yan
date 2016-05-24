@@ -188,9 +188,11 @@
             [self.navigationItem setPrompt:@"Logging in to Yan!"];
             self.view.userInteractionEnabled = NO;
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessful:) name:@"socialLoginObserver" object:nil];
+            NSString *deviceToken = ((AppDelegate*)[UIApplication sharedApplication].delegate).deviceToken;
             [self callAPI:API_USER_LOGIN withParameters:@{
                                                           @"username": _socialAccount[@"username"],
-                                                          @"password": _socialAccount[@"password"]
+                                                          @"password": _socialAccount[@"password"],
+                                                          @"device_token": deviceToken
                                                           } completionNotification:@"socialLoginObserver"];
         }
     }];
@@ -224,9 +226,11 @@
     [self.navigationItem setPrompt:@"Logging in to Yan!"];
     self.view.userInteractionEnabled = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gloginSuccessful:) name:@"socialLoginObserver" object:nil];
+    NSString *deviceToken = ((AppDelegate*)[UIApplication sharedApplication].delegate).deviceToken;
     [self callAPI:API_USER_LOGIN withParameters:@{
                                                   @"username": _socialAccount[@"username"],
-                                                  @"password": _socialAccount[@"password"]
+                                                  @"password": _socialAccount[@"password"],
+                                                  @"device_token": deviceToken
                                                   } completionNotification:@"socialLoginObserver"];
 }
 

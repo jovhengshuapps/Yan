@@ -185,7 +185,7 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 	[previewLayer setBackgroundColor:[[UIColor clearColor] CGColor]];
 	[previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
 	CALayer *rootLayer = [previewView layer];
-	[rootLayer setMasksToBounds:YES];
+//	[rootLayer setMasksToBounds:YES];
 	[previewLayer setFrame:[rootLayer bounds]];
 	[rootLayer addSublayer:previewLayer];
 	[session startRunning];
@@ -983,16 +983,16 @@ bail:
   width:(float) width height:(float) height
   alignment:(NSString*) alignment
  {
-  NSString* const font = @"LucidaGrande";
-  const float fontSize = 18.0f;
-
-  const float marginSizeX = 5.0f;
-  const float marginSizeY = 2.0f;
-
-  const CGRect backgroundBounds = CGRectMake(originX, originY, width, height);
-
-  const CGRect textBounds = CGRectMake((originX + marginSizeX), (originY + marginSizeY),
-    (width - (marginSizeX * 2)), (height - (marginSizeY * 2)));
+//  NSString* const font = @"LucidaGrande";
+//  const float fontSize = 18.0f;
+//
+//  const float marginSizeX = 5.0f;
+//  const float marginSizeY = 2.0f;
+//
+//  const CGRect backgroundBounds = CGRectMake(originX, originY, width, height);
+//
+//  const CGRect textBounds = CGRectMake((originX + marginSizeX), (originY + marginSizeY),
+//    (width - (marginSizeX * 2)), (height - (marginSizeY * 2)));
 
 //  CATextLayer* background = [CATextLayer layer];
 //  [background setBackgroundColor: [UIColor blackColor].CGColor];
@@ -1033,7 +1033,7 @@ bail:
   }
 
   [self.predictionTextLayer removeFromSuperlayer];
-  [[self.view layer] addSublayer: self.predictionTextLayer];
+//  [[self.view layer] addSublayer: self.predictionTextLayer];
   [self.predictionTextLayer setString: text];
 }
 

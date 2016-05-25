@@ -547,7 +547,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     </mask>
                                 </variation>
                             </view>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuP-t9-tV0">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuP-t9-tV0">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFn-PF-Cd8" customClass="CustomButton">
@@ -1010,7 +1010,7 @@ You may now start using the app for your favourite restaurant.</string>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="24G-xM-hzI">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="522"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="sMU-aq-zRn" appends="YES" id="YBk-LG-Mgw"/>
@@ -4947,6 +4947,8 @@ You may now start using the app for your favourite restaurant.</string>
                         <outlet property="textFieldEmail" destination="MuL-Zc-0qT" id="tF5-Vi-kdP"/>
                         <outlet property="textFieldName" destination="kyD-8P-sul" id="u7j-Zo-08m"/>
                         <outlet property="textFieldPassword" destination="Lb9-cy-vh5" id="YtT-AM-ixR"/>
+                        <outlet property="titleBarView" destination="e7Q-hd-Q7I" id="NAS-o5-qxO"/>
+                        <outlet property="view" destination="593-gt-R8e" id="xJO-xc-3ia"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P1H-dI-R2I" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6697,10 +6699,10 @@ You may now start using the app for your favourite restaurant.</string>
         <image name="yan-red-gold" width="4519" height="4513"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rPF-AT-35v"/>
         <segue reference="lc2-s0-6Be"/>
-        <segue reference="Y4r-v0-sWo"/>
         <segue reference="iwi-F0-UhZ"/>
-        <segue reference="7dQ-Ir-nbk"/>
+        <segue reference="YJZ-bv-B1B"/>
+        <segue reference="Y4r-v0-sWo"/>
+        <segue reference="Jyy-jT-Sb2"/>
     </inferredMetricsTieBreakers>
 </document>

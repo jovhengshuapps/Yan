@@ -71,7 +71,7 @@
 - (void)registerCompletedMethod:(NSNotification*)notification {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     id response = notification.object;
-    if ([response isMemberOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
+    if ([response isKindOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
         
         [self showTitleBar:@"REGISTRATION"];
         return;
@@ -93,7 +93,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerCompletedMethod:) name:@"registerCompletedObserver" object:nil];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM/dd/YYYY"];
-    NSDate *formattedDate = [dateFormatter dateFromString:[self.textFieldBirthday.text substringToIndex:[self.textFieldBirthday.text rangeOfString:@","].location-1]];
+    NSDate *formattedDate = [dateFormatter dateFromString:self.textFieldBirthday.text];
     //    NSLog(@"formattedDate:%@",[dateFormatter stringFromDate:formattedDate]);
     [self callAPI:API_USER_REGISTER withParameters:@{
                                                      @"user_email": self.textFieldEmail.text,
@@ -107,7 +107,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerCompletedMethod:) name:@"registerCompletedObserver" object:nil];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM/dd/YYYY"];
-    NSDate *formattedDate = [dateFormatter dateFromString:[self.textFieldBirthday.text substringToIndex:[self.textFieldBirthday.text rangeOfString:@","].location-1]];
+    NSDate *formattedDate = [dateFormatter dateFromString:self.textFieldBirthday.text];
 //    NSLog(@"formattedDate:%@",[dateFormatter stringFromDate:formattedDate]);
     [self callAPI:API_USER_REGISTER withParameters:@{
                                                      @"user_email": self.textFieldEmail.text,

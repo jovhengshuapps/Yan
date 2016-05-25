@@ -176,11 +176,11 @@ BOOL hackFromLoad = NO;
     MenuItem *menuItem = [[MenuItem alloc] initWithEntity:[NSEntityDescription entityForName:@"MenuItem" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
     
     
-    menuItem.name = item[@"name"];
-    menuItem.price = item[@"price"];
-    menuItem.desc = item[@"desc"];
-    menuItem.image = item[@"image"];
-    menuItem.identifier = item[@"id"];
+    menuItem.name = isNIL(item[@"name"]);
+    menuItem.price = isNIL(item[@"price"]);
+    menuItem.desc = isNIL(item[@"desc"]);
+    menuItem.image = isNIL(item[@"image"]);
+    menuItem.identifier = isNIL(item[@"id"]);
     menuItem.restaurantID = @5;
     NSDictionary *tempOptions = @{@"Steak":@[@"Well Done", @"Rare", @"Normal"], @"Sauce":@[@"Barbeque",@"Spicy"]};
     menuItem.options = [self encodeData:tempOptions withKey:@"options"];

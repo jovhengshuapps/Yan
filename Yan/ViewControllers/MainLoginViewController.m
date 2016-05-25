@@ -177,7 +177,7 @@
 - (void)registerCompletedMethod:(NSNotification*)notification {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     id response = notification.object;
-    if ([response isMemberOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
+    if ([response isKindOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
         
         [self showTitleBar:@"SIGN IN"];
         self.view.userInteractionEnabled = YES;

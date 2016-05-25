@@ -42,7 +42,7 @@
 - (void)loginSuccessful:(NSNotification*)notification {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     id response = notification.object;
-    if ([response isMemberOfClass:[NSError class]] || [response isMemberOfClass:[NSURLErrorDomain class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
+    if ([response isKindOfClass:[NSError class]] || [response isKindOfClass:[NSURLErrorDomain class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
         
         [self showTitleBar:@"SIGN IN"];
         return;

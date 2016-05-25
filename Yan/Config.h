@@ -50,6 +50,8 @@
 
 #define NETWORK_INDICATOR(bool)                                         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:bool];
 
+#define isNIL(key)                                                      (key && ![key isKindOfClass:[NSNull class]])?key:@""
+
 // NOTIFICATION OBSERVER NAME
 
 #define ChangeHomeViewToShow                                            @"ChangeHomeViewToShow"

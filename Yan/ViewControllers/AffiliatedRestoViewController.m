@@ -93,6 +93,12 @@ typedef enum {
     
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"getRestaurantsObserver" object:nil];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -105,9 +111,8 @@ typedef enum {
 
 - (void) getRestaurants:(NSNotification*)notification {
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     id response = notification.object;
-    if ([response isMemberOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
+    if ([response isKindOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
         
         [self showTitleBar:@"AFFILIATED RESTAURANT"];
         return;
@@ -122,17 +127,17 @@ typedef enum {
         
         Restaurant *restaurant = [[Restaurant alloc] initWithEntity:[NSEntityDescription entityForName:@"Restaurant" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
         
-        restaurant.contact = restaurantDetails[@"contact"];
-        restaurant.identifier = [NSString stringWithFormat:@"%@",restaurantDetails[@"id"]];
-        restaurant.imageURL = restaurantDetails[@"image"];
+        restaurant.contact = isNIL(restaurantDetails[@"contact"]);
+        restaurant.identifier = [NSString stringWithFormat:@"%@",isNIL(restaurantDetails[@"id"])];
+        restaurant.imageURL = isNIL(restaurantDetails[@"image"]);
 //        restaurant.imageData;
-        restaurant.latitude = restaurantDetails[@"lat"];
-        restaurant.longitude = restaurantDetails[@"lng"];
-        restaurant.location = restaurantDetails[@"location"];
-        restaurant.name = restaurantDetails[@"name"];
-        restaurant.payment_options = restaurantDetails[@"payment_options"];
-        restaurant.website = restaurantDetails[@"website"];
-        restaurant.logo_model = restaurantDetails[@"logo_model"];
+        restaurant.latitude = isNIL(restaurantDetails[@"lat"]);
+        restaurant.longitude = isNIL(restaurantDetails[@"lng"]);
+        restaurant.location = isNIL(restaurantDetails[@"location"]);
+        restaurant.name = isNIL(restaurantDetails[@"name"]);
+        restaurant.payment_options = isNIL(restaurantDetails[@"payment_options"]);
+        restaurant.website = isNIL(restaurantDetails[@"website"]);
+        restaurant.logo_model = isNIL(restaurantDetails[@"logo_model"]);
         
 //        NSData *imageData = _item.imageData;
 //        if (imageData) {

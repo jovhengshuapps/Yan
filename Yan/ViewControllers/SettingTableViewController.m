@@ -124,10 +124,10 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"pushNotificationCell"];
         }
         for (UIView *subview in cell.contentView.subviews) {
-            if (subview.tag == 1 && [subview isMemberOfClass:[UILabel class]]) {
+            if (subview.tag == 1 && [subview isKindOfClass:[UILabel class]]) {
                 label = (UILabel*)subview;
             }
-            else if (subview.tag == 2 && [subview isMemberOfClass:[UISwitch class]]) {
+            else if (subview.tag == 2 && [subview isKindOfClass:[UISwitch class]]) {
                 switchControl = (UISwitch*)subview;
                 [switchControl addTarget:self action:@selector(changeNotification:) forControlEvents:UIControlEventValueChanged];
             }
@@ -230,7 +230,7 @@
         
         UISwitch *switchControl = nil;
         for (UIView *subview in cell.contentView.subviews) {
-            if (subview.tag == 2 && [subview isMemberOfClass:[UISwitch class]]) {
+            if (subview.tag == 2 && [subview isKindOfClass:[UISwitch class]]) {
                 switchControl = (UISwitch*)subview;
                 break;
             }

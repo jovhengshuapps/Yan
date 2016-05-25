@@ -238,7 +238,7 @@
 - (void)loginSuccessful:(NSNotification*)notification {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     id response = notification.object;
-    if ([response isMemberOfClass:[NSError class]]) {
+    if ([response isKindOfClass:[NSError class]]) {
         
         //        [self showTitleBar:@"SIGN IN"];
         self.view.userInteractionEnabled = YES;
@@ -272,7 +272,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     id response = notification.object;
     [self.navigationItem setPrompt:nil];
-    if ([response isMemberOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
+    if ([response isKindOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
         
         //        [self showTitleBar:@"SIGN IN"];
         self.view.userInteractionEnabled = YES;
@@ -289,7 +289,7 @@
 - (void)gloginSuccessful:(NSNotification*)notification {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     id response = notification.object;
-    if ([response isMemberOfClass:[NSError class]]) {
+    if ([response isKindOfClass:[NSError class]]) {
         
 //        [self showTitleBar:@"SIGN IN"];
         self.view.userInteractionEnabled = YES;
@@ -323,7 +323,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     id response = notification.object;
     [self.navigationItem setPrompt:nil];
-    if ([response isMemberOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
+    if ([response isKindOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
         
         //        [self showTitleBar:@"SIGN IN"];
         self.view.userInteractionEnabled = YES;

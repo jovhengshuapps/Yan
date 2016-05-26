@@ -741,9 +741,9 @@ bail:
     [[UINavigationBar appearance] addSubview:statusBarView];
     
     buttonTakePicture.titleLabel.numberOfLines = 0;
-    buttonTakePicture.titleLabel.lineBreakMode = NSLineBreakByCharWrapping;
+    buttonTakePicture.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     buttonTakePicture.titleLabel.adjustsFontSizeToFitWidth = YES;
-    buttonTakePicture.titleLabel.minimumScaleFactor = -3.0f;
+    buttonTakePicture.titleLabel.minimumScaleFactor = -5.0f;
     
     titleBar.backgroundColor = UIColorFromRGB(0x333333);
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KEYWINDOW.frame.size.width, 44.0f)];

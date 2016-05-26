@@ -1024,7 +1024,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     <constraint firstAttribute="height" constant="80" id="wa6-aL-m2p"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="20"/>
-                                <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                <inset key="contentEdgeInsets" minX="22" minY="0.0" maxX="22" maxY="0.0"/>
                                 <state key="normal" title="* The Restaurant logo should be somewhere nearby.">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>

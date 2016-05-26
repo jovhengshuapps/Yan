@@ -367,11 +367,11 @@
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     Account *account = [[Account alloc] initWithEntity:[NSEntityDescription entityForName:@"Account" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
-    account.username = username;
-    account.password = password;
-    account.birthday = birthday;
-    account.fullname = fullname;
-    account.token = token;
+    account.username = isNIL(username);
+    account.password = isNIL(password);
+    account.birthday = isNIL(birthday);
+    account.fullname = isNIL(fullname);
+    account.token = isNIL(token);
     account.identifier = [NSString stringWithFormat:@"%@",identifier];
     NSLog(@"identifier USER:%@",identifier);
     NSError *error = nil;

@@ -46,7 +46,7 @@
     [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeBadge|UIUserNotificationTypeSound|UIUserNotificationTypeAlert categories:nil]];
     [[UIApplication sharedApplication] registerForRemoteNotifications];
     
-    
+    self.deviceToken = @"dffb861f98604e27cac021b76d1a6cca0019bfdf842adadd50982f2fa68c086a";
     
     return YES;
 }

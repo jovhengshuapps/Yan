@@ -950,7 +950,9 @@ bail:
 //      originX: labelOriginX originY: originY
 //      width: labelWidth height: labelHeight
 //      alignment:kCAAlignmentLeft];
-
+      
+//      [buttonTakePicture setTitle:[NSString stringWithFormat:@"* The Restaurant logo should be somewhere nearby."] forState:UIControlStateNormal];
+      
     if ((labelCount == 0) && (value > 0.5f)) {
 //      [self speak: [label capitalizedString]];
         [buttonTakePicture setTitle:[NSString stringWithFormat:@"Is it %@ ?",[label capitalizedString]] forState:UIControlStateNormal];

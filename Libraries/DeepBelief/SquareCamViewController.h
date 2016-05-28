@@ -69,8 +69,7 @@
 	CGFloat beginGestureScale;
 	CGFloat effectiveScale;
   void* network;
-    void* predictorMcdonalds;
-    void* predictorJollibee;
+    void* predictorArtsy;
   AVSpeechSynthesizer *synth;
   NSMutableDictionary* oldPredictionValues;
   NSMutableArray* labelLayers;

@@ -183,12 +183,15 @@ static CGContextRef CreateCGBitmapContextForSize(CGSize size)
 	effectiveScale = 1.0;
 	previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
 	[previewLayer setBackgroundColor:[[UIColor clearColor] CGColor]];
-	[previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
+	[previewLayer setVideoGravity:AVLayerVideoGravityResize];
 	CALayer *rootLayer = [previewView layer];
 //	[rootLayer setMasksToBounds:YES];
-	[previewLayer setFrame:[rootLayer bounds]];
+	[previewLayer setFrame:CGRectMake([rootLayer bounds].origin.x, [rootLayer bounds].origin.y, [rootLayer bounds].size.width - 2.0f, [rootLayer bounds].size.height)];
 	[rootLayer addSublayer:previewLayer];
 	[session startRunning];
+    
+
+    
 
 bail:
 	[session release];
@@ -491,44 +494,45 @@ bail:
 // find where the video box is positioned within the preview layer based on the video size and gravity
 + (CGRect)videoPreviewBoxForGravity:(NSString *)gravity frameSize:(CGSize)frameSize apertureSize:(CGSize)apertureSize
 {
-    CGFloat apertureRatio = apertureSize.height / apertureSize.width;
-    CGFloat viewRatio = frameSize.width / frameSize.height;
-    
-    CGSize size = CGSizeZero;
-    if ([gravity isEqualToString:AVLayerVideoGravityResizeAspectFill]) {
-        if (viewRatio > apertureRatio) {
-            size.width = frameSize.width;
-            size.height = apertureSize.width * (frameSize.width / apertureSize.height);
-        } else {
-            size.width = apertureSize.height * (frameSize.height / apertureSize.width);
-            size.height = frameSize.height;
-        }
-    } else if ([gravity isEqualToString:AVLayerVideoGravityResizeAspect]) {
-        if (viewRatio > apertureRatio) {
-            size.width = apertureSize.height * (frameSize.height / apertureSize.width);
-            size.height = frameSize.height;
-        } else {
-            size.width = frameSize.width;
-            size.height = apertureSize.width * (frameSize.width / apertureSize.height);
-        }
-    } else if ([gravity isEqualToString:AVLayerVideoGravityResize]) {
-        size.width = frameSize.width;
-        size.height = frameSize.height;
-    }
-	
-	CGRect videoBox;
-	videoBox.size = size;
-	if (size.width < frameSize.width)
-		videoBox.origin.x = (frameSize.width - size.width) / 2;
-	else
-		videoBox.origin.x = (size.width - frameSize.width) / 2;
-	
-	if ( size.height < frameSize.height )
-		videoBox.origin.y = (frameSize.height - size.height) / 2;
-	else
-		videoBox.origin.y = (size.height - frameSize.height) / 2;
-    
-	return videoBox;
+    return CGRectMake(0.0f, 0.0f, frameSize.width, frameSize.height);
+//    CGFloat apertureRatio = apertureSize.height / apertureSize.width;
+//    CGFloat viewRatio = frameSize.width / frameSize.height;
+//    
+//    CGSize size = CGSizeZero;
+//    if ([gravity isEqualToString:AVLayerVideoGravityResizeAspectFill]) {
+//        if (viewRatio > apertureRatio) {
+//            size.width = frameSize.width;
+//            size.height = apertureSize.width * (frameSize.width / apertureSize.height);
+//        } else {
+//            size.width = apertureSize.height * (frameSize.height / apertureSize.width);
+//            size.height = frameSize.height;
+//        }
+//    } else if ([gravity isEqualToString:AVLayerVideoGravityResizeAspect]) {
+//        if (viewRatio > apertureRatio) {
+//            size.width = apertureSize.height * (frameSize.height / apertureSize.width);
+//            size.height = frameSize.height;
+//        } else {
+//            size.width = frameSize.width;
+//            size.height = apertureSize.width * (frameSize.width / apertureSize.height);
+//        }
+//    } else if ([gravity isEqualToString:AVLayerVideoGravityResize]) {
+//        size.width = frameSize.width;
+//        size.height = frameSize.height;
+//    }
+//	
+//	CGRect videoBox;
+//	videoBox.size = size;
+//	if (size.width < frameSize.width)
+//		videoBox.origin.x = (frameSize.width - size.width) / 2;
+//	else
+//		videoBox.origin.x = (size.width - frameSize.width) / 2;
+//	
+//	if ( size.height < frameSize.height )
+//		videoBox.origin.y = (frameSize.height - size.height) / 2;
+//	else
+//		videoBox.origin.y = (size.height - frameSize.height) / 2;
+//    
+//	return videoBox;
 }
 
 // called asynchronously as the capture output is capturing sample buffers, this method asks the face detector (if on)
@@ -676,15 +680,14 @@ bail:
 
   jpcnn_destroy_image_buffer(cnnInput);
 
-    const float predictionValueMcdonalds = jpcnn_predict(predictorMcdonalds, predictions, predictionsLength);
-    const float predictionValueJollibee = jpcnn_predict(predictorJollibee, predictions, predictionsLength);
+    const float predictionValueArtsy = jpcnn_predict(predictorArtsy, predictions, predictionsLength);
 
-  NSMutableDictionary* valuesM = [NSMutableDictionary
-    dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat: predictionValueMcdonalds],@"Mcdonalds",[NSNumber numberWithFloat: predictionValueJollibee],@"Jollibee", nil];
+  NSMutableDictionary* valuesA = [NSMutableDictionary
+    dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat: predictionValueArtsy],@"Artsy", nil];
     
     
   dispatch_async(dispatch_get_main_queue(), ^(void) {
-    [self setPredictionValues: valuesM];
+    [self setPredictionValues: valuesA];
   });
     
 }
@@ -763,25 +766,15 @@ bail:
   network = jpcnn_create_network([networkPath UTF8String]);
   assert(network != NULL);
 
-  NSString* predictorPathMcdonalds = [[NSBundle mainBundle] pathForResource:@"mcdonalds" ofType:@"txt"];
-  if (predictorPathMcdonalds == NULL) {
+  NSString* predictorPathArtsy = [[NSBundle mainBundle] pathForResource:@"artsy" ofType:@"txt"];
+  if (predictorPathArtsy == NULL) {
     fprintf(stderr, "Couldn't find the neural network predictor model file - did you add it as a resource to your application?\n");
     assert(false);
   }
-  predictorMcdonalds = jpcnn_load_predictor([predictorPathMcdonalds UTF8String]);
+  predictorArtsy = jpcnn_load_predictor([predictorPathArtsy UTF8String]);
     
-    assert(predictorMcdonalds != NULL);
+    assert(predictorArtsy != NULL);
     
-    
-    NSString* predictorPathJollibee = [[NSBundle mainBundle] pathForResource:@"jollibee" ofType:@"txt"];
-    if (predictorPathJollibee == NULL) {
-        fprintf(stderr, "Couldn't find the neural network predictor model file - did you add it as a resource to your application?\n");
-        assert(false);
-    }
-    predictorJollibee = jpcnn_load_predictor([predictorPathJollibee UTF8String]);
-    
-    assert(predictorJollibee != NULL);
-
 	[self setupAVCapture];
 	square = [[UIImage imageNamed:@"squarePNG"] retain];
 	NSDictionary *detectorOptions = [[NSDictionary alloc] initWithObjectsAndKeys:CIDetectorAccuracyLow, CIDetectorAccuracy, nil];

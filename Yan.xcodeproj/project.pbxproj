@@ -52,8 +52,6 @@
 		335B7ACC1CD7A156000E9D9F /* MenuOptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335B7ACB1CD7A156000E9D9F /* MenuOptionTableViewCell.m */; };
 		335DC0EF1CEDEE67001183DD /* DeepBelief.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335DC0E91CEDEE67001183DD /* DeepBelief.framework */; };
 		335DC0F01CEDEE67001183DD /* jetpac.ntwk in Resources */ = {isa = PBXBuildFile; fileRef = 335DC0EA1CEDEE67001183DD /* jetpac.ntwk */; };
-		335DC0F11CEDEE67001183DD /* jollibee.txt in Resources */ = {isa = PBXBuildFile; fileRef = 335DC0EB1CEDEE67001183DD /* jollibee.txt */; };
-		335DC0F21CEDEE67001183DD /* mcdonalds.txt in Resources */ = {isa = PBXBuildFile; fileRef = 335DC0EC1CEDEE67001183DD /* mcdonalds.txt */; };
 		335DC0F31CEDEE67001183DD /* SquareCamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335DC0EE1CEDEE67001183DD /* SquareCamViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		335DC0F51CEDEFCB001183DD /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335DC0F41CEDEFCB001183DD /* Accelerate.framework */; };
 		335DC0F71CEDEFD4001183DD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335DC0F61CEDEFD4001183DD /* UIKit.framework */; };
@@ -117,6 +115,7 @@
 		33E2C5981CE222FB00B28935 /* ShareTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E2C5971CE222FB00B28935 /* ShareTableViewController.m */; };
 		33E44CE31CE3442C002272EA /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E44CE21CE3442C002272EA /* UIImage+animatedGIF.m */; };
 		33E44CE71CE34ADC002272EA /* apple.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 33E44CE61CE34ADC002272EA /* apple.mp4 */; };
+		33E626D01CF9C193002CFB2F /* artsy.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33E626CF1CF9C193002CFB2F /* artsy.txt */; };
 		33ED27811CD22F5E0013FADD /* ConfirmOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ED27801CD22F5E0013FADD /* ConfirmOrderViewController.m */; };
 		33F9FB401CB6841700637A02 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F9FB3F1CB6841700637A02 /* RegisterViewController.m */; };
 		33F9FB431CB68D5600637A02 /* MainLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F9FB421CB68D5600637A02 /* MainLoginViewController.m */; };
@@ -226,8 +225,6 @@
 		335B7ACB1CD7A156000E9D9F /* MenuOptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuOptionTableViewCell.m; sourceTree = "<group>"; };
 		335DC0E91CEDEE67001183DD /* DeepBelief.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DeepBelief.framework; sourceTree = "<group>"; };
 		335DC0EA1CEDEE67001183DD /* jetpac.ntwk */ = {isa = PBXFileReference; lastKnownFileType = file; path = jetpac.ntwk; sourceTree = "<group>"; };
-		335DC0EB1CEDEE67001183DD /* jollibee.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = jollibee.txt; sourceTree = "<group>"; };
-		335DC0EC1CEDEE67001183DD /* mcdonalds.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mcdonalds.txt; sourceTree = "<group>"; };
 		335DC0ED1CEDEE67001183DD /* SquareCamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareCamViewController.h; sourceTree = "<group>"; };
 		335DC0EE1CEDEE67001183DD /* SquareCamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SquareCamViewController.m; sourceTree = "<group>"; };
 		335DC0F41CEDEFCB001183DD /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -345,6 +342,7 @@
 		33E44CE11CE3442C002272EA /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
 		33E44CE21CE3442C002272EA /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
 		33E44CE61CE34ADC002272EA /* apple.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = apple.mp4; sourceTree = "<group>"; };
+		33E626CF1CF9C193002CFB2F /* artsy.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = artsy.txt; sourceTree = "<group>"; };
 		33ED277F1CD22F5E0013FADD /* ConfirmOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmOrderViewController.h; sourceTree = "<group>"; };
 		33ED27801CD22F5E0013FADD /* ConfirmOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ConfirmOrderViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		33F9FB3E1CB6841700637A02 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
@@ -516,8 +514,7 @@
 			children = (
 				335DC0E91CEDEE67001183DD /* DeepBelief.framework */,
 				335DC0EA1CEDEE67001183DD /* jetpac.ntwk */,
-				335DC0EB1CEDEE67001183DD /* jollibee.txt */,
-				335DC0EC1CEDEE67001183DD /* mcdonalds.txt */,
+				33E626CF1CF9C193002CFB2F /* artsy.txt */,
 				335DC0ED1CEDEE67001183DD /* SquareCamViewController.h */,
 				335DC0EE1CEDEE67001183DD /* SquareCamViewController.m */,
 			);
@@ -939,13 +936,12 @@
 				3394A3A51CAE078100472030 /* LucidaGrande.ttc in Resources */,
 				33E44CE71CE34ADC002272EA /* apple.mp4 in Resources */,
 				33599B561CAD259100366C34 /* LaunchScreen.storyboard in Resources */,
-				335DC0F11CEDEE67001183DD /* jollibee.txt in Resources */,
 				33599B531CAD259100366C34 /* Assets.xcassets in Resources */,
 				335DC0F01CEDEE67001183DD /* jetpac.ntwk in Resources */,
 				33599B4E1CAD259100366C34 /* Main.storyboard in Resources */,
 				33DBA6E91CB8D1B800AB0062 /* GoogleSignIn.bundle in Resources */,
-				335DC0F21CEDEE67001183DD /* mcdonalds.txt in Resources */,
 				33DBA6E51CB8CD2100AB0062 /* GoogleService-Info.plist in Resources */,
+				33E626D01CF9C193002CFB2F /* artsy.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1209,7 +1205,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.yan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8b992c42-233a-4eb3-a2dd-efe29fcdce64";
+				PROVISIONING_PROFILE = "b13daf03-17f1-4646-bfa6-d90014b4523e";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;

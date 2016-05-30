@@ -420,7 +420,7 @@ bail:
 //    [self.navigationController pushViewController:orderMenu animated:YES];
     
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuForRestaurant:) name:@"getMenuForRestaurantObserver" object:nil];
-        [self callGETAPI:API_MENU(2) withParameters:@{} completionNotification:@"getMenuForRestaurantObserver"];
+        [self callGETAPI:API_MENU(5) withParameters:@{} completionNotification:@"getMenuForRestaurantObserver"];
     
 }
 

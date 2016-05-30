@@ -77,16 +77,27 @@ BOOL hackFromLoad = NO;
     
     _rawData = [self extractMenuContent];
     
-    CGFloat hackHeight = self.view.frame.size.height - 64.0f; //nav plus status bar
+//    CGFloat hackHeight = self.view.frame.size.height - 64.0f; //nav plus status bar
+//    
+//    CGFloat positionY = hackHeight - (self.orderCheckoutView.bounds.origin.y +  self.orderCheckoutView.bounds.size.height);
+//    CGFloat sizeHeight = (44.0f * _arrayCategories.count) + 44.0f; /*height of row and section*/
+//    positionY -= sizeHeight;
+//    
+//    CGFloat maxY = self.loadedControllerView.bounds.origin.y - 10.0f;
+//    CGFloat minY = self.navigationController.navigationBar.frame.size.height;
+//    CGFloat maxHeight = hackHeight - (self.orderCheckoutView.bounds.origin.y +  self.orderCheckoutView.bounds.size.height);
+//    
+//    if (positionY < maxY) {
+//        positionY = minY;
+//        sizeHeight = maxHeight;
+//    }
+//    
+//    _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, positionY, self.view.frame.size.width, sizeHeight) style:UITableViewStylePlain];
     
-    CGFloat positionY = hackHeight - (_orderCheckoutView.bounds.origin.y +  _orderCheckoutView.bounds.size.height);
-    CGFloat sizeHeight = (44.0f * _arrayCategories.count) + 44.0f; /*height of row and section*/
-    positionY -= sizeHeight;
-    
-    _mainTableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0f, positionY, self.view.frame.size.width, sizeHeight) style:UITableViewStylePlain];
-    _mainTableView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.3f];
+    _mainTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    _mainTableView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.5f];
     _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _mainTableView.bounces = NO;
+    _mainTableView.bounces = YES;
     _mainTableView.dataSource = self;
     _mainTableView.delegate = self;
     [self.view addSubview:_mainTableView];
@@ -105,13 +116,13 @@ BOOL hackFromLoad = NO;
     [super viewWillAppear:animated];
     
     [self showTitleBar:_categoryString];
-    if (hackFromLoad) {
-        
-    }
-    else {
+//    if (hackFromLoad) {
+//        
+//    }
+//    else {
         [self showMenu];
-        hackFromLoad = NO;
-    }
+//        hackFromLoad = NO;
+//    }
 }
 
 - (void) showOrderSentView {
@@ -211,12 +222,23 @@ BOOL hackFromLoad = NO;
 - (void) showMenu {
     self.orderSentView.hidden = YES;
     [self showTitleBar:_categoryString];
-    CGFloat positionY = self.view.frame.size.height - _orderCheckoutView.bounds.size.height;
-    CGFloat sizeHeight = (44.0f * _arrayCategories.count) + 44.0f; /*height of row and section*/
+    
+    CGFloat hackHeight = self.view.frame.size.height - 64.0f; //nav plus status bar
+    
+    CGFloat positionY = hackHeight - (self.orderCheckoutView.bounds.origin.y +  self.orderCheckoutView.bounds.size.height);
+    CGFloat sizeHeight = (44.0f * self.arrayCategories.count) + 44.0f; /*height of row and section*/
     positionY -= sizeHeight;
     
+    CGFloat maxY = self.loadedControllerView.bounds.origin.y - 10.0f;
+    CGFloat maxHeight = hackHeight - (self.orderCheckoutView.bounds.origin.y +  self.orderCheckoutView.bounds.size.height);
+    
+    if (positionY < maxY) {
+        positionY = maxY + 10.0f;
+        sizeHeight = maxHeight + self.orderCheckoutView.bounds.size.height + 20.0f;
+    }
+    
     [UIView animateWithDuration:0.2f animations:^{
-        _mainTableView.frame = CGRectMake(_mainTableView.frame.origin.x, positionY, _mainTableView.frame.size.width, sizeHeight);
+        _mainTableView.frame = CGRectMake(0.0f, positionY,  self.view.frame.size.width, sizeHeight);
     } completion:^(BOOL finished) {
         _menuShown = YES;
         [_mainTableView reloadData];
@@ -246,13 +268,15 @@ BOOL hackFromLoad = NO;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
-        cell.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.0f];
+        cell.backgroundColor = [UIColor colorWithWhite:0.5f alpha:0.2f];
     }
     if (_menuShown) {
         cell.textLabel.text = [_arrayCategories[indexPath.row] uppercaseString];
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
         cell.textLabel.font = [UIFont fontWithName:@"LucidaGrande" size:30.0f];
         cell.textLabel.textColor = [UIColor whiteColor];
+        cell.textLabel.adjustsFontSizeToFitWidth = YES;
+        cell.textLabel.minimumScaleFactor = -5.0f;
         
         cell.contentView.layer.borderColor = [UIColor whiteColor].CGColor;
         cell.contentView.layer.borderWidth = 0.5f;
@@ -273,7 +297,7 @@ BOOL hackFromLoad = NO;
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIButton *buttonMenu = [UIButton buttonWithType:UIButtonTypeCustom];
     buttonMenu.frame = CGRectMake(0.0f, 0.0f, _mainTableView.bounds.size.width, [self tableView:tableView heightForHeaderInSection:section]);
-    buttonMenu.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.0f];
+    buttonMenu.backgroundColor = [UIColor colorWithWhite:0.5f alpha:1.0f];
     
     [buttonMenu setTitle:@"MAIN MENU" forState:UIControlStateNormal];
     [buttonMenu setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

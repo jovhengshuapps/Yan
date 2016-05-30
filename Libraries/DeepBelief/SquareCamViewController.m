@@ -419,6 +419,7 @@ bail:
 //    orderMenu.categories = categories;
 //    [self.navigationController pushViewController:orderMenu animated:YES];
     
+    self.view.userInteractionEnabled = NO;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuForRestaurant:) name:@"getMenuForRestaurantObserver" object:nil];
         [self callGETAPI:API_MENU(5) withParameters:@{} completionNotification:@"getMenuForRestaurantObserver"];
     
@@ -431,6 +432,7 @@ bail:
     NSArray *categories = response[@"categories"];
     OrderMenuViewController *orderMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"orderMenu"];
     orderMenu.categories = categories;
+    self.view.userInteractionEnabled = YES;
     [self.navigationController pushViewController:orderMenu animated:YES];
 }
 

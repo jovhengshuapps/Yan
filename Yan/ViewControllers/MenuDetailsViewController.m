@@ -144,12 +144,15 @@
     labelName.minimumScaleFactor = -15.0f;
     NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[_item.name uppercaseString],_item.price];
     
-    CGFloat nameSize = labelName.frame.size.height - 10.0f;
+    CGFloat nameSize = 20.0f;//labelName.frame.size.height - 10.0f;
     CGFloat priceSize = nameSize / 2.0f;
     
     NSArray *components = [text componentsSeparatedByString:@" PHP"];
     NSRange nameRange = [text rangeOfString:[components objectAtIndex:0]];
     NSRange priceRange = [text rangeOfString:[components objectAtIndex:1]];
+    
+    nameRange = NSMakeRange(nameRange.location, nameRange.length - 3);
+    priceRange = NSMakeRange(priceRange.location-3, priceRange.length+3);
     
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text];
     
@@ -188,7 +191,7 @@
     descriptionLabel.textColor = UIColorFromRGB(0x333333);
     
     UILabel *orderLabels = [[UILabel alloc] initWithFrame:CGRectMake(5.0f, descriptionLabel.frame.size.height, descriptionView.bounds.size.width - 5.0f - 10.0f, 30.0f)];
-    orderLabels.text = @"Your Orders:";
+    orderLabels.text = (_arrayOrders.count)?@"Your Orders:":@"";
     orderLabels.font = [UIFont fontWithName:@"LucidaGrande" size:18.0f];
     orderLabels.textColor = UIColorFromRGB(0x333333);
     

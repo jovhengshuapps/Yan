@@ -97,7 +97,7 @@ BOOL hackFromLoad = NO;
     _mainTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     _mainTableView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.5f];
     _mainTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    _mainTableView.bounces = YES;
+    _mainTableView.bounces = NO;
     _mainTableView.dataSource = self;
     _mainTableView.delegate = self;
     [self.view addSubview:_mainTableView];
@@ -121,7 +121,7 @@ BOOL hackFromLoad = NO;
 //    }
 //    else {
         [self showMenu];
-//        hackFromLoad = NO;
+        hackFromLoad = NO;
 //    }
 }
 
@@ -230,11 +230,11 @@ BOOL hackFromLoad = NO;
     positionY -= sizeHeight;
     
     CGFloat maxY = self.loadedControllerView.bounds.origin.y - 10.0f;
-    CGFloat maxHeight = hackHeight - (self.orderCheckoutView.bounds.origin.y +  self.orderCheckoutView.bounds.size.height);
+    CGFloat maxHeight = hackHeight - (44.0f + (hackFromLoad?20.0f:-44.0f));
     
     if (positionY < maxY) {
         positionY = maxY + 10.0f;
-        sizeHeight = maxHeight + self.orderCheckoutView.bounds.size.height + 20.0f;
+        sizeHeight = maxHeight + 20.0f;
     }
     
     [UIView animateWithDuration:0.2f animations:^{

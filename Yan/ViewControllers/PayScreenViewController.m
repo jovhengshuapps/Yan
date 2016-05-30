@@ -243,17 +243,22 @@
     
     if (indexPath.section == 0) {
         
+        OrderListTableViewCell *cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"orderListCell"];
+        
         NSDictionary *bundle = _arrayOrderList[indexPath.row];
         NSArray *details = bundle[@"details"];
         NSDictionary *item = details[0]; //doesn't matter which one
         NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"name"] uppercaseString],item[@"price"]];
         
-        CGFloat nameSize = [self tableView:tableView heightForRowAtIndexPath:indexPath] - 20.0f;
+        CGFloat nameSize = cell.labelItemNamePrice.font.pointSize; //[self tableView:tableView heightForRowAtIndexPath:indexPath] - 20.0f;
         CGFloat priceSize = nameSize / 2.0f;
         
         NSArray *components = [text componentsSeparatedByString:@" PHP"];
         NSRange nameRange = [text rangeOfString:[components objectAtIndex:0]];
         NSRange priceRange = [text rangeOfString:[components objectAtIndex:1]];
+        
+        nameRange = NSMakeRange(nameRange.location, nameRange.length - 3);
+        priceRange = NSMakeRange(priceRange.location-3, priceRange.length+3);
         
         NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text];
         
@@ -268,7 +273,6 @@
         
         [attrString endEditing];
         
-        OrderListTableViewCell *cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"orderListCell"];
         cell.labelItemNamePrice.attributedText = attrString;
         cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",bundle[@"quantity"]];
         

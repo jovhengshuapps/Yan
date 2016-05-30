@@ -20,7 +20,7 @@
     // Do any additional setup after loading the view.
     [self.menuListTable reloadData];
     
-    self.menuListTable.contentSize = CGSizeMake(self.menuListTable.contentSize.width, self.menuListTable.contentSize.height + 110.0f); //allowance for the menu and checkout
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,6 +37,11 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    self.menuListTable.contentSize = CGSizeMake(self.menuListTable.contentSize.width, self.menuListTable.contentSize.height + 140.0f); //allowance for the menu and checkout
+}
 
 # pragma mark Data Source
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -101,6 +106,14 @@
     
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 44.0f;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    return @"";
 }
 
 - (void)addThisMenu:(MenuItem *)menu {

@@ -1229,7 +1229,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.yan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "de331b5c-e005-41b7-becd-46014c2a7fbd";
+				PROVISIONING_PROFILE = "7cf343de-1729-4868-94ef-70431d4271f3";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

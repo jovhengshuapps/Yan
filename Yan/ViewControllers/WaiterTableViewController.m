@@ -116,10 +116,17 @@
 }
 
 - (void) sendWaiterRequestAndDismiss {
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(waiterRequestSent:) name:@"sendWaiterRequest" object:nil];
+    [self callAPI:API_WAITER(5) withParameters:@{} completionNotification:@"sendWaiterRequest"];
+
+    
 }
 
-
+- (void) waiterRequestSent:(NSNotification*)notification {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 - (void)optionKey:(NSString *)key checked:(BOOL)isChecked {

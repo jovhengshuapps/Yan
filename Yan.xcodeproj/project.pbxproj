@@ -117,6 +117,12 @@
 		33E44CE71CE34ADC002272EA /* apple.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 33E44CE61CE34ADC002272EA /* apple.mp4 */; };
 		33E626D01CF9C193002CFB2F /* artsy.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33E626CF1CF9C193002CFB2F /* artsy.txt */; };
 		33ED27811CD22F5E0013FADD /* ConfirmOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ED27801CD22F5E0013FADD /* ConfirmOrderViewController.m */; };
+		33EF61591CFF103500162224 /* QRReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EF61581CFF103500162224 /* QRReaderViewController.m */; };
+		33EF61661CFF134200162224 /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EF615C1CFF134200162224 /* QRCameraSwitchButton.m */; };
+		33EF61671CFF134200162224 /* QRCodeReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EF615E1CFF134200162224 /* QRCodeReader.m */; };
+		33EF61681CFF134200162224 /* QRCodeReaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EF61611CFF134200162224 /* QRCodeReaderView.m */; };
+		33EF61691CFF134200162224 /* QRCodeReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EF61631CFF134200162224 /* QRCodeReaderViewController.m */; };
+		33EF616A1CFF134200162224 /* QRToggleTorchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EF61651CFF134200162224 /* QRToggleTorchButton.m */; };
 		33F9FB401CB6841700637A02 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F9FB3F1CB6841700637A02 /* RegisterViewController.m */; };
 		33F9FB431CB68D5600637A02 /* MainLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33F9FB421CB68D5600637A02 /* MainLoginViewController.m */; };
 		442160881CB32C5800BB387F /* CollapseMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 442160871CB32C5800BB387F /* CollapseMenuView.m */; };
@@ -345,6 +351,19 @@
 		33E626CF1CF9C193002CFB2F /* artsy.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = artsy.txt; sourceTree = "<group>"; };
 		33ED277F1CD22F5E0013FADD /* ConfirmOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmOrderViewController.h; sourceTree = "<group>"; };
 		33ED27801CD22F5E0013FADD /* ConfirmOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ConfirmOrderViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		33EF61571CFF103500162224 /* QRReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRReaderViewController.h; sourceTree = "<group>"; };
+		33EF61581CFF103500162224 /* QRReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRReaderViewController.m; sourceTree = "<group>"; };
+		33EF615B1CFF134200162224 /* QRCameraSwitchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCameraSwitchButton.h; sourceTree = "<group>"; };
+		33EF615C1CFF134200162224 /* QRCameraSwitchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCameraSwitchButton.m; sourceTree = "<group>"; };
+		33EF615D1CFF134200162224 /* QRCodeReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeReader.h; sourceTree = "<group>"; };
+		33EF615E1CFF134200162224 /* QRCodeReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeReader.m; sourceTree = "<group>"; };
+		33EF615F1CFF134200162224 /* QRCodeReaderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeReaderDelegate.h; sourceTree = "<group>"; };
+		33EF61601CFF134200162224 /* QRCodeReaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeReaderView.h; sourceTree = "<group>"; };
+		33EF61611CFF134200162224 /* QRCodeReaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeReaderView.m; sourceTree = "<group>"; };
+		33EF61621CFF134200162224 /* QRCodeReaderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRCodeReaderViewController.h; sourceTree = "<group>"; };
+		33EF61631CFF134200162224 /* QRCodeReaderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRCodeReaderViewController.m; sourceTree = "<group>"; };
+		33EF61641CFF134200162224 /* QRToggleTorchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QRToggleTorchButton.h; sourceTree = "<group>"; };
+		33EF61651CFF134200162224 /* QRToggleTorchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QRToggleTorchButton.m; sourceTree = "<group>"; };
 		33F9FB3E1CB6841700637A02 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		33F9FB3F1CB6841700637A02 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RegisterViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		33F9FB411CB68D5600637A02 /* MainLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainLoginViewController.h; sourceTree = "<group>"; };
@@ -479,6 +498,7 @@
 		33599B791CAD26A900366C34 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				33EF615A1CFF134200162224 /* QRCodeReaderViewController */,
 				335DC0E81CEDEE67001183DD /* DeepBelief */,
 				3346B3161CE49F6C008E8B96 /* FPPopover */,
 				33E44CE01CE3442C002272EA /* AnimatedGIF */,
@@ -679,6 +699,8 @@
 		33A276B01CD4688C00FAE9C8 /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				33EF61571CFF103500162224 /* QRReaderViewController.h */,
+				33EF61581CFF103500162224 /* QRReaderViewController.m */,
 				33C6E67E1CC7C6CD001690ED /* ScanLogoViewController.h */,
 				33C6E67F1CC7C6CD001690ED /* ScanLogoViewController.m */,
 				442160911CB3760A00BB387F /* OrderMenuViewController.h */,
@@ -798,6 +820,24 @@
 				33E44CE21CE3442C002272EA /* UIImage+animatedGIF.m */,
 			);
 			path = AnimatedGIF;
+			sourceTree = "<group>";
+		};
+		33EF615A1CFF134200162224 /* QRCodeReaderViewController */ = {
+			isa = PBXGroup;
+			children = (
+				33EF615B1CFF134200162224 /* QRCameraSwitchButton.h */,
+				33EF615C1CFF134200162224 /* QRCameraSwitchButton.m */,
+				33EF615D1CFF134200162224 /* QRCodeReader.h */,
+				33EF615E1CFF134200162224 /* QRCodeReader.m */,
+				33EF615F1CFF134200162224 /* QRCodeReaderDelegate.h */,
+				33EF61601CFF134200162224 /* QRCodeReaderView.h */,
+				33EF61611CFF134200162224 /* QRCodeReaderView.m */,
+				33EF61621CFF134200162224 /* QRCodeReaderViewController.h */,
+				33EF61631CFF134200162224 /* QRCodeReaderViewController.m */,
+				33EF61641CFF134200162224 /* QRToggleTorchButton.h */,
+				33EF61651CFF134200162224 /* QRToggleTorchButton.m */,
+			);
+			path = QRCodeReaderViewController;
 			sourceTree = "<group>";
 		};
 		B34B5C970B55F0D232BFF620 /* Frameworks */ = {
@@ -973,9 +1013,11 @@
 				3345EF691CDE5127008A0A13 /* WaiterOptionTableViewCell.m in Sources */,
 				336424BF1CAE313A00E0E156 /* UIImageView+AFNetworking.m in Sources */,
 				336424BE1CAE313A00E0E156 /* UIButton+AFNetworking.m in Sources */,
+				33EF61691CFF134200162224 /* QRCodeReaderViewController.m in Sources */,
 				33599BBF1CAD444500366C34 /* LoginViewController.m in Sources */,
 				33446AF21CDB524100F46EE1 /* CustomPickerViewController.m in Sources */,
 				442160931CB3760A00BB387F /* OrderMenuViewController.m in Sources */,
+				33EF61681CFF134200162224 /* QRCodeReaderView.m in Sources */,
 				33446B021CDB613300F46EE1 /* MenuItem.m in Sources */,
 				3394A39F1CADF66300472030 /* REFrostedContainerViewController.m in Sources */,
 				33599B511CAD259100366C34 /* Yan.xcdatamodeld in Sources */,
@@ -992,6 +1034,8 @@
 				333FEEF71CCF7205004D4B5B /* MenuListViewController.m in Sources */,
 				33599BB61CAD2E9A00366C34 /* DrawerTableViewController.m in Sources */,
 				336424E71CAE354F00E0E156 /* Reachability.m in Sources */,
+				33EF61671CFF134200162224 /* QRCodeReader.m in Sources */,
+				33EF61591CFF103500162224 /* QRReaderViewController.m in Sources */,
 				336424B51CAE313A00E0E156 /* AFNetworkReachabilityManager.m in Sources */,
 				3346B3201CE49F6C008E8B96 /* FPTouchView.m in Sources */,
 				33599B481CAD259100366C34 /* AppDelegate.m in Sources */,
@@ -1005,6 +1049,7 @@
 				337516DF1CB2AC390065AB7A /* HomeViewController.m in Sources */,
 				336424BC1CAE313A00E0E156 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				3346B3231CE4B52C008E8B96 /* DiscountViewController.m in Sources */,
+				33EF61661CFF134200162224 /* QRCameraSwitchButton.m in Sources */,
 				333FEEFA1CCF7AFE004D4B5B /* MenuDetailsViewController.m in Sources */,
 				33446AFF1CDB613300F46EE1 /* Reservation+CoreDataProperties.m in Sources */,
 				3346B31E1CE49F6C008E8B96 /* FPPopoverController.m in Sources */,
@@ -1043,6 +1088,7 @@
 				33B36F0C1CC663BC00AB30C6 /* ReserveCompleteViewController.m in Sources */,
 				33599BC21CAD4CD600366C34 /* NavigationController.m in Sources */,
 				33446B041CDB613300F46EE1 /* OrderList.m in Sources */,
+				33EF616A1CFF134200162224 /* QRToggleTorchButton.m in Sources */,
 				33E44CE31CE3442C002272EA /* UIImage+animatedGIF.m in Sources */,
 				33C6E67D1CC7A1D9001690ED /* CustomButton.m in Sources */,
 				3394A3A21CADF66300472030 /* UIView+REFrostedViewController.m in Sources */,
@@ -1190,7 +1236,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Eugene Leoncio (9GZUYUT7E4)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eugene Leoncio (9GZUYUT7E4)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1205,7 +1250,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.yan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b13daf03-17f1-4646-bfa6-d90014b4523e";
+				PROVISIONING_PROFILE = "e8314050-cc19-4a45-ba94-419d0501a3eb";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;

@@ -19,4 +19,7 @@
 @dynamic fullname;
 @dynamic birthday;
 @dynamic identifier;
+@dynamic current_tableNumber;
+@dynamic current_restaurantID;
+@dynamic current_restaurantName;
 @end

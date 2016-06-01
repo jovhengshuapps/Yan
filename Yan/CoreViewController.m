@@ -22,8 +22,6 @@
     // Do any additional setup after loading the view.
     [self setNeedsStatusBarAppearanceUpdate];
     
-    self.title = @"Yan";
-    
     //Setup Title Bar
 //    _titleBarView = [[UIView alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.view.bounds.size.width, self.navigationController.navigationBar.frame.size.height)];
     _titleBarView.backgroundColor = UIColorFromRGB(0x333333);
@@ -88,11 +86,18 @@
     [self hideTitleBar];
 }
 
-//- (void)viewWillAppear:(BOOL)animated {
-//    [super viewWillAppear:animated];
-//    
-//    
-//}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.title = @"Yan";
+    
+    Account *loggedUSER = [self userLoggedIn];
+    if (loggedUSER && loggedUSER.current_restaurantName && loggedUSER.current_restaurantName.length > 0) {
+        self.title = loggedUSER.current_restaurantName;
+    }
+    
+    
+}
 //
 //- (void)viewDidAppear:(BOOL)animated {
 //    [super viewDidAppear:animated];

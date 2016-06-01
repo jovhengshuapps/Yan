@@ -28,6 +28,7 @@ BOOL hackFromLoad = NO;
 @property (strong, nonatomic) NSString *orderTableNumber;
 @property (assign, nonatomic) CGFloat totalOrderPrice;
 @property (weak, nonatomic) IBOutlet UIView *orderSentView;
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -75,7 +76,16 @@ BOOL hackFromLoad = NO;
     _orderCostButton.titleLabel.minimumScaleFactor = -5.0f;
     _orderTableButton.titleLabel.minimumScaleFactor = -5.0f;
     
-    _rawData = [self extractMenuContent];
+    
+    
+    Account *loggedUSER = [self userLoggedIn];
+    NSInteger restaurantID = [loggedUSER.current_restaurantID integerValue];
+    self.tableNumber = loggedUSER.current_tableNumber;
+    
+    self.view.userInteractionEnabled = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuForRestaurant:) name:@"getMenuForRestaurantObserver" object:nil];
+    [self callGETAPI:API_MENU(restaurantID) withParameters:@{} completionNotification:@"getMenuForRestaurantObserver"];
+    
     
 //    CGFloat hackHeight = self.view.frame.size.height - 64.0f; //nav plus status bar
 //    
@@ -101,7 +111,7 @@ BOOL hackFromLoad = NO;
     _mainTableView.dataSource = self;
     _mainTableView.delegate = self;
     [self.view addSubview:_mainTableView];
-    _menuShown = YES;
+    _menuShown = NO;
     [_mainTableView reloadData];
     hackFromLoad = YES;
     _categoryString = @"";
@@ -123,6 +133,18 @@ BOOL hackFromLoad = NO;
         [self showMenu];
         hackFromLoad = NO;
 //    }
+}
+
+- (void) menuForRestaurant:(NSNotification*)notification {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
+    NSDictionary *response = (NSDictionary*)notification.object;
+    self.categories = response[@"categories"];
+
+    _rawData = [self extractMenuContent];
+    _menuShown = YES;
+    self.view.userInteractionEnabled = YES;
+    [_mainTableView reloadData];
+    [self showMenu];
 }
 
 - (void) showOrderSentView {
@@ -312,6 +334,23 @@ BOOL hackFromLoad = NO;
     }
     else {
         [buttonMenu addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
+    }
+    
+    if (!self.activityIndicator) {
+        self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        self.activityIndicator.frame = CGRectMake(buttonMenu.bounds.size.width - 40.0f, 8.0f, 25.0f, 25.0f);
+        self.activityIndicator.hidden = YES;
+        [buttonMenu addSubview: self.activityIndicator];
+        
+    }
+    
+    if (self.view.userInteractionEnabled == NO) {
+        self.activityIndicator.hidden = NO;
+        [self.activityIndicator startAnimating];
+    }
+    else {
+        self.activityIndicator.hidden = YES;
+        [self.activityIndicator stopAnimating];
     }
     
     return buttonMenu;

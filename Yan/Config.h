@@ -72,8 +72,10 @@
 
 #define API_RESTAURANTS                                                 @"restaurant"
 
-#define API_MENU(RESTAURANT_ID)                                                 [NSString stringWithFormat:@"restaurant/menus/%i",RESTAURANT_ID]
+#define API_MENU(RESTAURANT_ID)                                                 [NSString stringWithFormat:@"restaurant/menus/%li",(long)RESTAURANT_ID]
 
-#define API_RESERVATION(RESTAURANT_ID,USER_ID)                          [NSString stringWithFormat:@"/api_v1/reservation/%@/user/%@",RESTAURANT_ID,USER_ID]
+#define API_RESERVATION(RESTAURANT_ID,USER_ID)                          [NSString stringWithFormat:@"reservation/%@/user/%@",RESTAURANT_ID,USER_ID]
+
+#define API_WAITER(RESTAURANT_ID)                                                 [NSString stringWithFormat:@"call_water/%li",(long)RESTAURANT_ID]
 
 #endif /* Config_h */

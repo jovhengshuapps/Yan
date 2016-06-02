@@ -11,7 +11,9 @@
 
 @interface OptionListTableViewController : CoreViewController <UITableViewDelegate, UITableViewDataSource, CustomPickerViewControllerDelegate, FPPopoverControllerDelegate>
 
-@property (strong, nonatomic) NSString *menuName;
-@property (strong,nonatomic) NSDictionary *optionList;
+//@property (strong, nonatomic) NSString *menuName;
+//@property (strong,nonatomic) NSDictionary *optionList;
+@property (strong,nonatomic) NSDictionary *itemDetails;
+@property (strong, nonatomic) NSString *tableNumber;
 
 @end

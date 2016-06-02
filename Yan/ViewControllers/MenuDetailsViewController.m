@@ -52,7 +52,6 @@
     
     _detailsTable.scrollsToTop = YES;
     
-    [self fetchOrderData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,10 +64,11 @@
     self.itemImage.image = notification.object;
 }
 
-//- (void)viewDidAppear:(BOOL)animated {
-//    [super viewDidAppear:animated];
-//    
-//}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self fetchOrderData];
+}
 
 - (void) fetchOrderData {
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
@@ -88,7 +88,9 @@
         
         for (NSDictionary *bundle in storedOrders) {
             for (NSDictionary *item in bundle[@"details"]) {
-                [_arrayOrders addObject:item];
+                if([self.item.identifier isEqualToNumber:item[@"identifier"]]){
+                    [_arrayOrders addObject:item];                    
+                }
             }
         }
     }
@@ -120,7 +122,10 @@
     MenuOptionTableViewCell *cell = (MenuOptionTableViewCell*)[tableView dequeueReusableCellWithIdentifier:identifier];
     cell.delegateOptionCell = self;
     NSDictionary *item = (NSDictionary*)_arrayOrders[indexPath.row];
+//    NSLog(@"items:%@",item);
     cell.labelMenuName.text = [item[@"name"] uppercaseString];
+    NSString *choices = [item[@"option_choices"] substringToIndex:[item[@"option_choices"] length]-1];
+    cell.labelMenuOptions.text = [choices capitalizedString];
     cell.index = indexPath.row;
 
     return cell;
@@ -270,9 +275,10 @@
 
 - (void)optionSelectedIndex:(NSInteger)index sender:(id)sender {
     OptionListTableViewController *optionsTVC = (OptionListTableViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"optionListController"];
-    NSDictionary *item = (NSDictionary*)_arrayOrders[index][@"details"];
-    optionsTVC.menuName = item[@"name"];
-    optionsTVC.optionList = [self decodeData:item[@"options"] forKey:@"options"];
+    NSDictionary *item = (NSDictionary*)_arrayOrders[index];
+//    optionsTVC.menuName = item[@"name"];
+//    optionsTVC.optionList = [self decodeData:item[@"options"] forKey:@"options"];
+    optionsTVC.itemDetails = item;
     [self.navigationController pushViewController:optionsTVC animated:YES];
     
     

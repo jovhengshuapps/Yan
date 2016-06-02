@@ -14,6 +14,10 @@
 @property (strong, nonatomic) NSArray *optionTitles;
 @property (strong, nonatomic) CustomPickerViewController *pickerController;
 @property (strong, nonnull) FPPopoverController *popover;
+@property (strong, nonatomic) NSDictionary *options;
+@property (strong, nonatomic) NSMutableString *selectedOptions;
+
+
 @end
 
 @implementation OptionListTableViewController
@@ -28,14 +32,72 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.mainTableView.allowsSelection = NO;
-    
-    self.optionTitles = [NSArray arrayWithArray:[_optionList allKeys]];
+    self.options = (NSDictionary*)[self decodeData:self.itemDetails[@"options"] forKey:@"options"];
+    self.optionTitles = [NSArray arrayWithArray:[self.options allKeys]];
+    self.selectedOptions = [NSMutableString stringWithString:@""];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self showTitleBar:[_menuName uppercaseString]];
+    [self showTitleBar:[self.itemDetails[@"name"] uppercaseString]];
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+    [request setReturnsObjectsAsFaults:NO];
+    NSError *error = nil;
+    
+    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    
+    OrderList *order = (OrderList*)result[0];
+    NSMutableArray *newOrderList = [NSMutableArray new];
+    NSArray *decodedList = (NSArray*)[self decodeData:order.items forKey:@"orderItems"];
+    
+    
+    [newOrderList addObjectsFromArray:decodedList];
+    
+    for (NSInteger index = 0; index < decodedList.count; index++) {
+        NSMutableDictionary *bundle = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
+        if ([bundle[@"identifier"] integerValue] == [self.itemDetails[@"identifier"] integerValue]) {
+            
+            NSMutableArray *details = [NSMutableArray arrayWithArray:(NSArray*)bundle[@"details"]];
+            for (NSInteger i = 0; i < details.count; i++) {
+                NSDictionary *item = (NSDictionary*)details[i];
+                if ([item[@"itemnumber"] isEqualToNumber:self.itemDetails[@"itemnumber"]]) {
+//                    NSLog(@"%@-ITEM:%@",self.selectedOptions,item);
+                    NSMutableDictionary *updatedItem = [item mutableCopy];
+                    [updatedItem setObject:self.selectedOptions forKey:@"option_choices"];
+                    [details replaceObjectAtIndex:i withObject:updatedItem];
+                    break;
+                }
+            }
+//            NSLog(@"details:%@",details);
+            [bundle setObject:details forKey:@"details"];
+            [newOrderList replaceObjectAtIndex:index withObject:bundle];
+        }
+    }
+    
+    order.items = [self encodeData:newOrderList withKey:@"orderItems"];
+    order.orderSent = @NO;
+    order.tableNumber = self.tableNumber;
+    
+    error = nil;
+    if (![context save:&error]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,13 +124,13 @@
     
     NSString *key = _optionTitles[indexPath.row];
     cell.optionLabel = key;
-    cell.optionChoices = _optionList[key];
+    cell.optionChoices = self.options[key];
     UIButton *button = cell.buttonChoices;
     cell.tapHandler = ^(id sender) {
         // do something
         _pickerController = (CustomPickerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"pickerView"];
         _pickerController.delegatePicker = self;
-        _pickerController.choices = _optionList[key];
+        _pickerController.choices = self.options[key];
         _pickerController.button = button;
         
 //        _pickerController.modalPresentationStyle = UIModalPresentationPopover;
@@ -105,6 +167,46 @@
 
 
 - (void)selectedItem:(NSString *)item withButton:(UIButton *)button{
+    CGPoint buttonPosition = [button convertPoint:CGPointZero toView:self.mainTableView];
+    NSIndexPath *indexPath = [self.mainTableView indexPathForRowAtPoint:buttonPosition];
+    OptionListTableViewCell *cell = (OptionListTableViewCell*)[self.mainTableView cellForRowAtIndexPath:indexPath];
+//    NSLog(@"key:%@ value:%@",cell.optionLabel,item);
+    
+    NSMutableArray *optionComponents = [[self.selectedOptions componentsSeparatedByString:@","] mutableCopy];
+    
+    if (optionComponents.count > 0) {
+        BOOL isNewEntry = YES;
+        for (NSInteger index = 0; index < optionComponents.count; index++) {
+            NSString *option = (NSString*)optionComponents[index];
+            if ([option containsString:[NSString stringWithFormat:@"%@:",cell.optionLabel]]) {
+                isNewEntry = NO;
+                [optionComponents replaceObjectAtIndex:index withObject:[NSString stringWithFormat:@"%@:%@",cell.optionLabel,item]];
+//                NSLog(@"options:%@",optionComponents);
+                break;
+            }
+        }
+        
+        if (isNewEntry) {
+            
+            [self.selectedOptions appendFormat:@"%@:%@,",cell.optionLabel,item];
+        }
+        else {
+            [self.selectedOptions setString:@""];
+            for (NSString *option in optionComponents) {
+                if (option.length > 0) {
+                    [self.selectedOptions appendFormat:@"%@,",option];
+                }
+            }
+        }
+        
+    }
+    else {
+        [self.selectedOptions appendFormat:@"%@:%@,",cell.optionLabel,item];
+    }
+    
+    
+//    NSLog(@"options;%@",self.selectedOptions);
+    
     [button setTitle:item forState:UIControlStateNormal];
     [self.popover dismissPopoverAnimated:YES];
 }

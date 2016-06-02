@@ -61,6 +61,9 @@
         [vc startScanning];
     }
     else {
+        self.restaurantID = @"5";
+        self.restaurantName = @"Artsy Cafe";
+        self.tableNumber = @"1";
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Reader not supported by the current device" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         
         [alert show];
@@ -118,7 +121,7 @@
 
 - (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
 {
-    NSArray *components = [result componentsSeparatedByString:@","];
+    NSArray *components = [result componentsSeparatedByString:@"|"];
     NSString *crestaurantID = components[0];
     NSString *crestaurantName = components[1];
     NSString *ctableNumber = components[components.count-1];

@@ -16,6 +16,7 @@
 @end
 @interface MenuOptionTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel  *labelMenuName;
+@property (weak, nonatomic) IBOutlet UILabel *labelMenuOptions;
 @property (assign, nonatomic) NSInteger index;
 @property (assign, nonatomic) id<MenuOptionTableViewCellDelegate> delegateOptionCell;
 

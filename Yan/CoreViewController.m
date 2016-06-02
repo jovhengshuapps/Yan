@@ -584,7 +584,6 @@
         
         for (NSInteger index = 0; index < decodedList.count; index++) {
             NSMutableDictionary *bundle = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
-//            isNewIdentifier = YES;
             if ([bundle[@"identifier"] integerValue] == [menu.identifier integerValue]) {
                 isNewIdentifier = NO;
                 NSInteger sum = [bundle[@"quantity"] integerValue] + 1;
@@ -638,6 +637,7 @@
     NSArray *keys = [[[menuItem entity] attributesByName] allKeys];
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[menuItem dictionaryWithValuesForKeys:keys]];
     [dictionary setObject:[NSNumber numberWithInteger:itemNumber] forKey:@"itemnumber"];
+    [dictionary setObject:@"" forKey:@"option_choices"];
     
     return dictionary;
 }

@@ -27,7 +27,7 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     
-    _waiterOptions = [[NSMutableDictionary alloc] initWithDictionary:@{@"Toothpick":@0,
+    self.waiterOptions = [[NSMutableDictionary alloc] initWithDictionary:@{@"Toothpick":@0,
                                                                       @"Table Napkin":@0,
                                                                       @"Extra Utensils":@0,
                                                                       @"Water":@0,
@@ -117,8 +117,25 @@
 
 - (void) sendWaiterRequestAndDismiss {
     
+    Account *account = [self userLoggedIn];
+    NSInteger restaurantID = [account.current_restaurantID integerValue];
+    
+    NSMutableString *message = [NSMutableString stringWithString:@""];
+    for (NSString *key in self.sections) {
+        if ([self.waiterOptions[key] boolValue] == YES) {
+            [message appendFormat:@"%@,",key];
+        }
+    }
+    
+    NSString *messageToWaiter = message;
+    if ([message rangeOfString:@","].location != NSNotFound) {
+        messageToWaiter = [message substringToIndex:message.length-1];
+    }
+    
+//    NSLog(@"request WAITER:%@",messageToWaiter);
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(waiterRequestSent:) name:@"sendWaiterRequest" object:nil];
-    [self callAPI:API_WAITER(5) withParameters:@{} completionNotification:@"sendWaiterRequest"];
+    [self callAPI:API_WAITER(restaurantID) withParameters:@{ @"uid": account.identifier, @"table": account.current_tableNumber, @"message": messageToWaiter} completionNotification:@"sendWaiterRequest"];
 
     
 }

@@ -164,7 +164,9 @@ BOOL hackFromLoad = NO;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     NSDictionary *response = (NSDictionary*)notification.object;
     self.categories = response[@"categories"];
-
+    
+//    NSLog(@"self.categories:%@",self.categories);
+    
     _rawData = [self extractMenuContent];
     _menuShown = YES;
     self.mainTableView.userInteractionEnabled = YES;
@@ -216,6 +218,7 @@ BOOL hackFromLoad = NO;
 }
 
 - (MenuItem*) insertMenuToDatabase:(NSDictionary*)item {
+    
     
     //checkDB
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;

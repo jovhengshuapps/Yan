@@ -29,6 +29,7 @@ BOOL hackFromLoad = NO;
 @property (assign, nonatomic) CGFloat totalOrderPrice;
 @property (weak, nonatomic) IBOutlet UIView *orderSentView;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+@property (assign, nonatomic) BOOL menuIsLoading;
 
 @end
 
@@ -82,7 +83,10 @@ BOOL hackFromLoad = NO;
     NSInteger restaurantID = [loggedUSER.current_restaurantID integerValue];
     self.tableNumber = loggedUSER.current_tableNumber;
     
-    self.view.userInteractionEnabled = NO;
+    self.mainTableView.userInteractionEnabled = NO;
+    self.activityIndicator.hidden = NO;
+    [self.activityIndicator startAnimating];
+    self.menuIsLoading = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuForRestaurant:) name:@"getMenuForRestaurantObserver" object:nil];
     [self callGETAPI:API_MENU(restaurantID) withParameters:@{} completionNotification:@"getMenuForRestaurantObserver"];
     
@@ -133,6 +137,27 @@ BOOL hackFromLoad = NO;
         [self showMenu];
         hackFromLoad = NO;
 //    }
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+    [request setReturnsObjectsAsFaults:NO];
+    NSError *error = nil;
+    
+    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    if (result.count) {
+        OrderList *order = (OrderList*)result[0];
+                
+        NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
+        
+        self.totalOrderPrice = 0.0f;
+        for (NSDictionary *bundle in storedOrders) {
+            self.totalOrderPrice += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
+        }
+    }
+    
+    [self setTotalPrice:self.totalOrderPrice];
+    
 }
 
 - (void) menuForRestaurant:(NSNotification*)notification {
@@ -142,8 +167,11 @@ BOOL hackFromLoad = NO;
 
     _rawData = [self extractMenuContent];
     _menuShown = YES;
-    self.view.userInteractionEnabled = YES;
-    [_mainTableView reloadData];
+    self.mainTableView.userInteractionEnabled = YES;
+    [self.activityIndicator stopAnimating];
+    self.activityIndicator.hidden = YES;
+    self.menuIsLoading = NO;
+    [self.mainTableView reloadData];
     [self showMenu];
 }
 
@@ -336,15 +364,16 @@ BOOL hackFromLoad = NO;
         [buttonMenu addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
     }
     
-    if (!self.activityIndicator) {
+//    if (!self.activityIndicator) {
         self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         self.activityIndicator.frame = CGRectMake(buttonMenu.bounds.size.width - 40.0f, 8.0f, 25.0f, 25.0f);
-        self.activityIndicator.hidden = YES;
+        self.activityIndicator.hidden = NO;
+        [self.activityIndicator startAnimating];
         [buttonMenu addSubview: self.activityIndicator];
         
-    }
+//    }
     
-    if (self.view.userInteractionEnabled == NO) {
+    if (self.menuIsLoading == YES) {
         self.activityIndicator.hidden = NO;
         [self.activityIndicator startAnimating];
     }

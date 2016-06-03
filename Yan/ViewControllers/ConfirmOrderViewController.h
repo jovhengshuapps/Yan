@@ -7,7 +7,8 @@
 //
 
 #import "CoreViewController.h"
+#import "OrderListTableViewCell.h"
 
-@interface ConfirmOrderViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ConfirmOrderViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate, OrderListTableViewCellDelegate>
 @property (strong, nonatomic) NSString *tableNumber;
 @end

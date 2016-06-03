@@ -467,7 +467,27 @@
         //            [[GIDSignIn sharedInstance] signOut];
         //            FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
         //            [login logOut];
-        return;
+        
+        //remove orders
+        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+        
+        error = nil;
+        
+        NSArray *result = [context executeFetchRequest:request error:&error];
+        
+        
+        for (OrderList *orders in result) {
+            [context deleteObject:orders];
+        }
+        
+        error = nil;
+        if ([context save:&error]) {
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:@"HomeViewLogin"];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            return;
+        }
+        
     }
 }
 
@@ -637,7 +657,7 @@
     NSArray *keys = [[[menuItem entity] attributesByName] allKeys];
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[menuItem dictionaryWithValuesForKeys:keys]];
     [dictionary setObject:[NSNumber numberWithInteger:itemNumber] forKey:@"itemnumber"];
-    [dictionary setObject:@"" forKey:@"option_choices"];
+    [dictionary setObject:@"Basic" forKey:@"option_choices"];
     
     return dictionary;
 }

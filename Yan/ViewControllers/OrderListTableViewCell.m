@@ -20,5 +20,11 @@
 
     // Configure the view for the selected state
 }
+- (IBAction)duplicateThisItem:(id)sender {
+    [self.delegateCell duplicateSelectedIndex:_index];
+}
+- (IBAction)removeThisItem:(id)sender {
+    [self.delegateCell removeSelectedIndex:_index];
+}
 
 @end

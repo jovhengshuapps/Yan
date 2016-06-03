@@ -407,8 +407,8 @@
         }
     }
     else {
-        [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:@"HomeViewLogin"];
-        return NO;
+//        [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:@"HomeViewLogin"];
+        return YES;
     }
 }
 

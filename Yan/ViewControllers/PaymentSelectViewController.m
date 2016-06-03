@@ -64,7 +64,7 @@
     
     [_mainTable setTableFooterView:footerView];
     
-    self.arrayOptions = @[@"Pay Cash to Restaurant Rep.", @"Pay CreditCard to Restaurant Rep.", @"Push bill to other user", @"Pay with GC/Discount"];
+    self.arrayOptions = @[@"Pay Cash to Restaurant Rep.", @"Pay CreditCard to Restaurant Rep.", /*@"Push bill to other user",*/ @"Pay with GC/Discount"];
     self.selectedOptionIndex = -1;
     self.expand = NO;
     
@@ -82,20 +82,30 @@
 
 - (void) proceedPayment {
     
-//    PayScreenViewController *paymentSelect = (PayScreenViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"payScreenView"];
-//    paymentSelect.tableNumber = _tableNumber;
-//    [self.navigationController pushViewController:paymentSelect animated:YES];
-    
     if (self.selectedOptionIndex == 2) {
-        NSString *name = @"Jay Medina";
-        AlertView *alert = [[AlertView alloc] initAlertWithMessage:[NSString stringWithFormat:@"Your request has been sent to %@ to join bill.\n\nPlease wait for his approval.",name] delegate:self buttons:@[@"CLOSE"]];
-        [alert showAlertView];
-    }
-    else {
         DiscountViewController *discountView = (DiscountViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"discountView"];
         discountView.tableNumber = _tableNumber;
         [self.navigationController pushViewController:discountView animated:YES];
     }
+    else {
+        PayScreenViewController *paymentSelect = (PayScreenViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"payScreenView"];
+        paymentSelect.tableNumber = _tableNumber;
+        paymentSelect.discountDetails = @{@"senior":@"0",
+                                          @"gc":@"0%"};
+        [self.navigationController pushViewController:paymentSelect animated:YES];
+        
+    }
+    
+//    if (self.selectedOptionIndex == 2) {
+//        NSString *name = @"Jay Medina";
+//        AlertView *alert = [[AlertView alloc] initAlertWithMessage:[NSString stringWithFormat:@"Your request has been sent to %@ to join bill.\n\nPlease wait for his approval.",name] delegate:self buttons:@[@"CLOSE"]];
+//        [alert showAlertView];
+//    }
+//    else {
+//        DiscountViewController *discountView = (DiscountViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"discountView"];
+//        discountView.tableNumber = _tableNumber;
+//        [self.navigationController pushViewController:discountView animated:YES];
+//    }
     
 
 }
@@ -115,7 +125,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (!_expand && _selectedOptionIndex == 1) {
-        return 4;
+        return 3;
     }
     return _arrayOptions.count;
 }

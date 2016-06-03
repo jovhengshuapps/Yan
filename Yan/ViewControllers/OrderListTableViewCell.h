@@ -8,7 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+
+@protocol OrderListTableViewCellDelegate <NSObject>
+
+- (void)duplicateSelectedIndex:(NSInteger)index;
+- (void)removeSelectedIndex:(NSInteger)index;
+
+@end
+
 @interface OrderListTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *labelItemOptions;
 @property (strong, nonatomic) IBOutlet UILabel *labelItemNamePrice;
 @property (strong, nonatomic) IBOutlet UILabel *labelItemQuantity;
+@property (assign, nonatomic) NSInteger index;
+@property (assign, nonatomic) id<OrderListTableViewCellDelegate> delegateCell;
 @end

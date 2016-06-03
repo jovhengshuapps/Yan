@@ -124,7 +124,10 @@
     NSDictionary *item = (NSDictionary*)_arrayOrders[indexPath.row];
 //    NSLog(@"items:%@",item);
     cell.labelMenuName.text = [item[@"name"] uppercaseString];
-    NSString *choices = [item[@"option_choices"] substringToIndex:[item[@"option_choices"] length]-1];
+    NSString *choices = item[@"option_choices"];
+    if ([choices rangeOfString:@","].location != NSNotFound) {
+        choices = [choices substringToIndex:choices.length-1];
+    }
     cell.labelMenuOptions.text = [choices capitalizedString];
     cell.index = indexPath.row;
 

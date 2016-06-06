@@ -246,8 +246,10 @@ BOOL hackFromLoad = NO;
     menuItem.image = isNIL(item[@"image"]);
     menuItem.identifier = isNIL(item[@"id"]);
     menuItem.restaurantID = @5;
-    NSDictionary *tempOptions = @{@"Steak":@[@"Well Done", @"Rare", @"Normal"], @"Sauce":@[@"Barbeque",@"Spicy"]};
-    menuItem.options = [self encodeData:tempOptions withKey:@"options"];
+//    NSArray *tempOptions = @[@{@"name":@"Steak",@"options":@[@"Well Done", @"Rare", @"Normal"]}, @{@"name":@"Sauce",@"options":@[@"Barbeque",@"Spicy"]}];
+//    menuItem.options = [self encodeData:tempOptions withKey:@"options"];
+
+    menuItem.options = [self encodeData:item[@"options"] withKey:@"options"];
     
     error = nil;
     if([context save:&error])

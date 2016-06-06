@@ -450,6 +450,16 @@
 }
 
 - (void) logoutUser {
+    
+    Account *account = [self userLoggedIn];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutCurrentAccount:) name:@"logoutCurrentAccount" object:nil];
+    [self callGETAPI:API_USER_LOGOUT(account.identifier) withParameters:@{} completionNotification:@"logoutCurrentAccount"];
+    
+}
+
+- (void) logoutCurrentAccount:(NSNotification*)notification {
+    NSLog(@"response:%@",notification.object);
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Account"];
     
@@ -490,6 +500,7 @@
         
     }
 }
+
 
 - (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     

@@ -194,45 +194,49 @@
                 [alert dismissViewControllerAnimated:YES completion:nil];
             }];
             UIAlertAction *actionYES = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
-                NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Account"];
                 
-                NSError *error = nil;
-                
-                NSArray *result = [context executeFetchRequest:request error:&error];
+                [self logoutUser];
                 
                 
-                for (Account *account in result) {
-                    [context deleteObject:account];
-                }
-                
-                error = nil;
-                if ([context save:&error]) {
-                    //            [[GIDSignIn sharedInstance] signOut];
-                    //            FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-                    //            [login logOut];
-                    
-                    //remove orders
-                    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-                    
-                    error = nil;
-                    
-                    NSArray *result = [context executeFetchRequest:request error:&error];
-                    
-                    
-                    for (OrderList *orders in result) {
-                        [context deleteObject:orders];
-                    }
-                    
-                    error = nil;
-                    if ([context save:&error]) {
-                        
-                        [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:@"HomeViewLogin"];
-                        [self.navigationController popToRootViewControllerAnimated:YES];
-                        return;
-                    }
-                    
-                }
+//                NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+//                NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Account"];
+//                
+//                NSError *error = nil;
+//                
+//                NSArray *result = [context executeFetchRequest:request error:&error];
+//                
+//                
+//                for (Account *account in result) {
+//                    [context deleteObject:account];
+//                }
+//                
+//                error = nil;
+//                if ([context save:&error]) {
+//                    //            [[GIDSignIn sharedInstance] signOut];
+//                    //            FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+//                    //            [login logOut];
+//                    
+//                    //remove orders
+//                    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+//                    
+//                    error = nil;
+//                    
+//                    NSArray *result = [context executeFetchRequest:request error:&error];
+//                    
+//                    
+//                    for (OrderList *orders in result) {
+//                        [context deleteObject:orders];
+//                    }
+//                    
+//                    error = nil;
+//                    if ([context save:&error]) {
+//                        
+//                        [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:@"HomeViewLogin"];
+//                        [self.navigationController popToRootViewControllerAnimated:YES];
+//                        return;
+//                    }
+//                    
+//                }
             }];
             [alert addAction:actionNO];
             [alert addAction:actionYES];
@@ -275,5 +279,136 @@
         }
     }
 }
+
+- (Account*) userLoggedIn {
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Account"];
+    
+    NSError *error = nil;
+    
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    
+    if (result.count) {
+        return ((Account*)result[0]);
+    }
+    
+    return nil;
+    
+}
+
+
+- (void)callGETAPI:(NSString*)method withParameters:(NSDictionary*)parameters completionNotification:(NSString*)notificationName{
+    
+    NSURL *baseURL = [NSURL URLWithString:BASE_API_URL];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    Account *user = [self userLoggedIn];
+    if (user.token) {
+        
+        [manager.requestSerializer setValue:user.token forHTTPHeaderField:@"x-yan-resto-api"];
+    }
+    
+    [self callGetSessionManager:manager :method :parameters :notificationName];
+}
+
+
+- (void)callGetSessionManager:(AFHTTPSessionManager*)manager :(NSString*)method :(NSDictionary*)parameters :(NSString*)notificationName {
+    
+    NETWORK_INDICATOR(YES)
+    
+    [manager GET:method parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NETWORK_INDICATOR(NO)
+        NSLog(@"response:%@",responseObject);
+        if ([responseObject isKindOfClass:[NSArray class]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
+        }
+        else if ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject allKeys] containsObject:@"error"]) {
+            if([responseObject[@"error"] integerValue] == 404 && [notificationName isEqualToString:@"socialLoginObserver"]){
+                [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
+            }
+//            else {
+//                [self resolveErrorResponse:responseObject withNotification:notificationName];
+//            }
+        }else {
+            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
+        NETWORK_INDICATOR(NO)
+        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:error];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }];
+}
+
+- (void) logoutUser {
+    
+    Account *account = [self userLoggedIn];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(logoutCurrentAccount:) name:@"logoutCurrentAccount" object:nil];
+    [self callGETAPI:API_USER_LOGOUT(account.identifier) withParameters:@{} completionNotification:@"logoutCurrentAccount"];
+}
+
+
+
+- (void) logoutCurrentAccount:(NSNotification*)notification {
+    if ([[notification.object objectForKey:@"success"] boolValue] == YES) {
+        NSLog(@"response:%@",notification.object);
+        NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Account"];
+        
+        NSError *error = nil;
+        
+        NSArray *result = [context executeFetchRequest:request error:&error];
+        
+        
+        for (Account *account in result) {
+            [context deleteObject:account];
+        }
+        
+        error = nil;
+        if ([context save:&error]) {
+            //            [[GIDSignIn sharedInstance] signOut];
+            //            FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+            //            [login logOut];
+            
+            //remove orders
+            NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+            
+            error = nil;
+            
+            NSArray *result = [context executeFetchRequest:request error:&error];
+            
+            
+            for (OrderList *orders in result) {
+                [context deleteObject:orders];
+            }
+            
+            error = nil;
+            if ([context save:&error]) {
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:@"HomeViewLogin"];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                return;
+            }
+            
+        }
+    }
+    
+}
+
 
 @end

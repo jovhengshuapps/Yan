@@ -11,10 +11,9 @@
 
 @interface OptionListTableViewController ()
 @property (strong, nonatomic) IBOutlet UITableView *mainTableView;
-@property (strong, nonatomic) NSArray *optionTitles;
 @property (strong, nonatomic) CustomPickerViewController *pickerController;
 @property (strong, nonnull) FPPopoverController *popover;
-@property (strong, nonatomic) NSDictionary *options;
+@property (strong, nonatomic) NSArray *options;
 @property (strong, nonatomic) NSMutableString *selectedOptions;
 
 
@@ -32,8 +31,8 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.mainTableView.allowsSelection = NO;
-    self.options = (NSDictionary*)[self decodeData:self.itemDetails[@"options"] forKey:@"options"];
-    self.optionTitles = [NSArray arrayWithArray:[self.options allKeys]];
+    self.options = (NSArray*)[self decodeData:self.itemDetails[@"options"] forKey:@"options"];
+    
     self.selectedOptions = [NSMutableString stringWithString:@""];
 }
 
@@ -112,7 +111,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _optionTitles.count;
+    return self.options.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -122,15 +121,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     OptionListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"menuOptionCell"];
     
-    NSString *key = _optionTitles[indexPath.row];
-    cell.optionLabel = key;
-    cell.optionChoices = self.options[key];
+    cell.optionLabel = self.options[indexPath.row][@"name"];
+    cell.optionChoices = self.options[indexPath.row][@"options"];
     UIButton *button = cell.buttonChoices;
     cell.tapHandler = ^(id sender) {
         // do something
         _pickerController = (CustomPickerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"pickerView"];
         _pickerController.delegatePicker = self;
-        _pickerController.choices = self.options[key];
+        _pickerController.choices = self.options[indexPath.row][@"options"];
         _pickerController.button = button;
         
 //        _pickerController.modalPresentationStyle = UIModalPresentationPopover;

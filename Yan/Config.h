@@ -70,6 +70,8 @@
 
 #define API_USER_LOGIN                                                  @"user/login"
 
+#define API_USER_LOGOUT(USER_ID)                                        [NSString stringWithFormat:@"user/logout/%@",USER_ID]
+
 #define API_RESTAURANTS                                                 @"restaurant"
 
 #define API_MENU(RESTAURANT_ID)                                                 [NSString stringWithFormat:@"restaurant/menus/%li",(long)RESTAURANT_ID]

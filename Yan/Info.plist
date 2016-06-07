@@ -33,7 +33,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>90</string>
+	<string>100</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -78,6 +78,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Localization Services is required</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Localization Services is required</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>LucidaGrande.ttc</string>
@@ -90,10 +94,6 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Localization Services is required</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Localization Services is required</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

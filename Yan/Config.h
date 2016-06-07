@@ -25,7 +25,6 @@
 #import <CoreLocation/CoreLocation.h>
 #import "UIImage+animatedGIF.h"
 #import "FPPopoverController.h"
-#import "UIImage+Blurring.h"
 
 #import "AppDelegate.h"
 #import "Account.h"

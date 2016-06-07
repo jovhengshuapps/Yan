@@ -84,7 +84,21 @@
 
 - (void) changeView:(NSNotification*)notification {
     [self.navigationItem setPrompt:nil];
-    if ([notification.object isEqualToString:@"HomeViewNotification"]) {
+    
+    if ([notification.object isEqualToString:@"ProceedToMenu"]) {
+        _viewDefaultHome.hidden = NO;
+        _viewRegistrationComplete.hidden = YES;
+        _viewLogin.hidden = YES;
+        _viewNotificationReminder.hidden = YES;
+        
+        UIBarButtonItem *menuBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"app-menu.png"] style:UIBarButtonItemStyleDone target:self action:@selector(openMenu)];
+        
+        [[self navigationItem] setLeftBarButtonItem:menuBarItem];
+        self.frostedViewController.panGestureEnabled = YES;
+        
+        [self performSegueWithIdentifier:@"homeOrder" sender:nil];
+    }
+    else if ([notification.object isEqualToString:@"HomeViewNotification"]) {
         self.viewToShow = HomeViewNotification;
         _viewDefaultHome.hidden = YES;
         _viewRegistrationComplete.hidden = YES;

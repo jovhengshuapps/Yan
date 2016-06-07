@@ -50,9 +50,6 @@
 		335AB9031CCE4B4F0037D66F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335AB9021CCE4B4F0037D66F /* CoreGraphics.framework */; };
 		335B7AC91CD76C48000E9D9F /* MenuListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335B7AC81CD76C48000E9D9F /* MenuListTableViewCell.m */; };
 		335B7ACC1CD7A156000E9D9F /* MenuOptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335B7ACB1CD7A156000E9D9F /* MenuOptionTableViewCell.m */; };
-		335DC0EF1CEDEE67001183DD /* DeepBelief.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335DC0E91CEDEE67001183DD /* DeepBelief.framework */; };
-		335DC0F01CEDEE67001183DD /* jetpac.ntwk in Resources */ = {isa = PBXBuildFile; fileRef = 335DC0EA1CEDEE67001183DD /* jetpac.ntwk */; };
-		335DC0F31CEDEE67001183DD /* SquareCamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 335DC0EE1CEDEE67001183DD /* SquareCamViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		335DC0F51CEDEFCB001183DD /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335DC0F41CEDEFCB001183DD /* Accelerate.framework */; };
 		335DC0F71CEDEFD4001183DD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335DC0F61CEDEFD4001183DD /* UIKit.framework */; };
 		335DC0F91CEDEFE3001183DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335DC0F81CEDEFE3001183DD /* Foundation.framework */; };
@@ -115,7 +112,6 @@
 		33E2C5981CE222FB00B28935 /* ShareTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E2C5971CE222FB00B28935 /* ShareTableViewController.m */; };
 		33E44CE31CE3442C002272EA /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E44CE21CE3442C002272EA /* UIImage+animatedGIF.m */; };
 		33E44CE71CE34ADC002272EA /* apple.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 33E44CE61CE34ADC002272EA /* apple.mp4 */; };
-		33E626D01CF9C193002CFB2F /* artsy.txt in Resources */ = {isa = PBXBuildFile; fileRef = 33E626CF1CF9C193002CFB2F /* artsy.txt */; };
 		33ED27811CD22F5E0013FADD /* ConfirmOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ED27801CD22F5E0013FADD /* ConfirmOrderViewController.m */; };
 		33EF61591CFF103500162224 /* QRReaderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EF61581CFF103500162224 /* QRReaderViewController.m */; };
 		33EF61661CFF134200162224 /* QRCameraSwitchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 33EF615C1CFF134200162224 /* QRCameraSwitchButton.m */; };
@@ -379,7 +375,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				335DC0EF1CEDEE67001183DD /* DeepBelief.framework in Frameworks */,
 				335DC0F91CEDEFE3001183DD /* Foundation.framework in Frameworks */,
 				335DC0F71CEDEFD4001183DD /* UIKit.framework in Frameworks */,
 				335DC0F51CEDEFCB001183DD /* Accelerate.framework in Frameworks */,
@@ -977,11 +972,9 @@
 				33E44CE71CE34ADC002272EA /* apple.mp4 in Resources */,
 				33599B561CAD259100366C34 /* LaunchScreen.storyboard in Resources */,
 				33599B531CAD259100366C34 /* Assets.xcassets in Resources */,
-				335DC0F01CEDEE67001183DD /* jetpac.ntwk in Resources */,
 				33599B4E1CAD259100366C34 /* Main.storyboard in Resources */,
 				33DBA6E91CB8D1B800AB0062 /* GoogleSignIn.bundle in Resources */,
 				33DBA6E51CB8CD2100AB0062 /* GoogleService-Info.plist in Resources */,
-				33E626D01CF9C193002CFB2F /* artsy.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1059,7 +1052,6 @@
 				336424B61CAE313A00E0E156 /* AFSecurityPolicy.m in Sources */,
 				33599BAE1CAD274E00366C34 /* CoreViewController.m in Sources */,
 				33446AEC1CDB486F00F46EE1 /* OptionListTableViewController.m in Sources */,
-				335DC0F31CEDEE67001183DD /* SquareCamViewController.m in Sources */,
 				3346B3291CE4CDC7008E8B96 /* CardTypeTableViewCell.m in Sources */,
 				33599B451CAD259100366C34 /* main.m in Sources */,
 				33599BB31CAD2D9000366C34 /* RootViewController.m in Sources */,
@@ -1250,7 +1242,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.yan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e8314050-cc19-4a45-ba94-419d0501a3eb";
+				PROVISIONING_PROFILE = "3a80d479-f8a1-4c2b-9e1f-dda9fc81ce4a";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1259,7 +1251,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Bilinear Inc. (YSNGH6HTET)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1274,7 +1265,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.yan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7cf343de-1729-4868-94ef-70431d4271f3";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

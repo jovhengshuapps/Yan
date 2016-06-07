@@ -31,6 +31,29 @@
 //    
 //    [[self navigationItem] setRightBarButtonItem:waiterItem];
     
+    
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    Account *account = [self userLoggedIn];
+    NSString *recentRestaurants = account.recent_restaurant;
+    account.recent_restaurant = [NSString stringWithFormat:@"%@,%@",recentRestaurants, self.restaurantID];
+    
+    NSError *error = nil;
+    if (![context save:&error]) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
+    
+    
 }
 
 

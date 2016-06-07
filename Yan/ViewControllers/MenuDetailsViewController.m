@@ -30,12 +30,12 @@
         self.itemImage.image = [UIImage imageWithData:imageData];
     }
     else {
-        self.itemImage.image = [UIImage imageNamed:@"yan-logo"];
+        self.itemImage.image = [UIImage imageNamed:@"yan-red-gold"];
         
         if (_item.image.length) {
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateImage:) name:@"MenuImageFromURL" object:nil];
             
-            [self getImageFromURL:_item.image completionNotification:@"MenuImageFromURL"];
+            [self getImageFromURL:_item.image updateImageView:self.itemImage completionNotification:@"MenuImageFromURL"];
             
         }
         
@@ -280,7 +280,7 @@
     OptionListTableViewController *optionsTVC = (OptionListTableViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"optionListController"];
     NSDictionary *item = (NSDictionary*)_arrayOrders[index];
 //    optionsTVC.menuName = item[@"name"];
-//    optionsTVC.optionList = [self decodeData:item[@"options"] forKey:@"options"];
+    //    optionsTVC.optionList = [self decodeData:item[@"options"] forKey:@"options"];
     optionsTVC.itemDetails = item;
     [self.navigationController pushViewController:optionsTVC animated:YES];
     

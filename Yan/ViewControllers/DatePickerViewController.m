@@ -58,4 +58,26 @@
     }];
 }
 
+-(void)disableDate{
+    
+    NSDate *pickedDate = self.datePicker.date;  // Get current Date
+    
+    for (NSDate *disabledDate in self.disabledDates) {
+        if([pickedDate compare:disabledDate] == NSOrderedSame){
+//            [self.datePicker setDate:[self someOtherDate] animated:YES];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Schedule Unavailable"] message:@"The selected date and time is unavailable, please select another one." preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alert dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alert addAction:actionOK];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+            
+        }
+    }
+    
+}
+
 @end

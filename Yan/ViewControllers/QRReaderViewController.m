@@ -30,19 +30,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self setNeedsStatusBarAppearanceUpdate];
     self.labelInstruction.text = @"* The Restaurant logo should be somewhere nearby.";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self showTitleBar:@"SCAN LOGO"];
+    [self showTitleBar:@"SCAN QR CODE"];
     if ([QRCodeReader supportsMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]]) {
         static QRCodeReaderViewController *vc = nil;
         static dispatch_once_t onceToken;
         
         dispatch_once(&onceToken, ^{
             QRCodeReader *reader = [QRCodeReader readerWithMetadataObjectTypes:@[AVMetadataObjectTypeQRCode]];
-            vc                   = [QRCodeReaderViewController readerWithCancelButtonTitle:@"Cance" codeReader:reader startScanningAtLoad:NO showSwitchCameraButton:YES showTorchButton:YES];
+            vc                   = [QRCodeReaderViewController readerWithCancelButtonTitle:@"Cancel" codeReader:reader startScanningAtLoad:NO showSwitchCameraButton:NO showTorchButton:YES];
             vc.modalPresentationStyle = UIModalPresentationFormSheet;
         });
         vc.delegate = self;
@@ -111,25 +112,46 @@
     else {
         [self dismissViewControllerAnimated:YES completion:^{
             
+            [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:@"ProceedToMenu"];
         }];
     }
     
 }
 
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
+
 #pragma mark - QRCodeReader Delegate Methods
 
 - (void)reader:(QRCodeReaderViewController *)reader didScanResult:(NSString *)result
 {
-    NSArray *components = [result componentsSeparatedByString:@"|"];
-    NSString *crestaurantID = components[0];
-    NSString *crestaurantName = components[1];
-    NSString *ctableNumber = components[components.count-1];
-    self.labelInstruction.text = [NSString stringWithFormat:@"Are you in %@, Table %@?",crestaurantName,ctableNumber];
-    
-    self.restaurantID = crestaurantID;
-    self.restaurantName = crestaurantName;
-    self.tableNumber = ctableNumber;
+    if ([result rangeOfString:@"|"].location == NSNotFound) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Invalid QR Code"] message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+            
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
+    else {
+        
+        NSArray *components = [result componentsSeparatedByString:@"|"];
+        NSString *crestaurantID = components[0];
+        NSString *crestaurantName = components[1];
+        NSString *ctableNumber = components[components.count-1];
+        self.labelInstruction.text = [NSString stringWithFormat:@"%@, Table %@",crestaurantName,ctableNumber];
+        
+        self.restaurantID = crestaurantID;
+        self.restaurantName = crestaurantName;
+        self.tableNumber = ctableNumber;
+    }
     
     
 //    [self dismissViewControllerAnimated:YES completion:^{

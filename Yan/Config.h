@@ -22,8 +22,10 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import <GoogleSignIn/GoogleSignIn.h>
+#import <CoreLocation/CoreLocation.h>
 #import "UIImage+animatedGIF.h"
 #import "FPPopoverController.h"
+#import "UIImage+Blurring.h"
 
 #import "AppDelegate.h"
 #import "Account.h"
@@ -77,6 +79,8 @@
 #define API_MENU(RESTAURANT_ID)                                                 [NSString stringWithFormat:@"restaurant/menus/%li",(long)RESTAURANT_ID]
 
 #define API_RESERVATION(RESTAURANT_ID,USER_ID)                          [NSString stringWithFormat:@"reservation/%@/user/%@",RESTAURANT_ID,USER_ID]
+
+#define API_RESERVATION_CHECKTIME(RESTAURANT_ID)                          [NSString stringWithFormat:@"reservation/%@",RESTAURANT_ID]
 
 #define API_WAITER(RESTAURANT_ID)                                                 [NSString stringWithFormat:@"call_water/%li",(long)RESTAURANT_ID]
 

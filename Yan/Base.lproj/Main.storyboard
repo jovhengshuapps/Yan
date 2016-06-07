@@ -57,18 +57,18 @@
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
-            <string>LucidaGrande-Bold</string>
-            <string>LucidaGrande-Bold</string>
-            <string>LucidaGrande-Bold</string>
-            <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande-Bold</string>
+            <string>LucidaGrande-Bold</string>
+            <string>LucidaGrande-Bold</string>
+            <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande-Bold</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
+            <string>LucidaGrande-Bold</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
@@ -2105,10 +2105,10 @@ You may now start using the app for your favourite restaurant.</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="orderListCell" rowHeight="60" id="CVN-mn-2SH" customClass="OrderListTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CVN-mn-2SH" id="FJ2-KL-52i">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MENU ITEM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TS2-BH-aDm">
@@ -2210,16 +2210,16 @@ You may now start using the app for your favourite restaurant.</string>
                                                     <exclude reference="Kbk-te-awf"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="4HA-Wq-5QB"/>
-                                                    <exclude reference="uIB-id-9iR"/>
-                                                    <exclude reference="LwH-Uq-Dbx"/>
-                                                    <exclude reference="Wvf-qE-foA"/>
-                                                    <exclude reference="j2t-k6-H7F"/>
                                                     <exclude reference="JT6-XN-MQP"/>
                                                     <exclude reference="baa-Ug-ZFt"/>
                                                     <exclude reference="JID-cx-1GF"/>
                                                     <exclude reference="LWk-AX-Cpo"/>
                                                     <exclude reference="eVf-zc-MNP"/>
+                                                    <exclude reference="4HA-Wq-5QB"/>
+                                                    <exclude reference="uIB-id-9iR"/>
+                                                    <exclude reference="LwH-Uq-Dbx"/>
+                                                    <exclude reference="Wvf-qE-foA"/>
+                                                    <exclude reference="j2t-k6-H7F"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -2230,16 +2230,16 @@ You may now start using the app for your favourite restaurant.</string>
                                                     <include reference="Kbk-te-awf"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="4HA-Wq-5QB"/>
-                                                    <include reference="uIB-id-9iR"/>
-                                                    <include reference="LwH-Uq-Dbx"/>
-                                                    <include reference="Wvf-qE-foA"/>
-                                                    <include reference="j2t-k6-H7F"/>
                                                     <include reference="JT6-XN-MQP"/>
                                                     <include reference="baa-Ug-ZFt"/>
                                                     <include reference="JID-cx-1GF"/>
                                                     <include reference="LWk-AX-Cpo"/>
                                                     <include reference="eVf-zc-MNP"/>
+                                                    <include reference="4HA-Wq-5QB"/>
+                                                    <include reference="uIB-id-9iR"/>
+                                                    <include reference="LwH-Uq-Dbx"/>
+                                                    <include reference="Wvf-qE-foA"/>
+                                                    <include reference="j2t-k6-H7F"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -2249,7 +2249,7 @@ You may now start using the app for your favourite restaurant.</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="billoutListCell" rowHeight="44" id="B3p-dS-CPp" customClass="OrderListTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="88" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B3p-dS-CPp" id="Um7-wv-zqH">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -6978,9 +6978,9 @@ You may now start using the app for your favourite restaurant.</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Y4r-v0-sWo"/>
-        <segue reference="iwi-F0-UhZ"/>
-        <segue reference="NWP-Te-KdC"/>
         <segue reference="YJZ-bv-B1B"/>
+        <segue reference="Ayu-oY-PwC"/>
+        <segue reference="iwi-F0-UhZ"/>
         <segue reference="Jyy-jT-Sb2"/>
     </inferredMetricsTieBreakers>
 </document>

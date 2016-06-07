@@ -35,6 +35,8 @@ typedef enum {
 @property (weak, nonatomic) IBOutlet UIButton *drawerBarItemRecents;
 @property (weak, nonatomic) IBOutlet UIButton *drawerBarItemFavorites;
 
+@property (strong, nonatomic) CLLocationManager *locationManager;
+
 @end
 
 @implementation AffiliatedRestoViewController
@@ -312,6 +314,19 @@ typedef enum {
             [_barItemRecents setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
             [_barItemNearby setBackgroundColor:UIColorFromRGB(0xFF7B3C)];
             [_barItemRestaurants setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
+            
+            
+            self.locationManager = [[CLLocationManager alloc] init];
+            self.locationManager.delegate = self;
+            self.locationManager.distanceFilter = kCLDistanceFilterNone;
+            self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+            
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+                [self.locationManager requestWhenInUseAuthorization];
+            
+            [self.locationManager startUpdatingLocation];            
+            
+            
         }
         else if ([sender tag] == AffiliatedRestoOptionRecent) {
             _tabBarOption = AffiliatedRestoOptionRecent;
@@ -346,6 +361,91 @@ typedef enum {
     [self.mainTableView reloadData];
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+//    NSLog(@"OldLocation %f %f", oldLocation.coordinate.latitude, oldLocation.coordinate.longitude);
+//    NSLog(@"NewLocation %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+    
+    
+}
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    
+    CLLocation *currentLocation = [locations objectAtIndex:0];
+//    CGFloat userLatitude = currentLocation.coordinate.latitude;
+//    CGFloat userLongitude = currentLocation.coordinate.longitude;
+    
+    __block NSArray *userCurrentAddressLine = [NSArray array];
+    
+    
+    [manager stopUpdatingLocation];
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init] ;
+    [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray *placemarks, NSError *error)
+     {
+         if (!(error))
+         {
+             CLPlacemark *placemark = [placemarks objectAtIndex:0];
+             NSLog(@"\nCurrent Location Detected\n");
+//             NSLog(@"placemark %@",placemark);
+//             NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
+//             NSString *Address = [[NSString alloc]initWithString:locatedAt];
+//             NSString *Area = [[NSString alloc]initWithString:placemark.locality];
+//             NSString *Country = [[NSString alloc]initWithString:placemark.country];
+//             NSString *CountryArea = [NSString stringWithFormat:@"%@, %@", Area,Country];
+//             NSLog(@"%@",CountryArea);
+             userCurrentAddressLine = [placemark.addressDictionary valueForKey:@"FormattedAddressLines"];
+             
+             
+             for (id restaurant in self.dataListAll) {
+                 CGFloat restaurantLatitude = [((Restaurant*)restaurant).latitude floatValue];
+                 CGFloat restaurantLongitude = [((Restaurant*)restaurant).longitude floatValue];
+                 //        NSLog(@"location:%@",((Restaurant*)restaurant).location);
+                 
+                 if (restaurantLatitude != 0.0f && restaurantLongitude != 0.0f) {
+                     //use longitude and latitude as basis
+                     CLLocation *restaurantLocation = [[CLLocation alloc] initWithLatitude:restaurantLatitude longitude:restaurantLongitude];
+                     CLLocationDistance meters = [restaurantLocation distanceFromLocation:currentLocation];
+                     //            NSLog(@"meters: %f",meters);
+                     if (meters <= 30) {
+                         [self.dataListNearby addObject:restaurant];
+                     }
+                     
+                 }
+                 else {
+                     //use location
+                     for (NSString *location in userCurrentAddressLine) {
+                         if ([[location lowercaseString] isEqualToString:[((Restaurant*)restaurant).location lowercaseString]]) {
+                             [self.dataListNearby addObject:restaurant];
+                         }
+                     }
+                 }
+             }
+             
+             NSLog(@"nearby:%@",self.dataListNearby);
+             
+             [self.mainTableView reloadData];
+             
+             
+         }
+         else
+         {
+             NSLog(@"Geocode failed with error %@", error);
+             NSLog(@"\nCurrent Location Not Detected\n");
+             //return;
+         }
+         /*---- For more results
+          placemark.region);
+          placemark.country);
+          placemark.locality);
+          placemark.name);
+          placemark.ocean);
+          placemark.postalCode);
+          placemark.subLocality);
+          placemark.location);
+          ------*/
+     }];
+
+    
+    
+}
 
 @end

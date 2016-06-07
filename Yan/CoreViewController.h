@@ -26,7 +26,7 @@
 
 - (void) addDoneToolbar:( nullable UITextField*)textfield;
 
-- (void)getImageFromURL:( nullable NSString*)urlPath completionNotification:( nullable NSString*)notificationName;
+- (void)getImageFromURL:( nullable NSString*)urlPath updateImageView:(nullable UIImageView*)imageView completionNotification:( nullable NSString*)notificationName;
 
 - ( nullable NSData*)encodeData:( nullable id)object withKey:( nullable NSString*)key;
 

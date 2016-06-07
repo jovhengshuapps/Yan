@@ -8,6 +8,7 @@
 
 #import "ReserveRestoViewController.h"
 #import "RestaurantDetailsViewController.h"
+#import "ReserveCompleteViewController.h"
 
 @interface ReserveRestoViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *textFieldDate;
@@ -15,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *textFieldNumberPerson;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldTableNumber;
 @property (weak, nonatomic) IBOutlet CustomButton *buttonReserve;
+@property (strong, nonatomic) NSMutableArray *arrayDisabledDates;
 
 @end
 
@@ -34,6 +36,12 @@
 
     [self addDoneToolbar:_textFieldNumberPerson];
     [self addDoneToolbar:_textFieldTableNumber];
+    
+//    Account *account = [self userLoggedIn];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkReservationTimes:) name:@"checkReservationTimes" object:nil];
+    [self callGETAPI:API_RESERVATION_CHECKTIME(self.restaurantDetails.identifier) withParameters:@{} completionNotification:@"checkReservationTimes"];
+    
 
 }
 
@@ -48,6 +56,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) checkReservationTimes:(NSNotification*)notification {
+    NSLog(@"Available Times:%@",notification.object);
 }
 
 - (void) completeReservation:(NSNotification*)notification {
@@ -90,6 +102,7 @@
         destNav.delegate = self;
         destNav.datePickerMode = UIDatePickerModeDate;
         destNav.todayValidation = YES;
+        destNav.disabledDates = self.arrayDisabledDates;
         
         // This is the important part
         UIPopoverPresentationController *popPC = destNav.popoverPresentationController;
@@ -100,10 +113,15 @@
         destNav.delegate = self;
         destNav.datePickerMode = UIDatePickerModeTime;
         destNav.todayValidation = YES;
+        destNav.disabledDates = self.arrayDisabledDates;
         
         // This is the important part
         UIPopoverPresentationController *popPC = destNav.popoverPresentationController;
         popPC.delegate = self;
+    }
+    else if ([segue.identifier isEqualToString:@"reservationComplete"]) {
+        ReserveCompleteViewController *destNav = segue.destinationViewController;
+        destNav.restaurantID = self.restaurantDetails.identifier;
     }
     
 }

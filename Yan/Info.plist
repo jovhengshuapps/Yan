@@ -90,6 +90,10 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Localization Services is required</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Localization Services is required</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

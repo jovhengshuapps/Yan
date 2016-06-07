@@ -33,6 +33,7 @@
     self.mainTableView.allowsSelection = NO;
     self.options = (NSArray*)[self decodeData:self.itemDetails[@"options"] forKey:@"options"];
     
+    NSLog(@"item:%@",self.options);
     self.selectedOptions = [NSMutableString stringWithString:@""];
 }
 
@@ -122,13 +123,20 @@
     OptionListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"menuOptionCell"];
     
     cell.optionLabel = self.options[indexPath.row][@"name"];
-    cell.optionChoices = self.options[indexPath.row][@"options"];
+    NSMutableArray *choices = [NSMutableArray array];
+    if ([self.options[indexPath.row][@"options"] rangeOfString:@","].location != NSNotFound) {
+        [choices setArray:[self.options[indexPath.row][@"options"] componentsSeparatedByString:@","]];
+    }
+    else {
+        [choices setArray:@[self.options[indexPath.row][@"options"]]];
+    }
+    cell.optionChoices = choices;
     UIButton *button = cell.buttonChoices;
     cell.tapHandler = ^(id sender) {
         // do something
         _pickerController = (CustomPickerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"pickerView"];
         _pickerController.delegatePicker = self;
-        _pickerController.choices = self.options[indexPath.row][@"options"];
+        _pickerController.choices = choices;
         _pickerController.button = button;
         
 //        _pickerController.modalPresentationStyle = UIModalPresentationPopover;

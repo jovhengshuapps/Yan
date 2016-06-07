@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *current_tableNumber;
 @property (nullable, nonatomic, retain) NSString *current_restaurantID;
 @property (nullable, nonatomic, retain) NSString *current_restaurantName;
+@property (nullable, nonatomic, retain) NSString *recent_restaurant;
+@property (nullable, nonatomic, retain) NSString *favorite_restaurant;
 
 @end
 

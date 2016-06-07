@@ -22,4 +22,6 @@
 @dynamic current_tableNumber;
 @dynamic current_restaurantID;
 @dynamic current_restaurantName;
+@dynamic recent_restaurant;
+@dynamic favorite_restaurant;
 @end

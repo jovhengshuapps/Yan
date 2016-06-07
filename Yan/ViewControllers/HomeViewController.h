@@ -13,7 +13,8 @@ typedef enum {
     HomeViewDefault,
     HomeViewRegistrationComplete,
     HomeViewNotification,
-    HomeViewLogin
+    HomeViewLogin,
+    ProceedToMenu
 } HomeView_ViewToShow;
 
 

@@ -14,7 +14,7 @@ typedef enum {
     AffiliatedRestaurantsFavorites
 } AffiliatedRestaurants;
 
-@interface AffiliatedRestoViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate>
+@interface AffiliatedRestoViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
 
 @property (assign, nonatomic) AffiliatedRestaurants showAffiliatedRestaurant;
 

@@ -158,11 +158,36 @@
     
     error = nil;
     if ([context save:&error]) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+        NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+        
+        Account *loggedUSER = [self userLoggedIn];
+        loggedUSER.current_restaurantID = @"";
+        loggedUSER.current_tableNumber = @"";
+        loggedUSER.current_restaurantName = @"";
+        
+        error = nil;
+        if (![context save:&error]) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alert dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alert addAction:actionOK];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+        }
+        else {
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+        
+        
     }
     else {
         
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Technical Data Error" message:@"Please try again." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             [alert dismissViewControllerAnimated:YES completion:nil];
         }];

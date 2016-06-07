@@ -5,9 +5,11 @@
         <attribute name="current_restaurantID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="current_restaurantName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="current_tableNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="favorite_restaurant" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fullname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recent_restaurant" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -47,7 +49,7 @@
         <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Account" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="Account" positionX="-63" positionY="-18" width="128" height="210"/>
         <element name="MenuItem" positionX="-63" positionY="18" width="128" height="165"/>
         <element name="OrderList" positionX="-54" positionY="45" width="128" height="90"/>
         <element name="Reservation" positionX="-36" positionY="72" width="128" height="120"/>

@@ -9,5 +9,5 @@
 #import "CoreViewController.h"
 
 @interface ReserveCompleteViewController : CoreViewController
-
+@property (strong, nonatomic) NSString *restaurantID;
 @end

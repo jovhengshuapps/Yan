@@ -192,19 +192,48 @@
     [self.view addSubview:view];
 }
 
-- (void)getImageFromURL:(NSString*)urlPath completionNotification:(NSString*)notificationName {
-    
+- (void)getImageFromURL:(NSString*)urlPath updateImageView:(UIImageView*)imageView completionNotification:(NSString*)notificationName {
+    NETWORK_INDICATOR(YES)
     NSURL *baseURL = [NSURL URLWithString:BASE_API_URL];
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
      manager.responseSerializer = [AFImageResponseSerializer serializer];
     
-    [manager GET:urlPath parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+    UIActivityIndicatorView *progressView = nil;
+    if (![imageView viewWithTag:12345]) {
+        progressView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        progressView.frame = CGRectMake(0.0f, 10.0f, 30.0f, 30.0f);
+        progressView.center = imageView.center;
+        progressView.backgroundColor = [UIColor grayColor];
+        progressView.tag = 12345;
+        [imageView addSubview:progressView];
+    }
+    else {
+        progressView = (UIActivityIndicatorView*)[imageView viewWithTag:12345];
+    }
+    [progressView startAnimating];
+    
+    
+    
+    [manager GET:urlPath parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         
-        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
+        NSLog(@"progress:%f",[downloadProgress fractionCompleted]);
+        
+//        UIProgressView *progressView = nil;
+//        if (![imageView viewWithTag:12345]) {
+//            progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+//            progressView.frame = CGRectMake(0.0f, 0.0f, imageView.frame.size.width - 15.0f, 30.0f);
+//            progressView.tag = 12345;
+//            [imageView.layer addSublayer:progressView.layer];
+//        }
+//        else {
+//            progressView = (UIProgressView*)[imageView viewWithTag:12345];
+//        }
+//        [progressView setProgress:0.0f animated:YES];
+//        [progressView setProgress:[downloadProgress fractionCompleted] animated:YES];
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NETWORK_INDICATOR(NO)
         NSLog(@"response:%@",responseObject);
-        
+        [[imageView viewWithTag:12345] removeFromSuperview];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -459,7 +488,7 @@
 }
 
 - (void) logoutCurrentAccount:(NSNotification*)notification {
-    NSLog(@"response:%@",notification.object);
+//    NSLog(@"response:%@",notification.object);
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Account"];
     
@@ -669,7 +698,6 @@
     NSMutableDictionary *dictionary = [NSMutableDictionary dictionaryWithDictionary:[menuItem dictionaryWithValuesForKeys:keys]];
     [dictionary setObject:[NSNumber numberWithInteger:itemNumber] forKey:@"itemnumber"];
     [dictionary setObject:@"Basic" forKey:@"option_choices"];
-    
     return dictionary;
 }
 

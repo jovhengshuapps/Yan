@@ -162,19 +162,26 @@ BOOL hackFromLoad = NO;
 
 - (void) menuForRestaurant:(NSNotification*)notification {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
-    NSDictionary *response = (NSDictionary*)notification.object;
-    self.categories = response[@"categories"];
     
-//    NSLog(@"self.categories:%@",self.categories);
-    
-    _rawData = [self extractMenuContent];
-    _menuShown = YES;
-    self.mainTableView.userInteractionEnabled = YES;
-    [self.activityIndicator stopAnimating];
-    self.activityIndicator.hidden = YES;
-    self.menuIsLoading = NO;
-    [self.mainTableView reloadData];
-    [self showMenu];
+    if ([notification.object isKindOfClass:[NSError class]] || ([notification.object isKindOfClass:[NSDictionary class]] && [[((NSDictionary*)notification.object) allKeys] containsObject:@"error"])) {
+        return;
+    }
+    else {
+        
+        NSDictionary *response = (NSDictionary*)notification.object;
+        self.categories = response[@"categories"];
+        
+        //    NSLog(@"self.categories:%@",self.categories);
+        
+        _rawData = [self extractMenuContent];
+        _menuShown = YES;
+        self.mainTableView.userInteractionEnabled = YES;
+        [self.activityIndicator stopAnimating];
+        self.activityIndicator.hidden = YES;
+        self.menuIsLoading = NO;
+        [self.mainTableView reloadData];
+        [self showMenu];
+    }
 }
 
 - (void) showOrderSentView {

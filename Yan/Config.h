@@ -83,4 +83,7 @@
 
 #define API_WAITER(RESTAURANT_ID)                                                 [NSString stringWithFormat:@"call_water/%li",(long)RESTAURANT_ID]
 
+
+#define API_BILLOUT(RESTAURANT_ID,ORDER_ID)                          [NSString stringWithFormat:@"bill_out/%@/order/%@",RESTAURANT_ID,ORDER_ID]
+
 #endif /* Config_h */

@@ -338,6 +338,29 @@ typedef enum {
                 [_barItemNearby setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
                 [_barItemRestaurants setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
             }
+            
+            if (self.dataListRecent.count == 0) {
+                
+                Account *account = [self userLoggedIn];
+                if ([account.recent_restaurant rangeOfString:@","].location == NSNotFound) {
+                    for (id restaurant in self.dataListAll) {
+                        if ([((Restaurant*)restaurant).identifier isEqualToString:account.recent_restaurant]) {
+                            [self.dataListRecent addObject:restaurant];
+                        }
+                    }
+                }
+                else {
+                    for (NSString *restaurantID in [account.recent_restaurant componentsSeparatedByString:@","]) {
+                        for (id restaurant in self.dataListAll) {
+                            if ([((Restaurant*)restaurant).identifier isEqualToString:restaurantID]) {
+                                [self.dataListRecent addObject:restaurant];
+                            }
+                        }
+                    }
+                }
+            }
+            
+            
         }else if ([sender tag] == AffiliatedRestoOptionFavorites) {
             _tabBarOption = AffiliatedRestoOptionFavorites;
                 [_drawerBarItemRecents setBackgroundColor:UIColorFromRGB(0xDFDFDF)];

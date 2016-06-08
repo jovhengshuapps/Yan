@@ -68,7 +68,7 @@
                             }
                           ];
     
-    self.discountDetails = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"0",@"senior",@"0%",@"gc", nil];
+    self.discountDetails = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"0",@"gc",@"0",@"senior", @"0", @"diners", nil];
     
 }
 
@@ -83,12 +83,27 @@
 }
 
 - (void) proceedPayment {
+    if ([self.discountDetails[@"senior"] floatValue] > 0 && [self.discountDetails[@"diners"] floatValue] == 0) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"No Number of Diners Specified"] message:@"Number of Diners is required for Senior Citizen Discount." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
+    else {
+        
+        PayScreenViewController *paymentSelect = (PayScreenViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"payScreenView"];
+        paymentSelect.tableNumber = _tableNumber;
+        paymentSelect.discountDetails = @{@"senior":self.discountDetails[@"senior"],
+                                          @"gc":self.discountDetails[@"gc"],
+                                          @"diners":self.discountDetails[@"diners"]};
+        [self.navigationController pushViewController:paymentSelect animated:YES];
+    }
     
-    PayScreenViewController *paymentSelect = (PayScreenViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"payScreenView"];
-    paymentSelect.tableNumber = _tableNumber;
-    paymentSelect.discountDetails = @{@"senior":_discountDetails[@"senior"],
-                                      @"gc":_discountDetails[@"gc"]};
-    [self.navigationController pushViewController:paymentSelect animated:YES];
 }
 
 - (void) cancelPayment {
@@ -97,10 +112,13 @@
 
 #pragma mark Table Data Source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (section == 0) {
+        return 1;
+    }
     return _discounts.count;
 }
 
@@ -119,7 +137,12 @@
     label.textAlignment = NSTextAlignmentLeft;
     label.font = [UIFont fontWithName:@"LucidaGrande" size:14.0f];
     label.textColor = [UIColor blackColor];
-    label.text = @"Select your Discount Options:";
+    if (section == 0) {
+        label.text = @"Input the number of diners on the table:";
+    }
+    else {
+        label.text = @"Select your Discount Options:";
+    }
     
     [headerView addSubview:label];
     
@@ -130,35 +153,68 @@
     
     DiscountTableViewCell *cell = (DiscountTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"discountCell"];
     cell.contentView.backgroundColor = [UIColor clearColor];
-    cell.discountTitle = _discounts[indexPath.row][@"title"];
-    cell.discountSubTitle = _discounts[indexPath.row][@"subtitle"];
-    cell.discountDesc = _discounts[indexPath.row][@"desc"];
-    cell.options = _discounts[indexPath.row][@"options"];
-    if ([_discounts[indexPath.row][@"title"] isEqualToString:@"Senior Citizen"]) {
-        cell.button.tag = 1;
+    
+    if (indexPath.section == 0) {
+        cell.discountTitle = @"Number of Diners";
+        cell.discountSubTitle = @"How many people are ordering in the table?";
+        cell.discountDesc = @"";
+        cell.options = @[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10"];
+        cell.button.tag = 3;
+        
+        UIButton *button = cell.button;
+        cell.tapHandler = ^(id sender) {
+            // do something
+            CustomPickerViewController *pickerController = (CustomPickerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"pickerView"];
+            pickerController.delegatePicker = self;
+            pickerController.choices = @[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10"];
+            pickerController.button = button;
+            
+            self.popover = [[FPPopoverController alloc] initWithViewController:pickerController];
+            
+            self.popover.tint = FPPopoverDefaultTint;
+            self.popover.border = NO;
+            self.popover.delegate = self;
+            
+            self.popover.arrowDirection = FPPopoverArrowDirectionRight;
+            
+            //sender is the UIButton view
+            [self.popover presentPopoverFromView:sender];
+        };
     }
     else {
-        cell.button.tag = 2;
+        cell.discountTitle = _discounts[indexPath.row][@"title"];
+        cell.discountSubTitle = _discounts[indexPath.row][@"subtitle"];
+        cell.discountDesc = _discounts[indexPath.row][@"desc"];
+        cell.options = _discounts[indexPath.row][@"options"];
+        if ([_discounts[indexPath.row][@"title"] isEqualToString:@"Senior Citizen"]) {
+            cell.button.tag = 1;
+        }
+        else {
+            cell.button.tag = 2;
+        }
+        UIButton *button = cell.button;
+        cell.tapHandler = ^(id sender) {
+            // do something
+            CustomPickerViewController *pickerController = (CustomPickerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"pickerView"];
+            pickerController.delegatePicker = self;
+            pickerController.choices = _discounts[indexPath.row][@"options"];
+            pickerController.button = button;
+            
+            self.popover = [[FPPopoverController alloc] initWithViewController:pickerController];
+            
+            self.popover.tint = FPPopoverDefaultTint;
+            self.popover.border = NO;
+            self.popover.delegate = self;
+            
+            self.popover.arrowDirection = FPPopoverArrowDirectionRight;
+            
+            //sender is the UIButton view
+            [self.popover presentPopoverFromView:sender];
+        };
     }
-    UIButton *button = cell.button;
-    cell.tapHandler = ^(id sender) {
-        // do something
-        CustomPickerViewController *pickerController = (CustomPickerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"pickerView"];
-        pickerController.delegatePicker = self;
-        pickerController.choices = _discounts[indexPath.row][@"options"];
-        pickerController.button = button;
-        
-        self.popover = [[FPPopoverController alloc] initWithViewController:pickerController];
-        
-        self.popover.tint = FPPopoverDefaultTint;
-        self.popover.border = NO;
-        self.popover.delegate = self;
-        
-        self.popover.arrowDirection = FPPopoverArrowDirectionRight;
-        
-        //sender is the UIButton view
-        [self.popover presentPopoverFromView:sender];
-    };
+    
+    
+    
     
     return cell;
 }
@@ -168,7 +224,10 @@
         [self.discountDetails setObject:item forKey:@"senior"];
     }
     else if (button.tag == 2){
-        [self.discountDetails setObject:item forKey:@"gc"];
+        [self.discountDetails setObject:[item substringToIndex:item.length-1] forKey:@"gc"];
+    }
+    else if (button.tag == 3){
+        [self.discountDetails setObject:item forKey:@"diners"];
     }
     [self.popover dismissPopoverAnimated:YES];
 }

@@ -73,9 +73,25 @@
     
     [_mainTable setTableFooterView:footerView];
     
-    self.totalValue = self.totalValue - (self.totalValue * 0.2);
-    self.totalValue = self.totalValue - (self.totalValue * ([_discountDetails[@"gc"] floatValue]/100.0f));
-    [self setTotalValue:self.totalValue];
+    CGFloat seniorDiscount = 0.0f;
+    CGFloat gcDiscount = 0.0f;
+    CGFloat vat = self.totalValue * 0.12;
+    if (![_discountDetails[@"senior"] isEqualToString:@"0"]) {
+        
+        seniorDiscount = (self.totalValue / [_discountDetails[@"diners"] floatValue]) * 0.2;
+        seniorDiscount = seniorDiscount * [_discountDetails[@"senior"] floatValue];
+        
+        
+    }
+    else if (![_discountDetails[@"gc"] isEqualToString:@"0"]) {
+        
+        gcDiscount = self.totalValue * ([_discountDetails[@"gc"] floatValue]/100.0f);
+        
+    }
+    
+    self.totalValue = (self.totalValue + vat) - (seniorDiscount + gcDiscount);
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -201,7 +217,7 @@
 
 #pragma mark Table Data Source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (![_discountDetails[@"senior"] isEqualToString:@"0"] || ![_discountDetails[@"gc"] isEqualToString:@"0%"]) {
+    if (![_discountDetails[@"senior"] isEqualToString:@"0"] || ![_discountDetails[@"gc"] isEqualToString:@"0"]) {
         return 2;
     }
     return 1;
@@ -214,7 +230,7 @@
             count = count + 1;
         }
         
-        if (_discountDetails[@"gc"] && ![_discountDetails[@"gc"] isEqualToString:@"0%"]) {
+        if (_discountDetails[@"gc"] && ![_discountDetails[@"gc"] isEqualToString:@"0"]) {
             count = count + 1;
         }
         return count;
@@ -312,14 +328,25 @@
         [numberFormatter setNumberStyle:NSNumberFormatterCurrencyISOCodeStyle];
         
         NSString *string = @"";
+        CGFloat seniorDiscount = 0.0f;
+        CGFloat gcDiscount = 0.0f;
         if (![_discountDetails[@"senior"] isEqualToString:@"0"] && indexPath.row == 0) {
             cell.labelDiscountTitle.text = [NSString stringWithFormat:@"Senior Citizen: x%@",_discountDetails[@"senior"]];
-            string = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:(self.totalValue * 0.2)]];
+            
+            seniorDiscount = (self.totalValue / [_discountDetails[@"diners"] floatValue]) * 0.2;
+            seniorDiscount = seniorDiscount * [_discountDetails[@"senior"] floatValue];
+            
+            
+            string = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:seniorDiscount]];
         }
         else if (![_discountDetails[@"gc"] isEqualToString:@"0%"]) {
-            cell.labelDiscountTitle.text = [NSString stringWithFormat:@"Gift Certificate: %@",_discountDetails[@"gc"]];
-            string = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:(self.totalValue * ([_discountDetails[@"gc"] floatValue]/100.0f))]];
+            cell.labelDiscountTitle.text = [NSString stringWithFormat:@"Gift Certificate: %@%%",_discountDetails[@"gc"]];
+            
+            gcDiscount = self.totalValue * ([_discountDetails[@"gc"] floatValue]/100.0f);
+            
+            string = [numberFormatter stringFromNumber:[NSNumber numberWithFloat:gcDiscount]];
         }
+        
         cell.labelDiscountValue.text = [NSString stringWithFormat:@"-%@",string];
         return cell;
     }

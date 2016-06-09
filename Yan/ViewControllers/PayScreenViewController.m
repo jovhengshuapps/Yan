@@ -54,7 +54,6 @@
     labelTotalValue.font = [UIFont fontWithName:@"LucidaGrande" size:20.0f];
     labelTotalValue.textColor = UIColorFromRGB(0x666666);
     labelTotalValue.textAlignment = NSTextAlignmentRight;
-    labelTotalValue.text = [NSString stringWithFormat:@"PHP: %.2f",_totalValue];
     [totalView addSubview:labelTotalValue];
     
     [footerView addSubview:totalView];
@@ -91,6 +90,7 @@
     
     self.totalValue = (self.totalValue + vat) - (seniorDiscount + gcDiscount);
     
+    labelTotalValue.text = [NSString stringWithFormat:@"PHP: %.2f",self.totalValue];
     
 }
 
@@ -129,7 +129,7 @@
 
         
         for (NSDictionary *item in storedOrders) {
-            NSLog(@"storedITEM:%@",item);
+//            NSLog(@"storedITEM:%@",item);
             [_arrayOrderList addObject:item];
         }
         
@@ -154,10 +154,32 @@
 //}
 
 - (void) submitPayment {
+    
+    
+    Account *account = [self userLoggedIn];
+    
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+    [request setReturnsObjectsAsFaults:NO];
+    
+    NSError *error = nil;
+    
+    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    OrderList *order = (OrderList*)result[0];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendPaymentToCounter:) name:@"sendPaymentToCounter" object:nil];
+    [self callAPI:API_BILLOUT(account.current_restaurantID, order.orderSubmitID) withParameters:@{ @"pay_type": self.paymentType, @"total_amount": [NSNumber numberWithFloat:self.totalValue] }completionNotification:@"sendPaymentToCounter"];
+    
+    
+}
+
+- (void) sendPaymentToCounter:(NSNotification*)notification {
     AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Our restaurant representative will see you to receive payment.\n\n Thank you!" delegate:self buttons:@[@"CLOSE"]];
     [alert showAlertView];
 }
-
 
 - (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     

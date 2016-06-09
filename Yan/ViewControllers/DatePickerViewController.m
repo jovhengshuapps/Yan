@@ -33,13 +33,41 @@
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         NSDate *currentDate = [NSDate date];
         NSDateComponents *comps = [[NSDateComponents alloc] init];
-        [comps setDay:1];
+//        [comps setDay:1];
         [comps setHour:1];
         NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
         
         [_datePicker setMinimumDate:minDate];
     }
+    
+    if (_dateRange) {
+        NSString *from = _dateRange[@"from"];
+        NSString *to = _dateRange[@"to"];
+        
+        NSInteger minHour = [self hourFromString:from];
+        NSInteger maxHour = [self hourFromString:to];
+        
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        NSDate *currentDate = [NSDate date];
+        NSDateComponents *comps = [[NSDateComponents alloc] init];
+        //        [comps setDay:1];
+        [comps setHour:1];
+//        NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+        NSLog(@"hour:%li",(long)[comps hour]);
+    }
 }
+
+- (NSInteger) hourFromString:(NSString*)string {
+    if ([string rangeOfString:@"AM"].location != NSNotFound) {
+        return [[string componentsSeparatedByString:@":"][0] integerValue];
+    }
+    else if ([string rangeOfString:@"PM"].location != NSNotFound) {
+        return [[string componentsSeparatedByString:@":"][0] integerValue] + 12;
+    }
+    return 0;
+}
+
+
 
 - (IBAction)donePressed:(id)sender {
     NSDate *myDate = self.datePicker.date;
@@ -56,28 +84,6 @@
     [self dismissViewControllerAnimated:YES completion:^{
         [self.delegate dateSelected:stringDate mode:_datePickerMode];
     }];
-}
-
--(void)disableDate{
-    
-    NSDate *pickedDate = self.datePicker.date;  // Get current Date
-    
-    for (NSDate *disabledDate in self.disabledDates) {
-        if([pickedDate compare:disabledDate] == NSOrderedSame){
-//            [self.datePicker setDate:[self someOtherDate] animated:YES];
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Schedule Unavailable"] message:@"The selected date and time is unavailable, please select another one." preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                [alert dismissViewControllerAnimated:YES completion:nil];
-            }];
-            [alert addAction:actionOK];
-            
-            [self presentViewController:alert animated:YES completion:^{
-                
-            }];
-            
-        }
-    }
-    
 }
 
 @end

@@ -170,38 +170,101 @@
     
 //    NSLog(@"####orderList:%@",_arrayOrderList);
     
-    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    /*
+     {
+     "order_date": "4/26/2016",
+     "table": "9",
+     "notes": "2 extra rice",
+     "menus":[{"menu_id": 1,"quantity": 1,"total_amount": 120},{"menu_id": 2,"quantity": 1,"total_amount": 120}]
+     }
+     */
     
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-    [request setReturnsObjectsAsFaults:NO];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM/dd/yyyy"];
     
-    NSError *error = nil;
+    NSString *order_date = [dateFormatter stringFromDate:[NSDate date]];
+    NSMutableString *notes = [NSMutableString stringWithString:@""];
+    NSMutableArray *menus = [NSMutableArray array];
     
-    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
-    OrderList *order = (OrderList*)result[0];
-    
-    order.orderSent = @YES;
-    
-    error = nil;
-    if ([context save:&error]) {
+    for (NSDictionary *items in self.arrayOrderList) {
+        if (![items[@"option_choices"] isEqualToString:@"Basic"] && ((NSString*)items[@"option_choices"]).length) {
+            [notes appendString:[NSString stringWithFormat:@"%@(%@),",items[@"name"],items[@"option_choices"]]];
+        }
         
-        [self.navigationController popToViewController:[self.navigationController viewControllers][1] animated:YES];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderSentNotification" object:nil];
+        if (menus.count) {
+            BOOL isNew = YES;
+            for (NSInteger i = 0; i < menus.count; i++) {
+                if ([(menus[i][@"identifier"]) isEqualToString:items[@"identifier"]]) {
+                    isNew = NO;
+                    NSInteger qty = [menus[i][@"quantity"] integerValue] + 1;
+                    NSInteger total = [items[@"price"] integerValue] * qty;
+                    
+                    [menus replaceObjectAtIndex:i withObject:@{@"menu_id":items[@"identifier"],@"quantity":[NSNumber numberWithInteger:qty],@"total_amount":[NSNumber numberWithInteger:total]}];
+                    
+                    break;
+                }
+            }
+        }
+        else {
+            [menus addObject:@{@"menu_id":items[@"identifier"],@"quantity":@1,@"total_amount":items[@"price"]}];
+        }
+        
+        
+        
     }
-    else {
+    
+    
+    Account *account = [self userLoggedIn];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(submitOrder:) name:@"submitOrder" object:nil];
+    [self callAPI:API_SENDORDER(account.current_restaurantID, account.identifier) withParameters:@{
+                                                  @"order_date": order_date,
+                                                  @"table": account.current_tableNumber,
+                                                  @"notes": notes,
+                                                  @"menus":menus
+                                                  } completionNotification:@"submitOrder"];
+    
+}
+
+- (void) submitOrder:(NSNotification*)notification {
+    NSDictionary *response = notification.object;
+    if (response[@"success"] && response[@"id"]) {
         
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            [alert dismissViewControllerAnimated:YES completion:nil];
-        }];
-        [alert addAction:actionOK];
+        NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
         
-        [self presentViewController:alert animated:YES completion:^{
+        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+        [request setReturnsObjectsAsFaults:NO];
+        
+        NSError *error = nil;
+        
+        NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+        OrderList *order = (OrderList*)result[0];
+        
+        order.orderSent = @YES;
+        order.orderSubmitID = [NSString stringWithFormat:@"%@",response[@"id"]];
+        
+        error = nil;
+        if ([context save:&error]) {
             
-        }];
+            [self.navigationController popToViewController:[self.navigationController viewControllers][1] animated:YES];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderSentNotification" object:nil];
+        }
+        else {
+            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alert dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alert addAction:actionOK];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+        }
+
     }
-    
 }
 
 - (void) callBillout {
@@ -323,7 +386,11 @@
         [attrString endEditing];
         
         cell.labelItemNamePrice.attributedText = attrString;
-        cell.labelItemOptions.text  = item[@"option_choices"];
+        NSString *choices = item[@"option_choices"];
+        if ([choices rangeOfString:@","].location != NSNotFound) {
+            choices = [choices substringToIndex:choices.length-1];
+        }
+        cell.labelItemOptions.text = [choices capitalizedString];
         cell.index = indexPath.row;
         cell.delegateCell = self;
         

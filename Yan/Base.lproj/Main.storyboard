@@ -111,6 +111,11 @@
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
+            <string>LucidaGrande-Bold</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande-Bold</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande-Bold</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -154,6 +159,260 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bRc-hS-p3d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="96" y="323"/>
+        </scene>
+        <!--Reminder Notification View Controller-->
+        <scene sceneID="7Ef-yK-r4P">
+            <objects>
+                <viewController storyboardIdentifier="reminderNotification" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1Yo-1X-RmN" customClass="ReminderNotificationViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="22x-zJ-nDV"/>
+                        <viewControllerLayoutGuide type="bottom" id="fra-jn-NUn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GDx-qc-YaE">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aAN-D4-SVn">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REMINDER !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grV-QR-IpS">
+                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="Saf-4R-6nu"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="LucidaGrande-Bold" family="Lucida Grande" pointSize="32"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Saf-4R-6nu"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="Saf-4R-6nu"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You have a reservation today at" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BJC-sv-462">
+                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="xsu-Hj-7Bp"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="xsu-Hj-7Bp"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="xsu-Hj-7Bp"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ci1-Fe-VuU">
+                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="125" id="Clm-Ow-N1i"/>
+                                        </constraints>
+                                        <string key="text">CASA MARCOS
+8:00PM</string>
+                                        <fontDescription key="fontDescription" name="LucidaGrande-Bold" family="Lucida Grande" pointSize="30"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Clm-Ow-N1i"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="Clm-Ow-N1i"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please be there on time." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Sb-Io-2jg">
+                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="1Wx-1c-ik1"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="1Wx-1c-ik1"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="1Wx-1c-ik1"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="97S-ec-BK2">
+                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="edA-CJ-GIP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="LucidaGrande-Bold" family="Lucida Grande" pointSize="25"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="edA-CJ-GIP"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="edA-CJ-GIP"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HXx-1u-p0g" customClass="CustomButton">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="OO6-pV-dmC"/>
+                                        </constraints>
+                                        <state key="normal" title="CLOSE"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="OO6-pV-dmC"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="OO6-pV-dmC"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="closeButton:" destination="1Yo-1X-RmN" eventType="touchUpInside" id="Vg4-hp-hfl"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="grV-QR-IpS" firstAttribute="top" secondItem="aAN-D4-SVn" secondAttribute="top" constant="135" id="26t-cR-xj2"/>
+                                    <constraint firstItem="97S-ec-BK2" firstAttribute="leading" secondItem="aAN-D4-SVn" secondAttribute="leading" constant="8" id="Ak3-lv-2RX"/>
+                                    <constraint firstItem="Ci1-Fe-VuU" firstAttribute="top" secondItem="BJC-sv-462" secondAttribute="bottom" constant="8" id="CBE-ba-kNG"/>
+                                    <constraint firstItem="2Sb-Io-2jg" firstAttribute="top" secondItem="Ci1-Fe-VuU" secondAttribute="bottom" constant="8" id="E7j-4h-Oex"/>
+                                    <constraint firstAttribute="trailing" secondItem="2Sb-Io-2jg" secondAttribute="trailing" constant="8" id="FYA-6X-1CM"/>
+                                    <constraint firstItem="grV-QR-IpS" firstAttribute="leading" secondItem="aAN-D4-SVn" secondAttribute="leading" constant="44" id="KcH-os-PHZ"/>
+                                    <constraint firstItem="BJC-sv-462" firstAttribute="top" secondItem="grV-QR-IpS" secondAttribute="bottom" constant="8" id="OPv-gV-NnK"/>
+                                    <constraint firstItem="2Sb-Io-2jg" firstAttribute="leading" secondItem="aAN-D4-SVn" secondAttribute="leading" constant="8" id="PA6-Bi-22i"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ci1-Fe-VuU" secondAttribute="trailing" constant="44" id="T0W-YR-mXB"/>
+                                    <constraint firstAttribute="trailing" secondItem="HXx-1u-p0g" secondAttribute="trailing" constant="44" id="Tax-VP-dvw"/>
+                                    <constraint firstItem="97S-ec-BK2" firstAttribute="top" secondItem="2Sb-Io-2jg" secondAttribute="bottom" constant="8" id="dsc-1I-FbT"/>
+                                    <constraint firstItem="Ci1-Fe-VuU" firstAttribute="leading" secondItem="aAN-D4-SVn" secondAttribute="leading" constant="44" id="iw9-ki-ueS"/>
+                                    <constraint firstItem="BJC-sv-462" firstAttribute="leading" secondItem="aAN-D4-SVn" secondAttribute="leading" constant="8" id="jba-J3-Fw3"/>
+                                    <constraint firstAttribute="bottom" secondItem="HXx-1u-p0g" secondAttribute="bottom" constant="8" id="kCa-kU-Dbn"/>
+                                    <constraint firstItem="HXx-1u-p0g" firstAttribute="leading" secondItem="aAN-D4-SVn" secondAttribute="leading" constant="44" id="n0p-xT-AKI"/>
+                                    <constraint firstAttribute="trailing" secondItem="97S-ec-BK2" secondAttribute="trailing" constant="8" id="raj-Qi-MzU"/>
+                                    <constraint firstAttribute="trailing" secondItem="BJC-sv-462" secondAttribute="trailing" constant="8" id="t3Y-47-E6h"/>
+                                    <constraint firstAttribute="trailing" secondItem="grV-QR-IpS" secondAttribute="trailing" constant="44" id="xEJ-8l-vTp"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="grV-QR-IpS"/>
+                                        <exclude reference="BJC-sv-462"/>
+                                        <exclude reference="Ci1-Fe-VuU"/>
+                                        <exclude reference="2Sb-Io-2jg"/>
+                                        <exclude reference="97S-ec-BK2"/>
+                                        <exclude reference="HXx-1u-p0g"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="26t-cR-xj2"/>
+                                        <exclude reference="KcH-os-PHZ"/>
+                                        <exclude reference="xEJ-8l-vTp"/>
+                                        <exclude reference="OPv-gV-NnK"/>
+                                        <exclude reference="jba-J3-Fw3"/>
+                                        <exclude reference="t3Y-47-E6h"/>
+                                        <exclude reference="CBE-ba-kNG"/>
+                                        <exclude reference="T0W-YR-mXB"/>
+                                        <exclude reference="iw9-ki-ueS"/>
+                                        <exclude reference="E7j-4h-Oex"/>
+                                        <exclude reference="FYA-6X-1CM"/>
+                                        <exclude reference="PA6-Bi-22i"/>
+                                        <exclude reference="Ak3-lv-2RX"/>
+                                        <exclude reference="dsc-1I-FbT"/>
+                                        <exclude reference="raj-Qi-MzU"/>
+                                        <exclude reference="Tax-VP-dvw"/>
+                                        <exclude reference="kCa-kU-Dbn"/>
+                                        <exclude reference="n0p-xT-AKI"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="grV-QR-IpS"/>
+                                        <include reference="BJC-sv-462"/>
+                                        <include reference="Ci1-Fe-VuU"/>
+                                        <include reference="2Sb-Io-2jg"/>
+                                        <include reference="97S-ec-BK2"/>
+                                        <include reference="HXx-1u-p0g"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <include reference="26t-cR-xj2"/>
+                                        <include reference="KcH-os-PHZ"/>
+                                        <include reference="xEJ-8l-vTp"/>
+                                        <include reference="OPv-gV-NnK"/>
+                                        <include reference="jba-J3-Fw3"/>
+                                        <include reference="t3Y-47-E6h"/>
+                                        <include reference="CBE-ba-kNG"/>
+                                        <include reference="T0W-YR-mXB"/>
+                                        <include reference="iw9-ki-ueS"/>
+                                        <include reference="E7j-4h-Oex"/>
+                                        <include reference="FYA-6X-1CM"/>
+                                        <include reference="PA6-Bi-22i"/>
+                                        <include reference="Ak3-lv-2RX"/>
+                                        <include reference="dsc-1I-FbT"/>
+                                        <include reference="raj-Qi-MzU"/>
+                                        <include reference="Tax-VP-dvw"/>
+                                        <include reference="kCa-kU-Dbn"/>
+                                        <include reference="n0p-xT-AKI"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aAN-D4-SVn" firstAttribute="top" secondItem="GDx-qc-YaE" secondAttribute="topMargin" id="6qm-WJ-pkp"/>
+                            <constraint firstItem="fra-jn-NUn" firstAttribute="top" secondItem="aAN-D4-SVn" secondAttribute="bottom" id="CHc-c0-fvV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="aAN-D4-SVn" secondAttribute="trailing" constant="-20" id="HAM-J8-wW0"/>
+                            <constraint firstItem="aAN-D4-SVn" firstAttribute="leading" secondItem="GDx-qc-YaE" secondAttribute="leadingMargin" constant="-20" id="jQV-RO-XKg"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="aAN-D4-SVn"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="6qm-WJ-pkp"/>
+                                <exclude reference="HAM-J8-wW0"/>
+                                <exclude reference="jQV-RO-XKg"/>
+                                <exclude reference="CHc-c0-fvV"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="aAN-D4-SVn"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="6qm-WJ-pkp"/>
+                                <include reference="HAM-J8-wW0"/>
+                                <include reference="jQV-RO-XKg"/>
+                                <include reference="CHc-c0-fvV"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="labelReservationNameTime" destination="Ci1-Fe-VuU" id="itD-XQ-IkV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7AL-Gs-AkB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="141" y="-408.75"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="S5H-SM-Q64">
@@ -3169,9 +3428,7 @@ You may now start using the app for your favourite restaurant.</string>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyc-0n-682">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <connections>
-                                    <segue destination="fzX-QJ-dop" kind="popoverPresentation" identifier="reserveDatePicker" popoverAnchorView="dyc-0n-682" id="rPF-AT-35v">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES"/>
-                                    </segue>
+                                    <action selector="selectDate:" destination="FR8-OO-KIF" eventType="touchUpInside" id="pxx-v0-HnD"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="TIME" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7TY-4G-teG">
@@ -3210,7 +3467,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     <outlet property="delegate" destination="FR8-OO-KIF" id="rUN-30-u2E"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="TABLE (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JdI-dd-xhF">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="TABLE" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JdI-dd-xhF">
                                 <rect key="frame" x="20" y="318" width="560" height="40"/>
                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -5358,6 +5615,23 @@ You may now start using the app for your favourite restaurant.</string>
             </objects>
             <point key="canvasLocation" x="4012.5" y="-855"/>
         </scene>
+        <!--Day Table View Controller-->
+        <scene sceneID="sip-UE-4jv">
+            <objects>
+                <tableViewController storyboardIdentifier="dayPicker" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cpH-3l-mnW" customClass="DayTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="rG8-Ub-Lcb">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="cpH-3l-mnW" id="DRT-7g-PSE"/>
+                            <outlet property="delegate" destination="cpH-3l-mnW" id="XHw-Ew-zN4"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4iD-3I-2YP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4660.5" y="-855"/>
+        </scene>
         <!--Payment Select View Controller-->
         <scene sceneID="Dma-1l-wOQ">
             <objects>
@@ -6977,10 +7251,10 @@ You may now start using the app for your favourite restaurant.</string>
         <image name="yan-red-gold" width="4519" height="4513"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="iwi-F0-UhZ"/>
         <segue reference="Y4r-v0-sWo"/>
         <segue reference="YJZ-bv-B1B"/>
         <segue reference="Ayu-oY-PwC"/>
-        <segue reference="iwi-F0-UhZ"/>
-        <segue reference="Jyy-jT-Sb2"/>
+        <segue reference="Q3B-uT-Aey"/>
     </inferredMetricsTieBreakers>
 </document>

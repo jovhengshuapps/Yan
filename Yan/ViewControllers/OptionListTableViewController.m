@@ -33,8 +33,18 @@
     self.mainTableView.allowsSelection = NO;
     self.options = (NSArray*)[self decodeData:self.itemDetails[@"options"] forKey:@"options"];
     
-    NSLog(@"item:%@",self.options);
+//    NSLog(@"item:%@",self.options);
     self.selectedOptions = [NSMutableString stringWithString:@""];
+    
+    for (NSDictionary *item in self.options) {
+        if ([item[@"options"] rangeOfString:@","].location != NSNotFound) {
+            [self.selectedOptions appendString:[NSString stringWithFormat:@"%@:%@,",item[@"name"],[item[@"options"] componentsSeparatedByString:@","][0]]];
+        }
+        else {
+            [self.selectedOptions appendString:[NSString stringWithFormat:@"%@:%@,",item[@"name"],item[@"options"]]];
+        }
+    }
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

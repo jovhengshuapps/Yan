@@ -91,7 +91,14 @@
         PayScreenViewController *paymentSelect = (PayScreenViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"payScreenView"];
         paymentSelect.tableNumber = _tableNumber;
         paymentSelect.discountDetails = @{@"senior":@"0",
-                                          @"gc":@"0%"};
+                                          @"gc":@"0"};
+        
+        if (self.selectedOptionIndex == 1) {
+            paymentSelect.paymentType = @"CC";
+        }
+        else {
+            paymentSelect.paymentType = @"CA";
+        }
         [self.navigationController pushViewController:paymentSelect animated:YES];
         
     }

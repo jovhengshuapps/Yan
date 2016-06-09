@@ -11,4 +11,5 @@
 @interface PayScreenViewController : CoreViewController <AlertViewDelegate>
 @property (strong, nonatomic) NSString *tableNumber;
 @property (strong, nonatomic) NSDictionary *discountDetails;
+@property (strong, nonatomic) NSString *paymentType;
 @end

@@ -16,7 +16,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *textFieldNumberPerson;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldTableNumber;
 @property (weak, nonatomic) IBOutlet CustomButton *buttonReserve;
-@property (strong, nonatomic) NSMutableArray *arrayDisabledDates;
+@property (strong, nonatomic) NSMutableArray *arrayAvailableDays;
+@property (strong, nonatomic) NSMutableArray *arrayAvailableTimes;
+@property (strong, nonatomic) FPPopoverController *popover;
 
 @end
 
@@ -43,6 +45,8 @@
     [self callGETAPI:API_RESERVATION_CHECKTIME(self.restaurantDetails.identifier) withParameters:@{} completionNotification:@"checkReservationTimes"];
     
 
+    self.title = self.restaurantDetails.name;
+    
 }
 
 
@@ -60,6 +64,15 @@
 
 - (void) checkReservationTimes:(NSNotification*)notification {
     NSLog(@"Available Times:%@",notification.object);
+    NSArray *response = notification.object;
+    self.arrayAvailableDays = [NSMutableArray array];
+    self.arrayAvailableTimes = [NSMutableArray array];
+    if (response.count) {
+        for (NSDictionary *dates in response) {
+            [self.arrayAvailableDays addObject:dates[@"day"]];
+            [self.arrayAvailableTimes addObject:dates/*@{@"from":dates[@"from"],@"to":dates[@"to"]}*/];
+        }
+    }
 }
 
 - (void) completeReservation:(NSNotification*)notification {
@@ -68,26 +81,44 @@
 
 - (BOOL) shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     if ([identifier isEqualToString:@"reservationComplete"]){
-        Account *account = (Account*)[self userLoggedIn];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completeReservation:) name:@"reservationRequest" object:nil];
-        NSDictionary *parameters = @{@"reserve_date":_textFieldDate.text,
-                                     @"reserve_time":_textFieldTime.text,
-                                     @"table":_textFieldTableNumber.text,
-                                     @"persons":_textFieldNumberPerson.text
-                                     };
-//        NSDictionary *parameters = @{@"reserve_date":@"05/23/2016",
-//                                     @"reserve_time":@"10:33 PM",
-//                                     @"table":@"9",
-//                                     @"persons":@"12"
-//                                     };
-        self.buttonReserve.enabled = NO;
-        [self.buttonReserve setTitle:@"Sending Reservation" forState:UIControlStateNormal];
-        [self callPOSTAPI:API_RESERVATION(_restaurantDetails.identifier, account.identifier) withParameters:parameters completionHandler:^(id  _Nullable response) {
-            self.buttonReserve.enabled = YES;
-            [self.buttonReserve setTitle:@"RESERVE" forState:UIControlStateNormal];
-            [self performSegueWithIdentifier:@"reservationComplete" sender:sender];
-        }];
+        if (_textFieldDate.text.length && _textFieldTime.text.length && _textFieldTableNumber.text.length && _textFieldNumberPerson.text.length) {
+            
+            Account *account = (Account*)[self userLoggedIn];
+            //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completeReservation:) name:@"reservationRequest" object:nil];
+            NSDictionary *parameters = @{@"reserve_date":_textFieldDate.text,
+                                         @"reserve_time":_textFieldTime.text,
+                                         @"table":_textFieldTableNumber.text,
+                                         @"persons":_textFieldNumberPerson.text
+                                         };
+            //        NSDictionary *parameters = @{@"reserve_date":@"05/23/2016",
+            //                                     @"reserve_time":@"10:33 PM",
+            //                                     @"table":@"9",
+            //                                     @"persons":@"12"
+            //                                     };
+            self.buttonReserve.enabled = NO;
+            [self.buttonReserve setTitle:@"Sending Reservation" forState:UIControlStateNormal];
+            [self callPOSTAPI:API_RESERVATION(_restaurantDetails.identifier, account.identifier) withParameters:parameters completionHandler:^(id  _Nullable response) {
+                self.buttonReserve.enabled = YES;
+                [self.buttonReserve setTitle:@"RESERVE" forState:UIControlStateNormal];
+                [self performSegueWithIdentifier:@"reservationComplete" sender:sender];
+            }];
+        }
+        else {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Incomplete Details" message:@"All fields are required." preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alert dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alert addAction:actionOK];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+
+        }
         return NO;
+    }
+    else if ([identifier isEqualToString:@"reserveDatePicker"]) {
+        return YES;
     }
     return YES;
 }
@@ -98,22 +129,33 @@
     [_textFieldNumberPerson resignFirstResponder];
     
     if ([segue.identifier isEqualToString:@"reserveDatePicker"]) {
-        DatePickerViewController *destNav = segue.destinationViewController;
-        destNav.delegate = self;
-        destNav.datePickerMode = UIDatePickerModeDate;
-        destNav.todayValidation = YES;
-        destNav.disabledDates = self.arrayDisabledDates;
+//        DatePickerViewController *destNav = segue.destinationViewController;
+//        destNav.delegate = self;
+//        destNav.datePickerMode = UIDatePickerModeDate;
+//        destNav.todayValidation = YES;
+////        destNav.disabledDates = self.arrayDisabledDates;
+//        
+//        // This is the important part
+//        UIPopoverPresentationController *popPC = destNav.popoverPresentationController;
+//        popPC.delegate = self;
         
-        // This is the important part
-        UIPopoverPresentationController *popPC = destNav.popoverPresentationController;
-        popPC.delegate = self;
+        
+        
     }
     else if ([segue.identifier isEqualToString:@"reserveTimePicker"]) {
         DatePickerViewController *destNav = segue.destinationViewController;
         destNav.delegate = self;
         destNav.datePickerMode = UIDatePickerModeTime;
         destNav.todayValidation = YES;
-        destNav.disabledDates = self.arrayDisabledDates;
+        NSString *daySelected = [self.textFieldDate.text componentsSeparatedByString:@","][0];
+        NSLog(@"selected:%@",daySelected);
+        for (NSDictionary *dateAndTimes in self.arrayAvailableTimes) {
+            if ([daySelected isEqualToString:dateAndTimes[@"day"]]) {
+                destNav.dateRange = @{@"from":dateAndTimes[@"from"], @"to":dateAndTimes[@"to"]};
+                break;
+            }
+        }
+        
         
         // This is the important part
         UIPopoverPresentationController *popPC = destNav.popoverPresentationController;
@@ -146,6 +188,28 @@
     [self.navigationController pushViewController:details animated:YES];
 }
 
+- (IBAction)selectDate:(id)sender {
+    DayTableViewController * dayPicker = (DayTableViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"dayPicker"];
+    dayPicker.delegatePicker = self;
+    dayPicker.availableDays = self.arrayAvailableDays;
+    
+    self.popover = [[FPPopoverController alloc] initWithViewController:dayPicker];
+    
+    self.popover.tint = FPPopoverDefaultTint;
+    self.popover.border = NO;
+//    self.popover.title = @"This Week's Schedule";
+    self.popover.delegate = self;
+    self.popover.contentSize = CGSizeMake(300, 500);
+    self.popover.arrowDirection = FPPopoverArrowDirectionUp;
+    
+    //sender is the UIButton view
+    [self.popover presentPopoverFromView:sender];
+}
 
+- (void)selectedDay:(NSDictionary *)day {
+    self.textFieldDate.text = [NSString stringWithFormat:@"%@, %@",day[@"day"],day[@"date"]];
+    self.textFieldTime.text = @"";
+    [self.popover dismissPopoverAnimated:YES];
+}
 
 @end

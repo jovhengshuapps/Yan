@@ -12,6 +12,8 @@
 //#import <Fabric/Fabric.h>
 //#import <Crashlytics/Crashlytics.h>
 
+
+
 @interface AppDelegate ()
 
 @end
@@ -106,6 +108,13 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
     NSLog(@"completion received notification:%@",userInfo);
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle].infoDictionary objectForKey:@"UIMainStoryboardFile"] bundle:[NSBundle mainBundle]];
+    ReminderNotificationViewController *reminder = [storyboard instantiateViewControllerWithIdentifier:@"reminderNotification"];
+    reminder.restaurantName = @"Restaurant Name";
+    reminder.reservationTimeFrom = @"TimeFrom";
+    reminder.reservationTimeTo = @"TimeTo";
+    [self.window addSubview:reminder.view];
+    
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {

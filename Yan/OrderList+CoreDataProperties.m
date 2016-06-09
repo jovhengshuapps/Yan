@@ -16,5 +16,6 @@
 @dynamic items;
 @dynamic tableNumber;
 @dynamic orderSent;
+@dynamic orderSubmitID;
 
 @end

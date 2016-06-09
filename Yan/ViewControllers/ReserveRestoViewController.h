@@ -8,8 +8,9 @@
 
 #import "CoreViewController.h"
 #import "DatePickerViewController.h"
+#import "DayTableViewController.h"
 
-@interface ReserveRestoViewController : CoreViewController <UIPopoverPresentationControllerDelegate, UITextFieldDelegate, DatePickerViewControllerDelegate>
+@interface ReserveRestoViewController : CoreViewController <UIPopoverPresentationControllerDelegate, UITextFieldDelegate, DatePickerViewControllerDelegate, FPPopoverControllerDelegate, DayTableViewControllerDelegate>
 
 @property (strong,nonatomic) Restaurant *restaurantDetails;
 

@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSData *items;
 @property (nullable, nonatomic, retain) NSString *tableNumber;
 @property (nullable, nonatomic, retain) NSNumber *orderSent;
+@property (nullable, nonatomic, retain) NSString *orderSubmitID;
 
 @end
 

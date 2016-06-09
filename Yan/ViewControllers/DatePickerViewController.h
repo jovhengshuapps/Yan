@@ -19,5 +19,5 @@
 @property (assign, nonatomic) UIDatePickerMode datePickerMode;
 @property (assign, nonatomic) BOOL birthdayValidation;
 @property (assign, nonatomic) BOOL todayValidation;
-@property (strong, nonatomic) NSArray *disabledDates;
+@property (strong, nonatomic) NSDictionary *dateRange;
 @end

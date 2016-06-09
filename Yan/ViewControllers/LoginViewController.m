@@ -35,7 +35,8 @@
     [self callAPI:API_USER_LOGIN withParameters:@{
                                                      @"username": self.textFieldUsername.text,
                                                      @"password": self.textFieldPassword.text,
-                                                     @"device_token": deviceToken
+                                                     @"device_token": deviceToken,
+                                                     @"device_type":@"ios"
                                                      } completionNotification:@"loginCompletedObserver"];
 }
 

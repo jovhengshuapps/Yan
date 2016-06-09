@@ -25,6 +25,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "UIImage+animatedGIF.h"
 #import "FPPopoverController.h"
+#import "ReminderNotificationViewController.h"
 
 #import "AppDelegate.h"
 #import "Account.h"
@@ -83,6 +84,8 @@
 
 #define API_WAITER(RESTAURANT_ID)                                                 [NSString stringWithFormat:@"call_water/%li",(long)RESTAURANT_ID]
 
+
+#define API_SENDORDER(RESTAURANT_ID,USER_ID)                          [NSString stringWithFormat:@"order/%@/user/%@",RESTAURANT_ID,USER_ID]
 
 #define API_BILLOUT(RESTAURANT_ID,ORDER_ID)                          [NSString stringWithFormat:@"bill_out/%@/order/%@",RESTAURANT_ID,ORDER_ID]
 

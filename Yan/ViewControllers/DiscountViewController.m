@@ -101,6 +101,7 @@
         paymentSelect.discountDetails = @{@"senior":self.discountDetails[@"senior"],
                                           @"gc":self.discountDetails[@"gc"],
                                           @"diners":self.discountDetails[@"diners"]};
+        paymentSelect.paymentType = @"GC";
         [self.navigationController pushViewController:paymentSelect animated:YES];
     }
     

@@ -209,7 +209,8 @@
             [self callAPI:API_USER_LOGIN withParameters:@{
                                                           @"username": _socialAccount[@"username"],
                                                           @"password": _socialAccount[@"password"],
-                                                          @"device_token": deviceToken
+                                                          @"device_token": deviceToken,
+                                                          @"device_type":@"ios"
                                                           } completionNotification:@"socialLoginObserver"];
         }
     }];
@@ -247,7 +248,8 @@
     [self callAPI:API_USER_LOGIN withParameters:@{
                                                   @"username": _socialAccount[@"username"],
                                                   @"password": _socialAccount[@"password"],
-                                                  @"device_token": deviceToken
+                                                  @"device_token": deviceToken,
+                                                  @"device_type":@"ios"
                                                   } completionNotification:@"socialLoginObserver"];
 }
 

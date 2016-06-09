@@ -19,11 +19,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    if (self.reservationTimeTo.length) {
-        self.labelReservationNameTime.text = [NSString stringWithFormat:@"%@\n\n%@ - %@",_restaurantName, _reservationTimeFrom, _reservationTimeTo];
+    if (self.reservationTimeTo && self.reservationTimeTo.length) {
+        self.labelReservationNameTime.text = [NSString stringWithFormat:@"%@\n%@ - %@",_restaurantName, _reservationTimeFrom, _reservationTimeTo];
     }
     else {
-        self.labelReservationNameTime.text = [NSString stringWithFormat:@"%@\n\n%@",_restaurantName, _reservationTimeFrom];
+        self.labelReservationNameTime.text = [NSString stringWithFormat:@"%@\n%@",_restaurantName, _reservationTimeFrom];
     }
 }
 

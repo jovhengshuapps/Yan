@@ -44,16 +44,57 @@
         NSString *from = _dateRange[@"from"];
         NSString *to = _dateRange[@"to"];
         
-        NSInteger minHour = [self hourFromString:from];
-        NSInteger maxHour = [self hourFromString:to];
+        NSInteger startHour = [self hourFromString:from];
+        NSInteger endHour = [self hourFromString:to];
         
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         NSDate *currentDate = [NSDate date];
         NSDateComponents *comps = [[NSDateComponents alloc] init];
         //        [comps setDay:1];
-        [comps setHour:1];
+        
+        NSInteger currentHour = [calendar component:NSCalendarUnitHour fromDate:currentDate];
+//        if (minHour > currentHour) {
+//            [comps setHour: (currentHour - minHour)];
+//        }
+//        
 //        NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
-        NSLog(@"hour:%li",(long)[comps hour]);
+//       
+//        
+//        calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+//        comps = [[NSDateComponents alloc] init];
+//        if (maxHour < currentHour) {
+//            [comps setHour: (maxHour - currentHour)];
+//        }
+//        else {
+//            [comps setHour: (currentHour - maxHour)];
+//        }
+//        NSDate *maxDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+//        self.datePicker.minimumDate = minDate;
+//        self.datePicker.maximumDate = maxDate;
+        
+        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSCalendarIdentifierGregorian];
+        NSDateComponents *components = [gregorian components: NSCalendarUnitHour fromDate: currentDate];
+        if (startHour < currentHour) {
+            [components setHour:currentHour];
+        }
+        else {
+            [components setHour: startHour];
+        }
+        [components setMinute: 0];
+        [components setSecond: 0];
+        NSDate *startDate = [gregorian dateFromComponents: components];
+        
+        
+        [components setHour: endHour];
+        [components setMinute: 0];
+        [components setSecond: 0];
+        NSDate *endDate = [gregorian dateFromComponents: components];
+        NSLog(@"s:%@ e:%@",startDate,endDate);
+        [self.datePicker setDatePickerMode:UIDatePickerModeTime];
+        [self.datePicker setMinimumDate:startDate];
+        [self.datePicker setMaximumDate:endDate];
+        [self.datePicker setDate:startDate animated:YES];
+        [self.datePicker reloadInputViews];
     }
 }
 

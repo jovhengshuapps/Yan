@@ -110,9 +110,8 @@
     NSLog(@"completion received notification:%@",userInfo);
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle].infoDictionary objectForKey:@"UIMainStoryboardFile"] bundle:[NSBundle mainBundle]];
     ReminderNotificationViewController *reminder = [storyboard instantiateViewControllerWithIdentifier:@"reminderNotification"];
-    reminder.restaurantName = @"Restaurant Name";
-    reminder.reservationTimeFrom = @"TimeFrom";
-    reminder.reservationTimeTo = @"TimeTo";
+    reminder.restaurantName = userInfo[@"name"];
+    reminder.reservationTimeFrom = userInfo[@"reservation-time"];
     [self.window addSubview:reminder.view];
     
 }

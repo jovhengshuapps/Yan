@@ -45,7 +45,6 @@
     [self callGETAPI:API_RESERVATION_CHECKTIME(self.restaurantDetails.identifier) withParameters:@{} completionNotification:@"checkReservationTimes"];
     
 
-    self.title = self.restaurantDetails.name;
     
 }
 
@@ -54,6 +53,7 @@
     [super viewWillAppear:animated];
     
     [self showTitleBar:@"RESERVATION"];
+    self.title = self.restaurantDetails.name;
 }
 
 

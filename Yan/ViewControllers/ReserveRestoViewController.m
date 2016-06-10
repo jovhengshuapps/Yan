@@ -63,7 +63,7 @@
 }
 
 - (void) checkReservationTimes:(NSNotification*)notification {
-    NSLog(@"Available Times:%@",notification.object);
+//    NSLog(@"Available Times:%@",notification.object);
     NSArray *response = notification.object;
     self.arrayAvailableDays = [NSMutableArray array];
     self.arrayAvailableTimes = [NSMutableArray array];
@@ -89,7 +89,7 @@
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"MM/dd/yyyy"];
             NSDate *reserveDate = [dateFormatter dateFromString:[_textFieldDate.text componentsSeparatedByString:@" - "][1]];
-            NSLog(@"reserve:%@",[dateFormatter stringFromDate:reserveDate]);
+//            NSLog(@"reserve:%@",[dateFormatter stringFromDate:reserveDate]);
             
             NSDictionary *parameters = @{@"reserve_date":[dateFormatter stringFromDate:reserveDate],
                                          @"reserve_time":_textFieldTime.text,
@@ -154,7 +154,7 @@
         destNav.datePickerMode = UIDatePickerModeTime;
         destNav.todayValidation = YES;
         NSString *daySelected = [self.textFieldDate.text componentsSeparatedByString:@","][0];
-        NSLog(@"selected:%@",daySelected);
+//        NSLog(@"selected:%@",daySelected);
         for (NSDictionary *dateAndTimes in self.arrayAvailableTimes) {
             if ([daySelected isEqualToString:dateAndTimes[@"day"]]) {
                 destNav.dateRange = @{@"from":dateAndTimes[@"from"], @"to":dateAndTimes[@"to"]};

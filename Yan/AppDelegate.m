@@ -92,7 +92,7 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    NSLog(@"success notification:%@",deviceToken);
+//    NSLog(@"success notification:%@",deviceToken);
     NSMutableString *string = [NSMutableString stringWithFormat:@"%@",deviceToken];
     [string replaceOccurrencesOfString:@"<" withString:@"" options:NSLiteralSearch range:NSMakeRange(0, string.length)];
     [string replaceOccurrencesOfString:@">" withString:@"" options:NSLiteralSearch range:NSMakeRange(0, string.length)];
@@ -102,12 +102,12 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
-    NSLog(@"received notification:%@",userInfo);
+//    NSLog(@"received notification:%@",userInfo);
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
-    NSLog(@"completion received notification:%@",userInfo);
+//    NSLog(@"completion received notification:%@",userInfo);
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle].infoDictionary objectForKey:@"UIMainStoryboardFile"] bundle:[NSBundle mainBundle]];
     ReminderNotificationViewController *reminder = [storyboard instantiateViewControllerWithIdentifier:@"reminderNotification"];
     reminder.restaurantName = userInfo[@"name"];
@@ -117,7 +117,7 @@
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    NSLog(@"error:%@",error.description);
+//    NSLog(@"error:%@",error.description);
 }
 
 

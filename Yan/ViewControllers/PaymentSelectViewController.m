@@ -358,7 +358,7 @@
     if ([item rangeOfString:@"|"].location != NSNotFound) {
         NSString *month = [item substringToIndex:[item rangeOfString:@"|"].location];
         NSString *year = [item substringFromIndex:[item rangeOfString:@"|"].location+1];
-        NSLog(@"[%@]m:%@ y:%@",item,month,year);
+//        NSLog(@"[%@]m:%@ y:%@",item,month,year);
         CardDateTableViewCell *cell = [_mainTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:1]];
         cell.labelMonth.text = month;
         cell.labelYear.text = year;

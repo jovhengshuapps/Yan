@@ -84,11 +84,11 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if (_components > 1) {
         NSString *key = [NSString stringWithFormat:@"%li",(long)component];
-        NSLog(@"selected:%@",(NSString*)_dictionaryChoices[key][row]);
+//        NSLog(@"selected:%@",(NSString*)_dictionaryChoices[key][row]);
         
     }
     else {
-        NSLog(@"selected:%@",_choices[row]);
+//        NSLog(@"selected:%@",_choices[row]);
         
     }
 }

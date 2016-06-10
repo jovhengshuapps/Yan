@@ -61,7 +61,7 @@
 }
 
 - (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSLog(@"Clicked index:%li",(long)buttonIndex);
+//    NSLog(@"Clicked index:%li",(long)buttonIndex);
 }
 
 - (IBAction)showRegister:(id)sender {

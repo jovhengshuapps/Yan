@@ -32,11 +32,23 @@
     else {
         self.itemImage.image = [UIImage imageNamed:@"yan-red-gold"];
         
+        CABasicAnimation *theAnimation;
+        
+        theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
+        theAnimation.duration=1.0;
+        theAnimation.repeatCount=HUGE_VALF;
+        theAnimation.autoreverses=YES;
+        theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
+        theAnimation.toValue=[NSNumber numberWithFloat:0.0];
+        
+        [self.itemImage.layer addAnimation:theAnimation forKey:@"animateOpacity"];
+        
         if (_item.image.length) {
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateImage:) name:@"MenuImageFromURL" object:nil];
-            
-            [self getImageFromURL:_item.image updateImageView:self.itemImage completionNotification:@"MenuImageFromURL"];
-            
+//            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateImage:) name:@"MenuImageFromURL" object:nil];
+//            
+//            [self getImageFromURL:_item.image updateImageView:self.itemImage completionNotification:@"MenuImageFromURL"];
+
+            [self getImageFromURL:_item.image];
         }
         
 
@@ -59,6 +71,45 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void) getImageFromURL:(NSString*)urlPath {
+    [self getImageFromURL:urlPath completionHandler:^(NSURLResponse * _Nullable response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if(!error) {
+            UIImage *image = (UIImage*)responseObject;
+            
+            
+            NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+            
+            NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MenuItem"];
+            [request setReturnsObjectsAsFaults:NO];
+            NSError *error = nil;
+            
+            NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+            
+            id menuItem = nil;
+            
+            for (MenuItem *itemR in result) {
+                if ([itemR.identifier integerValue] == [_item.identifier integerValue]) {
+                    menuItem = itemR;
+                    break;
+                }
+            }
+            
+            ((MenuItem*)menuItem).imageData = UIImagePNGRepresentation(image);
+            
+            NSError *saveError = nil;
+            
+            if([context save:&saveError]) {
+                
+                self.itemImage.image = image;
+                [self.itemImage.layer removeAllAnimations];
+                
+            }
+        }
+        
+    } andProgress:^(NSInteger expectedBytesToReceive, NSInteger receivedBytes) {
+        
+    }];
+}
 
 - (void) updateImage:(NSNotification*)notification {
     self.itemImage.image = notification.object;

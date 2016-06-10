@@ -65,11 +65,11 @@
          fromViewController:self
          handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
              if (error) {
-                 NSLog(@"Process error");
+//                 NSLog(@"Process error");
              } else if (result.isCancelled) {
-                 NSLog(@"Cancelled");
+//                 NSLog(@"Cancelled");
              } else {
-                 NSLog(@"Logged in Facebook");
+//                 NSLog(@"Logged in Facebook");
                  [self getYanAccountFromFacebook];
              }
          }];
@@ -131,7 +131,7 @@
     _socialAccount[@"birthday"] = @"01/01/1970";
     _socialAccount[@"password"] = [self passwordForName:user.profile.name email:user.profile.email birthday:@"01/01/1970" gender:@"unknown"];
     
-    NSLog(@"account:%@", _socialAccount);
+//    NSLog(@"account:%@", _socialAccount);
     [self showTitleBar:@"Logging in to Yan!"];
     self.view.userInteractionEnabled = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessful:) name:@"socialLoginObserver" object:nil];

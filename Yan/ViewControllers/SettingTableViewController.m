@@ -321,10 +321,10 @@
     
     [manager GET:method parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
-        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
+//        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NETWORK_INDICATOR(NO)
-        NSLog(@"response:%@",responseObject);
+//        NSLog(@"response:%@",responseObject);
         if ([responseObject isKindOfClass:[NSArray class]]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
         }
@@ -339,7 +339,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
+//        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
         NETWORK_INDICATOR(NO)
         [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:error];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
@@ -366,7 +366,7 @@
 
 - (void) logoutCurrentAccount:(NSNotification*)notification {
     if ([[notification.object objectForKey:@"success"] boolValue] == YES) {
-        NSLog(@"response:%@",notification.object);
+//        NSLog(@"response:%@",notification.object);
         NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
         NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Account"];
         

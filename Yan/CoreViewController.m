@@ -192,6 +192,34 @@
     [self.view addSubview:view];
 }
 
+
+- (void)getImageFromURL:(NSString*)urlPath  completionHandler:(void (^)(NSURLResponse *response, id responseObject, NSError *error))completionHandler andProgress:(void (^)(NSInteger expectedBytesToReceive, NSInteger receivedBytes))progress{
+    NETWORK_INDICATOR(YES)
+    NSURL *baseURL = [NSURL URLWithString:BASE_URL];
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
+    manager.responseSerializer = [AFImageResponseSerializer serializer];
+    
+    NSURLSessionDataTask *task = [manager dataTaskWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlPath relativeToURL:baseURL]] completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
+        NETWORK_INDICATOR(NO)
+        completionHandler(response, responseObject, error);
+    }];
+    
+    [manager setDataTaskDidReceiveDataBlock:^(NSURLSession * _Nonnull session, NSURLSessionDataTask * _Nonnull dataTask, NSData * _Nonnull data) {
+        progress(dataTask.countOfBytesExpectedToReceive,dataTask.countOfBytesReceived);
+    }];
+    
+    
+//    [manager setDataTaskDidReceiveDataBlock:^(NSURLSession * _Nonnull session, NSURLSessionDataTask * _Nonnull dataTask, NSData * _Nonnull data) {
+//        
+//        NSLog(@"data:%@",data);
+//    }];
+
+    [task resume];
+    
+    
+}
+
+
 - (void)getImageFromURL:(NSString*)urlPath updateImageView:(UIImageView*)imageView completionNotification:(NSString*)notificationName {
     NETWORK_INDICATOR(YES)
     NSURL *baseURL = [NSURL URLWithString:BASE_API_URL];
@@ -216,7 +244,7 @@
     
     [manager GET:urlPath parameters:nil progress:^(NSProgress * _Nonnull downloadProgress) {
         
-        NSLog(@"progress:%f",[downloadProgress fractionCompleted]);
+//        NSLog(@"progress:%f",[downloadProgress fractionCompleted]);
         
 //        UIProgressView *progressView = nil;
 //        if (![imageView viewWithTag:12345]) {
@@ -232,12 +260,12 @@
 //        [progressView setProgress:[downloadProgress fractionCompleted] animated:YES];
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NETWORK_INDICATOR(NO)
-        NSLog(@"response:%@",responseObject);
+//        NSLog(@"response:%@",responseObject);
         [[imageView viewWithTag:12345] removeFromSuperview];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
+//        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
         NETWORK_INDICATOR(NO)
         [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:error];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
@@ -267,13 +295,13 @@
     
     [manager POST:method parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
-        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
+//        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NETWORK_INDICATOR(NO)
         completion(responseObject);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
+//        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
         NETWORK_INDICATOR(NO)
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -322,14 +350,14 @@
     
     NETWORK_INDICATOR(YES)
     
-    NSLog(@"parameters:%@",parameters);
+//    NSLog(@"parameters:%@",parameters);
     [manager POST:method parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
-        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
+//        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NETWORK_INDICATOR(NO)
-        NSLog(@"response:%@",responseObject);
+//        NSLog(@"response:%@",responseObject);
         if ([responseObject isKindOfClass:[NSArray class]]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
         }
@@ -344,7 +372,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
+//        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
         NETWORK_INDICATOR(NO)
         [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:error];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
@@ -365,10 +393,10 @@
     
     [manager GET:method parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
-        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
+//        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NETWORK_INDICATOR(NO)
-        NSLog(@"response:%@",responseObject);
+//        NSLog(@"response:%@",responseObject);
         if ([responseObject isKindOfClass:[NSArray class]]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
         }
@@ -382,7 +410,7 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
+//        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
         NETWORK_INDICATOR(NO)
         [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:error];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
@@ -407,7 +435,7 @@
     account.fullname = isNIL(fullname);
     account.token = isNIL(token);
     account.identifier = [NSString stringWithFormat:@"%@",identifier];
-    NSLog(@"identifier USER:%@",identifier);
+//    NSLog(@"identifier USER:%@",identifier);
     NSError *error = nil;
     if ([context save:&error]) {
         return YES;

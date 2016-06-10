@@ -89,7 +89,7 @@
         [components setMinute: 0];
         [components setSecond: 0];
         NSDate *endDate = [gregorian dateFromComponents: components];
-        NSLog(@"s:%@ e:%@",startDate,endDate);
+//        NSLog(@"s:%@ e:%@",startDate,endDate);
         [self.datePicker setDatePickerMode:UIDatePickerModeTime];
         [self.datePicker setMinimumDate:startDate];
         [self.datePicker setMaximumDate:endDate];

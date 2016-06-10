@@ -116,18 +116,43 @@ typedef enum {
     id response = notification.object;
     if ([response isKindOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
         
-        [self showTitleBar:@"AFFILIATED RESTAURANT"];
+        [self showTitleBar:@" AFFILIATED RESTAURANT"];
         return;
     }
-    NSLog(@"response:%@",response);
+//    NSLog(@"response:%@",response);
 //    _dataListAll = [NSMutableArray arrayWithArray:((NSArray*) response)];
 
     _dataListAll = [NSMutableArray new];
     
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Restaurant"];
+    [request setReturnsObjectsAsFaults:NO];
+    NSError *error = nil;
+    
+    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    
+    
     for (NSDictionary *restaurantDetails in ((NSArray*) response)) {
-        NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
         
-        Restaurant *restaurant = [[Restaurant alloc] initWithEntity:[NSEntityDescription entityForName:@"Restaurant" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
+        
+        BOOL isNew = YES;
+        Restaurant *restaurant = nil;
+        
+        for (Restaurant *resto in result) {
+            if ([resto.identifier isEqualToString:[NSString stringWithFormat:@"%@",isNIL(restaurantDetails[@"id"])]]) {
+                isNew = NO;
+                restaurant = (Restaurant*)resto;
+                break;
+            }
+        }
+        
+        if (isNew) {
+            restaurant = [[Restaurant alloc] initWithEntity:[NSEntityDescription entityForName:@"Restaurant" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
+        }
+        
+        
+//        Restaurant *restaurant = [[Restaurant alloc] initWithEntity:[NSEntityDescription entityForName:@"Restaurant" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
         
         restaurant.contact = isNIL(restaurantDetails[@"contact"]);
         restaurant.identifier = [NSString stringWithFormat:@"%@",isNIL(restaurantDetails[@"id"])];
@@ -239,6 +264,15 @@ typedef enum {
     return result;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
+    if ([cell.contentView viewWithTag:45]) {
+        return 0;
+    }
+    return 5;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"CELL";
     
@@ -249,32 +283,81 @@ typedef enum {
         cell.textLabel.font = [UIFont fontWithName:@"LucidaGrande" size:16.0f];
         cell.detailTextLabel.font = [UIFont fontWithName:@"LucidaGrande" size:12.0f];
         cell.detailTextLabel.textColor = UIColorFromRGB(0x959595);
+        
+        UIImageView *imgView=[[UIImageView alloc] initWithFrame:CGRectMake(20, 0, 40, 40)];
+        imgView.image = [UIImage imageNamed:@"yan-new-logo"];
+        imgView.backgroundColor=[UIColor clearColor];
+        imgView.tag = 45;
+        imgView.contentMode = UIViewContentModeScaleAspectFit;
+        [cell.contentView addSubview:imgView];
+        
     }
     
     NSString *name = @"";
     NSString *details = @"";
+    NSData *imageData = nil;
     
     if (_tabBarOption == AffiliatedRestoOptionAll) {
         name = ((Restaurant*)_dataListAll[indexPath.row]).name;
         details = [NSString stringWithFormat:@"%@ | %@",((Restaurant*)_dataListAll[indexPath.row]).location,((Restaurant*)_dataListAll[indexPath.row]).website];
+        if (((Restaurant*)_dataListAll[indexPath.row]).imageData) {
+            imageData = ((Restaurant*)_dataListAll[indexPath.row]).imageData;
+        }
+        else {
+            if (((Restaurant*)_dataListAll[indexPath.row]).imageURL.length) {
+                UIProgressView *progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+                
+                progressView.frame = CGRectMake(0.0f, 0.0f, cell.contentView.frame.size.width, 5.0f);
+                [progressView setProgress:0.0f];
+                progressView.tag = 12345;
+                
+                CABasicAnimation *theAnimation;
+                
+                theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
+                theAnimation.duration=1.0;
+                theAnimation.repeatCount=HUGE_VALF;
+                theAnimation.autoreverses=YES;
+                theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
+                theAnimation.toValue=[NSNumber numberWithFloat:0.0];
+                
+                [((UIImageView*)[cell.contentView viewWithTag:45]).layer addAnimation:theAnimation forKey:@"animateOpacity"];
+                
+                [self getImageFromURL:((Restaurant*)_dataListAll[indexPath.row]).imageURL onIndex:indexPath.row];
+            }
+        }
     }
     else if (_tabBarOption == AffiliatedRestoOptionRecent) {
         name = ((Restaurant*)_dataListRecent[indexPath.row]).name;
         details = [NSString stringWithFormat:@"%@ | %@",((Restaurant*)_dataListRecent[indexPath.row]).location,((Restaurant*)_dataListRecent[indexPath.row]).website];
+        if (((Restaurant*)_dataListRecent[indexPath.row]).imageData) {
+            imageData = ((Restaurant*)_dataListRecent[indexPath.row]).imageData;
+        }
         
     }
     else if (_tabBarOption == AffiliatedRestoOptionNearby) {
         name = ((Restaurant*)_dataListNearby[indexPath.row]).name;
         details = [NSString stringWithFormat:@"%@ | %@",((Restaurant*)_dataListNearby[indexPath.row]).location,((Restaurant*)_dataListNearby[indexPath.row]).website];
+        if (((Restaurant*)_dataListNearby[indexPath.row]).imageData) {
+            imageData = ((Restaurant*)_dataListNearby[indexPath.row]).imageData;
+        }
         
     }
     else if (_tabBarOption == AffiliatedRestoOptionFavorites) {
         name = ((Restaurant*)_dataListFavorites[indexPath.row]).name;
         details = [NSString stringWithFormat:@"%@ | %@",((Restaurant*)_dataListFavorites[indexPath.row]).location,((Restaurant*)_dataListFavorites[indexPath.row]).website];
+        if (((Restaurant*)_dataListFavorites[indexPath.row]).imageData) {
+            imageData = ((Restaurant*)_dataListFavorites[indexPath.row]).imageData;
+        }
         
     }
     cell.textLabel.text = name;
     cell.detailTextLabel.text = details;
+    
+    if (imageData) {
+        ((UIImageView*)[cell.contentView viewWithTag:45]).image = [UIImage imageWithData:imageData];
+//        cell.imageView.image = [UIImage imageWithData:imageData];
+    }
+    
 //    cell.textLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:name attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), 24.0f)];
 //    cell.detailTextLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:details attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), 24.0f)];
     
@@ -307,7 +390,69 @@ typedef enum {
     
 }
 
+- (void) getImageFromURL:(NSString*)urlPath onIndex:(NSInteger)index {
+    [self getImageFromURL:urlPath completionHandler:^(NSURLResponse * _Nullable response, id  _Nullable responseObject, NSError * _Nullable error) {
+        if(!error) {
+            UIImage *image = (UIImage*)responseObject;
+            
+            
+            NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+            
+            NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Restaurant"];
+            [request setReturnsObjectsAsFaults:NO];
+            NSError *error = nil;
+            
+            NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+            
+            id restaurant = nil;
+            
+            for (Restaurant *resto in result) {
+                if ([resto.identifier isEqualToString:((Restaurant*)_dataListAll[index]).identifier]) {
+                    restaurant = resto;
+                    break;
+                }
+            }
+            
+            ((Restaurant*)restaurant).imageData = UIImageJPEGRepresentation(image, 100.0f);
+            
+            NSError *saveError = nil;
+            
+            if([context save:&saveError]) {
+                
+                UITableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+                
+//                cell.imageView.image = image;
+//                [cell.imageView.layer removeAllAnimations];
+                
+                 ((UIImageView*)[cell.contentView viewWithTag:45]).image = image;
+                 [((UIImageView*)[cell.contentView viewWithTag:45]).layer removeAllAnimations];
+                 [((UIProgressView*)[cell.contentView viewWithTag:12345]) removeFromSuperview];
+                
+                
+            }
+        }
+    } andProgress:^(NSInteger expectedBytesToReceive, NSInteger receivedBytes) {
+        UITableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+        
+        [((UIProgressView*)[cell.contentView viewWithTag:12345]) setProgress:((CGFloat)receivedBytes / (CGFloat)expectedBytesToReceive) animated:YES];
+        
+    }];
+}
+
 - (IBAction)reloadTableWithButton:(id)sender {
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Restaurant"];
+    [request setReturnsObjectsAsFaults:NO];
+    NSError *error = nil;
+    
+    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    _dataListAll = nil;
+    _dataListAll = [NSMutableArray array];
+    for (Restaurant *restaurant in result) {
+        [_dataListAll addObject:restaurant];
+    }
+    
     if (sender) {
         if ([sender tag] == AffiliatedRestoOptionNearby) {
             _tabBarOption = AffiliatedRestoOptionNearby;
@@ -407,7 +552,7 @@ typedef enum {
          if (!(error))
          {
              CLPlacemark *placemark = [placemarks objectAtIndex:0];
-             NSLog(@"\nCurrent Location Detected\n");
+//             NSLog(@"\nCurrent Location Detected\n");
 //             NSLog(@"placemark %@",placemark);
 //             NSString *locatedAt = [[placemark.addressDictionary valueForKey:@"FormattedAddressLines"] componentsJoinedByString:@", "];
 //             NSString *Address = [[NSString alloc]initWithString:locatedAt];
@@ -443,7 +588,7 @@ typedef enum {
                  }
              }
              
-             NSLog(@"nearby:%@",self.dataListNearby);
+//             NSLog(@"nearby:%@",self.dataListNearby);
              
              [self.mainTableView reloadData];
              
@@ -451,8 +596,8 @@ typedef enum {
          }
          else
          {
-             NSLog(@"Geocode failed with error %@", error);
-             NSLog(@"\nCurrent Location Not Detected\n");
+//             NSLog(@"Geocode failed with error %@", error);
+//             NSLog(@"\nCurrent Location Not Detected\n");
              //return;
          }
          /*---- For more results

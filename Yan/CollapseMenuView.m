@@ -110,7 +110,7 @@
 
 - (void) showMenu {
     
-    NSLog(@"showMenu[%lu / %lu]",(unsigned long)_collapsedSectionRows.count,(unsigned long)_expandedSectionRows.count);
+//    NSLog(@"showMenu[%lu / %lu]",(unsigned long)_collapsedSectionRows.count,(unsigned long)_expandedSectionRows.count);
     
     [UIView animateWithDuration:0.2f animations:^{
         
@@ -131,7 +131,7 @@
         
         
     } completion:^(BOOL finished) {
-        NSLog(@"completed SHOW");
+//        NSLog(@"completed SHOW");
         [self.delegate collapsedMenuShown:YES];
         [_topBarButton addTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
         [_menuTableView reloadData];
@@ -141,7 +141,7 @@
 
 - (void) hideMenu {
     
-    NSLog(@"hideMenu[%lu / %lu]",(unsigned long)_collapsedSectionRows.count,(unsigned long)_expandedSectionRows.count);
+//    NSLog(@"hideMenu[%lu / %lu]",(unsigned long)_collapsedSectionRows.count,(unsigned long)_expandedSectionRows.count);
     
     [UIView animateWithDuration:0.2f animations:^{
         if ([_expandedSectionRows count] == 0) {
@@ -181,7 +181,7 @@
     } completion:^(BOOL finished) {
         
         
-        NSLog(@"completed HIDE");
+//        NSLog(@"completed HIDE");
         if ([_expandedSectionRows count] == 0) {
             [_topBarButton addTarget:self action:@selector(showMenu) forControlEvents:UIControlEventTouchUpInside];
         }

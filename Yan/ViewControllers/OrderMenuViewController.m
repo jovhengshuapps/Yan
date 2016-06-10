@@ -65,7 +65,7 @@ BOOL hackFromLoad = NO;
         
         
         for (NSDictionary *bundle in storedOrders) {
-            NSLog(@"bundle:%@",bundle);
+//            NSLog(@"bundle:%@",bundle);
             self.totalOrderPrice += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
         }
 

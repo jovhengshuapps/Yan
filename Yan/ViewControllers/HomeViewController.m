@@ -173,11 +173,11 @@
          fromViewController:self
          handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
              if (error) {
-                 NSLog(@"Process error");
+//                 NSLog(@"Process error");
              } else if (result.isCancelled) {
-                 NSLog(@"Cancelled");
+//                 NSLog(@"Cancelled");
              } else {
-                 NSLog(@"Logged in Facebook");
+//                 NSLog(@"Logged in Facebook");
                  [self getYanAccountFromFacebook];
              }
          }];

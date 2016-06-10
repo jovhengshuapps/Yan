@@ -28,6 +28,8 @@
 
 - (void)getImageFromURL:( nullable NSString*)urlPath updateImageView:(nullable UIImageView*)imageView completionNotification:( nullable NSString*)notificationName;
 
+- (void)getImageFromURL:( nullable NSString*)urlPath  completionHandler:(nullable void (^)(NSURLResponse * _Nullable response, id _Nullable responseObject,  NSError * _Nullable error))completionHandler andProgress:(nullable void (^)(NSInteger expectedBytesToReceive, NSInteger receivedBytes))progress;
+
 - ( nullable NSData*)encodeData:( nullable id)object withKey:( nullable NSString*)key;
 
 - ( nullable id)decodeData:( nullable NSData*)data forKey:( nullable NSString*)key;

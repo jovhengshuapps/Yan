@@ -117,7 +117,7 @@
 }
 
 - (void)addThisMenu:(MenuItem *)menu {
-    NSLog(@"This menu should be added :%@", menu);
+//    NSLog(@"This menu should be added :%@", menu);
     [self.delegate addThisMenuToOrder:menu];
 }
 
@@ -135,7 +135,7 @@
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
     //add to order list
     
-    NSLog(@"accessory:[%li / %li]",(long)indexPath.section, (long)indexPath.row);
+//    NSLog(@"accessory:[%li / %li]",(long)indexPath.section, (long)indexPath.row);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

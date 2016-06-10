@@ -232,7 +232,7 @@
 }
 
 - (void)popoverControllerDidDismissPopover:(FPPopoverController *)popoverController {
-    NSLog(@"dismiss");
+//    NSLog(@"dismiss");
 }
 
 /*

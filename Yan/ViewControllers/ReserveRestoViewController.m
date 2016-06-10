@@ -189,15 +189,19 @@
 }
 
 - (IBAction)selectDate:(id)sender {
+    [self.textFieldDate resignFirstResponder];
+    [self.textFieldTime resignFirstResponder];
+    [self.textFieldTableNumber resignFirstResponder];
+    [self.textFieldNumberPerson resignFirstResponder];
+    
     DayTableViewController * dayPicker = (DayTableViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"dayPicker"];
     dayPicker.delegatePicker = self;
     dayPicker.availableDays = self.arrayAvailableDays;
     
     self.popover = [[FPPopoverController alloc] initWithViewController:dayPicker];
     
-    self.popover.tint = FPPopoverDefaultTint;
-    self.popover.border = NO;
-//    self.popover.title = @"This Week's Schedule";
+    self.popover.tint = FPPopoverRedTint;
+    self.popover.border = YES;
     self.popover.delegate = self;
     self.popover.contentSize = CGSizeMake(300, 500);
     self.popover.arrowDirection = FPPopoverArrowDirectionUp;

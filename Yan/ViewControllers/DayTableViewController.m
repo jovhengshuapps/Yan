@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"Available Days";
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -26,62 +28,126 @@
     self.dayList = [NSMutableArray array];
     
 //    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDate *currentDate = [NSDate date];
-    NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday fromDate:currentDate]; // Get necessary date components
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MMM dd, yyyy"];
-    
+//    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+//    NSDate *currentDate = [NSDate date];
+//    NSDateComponents* components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday fromDate:currentDate]; // Get necessary date components
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"MMM dd, yyyy"];
+//    
 //    NSLog(@"%li / %li / %li / %li",(long)[components month],(long)[components day],(long)[components year],(long)[components weekday]);
+//    
+//    for (NSInteger day = 1; day <= 7; day++) {
+//        components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday fromDate:currentDate];
+//        if (day == [components weekday]) {
+//            BOOL available = NO;
+//            for (NSString *allowedDays in self.availableDays) {
+//                
+//                if (day == [self weekdayIntegerFromName:allowedDays]) {
+//                    available = YES;
+//                }
+//            }
+//            
+//            [self.dayList addObject:@{@"day":[self weekdayNameFromInteger:day],@"date":[NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:currentDate]], @"available":[NSNumber numberWithBool:available]}];
+//        }
+//        else if (day > [components weekday]) {
+//            NSInteger difference = day - [components weekday];
+//            
+//            NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
+//            dayComponent.day = difference;
+//            
+//            NSCalendar *theCalendar = [NSCalendar currentCalendar];
+//            NSDate *nextDate = [theCalendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
+//            
+//            BOOL available = NO;
+//            for (NSString *allowedDays in self.availableDays) {
+//                
+//                if (day == [self weekdayIntegerFromName:allowedDays]) {
+//                    available = YES;
+//                }
+//            }
+//            
+//            [self.dayList addObject:@{@"day":[self weekdayNameFromInteger:day],@"date":[NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:nextDate]], @"available":[NSNumber numberWithBool:available]}];
+//        }
+//        else {
+//            NSInteger difference = day - [components weekday];
+//            
+//            NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
+//            dayComponent.day = difference;
+//            
+//            NSCalendar *theCalendar = [NSCalendar currentCalendar];
+//            NSDate *prevDate = [theCalendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
+//            
+//            [self.dayList addObject:@{@"day":[self weekdayNameFromInteger:day],@"date":[NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:prevDate]], @"available":@0}];
+//        }
+//    }
     
-    for (NSInteger day = 1; day <= 7; day++) {
-//        [components setDay:-([components weekday] - day)];
-//        NSDate *dateOnDay = [calendar dateByAddingComponents:components toDate:currentDate options:0];
-        components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay|NSCalendarUnitWeekday fromDate:currentDate];
-        if (day == [components weekday]) {
-            BOOL available = NO;
-            for (NSString *allowedDays in self.availableDays) {
-                
-                if (day == [self weekdayIntegerFromName:allowedDays]) {
-                    available = YES;
-                }
+    
+    NSDate *currentDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"EEEE|MMM dd, yyyy"];
+    for (NSInteger day = 0; day < 7; day++) {
+        NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
+        dayComponent.day = day;
+        
+        NSCalendar *theCalendar = [NSCalendar currentCalendar];
+        NSDate *nextDate = [theCalendar dateByAddingComponents:dayComponent toDate:currentDate options:0];
+
+//        NSLog(@"### DATE:%@",[dateFormatter stringFromDate:nextDate]);
+        
+        BOOL available = NO;
+        NSString *isDayAvailable = [[dateFormatter stringFromDate:nextDate] componentsSeparatedByString:@"|"][0];
+        for (NSString *allowedDay in self.availableDays) {
+            if ([isDayAvailable isEqualToString:allowedDay]) {
+                available = YES;
+                break;
             }
-            
-            [self.dayList addObject:@{@"day":[self weekdayNameFromInteger:day],@"date":[NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:currentDate]], @"available":[NSNumber numberWithBool:available]}];
         }
-        else if (day > [components weekday]) {
-            NSInteger difference = day - [components weekday];
-            
-            NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
-            dayComponent.day = difference;
-            
-            NSCalendar *theCalendar = [NSCalendar currentCalendar];
-            NSDate *nextDate = [theCalendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
-            
-            BOOL available = NO;
-            for (NSString *allowedDays in self.availableDays) {
-                
-                if (day == [self weekdayIntegerFromName:allowedDays]) {
-                    available = YES;
-                }
-            }
-            
-            [self.dayList addObject:@{@"day":[self weekdayNameFromInteger:day],@"date":[NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:nextDate]], @"available":[NSNumber numberWithBool:available]}];
-        }
-        else {
-            NSInteger difference = day - [components weekday];
-            
-            NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
-            dayComponent.day = difference;
-            
-            NSCalendar *theCalendar = [NSCalendar currentCalendar];
-            NSDate *prevDate = [theCalendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
-            
-            [self.dayList addObject:@{@"day":[self weekdayNameFromInteger:day],@"date":[NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:prevDate]], @"available":@0}];
-        }
+        
+        [self.dayList addObject:@{@"day":isDayAvailable,@"date":[NSString stringWithFormat:@"%@",[[dateFormatter stringFromDate:nextDate] componentsSeparatedByString:@"|"][1]], @"available":[NSNumber numberWithBool:available]}];
+        
+        
+//        if (day == [components weekday]) {
+//            BOOL available = NO;
+//            for (NSString *allowedDays in self.availableDays) {
+//                
+//                if (day == [self weekdayIntegerFromName:allowedDays]) {
+//                    available = YES;
+//                }
+//            }
+//            
+//            [self.dayList addObject:@{@"day":[self weekdayNameFromInteger:day],@"date":[NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:currentDate]], @"available":[NSNumber numberWithBool:available]}];
+//        }
+//        else if (day > [components weekday]) {
+//            NSInteger difference = day - [components weekday];
+//            
+//            NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
+//            dayComponent.day = difference;
+//            
+//            NSCalendar *theCalendar = [NSCalendar currentCalendar];
+//            NSDate *nextDate = [theCalendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
+//
+//            BOOL available = NO;
+//            for (NSString *allowedDays in self.availableDays) {
+//                
+//                if (day == [self weekdayIntegerFromName:allowedDays]) {
+//                    available = YES;
+//                }
+//            }
+//            
+//            [self.dayList addObject:@{@"day":[self weekdayNameFromInteger:day],@"date":[NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:nextDate]], @"available":[NSNumber numberWithBool:available]}];
+//        }
+//        else {
+//            NSInteger difference = day - [components weekday];
+//            
+//            NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
+//            dayComponent.day = difference;
+//            
+//            NSCalendar *theCalendar = [NSCalendar currentCalendar];
+//            NSDate *prevDate = [theCalendar dateByAddingComponents:dayComponent toDate:[NSDate date] options:0];
+//            
+//            [self.dayList addObject:@{@"day":[self weekdayNameFromInteger:day],@"date":[NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:prevDate]], @"available":@0}];
+//        }
     }
-    
-    
     
 }
 

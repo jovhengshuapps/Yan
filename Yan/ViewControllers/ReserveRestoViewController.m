@@ -85,7 +85,13 @@
             
             Account *account = (Account*)[self userLoggedIn];
             //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completeReservation:) name:@"reservationRequest" object:nil];
-            NSDictionary *parameters = @{@"reserve_date":_textFieldDate.text,
+            
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+            NSDate *reserveDate = [dateFormatter dateFromString:[_textFieldDate.text componentsSeparatedByString:@" - "][1]];
+            NSLog(@"reserve:%@",[dateFormatter stringFromDate:reserveDate]);
+            
+            NSDictionary *parameters = @{@"reserve_date":[dateFormatter stringFromDate:reserveDate],
                                          @"reserve_time":_textFieldTime.text,
                                          @"table":_textFieldTableNumber.text,
                                          @"persons":_textFieldNumberPerson.text
@@ -211,7 +217,7 @@
 }
 
 - (void)selectedDay:(NSDictionary *)day {
-    self.textFieldDate.text = [NSString stringWithFormat:@"%@, %@",day[@"day"],day[@"date"]];
+    self.textFieldDate.text = [NSString stringWithFormat:@"%@ - %@",day[@"day"],day[@"date"]];
     self.textFieldTime.text = @"";
     [self.popover dismissPopoverAnimated:YES];
 }

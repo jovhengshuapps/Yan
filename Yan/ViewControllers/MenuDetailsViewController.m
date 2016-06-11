@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *itemImage;
 
 @property (strong, nonatomic) NSMutableArray *arrayOrders;
+@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 
 @end
 
@@ -28,10 +29,12 @@
     if (imageData) {
         
         self.itemImage.image = [UIImage imageWithData:imageData];
+//        self.progressView.hidden = YES;
     }
     else {
         self.itemImage.image = [UIImage imageNamed:@"yan-red-gold"];
-        
+//        self.progressView.hidden = NO;
+//        [self.progressView setProgress:0.0f];
         CABasicAnimation *theAnimation;
         
         theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
@@ -108,6 +111,7 @@
         
     } andProgress:^(NSInteger expectedBytesToReceive, NSInteger receivedBytes) {
         
+//        [self.progressView setProgress:(CGFloat)receivedBytes / (CGFloat)expectedBytesToReceive];
     }];
 }
 

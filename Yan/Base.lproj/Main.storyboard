@@ -1570,6 +1570,13 @@ You may now start using the app for your favourite restaurant.</string>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="yan-red-gold" translatesAutoresizingMaskIntoConstraints="NO" id="Ufi-wl-mh7">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="548"/>
                             </imageView>
+                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Q3z-CI-yBu">
+                                <rect key="frame" x="0.0" y="-2" width="150" height="2"/>
+                                <color key="progressTintColor" red="0.40000000000000002" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="125" y="363" width="150" height="2"/>
+                                </variation>
+                            </progressView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nzj-CW-O0v">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1599,6 +1606,9 @@ You may now start using the app for your favourite restaurant.</string>
                                         <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="18"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="55" y="132" width="291" height="42"/>
+                                        </variation>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcD-DC-8Kh">
                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -1613,7 +1623,8 @@ You may now start using the app for your favourite restaurant.</string>
                                                 <exclude reference="5o4-pZ-E5z"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="55" y="182" width="291" height="105"/>
                                             <mask key="constraints">
                                                 <include reference="5o4-pZ-E5z"/>
                                             </mask>
@@ -1747,6 +1758,7 @@ You may now start using the app for your favourite restaurant.</string>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
+                                <exclude reference="Q3z-CI-yBu"/>
                                 <exclude reference="Nzj-CW-O0v"/>
                                 <exclude reference="SLi-yN-guE"/>
                             </mask>
@@ -1767,6 +1779,7 @@ You may now start using the app for your favourite restaurant.</string>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
+                                <include reference="Q3z-CI-yBu"/>
                                 <include reference="Nzj-CW-O0v"/>
                                 <include reference="SLi-yN-guE"/>
                             </mask>
@@ -1795,6 +1808,7 @@ You may now start using the app for your favourite restaurant.</string>
                         <outlet property="orderCostButton" destination="XLB-8Q-53y" id="hEW-oI-S84"/>
                         <outlet property="orderSentView" destination="SLi-yN-guE" id="8Zy-Rc-MGk"/>
                         <outlet property="orderTableButton" destination="Edi-dF-Jro" id="3Vk-ve-dKh"/>
+                        <outlet property="progressView" destination="Q3z-CI-yBu" id="qgG-x9-LBb"/>
                         <outlet property="titleBarView" destination="Nzj-CW-O0v" id="DfL-PF-8C3"/>
                         <outlet property="view" destination="CAg-DY-uvb" id="fic-gj-Qfa"/>
                     </connections>
@@ -3183,21 +3197,55 @@ You may now start using the app for your favourite restaurant.</string>
                                     <outlet property="delegate" destination="OYV-v8-jXH" id="f7C-4b-QD0"/>
                                 </connections>
                             </tableView>
+                            <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="g7v-Pn-x9i">
+                                <rect key="frame" x="0.0" y="-2" width="150" height="2"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="2" id="TMr-fT-H40"/>
+                                    <constraint firstAttribute="width" constant="150" id="gj9-Ad-OAV"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="TMr-fT-H40"/>
+                                        <exclude reference="gj9-Ad-OAV"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="TMr-fT-H40"/>
+                                        <include reference="gj9-Ad-OAV"/>
+                                    </mask>
+                                </variation>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="g7v-Pn-x9i" secondAttribute="trailing" constant="105" id="M9f-tK-jxL"/>
+                            <constraint firstItem="g7v-Pn-x9i" firstAttribute="top" secondItem="cO5-3e-vBU" secondAttribute="bottom" constant="168" id="Mp1-SB-MlX"/>
                             <constraint firstItem="QRv-CM-FTw" firstAttribute="leading" secondItem="t9A-2Q-EXZ" secondAttribute="leadingMargin" constant="-20" id="SKV-vb-L5j"/>
                             <constraint firstAttribute="trailingMargin" secondItem="QRv-CM-FTw" secondAttribute="trailing" constant="-20" id="WH6-4Z-oNd"/>
+                            <constraint firstItem="g7v-Pn-x9i" firstAttribute="leading" secondItem="t9A-2Q-EXZ" secondAttribute="leadingMargin" constant="105" id="cey-ms-qoo"/>
                             <constraint firstItem="D3O-0e-tbt" firstAttribute="top" secondItem="QRv-CM-FTw" secondAttribute="bottom" id="mJv-zF-5QD"/>
                             <constraint firstItem="QRv-CM-FTw" firstAttribute="top" secondItem="cO5-3e-vBU" secondAttribute="bottom" constant="6" id="y1F-eq-auq"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="g7v-Pn-x9i"/>
+                            </mask>
                             <mask key="constraints">
+                                <exclude reference="M9f-tK-jxL"/>
+                                <exclude reference="Mp1-SB-MlX"/>
+                                <exclude reference="cey-ms-qoo"/>
                                 <exclude reference="y1F-eq-auq"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="g7v-Pn-x9i"/>
+                            </mask>
                             <mask key="constraints">
+                                <include reference="M9f-tK-jxL"/>
+                                <include reference="Mp1-SB-MlX"/>
+                                <include reference="cey-ms-qoo"/>
                                 <include reference="y1F-eq-auq"/>
                             </mask>
                         </variation>
@@ -3206,6 +3254,7 @@ You may now start using the app for your favourite restaurant.</string>
                     <connections>
                         <outlet property="detailsTable" destination="QRv-CM-FTw" id="Bby-px-nkC"/>
                         <outlet property="itemImage" destination="02n-Re-rqK" id="5da-Zf-Cq0"/>
+                        <outlet property="progressView" destination="g7v-Pn-x9i" id="Ns2-TJ-jhA"/>
                         <outlet property="view" destination="t9A-2Q-EXZ" id="A3Y-eF-67I"/>
                     </connections>
                 </viewController>

@@ -31,6 +31,7 @@ BOOL hackFromLoad = NO;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (assign, nonatomic) BOOL menuIsLoading;
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewBackground;
+@property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 
 @end
 
@@ -48,8 +49,11 @@ BOOL hackFromLoad = NO;
         UIImage *image = [UIImage imageWithData:loggedUSER.restaurant_logo_data];
         
         self.imageViewBackground.image = image;
+//        self.progressView.hidden = YES;
     }
     else {
+//        self.progressView.hidden = NO;
+//        [self.progressView setProgress:0.0f];
         CABasicAnimation *theAnimation;
         
         theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
@@ -73,12 +77,14 @@ BOOL hackFromLoad = NO;
                     
                     self.imageViewBackground.image = image;
                     [self.imageViewBackground.layer removeAllAnimations];
+                    self.progressView.hidden = YES;
                 }
             }
             else {
 //                NSLog(@"error:%@",[error description]);
             }
         } andProgress:^(NSInteger expectedBytesToReceive, NSInteger receivedBytes) {
+//            [self.progressView setProgress:(CGFloat)receivedBytes / (CGFloat)expectedBytesToReceive];
 //            NSLog(@"progress:%f",(CGFloat)receivedBytes / (CGFloat)expectedBytesToReceive);
         }];
     }

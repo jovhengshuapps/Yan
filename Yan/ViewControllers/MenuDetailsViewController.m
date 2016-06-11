@@ -210,7 +210,7 @@
     NSRange nameRange = [text rangeOfString:[components objectAtIndex:0]];
     NSRange priceRange = [text rangeOfString:[components objectAtIndex:1]];
     
-    nameRange = NSMakeRange(nameRange.location, nameRange.length - 3);
+    nameRange = NSMakeRange(nameRange.location, nameRange.length);
     priceRange = NSMakeRange(priceRange.location-3, priceRange.length+3);
     
     NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text];

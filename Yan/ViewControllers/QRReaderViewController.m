@@ -21,6 +21,7 @@
 @property (strong, nonatomic) NSString *restaurantID;
 @property (strong, nonatomic) NSString *restaurantName;
 @property (strong, nonatomic) NSString *tableNumber;
+@property (strong, nonatomic) NSString *logoURL;
 
 @end
 
@@ -65,6 +66,7 @@
         self.restaurantID = @"5";
         self.restaurantName = @"Artsy Cafe";
         self.tableNumber = @"1";
+        self.logoURL = ARTSY_LOGO_URL;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Reader not supported by the current device" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         
         [alert show];
@@ -96,6 +98,7 @@
     loggedUSER.current_restaurantID = self.restaurantID;
     loggedUSER.current_tableNumber = self.tableNumber;
     loggedUSER.current_restaurantName = self.restaurantName;
+    loggedUSER.restaurant_logo_url = self.logoURL;
     
     NSError *error = nil;
     if (![context save:&error]) {
@@ -145,12 +148,14 @@
         NSArray *components = [result componentsSeparatedByString:@"|"];
         NSString *crestaurantID = components[0];
         NSString *crestaurantName = components[1];
-        NSString *ctableNumber = components[components.count-1];
+        NSString *ctableNumber = components[2];
+        NSString *clogourl = components[3];
         self.labelInstruction.text = [NSString stringWithFormat:@"%@, Table %@",crestaurantName,ctableNumber];
         
         self.restaurantID = crestaurantID;
         self.restaurantName = crestaurantName;
         self.tableNumber = ctableNumber;
+        self.logoURL = clogourl;
     }
     
     

@@ -64,7 +64,7 @@
 #define GOOGLE_CLIENT_ID                                                @"668953075234-bf7f3vasveo0dj919fp75aj0saoa4vc9.apps.googleusercontent.com"
 
 
-
+#define ARTSY_LOGO_URL                                                  @"/yan-uploads/yan_uploads/J9TN1GDYYN8U/image_JABGsi1.jpeg"
 
 // API CALLS
 #define BASE_URL                                                        @"http://yan.bilinear.ph"

@@ -30,13 +30,61 @@ BOOL hackFromLoad = NO;
 @property (weak, nonatomic) IBOutlet UIView *orderSentView;
 @property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
 @property (assign, nonatomic) BOOL menuIsLoading;
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewBackground;
 
 @end
 
 @implementation OrderMenuViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];    
+    [super viewDidLoad];
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    
+    Account *loggedUSER = [self userLoggedIn];
+    self.imageViewBackground.contentMode = UIViewContentModeScaleAspectFill;
+    if (loggedUSER.restaurant_logo_data) {
+        UIImage *image = [UIImage imageWithData:loggedUSER.restaurant_logo_data];
+        
+        self.imageViewBackground.image = image;
+    }
+    else {
+        CABasicAnimation *theAnimation;
+        
+        theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
+        theAnimation.duration=1.0;
+        theAnimation.repeatCount=HUGE_VALF;
+        theAnimation.autoreverses=YES;
+        theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
+        theAnimation.toValue=[NSNumber numberWithFloat:0.0];
+        
+        [self.imageViewBackground.layer addAnimation:theAnimation forKey:@"animateOpacity"];
+        [self getImageFromURL:loggedUSER.restaurant_logo_url completionHandler:^(NSURLResponse * _Nullable response, id  _Nullable responseObject, NSError * _Nullable error) {
+            if (!error) {
+                loggedUSER.restaurant_logo_data = UIImageJPEGRepresentation((UIImage*)responseObject, 100.0f);
+                
+                NSError *saveError = nil;
+                if([context save:&saveError]) {
+                    UIImage *image = (UIImage*)responseObject;
+                    
+                    
+                    
+                    
+                    self.imageViewBackground.image = image;
+                    [self.imageViewBackground.layer removeAllAnimations];
+                }
+            }
+            else {
+//                NSLog(@"error:%@",[error description]);
+            }
+        } andProgress:^(NSInteger expectedBytesToReceive, NSInteger receivedBytes) {
+//            NSLog(@"progress:%f",(CGFloat)receivedBytes / (CGFloat)expectedBytesToReceive);
+        }];
+    }
+    
+    
+    
     
     UIBarButtonItem *waiterBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"waiter-icon-resized.png"] style:UIBarButtonItemStyleDone target:self action:@selector(callWaiter)];
     
@@ -48,7 +96,6 @@ BOOL hackFromLoad = NO;
     
     
     
-    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     [request setReturnsObjectsAsFaults:NO];
@@ -79,7 +126,6 @@ BOOL hackFromLoad = NO;
     
     
     
-    Account *loggedUSER = [self userLoggedIn];
     NSInteger restaurantID = [loggedUSER.current_restaurantID integerValue];
     self.tableNumber = loggedUSER.current_tableNumber;
     
@@ -129,7 +175,15 @@ BOOL hackFromLoad = NO;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self showTitleBar:_categoryString];
+    if (_categoryString && [_categoryString isEqualToString:@""]) {
+        
+        [self hideTitleBar];
+    }
+    else {
+        
+        [self showTitleBar:_categoryString];
+    }
+    
 //    if (hackFromLoad) {
 //        
 //    }
@@ -171,7 +225,7 @@ BOOL hackFromLoad = NO;
         NSDictionary *response = (NSDictionary*)notification.object;
         self.categories = response[@"categories"];
         
-        //    NSLog(@"self.categories:%@",self.categories);
+            NSLog(@"self.categories:%@",self.categories);
         
         _rawData = [self extractMenuContent];
         _menuShown = YES;
@@ -186,7 +240,7 @@ BOOL hackFromLoad = NO;
 
 - (void) showOrderSentView {
     self.orderSentView.hidden = NO;
-    [self showTitleBar:@""];
+    [self hideTitleBar];
 }
 
 - (void) callWaiter {
@@ -249,7 +303,7 @@ BOOL hackFromLoad = NO;
     
     menuItem.name = isNIL(item[@"name"]);
     menuItem.price = isNIL(item[@"price"]);
-    menuItem.desc = isNIL(item[@"desc"]);
+    menuItem.desc = isNIL(item[@"short_desc"]);
     menuItem.image = isNIL(item[@"image"]);
     menuItem.identifier = isNIL(item[@"id"]);
     menuItem.restaurantID = @5;

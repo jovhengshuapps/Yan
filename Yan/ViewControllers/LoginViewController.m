@@ -26,6 +26,8 @@
     [super viewWillAppear:animated];
     
     [self showTitleBar:@"SIGN IN"];
+    
+    [self.textFieldUsername becomeFirstResponder];
 }
 
 - (IBAction)loginPressed:(id)sender {

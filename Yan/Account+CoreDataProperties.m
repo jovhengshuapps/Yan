@@ -24,4 +24,6 @@
 @dynamic current_restaurantName;
 @dynamic recent_restaurant;
 @dynamic favorite_restaurant;
+@dynamic restaurant_logo_url;
+@dynamic restaurant_logo_data;
 @end

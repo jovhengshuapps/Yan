@@ -45,6 +45,7 @@ BOOL hackFromLoad = NO;
     
     Account *loggedUSER = [self userLoggedIn];
     self.imageViewBackground.contentMode = UIViewContentModeScaleAspectFill;
+    self.imageViewBackground.clipsToBounds = YES;
     if (loggedUSER.restaurant_logo_data) {
         UIImage *image = [UIImage imageWithData:loggedUSER.restaurant_logo_data];
         
@@ -63,6 +64,7 @@ BOOL hackFromLoad = NO;
         theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
         theAnimation.toValue=[NSNumber numberWithFloat:0.0];
         
+//        NSLog(@"URL_LOGO:%@",loggedUSER.restaurant_logo_url);
         [self.imageViewBackground.layer addAnimation:theAnimation forKey:@"animateOpacity"];
         [self getImageFromURL:loggedUSER.restaurant_logo_url completionHandler:^(NSURLResponse * _Nullable response, id  _Nullable responseObject, NSError * _Nullable error) {
             if (!error) {
@@ -81,7 +83,7 @@ BOOL hackFromLoad = NO;
                 }
             }
             else {
-//                NSLog(@"error:%@",[error description]);
+                NSLog(@"error:%@",[error description]);
             }
         } andProgress:^(NSInteger expectedBytesToReceive, NSInteger receivedBytes) {
 //            [self.progressView setProgress:(CGFloat)receivedBytes / (CGFloat)expectedBytesToReceive];
@@ -231,7 +233,7 @@ BOOL hackFromLoad = NO;
         NSDictionary *response = (NSDictionary*)notification.object;
         self.categories = response[@"categories"];
         
-            NSLog(@"self.categories:%@",self.categories);
+//            NSLog(@"self.categories:%@",self.categories);
         
         _rawData = [self extractMenuContent];
         _menuShown = YES;

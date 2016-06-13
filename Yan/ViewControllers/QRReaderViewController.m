@@ -64,9 +64,9 @@
     }
     else {
         self.restaurantID = @"5";
-        self.restaurantName = @"Artsy Cafe";
+        self.restaurantName = @"Artsy Café";
         self.tableNumber = @"1";
-        self.logoURL = ARTSY_LOGO_URL;
+//        self.logoURL = ARTSY_LOGO_URL;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Reader not supported by the current device" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         
         [alert show];
@@ -91,32 +91,46 @@
     }];
 }
 - (IBAction)buttonContinuePressed:(id)sender {
-    
-    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
-    
-    Account *loggedUSER = [self userLoggedIn];
-    loggedUSER.current_restaurantID = self.restaurantID;
-    loggedUSER.current_tableNumber = self.tableNumber;
-    loggedUSER.current_restaurantName = self.restaurantName;
-    loggedUSER.restaurant_logo_url = self.logoURL;
-    
-    NSError *error = nil;
-    if (![context save:&error]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            [alert dismissViewControllerAnimated:YES completion:nil];
-        }];
-        [alert addAction:actionOK];
+    if (self.restaurantID.length && self.restaurantName.length && self.tableNumber.length) {
         
-        [self presentViewController:alert animated:YES completion:^{
-            
-        }];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getRestaurantDetails:) name:@"getRestaurantDetails" object:nil];
+        [self callGETAPI:API_RESTAURANT_DETAILS(self.restaurantID) withParameters:@{} completionNotification:@"getRestaurantDetails"];
+        
+    }
+}
+
+- (void)getRestaurantDetails:(NSNotification*)notification {
+    NSDictionary *response = (NSDictionary*)notification.object;
+//    NSLog(@"RESPONSE DETAILS:%@",response);
+    if ([response isKindOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
     }
     else {
-        [self dismissViewControllerAnimated:YES completion:^{
+        NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+        
+        Account *loggedUSER = [self userLoggedIn];
+        loggedUSER.current_restaurantID = self.restaurantID;
+        loggedUSER.current_tableNumber = self.tableNumber;
+        loggedUSER.current_restaurantName = self.restaurantName;
+        loggedUSER.restaurant_logo_url = [response[@"restaurant"][@"image"] substringFromIndex:1];
+        
+        NSError *error = nil;
+        if (![context save:&error]) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alert dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alert addAction:actionOK];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:@"ProceedToMenu"];
-        }];
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+        }
+        else {
+            [self dismissViewControllerAnimated:YES completion:^{
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:@"ProceedToMenu"];
+            }];
+        }
     }
     
 }
@@ -132,30 +146,43 @@
 {
     if ([result rangeOfString:@"|"].location == NSNotFound) {
         
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Invalid QR Code"] message:nil preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            [alert dismissViewControllerAnimated:YES completion:nil];
-            
-        }];
-        [alert addAction:actionOK];
-        
-        [self presentViewController:alert animated:YES completion:^{
-            
-        }];
+//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Invalid QR Code"] message:@"This is not a valid QR Code" preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//            [alert dismissViewControllerAnimated:YES completion:nil];
+//            
+//        }];
+//        [alert addAction:actionOK];
+//        
+//        [self presentViewController:alert animated:YES completion:^{
+//            
+//        }];
     }
     else {
         
         NSArray *components = [result componentsSeparatedByString:@"|"];
-        NSString *crestaurantID = components[0];
-        NSString *crestaurantName = components[1];
-        NSString *ctableNumber = components[2];
-        NSString *clogourl = components[3];
-        self.labelInstruction.text = [NSString stringWithFormat:@"%@, Table %@",crestaurantName,ctableNumber];
-        
-        self.restaurantID = crestaurantID;
-        self.restaurantName = crestaurantName;
-        self.tableNumber = ctableNumber;
-        self.logoURL = clogourl;
+        if (components.count != 3) {
+//            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid QR Code" message:@"This is not a valid QR Code" preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//                [alert dismissViewControllerAnimated:YES completion:nil];
+//            }];
+//            [alert addAction:actionOK];
+//            
+//            [self presentViewController:alert animated:YES completion:^{
+//                
+//            }];
+        }
+        else {
+            NSString *crestaurantID = components[0];
+            NSString *crestaurantName = components[1];
+            NSString *ctableNumber = components[components.count-1];
+            //        NSString *clogourl = components[3];
+            self.labelInstruction.text = [NSString stringWithFormat:@"%@, Table %@",crestaurantName,ctableNumber];
+            
+            self.restaurantID = crestaurantID;
+            self.restaurantName = crestaurantName;
+            self.tableNumber = ctableNumber;
+            //        self.logoURL = clogourl;
+        }
     }
     
     

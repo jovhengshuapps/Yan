@@ -18,7 +18,7 @@ typedef enum {
 } HomeView_ViewToShow;
 
 
-@interface HomeViewController : CoreViewController <FBSDKLoginButtonDelegate, GIDSignInUIDelegate, GIDSignInDelegate>
+@interface HomeViewController : CoreViewController <FBSDKLoginButtonDelegate, GIDSignInUIDelegate, GIDSignInDelegate, AlertViewDelegate>
 
 @property (assign, nonatomic) HomeView_ViewToShow viewToShow;
 

@@ -64,7 +64,7 @@
 #define GOOGLE_CLIENT_ID                                                @"668953075234-bf7f3vasveo0dj919fp75aj0saoa4vc9.apps.googleusercontent.com"
 
 
-#define ARTSY_LOGO_URL                                                  @"/yan-uploads/yan_uploads/J9TN1GDYYN8U/image_JABGsi1.jpeg"
+//#define ARTSY_LOGO_URL                                                  @"/yan-uploads/yan_uploads/J9TN1GDYYN8U/image_JABGsi1.jpeg"
 
 // API CALLS
 #define BASE_URL                                                        @"http://yan.bilinear.ph"
@@ -91,5 +91,7 @@
 #define API_SENDORDER(RESTAURANT_ID,USER_ID)                          [NSString stringWithFormat:@"order/%@/user/%@",RESTAURANT_ID,USER_ID]
 
 #define API_BILLOUT(RESTAURANT_ID,ORDER_ID)                          [NSString stringWithFormat:@"bill_out/%@/order/%@",RESTAURANT_ID,ORDER_ID]
+
+#define API_RESTAURANT_DETAILS(RESTAURANT_ID)                           [NSString stringWithFormat:@"restaurant/details/%@",RESTAURANT_ID]
 
 #endif /* Config_h */

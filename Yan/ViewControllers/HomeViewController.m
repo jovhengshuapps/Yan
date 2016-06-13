@@ -122,6 +122,11 @@
         
         [[self navigationItem] setLeftBarButtonItem:menuBarItem];
         self.frostedViewController.panGestureEnabled = YES;
+        
+        
+        NSURL *url = [[NSBundle mainBundle] URLForResource:@"apple" withExtension:@"mp4"];
+        AlertView *alert = [[AlertView alloc] initVideoAd:url delegate:self];
+        alert.tag = 1;
     }
     else if ([notification.object isEqualToString:@"HomeViewLogin"]) {
         self.viewToShow = HomeViewLogin;
@@ -147,6 +152,12 @@
     }
 }
 
+- (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [alertView dismissAlertView];
+}
+- (void)videoAdPlayer:(AlertView *)alertView{
+    [alertView dismissAlertView];
+}
 - (void)loginButton:(FBSDKLoginButton *)loginButton didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result error:(NSError *)error {
     
 }

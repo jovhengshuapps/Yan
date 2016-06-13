@@ -201,10 +201,12 @@
     
     NSURLSessionDataTask *task = [manager dataTaskWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlPath relativeToURL:baseURL]] completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         NETWORK_INDICATOR(NO)
+        
         completionHandler(response, responseObject, error);
     }];
     
     [manager setDataTaskDidReceiveDataBlock:^(NSURLSession * _Nonnull session, NSURLSessionDataTask * _Nonnull dataTask, NSData * _Nonnull data) {
+        NETWORK_INDICATOR(YES)
         progress(dataTask.countOfBytesExpectedToReceive,dataTask.countOfBytesReceived);
     }];
     

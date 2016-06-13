@@ -45,14 +45,26 @@
 //    alert.tag = 1;
 //    [alert showAlertView];
     if (self.textFieldName.text.length && self.textFieldBirthday.text.length && self.textFieldEmail.text.length && self.textFieldPassword.text.length) {
-//        NSURL *url = [[NSBundle mainBundle] URLForResource:@"imageGIF" withExtension:@"gif"];
-//        AlertView *alert = [[AlertView alloc] initWithImageGIF:url duration:19.0f delegate:self];
-//        [alert showAlertViewWithDuration:19.0f];
-        NSURL *url = [[NSBundle mainBundle] URLForResource:@"apple" withExtension:@"mp4"];
-        AlertView *alert = [[AlertView alloc] initVideoAd:url delegate:self];
-        alert.tag = 1;
-        [alert showAlertView];
+//        
+//        NSURL *url = [[NSBundle mainBundle] URLForResource:@"apple" withExtension:@"mp4"];
+//        AlertView *alert = [[AlertView alloc] initVideoAd:url delegate:self];
+//        alert.tag = 1;
+//        [alert showAlertView];
 
+        self.view.userInteractionEnabled = NO;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerCompletedMethod:) name:@"registerCompletedObserver" object:nil];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"MM/dd/YYYY"];
+        NSDate *formattedDate = [dateFormatter dateFromString:self.textFieldBirthday.text];
+        //    NSLog(@"formattedDate:%@",[dateFormatter stringFromDate:formattedDate]);
+        [self callAPI:API_USER_REGISTER withParameters:@{
+                                                         @"user_email": self.textFieldEmail.text,
+                                                         @"user_password": self.textFieldPassword.text,
+                                                         @"full_name": self.textFieldName.text,
+                                                         @"birthday": [dateFormatter stringFromDate:formattedDate]
+                                                         } completionNotification:@"registerCompletedObserver"];
+        
     }
     else {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Incomplete Details" message:@"Please complete all information" preferredStyle:UIAlertControllerStyleAlert];
@@ -71,12 +83,20 @@
 - (void)registerCompletedMethod:(NSNotification*)notification {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     id response = notification.object;
+    self.view.userInteractionEnabled = YES;
     if ([response isKindOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
         
         [self showTitleBar:@"REGISTRATION"];
         return;
     }
     if ([self saveLoggedInAccount:self.textFieldEmail.text :self.textFieldPassword.text :self.textFieldName.text :self.textFieldBirthday.text :response[@"token"] :response[@"uid"]]) {
+        
+//        
+//        NSURL *url = [[NSBundle mainBundle] URLForResource:@"apple" withExtension:@"mp4"];
+//        AlertView *alert = [[AlertView alloc] initVideoAd:url delegate:self];
+//        alert.tag = 1;
+//        [alert showAlertView];
+//
         [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:@"HomeViewRegistrationComplete"];
         
         [self.navigationController popToRootViewControllerAnimated:YES];
@@ -90,32 +110,37 @@
 }
 
 - (void)alertViewDismissed:(AlertView *)alertView {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerCompletedMethod:) name:@"registerCompletedObserver" object:nil];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM/dd/YYYY"];
-    NSDate *formattedDate = [dateFormatter dateFromString:self.textFieldBirthday.text];
-    //    NSLog(@"formattedDate:%@",[dateFormatter stringFromDate:formattedDate]);
-    [self callAPI:API_USER_REGISTER withParameters:@{
-                                                     @"user_email": self.textFieldEmail.text,
-                                                     @"user_password": self.textFieldPassword.text,
-                                                     @"full_name": self.textFieldName.text,
-                                                     @"birthday": [dateFormatter stringFromDate:formattedDate]
-                                                     } completionNotification:@"registerCompletedObserver"];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerCompletedMethod:) name:@"registerCompletedObserver" object:nil];
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"MM/dd/YYYY"];
+//    NSDate *formattedDate = [dateFormatter dateFromString:self.textFieldBirthday.text];
+//    //    NSLog(@"formattedDate:%@",[dateFormatter stringFromDate:formattedDate]);
+//    [self callAPI:API_USER_REGISTER withParameters:@{
+//                                                     @"user_email": self.textFieldEmail.text,
+//                                                     @"user_password": self.textFieldPassword.text,
+//                                                     @"full_name": self.textFieldName.text,
+//                                                     @"birthday": [dateFormatter stringFromDate:formattedDate]
+//                                                     } completionNotification:@"registerCompletedObserver"];
+    
+    
+//    [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:@"HomeViewRegistrationComplete"];
+//    
+//    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)videoAdPlayer:(AlertView *)alertView{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerCompletedMethod:) name:@"registerCompletedObserver" object:nil];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM/dd/YYYY"];
-    NSDate *formattedDate = [dateFormatter dateFromString:self.textFieldBirthday.text];
-//    NSLog(@"formattedDate:%@",[dateFormatter stringFromDate:formattedDate]);
-    [self callAPI:API_USER_REGISTER withParameters:@{
-                                                     @"user_email": self.textFieldEmail.text,
-                                                     @"user_password": self.textFieldPassword.text,
-                                                     @"full_name": self.textFieldName.text,
-                                                     @"birthday": [dateFormatter stringFromDate:formattedDate]
-                                                     } completionNotification:@"registerCompletedObserver"];
-    [alertView dismissAlertView];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerCompletedMethod:) name:@"registerCompletedObserver" object:nil];
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"MM/dd/YYYY"];
+//    NSDate *formattedDate = [dateFormatter dateFromString:self.textFieldBirthday.text];
+////    NSLog(@"formattedDate:%@",[dateFormatter stringFromDate:formattedDate]);
+//    [self callAPI:API_USER_REGISTER withParameters:@{
+//                                                     @"user_email": self.textFieldEmail.text,
+//                                                     @"user_password": self.textFieldPassword.text,
+//                                                     @"full_name": self.textFieldName.text,
+//                                                     @"birthday": [dateFormatter stringFromDate:formattedDate]
+//                                                     } completionNotification:@"registerCompletedObserver"];
+//    [alertView dismissAlertView];
 }
 
 //- (void)imageGIFEnded:(AlertView *)alertView {

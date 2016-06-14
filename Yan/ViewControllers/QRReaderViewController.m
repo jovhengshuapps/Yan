@@ -146,6 +146,7 @@
 {
     if ([result rangeOfString:@"|"].location == NSNotFound) {
         
+        self.labelInstruction.text = @"Invalid QR Code";
 //        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Invalid QR Code"] message:@"This is not a valid QR Code" preferredStyle:UIAlertControllerStyleAlert];
 //        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
 //            [alert dismissViewControllerAnimated:YES completion:nil];
@@ -161,6 +162,7 @@
         
         NSArray *components = [result componentsSeparatedByString:@"|"];
         if (components.count != 3) {
+            self.labelInstruction.text = @"Invalid QR Code";
 //            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid QR Code" message:@"This is not a valid QR Code" preferredStyle:UIAlertControllerStyleAlert];
 //            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
 //                [alert dismissViewControllerAnimated:YES completion:nil];

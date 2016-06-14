@@ -161,7 +161,7 @@
     else {
         
         NSArray *components = [result componentsSeparatedByString:@"|"];
-        if (components.count != 3) {
+        if (components.count < 3) {
             self.labelInstruction.text = @"Invalid QR Code";
 //            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid QR Code" message:@"This is not a valid QR Code" preferredStyle:UIAlertControllerStyleAlert];
 //            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
@@ -176,7 +176,8 @@
         else {
             NSString *crestaurantID = components[0];
             NSString *crestaurantName = components[1];
-            NSString *ctableNumber = components[components.count-1];
+            NSString *ctableNumber = components[2];
+//            NSString *ctableNumber = components[components.count-1];
             //        NSString *clogourl = components[3];
             self.labelInstruction.text = [NSString stringWithFormat:@"%@, Table %@",crestaurantName,ctableNumber];
             

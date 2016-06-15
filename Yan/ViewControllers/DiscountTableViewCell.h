@@ -16,5 +16,8 @@
 @property (strong, nonnull) NSArray *options;
 @property (nonatomic, copy, nonnull) void (^tapHandler)(_Nonnull id sender);
 @property (weak, nonatomic, nullable) IBOutlet CustomButton *button;
+@property (weak, nonatomic, nullable) IBOutlet UITextField *textFieldValue;
+
+@property (assign, nonatomic) BOOL useTextField;
 
 @end

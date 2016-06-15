@@ -91,7 +91,7 @@ typedef enum {
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self showTitleBar:@"AFFILIATED RESTAURANT"];
+    [self showTitleBar:@"RESTAURANTS"];
     
 }
 

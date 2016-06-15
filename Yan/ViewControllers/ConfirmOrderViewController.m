@@ -8,6 +8,7 @@
 
 #import "ConfirmOrderViewController.h"
 #import "PaymentSelectViewController.h"
+#import "DiscountViewController.h"
 
 @interface ConfirmOrderViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
@@ -268,9 +269,13 @@
 }
 
 - (void) callBillout {
-    PaymentSelectViewController *paymentSelect = (PaymentSelectViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"paymentSelection"];
-    paymentSelect.tableNumber = _tableNumber;
-    [self.navigationController pushViewController:paymentSelect animated:YES];
+    DiscountViewController *discountView = (DiscountViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"discountView"];
+    discountView.tableNumber = self.tableNumber;
+    [self.navigationController pushViewController:discountView animated:YES];
+    
+//    PaymentSelectViewController *paymentSelect = (PaymentSelectViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"paymentSelection"];
+//    paymentSelect.tableNumber = _tableNumber;
+//    [self.navigationController pushViewController:paymentSelect animated:YES];
 }
 
 #pragma mark Table Data Source

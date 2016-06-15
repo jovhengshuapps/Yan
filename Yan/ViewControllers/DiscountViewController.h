@@ -9,6 +9,6 @@
 #import "CoreViewController.h"
 #import "CustomPickerViewController.h"
 
-@interface DiscountViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate, CustomPickerViewControllerDelegate, FPPopoverControllerDelegate>
+@interface DiscountViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate, CustomPickerViewControllerDelegate, FPPopoverControllerDelegate, UITextFieldDelegate>
 @property (strong, nonnull) NSString *tableNumber;
 @end

@@ -82,6 +82,9 @@
                                                               annotation:annotation];
         
     }
+    else if ([[url absoluteString] rangeOfString:@"waze"].location != NSNotFound) {
+        handled = YES;
+    }
     else {
         handled = [[GIDSignIn sharedInstance] handleURL:url
                                       sourceApplication:sourceApplication

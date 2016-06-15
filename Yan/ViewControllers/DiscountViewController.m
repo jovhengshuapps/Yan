@@ -15,6 +15,7 @@
 @property (strong, nonnull) NSArray *discounts;
 @property (strong, nonnull) FPPopoverController *popover;
 @property (strong, nonatomic) NSMutableDictionary *discountDetails;
+@property (assign, nonatomic) BOOL keyboardShown;
 @end
 
 @implementation DiscountViewController
@@ -69,6 +70,16 @@
                           ];
     
     self.discountDetails = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"0",@"gc",@"0",@"senior", @"0", @"diners", nil];
+    // Listen for keyboard appearances and disappearances
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidHide:)
+                                                 name:UIKeyboardDidHideNotification
+                                               object:nil];
     
 }
 
@@ -76,6 +87,7 @@
     [super viewWillAppear:animated];
     
     [self showTitleBar:@"PAYMENT"];
+    self.keyboardShown = NO;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -155,70 +167,135 @@
     DiscountTableViewCell *cell = (DiscountTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"discountCell"];
     cell.contentView.backgroundColor = [UIColor clearColor];
     
+//    if (indexPath.section == 0) {
+//        cell.discountTitle = @"Number of Diners";
+//        cell.discountSubTitle = @"How many people are ordering in the table?";
+//        cell.discountDesc = @"";
+//        cell.options = @[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10"];
+//        cell.button.tag = 3;
+//        
+//        UIButton *button = cell.button;
+//        cell.tapHandler = ^(id sender) {
+//            // do something
+//            CustomPickerViewController *pickerController = (CustomPickerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"pickerView"];
+//            pickerController.delegatePicker = self;
+//            pickerController.choices = @[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10"];
+//            pickerController.button = button;
+//            
+//            self.popover = [[FPPopoverController alloc] initWithViewController:pickerController];
+//            
+//            self.popover.tint = FPPopoverDefaultTint;
+//            self.popover.border = NO;
+//            self.popover.delegate = self;
+//            
+//            self.popover.arrowDirection = FPPopoverArrowDirectionRight;
+//            
+//            //sender is the UIButton view
+//            [self.popover presentPopoverFromView:sender];
+//        };
+//    }
+//    else {
+//        cell.discountTitle = _discounts[indexPath.row][@"title"];
+//        cell.discountSubTitle = _discounts[indexPath.row][@"subtitle"];
+//        cell.discountDesc = _discounts[indexPath.row][@"desc"];
+//        cell.options = _discounts[indexPath.row][@"options"];
+//        if ([_discounts[indexPath.row][@"title"] isEqualToString:@"Senior Citizen"]) {
+//            cell.button.tag = 1;
+//        }
+//        else {
+//            cell.button.tag = 2;
+//        }
+//        UIButton *button = cell.button;
+//        cell.tapHandler = ^(id sender) {
+//            // do something
+//            CustomPickerViewController *pickerController = (CustomPickerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"pickerView"];
+//            pickerController.delegatePicker = self;
+//            pickerController.choices = _discounts[indexPath.row][@"options"];
+//            pickerController.button = button;
+//            
+//            self.popover = [[FPPopoverController alloc] initWithViewController:pickerController];
+//            
+//            self.popover.tint = FPPopoverDefaultTint;
+//            self.popover.border = NO;
+//            self.popover.delegate = self;
+//            
+//            self.popover.arrowDirection = FPPopoverArrowDirectionRight;
+//            
+//            //sender is the UIButton view
+//            [self.popover presentPopoverFromView:sender];
+//        };
+//    }
+    
     if (indexPath.section == 0) {
         cell.discountTitle = @"Number of Diners";
         cell.discountSubTitle = @"How many people are ordering in the table?";
         cell.discountDesc = @"";
         cell.options = @[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10"];
-        cell.button.tag = 3;
+        cell.useTextField = YES;
+        cell.textFieldValue.tag = 3;
+        cell.textFieldValue.delegate = self;
         
-        UIButton *button = cell.button;
-        cell.tapHandler = ^(id sender) {
-            // do something
-            CustomPickerViewController *pickerController = (CustomPickerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"pickerView"];
-            pickerController.delegatePicker = self;
-            pickerController.choices = @[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10"];
-            pickerController.button = button;
-            
-            self.popover = [[FPPopoverController alloc] initWithViewController:pickerController];
-            
-            self.popover.tint = FPPopoverDefaultTint;
-            self.popover.border = NO;
-            self.popover.delegate = self;
-            
-            self.popover.arrowDirection = FPPopoverArrowDirectionRight;
-            
-            //sender is the UIButton view
-            [self.popover presentPopoverFromView:sender];
-        };
     }
     else {
         cell.discountTitle = _discounts[indexPath.row][@"title"];
         cell.discountSubTitle = _discounts[indexPath.row][@"subtitle"];
         cell.discountDesc = _discounts[indexPath.row][@"desc"];
         cell.options = _discounts[indexPath.row][@"options"];
+        cell.useTextField = YES;
+        cell.textFieldValue.delegate = self;
         if ([_discounts[indexPath.row][@"title"] isEqualToString:@"Senior Citizen"]) {
-            cell.button.tag = 1;
+            cell.textFieldValue.tag = 1;
         }
         else {
-            cell.button.tag = 2;
+            cell.textFieldValue.tag = 2;
         }
-        UIButton *button = cell.button;
-        cell.tapHandler = ^(id sender) {
-            // do something
-            CustomPickerViewController *pickerController = (CustomPickerViewController *)[self.storyboard instantiateViewControllerWithIdentifier:@"pickerView"];
-            pickerController.delegatePicker = self;
-            pickerController.choices = _discounts[indexPath.row][@"options"];
-            pickerController.button = button;
-            
-            self.popover = [[FPPopoverController alloc] initWithViewController:pickerController];
-            
-            self.popover.tint = FPPopoverDefaultTint;
-            self.popover.border = NO;
-            self.popover.delegate = self;
-            
-            self.popover.arrowDirection = FPPopoverArrowDirectionRight;
-            
-            //sender is the UIButton view
-            [self.popover presentPopoverFromView:sender];
-        };
     }
     
-    
-    
+    [self addDoneToolbar:cell.textFieldValue];
     
     return cell;
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString *item = [NSString stringWithFormat:@"%@%@",textField.text,string];
+    
+    if (textField.tag == 1) {
+        [self.discountDetails setObject:item forKey:@"senior"];
+    }
+    else if (textField.tag == 2){
+        [self.discountDetails setObject:item forKey:@"gc"];
+    }
+    else if (textField.tag == 3){
+        [self.discountDetails setObject:item forKey:@"diners"];
+    }
+
+    if (range.location > 1 || string.length > 1) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
+//- (void)textFieldDidEndEditing:(UITextField *)textField {
+//    NSString *item = textField.text;
+//    if (textField.tag == 1) {
+//        [self.discountDetails setObject:item forKey:@"senior"];
+//    }
+//    else if (textField.tag == 2){
+//        [self.discountDetails setObject:[item substringToIndex:item.length-1] forKey:@"gc"];
+//    }
+//    else if (textField.tag == 3){
+//        [self.discountDetails setObject:item forKey:@"diners"];
+//    }
+//    [textField resignFirstResponder];
+//}
+
 - (void)selectedItem:(NSString *)item withButton:(UIButton *)button{
     [button setTitle:item forState:UIControlStateNormal];
     if (button.tag == 1) {
@@ -236,7 +313,44 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    [_mainTableView reloadData];
+    DiscountTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    [cell.textFieldValue becomeFirstResponder];
+//    [_mainTableView reloadData];
+}
+
+
+- (void)keyboardDidShow: (NSNotification *) notification{
+    NSDictionary *info  = notification.userInfo;
+    NSValue      *value = info[UIKeyboardFrameEndUserInfoKey];
+    
+    CGRect rawFrame      = [value CGRectValue];
+    CGRect keyboardFrame = [self.view convertRect:rawFrame fromView:nil];
+    
+    if (self.keyboardShown == NO) {
+        [UIView animateWithDuration:0.1f animations:^{
+            self.mainTableView.frame = CGRectMake(self.mainTableView.frame.origin.x, self.mainTableView.frame.origin.y, self.mainTableView.frame.size.width, self.mainTableView.frame.size.height - keyboardFrame.size.height);
+            
+        }];
+        self.keyboardShown = YES;
+    }
+    
+}
+
+- (void)keyboardDidHide: (NSNotification *) notification{
+    NSDictionary *info  = notification.userInfo;
+    NSValue      *value = info[UIKeyboardFrameEndUserInfoKey];
+    
+    CGRect rawFrame      = [value CGRectValue];
+    CGRect keyboardFrame = [self.view convertRect:rawFrame fromView:nil];
+    
+    
+    if (self.keyboardShown == YES) {
+        [UIView animateWithDuration:0.1f animations:^{
+            self.mainTableView.frame = CGRectMake(self.mainTableView.frame.origin.x, self.mainTableView.frame.origin.y, self.mainTableView.frame.size.width, self.mainTableView.frame.size.height + keyboardFrame.size.height);
+            
+        }];
+        self.keyboardShown = NO;
+    }
 }
 
 @end

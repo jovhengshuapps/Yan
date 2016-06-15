@@ -57,7 +57,7 @@
 // http://waze.to/?ll=latitude,longitude&navigate=yes
     
     NSString *parameters = [NSString stringWithFormat:@"?ll=%@,%@&navigate=yes",_restaurantDetails.latitude, _restaurantDetails.longitude];
-    NSURL *wazeURL = [NSURL URLWithString:[NSString  stringWithFormat:@"waze://%@",parameters]];
+    NSURL *wazeURL = [NSURL URLWithString:[NSString  stringWithFormat:@"http://waze.to/%@",parameters]];
     
     if ([[UIApplication sharedApplication] canOpenURL:wazeURL]) {
         [[UIApplication sharedApplication] openURL:wazeURL];

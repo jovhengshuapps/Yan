@@ -30,6 +30,15 @@
     _labelDiscountTitle.text = _discountTitle;
     _labelDiscountSubTitle.text = _discountSubTitle;
     _labelDiscountDesc.text = _discountDesc;
+    
+    if (self.useTextField) {
+        self.textFieldValue.hidden = NO;
+        self.button.hidden = YES;
+    }
+    else {
+        self.textFieldValue.hidden = YES;
+        self.button.hidden = NO;
+    }
 }
 
 - (NSArray *)options {

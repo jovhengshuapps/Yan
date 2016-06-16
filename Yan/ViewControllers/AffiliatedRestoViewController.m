@@ -116,7 +116,7 @@ typedef enum {
     id response = notification.object;
     if ([response isKindOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
         
-        [self showTitleBar:@" AFFILIATED RESTAURANT"];
+        [self showTitleBar:@"RESTAURANTS"];
         return;
     }
 //    NSLog(@"response:%@",response);

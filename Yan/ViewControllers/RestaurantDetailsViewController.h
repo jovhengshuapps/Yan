@@ -8,7 +8,7 @@
 
 #import "CoreViewController.h"
 
-@interface RestaurantDetailsViewController : CoreViewController
+@interface RestaurantDetailsViewController : CoreViewController <MKMapViewDelegate>
 @property (strong, nonatomic) Restaurant *restaurantDetails;
 @property (strong, nonatomic) NSString *reservedTableNumber;
 @end

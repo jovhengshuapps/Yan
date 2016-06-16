@@ -12,6 +12,7 @@
 @interface RestaurantDetailsViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *labelRestaurantAddress;
 @property (weak, nonatomic) IBOutlet UILabel *labelRestaurantOpeningHoursDays;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @end
 
@@ -20,7 +21,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    _labelRestaurantAddress.text = _restaurantDetails.location;
+    self.labelRestaurantAddress.text = _restaurantDetails.location;
+    self.labelRestaurantOpeningHoursDays.text = _restaurantDetails.operating;
+    if ([_restaurantDetails.latitude doubleValue] != 0 && [_restaurantDetails.longitude doubleValue] != 0) {
+        
+        CLLocationCoordinate2D restaurantLocation = CLLocationCoordinate2DMake([_restaurantDetails.latitude doubleValue], [_restaurantDetails.longitude doubleValue]);
+        CLLocationDistance radiusRange = 1000;
+        MKCoordinateRegion coordinateRegion = MKCoordinateRegionMakeWithDistance(restaurantLocation, radiusRange * 2.0f, radiusRange * 2.0f);
+        [self.mapView setRegion:coordinateRegion];
+        [self.mapView setCenterCoordinate:restaurantLocation];
+    }
+    UITapGestureRecognizer *tapMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(directionsWaze:)];
+    tapMap.numberOfTouchesRequired = 1;
+    [self.mapView addGestureRecognizer:tapMap];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

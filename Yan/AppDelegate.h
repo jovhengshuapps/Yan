@@ -20,6 +20,7 @@
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @property (strong, nonatomic) NSString *deviceToken;
+@property (strong, nonatomic) NSDictionary *notificationUserInfo;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

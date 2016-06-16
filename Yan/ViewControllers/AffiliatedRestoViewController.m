@@ -165,6 +165,7 @@ typedef enum {
         restaurant.payment_options = isNIL(restaurantDetails[@"payment_options"]);
         restaurant.website = isNIL(restaurantDetails[@"website"]);
         restaurant.logo_model = isNIL(restaurantDetails[@"logo_model"]);
+        restaurant.operating = isNIL(restaurantDetails[@"operating"]);
         
 //        NSData *imageData = _item.imageData;
 //        if (imageData) {

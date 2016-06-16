@@ -48,6 +48,7 @@
         <attribute name="logo_model" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="operating" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="payment_options" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -56,6 +57,6 @@
         <element name="MenuItem" positionX="-63" positionY="18" width="128" height="165"/>
         <element name="OrderList" positionX="-54" positionY="45" width="128" height="105"/>
         <element name="Reservation" positionX="-36" positionY="72" width="128" height="120"/>
-        <element name="Restaurant" positionX="-45" positionY="63" width="128" height="210"/>
+        <element name="Restaurant" positionX="-45" positionY="63" width="128" height="225"/>
     </elements>
 </model>

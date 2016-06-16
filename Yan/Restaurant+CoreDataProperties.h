@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *payment_options;
 @property (nullable, nonatomic, retain) NSString *website;
 @property (nullable, nonatomic, retain) NSString *logo_model;
+@property (nullable, nonatomic, retain) NSString *operating;
 
 @end
 

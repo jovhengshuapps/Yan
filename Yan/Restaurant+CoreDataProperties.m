@@ -24,5 +24,6 @@
 @dynamic payment_options;
 @dynamic website;
 @dynamic logo_model;
+@dynamic operating;
 
 @end

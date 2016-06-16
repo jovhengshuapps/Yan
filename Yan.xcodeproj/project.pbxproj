@@ -105,6 +105,7 @@
 		33DBA6ED1CB8D1DD00AB0062 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DBA6EC1CB8D1DD00AB0062 /* SafariServices.framework */; };
 		33DBA6EF1CB8D1E800AB0062 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DBA6EE1CB8D1E800AB0062 /* SystemConfiguration.framework */; };
 		33DBA6F51CB8D31600AB0062 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DBA6F41CB8D31600AB0062 /* libz.tbd */; };
+		33DE2E151D12E205008F4AC6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DE2E141D12E205008F4AC6 /* MapKit.framework */; };
 		33E1B8C81CB7DCF000B4207F /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1B8C71CB7DCF000B4207F /* FBSDKCoreKit.framework */; };
 		33E1B8CB1CB7DD4100B4207F /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1B8C91CB7DD4100B4207F /* FBSDKLoginKit.framework */; };
 		33E1B8CC1CB7DD4100B4207F /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33E1B8CA1CB7DD4100B4207F /* FBSDKShareKit.framework */; };
@@ -336,6 +337,7 @@
 		33DBA6F01CB8D2FC00AB0062 /* dylib1.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = dylib1.o; path = usr/lib/dylib1.o; sourceTree = SDKROOT; };
 		33DBA6F21CB8D30500AB0062 /* lazydylib1.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = lazydylib1.o; path = usr/lib/lazydylib1.o; sourceTree = SDKROOT; };
 		33DBA6F41CB8D31600AB0062 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		33DE2E141D12E205008F4AC6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		33E1B8C71CB7DCF000B4207F /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		33E1B8C91CB7DD4100B4207F /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		33E1B8CA1CB7DD4100B4207F /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 				335DC0F71CEDEFD4001183DD /* UIKit.framework in Frameworks */,
 				335DC0F51CEDEFCB001183DD /* Accelerate.framework in Frameworks */,
 				335AB9031CCE4B4F0037D66F /* CoreGraphics.framework in Frameworks */,
+				33DE2E151D12E205008F4AC6 /* MapKit.framework in Frameworks */,
 				335AB9011CCE4B280037D66F /* CoreVideo.framework in Frameworks */,
 				335AB8FF1CCE4B1D0037D66F /* QuartzCore.framework in Frameworks */,
 				335AB8FD1CCE4B130037D66F /* ImageIO.framework in Frameworks */,
@@ -848,6 +851,7 @@
 		B34B5C970B55F0D232BFF620 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				33DE2E141D12E205008F4AC6 /* MapKit.framework */,
 				335DC0F81CEDEFE3001183DD /* Foundation.framework */,
 				335DC0F61CEDEFD4001183DD /* UIKit.framework */,
 				335DC0F41CEDEFCB001183DD /* Accelerate.framework */,
@@ -938,6 +942,9 @@
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = YSNGH6HTET;
 						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};

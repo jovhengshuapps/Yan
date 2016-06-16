@@ -64,6 +64,9 @@
                                                               annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
         
     }
+    else if ([[url absoluteString] rangeOfString:@"waze"].location != NSNotFound) {
+        handled = YES;
+    }
     else {
         handled = [[GIDSignIn sharedInstance] handleURL:url
                                       sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
@@ -106,15 +109,17 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
 //    NSLog(@"received notification:%@",userInfo);
+    self.notificationUserInfo = [NSDictionary dictionaryWithDictionary:userInfo];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
-//    NSLog(@"completion received notification:%@",userInfo);
+    //    NSLog(@"completion received notification:%@",userInfo);
+    self.notificationUserInfo = [NSDictionary dictionaryWithDictionary:userInfo];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle].infoDictionary objectForKey:@"UIMainStoryboardFile"] bundle:[NSBundle mainBundle]];
     ReminderNotificationViewController *reminder = [storyboard instantiateViewControllerWithIdentifier:@"reminderNotification"];
-    reminder.restaurantName = userInfo[@"name"];
-    reminder.reservationTimeFrom = userInfo[@"reservation-time"];
+    reminder.restaurantName = self.notificationUserInfo[@"name"];
+    reminder.reservationTimeFrom = self.notificationUserInfo[@"reservation-time"];
     [self.window addSubview:reminder.view];
     
 }
@@ -145,7 +150,17 @@
     [FBSDKAppEvents activateApp];
     
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-
+    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDate *currentDate = [NSDate date];
+    NSInteger currentHour = [calendar component:NSCalendarUnitHour fromDate:currentDate];
+    if (currentHour < [self hourFromString:self.notificationUserInfo[@"reservation-time"]]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle].infoDictionary objectForKey:@"UIMainStoryboardFile"] bundle:[NSBundle mainBundle]];
+        ReminderNotificationViewController *reminder = [storyboard instantiateViewControllerWithIdentifier:@"reminderNotification"];
+        reminder.restaurantName = self.notificationUserInfo[@"name"];
+        reminder.reservationTimeFrom = self.notificationUserInfo[@"reservation-time"];
+        [self.window addSubview:reminder.view];
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -255,5 +270,19 @@ didDisconnectWithUser:(GIDGoogleUser *)user
     // Perform any operations when the user disconnects from app here.
     // ...
 }
+
+
+
+
+- (NSInteger) hourFromString:(NSString*)string {
+    if ([string rangeOfString:@"AM"].location != NSNotFound) {
+        return [[string componentsSeparatedByString:@":"][0] integerValue];
+    }
+    else if ([string rangeOfString:@"PM"].location != NSNotFound) {
+        return [[string componentsSeparatedByString:@":"][0] integerValue] + 12;
+    }
+    return 0;
+}
+
 
 @end

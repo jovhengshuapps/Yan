@@ -98,12 +98,20 @@
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-//    NSLog(@"success notification:%@",deviceToken);
-    NSMutableString *string = [NSMutableString stringWithFormat:@"%@",deviceToken];
-    [string replaceOccurrencesOfString:@"<" withString:@"" options:NSLiteralSearch range:NSMakeRange(0, string.length)];
-    [string replaceOccurrencesOfString:@">" withString:@"" options:NSLiteralSearch range:NSMakeRange(0, string.length)];
-    [string replaceOccurrencesOfString:@" " withString:@"" options:NSLiteralSearch range:NSMakeRange(0, string.length)];
-    self.deviceToken = string;
+
+//    self.deviceToken=[[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+//    self.deviceToken = [self.deviceToken stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//    self.deviceToken = [self.deviceToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    char * tokenChars = (char*)[deviceToken bytes];
+    NSMutableString * tokenString = [NSMutableString new];
+    
+    for (NSInteger i = 0; i < deviceToken.length; i++) {
+        [tokenString appendFormat:@"%02.2hhx", tokenChars[i]];
+    }
+    
+//    NSLog(@"tokenString:%@",tokenString);
+    self.deviceToken = tokenString;
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {

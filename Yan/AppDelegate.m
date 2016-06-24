@@ -116,20 +116,33 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
-//    NSLog(@"received notification:%@",userInfo);
-    self.notificationUserInfo = [NSDictionary dictionaryWithDictionary:userInfo];
+    //    NSLog(@"received notification:%@",userInfo);
+    self.notificationUserInfo = [NSDictionary dictionaryWithDictionary:userInfo[@"aps"][@"alert"]];
+    [UIApplication sharedApplication].applicationIconBadgeNumber += [[[userInfo objectForKey:@"aps"] objectForKey: @"badge"] intValue];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
-    //    NSLog(@"completion received notification:%@",userInfo);
-    self.notificationUserInfo = [NSDictionary dictionaryWithDictionary:userInfo];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle].infoDictionary objectForKey:@"UIMainStoryboardFile"] bundle:[NSBundle mainBundle]];
-    ReminderNotificationViewController *reminder = [storyboard instantiateViewControllerWithIdentifier:@"reminderNotification"];
-    reminder.restaurantName = self.notificationUserInfo[@"name"];
-    reminder.reservationTimeFrom = self.notificationUserInfo[@"reservation-time"];
-    [self.window addSubview:reminder.view];
-    
+//    NSLog(@"completion received notification:%@",userInfo);
+    self.notificationUserInfo = [NSDictionary dictionaryWithDictionary:userInfo[@"aps"][@"alert"]];
+    if (self.notificationUserInfo) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle].infoDictionary objectForKey:@"UIMainStoryboardFile"] bundle:[NSBundle mainBundle]];
+        
+        ReminderNotificationViewController *reminder = [storyboard instantiateViewControllerWithIdentifier:@"reminderNotification"];
+        if (self.notificationUserInfo[@"name"]) {
+            reminder.restaurantName = self.notificationUserInfo[@"name"];
+            reminder.reservationTimeFrom = self.notificationUserInfo[@"reservation-time"];
+            reminder.type = @"reminder";
+        }
+        else {
+            
+            reminder.type = @"notification";
+            reminder.title = self.notificationUserInfo[@"title"];
+            reminder.bodyText = self.notificationUserInfo[@"body"];
+        }
+        
+        [self.window addSubview:reminder.view];
+    }
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -159,14 +172,22 @@
     
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDate *currentDate = [NSDate date];
-    NSInteger currentHour = [calendar component:NSCalendarUnitHour fromDate:currentDate];
-    if (currentHour < [self hourFromString:self.notificationUserInfo[@"reservation-time"]]) {
+    if (self.notificationUserInfo) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle].infoDictionary objectForKey:@"UIMainStoryboardFile"] bundle:[NSBundle mainBundle]];
+        
         ReminderNotificationViewController *reminder = [storyboard instantiateViewControllerWithIdentifier:@"reminderNotification"];
-        reminder.restaurantName = self.notificationUserInfo[@"name"];
-        reminder.reservationTimeFrom = self.notificationUserInfo[@"reservation-time"];
+        if (self.notificationUserInfo[@"name"]) {
+            reminder.restaurantName = self.notificationUserInfo[@"name"];
+            reminder.reservationTimeFrom = self.notificationUserInfo[@"reservation-time"];
+            reminder.type = @"reminder";
+        }
+        else {
+            
+            reminder.type = @"notification";
+            reminder.title = self.notificationUserInfo[@"title"];
+            reminder.bodyText = self.notificationUserInfo[@"body"];
+        }
+        
         [self.window addSubview:reminder.view];
     }
 }

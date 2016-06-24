@@ -13,5 +13,8 @@
 @property (strong, nonatomic) NSString *restaurantName;
 @property (strong, nonatomic) NSString *reservationTimeFrom;
 @property (strong, nonatomic) NSString *reservationTimeTo;
+@property (strong, nonatomic) NSString *type;
+@property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSString *bodyText;
 
 @end

@@ -9,6 +9,7 @@
 #import "ReserveCompleteViewController.h"
 
 @interface ReserveCompleteViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *NotificationText;
 
 @end
 
@@ -31,6 +32,11 @@
 //    
 //    [[self navigationItem] setRightBarButtonItem:waiterItem];
     
+    
+    // Original Text: You will receive a notification a day before your reservation as a reminder.
+    
+    
+    self.NotificationText.text = @"A Restaurant representative will get back to you on your request.";
     
     
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;

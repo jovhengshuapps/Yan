@@ -20,4 +20,5 @@
 @property (assign, nonatomic) BOOL birthdayValidation;
 @property (assign, nonatomic) BOOL todayValidation;
 @property (strong, nonatomic) NSDictionary *dateRange;
+@property (strong, nonatomic) NSString *dateSelected;
 @end

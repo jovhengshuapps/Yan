@@ -73,8 +73,8 @@
             <string>LucidaGrande-Bold</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
-            <string>LucidaGrande-Bold</string>
             <string>LucidaGrande</string>
+            <string>LucidaGrande-Bold</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
@@ -176,10 +176,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aAN-D4-SVn">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REMINDER !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grV-QR-IpS">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REMINDER !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="grV-QR-IpS">
                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="Saf-4R-6nu"/>
+                                            <constraint firstAttribute="height" constant="36" id="Saf-4R-6nu">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="66"/>
+                                            </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="LucidaGrande-Bold" family="Lucida Grande" pointSize="32"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -211,27 +213,6 @@
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
                                                 <include reference="xsu-Hj-7Bp"/>
-                                            </mask>
-                                        </variation>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ci1-Fe-VuU">
-                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="125" id="Clm-Ow-N1i"/>
-                                        </constraints>
-                                        <string key="text">CASA MARCOS
-8:00PM</string>
-                                        <fontDescription key="fontDescription" name="LucidaGrande-Bold" family="Lucida Grande" pointSize="30"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="Clm-Ow-N1i"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
-                                            <mask key="constraints">
-                                                <include reference="Clm-Ow-N1i"/>
                                             </mask>
                                         </variation>
                                     </label>
@@ -294,10 +275,33 @@
                                             <action selector="closeButton:" destination="1Yo-1X-RmN" eventType="touchUpInside" id="Vg4-hp-hfl"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Ci1-Fe-VuU">
+                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="125" id="Clm-Ow-N1i"/>
+                                        </constraints>
+                                        <string key="text">CASA MARCOS
+8:00PM</string>
+                                        <fontDescription key="fontDescription" name="LucidaGrande-Bold" family="Lucida Grande" pointSize="30"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="Clm-Ow-N1i"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="Clm-Ow-N1i"/>
+                                            </mask>
+                                        </variation>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="grV-QR-IpS" firstAttribute="top" secondItem="aAN-D4-SVn" secondAttribute="top" constant="135" id="26t-cR-xj2"/>
+                                    <constraint firstItem="grV-QR-IpS" firstAttribute="top" secondItem="aAN-D4-SVn" secondAttribute="top" constant="135" id="26t-cR-xj2">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="105"/>
+                                    </constraint>
                                     <constraint firstItem="97S-ec-BK2" firstAttribute="leading" secondItem="aAN-D4-SVn" secondAttribute="leading" constant="8" id="Ak3-lv-2RX"/>
                                     <constraint firstItem="Ci1-Fe-VuU" firstAttribute="top" secondItem="BJC-sv-462" secondAttribute="bottom" constant="8" id="CBE-ba-kNG"/>
                                     <constraint firstItem="2Sb-Io-2jg" firstAttribute="top" secondItem="Ci1-Fe-VuU" secondAttribute="bottom" constant="8" id="E7j-4h-Oex"/>
@@ -310,7 +314,7 @@
                                     <constraint firstItem="97S-ec-BK2" firstAttribute="top" secondItem="2Sb-Io-2jg" secondAttribute="bottom" constant="8" id="dsc-1I-FbT"/>
                                     <constraint firstItem="Ci1-Fe-VuU" firstAttribute="leading" secondItem="aAN-D4-SVn" secondAttribute="leading" constant="44" id="iw9-ki-ueS"/>
                                     <constraint firstItem="BJC-sv-462" firstAttribute="leading" secondItem="aAN-D4-SVn" secondAttribute="leading" constant="8" id="jba-J3-Fw3"/>
-                                    <constraint firstAttribute="bottom" secondItem="HXx-1u-p0g" secondAttribute="bottom" constant="8" id="kCa-kU-Dbn"/>
+                                    <constraint firstItem="HXx-1u-p0g" firstAttribute="top" secondItem="97S-ec-BK2" secondAttribute="bottom" constant="37" id="mdy-0L-goR"/>
                                     <constraint firstItem="HXx-1u-p0g" firstAttribute="leading" secondItem="aAN-D4-SVn" secondAttribute="leading" constant="44" id="n0p-xT-AKI"/>
                                     <constraint firstAttribute="trailing" secondItem="97S-ec-BK2" secondAttribute="trailing" constant="8" id="raj-Qi-MzU"/>
                                     <constraint firstAttribute="trailing" secondItem="BJC-sv-462" secondAttribute="trailing" constant="8" id="t3Y-47-E6h"/>
@@ -320,60 +324,60 @@
                                     <mask key="subviews">
                                         <exclude reference="grV-QR-IpS"/>
                                         <exclude reference="BJC-sv-462"/>
-                                        <exclude reference="Ci1-Fe-VuU"/>
                                         <exclude reference="2Sb-Io-2jg"/>
                                         <exclude reference="97S-ec-BK2"/>
                                         <exclude reference="HXx-1u-p0g"/>
+                                        <exclude reference="Ci1-Fe-VuU"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="Tax-VP-dvw"/>
-                                        <exclude reference="kCa-kU-Dbn"/>
-                                        <exclude reference="n0p-xT-AKI"/>
-                                        <exclude reference="E7j-4h-Oex"/>
-                                        <exclude reference="FYA-6X-1CM"/>
-                                        <exclude reference="PA6-Bi-22i"/>
-                                        <exclude reference="Ak3-lv-2RX"/>
-                                        <exclude reference="dsc-1I-FbT"/>
-                                        <exclude reference="raj-Qi-MzU"/>
+                                        <exclude reference="26t-cR-xj2"/>
+                                        <exclude reference="KcH-os-PHZ"/>
+                                        <exclude reference="xEJ-8l-vTp"/>
                                         <exclude reference="OPv-gV-NnK"/>
                                         <exclude reference="jba-J3-Fw3"/>
                                         <exclude reference="t3Y-47-E6h"/>
                                         <exclude reference="CBE-ba-kNG"/>
                                         <exclude reference="T0W-YR-mXB"/>
                                         <exclude reference="iw9-ki-ueS"/>
-                                        <exclude reference="26t-cR-xj2"/>
-                                        <exclude reference="KcH-os-PHZ"/>
-                                        <exclude reference="xEJ-8l-vTp"/>
+                                        <exclude reference="E7j-4h-Oex"/>
+                                        <exclude reference="FYA-6X-1CM"/>
+                                        <exclude reference="PA6-Bi-22i"/>
+                                        <exclude reference="Ak3-lv-2RX"/>
+                                        <exclude reference="dsc-1I-FbT"/>
+                                        <exclude reference="raj-Qi-MzU"/>
+                                        <exclude reference="Tax-VP-dvw"/>
+                                        <exclude reference="mdy-0L-goR"/>
+                                        <exclude reference="n0p-xT-AKI"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="subviews">
                                         <include reference="grV-QR-IpS"/>
                                         <include reference="BJC-sv-462"/>
-                                        <include reference="Ci1-Fe-VuU"/>
                                         <include reference="2Sb-Io-2jg"/>
                                         <include reference="97S-ec-BK2"/>
                                         <include reference="HXx-1u-p0g"/>
+                                        <include reference="Ci1-Fe-VuU"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="Tax-VP-dvw"/>
-                                        <include reference="kCa-kU-Dbn"/>
-                                        <include reference="n0p-xT-AKI"/>
-                                        <include reference="E7j-4h-Oex"/>
-                                        <include reference="FYA-6X-1CM"/>
-                                        <include reference="PA6-Bi-22i"/>
-                                        <include reference="Ak3-lv-2RX"/>
-                                        <include reference="dsc-1I-FbT"/>
-                                        <include reference="raj-Qi-MzU"/>
+                                        <include reference="26t-cR-xj2"/>
+                                        <include reference="KcH-os-PHZ"/>
+                                        <include reference="xEJ-8l-vTp"/>
                                         <include reference="OPv-gV-NnK"/>
                                         <include reference="jba-J3-Fw3"/>
                                         <include reference="t3Y-47-E6h"/>
                                         <include reference="CBE-ba-kNG"/>
                                         <include reference="T0W-YR-mXB"/>
                                         <include reference="iw9-ki-ueS"/>
-                                        <include reference="26t-cR-xj2"/>
-                                        <include reference="KcH-os-PHZ"/>
-                                        <include reference="xEJ-8l-vTp"/>
+                                        <include reference="E7j-4h-Oex"/>
+                                        <include reference="FYA-6X-1CM"/>
+                                        <include reference="PA6-Bi-22i"/>
+                                        <include reference="Ak3-lv-2RX"/>
+                                        <include reference="dsc-1I-FbT"/>
+                                        <include reference="raj-Qi-MzU"/>
+                                        <include reference="Tax-VP-dvw"/>
+                                        <include reference="mdy-0L-goR"/>
+                                        <include reference="n0p-xT-AKI"/>
                                     </mask>
                                 </variation>
                             </view>
@@ -409,7 +413,11 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="labelMainTitle" destination="grV-QR-IpS" id="1b7-Et-rxt"/>
                         <outlet property="labelReservationNameTime" destination="Ci1-Fe-VuU" id="itD-XQ-IkV"/>
+                        <outlet property="labelText1" destination="BJC-sv-462" id="T3k-lH-3d9"/>
+                        <outlet property="labelText2" destination="2Sb-Io-2jg" id="FBO-TK-Cby"/>
+                        <outlet property="labelThankYou" destination="97S-ec-BK2" id="rzG-37-Mwa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7AL-Gs-AkB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3974,18 +3982,6 @@ You may now start using the app for your favourite restaurant.</string>
                                 <exclude reference="a5L-M9-XQJ"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Cb2-D3-Avf"/>
-                                <exclude reference="DPe-hL-OS2"/>
-                                <exclude reference="Msb-5o-o2C"/>
-                                <exclude reference="9YH-a1-TWR"/>
-                                <exclude reference="Onf-md-GPF"/>
-                                <exclude reference="gam-Ll-EAJ"/>
-                                <exclude reference="0uR-QD-P28"/>
-                                <exclude reference="7xU-rc-w0B"/>
-                                <exclude reference="xab-ps-Puo"/>
-                                <exclude reference="Evy-Z2-4Rg"/>
-                                <exclude reference="a6E-Ko-KjD"/>
-                                <exclude reference="vUe-zQ-2kz"/>
                                 <exclude reference="2xq-C5-2HL"/>
                                 <exclude reference="PB9-QP-t7s"/>
                                 <exclude reference="rIF-wh-X6T"/>
@@ -3995,6 +3991,18 @@ You may now start using the app for your favourite restaurant.</string>
                                 <exclude reference="4Kc-SG-k5X"/>
                                 <exclude reference="Z8U-pJ-yD4"/>
                                 <exclude reference="jqZ-ah-djj"/>
+                                <exclude reference="0uR-QD-P28"/>
+                                <exclude reference="7xU-rc-w0B"/>
+                                <exclude reference="xab-ps-Puo"/>
+                                <exclude reference="Evy-Z2-4Rg"/>
+                                <exclude reference="a6E-Ko-KjD"/>
+                                <exclude reference="vUe-zQ-2kz"/>
+                                <exclude reference="Cb2-D3-Avf"/>
+                                <exclude reference="DPe-hL-OS2"/>
+                                <exclude reference="Msb-5o-o2C"/>
+                                <exclude reference="9YH-a1-TWR"/>
+                                <exclude reference="Onf-md-GPF"/>
+                                <exclude reference="gam-Ll-EAJ"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -4008,18 +4016,6 @@ You may now start using the app for your favourite restaurant.</string>
                                 <include reference="a5L-M9-XQJ"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Cb2-D3-Avf"/>
-                                <include reference="DPe-hL-OS2"/>
-                                <include reference="Msb-5o-o2C"/>
-                                <include reference="9YH-a1-TWR"/>
-                                <include reference="Onf-md-GPF"/>
-                                <include reference="gam-Ll-EAJ"/>
-                                <include reference="0uR-QD-P28"/>
-                                <include reference="7xU-rc-w0B"/>
-                                <include reference="xab-ps-Puo"/>
-                                <include reference="Evy-Z2-4Rg"/>
-                                <include reference="a6E-Ko-KjD"/>
-                                <include reference="vUe-zQ-2kz"/>
                                 <include reference="2xq-C5-2HL"/>
                                 <include reference="PB9-QP-t7s"/>
                                 <include reference="rIF-wh-X6T"/>
@@ -4029,6 +4025,18 @@ You may now start using the app for your favourite restaurant.</string>
                                 <include reference="4Kc-SG-k5X"/>
                                 <include reference="Z8U-pJ-yD4"/>
                                 <include reference="jqZ-ah-djj"/>
+                                <include reference="0uR-QD-P28"/>
+                                <include reference="7xU-rc-w0B"/>
+                                <include reference="xab-ps-Puo"/>
+                                <include reference="Evy-Z2-4Rg"/>
+                                <include reference="a6E-Ko-KjD"/>
+                                <include reference="vUe-zQ-2kz"/>
+                                <include reference="Cb2-D3-Avf"/>
+                                <include reference="DPe-hL-OS2"/>
+                                <include reference="Msb-5o-o2C"/>
+                                <include reference="9YH-a1-TWR"/>
+                                <include reference="Onf-md-GPF"/>
+                                <include reference="gam-Ll-EAJ"/>
                             </mask>
                         </variation>
                     </view>
@@ -4453,7 +4461,9 @@ You may now start using the app for your favourite restaurant.</string>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You will receive a notification a day before your reservation as a reminder." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lxI-Gu-6fd">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="81" id="nfn-ir-dHu"/>
+                                    <constraint firstAttribute="height" constant="81" id="nfn-ir-dHu">
+                                        <variation key="heightClass=regular-widthClass=compact" constant="165"/>
+                                    </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -4466,25 +4476,6 @@ You may now start using the app for your favourite restaurant.</string>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="nfn-ir-dHu"/>
-                                    </mask>
-                                </variation>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="See you soon!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4sg-yu-JL6">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="pmv-d0-n6O"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="LucidaGrande-Bold" family="Lucida Grande" pointSize="22"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="pmv-d0-n6O"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="pmv-d0-n6O"/>
                                     </mask>
                                 </variation>
                             </label>
@@ -4511,6 +4502,25 @@ You may now start using the app for your favourite restaurant.</string>
                                     <action selector="completeRegistration:" destination="9eW-Mt-EhP" eventType="touchUpInside" id="Uja-9b-Q5U"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="See you soon!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4sg-yu-JL6">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="pmv-d0-n6O"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="LucidaGrande-Bold" family="Lucida Grande" pointSize="22"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="pmv-d0-n6O"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="pmv-d0-n6O"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -4537,8 +4547,8 @@ You may now start using the app for your favourite restaurant.</string>
                                 <exclude reference="2bg-nM-SGh"/>
                                 <exclude reference="qDF-15-SXp"/>
                                 <exclude reference="lxI-Gu-6fd"/>
-                                <exclude reference="4sg-yu-JL6"/>
                                 <exclude reference="lkA-q7-3sc"/>
+                                <exclude reference="4sg-yu-JL6"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="ivx-G0-aJT"/>
@@ -4563,8 +4573,8 @@ You may now start using the app for your favourite restaurant.</string>
                                 <include reference="2bg-nM-SGh"/>
                                 <include reference="qDF-15-SXp"/>
                                 <include reference="lxI-Gu-6fd"/>
-                                <include reference="4sg-yu-JL6"/>
                                 <include reference="lkA-q7-3sc"/>
+                                <include reference="4sg-yu-JL6"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="ivx-G0-aJT"/>
@@ -4586,6 +4596,9 @@ You may now start using the app for your favourite restaurant.</string>
                         </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
+                    <connections>
+                        <outlet property="NotificationText" destination="lxI-Gu-6fd" id="Are-hl-c4O"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PkM-hM-4CS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

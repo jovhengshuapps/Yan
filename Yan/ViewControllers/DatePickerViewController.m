@@ -47,9 +47,16 @@
         NSInteger startHour = [self hourFromString:from];
         NSInteger endHour = [self hourFromString:to];
         
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat:@"MM/dd/yyyy"];
+        
+        NSDate *dateToCheck = [dateFormat dateFromString:self.dateSelected];
+        
+        
+        
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         NSDate *currentDate = [NSDate date];
-        NSDateComponents *comps = [[NSDateComponents alloc] init];
+//        NSDateComponents *comps = [[NSDateComponents alloc] init];
         //        [comps setDay:1];
         
         NSInteger currentHour = [calendar component:NSCalendarUnitHour fromDate:currentDate];
@@ -73,11 +80,18 @@
 //        self.datePicker.maximumDate = maxDate;
         
         NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier: NSCalendarIdentifierGregorian];
-        NSDateComponents *components = [gregorian components: NSCalendarUnitHour fromDate: currentDate];
-        if (startHour < currentHour) {
-            [components setHour:currentHour];
+        NSDateComponents * components = nil;
+        if ([[dateFormat stringFromDate:currentDate] isEqualToString:[dateFormat stringFromDate:dateToCheck]]) {
+            components = [gregorian components: NSCalendarUnitHour fromDate: currentDate];
+            if (startHour < currentHour) {
+                [components setHour:currentHour];
+            }
+            else {
+                [components setHour: startHour];
+            }
         }
         else {
+            components = [gregorian components: NSCalendarUnitHour fromDate: dateToCheck];
             [components setHour: startHour];
         }
         [components setMinute: 0];
@@ -115,7 +129,7 @@
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     if (_datePickerMode == UIDatePickerModeDate) {
-        [dateFormat setDateFormat:@"MM/dd/YYYY"];
+        [dateFormat setDateFormat:@"MM/dd/yyyy"];
     }
     else if (_datePickerMode == UIDatePickerModeTime) {
         [dateFormat setDateFormat:@"hh:mm aa"];

@@ -41,6 +41,8 @@
     
 //    Account *account = [self userLoggedIn];
     
+    self.textFieldDate.placeholder = @"Loading Available Dates";
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkReservationTimes:) name:@"checkReservationTimes" object:nil];
     [self callGETAPI:API_RESERVATION_CHECKTIME(self.restaurantDetails.identifier) withParameters:@{} completionNotification:@"checkReservationTimes"];
     
@@ -64,6 +66,8 @@
 
 - (void) checkReservationTimes:(NSNotification*)notification {
 //    NSLog(@"Available Times:%@",notification.object);
+    
+    self.textFieldDate.placeholder = @"Date";
     NSArray *response = notification.object;
     self.arrayAvailableDays = [NSMutableArray array];
     self.arrayAvailableTimes = [NSMutableArray array];
@@ -153,11 +157,12 @@
         destNav.delegate = self;
         destNav.datePickerMode = UIDatePickerModeTime;
         destNav.todayValidation = YES;
-        NSString *daySelected = [self.textFieldDate.text componentsSeparatedByString:@","][0];
-//        NSLog(@"selected:%@",daySelected);
+        NSString *daySelected = [self.textFieldDate.text componentsSeparatedByString:@" - "][0];
+        NSLog(@"selected:%@",daySelected);
         for (NSDictionary *dateAndTimes in self.arrayAvailableTimes) {
             if ([daySelected isEqualToString:dateAndTimes[@"day"]]) {
                 destNav.dateRange = @{@"from":dateAndTimes[@"from"], @"to":dateAndTimes[@"to"]};
+                destNav.dateSelected = [self.textFieldDate.text componentsSeparatedByString:@" - "][1];
                 break;
             }
         }

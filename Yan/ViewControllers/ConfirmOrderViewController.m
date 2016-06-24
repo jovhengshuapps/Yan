@@ -9,6 +9,7 @@
 #import "ConfirmOrderViewController.h"
 #import "PaymentSelectViewController.h"
 #import "DiscountViewController.h"
+#import "PayScreenViewController.h"
 
 @interface ConfirmOrderViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *mainTable;
@@ -269,13 +270,27 @@
 }
 
 - (void) callBillout {
-    DiscountViewController *discountView = (DiscountViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"discountView"];
-    discountView.tableNumber = self.tableNumber;
-    [self.navigationController pushViewController:discountView animated:YES];
+//    DiscountViewController *discountView = (DiscountViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"discountView"];
+//    discountView.tableNumber = self.tableNumber;
+//    [self.navigationController pushViewController:discountView animated:YES];
     
 //    PaymentSelectViewController *paymentSelect = (PaymentSelectViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"paymentSelection"];
 //    paymentSelect.tableNumber = _tableNumber;
 //    [self.navigationController pushViewController:paymentSelect animated:YES];
+    
+    
+    
+    
+    
+    PayScreenViewController *paymentSelect = (PayScreenViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"payScreenView"];
+    paymentSelect.tableNumber = _tableNumber;
+//    paymentSelect.discountDetails = @{@"senior":self.discountDetails[@"senior"],
+//                                      @"gc":self.discountDetails[@"gc"],
+//                                      @"diners":self.discountDetails[@"diners"]};
+    paymentSelect.paymentType = @"CA";
+    [self.navigationController pushViewController:paymentSelect animated:YES];
+    
+    
 }
 
 #pragma mark Table Data Source

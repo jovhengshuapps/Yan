@@ -43,10 +43,10 @@
     
     UILabel *labelTotal = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 0.0f, 120.0f, 44.0f)];
     labelTotal.backgroundColor = [UIColor clearColor];
-    labelTotal.font = [UIFont fontWithName:@"LucidaGrande" size:20.0f];
+    labelTotal.font = [UIFont fontWithName:@"LucidaGrande" size:16.0f];
     labelTotal.textColor = UIColorFromRGB(0x666666);
     labelTotal.textAlignment = NSTextAlignmentLeft;
-    labelTotal.text = @"TOTAL:";
+    labelTotal.text = @"TOTAL w/ VAT:";
     [totalView addSubview:labelTotal];
     
     UILabel *labelTotalValue = [[UILabel alloc] initWithFrame:CGRectMake(labelTotal.bounds.origin.x + labelTotal.bounds.size.width, 0.0f, footerView.bounds.size.width - (labelTotal.bounds.size.width  + 20.0f), 44.0f)];
@@ -243,7 +243,7 @@
 
 #pragma mark Table Data Source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (![_discountDetails[@"senior"] isEqualToString:@"0"] || ![_discountDetails[@"gc"] isEqualToString:@"0"]) {
+    if (_discountDetails && (![_discountDetails[@"senior"] isEqualToString:@"0"] || ![_discountDetails[@"gc"] isEqualToString:@"0"])) {
         return 2;
     }
     return 1;

@@ -85,7 +85,7 @@
 
 - (BOOL) shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     if ([identifier isEqualToString:@"reservationComplete"]){
-        if (_textFieldDate.text.length && _textFieldTime.text.length && _textFieldTableNumber.text.length && _textFieldNumberPerson.text.length) {
+        if (_textFieldDate.text.length && _textFieldTime.text.length && /*_textFieldTableNumber.text.length &&*/ _textFieldNumberPerson.text.length) {
             
             Account *account = (Account*)[self userLoggedIn];
             //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completeReservation:) name:@"reservationRequest" object:nil];
@@ -94,10 +94,10 @@
             [dateFormatter setDateFormat:@"MM/dd/yyyy"];
             NSDate *reserveDate = [dateFormatter dateFromString:[_textFieldDate.text componentsSeparatedByString:@" - "][1]];
 //            NSLog(@"reserve:%@",[dateFormatter stringFromDate:reserveDate]);
-            
+            NSString *tableNumberParameter = (self.textFieldTableNumber.text.length)?self.textFieldTableNumber.text:@"X";
             NSDictionary *parameters = @{@"reserve_date":[dateFormatter stringFromDate:reserveDate],
                                          @"reserve_time":_textFieldTime.text,
-                                         @"table":_textFieldTableNumber.text,
+                                         @"table":tableNumberParameter,
                                          @"persons":_textFieldNumberPerson.text
                                          };
             //        NSDictionary *parameters = @{@"reserve_date":@"05/23/2016",
@@ -114,7 +114,7 @@
             }];
         }
         else {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Incomplete Details" message:@"All fields are required." preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Incomplete Details" message:@"Date, Time and Number of Person fields are required." preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                 [alert dismissViewControllerAnimated:YES completion:nil];
             }];

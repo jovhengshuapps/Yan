@@ -11,6 +11,8 @@
 		3302B0501CF1FE970033BAA1 /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 3302B04E1CF1FE970033BAA1 /* Restaurant.m */; };
 		33038B471D09779400637A0A /* ReminderNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33038B461D09779400637A0A /* ReminderNotificationViewController.m */; };
 		33038B4A1D098BEF00637A0A /* DayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33038B491D098BEF00637A0A /* DayTableViewController.m */; };
+		3338AE8E1D1F588F002B12F1 /* Notification+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3338AE8B1D1F588F002B12F1 /* Notification+CoreDataProperties.m */; };
+		3338AE8F1D1F588F002B12F1 /* Notification.m in Sources */ = {isa = PBXBuildFile; fileRef = 3338AE8D1D1F588F002B12F1 /* Notification.m */; };
 		333FEEF71CCF7205004D4B5B /* MenuListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FEEF61CCF7205004D4B5B /* MenuListViewController.m */; };
 		333FEEFA1CCF7AFE004D4B5B /* MenuDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FEEF91CCF7AFE004D4B5B /* MenuDetailsViewController.m */; };
 		33446AEC1CDB486F00F46EE1 /* OptionListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33446AEB1CDB486F00F46EE1 /* OptionListTableViewController.m */; };
@@ -154,6 +156,10 @@
 		33038B461D09779400637A0A /* ReminderNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderNotificationViewController.m; sourceTree = "<group>"; };
 		33038B481D098BEF00637A0A /* DayTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayTableViewController.h; sourceTree = "<group>"; };
 		33038B491D098BEF00637A0A /* DayTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayTableViewController.m; sourceTree = "<group>"; };
+		3338AE8A1D1F588F002B12F1 /* Notification+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Notification+CoreDataProperties.h"; sourceTree = "<group>"; };
+		3338AE8B1D1F588F002B12F1 /* Notification+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Notification+CoreDataProperties.m"; sourceTree = "<group>"; };
+		3338AE8C1D1F588F002B12F1 /* Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notification.h; sourceTree = "<group>"; };
+		3338AE8D1D1F588F002B12F1 /* Notification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Notification.m; sourceTree = "<group>"; };
 		333FEEF51CCF7205004D4B5B /* MenuListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuListViewController.h; sourceTree = "<group>"; };
 		333FEEF61CCF7205004D4B5B /* MenuListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuListViewController.m; sourceTree = "<group>"; };
 		333FEEF81CCF7AFE004D4B5B /* MenuDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuDetailsViewController.h; sourceTree = "<group>"; };
@@ -678,6 +684,10 @@
 				3302B04C1CF1FE970033BAA1 /* Restaurant+CoreDataProperties.m */,
 				3302B04D1CF1FE970033BAA1 /* Restaurant.h */,
 				3302B04E1CF1FE970033BAA1 /* Restaurant.m */,
+				3338AE8A1D1F588F002B12F1 /* Notification+CoreDataProperties.h */,
+				3338AE8B1D1F588F002B12F1 /* Notification+CoreDataProperties.m */,
+				3338AE8C1D1F588F002B12F1 /* Notification.h */,
+				3338AE8D1D1F588F002B12F1 /* Notification.m */,
 			);
 			name = "CoreData Objects";
 			sourceTree = "<group>";
@@ -1032,8 +1042,10 @@
 				33446B021CDB613300F46EE1 /* MenuItem.m in Sources */,
 				3394A39F1CADF66300472030 /* REFrostedContainerViewController.m in Sources */,
 				33599B511CAD259100366C34 /* Yan.xcdatamodeld in Sources */,
+				3338AE8F1D1F588F002B12F1 /* Notification.m in Sources */,
 				3381D35D1CDD84D7006BBAEF /* WaiterTableViewController.m in Sources */,
 				3394A39E1CADF66300472030 /* RECommonFunctions.m in Sources */,
+				3338AE8E1D1F588F002B12F1 /* Notification+CoreDataProperties.m in Sources */,
 				33E2C5951CE2015400B28935 /* PayScreenViewController.m in Sources */,
 				33A2D30F1CDEED0B00D86794 /* TableNumberViewController.m in Sources */,
 				335834641CC4F1B4008606C8 /* AffiliatedRestoViewController.m in Sources */,

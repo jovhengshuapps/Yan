@@ -117,32 +117,16 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
     //    NSLog(@"received notification:%@",userInfo);
-    self.notificationUserInfo = [NSDictionary dictionaryWithDictionary:userInfo[@"aps"][@"alert"]];
+    [self saveNotificationData:userInfo[@"aps"][@"alert"]];
     [UIApplication sharedApplication].applicationIconBadgeNumber += [[[userInfo objectForKey:@"aps"] objectForKey: @"badge"] intValue];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
 //    NSLog(@"completion received notification:%@",userInfo);
-    self.notificationUserInfo = [NSDictionary dictionaryWithDictionary:userInfo[@"aps"][@"alert"]];
-    if (self.notificationUserInfo) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle].infoDictionary objectForKey:@"UIMainStoryboardFile"] bundle:[NSBundle mainBundle]];
-        
-        ReminderNotificationViewController *reminder = [storyboard instantiateViewControllerWithIdentifier:@"reminderNotification"];
-        if (self.notificationUserInfo[@"name"]) {
-            reminder.restaurantName = self.notificationUserInfo[@"name"];
-            reminder.reservationTimeFrom = self.notificationUserInfo[@"reservation-time"];
-            reminder.type = @"reminder";
-        }
-        else {
-            
-            reminder.type = @"notification";
-            reminder.title = self.notificationUserInfo[@"title"];
-            reminder.bodyText = self.notificationUserInfo[@"body"];
-        }
-        
-        [self.window addSubview:reminder.view];
-    }
+    [self saveNotificationData:userInfo[@"aps"][@"alert"]];
+    
+    [self showNoticationScreen:self.notificationUserInfo];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -172,24 +156,21 @@
     
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     
-    if (self.notificationUserInfo) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle].infoDictionary objectForKey:@"UIMainStoryboardFile"] bundle:[NSBundle mainBundle]];
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Notification"];
+    
+    NSError *error = nil;
+    
+    NSArray *result = [context executeFetchRequest:request error:&error];
+    
+    if (result.count) {
+        Notification * notificationData = (Notification*)result[0];
         
-        ReminderNotificationViewController *reminder = [storyboard instantiateViewControllerWithIdentifier:@"reminderNotification"];
-        if (self.notificationUserInfo[@"name"]) {
-            reminder.restaurantName = self.notificationUserInfo[@"name"];
-            reminder.reservationTimeFrom = self.notificationUserInfo[@"reservation-time"];
-            reminder.type = @"reminder";
-        }
-        else {
-            
-            reminder.type = @"notification";
-            reminder.title = self.notificationUserInfo[@"title"];
-            reminder.bodyText = self.notificationUserInfo[@"body"];
-        }
-        
-        [self.window addSubview:reminder.view];
+        self.notificationUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:notificationData.type,@"type",notificationData.name,@"name",notificationData.reservation_time,@"reservation-time",notificationData.title,@"title",notificationData.body_text,@"body", nil];
     }
+    
+    [self showNoticationScreen:self.notificationUserInfo];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -313,5 +294,52 @@ didDisconnectWithUser:(GIDGoogleUser *)user
     return 0;
 }
 
+- (void) saveNotificationData:(NSDictionary*)data {
+    
+    self.notificationUserInfo = [NSDictionary dictionaryWithDictionary:data];
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    Notification *notificationItem = [[Notification alloc] initWithEntity:[NSEntityDescription entityForName:@"Notification" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
+    
+    
+    notificationItem.name = isNIL(data[@"name"]);
+    notificationItem.title = isNIL(data[@"title"]);
+    notificationItem.body_text = isNIL(data[@"body"]);
+    notificationItem.reservation_time = isNIL(data[@"reservation-time"]);
+    if (data[@"name"] && [data[@"name"] length]) {
+        notificationItem.type = @"reminder";
+    }
+    else {
+        notificationItem.type = @"notification";
+    }
+    
+    NSError *error = nil;
+    
+    [context save:&error];
+    
+    
+}
+
+- (void) showNoticationScreen:(NSDictionary*)notificationData {
+    if (notificationData) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle].infoDictionary objectForKey:@"UIMainStoryboardFile"] bundle:[NSBundle mainBundle]];
+        
+        ReminderNotificationViewController *reminder = [storyboard instantiateViewControllerWithIdentifier:@"reminderNotification"];
+        if (self.notificationUserInfo[@"name"] && [self.notificationUserInfo[@"name"] length]) {
+            reminder.restaurantName = self.notificationUserInfo[@"name"];
+            reminder.reservationTimeFrom = self.notificationUserInfo[@"reservation-time"];
+            reminder.type = @"reminder";
+        }
+        else {
+            
+            reminder.type = @"notification";
+            reminder.title = self.notificationUserInfo[@"title"];
+            reminder.bodyText = self.notificationUserInfo[@"body"];
+        }
+        
+        [self.window addSubview:reminder.view];
+    }
+}
 
 @end

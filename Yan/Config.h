@@ -35,6 +35,7 @@
 #import "MenuItem.h"
 #import "OrderList.h"
 #import "Restaurant.h"
+#import "Notification.h"
 
 // MACROS
 

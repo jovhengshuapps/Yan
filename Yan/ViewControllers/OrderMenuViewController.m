@@ -448,10 +448,14 @@ BOOL hackFromLoad = NO;
 //    }
     
     if (self.menuIsLoading == YES) {
+        buttonMenu.hidden = YES;
+        self.mainTableView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.0f];
         self.activityIndicator.hidden = NO;
         [self.activityIndicator startAnimating];
     }
     else {
+        buttonMenu.hidden = NO;
+        self.mainTableView.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.5f];
         self.activityIndicator.hidden = YES;
         [self.activityIndicator stopAnimating];
     }

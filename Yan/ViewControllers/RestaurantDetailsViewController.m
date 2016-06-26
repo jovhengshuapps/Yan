@@ -25,11 +25,16 @@
     self.labelRestaurantOpeningHoursDays.text = _restaurantDetails.operating;
     if ([_restaurantDetails.latitude doubleValue] != 0 && [_restaurantDetails.longitude doubleValue] != 0) {
         
+        self.mapView.hidden = NO;
         CLLocationCoordinate2D restaurantLocation = CLLocationCoordinate2DMake([_restaurantDetails.latitude doubleValue], [_restaurantDetails.longitude doubleValue]);
         CLLocationDistance radiusRange = 1000;
         MKCoordinateRegion coordinateRegion = MKCoordinateRegionMakeWithDistance(restaurantLocation, radiusRange * 2.0f, radiusRange * 2.0f);
         [self.mapView setRegion:coordinateRegion];
         [self.mapView setCenterCoordinate:restaurantLocation];
+        
+    }
+    else {
+        self.mapView.hidden = YES;
     }
     UITapGestureRecognizer *tapMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(directionsWaze:)];
     tapMap.numberOfTouchesRequired = 1;

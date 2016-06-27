@@ -712,7 +712,7 @@ You may now start using the app for your favourite restaurant.</string>
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <segue destination="qUt-L3-tSa" kind="show" identifier="regCompleteOrderButton" id="NWP-Te-KdC"/>
+                                            <action selector="gotoOrderScreen:" destination="jUk-Vx-8B5" eventType="touchUpInside" id="5xM-bD-DwU"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What do you want to do next?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Sg-aR-Fof">
@@ -831,7 +831,7 @@ You may now start using the app for your favourite restaurant.</string>
                                         <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="24"/>
                                         <state key="normal" title="Order"/>
                                         <connections>
-                                            <segue destination="qUt-L3-tSa" kind="show" identifier="homeOrder" id="Ayu-oY-PwC"/>
+                                            <action selector="gotoOrderScreen:" destination="jUk-Vx-8B5" eventType="touchUpInside" id="VOn-oa-mgR"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQJ-aG-ZbW" customClass="CustomButton">
@@ -1549,6 +1549,7 @@ You may now start using the app for your favourite restaurant.</string>
                         </variation>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" id="Gej-u1-yUn"/>
                     <connections>
                         <outlet property="backButtonItem" destination="zXk-Rq-51f" id="j7g-U1-zMD"/>
                         <outlet property="buttonContinue" destination="q1d-eH-eDm" id="ygj-U3-GvH"/>
@@ -1989,6 +1990,22 @@ You may now start using the app for your favourite restaurant.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j7B-AA-Gjn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1773" y="-840.75"/>
+        </scene>
+        <!--Nav Order Menu Controller-->
+        <scene sceneID="pNF-66-jlG">
+            <objects>
+                <navigationController storyboardIdentifier="navOrderMenu" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rQ2-2C-MId" customClass="NavOrderMenuController" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Lzp-Q1-ARP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="qUt-L3-tSa" kind="relationship" relationship="rootViewController" id="611-bS-DFM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lYw-bC-0dC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1512" y="477"/>
         </scene>
         <!--Affiliated Resto View Controller-->
         <scene sceneID="XJ9-pC-yKO">
@@ -7393,10 +7410,9 @@ You may now start using the app for your favourite restaurant.</string>
         <image name="yan-red-gold" width="4519" height="4513"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iwi-F0-UhZ"/>
         <segue reference="Y4r-v0-sWo"/>
         <segue reference="YJZ-bv-B1B"/>
-        <segue reference="Ayu-oY-PwC"/>
+        <segue reference="iwi-F0-UhZ"/>
         <segue reference="Q3B-uT-Aey"/>
     </inferredMetricsTieBreakers>
 </document>

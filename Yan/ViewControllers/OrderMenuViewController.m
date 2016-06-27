@@ -485,11 +485,13 @@ BOOL hackFromLoad = NO;
     menuListView.menuList = _rawData[category];
     menuListView.delegate = self;
     
-    menuListView.view.frame = self.loadedControllerView.bounds;
+    
+    
     [self.loadedControllerView addSubview:menuListView.view];
     [self addChildViewController:menuListView];
     [menuListView didMoveToParentViewController:self];
-                             
+    
+    
     [self hideMenu];
     
     
@@ -504,10 +506,12 @@ BOOL hackFromLoad = NO;
     itemDetails.tableNumber = _orderTableNumber;
     itemDetails.delegate = self;
     
-    itemDetails.view.frame = self.loadedControllerView.bounds;
-    [self.loadedControllerView addSubview:itemDetails.view];
-    [self addChildViewController:itemDetails];
-    [itemDetails didMoveToParentViewController:self];
+//    itemDetails.view.frame = self.loadedControllerView.bounds;
+//    [self.loadedControllerView addSubview:itemDetails.view];
+//    [self addChildViewController:itemDetails];
+//    [itemDetails didMoveToParentViewController:self];
+
+    [self.navigationController pushViewController:itemDetails animated:YES];
     
 }
 

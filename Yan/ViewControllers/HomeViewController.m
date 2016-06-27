@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *googleLoginButton; //google
 
 @property (strong, nonatomic) NSMutableDictionary *socialAccount;
+@property (assign, nonatomic) NSInteger restaurantID;
+@property (assign, nonatomic) NSInteger tableNumber;
 @end
 
 @implementation HomeViewController
@@ -413,23 +415,19 @@
         return YES;
     }
     else if ([identifier isEqualToString:@"regCompleteOrderButton"] || [identifier isEqualToString:@"homeOrder"]) {
-        NSInteger restaurantID = 0;
-        NSInteger tableNumber = 0;
+        self.restaurantID = 0;
+        self.tableNumber = 0;
         
         Account *loggedUSER = [self userLoggedIn];
-        restaurantID = [loggedUSER.current_restaurantID integerValue];
-        tableNumber = [loggedUSER.current_tableNumber integerValue];
+        self.restaurantID = [loggedUSER.current_restaurantID integerValue];
+        self.tableNumber = [loggedUSER.current_tableNumber integerValue];
         
         
         
-        if (restaurantID > 0 && tableNumber > 0) {
+        if (self.restaurantID > 0 && self.tableNumber > 0) {
             return YES;
         }
         else {
-            QRReaderViewController *scanLogo = [self.storyboard instantiateViewControllerWithIdentifier:@"qrReader"];
-            [self presentViewController:scanLogo animated:NO completion:^{
-                
-            }];
         return NO;
         }
     }
@@ -439,44 +437,48 @@
     }
 }
 
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    
-//    if ([segue.identifier isEqualToString:@"regCompleteOrderButton"] || [segue.identifier isEqualToString:@"homeOrder"]) {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"regCompleteOrderButton"] || [segue.identifier isEqualToString:@"homeOrder"]) {
 
         
+        if (self.restaurantID == 0  && self.tableNumber == 0) {
             
-//            SquareCamViewController *scanLogo = [self.storyboard instantiateViewControllerWithIdentifier:@"scanLogo"];
-//            scanLogo.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
-//            scanLogo.modalPresentationStyle = UIModalPresentationCurrentContext;
-//            [self presentViewController:scanLogo animated:YES completion:^{
-//                
-//            }];
-            
-            //qrReader
-            
-        
-//            CATransition *transition = [CATransition animation];
-//            transition.duration = 0.3;
-//            transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-//            transition.type = kCATransitionPush;
-//            transition.subtype = kCATransitionFromRight;
-//            [self.view.window.layer addAnimation:transition forKey:nil];
+            QRReaderViewController *scanLogo = [self.storyboard instantiateViewControllerWithIdentifier:@"qrReader"];
+            scanLogo.modalPresentationStyle = UIModalPresentationOverFullScreen;
+            scanLogo.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self presentViewController:scanLogo animated:NO completion:^{
+                
+            }];
+        }
         
             
         
-//    }
-//}
+    }
+}
 
-
-
-//- (void) menuForRestaurant:(NSNotification*)notification {
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
-//    NSDictionary *response = (NSDictionary*)notification.object;
-//    NSArray *categories = response[@"categories"];
-//    OrderMenuViewController *orderMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"orderMenu"];
-//    orderMenu.categories = categories;
-//    self.view.userInteractionEnabled = YES;
-//    [self.navigationController pushViewController:orderMenu animated:YES];
-//}
+- (IBAction)gotoOrderScreen:(id)sender {
+    self.restaurantID = 0;
+    self.tableNumber = 0;
+    
+    Account *loggedUSER = [self userLoggedIn];
+    self.restaurantID = [loggedUSER.current_restaurantID integerValue];
+    self.tableNumber = [loggedUSER.current_tableNumber integerValue];
+    
+    
+    
+    if (self.restaurantID > 0 && self.tableNumber > 0) {
+        OrderMenuViewController *orderMenu = [self.storyboard instantiateViewControllerWithIdentifier:@"orderMenu"];
+        [self.navigationController pushViewController:orderMenu animated:YES];
+    }
+    else {
+        QRReaderViewController *scanLogo = [self.storyboard instantiateViewControllerWithIdentifier:@"qrReader"];
+        scanLogo.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        scanLogo.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self presentViewController:scanLogo animated:NO completion:^{
+            
+        }];
+    }
+}
 
 @end

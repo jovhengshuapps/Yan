@@ -98,7 +98,8 @@
         [[self navigationItem] setLeftBarButtonItem:menuBarItem];
         self.frostedViewController.panGestureEnabled = YES;
         
-        [self performSegueWithIdentifier:@"homeOrder" sender:nil];
+        [self performSelector:@selector(gotoOrderScreen:) withObject:nil];
+//        [self performSegueWithIdentifier:@"homeOrder" sender:nil];
     }
     else if ([notification.object isEqualToString:@"HomeViewNotification"]) {
         self.viewToShow = HomeViewNotification;

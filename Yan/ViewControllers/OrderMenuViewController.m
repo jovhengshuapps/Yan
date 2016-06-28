@@ -33,6 +33,9 @@ BOOL hackFromLoad = NO;
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewBackground;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 
+@property (strong, nonatomic) MenuListViewController *menuListController;
+@property (strong, nonatomic) MenuDetailsViewController *menuDetailsController;
+
 @end
 
 @implementation OrderMenuViewController
@@ -98,6 +101,16 @@ BOOL hackFromLoad = NO;
     
     [[self navigationItem] setRightBarButtonItem:waiterBarItem];
     
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:[UIImage imageNamed:@"back-resized"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [button setFrame:CGRectMake(0.0f, 0.0f, 17, 28.0f)];
+    
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    
+    backButton.tintColor = [UIColor whiteColor];
+    [[self navigationItem] setLeftBarButtonItem:backButton];
     
     _orderTableNumber = @"1";
     [self.orderTableButton setTitle:[NSString stringWithFormat:@"Order Table: %@",_orderTableNumber] forState:UIControlStateNormal];
@@ -480,16 +493,17 @@ BOOL hackFromLoad = NO;
     NSString *category = _arrayCategories[indexPath.row];
     _categoryString = category;
     [self showTitleBar:category];
-    MenuListViewController *menuListView = [self.storyboard instantiateViewControllerWithIdentifier:@"menuList"];
-    menuListView.category = category;
-    menuListView.menuList = _rawData[category];
-    menuListView.delegate = self;
+    self.menuListController = [self.storyboard instantiateViewControllerWithIdentifier:@"menuList"];
+    self.menuListController.category = category;
+    self.menuListController.menuList = _rawData[category];
+    self.menuListController.delegate = self;
     
     
     
-    [self.loadedControllerView addSubview:menuListView.view];
-    [self addChildViewController:menuListView];
-    [menuListView didMoveToParentViewController:self];
+    self.menuListController.view.frame = self.loadedControllerView.bounds;
+    [self.loadedControllerView addSubview:self.menuListController.view];
+    [self addChildViewController:self.menuListController];
+    [self.menuListController didMoveToParentViewController:self];
     
     
     [self hideMenu];
@@ -501,69 +515,20 @@ BOOL hackFromLoad = NO;
 #pragma mark MenuListDelegate
 - (void) selectedItem:(MenuItem *)item {
     
-    MenuDetailsViewController *itemDetails = [self.storyboard instantiateViewControllerWithIdentifier:@"menuDetails"];
-    itemDetails.item = item;
-    itemDetails.tableNumber = _orderTableNumber;
-    itemDetails.delegate = self;
+    self.menuDetailsController = [self.storyboard instantiateViewControllerWithIdentifier:@"menuDetails"];
+    self.menuDetailsController.item = item;
+    self.menuDetailsController.tableNumber = _orderTableNumber;
+    self.menuDetailsController.delegate = self;
     
-//    itemDetails.view.frame = self.loadedControllerView.bounds;
-//    [self.loadedControllerView addSubview:itemDetails.view];
-//    [self addChildViewController:itemDetails];
-//    [itemDetails didMoveToParentViewController:self];
+    self.menuDetailsController.view.frame = self.loadedControllerView.bounds;
+    [self.loadedControllerView addSubview:self.menuDetailsController.view];
+    [self addChildViewController:self.menuDetailsController];
+    [self.menuDetailsController didMoveToParentViewController:self];
 
-    [self.navigationController pushViewController:itemDetails animated:YES];
-    
 }
 
 - (void)addThisMenuToOrder:(MenuItem *)menu {
     
-//    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
-//    
-//    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-//    [request setReturnsObjectsAsFaults:NO];
-//    NSError *error = nil;
-//    
-//    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
-//    if (result.count) {
-//        OrderList *order = (OrderList*)result[0];
-//        
-//        NSMutableArray *storedOrders = [NSMutableArray new];
-//        
-//        NSArray *decodedList = (NSArray*)[self decodeData:order.items forKey:@"orderItems"];
-//        
-//        for (NSDictionary *item in decodedList) {
-//            [storedOrders addObject:item];
-//        }
-//        
-//        [storedOrders addObject:[self menuItemToDictionary:menu]];
-//        
-//        NSLog(@"stored:%@",storedOrders);
-//        order.items = [self encodeData:storedOrders withKey:@"orderItems"];
-//        order.orderSent = @NO;
-//        
-//        error = nil;
-//        if (![context save:&error]) {
-//            UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
-//            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//                [alert dismissViewControllerAnimated:YES completion:nil];
-//            }];
-//            [alert addAction:actionOK];
-//            
-//            [self presentViewController:alert animated:YES completion:^{
-//                
-//            }];
-//        }
-//    }
-//    else {
-//        OrderList *order = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
-//        NSDictionary *menuItem = [self menuItemToDictionary:menu];
-//        NSArray *items = @[menuItem];
-//        order.items = [self encodeData:items withKey:@"orderItems"];
-//        order.orderSent = @NO;
-//        order.tableNumber = _orderTableNumber;
-//    }
-//    
-//    [context save:&error];
     
     
     
@@ -599,4 +564,35 @@ BOOL hackFromLoad = NO;
     [self setTotalPrice:_totalOrderPrice];
 }
 
+
+- (void) backButtonPressed {
+    if ([self childViewControllers].count == 0) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else {
+        
+        UIView *viewShown = [((NSArray*)self.loadedControllerView.subviews) lastObject];
+        
+        CATransition *transition = [CATransition animation];
+        transition.duration = 0.3;
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        transition.type = kCATransitionPush;
+        transition.subtype = kCATransitionFromLeft;
+        [self.loadedControllerView.layer addAnimation:transition forKey:nil];
+
+        
+        
+        [viewShown removeFromSuperview];
+        
+        if(self.menuDetailsController) {
+            [self.menuDetailsController removeFromParentViewController];
+            self.menuDetailsController = nil;
+        }
+        else {
+            [self.menuListController removeFromParentViewController];
+            self.menuListController = nil;
+            [self hideTitleBar];
+        }
+    }
+}
 @end

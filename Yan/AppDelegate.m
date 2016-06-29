@@ -165,12 +165,19 @@
     NSArray *result = [context executeFetchRequest:request error:&error];
     
     if (result.count) {
-        Notification * notificationData = (Notification*)result[0];
+        Notification * notificationData = (Notification*)[result lastObject];
         
         self.notificationUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:notificationData.type,@"type",notificationData.name,@"name",notificationData.reservation_time,@"reservation-time",notificationData.title,@"title",notificationData.body_text,@"body", nil];
+        
+        
+        [context deleteObject:notificationData];
+        
+        error = nil;
+        if ([context save:&error]) {
+            [self showNoticationScreen:self.notificationUserInfo];
+        }
     }
     
-    [self showNoticationScreen:self.notificationUserInfo];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

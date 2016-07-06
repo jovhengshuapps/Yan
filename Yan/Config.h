@@ -87,7 +87,7 @@
 
 #define API_RESERVATION_CHECKTIME(RESTAURANT_ID)                          [NSString stringWithFormat:@"reservation/%@",RESTAURANT_ID]
 
-#define API_WAITER(RESTAURANT_ID)                                                 [NSString stringWithFormat:@"call_water/%li",(long)RESTAURANT_ID]
+#define API_WAITER(RESTAURANT_ID)                                                 [NSString stringWithFormat:@"call_waiter/%li",(long)RESTAURANT_ID]
 
 
 #define API_SENDORDER(RESTAURANT_ID,USER_ID)                          [NSString stringWithFormat:@"order/%@/user/%@",RESTAURANT_ID,USER_ID]

@@ -17,5 +17,6 @@
 @dynamic tableNumber;
 @dynamic orderSent;
 @dynamic orderSubmitID;
+@dynamic user_id;
 
 @end

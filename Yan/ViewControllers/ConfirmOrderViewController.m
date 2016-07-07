@@ -223,13 +223,27 @@
     
     Account *account = [self userLoggedIn];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(submitOrder:) name:@"submitOrder" object:nil];
-    [self callAPI:API_SENDORDER(account.current_restaurantID, account.identifier) withParameters:@{
-                                                  @"order_date": order_date,
-                                                  @"table": account.current_tableNumber,
-                                                  @"notes": notes,
-                                                  @"menus":menus
-                                                  } completionNotification:@"submitOrder"];
+    if (account.current_orderID.length) {
+        
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(submitOrder:) name:@"submitOrder" object:nil];
+        [self callAPI:API_SENDORDERUPDATE(account.current_restaurantID, account.identifier,account.current_orderID) withParameters:@{
+                                                                                                       @"order_date": order_date,
+                                                                                                       @"table": account.current_tableNumber,
+                                                                                                       @"notes": notes,
+                                                                                                       @"menus":menus
+                                                                                                       } completionNotification:@"submitOrder"];
+    }
+    else {
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(submitOrder:) name:@"submitOrder" object:nil];
+        [self callAPI:API_SENDORDER(account.current_restaurantID, account.identifier) withParameters:@{
+                                                                                                       @"order_date": order_date,
+                                                                                                       @"table": account.current_tableNumber,
+                                                                                                       @"notes": notes,
+                                                                                                       @"menus":menus
+                                                                                                       } completionNotification:@"submitOrder"];
+    }
     
 }
 
@@ -253,9 +267,21 @@
         error = nil;
         if ([context save:&error]) {
             
-            [self.navigationController popToViewController:[self.navigationController viewControllers][1] animated:YES];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderSentNotification" object:nil];
+            Account *userAccount = [self userLoggedIn];
+            userAccount.current_orderID = [NSString stringWithFormat:@"%@",response[@"id"]];
+            
+            error = nil;
+            
+            if ([context save:&error]) {
+                [self.navigationController popToViewController:[self.navigationController viewControllers][1] animated:YES];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"OrderSentNotification" object:nil];
+            }
+            
+            
+            
+            
         }
         else {
             

@@ -38,6 +38,7 @@
         <attribute name="orderSent" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="orderSubmitID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tableNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="user_id" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Reservation" representedClassName="Reservation" syncable="YES">
         <attribute name="fullName" optional="YES" attributeType="String" syncable="YES"/>
@@ -64,7 +65,7 @@
         <element name="Account" positionX="-63" positionY="-18" width="128" height="255"/>
         <element name="MenuItem" positionX="-63" positionY="18" width="128" height="165"/>
         <element name="Notification" positionX="-45" positionY="117" width="128" height="120"/>
-        <element name="OrderList" positionX="-54" positionY="45" width="128" height="105"/>
+        <element name="OrderList" positionX="-54" positionY="45" width="128" height="120"/>
         <element name="Reservation" positionX="-36" positionY="72" width="128" height="120"/>
         <element name="Restaurant" positionX="-45" positionY="63" width="128" height="225"/>
     </elements>

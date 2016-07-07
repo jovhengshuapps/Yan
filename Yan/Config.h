@@ -92,6 +92,8 @@
 
 #define API_SENDORDER(RESTAURANT_ID,USER_ID)                          [NSString stringWithFormat:@"order/%@/user/%@",RESTAURANT_ID,USER_ID]
 
+#define API_SENDORDERUPDATE(RESTAURANT_ID,USER_ID,ORDER_ID)                          [NSString stringWithFormat:@"order/%@/user/%@/update/%@",RESTAURANT_ID,USER_ID,ORDER_ID]
+
 #define API_BILLOUT(RESTAURANT_ID,ORDER_ID)                          [NSString stringWithFormat:@"bill_out/%@/order/%@",RESTAURANT_ID,ORDER_ID]
 
 #define API_RESTAURANT_DETAILS(RESTAURANT_ID)                           [NSString stringWithFormat:@"restaurant/details/%@",RESTAURANT_ID]

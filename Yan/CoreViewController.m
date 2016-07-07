@@ -344,7 +344,7 @@
         
         [manager.requestSerializer setValue:user.token forHTTPHeaderField:@"x-yan-resto-api"];
     }
-    
+//    NSLog(@"METHOD:%@",method);
     [self callPostSessionManager:manager :method :parameters :notificationName];
 }
 

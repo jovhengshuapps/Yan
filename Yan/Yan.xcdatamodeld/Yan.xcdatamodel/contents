@@ -2,6 +2,7 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15F34" minimumToolsVersion="Automatic">
     <entity name="Account" representedClassName="Account" syncable="YES">
         <attribute name="birthday" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="current_orderID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="current_restaurantID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="current_restaurantName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="current_tableNumber" optional="YES" attributeType="String" syncable="YES"/>
@@ -60,11 +61,11 @@
         <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Account" positionX="-63" positionY="-18" width="128" height="240"/>
+        <element name="Account" positionX="-63" positionY="-18" width="128" height="255"/>
         <element name="MenuItem" positionX="-63" positionY="18" width="128" height="165"/>
+        <element name="Notification" positionX="-45" positionY="117" width="128" height="120"/>
         <element name="OrderList" positionX="-54" positionY="45" width="128" height="105"/>
         <element name="Reservation" positionX="-36" positionY="72" width="128" height="120"/>
         <element name="Restaurant" positionX="-45" positionY="63" width="128" height="225"/>
-        <element name="Notification" positionX="-45" positionY="117" width="128" height="120"/>
     </elements>
 </model>

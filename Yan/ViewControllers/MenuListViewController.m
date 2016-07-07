@@ -20,6 +20,7 @@
     // Do any additional setup after loading the view.
     [self.menuListTable reloadData];
     
+    self.menuListTable.contentSize = CGSizeMake(self.menuListTable.contentSize.width, self.menuListTable.contentSize.height + 140.0f); //allowance for the menu and checkout
     
 }
 
@@ -40,7 +41,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     
-    self.menuListTable.contentSize = CGSizeMake(self.menuListTable.contentSize.width, self.menuListTable.contentSize.height + 140.0f); //allowance for the menu and checkout
 }
 
 # pragma mark Data Source

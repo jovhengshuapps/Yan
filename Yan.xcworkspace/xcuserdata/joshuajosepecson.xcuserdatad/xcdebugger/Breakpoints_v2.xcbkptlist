@@ -67,5 +67,53 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Yan/ViewControllers/ConfirmOrderViewController.m"
+            timestampString = "489594212.568812"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
+            landmarkName = "-orderSentToServer"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ConfirmOrderViewController orderSentToServer]"
+                  moduleName = "Yan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/joshuajosepecson/Projects/Arbie%20Team/Yan/Yan/ViewControllers/ConfirmOrderViewController.m"
+                  timestampString = "489594581.838267"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "191"
+                  endingLineNumber = "191"
+                  offsetFromSymbolStart = "349">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ConfirmOrderViewController orderSentToServer]"
+                  moduleName = "Yan"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/joshuajosepecson/Projects/Arbie%20Team/Yan/Yan/ViewControllers/ConfirmOrderViewController.m"
+                  timestampString = "489594581.838384"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "191"
+                  endingLineNumber = "191"
+                  offsetFromSymbolStart = "354">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

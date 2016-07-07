@@ -26,4 +26,5 @@
 @dynamic favorite_restaurant;
 @dynamic restaurant_logo_url;
 @dynamic restaurant_logo_data;
+@dynamic current_orderID;
 @end

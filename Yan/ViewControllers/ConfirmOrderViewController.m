@@ -197,7 +197,7 @@
         if (menus.count) {
             BOOL isNew = YES;
             for (NSInteger i = 0; i < menus.count; i++) {
-                if ([(menus[i][@"identifier"]) isEqualToString:items[@"identifier"]]) {
+                if ([(menus[i][@"menu_id"]) integerValue] == [items[@"identifier"] integerValue]) {
                     isNew = NO;
                     NSInteger qty = [menus[i][@"quantity"] integerValue] + 1;
                     NSInteger total = [items[@"price"] integerValue] * qty;
@@ -206,6 +206,10 @@
                     
                     break;
                 }
+            }
+            
+            if (isNew) {
+                [menus addObject:@{@"menu_id":items[@"identifier"],@"quantity":@1,@"total_amount":items[@"price"]}];
             }
         }
         else {

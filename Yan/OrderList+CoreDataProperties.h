@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *orderSent;
 @property (nullable, nonatomic, retain) NSString *orderSubmitID;
 @property (nullable, nonatomic, retain) NSString *user_id;
+@property (nullable, nonatomic, retain) NSString *restaurant_id;
 
 @end
 

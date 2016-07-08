@@ -120,6 +120,8 @@ BOOL hackFromLoad = NO;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     [request setReturnsObjectsAsFaults:NO];
+    Account *userAccount = [self userLoggedIn];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
@@ -217,6 +219,8 @@ BOOL hackFromLoad = NO;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     [request setReturnsObjectsAsFaults:NO];
+    Account *userAccount = [self userLoggedIn];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
@@ -302,12 +306,14 @@ BOOL hackFromLoad = NO;
 - (MenuItem*) insertMenuToDatabase:(NSDictionary*)item {
     
     
+    Account *user = [self userLoggedIn];
+    
     //checkDB
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"MenuItem"];
     
-    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ AND price == %@ AND  desc == %@ AND image == %@ AND identifier == %@ AND restaurantID == 5", item[@"name"], item[@"price"], item[@"desc"], item[@"image"], item[@"id"]]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"name == %@ AND price == %@ AND  desc == %@ AND image == %@ AND identifier == %@ AND restaurantID == %@", item[@"name"], item[@"price"], item[@"desc"], item[@"image"], item[@"id"], user.current_restaurantID]];
     NSError *error = nil;
     
     NSArray *result = [context executeFetchRequest:request error:&error];
@@ -327,7 +333,7 @@ BOOL hackFromLoad = NO;
     menuItem.desc = isNIL(item[@"short_desc"]);
     menuItem.image = isNIL(item[@"image"]);
     menuItem.identifier = isNIL(item[@"id"]);
-    menuItem.restaurantID = @5;
+    menuItem.restaurantID = [NSNumber numberWithInteger:[user.current_restaurantID integerValue]];
 //    NSArray *tempOptions = @[@{@"name":@"Steak",@"options":@[@"Well Done", @"Rare", @"Normal"]}, @{@"name":@"Sauce",@"options":@[@"Barbeque",@"Spicy"]}];
 //    menuItem.options = [self encodeData:tempOptions withKey:@"options"];
 

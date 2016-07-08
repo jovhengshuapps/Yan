@@ -635,6 +635,7 @@
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     
+    Account *user = [self userLoggedIn];
     if (result.count == 0) {
         NSDictionary *item = [self menuItemToDictionary:menu itemNumber:1];
         NSDictionary *bundle = @{@"identifier":item[@"identifier"],
@@ -648,6 +649,8 @@
         order.items = [self encodeData:orderItems withKey:@"orderItems"];
         order.orderSent = @NO;
         order.tableNumber = tableNumber;
+        order.user_id = user.identifier;
+        order.restaurant_id = user.current_restaurantID;
         
         error = nil;
         if (![context save:&error]) {
@@ -704,6 +707,7 @@
         order.items = [self encodeData:newOrderList withKey:@"orderItems"];
         order.orderSent = @NO;
         order.tableNumber = tableNumber;
+        order.user_id = user.identifier;
         
         error = nil;
         if (![context save:&error]) {

@@ -117,6 +117,8 @@
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     [request setReturnsObjectsAsFaults:NO];
+    Account *userAccount = [self userLoggedIn];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
@@ -167,6 +169,8 @@
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     [request setReturnsObjectsAsFaults:NO];
+    Account *userAccount = [self userLoggedIn];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
     
     NSError *error = nil;
     
@@ -191,6 +195,8 @@
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     NSError *error = nil;
+    Account *loggedUSER = [self userLoggedIn];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND restaurant_id == %@", loggedUSER.identifier, loggedUSER.current_restaurantID]];
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     if (result.count) {
@@ -203,7 +209,6 @@
         
         NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
         
-        Account *loggedUSER = [self userLoggedIn];
         loggedUSER.current_restaurantID = @"";
         loggedUSER.current_tableNumber = @"";
         loggedUSER.current_restaurantName = @"";

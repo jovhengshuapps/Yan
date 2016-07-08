@@ -103,11 +103,12 @@
 }
 
 - (void) fetchOrderDataList {
-    
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     [request setReturnsObjectsAsFaults:NO];
+    Account *userAccount = [self userLoggedIn];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
@@ -250,11 +251,14 @@
 - (void) submitOrder:(NSNotification*)notification {
     NSDictionary *response = notification.object;
     if (response[@"success"] && response[@"id"]) {
+        Account *userAccount = [self userLoggedIn];
         
         NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
         
         NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
         [request setReturnsObjectsAsFaults:NO];
+        
+        [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
         
         NSError *error = nil;
         
@@ -268,7 +272,6 @@
         if ([context save:&error]) {
             
             
-            Account *userAccount = [self userLoggedIn];
             userAccount.current_orderID = [NSString stringWithFormat:@"%@",response[@"id"]];
             
             error = nil;
@@ -471,6 +474,8 @@
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     [request setReturnsObjectsAsFaults:NO];
+    Account *userAccount = [self userLoggedIn];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
@@ -551,6 +556,8 @@
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     [request setReturnsObjectsAsFaults:NO];
+    Account *userAccount = [self userLoggedIn];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];

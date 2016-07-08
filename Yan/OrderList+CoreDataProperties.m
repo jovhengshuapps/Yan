@@ -18,5 +18,6 @@
 @dynamic orderSent;
 @dynamic orderSubmitID;
 @dynamic user_id;
+@dynamic restaurant_id;
 
 @end

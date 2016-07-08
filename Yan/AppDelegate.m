@@ -303,27 +303,72 @@ didDisconnectWithUser:(GIDGoogleUser *)user
 
 - (void) saveNotificationData:(NSDictionary*)data {
     
-    self.notificationUserInfo = [NSDictionary dictionaryWithDictionary:data];
-    
-    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
-    
-    Notification *notificationItem = [[Notification alloc] initWithEntity:[NSEntityDescription entityForName:@"Notification" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
-    
-    
-    notificationItem.name = isNIL(data[@"name"]);
-    notificationItem.title = isNIL(data[@"title"]);
-    notificationItem.body_text = isNIL(data[@"body"]);
-    notificationItem.reservation_time = isNIL(data[@"reservation-time"]);
-    if (data[@"name"] && [data[@"name"] length]) {
-        notificationItem.type = @"reminder";
+    if (data[@"user_id"] && data[@"orders"]) {
+        self.notificationUserInfo = nil;
+        
+        NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+        
+        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+        [request setReturnsObjectsAsFaults:NO];
+        NSError *error = nil;
+        
+        NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+        BOOL isNewOrder = YES;
+        if (result.count) {
+            for (OrderList *orderItem in result) {
+                if ([orderItem.user_id isEqualToString:data[@"user_id"]]) {
+                    //update order
+                    orderItem.items = [self encodeData:[NSArray arrayWithArray:data[@"orders"]] withKey:@"orderItems"];
+                    isNewOrder = NO;
+                    break;
+                }
+                
+            }
+        }
+        
+        
+        if(isNewOrder){
+            //add to order list
+            
+            OrderList *order = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
+            
+            order.items = [self encodeData:[NSArray arrayWithArray:data[@"orders"]] withKey:@"orderItems"];
+            order.orderSent = @YES;
+            order.tableNumber = isNIL(data[@"table_number"]);
+            order.user_id = data[@"user_id"];
+        }
+        
+        error = nil;
+        
+        [context save:&error];
     }
     else {
-        notificationItem.type = @"notification";
+        
+        
+        self.notificationUserInfo = [NSDictionary dictionaryWithDictionary:data];
+        
+        NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+        
+        Notification *notificationItem = [[Notification alloc] initWithEntity:[NSEntityDescription entityForName:@"Notification" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
+        
+        
+        notificationItem.name = isNIL(data[@"name"]);
+        notificationItem.title = isNIL(data[@"title"]);
+        notificationItem.body_text = isNIL(data[@"body"]);
+        notificationItem.reservation_time = isNIL(data[@"reservation-time"]);
+        if (data[@"name"] && [data[@"name"] length]) {
+            notificationItem.type = @"reminder";
+        }
+        else {
+            notificationItem.type = @"notification";
+        }
+        
+        NSError *error = nil;
+        
+        [context save:&error];
     }
     
-    NSError *error = nil;
     
-    [context save:&error];
     
     
 }
@@ -349,4 +394,11 @@ didDisconnectWithUser:(GIDGoogleUser *)user
     }
 }
 
+- (NSData*)encodeData:(id)object withKey:(NSString*)key {
+    NSMutableData *data = [NSMutableData new];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    [archiver encodeObject:object forKey:key];
+    [archiver finishEncoding];
+    return data;
+}
 @end

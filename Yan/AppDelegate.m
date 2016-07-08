@@ -336,6 +336,7 @@ didDisconnectWithUser:(GIDGoogleUser *)user
             order.orderSent = @YES;
             order.tableNumber = isNIL(data[@"table_number"]);
             order.user_id = data[@"user_id"];
+            order.user_name = data[@"user_name"];
         }
         
         error = nil;

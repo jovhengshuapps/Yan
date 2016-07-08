@@ -19,6 +19,9 @@
 @property (strong, nonatomic) NSMutableArray *arrayBilloutList;
 @property (strong, nonatomic) UILabel *labelTotalValue;
 
+@property (strong, nonatomic) NSMutableDictionary *dictionaryOtherOrders;
+@property (strong, nonatomic) NSMutableArray *arrayOtherUsers;
+
 @end
 
 @implementation ConfirmOrderViewController
@@ -149,7 +152,43 @@
 
     }
     
+    //get other orders
     
+    NSFetchRequest *requestOthers = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+    [requestOthers setReturnsObjectsAsFaults:NO];
+    
+    [requestOthers setPredicate:[NSPredicate predicateWithFormat:@"user_id <> %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
+    error = nil;
+    
+    NSArray *resultOthers = [NSArray arrayWithArray:[context executeFetchRequest:requestOthers error:&error]];
+    if (resultOthers.count) {
+        
+        self.dictionaryOtherOrders = [NSMutableDictionary dictionary];
+        self.arrayOtherUsers = [NSMutableArray array];
+        
+        for (OrderList *otherOrder in resultOthers) {
+            NSArray *storedOrders = [self decodeData:otherOrder.items forKey:@"orderItems"];
+            
+            for (NSDictionary *menuOrder in storedOrders) {
+                self.totalValue += [menuOrder[@"total_amount"] floatValue];
+            }
+            
+            NSDictionary *otherList = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",otherOrder.user_name],@"name",storedOrders,@"items", nil];
+            
+            [self.dictionaryOtherOrders setObject:otherList forKey:otherOrder.user_id];
+            
+            [self.arrayOtherUsers addObject:otherOrder.user_id];
+            
+        }
+        
+        
+//        NSArray *arrayToSort = [NSArray arrayWithArray:self.arrayOrderList];
+//        NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+//        NSArray *sortDescriptors = [NSArray arrayWithObject:nameDescriptor];
+//        self.arrayOrderList = [[arrayToSort sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+        
+        
+    }
     
 }
 
@@ -328,14 +367,25 @@
 
 #pragma mark Table Data Source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if(self.arrayOtherUsers){
+        return 1 + [self.arrayOtherUsers count];
+    }
+        
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.billoutOrder) {
-        return self.arrayBilloutList.count;
+    if (section == 0) {
+        if (self.billoutOrder) {
+            return self.arrayBilloutList.count;
+        }
+        return self.arrayOrderList.count;
     }
-    return self.arrayOrderList.count;
+    else {
+        NSString *user_id = self.arrayOtherUsers[section-1];
+        return [([self.dictionaryOtherOrders objectForKey:user_id][@"items"]) count];
+    }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -357,28 +407,144 @@
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont fontWithName:@"LucidaGrande" size:22.0f];
     label.textColor = [UIColor blackColor];
-    if (self.arrayOrderList.count == 0 && self.arrayBilloutList.count == 0) {
-        label.text = @"You have no orders yet.";
+    
+    if(section == 0) {
+        if (self.arrayOrderList.count == 0 && self.arrayBilloutList.count == 0) {
+            label.text = @"You have no orders yet.";
+        }
+        else {
+            label.text = @"Your Orders";
+        }
+        
     }
     else {
-        label.text = @"Your Orders";
+        NSString *user_id = self.arrayOtherUsers[section-1];
+        label.text = [NSString stringWithFormat:@"%@ ordered",[self.dictionaryOtherOrders objectForKey:user_id][@"name"]];
     }
+    
     
     [headerView addSubview:label];
     
     return headerView;
 }
 
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    
+    if(!self.arrayOtherUsers) {
+        return nil;
+    }
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, 34.0f)];
+    footerView.backgroundColor = [UIColor whiteColor];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:footerView.frame];
+    label.center = footerView.center;
+    label.backgroundColor = [UIColor clearColor];
+    label.textAlignment = NSTextAlignmentLeft;
+    label.font = [UIFont fontWithName:@"LucidaGrande" size:22.0f];
+    label.textColor = [UIColor blackColor];
+    
+    label.text = @"Sub Total: XX.XX";
+    
+    
+    [footerView addSubview:label];
+    
+    return footerView;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    if (self.billoutOrder) {
+    NSInteger section = indexPath.section;
+    
+    if (section == 0) {
+        if (self.billoutOrder) {
+            
+            OrderListTableViewCell *cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"billoutListCell"];
+            
+            NSDictionary *bundle = self.arrayBilloutList[indexPath.row];
+            NSArray *details = bundle[@"details"];
+            NSDictionary *item = details[0];//doesn't matter which one
+            NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"name"] uppercaseString],item[@"price"]];
+            
+            CGFloat nameSize = cell.labelItemNamePrice.font.pointSize;
+            CGFloat priceSize = nameSize / 2.0f;
+            
+            NSArray *components = [text componentsSeparatedByString:@" PHP"];
+            NSRange nameRange = [text rangeOfString:[components objectAtIndex:0]];
+            NSRange priceRange = [text rangeOfString:[components objectAtIndex:1]];
+            
+            nameRange = NSMakeRange(nameRange.location, nameRange.length - 3);
+            priceRange = NSMakeRange(priceRange.location-3, priceRange.length+3);
+            
+            NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text];
+            
+            [attrString beginEditing];
+            [attrString addAttribute: NSFontAttributeName
+                               value:[UIFont fontWithName:@"LucidaGrande" size:nameSize]
+                               range:nameRange];
+            
+            [attrString addAttribute: NSFontAttributeName
+                               value:[UIFont fontWithName:@"LucidaGrande" size:priceSize]
+                               range:priceRange];
+            
+            [attrString endEditing];
+            
+            cell.labelItemNamePrice.attributedText = attrString;
+            cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",bundle[@"quantity"]];
+            
+            
+            return cell;
+        }
+        else {
+            OrderListTableViewCell *cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"orderListCell"];
+            
+            NSDictionary *item = self.arrayOrderList[indexPath.row];
+            NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"name"] uppercaseString],item[@"price"]];
+            
+            CGFloat nameSize = cell.labelItemNamePrice.font.pointSize;
+            CGFloat priceSize = nameSize / 2.0f;
+            
+            NSArray *components = [text componentsSeparatedByString:@" PHP"];
+            NSRange nameRange = [text rangeOfString:[components objectAtIndex:0]];
+            NSRange priceRange = [text rangeOfString:[components objectAtIndex:1]];
+            
+            nameRange = NSMakeRange(nameRange.location, nameRange.length - 3);
+            priceRange = NSMakeRange(priceRange.location-3, priceRange.length+3);
+            
+            NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text];
+            
+            [attrString beginEditing];
+            [attrString addAttribute: NSFontAttributeName
+                               value:[UIFont fontWithName:@"LucidaGrande" size:nameSize]
+                               range:nameRange];
+            
+            [attrString addAttribute: NSFontAttributeName
+                               value:[UIFont fontWithName:@"LucidaGrande" size:priceSize]
+                               range:priceRange];
+            
+            [attrString endEditing];
+            
+            cell.labelItemNamePrice.attributedText = attrString;
+            NSString *choices = item[@"option_choices"];
+            if ([choices rangeOfString:@","].location != NSNotFound) {
+                choices = [choices substringToIndex:choices.length-1];
+            }
+            cell.labelItemOptions.text = [choices capitalizedString];
+            cell.index = indexPath.row;
+            cell.delegateCell = self;
+            
+            
+            return cell;
+        }
+    }
+    else {
         
         OrderListTableViewCell *cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"billoutListCell"];
         
-        NSDictionary *bundle = self.arrayBilloutList[indexPath.row];
-        NSArray *details = bundle[@"details"];
-        NSDictionary *item = details[0];//doesn't matter which one
-        NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"name"] uppercaseString],item[@"price"]];
+        NSString *user_id = self.arrayOtherUsers[section-1];
+        NSArray *itemOrders = [self.dictionaryOtherOrders objectForKey:user_id][@"items"];
+        NSDictionary *item = itemOrders[indexPath.row];
+        NSString *text = [NSString stringWithFormat:@"%@ PHP%.2f",[item[@"menu_name"] uppercaseString],([item[@"total_amount"] floatValue] / [item[@"quantity"] floatValue])];
         
         CGFloat nameSize = cell.labelItemNamePrice.font.pointSize;
         CGFloat priceSize = nameSize / 2.0f;
@@ -404,52 +570,12 @@
         [attrString endEditing];
         
         cell.labelItemNamePrice.attributedText = attrString;
-        cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",bundle[@"quantity"]];
+        cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",item[@"quantity"]];
         
         
         return cell;
     }
-    else {
-        OrderListTableViewCell *cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"orderListCell"];
-        
-        NSDictionary *item = self.arrayOrderList[indexPath.row];
-        NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"name"] uppercaseString],item[@"price"]];
-        
-        CGFloat nameSize = cell.labelItemNamePrice.font.pointSize;
-        CGFloat priceSize = nameSize / 2.0f;
-        
-        NSArray *components = [text componentsSeparatedByString:@" PHP"];
-        NSRange nameRange = [text rangeOfString:[components objectAtIndex:0]];
-        NSRange priceRange = [text rangeOfString:[components objectAtIndex:1]];
-        
-        nameRange = NSMakeRange(nameRange.location, nameRange.length - 3);
-        priceRange = NSMakeRange(priceRange.location-3, priceRange.length+3);
-        
-        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text];
-        
-        [attrString beginEditing];
-        [attrString addAttribute: NSFontAttributeName
-                           value:[UIFont fontWithName:@"LucidaGrande" size:nameSize]
-                           range:nameRange];
-        
-        [attrString addAttribute: NSFontAttributeName
-                           value:[UIFont fontWithName:@"LucidaGrande" size:priceSize]
-                           range:priceRange];
-        
-        [attrString endEditing];
-        
-        cell.labelItemNamePrice.attributedText = attrString;
-        NSString *choices = item[@"option_choices"];
-        if ([choices rangeOfString:@","].location != NSNotFound) {
-            choices = [choices substringToIndex:choices.length-1];
-        }
-        cell.labelItemOptions.text = [choices capitalizedString];
-        cell.index = indexPath.row;
-        cell.delegateCell = self;
-        
-        
-        return cell;
-    }
+    
     
 }
 

@@ -19,5 +19,5 @@
 @dynamic orderSubmitID;
 @dynamic user_id;
 @dynamic restaurant_id;
-
+@dynamic user_name;
 @end

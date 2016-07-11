@@ -437,16 +437,47 @@
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, 34.0f)];
     footerView.backgroundColor = [UIColor whiteColor];
     
-    UILabel *label = [[UILabel alloc] initWithFrame:footerView.frame];
-    label.center = footerView.center;
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 50.0f, 34.0f)];
     label.backgroundColor = [UIColor clearColor];
     label.textAlignment = NSTextAlignmentLeft;
     label.font = [UIFont fontWithName:@"LucidaGrande" size:22.0f];
     label.textColor = [UIColor blackColor];
+    label.text = @"Sub Total:";
     
-    label.text = @"Sub Total: XX.XX";
+    UILabel *value = [[UILabel alloc] initWithFrame:CGRectMake(55.0f, 0.0f, footerView.bounds.size.width - 55.0f, 34.0f)];
+    value.backgroundColor = [UIColor clearColor];
+    value.textAlignment = NSTextAlignmentRight;
+    value.font = [UIFont fontWithName:@"LucidaGrande" size:22.0f];
+    value.textColor = [UIColor blackColor];
+    
+    CGFloat subTotal = 0.0f;
+    
+    if (section == 0) {
+        
+        for (NSDictionary *bundle in self.arrayBilloutList) {
+            
+            NSArray *details = bundle[@"details"];
+            NSDictionary *item = details[0];//doesn't matter which one
+            
+            subTotal += ([item[@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
+        }
+    }
+    else {
+        
+        NSString *user_id = self.arrayOtherUsers[section-1];
+        NSArray *items = [self.dictionaryOtherOrders objectForKey:user_id][@"items"];
+        
+        for (NSDictionary *menuItem in items) {
+            subTotal += [menuItem[@"total_amount"] floatValue];
+        }
+    }
     
     
+    value.text = [NSString stringWithFormat:@"PHP %.2f",subTotal];
+    
+    
+    [footerView addSubview:value];
     [footerView addSubview:label];
     
     return footerView;

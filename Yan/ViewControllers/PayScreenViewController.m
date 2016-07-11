@@ -16,6 +16,11 @@
 @property (assign, nonatomic) BOOL showSubTotal;
 @property (assign, nonatomic) CGFloat totalValue;
 
+@property (strong, nonatomic) NSMutableDictionary *dictionaryOtherOrders;
+@property (strong, nonatomic) NSMutableArray *arrayOtherUsers;
+
+@property (assign, nonatomic) NSInteger discountSection;
+
 @end
 
 @implementation PayScreenViewController
@@ -143,6 +148,45 @@
     }
     
     
+    
+    //get other orders
+    
+    NSFetchRequest *requestOthers = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+    [requestOthers setReturnsObjectsAsFaults:NO];
+    
+    [requestOthers setPredicate:[NSPredicate predicateWithFormat:@"user_id <> %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
+    error = nil;
+    
+    NSArray *resultOthers = [NSArray arrayWithArray:[context executeFetchRequest:requestOthers error:&error]];
+    if (resultOthers.count) {
+        
+        self.dictionaryOtherOrders = [NSMutableDictionary dictionary];
+        self.arrayOtherUsers = [NSMutableArray array];
+        
+        for (OrderList *otherOrder in resultOthers) {
+            NSArray *storedOrders = [self decodeData:otherOrder.items forKey:@"orderItems"];
+            
+            for (NSDictionary *menuOrder in storedOrders) {
+                self.totalValue += [menuOrder[@"total_amount"] floatValue];
+            }
+            
+            NSDictionary *otherList = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",otherOrder.user_name],@"name",storedOrders,@"items", nil];
+            
+            [self.dictionaryOtherOrders setObject:otherList forKey:otherOrder.user_id];
+            
+            [self.arrayOtherUsers addObject:otherOrder.user_id];
+            
+        }
+        
+        
+        //        NSArray *arrayToSort = [NSArray arrayWithArray:self.arrayOrderList];
+        //        NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+        //        NSArray *sortDescriptors = [NSArray arrayWithObject:nameDescriptor];
+        //        self.arrayOrderList = [[arrayToSort sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+        
+        
+    }
+    
 }
 
 //- (BOOL) containsMenuItem:(MenuItem*)item index:(NSInteger*)index{
@@ -248,14 +292,20 @@
 
 #pragma mark Table Data Source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    if (_discountDetails && (![_discountDetails[@"senior"] isEqualToString:@"0"] || ![_discountDetails[@"gc"] isEqualToString:@"0"])) {
-        return 2;
+    NSInteger otherUserCount = 0;
+    if (self.arrayOtherUsers) {
+        otherUserCount = [self.arrayOtherUsers count]-1;
     }
-    return 1;
+    self.discountSection = -1;
+    if (_discountDetails && (![_discountDetails[@"senior"] isEqualToString:@"0"] || ![_discountDetails[@"gc"] isEqualToString:@"0"])) {
+        self.discountSection = 2 + otherUserCount;
+        return 2 + otherUserCount;
+    }
+    return 1 + otherUserCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 1) {
+    if (section == self.discountSection) {
         NSInteger count = 0;
         if (_discountDetails[@"senior"] && ![_discountDetails[@"senior"] isEqualToString:@"0"]) {
             count = count + 1;
@@ -266,23 +316,29 @@
         }
         return count;
     }
-    return _arrayOrderList.count;
+    else if (section == 0) {
+        return _arrayOrderList.count;
+    }
+    else {
+        NSString *user_id = self.arrayOtherUsers[section-1];
+        return [([self.dictionaryOtherOrders objectForKey:user_id][@"items"]) count];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 44.0f;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (!self.discountDetails && !self.arrayOtherUsers) {
         return 0;
     }
     return 34.0f;
 }
 
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if (!self.discountDetails && !self.arrayOtherUsers) {
         return nil;
     }
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, 34.0f)];
@@ -303,9 +359,37 @@
     labelPrice.textAlignment = NSTextAlignmentRight;
     labelPrice.font = [UIFont fontWithName:@"LucidaGrande" size:16.0f];
     labelPrice.textColor = UIColorFromRGB(0x363636);
-    labelPrice.text = [NSString stringWithFormat:@"%.2f",self.totalValue];
+//    labelPrice.text = [NSString stringWithFormat:@"%.2f",self.totalValue];
     
     [headerView addSubview:labelPrice];
+    
+    
+    
+    CGFloat subTotal = 0.0f;
+    
+    if (section == 0) {
+        
+        for (NSDictionary *bundle in self.arrayOrderList) {
+            
+            NSArray *details = bundle[@"details"];
+            NSDictionary *item = details[0];//doesn't matter which one
+            
+            subTotal += ([item[@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
+        }
+    }
+    else {
+        
+        NSString *user_id = self.arrayOtherUsers[section-1];
+        NSArray *items = [self.dictionaryOtherOrders objectForKey:user_id][@"items"];
+        
+        for (NSDictionary *menuItem in items) {
+            subTotal += [menuItem[@"total_amount"] floatValue];
+        }
+    }
+    
+    
+    labelPrice.text = [NSString stringWithFormat:@"PHP %.2f",subTotal];
+    
     
     return headerView;
 }
@@ -313,14 +397,28 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    if (indexPath.section == 0) {
+    if (indexPath.section != self.discountSection) {
         
         OrderListTableViewCell *cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"orderListCell"];
         
-        NSDictionary *bundle = _arrayOrderList[indexPath.row];
-        NSArray *details = bundle[@"details"];
-        NSDictionary *item = details[0]; //doesn't matter which one
-        NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"name"] uppercaseString],item[@"price"]];
+        NSDictionary *item = nil;
+        NSDictionary *bundle = nil;
+        NSString *text = @"";
+        
+        if (indexPath.section == 0) {
+            NSDictionary *bundle = _arrayOrderList[indexPath.row];
+            NSArray *details = bundle[@"details"];
+            item = details[0]; //doesn't matter which one
+            text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"name"] uppercaseString],item[@"price"]];
+            
+        }
+        else {
+            NSString *user_id = self.arrayOtherUsers[indexPath.section-1];
+            NSArray *itemOrders = [self.dictionaryOtherOrders objectForKey:user_id][@"items"];
+            item = itemOrders[indexPath.row];
+            text = [NSString stringWithFormat:@"%@ PHP%.2f",[item[@"menu_name"] uppercaseString],([item[@"total_amount"] floatValue] / [item[@"quantity"] floatValue])];
+        }
+        
         
         CGFloat nameSize = cell.labelItemNamePrice.font.pointSize; //[self tableView:tableView heightForRowAtIndexPath:indexPath] - 20.0f;
         CGFloat priceSize = nameSize / 2.0f;
@@ -346,7 +444,15 @@
         [attrString endEditing];
         
         cell.labelItemNamePrice.attributedText = attrString;
-        cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",bundle[@"quantity"]];
+        if (indexPath.section == 0) {
+            cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",bundle[@"quantity"]];
+            
+        }
+        else {
+            cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",item[@"quantity"]];
+            
+        }
+        
         
         return cell;
     }

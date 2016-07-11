@@ -343,6 +343,52 @@ didDisconnectWithUser:(GIDGoogleUser *)user
         
         [context save:&error];
     }
+    else if (data[@"billout"]) {
+        self.notificationUserInfo = nil;
+        
+        AlertView *alert = [[AlertView alloc] initAlertWithMessage:[NSString stringWithFormat:@"%@ has requested to bill out the orders from your table.",data[@"user_name"]] delegate:self buttons:@[@"CLOSE"]];
+        [alert showAlertView];
+        
+        NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+        
+        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+        NSError *error = nil;
+        [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@", data[@"table_number"]]];
+        
+        NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+        
+        for (OrderList *order in result) {
+            [context deleteObject:order];
+        }
+        
+        
+        error = nil;
+        if ([context save:&error]) {
+            
+            NSManagedObjectContext *contextAccount = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+            
+            NSFetchRequest *requestAccount = [[NSFetchRequest alloc] initWithEntityName:@"Account"];
+            
+            error = nil;
+            
+            NSArray *accounts = [contextAccount executeFetchRequest:requestAccount error:&error];
+            
+            Account *loggedUSER = (Account*)accounts[0];
+            
+            loggedUSER.current_restaurantID = @"";
+            loggedUSER.current_tableNumber = @"";
+            loggedUSER.current_restaurantName = @"";
+            
+            error = nil;
+            if ([context save:&error]) {
+                
+                [self.window.rootViewController.navigationController popToRootViewControllerAnimated:YES];
+                
+            }
+            
+            
+        }
+    }
     else {
         
         

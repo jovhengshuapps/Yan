@@ -358,7 +358,10 @@ didDisconnectWithUser:(GIDGoogleUser *)user
         NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
         
         for (OrderList *order in result) {
-            [context deleteObject:order];
+            if([order.orderSent boolValue]) {
+                [context deleteObject:order];
+            }
+            
         }
         
         

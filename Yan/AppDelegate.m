@@ -126,6 +126,10 @@
 //    NSLog(@"completion received notification:%@",userInfo);
     [self saveNotificationData:userInfo[@"aps"][@"alert"]];
     
+    if (self.notificationUserInfo == nil) {
+        return;
+    }
+    
     [self showNoticationScreen:self.notificationUserInfo];
 }
 
@@ -159,6 +163,7 @@
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Notification"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"type == 'reminder' OR type == 'notification'"]];
     
     NSError *error = nil;
     
@@ -424,11 +429,11 @@ didDisconnectWithUser:(GIDGoogleUser *)user
 }
 
 - (void) showNoticationScreen:(NSDictionary*)notificationData {
-    if (notificationData) {
+    if (notificationData != nil) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:[[NSBundle mainBundle].infoDictionary objectForKey:@"UIMainStoryboardFile"] bundle:[NSBundle mainBundle]];
         
         ReminderNotificationViewController *reminder = [storyboard instantiateViewControllerWithIdentifier:@"reminderNotification"];
-        if (self.notificationUserInfo[@"name"] && [self.notificationUserInfo[@"name"] length]) {
+        if (notificationData[@"name"] && [notificationData[@"name"] length]) {
             reminder.restaurantName = self.notificationUserInfo[@"name"];
             reminder.reservationTimeFrom = self.notificationUserInfo[@"reservation-time"];
             reminder.type = @"reminder";

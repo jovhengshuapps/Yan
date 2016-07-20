@@ -111,85 +111,75 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     [request setReturnsObjectsAsFaults:NO];
     Account *userAccount = [self userLoggedIn];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"restaurant_id == %@", userAccount.current_restaurantID]];
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     if (result.count) {
-        OrderList *order = (OrderList*)result[0];
+        for (OrderList *order in result) {
         
-        //check if billout
-        self.billoutOrder = [order.orderSent boolValue];
-        
-        NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
-        
-        for (NSDictionary *bundle in storedOrders) {
-            self.totalValue += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
-        }
-        
-        self.arrayOrderList = [NSMutableArray array];
-        self.arrayBilloutList = [NSMutableArray array];
-        
-        if (self.billoutOrder) {
-            for (NSDictionary *bundle in storedOrders) {
-                [self.arrayBilloutList addObject:bundle];
-            }
-        }
-        else {
-            for (NSDictionary *bundle in storedOrders) {
-                for (NSDictionary *item in bundle[@"details"]) {
-                    [self.arrayOrderList addObject:item];
+            if ([order.user_id integerValue] == [userAccount.identifier integerValue]) {
+                
+                //check if billout
+                self.billoutOrder = [order.orderSent boolValue];
+                
+                NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
+                
+                for (NSDictionary *bundle in storedOrders) {
+                    self.totalValue += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
+                }
+                
+                self.arrayOrderList = [NSMutableArray array];
+                self.arrayBilloutList = [NSMutableArray array];
+                
+                if (self.billoutOrder) {
+                    for (NSDictionary *bundle in storedOrders) {
+                        [self.arrayBilloutList addObject:bundle];
+                    }
+                }
+                else {
+                    for (NSDictionary *bundle in storedOrders) {
+                        for (NSDictionary *item in bundle[@"details"]) {
+                            [self.arrayOrderList addObject:item];
+                        }
+                    }
+                    
+                    NSArray *arrayToSort = [NSArray arrayWithArray:self.arrayOrderList];
+                    NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+                    NSArray *sortDescriptors = [NSArray arrayWithObject:nameDescriptor];
+                    self.arrayOrderList = [[arrayToSort sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
                 }
             }
+            else {
+                
+                
+                //get other orders
+                
+                
+                self.dictionaryOtherOrders = [NSMutableDictionary dictionary];
+                self.arrayOtherUsers = [NSMutableArray array];
+                
+                NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
+                
+                for (NSDictionary *menuOrder in storedOrders) {
+                    self.totalValue += [menuOrder[@"total_amount"] floatValue];
+                }
+                
+                NSDictionary *otherList = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",order.user_name],@"name",storedOrders,@"items", nil];
+                
+                [self.dictionaryOtherOrders setObject:otherList forKey:order.user_id];
+                
+                [self.arrayOtherUsers addObject:order.user_id];
+            }
             
-            NSArray *arrayToSort = [NSArray arrayWithArray:self.arrayOrderList];
-            NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-            NSArray *sortDescriptors = [NSArray arrayWithObject:nameDescriptor];
-            self.arrayOrderList = [[arrayToSort sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
         }
-        
         
 
     }
     
-    //get other orders
-    
-    NSFetchRequest *requestOthers = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-    [requestOthers setReturnsObjectsAsFaults:NO];
-    
-    [requestOthers setPredicate:[NSPredicate predicateWithFormat:@"user_id <> %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
-    error = nil;
-    
-    NSArray *resultOthers = [NSArray arrayWithArray:[context executeFetchRequest:requestOthers error:&error]];
-    if (resultOthers.count) {
-        
-        self.dictionaryOtherOrders = [NSMutableDictionary dictionary];
-        self.arrayOtherUsers = [NSMutableArray array];
-        
-        for (OrderList *otherOrder in resultOthers) {
-            NSArray *storedOrders = [self decodeData:otherOrder.items forKey:@"orderItems"];
-            
-            for (NSDictionary *menuOrder in storedOrders) {
-                self.totalValue += [menuOrder[@"total_amount"] floatValue];
-            }
-            
-            NSDictionary *otherList = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",otherOrder.user_name],@"name",storedOrders,@"items", nil];
-            
-            [self.dictionaryOtherOrders setObject:otherList forKey:otherOrder.user_id];
-            
-            [self.arrayOtherUsers addObject:otherOrder.user_id];
-            
-        }
         
         
-//        NSArray *arrayToSort = [NSArray arrayWithArray:self.arrayOrderList];
-//        NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-//        NSArray *sortDescriptors = [NSArray arrayWithObject:nameDescriptor];
-//        self.arrayOrderList = [[arrayToSort sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
         
-        
-    }
-    
 }
 
 //- (BOOL) containsMenuItemIdentifier:(NSNumber*)itemIdentifier index:(NSInteger*)index{

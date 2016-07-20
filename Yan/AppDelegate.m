@@ -110,7 +110,7 @@
         [tokenString appendFormat:@"%02.2hhx", tokenChars[i]];
     }
     
-//    NSLog(@"tokenString:%@",tokenString);
+    NSLog(@"tokenString:%@",tokenString);
     self.deviceToken = tokenString;
 }
 
@@ -123,8 +123,10 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
-//    NSLog(@"completion received notification:%@",userInfo);
+    NSLog(@"completion received notification:%@",userInfo);
     [self saveNotificationData:userInfo[@"aps"][@"alert"]];
+    
+    completionHandler(UIBackgroundFetchResultNewData);
     
     if (self.notificationUserInfo == nil) {
         return;
@@ -160,7 +162,7 @@
     
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     
-    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    NSManagedObjectContext *context = self.managedObjectContext;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Notification"];
     [request setPredicate:[NSPredicate predicateWithFormat:@"type == 'reminder' OR type == 'notification'"]];
@@ -308,21 +310,24 @@ didDisconnectWithUser:(GIDGoogleUser *)user
 
 - (void) saveNotificationData:(NSDictionary*)data {
     
+//    NSLog(@"data:%@",data);
     if (data[@"user_id"] && data[@"orders"]) {
         self.notificationUserInfo = nil;
         
-        NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+        NSManagedObjectContext *context = self.managedObjectContext;
         
         NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
         [request setReturnsObjectsAsFaults:NO];
         NSError *error = nil;
         
         NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+//        NSLog(@"orderlist:%@",result);
         BOOL isNewOrder = YES;
         if (result.count) {
             for (OrderList *orderItem in result) {
                 if ([orderItem.user_id isEqualToString:data[@"user_id"]]) {
                     //update order
+                    NSLog(@"update to orderlist");
                     orderItem.items = [self encodeData:[NSArray arrayWithArray:data[@"orders"]] withKey:@"orderItems"];
                     isNewOrder = NO;
                     break;
@@ -334,7 +339,7 @@ didDisconnectWithUser:(GIDGoogleUser *)user
         
         if(isNewOrder){
             //add to order list
-            
+//            NSLog(@"add to orderlist");
             OrderList *order = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
             
             order.items = [self encodeData:[NSArray arrayWithArray:data[@"orders"]] withKey:@"orderItems"];
@@ -342,11 +347,17 @@ didDisconnectWithUser:(GIDGoogleUser *)user
             order.tableNumber = isNIL(data[@"table_number"]);
             order.user_id = data[@"user_id"];
             order.user_name = data[@"user_name"];
+            order.restaurant_id = data[@"restaurant_id"];
         }
         
         error = nil;
         
-        [context save:&error];
+        if([context save:&error]) {
+            NSLog(@"orders saved");
+        }
+        else {
+            NSLog(@"order saving failed");
+        }
     }
     else if (data[@"billout"]) {
         self.notificationUserInfo = nil;
@@ -354,7 +365,7 @@ didDisconnectWithUser:(GIDGoogleUser *)user
         AlertView *alert = [[AlertView alloc] initAlertWithMessage:[NSString stringWithFormat:@"%@ has requested to bill out the orders from your table.",data[@"user_name"]] delegate:self buttons:@[@"CLOSE"]];
         [alert showAlertView];
         
-        NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+        NSManagedObjectContext *context = self.managedObjectContext;
         
         NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
         NSError *error = nil;
@@ -373,7 +384,7 @@ didDisconnectWithUser:(GIDGoogleUser *)user
         error = nil;
         if ([context save:&error]) {
             
-            NSManagedObjectContext *contextAccount = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+            NSManagedObjectContext *contextAccount = self.managedObjectContext;
             
             NSFetchRequest *requestAccount = [[NSFetchRequest alloc] initWithEntityName:@"Account"];
             
@@ -402,7 +413,7 @@ didDisconnectWithUser:(GIDGoogleUser *)user
         
         self.notificationUserInfo = [NSDictionary dictionaryWithDictionary:data];
         
-        NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+        NSManagedObjectContext *context = self.managedObjectContext;
         
         Notification *notificationItem = [[Notification alloc] initWithEntity:[NSEntityDescription entityForName:@"Notification" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
         

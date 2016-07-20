@@ -154,7 +154,7 @@
     NSFetchRequest *requestOthers = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     [requestOthers setReturnsObjectsAsFaults:NO];
     
-    [requestOthers setPredicate:[NSPredicate predicateWithFormat:@"user_id <> %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
+    [requestOthers setPredicate:[NSPredicate predicateWithFormat:@"user_id != %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
     error = nil;
     
     NSArray *resultOthers = [NSArray arrayWithArray:[context executeFetchRequest:requestOthers error:&error]];
@@ -406,7 +406,7 @@
         NSString *text = @"";
         
         if (indexPath.section == 0) {
-            NSDictionary *bundle = _arrayOrderList[indexPath.row];
+            bundle = _arrayOrderList[indexPath.row];
             NSArray *details = bundle[@"details"];
             item = details[0]; //doesn't matter which one
             text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"name"] uppercaseString],item[@"price"]];

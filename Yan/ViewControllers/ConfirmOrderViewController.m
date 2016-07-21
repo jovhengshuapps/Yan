@@ -102,7 +102,17 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadOrderList) name:@"reloadOrderListObserver" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockOrderList) name:@"lockOrderListObserver" object:nil];
     [self showTitleBar:[NSString stringWithFormat:@"Orders: Table %@",_tableNumber]];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"reloadOrderListObserver" object:@""];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"lockOrderListObserver" object:@""];
 }
 
 - (void) fetchOrderDataList {
@@ -180,6 +190,12 @@
         
         
         
+}
+
+- (void) reloadOrderList {
+    
+    [self fetchOrderDataList];
+    [self.mainTable reloadData];
 }
 
 //- (BOOL) containsMenuItemIdentifier:(NSNumber*)itemIdentifier index:(NSInteger*)index{
@@ -331,6 +347,43 @@
     }
 }
 
+- (void) lockOrderList {
+    
+    Account *userAccount = [self userLoggedIn];
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+    [request setReturnsObjectsAsFaults:NO];
+    
+    [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
+    
+    NSError *error = nil;
+    
+    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    OrderList *order = (OrderList*)result[0];
+    NSMutableArray *newOrderList = [NSMutableArray new];
+    NSArray *decodedList = (NSArray*)[self decodeData:order.items forKey:@"orderItems"];
+    
+    
+    [newOrderList addObjectsFromArray:decodedList];
+    
+    for (NSInteger index = 0; index < decodedList.count; index++) {
+        NSMutableDictionary *bundle = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
+        
+        [bundle setObject:@YES forKey:@"is_locked"];
+        
+        [newOrderList replaceObjectAtIndex:index withObject:bundle];
+    }
+    
+    
+    order.items = [self encodeData:newOrderList withKey:@"orderItems"];
+    
+    error = nil;
+    if ([context save:&error]) {
+    }
+}
+
 - (void) callBillout {
 //    DiscountViewController *discountView = (DiscountViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"discountView"];
 //    discountView.tableNumber = self.tableNumber;
@@ -424,18 +477,18 @@
     if(!self.arrayOtherUsers) {
         return nil;
     }
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, 34.0f)];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, 44.0f)];
     footerView.backgroundColor = [UIColor whiteColor];
     
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 50.0f, 34.0f)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 5.0f, 80.0f, 34.0f)];
     label.backgroundColor = [UIColor clearColor];
     label.textAlignment = NSTextAlignmentLeft;
-    label.font = [UIFont fontWithName:@"LucidaGrande" size:22.0f];
+    label.font = [UIFont fontWithName:@"LucidaGrande" size:18.0f];
     label.textColor = [UIColor blackColor];
     label.text = @"Sub Total:";
     
-    UILabel *value = [[UILabel alloc] initWithFrame:CGRectMake(55.0f, 0.0f, footerView.bounds.size.width - 55.0f, 34.0f)];
+    UILabel *value = [[UILabel alloc] initWithFrame:CGRectMake(85.0f, 5.0f, footerView.bounds.size.width - 85.0f, 34.0f)];
     value.backgroundColor = [UIColor clearColor];
     value.textAlignment = NSTextAlignmentRight;
     value.font = [UIFont fontWithName:@"LucidaGrande" size:22.0f];
@@ -553,6 +606,15 @@
             cell.labelItemOptions.text = [choices capitalizedString];
             cell.index = indexPath.row;
             cell.delegateCell = self;
+            
+            if ([[item allKeys] containsObject:@"is_locked"]) {
+                cell.removeButton.userInteractionEnabled = NO;
+                cell.removeButton.enabled = NO;
+            }
+            else {
+                cell.removeButton.userInteractionEnabled = YES;
+                cell.removeButton.enabled = YES;
+            }
             
             
             return cell;

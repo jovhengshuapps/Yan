@@ -43,6 +43,7 @@ BOOL hackFromLoad = NO;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     
@@ -116,32 +117,9 @@ BOOL hackFromLoad = NO;
     [self.orderTableButton setTitle:[NSString stringWithFormat:@"Order Table: %@",_orderTableNumber] forState:UIControlStateNormal];
     
     
+    [self computeTotalOrderPrice];
     
     
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-    [request setReturnsObjectsAsFaults:NO];
-    Account *userAccount = [self userLoggedIn];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
-    NSError *error = nil;
-    
-    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
-    
-    _totalOrderPrice = 0.0f;
-    
-    if (result.count) {
-        OrderList *order = (OrderList*)result[0];
-        
-        NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
-        
-        
-        for (NSDictionary *bundle in storedOrders) {
-//            NSLog(@"bundle:%@",bundle);
-            self.totalOrderPrice += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
-        }
-
-    }
-    
-    [self setTotalPrice:_totalOrderPrice];
     _orderTableButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     _orderCostButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     _orderCostButton.titleLabel.minimumScaleFactor = -5.0f;
@@ -198,6 +176,7 @@ BOOL hackFromLoad = NO;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(computeTotalOrderPrice) name:@"computeTotalOrderPriceObserver" object:nil];
     if (_categoryString && [_categoryString isEqualToString:@""]) {
         
         [self hideTitleBar];
@@ -237,6 +216,59 @@ BOOL hackFromLoad = NO;
     
     [self setTotalPrice:self.totalOrderPrice];
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"computeTotalOrderPriceObserver" object:@""];
+}
+
+- (void) computeTotalOrderPrice {
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+    [request setReturnsObjectsAsFaults:NO];
+    Account *userAccount = [self userLoggedIn];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
+    NSError *error = nil;
+    
+    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    
+    self.totalOrderPrice = 0.0f;
+    
+    if (result.count) {
+        for (OrderList *order in result) {
+            
+            if ([order.user_id integerValue] == [userAccount.identifier integerValue]) {
+                
+                NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
+                
+                for (NSDictionary *bundle in storedOrders) {
+                    self.totalOrderPrice += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
+                }
+                
+            }
+            else {
+                
+                
+                //get other orders
+                
+                
+                NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
+                
+                for (NSDictionary *menuOrder in storedOrders) {
+                    self.totalOrderPrice += [menuOrder[@"total_amount"] floatValue];
+                }
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    [self setTotalPrice:self.totalOrderPrice];
 }
 
 - (void) menuForRestaurant:(NSNotification*)notification {
@@ -565,7 +597,7 @@ BOOL hackFromLoad = NO;
 }
 
 
-- (void)resolveTotalPrice:(NSInteger)price {
+- (void)resolveTotalPrice:(NSInteger)price { //unused lol
     _totalOrderPrice += price;
     [self setTotalPrice:_totalOrderPrice];
 }

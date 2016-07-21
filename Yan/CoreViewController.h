@@ -42,4 +42,6 @@
 
 - ( nullable NSDictionary*)menuItemToDictionary:( nullable MenuItem*)menuItem itemNumber:(NSInteger)itemNumber;
 
+- (void) billoutRequestedOrdersCleared;
+
 @end

@@ -354,10 +354,18 @@ didDisconnectWithUser:(GIDGoogleUser *)user
         
         if([context save:&error]) {
             NSLog(@"orders saved");
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"computeTotalOrderPriceObserver"  object:@""];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadOrderListObserver"  object:@""];
+            
+            
         }
         else {
             NSLog(@"order saving failed");
         }
+        
+        
     }
     else if (data[@"billout"]) {
         self.notificationUserInfo = nil;
@@ -401,7 +409,7 @@ didDisconnectWithUser:(GIDGoogleUser *)user
             error = nil;
             if ([context save:&error]) {
                 
-                [self.window.rootViewController.navigationController popToRootViewControllerAnimated:YES];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"billoutRequestedOrdersClearedObserver"  object:@""];
                 
             }
             
@@ -454,9 +462,36 @@ didDisconnectWithUser:(GIDGoogleUser *)user
             reminder.type = @"notification";
             reminder.title = self.notificationUserInfo[@"title"];
             reminder.bodyText = self.notificationUserInfo[@"body"];
+            
+            if([self.notificationUserInfo[@"title"] rangeOfString:@"order"].location != NSNotFound) {
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"lockOrderListObserver"  object:@""];
+            }
         }
         
         [self.window addSubview:reminder.view];
+        
+        //remove notifications
+        NSManagedObjectContext *context = self.managedObjectContext;
+        
+        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"Notification"];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"type == 'reminder' OR type == 'notification'"]];
+        
+        NSError *error = nil;
+        
+        NSArray *result = [context executeFetchRequest:request error:&error];
+        
+        if (result.count) {
+            for (Notification *notificationData in result) {
+                
+                [context deleteObject:notificationData];
+                
+                error = nil;
+                [context save:&error];
+            }
+            
+        }
+        
     }
 }
 

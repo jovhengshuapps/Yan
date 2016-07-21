@@ -2540,8 +2540,10 @@ You may now start using the app for your favourite restaurant.</string>
                                             </variation>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="duplicateButton" destination="Kbk-te-awf" id="jNQ-r8-5Nb"/>
                                             <outlet property="labelItemNamePrice" destination="TS2-BH-aDm" id="qfZ-Bc-4Ud"/>
                                             <outlet property="labelItemOptions" destination="mDd-rV-ZGj" id="C3e-vp-mee"/>
+                                            <outlet property="removeButton" destination="kHk-E3-8Ci" id="Uu5-b1-kCF"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="billoutListCell" rowHeight="44" id="B3p-dS-CPp" customClass="OrderListTableViewCell">

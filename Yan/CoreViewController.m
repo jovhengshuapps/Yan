@@ -8,6 +8,12 @@
 
 #import "CoreViewController.h"
 
+#import "OrderMenuViewController.h"
+#import "MenuDetailsViewController.h"
+#import "ConfirmOrderViewController.h"
+#import "OptionListTableViewController.h"
+#import "WaiterTableViewController.h"
+#import "PayScreenViewController.h"
 
 @interface CoreViewController ()
 @property (strong, nonatomic) UILabel *titleLabel;
@@ -30,6 +36,8 @@
     _titleLabel.text = @"...";
     _titleLabel.font = [UIFont fontWithName:@"LucidaGrande" size:25.0f];
     _titleLabel.textColor = UIColorFromRGB(0xFFFFFF);
+    _titleLabel.adjustsFontSizeToFitWidth = YES;
+    _titleLabel.minimumScaleFactor = -5.0f;
     [self hideTitleBar];
     
     
@@ -83,12 +91,14 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"billoutRequestedOrdersClearedObserver" object:nil];
     [self hideTitleBar];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(billoutRequestedOrdersCleared) name:@"billoutRequestedOrdersClearedObserver" object:nil];
     self.title = @"Yan";
     
     Account *loggedUSER = [self userLoggedIn];
@@ -735,5 +745,12 @@
     return dictionary;
 }
 
+- (void)billoutRequestedOrdersCleared {
+    
+    if ([self isMemberOfClass:[OrderMenuViewController class]] || [self isMemberOfClass:[MenuDetailsViewController class]] || [self isMemberOfClass:[ConfirmOrderViewController class]] || [self isMemberOfClass:[OptionListTableViewController class]] || [self isMemberOfClass:[WaiterTableViewController class]] || [self isMemberOfClass:[PayScreenViewController class]]) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+    }
+}
 
 @end

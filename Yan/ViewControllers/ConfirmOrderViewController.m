@@ -231,13 +231,13 @@
     [dateFormatter setDateFormat:@"MM/dd/yyyy"];
     
     NSString *order_date = [dateFormatter stringFromDate:[NSDate date]];
-    NSMutableString *notes = [NSMutableString stringWithString:@""];
+//    NSMutableString *notes = [NSMutableString stringWithString:@""];
     NSMutableArray *menus = [NSMutableArray array];
     
     for (NSDictionary *items in self.arrayOrderList) {
-        if (![items[@"option_choices"] isEqualToString:@"Basic"] && ((NSString*)items[@"option_choices"]).length) {
-            [notes appendString:[NSString stringWithFormat:@"%@(%@),",items[@"name"],items[@"option_choices"]]];
-        }
+//        if (![items[@"option_choices"] isEqualToString:@"Basic"] && ((NSString*)items[@"option_choices"]).length) {
+//            [notes appendString:[NSString stringWithFormat:@"%@(%@),",items[@"name"],items[@"option_choices"]]];
+//        }
         
         
         if (menus.count) {
@@ -245,28 +245,32 @@
             for (NSInteger i = 0; i < menus.count; i++) {
                 if ([(menus[i][@"menu_id"]) integerValue] == [items[@"identifier"] integerValue]) {
                     isNew = NO;
+                    NSLog(@"menu:%@",menus[i]);
                     NSInteger qty = [menus[i][@"quantity"] integerValue] + 1;
                     NSInteger total = [items[@"price"] integerValue] * qty;
                     
-                    [menus replaceObjectAtIndex:i withObject:@{@"menu_id":items[@"identifier"],@"quantity":[NSNumber numberWithInteger:qty],@"total_amount":[NSNumber numberWithInteger:total]}];
+                    NSString *options = [NSString stringWithFormat:@"%@, %@(%@);",menus[i][@"options"],items[@"name"],items[@"option_choices"]];
+                    [menus replaceObjectAtIndex:i withObject:@{@"menu_id":items[@"identifier"],@"quantity":[NSNumber numberWithInteger:qty],@"total_amount":[NSNumber numberWithInteger:total],@"options":options}];
                     
                     break;
                 }
             }
             
             if (isNew) {
-                [menus addObject:@{@"menu_id":items[@"identifier"],@"quantity":@1,@"total_amount":items[@"price"]}];
+                NSString *options = [NSString stringWithFormat:@"%@(%@);",items[@"name"],items[@"option_choices"]];
+                [menus addObject:@{@"menu_id":items[@"identifier"],@"quantity":@1,@"total_amount":items[@"price"], @"options":options}];
             }
         }
         else {
-            [menus addObject:@{@"menu_id":items[@"identifier"],@"quantity":@1,@"total_amount":items[@"price"]}];
+            NSString *options = [NSString stringWithFormat:@"%@(%@);",items[@"name"],items[@"option_choices"]];
+            [menus addObject:@{@"menu_id":items[@"identifier"],@"quantity":@1,@"total_amount":items[@"price"], @"options":options}];
         }
         
         
         
     }
     
-    
+//    NSLog(@"MENU ORDER:%@",menus);
     Account *account = [self userLoggedIn];
     
     if (account.current_orderID.length) {
@@ -276,7 +280,7 @@
         [self callAPI:API_SENDORDERUPDATE(account.current_restaurantID, account.identifier,account.current_orderID) withParameters:@{
                                                                                                        @"order_date": order_date,
                                                                                                        @"table": account.current_tableNumber,
-                                                                                                       @"notes": notes,
+                                                                                                       /*@"notes": notes,*/
                                                                                                        @"menus":menus
                                                                                                        } completionNotification:@"submitOrder"];
     }
@@ -286,7 +290,7 @@
         [self callAPI:API_SENDORDER(account.current_restaurantID, account.identifier) withParameters:@{
                                                                                                        @"order_date": order_date,
                                                                                                        @"table": account.current_tableNumber,
-                                                                                                       @"notes": notes,
+                                                                                                       /*@"notes": notes,*/
                                                                                                        @"menus":menus
                                                                                                        } completionNotification:@"submitOrder"];
     }

@@ -370,7 +370,7 @@
         
         NETWORK_INDICATOR(NO)
 //        NSLog(@"response:%@",responseObject);
-        if ([responseObject isKindOfClass:[NSArray class]]) {
+        if ([responseObject isKindOfClass:[NSArray class]] || [responseObject isKindOfClass:[NSDictionary class]]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
         }
         else if ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject allKeys] containsObject:@"error"]) {
@@ -381,7 +381,8 @@
             }
             
         }else {
-            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
+            [self resolveErrorResponse:responseObject withNotification:notificationName];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
 //        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
@@ -409,7 +410,7 @@
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NETWORK_INDICATOR(NO)
 //        NSLog(@"response:%@",responseObject);
-        if ([responseObject isKindOfClass:[NSArray class]]) {
+        if ([responseObject isKindOfClass:[NSArray class]] || [responseObject isKindOfClass:[NSDictionary class]]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
         }
         else if ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject allKeys] containsObject:@"error"]) {
@@ -419,7 +420,8 @@
                 [self resolveErrorResponse:responseObject withNotification:notificationName];
             }
         }else {
-            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
+            [self resolveErrorResponse:responseObject withNotification:notificationName];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
 //        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);

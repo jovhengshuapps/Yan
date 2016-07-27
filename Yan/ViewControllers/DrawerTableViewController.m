@@ -114,8 +114,26 @@
                 //            FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
                 //            [login logOut];
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:@"HomeViewLogin"];
-                return;
+                //remove orders
+                NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+                
+                error = nil;
+                
+                NSArray *result = [context executeFetchRequest:request error:&error];
+                
+                
+                for (OrderList *orders in result) {
+                    [context deleteObject:orders];
+                }
+                
+                error = nil;
+                if ([context save:&error]) {
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:@"HomeViewLogin"];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    return;
+                }
+                
             }
         }];
         [alert addAction:actionNO];

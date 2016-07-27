@@ -485,14 +485,14 @@
     footerView.backgroundColor = [UIColor whiteColor];
     
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 5.0f, 80.0f, 34.0f)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 5.0f, 100.0f, 34.0f)];
     label.backgroundColor = [UIColor clearColor];
     label.textAlignment = NSTextAlignmentLeft;
     label.font = [UIFont fontWithName:@"LucidaGrande" size:18.0f];
     label.textColor = [UIColor blackColor];
     label.text = @"Sub Total:";
     
-    UILabel *value = [[UILabel alloc] initWithFrame:CGRectMake(85.0f, 5.0f, footerView.bounds.size.width - 85.0f, 34.0f)];
+    UILabel *value = [[UILabel alloc] initWithFrame:CGRectMake(105.0f, 5.0f, footerView.bounds.size.width - 105.0f, 34.0f)];
     value.backgroundColor = [UIColor clearColor];
     value.textAlignment = NSTextAlignmentRight;
     value.font = [UIFont fontWithName:@"LucidaGrande" size:22.0f];

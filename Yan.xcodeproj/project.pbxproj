@@ -1258,7 +1258,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Eugene Leoncio (9GZUYUT7E4)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1273,7 +1272,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.yan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3a80d479-f8a1-4c2b-9e1f-dda9fc81ce4a";
+				PROVISIONING_PROFILE = "bad4d44b-d01d-4166-bda1-d9c19a659e2e";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1282,7 +1281,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Bilinear Inc. (YSNGH6HTET)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bilinear Inc. (YSNGH6HTET)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1297,7 +1296,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.yan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7cf343de-1729-4868-94ef-70431d4271f3";
+				PROVISIONING_PROFILE = "bad4d44b-d01d-4166-bda1-d9c19a659e2e";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

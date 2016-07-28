@@ -370,17 +370,18 @@
         
         NETWORK_INDICATOR(NO)
 //        NSLog(@"response:%@",responseObject);
-        if ([responseObject isKindOfClass:[NSArray class]] || [responseObject isKindOfClass:[NSDictionary class]]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
-        }
-        else if ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject allKeys] containsObject:@"error"]) {
+        if ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject allKeys] containsObject:@"error"]) {
             if([responseObject[@"error"] integerValue] == 404 && [notificationName isEqualToString:@"socialLoginObserver"]){
                 [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
             }else {
                 [self resolveErrorResponse:responseObject withNotification:notificationName];
             }
             
-        }else {
+        }
+        else if ([responseObject isKindOfClass:[NSArray class]] || [responseObject isKindOfClass:[NSDictionary class]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
+        }
+        else {
             [self resolveErrorResponse:responseObject withNotification:notificationName];
 //            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
         }
@@ -410,16 +411,17 @@
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NETWORK_INDICATOR(NO)
 //        NSLog(@"response:%@",responseObject);
-        if ([responseObject isKindOfClass:[NSArray class]] || [responseObject isKindOfClass:[NSDictionary class]]) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
-        }
-        else if ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject allKeys] containsObject:@"error"]) {
+        if ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject allKeys] containsObject:@"error"]) {
             if([responseObject[@"error"] integerValue] == 404 && [notificationName isEqualToString:@"socialLoginObserver"]){
                 [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
             }else {
                 [self resolveErrorResponse:responseObject withNotification:notificationName];
             }
-        }else {
+        }
+        else if ([responseObject isKindOfClass:[NSArray class]] || [responseObject isKindOfClass:[NSDictionary class]]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
+        }
+        else {
             [self resolveErrorResponse:responseObject withNotification:notificationName];
 //            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
         }

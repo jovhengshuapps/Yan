@@ -98,4 +98,6 @@
 
 #define API_RESTAURANT_DETAILS(RESTAURANT_ID)                           [NSString stringWithFormat:@"restaurant/details/%@",RESTAURANT_ID]
 
+#define API_GETTABLEORDERS(RESTAURANT_ID,TABLE_NUMBER)                          [NSString stringWithFormat:@"table_orders/%@/table/%@",RESTAURANT_ID,TABLE_NUMBER]
+
 #endif /* Config_h */

@@ -35,7 +35,8 @@
     
     self.totalValue = 0.0f;
     
-    [self fetchOrderDataList];
+//    [self fetchOrderDataList];
+    [self reloadOrderList];
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, KEYWINDOW.frame.size.width+5.0f, 110.0f)];
     footerView.backgroundColor = UIColorFromRGB(0xDFDFDF);
@@ -192,8 +193,19 @@
         
 }
 
-- (void) reloadOrderList {
+- (void) retrieveOtherUserOrders {
     
+    Account *account = [self userLoggedIn];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableOrders:) name:@"get_table_orders" object:nil];
+    [self callGETAPI:API_GETTABLEORDERS(account.current_restaurantID, account.current_tableNumber) withParameters:@{} completionNotification:@"get_table_orders"];
+}
+
+- (void) tableOrders:(NSNotification*)notification {
+    NSLog(@"response:%@",notification.object);
+}
+
+- (void) reloadOrderList {
+    [self retrieveOtherUserOrders];
     [self fetchOrderDataList];
     [self.mainTable reloadData];
 }

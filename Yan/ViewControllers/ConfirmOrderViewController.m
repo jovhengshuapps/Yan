@@ -35,6 +35,7 @@
     
     self.totalValue = 0.0f;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveTableOrders:) name:@"get_table_orders" object:nil];
 //    [self fetchOrderDataList];
     [self reloadOrderList];
     
@@ -112,11 +113,15 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"get_table_orders" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"reloadOrderListObserver" object:@""];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"lockOrderListObserver" object:@""];
 }
 
 - (void) fetchOrderDataList {
+    self.totalValue = 0.0f;
+    self.dictionaryOtherOrders = [NSMutableDictionary dictionary];
+    self.arrayOtherUsers = [NSMutableArray array];
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
@@ -137,7 +142,17 @@
                 NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
                 
                 for (NSDictionary *bundle in storedOrders) {
-                    self.totalValue += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
+                    if (self.billoutOrder) {
+                        if (bundle[@"details"]) {
+                            self.totalValue += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
+                        }
+                        else {
+                            self.totalValue += ([bundle[@"total_amount"] floatValue] * [bundle[@"quantity"] floatValue]);
+                        }
+                    }
+                    else {
+                        self.totalValue += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
+                    }
                 }
                 
                 self.arrayOrderList = [NSMutableArray array];
@@ -167,8 +182,6 @@
                 //get other orders
                 
                 
-                self.dictionaryOtherOrders = [NSMutableDictionary dictionary];
-                self.arrayOtherUsers = [NSMutableArray array];
                 
                 NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
                 
@@ -179,7 +192,7 @@
                 NSDictionary *otherList = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",order.user_name],@"name",storedOrders,@"items", nil];
                 
                 [self.dictionaryOtherOrders setObject:otherList forKey:order.user_id];
-                
+//                NSLog(@"others[%@] - %@",order.user_id,otherList);
                 [self.arrayOtherUsers addObject:order.user_id];
             }
             
@@ -196,13 +209,78 @@
 - (void) retrieveOtherUserOrders {
     
     Account *account = [self userLoggedIn];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tableOrders:) name:@"get_table_orders" object:nil];
-    [self callGETAPI:API_GETTABLEORDERS(account.current_restaurantID, account.current_tableNumber) withParameters:@{} completionNotification:@"get_table_orders"];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveTableOrders:) name:@"getCurrentTableOrder" object:nil];
+    [self callGETAPI:API_GETTABLEORDERS(account.current_restaurantID, account.current_tableNumber) withParameters:@{} completionNotification:@"getCurrentTableOrder"];
 }
 
-- (void) tableOrders:(NSNotification*)notification {
-    NSLog(@"response:%@",notification.object);
+- (void) saveTableOrders:(NSNotification*)notification {
+//    NSLog(@"response:%@",notification.object);
+    
+    NSArray *orderList = (NSArray*)notification.object;
+    
+    for (NSDictionary *data in orderList) {
+        NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+        
+        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+        [request setReturnsObjectsAsFaults:NO];
+        NSError *error = nil;
+        
+        NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+        //        NSLog(@"orderlist:%@",result);
+        BOOL isNewOrder = YES;
+        if (result.count) {
+            for (OrderList *orderItem in result) {
+                if ([orderItem.user_id isEqualToString:data[@"user_id"]]) {
+                    //update order
+//                    NSLog(@"update to orderlist");
+                    orderItem.items = [self encodeData:[NSArray arrayWithArray:data[@"orders"]] withKey:@"orderItems"];
+                    isNewOrder = NO;
+                    break;
+                }
+                
+            }
+        }
+        
+        
+        if(isNewOrder){
+            //add to order list
+            //            NSLog(@"add to orderlist");
+            OrderList *order = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
+            
+            order.items = [self encodeData:[NSArray arrayWithArray:data[@"orders"]] withKey:@"orderItems"];
+            order.orderSent = @YES;
+            order.tableNumber = isNIL(data[@"table_number"]);
+            order.user_id = data[@"user_id"];
+            order.user_name = data[@"user_name"];
+            order.restaurant_id = data[@"restaurant_id"];
+        }
+        
+        error = nil;
+        
+        if([context save:&error]) {
+            NSLog(@"orders saved");
+            
+            
+            [self fetchOrderDataList];
+            [self.mainTable reloadData];
+            
+            //        [[NSNotificationCenter defaultCenter] postNotificationName:@"computeTotalOrderPriceObserver"  object:@""];
+            //
+            //        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadOrderListObserver"  object:@""];
+            
+            
+        }
+        else {
+            NSLog(@"order saving failed");
+        }
+    }
+    
+    
 }
+
+
+
+
 
 - (void) reloadOrderList {
     [self retrieveOtherUserOrders];
@@ -442,6 +520,7 @@
     }
     else {
         NSString *user_id = self.arrayOtherUsers[section-1];
+//        NSLog(@"[%@] - %lu",user_id,[([self.dictionaryOtherOrders objectForKey:user_id][@"items"]) count]);
         return [([self.dictionaryOtherOrders objectForKey:user_id][@"items"]) count];
     }
     
@@ -452,6 +531,13 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 34.0f;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if(self.arrayOtherUsers == nil || [self.arrayOtherUsers count] == 0) {
+        return 0;
+    }
     return 34.0f;
 }
 
@@ -490,36 +576,73 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     
-    if(!self.arrayOtherUsers) {
+    if(self.arrayOtherUsers == nil || [self.arrayOtherUsers count] == 0) {
         return nil;
     }
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, 44.0f)];
-    footerView.backgroundColor = [UIColor whiteColor];
+//    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, 44.0f)];
+//    footerView.backgroundColor = [UIColor whiteColor];
+//    
+//    
+//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(10.0f, 5.0f, 90.0f, 34.0f)];
+//    label.backgroundColor = [UIColor clearColor];
+//    label.textAlignment = NSTextAlignmentLeft;
+//    label.font = [UIFont fontWithName:@"LucidaGrande" size:18.0f];
+//    label.textColor = [UIColor blackColor];
+//    label.text = @"Sub Total:";
+//    
+//    UILabel *value = [[UILabel alloc] initWithFrame:CGRectMake(85.0f, 5.0f, footerView.bounds.size.width - 95.0f, 34.0f)];
+//    value.backgroundColor = [UIColor clearColor];
+//    value.textAlignment = NSTextAlignmentRight;
+//    value.font = [UIFont fontWithName:@"LucidaGrande" size:22.0f];
+//    value.textColor = [UIColor blackColor];
     
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 5.0f, 100.0f, 34.0f)];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, 34.0f)];
+    footerView.backgroundColor = UIColorFromRGB(0xDFDFDF);
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15.0f, 0.0f, 100.0f, footerView.frame.size.height)];
     label.backgroundColor = [UIColor clearColor];
     label.textAlignment = NSTextAlignmentLeft;
-    label.font = [UIFont fontWithName:@"LucidaGrande" size:18.0f];
-    label.textColor = [UIColor blackColor];
-    label.text = @"Sub Total:";
+    label.font = [UIFont fontWithName:@"LucidaGrande" size:16.0f];
+    label.textColor = UIColorFromRGB(0x363636);
+    label.text = @"Sub-total:";
     
-    UILabel *value = [[UILabel alloc] initWithFrame:CGRectMake(105.0f, 5.0f, footerView.bounds.size.width - 105.0f, 34.0f)];
+    [footerView addSubview:label];
+    
+    
+    UILabel *value = [[UILabel alloc] initWithFrame:CGRectMake(label.bounds.origin.x + label.bounds.size.width + 15.0f, 0.0f, footerView.frame.size.width - 30.0f - label.bounds.size.width, footerView.frame.size.height)];
     value.backgroundColor = [UIColor clearColor];
     value.textAlignment = NSTextAlignmentRight;
-    value.font = [UIFont fontWithName:@"LucidaGrande" size:22.0f];
-    value.textColor = [UIColor blackColor];
+    value.font = [UIFont fontWithName:@"LucidaGrande" size:16.0f];
+    value.textColor = UIColorFromRGB(0x363636);
+    //    labelPrice.text = [NSString stringWithFormat:@"%.2f",self.totalValue];
+    
+    [footerView addSubview:value];
+    
     
     CGFloat subTotal = 0.0f;
     
     if (section == 0) {
-        
-        for (NSDictionary *bundle in self.arrayBilloutList) {
+        if (self.arrayBilloutList && [self.arrayBilloutList count]) {
+//            for (NSDictionary *bundle in self.arrayBilloutList) {
+//                
+//                NSArray *details = bundle[@"details"];
+//                NSDictionary *item = details[0];//doesn't matter which one
+//                
+//                subTotal += ([item[@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
+//            }
             
-            NSArray *details = bundle[@"details"];
-            NSDictionary *item = details[0];//doesn't matter which one
+            for (NSDictionary *item in self.arrayBilloutList) {
+                
+                subTotal += ([item[@"total_amount"] floatValue] * [item[@"quantity"] floatValue]);
+            }
+        }
+        else {
             
-            subTotal += ([item[@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
+            for (NSDictionary *item in self.arrayOrderList) {
+                
+                subTotal += ([item[@"price"] floatValue]);
+            }
         }
     }
     else {
@@ -536,9 +659,6 @@
     value.text = [NSString stringWithFormat:@"PHP %.2f",subTotal];
     
     
-    [footerView addSubview:value];
-    [footerView addSubview:label];
-    
     return footerView;
 }
 
@@ -551,10 +671,18 @@
             
             OrderListTableViewCell *cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"billoutListCell"];
             
-            NSDictionary *bundle = self.arrayBilloutList[indexPath.row];
-            NSArray *details = bundle[@"details"];
-            NSDictionary *item = details[0];//doesn't matter which one
-            NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"name"] uppercaseString],item[@"price"]];
+            NSDictionary *item = self.arrayBilloutList[indexPath.row];
+            NSString *name = @"";
+            NSString *price = @"";
+            if (item[@"details"]) {
+                name = item[@"details"][0][@"name"];
+                price = item[@"details"][0][@"price"];
+            }
+            else {
+                name = item[@"menu_name"];
+                price = item[@"total_amount"];
+            }
+            NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[name uppercaseString],price];
             
             CGFloat nameSize = cell.labelItemNamePrice.font.pointSize;
             CGFloat priceSize = nameSize / 2.0f;
@@ -580,7 +708,7 @@
             [attrString endEditing];
             
             cell.labelItemNamePrice.attributedText = attrString;
-            cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",bundle[@"quantity"]];
+            cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",item[@"quantity"]];
             
             
             return cell;

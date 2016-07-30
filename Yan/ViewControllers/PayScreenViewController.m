@@ -29,16 +29,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _showSubTotal = NO;
+//    _showSubTotal = NO;
     _mainTable.allowsSelection = NO;
     
     self.totalValue = 0.0f;
     [self fetchOrderDataList];
         
     
-    if (_discountDetails) {
-        _showSubTotal = YES;
-    }
+//    if (_discountDetails) {
+//        _showSubTotal = YES;
+//    }
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, KEYWINDOW.frame.size.width+5.0f, 110.0f)];
     footerView.backgroundColor = UIColorFromRGB(0xDFDFDF);
@@ -115,79 +115,173 @@
     [self showTitleBar:[NSString stringWithFormat:@"Bill: Table %@",_tableNumber]];
 }
 
-
 - (void) fetchOrderDataList {
-    
+    self.totalValue = 0.0f;
+    self.dictionaryOtherOrders = [NSMutableDictionary dictionary];
+    self.arrayOtherUsers = [NSMutableArray array];
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     [request setReturnsObjectsAsFaults:NO];
     Account *userAccount = [self userLoggedIn];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"restaurant_id == %@", userAccount.current_restaurantID]];
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     if (result.count) {
-        OrderList *order = (OrderList*)result[0];
-        
-        NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
-        
-        for (NSDictionary *bundle in storedOrders) {
-            self.totalValue += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
-        }
-        
-        _arrayOrderList = [NSMutableArray new];
-
-        
-        for (NSDictionary *item in storedOrders) {
-//            NSLog(@"storedITEM:%@",item);
-            [_arrayOrderList addObject:item];
-        }
-        
-
-    }
-    
-    
-    
-    //get other orders
-    
-    NSFetchRequest *requestOthers = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-    [requestOthers setReturnsObjectsAsFaults:NO];
-    
-    [requestOthers setPredicate:[NSPredicate predicateWithFormat:@"user_id != %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
-    error = nil;
-    
-    NSArray *resultOthers = [NSArray arrayWithArray:[context executeFetchRequest:requestOthers error:&error]];
-    if (resultOthers.count) {
-        
-        self.dictionaryOtherOrders = [NSMutableDictionary dictionary];
-        self.arrayOtherUsers = [NSMutableArray array];
-        
-        for (OrderList *otherOrder in resultOthers) {
-            NSArray *storedOrders = [self decodeData:otherOrder.items forKey:@"orderItems"];
+        for (OrderList *order in result) {
             
-            for (NSDictionary *menuOrder in storedOrders) {
-                self.totalValue += [menuOrder[@"total_amount"] floatValue];
+            if ([order.user_id integerValue] == [userAccount.identifier integerValue]) {
+                
+                //check if billout
+//                self.billoutOrder = [order.orderSent boolValue];
+                
+                NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
+                
+                self.arrayOrderList = [NSMutableArray array];
+//                NSMutableArray *menus = [NSMutableArray array];
+                for (NSDictionary *item in storedOrders) {
+                    NSLog(@"item:%@",item);
+                    
+                    
+//                    if (menus.count) {
+//                        BOOL isNew = YES;
+//                        for (NSInteger i = 0; i < menus.count; i++) {
+//                            if ([(menus[i][@"menu_id"]) integerValue] == [item[@"details"][0][@"identifier"] integerValue]) {
+//                                isNew = NO;
+//                                NSLog(@"menu:%@",menus[i]);
+//                                NSInteger qty = [menus[i][@"quantity"] integerValue] + 1;
+//                                NSInteger total = [item[@"details"][0][@"price"] integerValue] * qty;
+//                                
+//                                NSString *options = [NSString stringWithFormat:@"%@, %@(%@);",menus[i][@"options"],item[@"details"][0][@"name"],item[@"details"][0][@"option_choices"]];
+//                                [menus replaceObjectAtIndex:i withObject:@{@"menu_id":item[@"details"][0][@"identifier"],@"quantity":[NSNumber numberWithInteger:qty],@"total_amount":[NSNumber numberWithInteger:total],@"options":options}];
+//                                
+//                                break;
+//                            }
+//                        }
+//                        
+//                        if (isNew) {
+//                            NSString *options = [NSString stringWithFormat:@"%@(%@);",item[@"details"][0][@"name"],item[@"details"][0][@"option_choices"]];
+//                            [menus addObject:@{@"menu_id":item[@"details"][0][@"identifier"],@"quantity":@1,@"total_amount":item[@"details"][0][@"price"], @"options":options}];
+//                        }
+//                    }
+//                    else {
+//                        NSString *options = [NSString stringWithFormat:@"%@(%@);",item[@"details"][0][@"name"],item[@"details"][0][@"option_choices"]];
+//                        [menus addObject:@{@"menu_id":item[@"details"][0][@"identifier"],@"quantity":@1,@"total_amount":item[@"details"][0][@"price"], @"options":options}];
+//                    }
+                    
+                    self.totalValue += ([item[@"total_amount"] floatValue] * [item[@"quantity"] floatValue]);
+                    [self.arrayOrderList addObject:item];
+                    
+                }
+                    NSArray *arrayToSort = [NSArray arrayWithArray:self.arrayOrderList];
+                    NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"menu_name" ascending:YES];
+                    NSArray *sortDescriptors = [NSArray arrayWithObject:nameDescriptor];
+                    self.arrayOrderList = [[arrayToSort sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+                
+            }
+            else {
+                
+                
+                //get other orders
+                
+                
+                
+                NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
+                
+                for (NSDictionary *menuOrder in storedOrders) {
+                    self.totalValue += [menuOrder[@"total_amount"] floatValue];
+                }
+                
+                NSDictionary *otherList = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",order.user_name],@"name",storedOrders,@"items", nil];
+                
+                [self.dictionaryOtherOrders setObject:otherList forKey:order.user_id];
+                //                NSLog(@"others[%@] - %@",order.user_id,otherList);
+                [self.arrayOtherUsers addObject:order.user_id];
             }
             
-            NSDictionary *otherList = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",otherOrder.user_name],@"name",storedOrders,@"items", nil];
-            
-            [self.dictionaryOtherOrders setObject:otherList forKey:otherOrder.user_id];
-            
-            [self.arrayOtherUsers addObject:otherOrder.user_id];
-            
         }
-        
-        
-        //        NSArray *arrayToSort = [NSArray arrayWithArray:self.arrayOrderList];
-        //        NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
-        //        NSArray *sortDescriptors = [NSArray arrayWithObject:nameDescriptor];
-        //        self.arrayOrderList = [[arrayToSort sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
         
         
     }
     
+    
+    
+    
 }
+
+//- (void) fetchOrderDataList {
+//    
+//    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+//    
+//    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+//    [request setReturnsObjectsAsFaults:NO];
+//    Account *userAccount = [self userLoggedIn];
+//    [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
+//    NSError *error = nil;
+//    
+//    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+//    if (result.count) {
+//        OrderList *order = (OrderList*)result[0];
+//        
+//        NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
+//        
+//        for (NSDictionary *bundle in storedOrders) {
+//            self.totalValue += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
+//        }
+//        
+//        _arrayOrderList = [NSMutableArray new];
+//
+//        
+//        for (NSDictionary *item in storedOrders) {
+////            NSLog(@"storedITEM:%@",item);
+//            [_arrayOrderList addObject:item];
+//        }
+//        
+//
+//    }
+//    
+//    
+//    
+//    //get other orders
+//    
+//    NSFetchRequest *requestOthers = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+//    [requestOthers setReturnsObjectsAsFaults:NO];
+//    
+//    [requestOthers setPredicate:[NSPredicate predicateWithFormat:@"user_id != %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
+//    error = nil;
+//    
+//    NSArray *resultOthers = [NSArray arrayWithArray:[context executeFetchRequest:requestOthers error:&error]];
+//    if (resultOthers.count) {
+//        
+//        self.dictionaryOtherOrders = [NSMutableDictionary dictionary];
+//        self.arrayOtherUsers = [NSMutableArray array];
+//        
+//        for (OrderList *otherOrder in resultOthers) {
+//            NSArray *storedOrders = [self decodeData:otherOrder.items forKey:@"orderItems"];
+//            
+//            for (NSDictionary *menuOrder in storedOrders) {
+//                self.totalValue += [menuOrder[@"total_amount"] floatValue];
+//            }
+//            
+//            NSDictionary *otherList = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",otherOrder.user_name],@"name",storedOrders,@"items", nil];
+//            
+//            [self.dictionaryOtherOrders setObject:otherList forKey:otherOrder.user_id];
+//            
+//            [self.arrayOtherUsers addObject:otherOrder.user_id];
+//            
+//        }
+//        
+//        
+//        //        NSArray *arrayToSort = [NSArray arrayWithArray:self.arrayOrderList];
+//        //        NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+//        //        NSArray *sortDescriptors = [NSArray arrayWithObject:nameDescriptor];
+//        //        self.arrayOrderList = [[arrayToSort sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+//        
+//        
+//    }
+//    
+//}
 
 //- (BOOL) containsMenuItem:(MenuItem*)item index:(NSInteger*)index{
 //    BOOL result = NO;
@@ -229,6 +323,7 @@
 }
 
 - (void) sendPaymentToCounter:(NSNotification*)notification {
+    NSLog(@"response:%@",notification.object);
     AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Our restaurant representative will see you to receive payment.\n\n Thank you!" delegate:self buttons:@[@"CLOSE"]];
     [alert showAlertView];
 }
@@ -294,7 +389,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     NSInteger otherUserCount = 0;
     if (self.arrayOtherUsers) {
-        otherUserCount = [self.arrayOtherUsers count]-1;
+        otherUserCount = [self.arrayOtherUsers count];
     }
     self.discountSection = -1;
     if (_discountDetails && (![_discountDetails[@"senior"] isEqualToString:@"0"] || ![_discountDetails[@"gc"] isEqualToString:@"0"])) {
@@ -317,7 +412,8 @@
         return count;
     }
     else if (section == 0) {
-        return _arrayOrderList.count;
+//        NSLog(@"orderList:%@",self.arrayOrderList);
+        return self.arrayOrderList.count;
     }
     else {
         NSString *user_id = self.arrayOtherUsers[section-1];
@@ -330,15 +426,48 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    if (!self.discountDetails && !self.arrayOtherUsers) {
+    if (/*!self.discountDetails &&*/!self.arrayOtherUsers || [self.arrayOtherUsers count] == 0) {
         return 0;
     }
     return 34.0f;
 }
 
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 34.0f;
+}
+
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, 34.0f)];
+    headerView.backgroundColor = [UIColor whiteColor];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:headerView.frame];
+    label.center = headerView.center;
+    label.backgroundColor = [UIColor clearColor];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.font = [UIFont fontWithName:@"LucidaGrande" size:22.0f];
+    label.textColor = [UIColor blackColor];
+    
+    if(section == 0) {
+            label.text = @"Your Orders";
+        
+        
+    }
+    else {
+        NSString *user_id = self.arrayOtherUsers[section-1];
+        label.text = [NSString stringWithFormat:@"%@ ordered",[self.dictionaryOtherOrders objectForKey:user_id][@"name"]];
+    }
+    
+    
+    [headerView addSubview:label];
+    
+    return headerView;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if (!self.discountDetails && !self.arrayOtherUsers) {
+    if (/*!self.discountDetails && */!self.arrayOtherUsers || [self.arrayOtherUsers count] == 0) {
         return nil;
     }
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, tableView.bounds.size.width, 34.0f)];
@@ -369,12 +498,9 @@
     
     if (section == 0) {
         
-        for (NSDictionary *bundle in self.arrayOrderList) {
+        for (NSDictionary *item in self.arrayOrderList) {
             
-            NSArray *details = bundle[@"details"];
-            NSDictionary *item = details[0];//doesn't matter which one
-            
-            subTotal += ([item[@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
+            subTotal += ([item[@"total_amount"] floatValue] * [item[@"quantity"] floatValue]);
         }
     }
     else {
@@ -402,14 +528,12 @@
         OrderListTableViewCell *cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"orderListCell"];
         
         NSDictionary *item = nil;
-        NSDictionary *bundle = nil;
+//        NSDictionary *bundle = nil;
         NSString *text = @"";
         
         if (indexPath.section == 0) {
-            bundle = _arrayOrderList[indexPath.row];
-            NSArray *details = bundle[@"details"];
-            item = details[0]; //doesn't matter which one
-            text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"name"] uppercaseString],item[@"price"]];
+            item = self.arrayOrderList[indexPath.row];
+            text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"menu_name"] uppercaseString],item[@"total_amount"]];
             
         }
         else {
@@ -445,7 +569,7 @@
         
         cell.labelItemNamePrice.attributedText = attrString;
         if (indexPath.section == 0) {
-            cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",bundle[@"quantity"]];
+            cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",item[@"quantity"]];
             
         }
         else {

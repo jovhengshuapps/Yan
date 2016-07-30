@@ -311,59 +311,11 @@ didDisconnectWithUser:(GIDGoogleUser *)user
 - (void) saveNotificationData:(NSDictionary*)data {
     
 //    NSLog(@"data:%@",data);
-    if (data[@"user_id"] && data[@"orders"]) {
+    if (data[@"confirm_order"]) {
         self.notificationUserInfo = nil;
         
-        NSManagedObjectContext *context = self.managedObjectContext;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"get_table_orders"  object:nil];
         
-        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-        [request setReturnsObjectsAsFaults:NO];
-        NSError *error = nil;
-        
-        NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
-//        NSLog(@"orderlist:%@",result);
-        BOOL isNewOrder = YES;
-        if (result.count) {
-            for (OrderList *orderItem in result) {
-                if ([orderItem.user_id isEqualToString:data[@"user_id"]]) {
-                    //update order
-                    NSLog(@"update to orderlist");
-                    orderItem.items = [self encodeData:[NSArray arrayWithArray:data[@"orders"]] withKey:@"orderItems"];
-                    isNewOrder = NO;
-                    break;
-                }
-                
-            }
-        }
-        
-        
-        if(isNewOrder){
-            //add to order list
-//            NSLog(@"add to orderlist");
-            OrderList *order = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
-            
-            order.items = [self encodeData:[NSArray arrayWithArray:data[@"orders"]] withKey:@"orderItems"];
-            order.orderSent = @YES;
-            order.tableNumber = isNIL(data[@"table_number"]);
-            order.user_id = data[@"user_id"];
-            order.user_name = data[@"user_name"];
-            order.restaurant_id = data[@"restaurant_id"];
-        }
-        
-        error = nil;
-        
-        if([context save:&error]) {
-            NSLog(@"orders saved");
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"computeTotalOrderPriceObserver"  object:@""];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadOrderListObserver"  object:@""];
-            
-            
-        }
-        else {
-            NSLog(@"order saving failed");
-        }
         
         
     }
@@ -446,6 +398,9 @@ didDisconnectWithUser:(GIDGoogleUser *)user
     
     
 }
+
+
+
 
 - (void) showNoticationScreen:(NSDictionary*)notificationData {
     if (notificationData != nil) {

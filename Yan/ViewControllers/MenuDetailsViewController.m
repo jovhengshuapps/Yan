@@ -340,10 +340,10 @@
 
 - (void)optionSelectedIndex:(NSInteger)index sender:(id)sender {
     OptionListTableViewController *optionsTVC = (OptionListTableViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"optionListController"];
-    NSDictionary *item = (NSDictionary*)_arrayOrders[index];
+//    NSDictionary *item = (NSDictionary*)_arrayOrders[index];
 //    optionsTVC.menuName = item[@"name"];
     //    optionsTVC.optionList = [self decodeData:item[@"options"] forKey:@"options"];
-    optionsTVC.itemDetails = item;
+    optionsTVC.itemDetails = [self menuItemToDictionary:self.item itemNumber:1];
     [self.navigationController pushViewController:optionsTVC animated:YES];
     
     

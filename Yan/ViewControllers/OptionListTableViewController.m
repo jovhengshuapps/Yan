@@ -61,7 +61,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     [request setReturnsObjectsAsFaults:NO];
     Account *userAccount = [self userLoggedIn];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND user_id == %@ AND restaurant_id == %@", userAccount.current_tableNumber, userAccount.identifier, userAccount.current_restaurantID]];
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
@@ -75,7 +75,7 @@
     
     for (NSInteger index = 0; index < decodedList.count; index++) {
         NSMutableDictionary *bundle = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
-        if ([bundle[@"identifier"] integerValue] == [self.itemDetails[@"identifier"] integerValue]) {
+        if ([bundle[@"menu_id"] integerValue] == [self.itemDetails[@"identifier"] integerValue]) {
             
             NSMutableArray *details = [NSMutableArray arrayWithArray:(NSArray*)bundle[@"details"]];
             for (NSInteger i = 0; i < details.count; i++) {

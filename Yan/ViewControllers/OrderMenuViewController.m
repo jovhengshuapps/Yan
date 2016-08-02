@@ -35,6 +35,7 @@ BOOL hackFromLoad = NO;
 
 @property (strong, nonatomic) MenuListViewController *menuListController;
 @property (strong, nonatomic) MenuDetailsViewController *menuDetailsController;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorTotalAmount;
 
 @end
 
@@ -234,6 +235,8 @@ BOOL hackFromLoad = NO;
     Account *account = [self userLoggedIn];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveTableOrders:) name:@"getCurrentTableOrder" object:nil];
     [self callGETAPI:API_GETTABLEORDERS(account.current_restaurantID, account.current_tableNumber) withParameters:@{} completionNotification:@"getCurrentTableOrder"];
+    [self.activityIndicatorTotalAmount startAnimating];
+    self.activityIndicatorTotalAmount.hidden = NO;
 }
 
 - (void) saveTableOrders:(NSNotification*)notification {
@@ -295,18 +298,20 @@ BOOL hackFromLoad = NO;
         else {
             NSLog(@"order saving failed");
         }
+        
     }
     
     
 }
 
 - (void) computeTotalOrderPrice {
-    
+    [self.activityIndicatorTotalAmount startAnimating];
+    self.activityIndicatorTotalAmount.hidden = NO;
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     [request setReturnsObjectsAsFaults:NO];
     Account *userAccount = [self userLoggedIn];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"restaurant_id == %@", userAccount.current_restaurantID]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND user_id == %@ AND restaurant_id == %@", userAccount.current_tableNumber, userAccount.identifier, userAccount.current_restaurantID]];
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
@@ -320,24 +325,29 @@ BOOL hackFromLoad = NO;
                 
                 NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
                 
-                if ([order.orderSent boolValue]) {
-                    
-                    for (NSDictionary *bundle in storedOrders) {
-                        if (bundle[@"details"]) {
-                            self.totalOrderPrice += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
-                            
-                        }
-                        else {
-                            self.totalOrderPrice += ([bundle[@"total_amount"] floatValue] * [bundle[@"quantity"] floatValue]);
-                        }
-                    }
+                
+                for (NSDictionary *bundle in storedOrders) {
+                    self.totalOrderPrice += [bundle[@"total_amount"] floatValue];
                 }
-                else {
-                    
-                    for (NSDictionary *bundle in storedOrders) {
-                        self.totalOrderPrice += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
-                    }
-                }
+                
+//                if ([order.orderSent boolValue]) {
+//                    
+//                    for (NSDictionary *bundle in storedOrders) {
+//                        if (bundle[@"details"]) {
+//                            self.totalOrderPrice += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
+//                            
+//                        }
+//                        else {
+//                            self.totalOrderPrice += ([bundle[@"total_amount"] floatValue] * [bundle[@"quantity"] floatValue]);
+//                        }
+//                    }
+//                }
+//                else {
+//                    
+//                    for (NSDictionary *bundle in storedOrders) {
+//                        self.totalOrderPrice += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
+//                    }
+//                }
                 
                 
             }
@@ -360,7 +370,8 @@ BOOL hackFromLoad = NO;
         
         
     }
-    
+    [self.activityIndicatorTotalAmount stopAnimating];
+    self.activityIndicatorTotalAmount.hidden = YES;
     [self setTotalPrice:self.totalOrderPrice];
 }
 

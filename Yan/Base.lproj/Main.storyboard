@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CTA-Pa-3Kh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CTA-Pa-3Kh">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -1714,6 +1714,26 @@ You may now start using the app for your favourite restaurant.</string>
                                             <segue destination="YmN-hE-WHQ" kind="show" identifier="priceConfirmOrder" id="e0B-c5-pXU"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="6sO-lr-rRf">
+                                        <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="OFc-28-4Rr"/>
+                                            <constraint firstAttribute="height" constant="20" id="vhv-fl-QZu"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="OFc-28-4Rr"/>
+                                                <exclude reference="vhv-fl-QZu"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="224" y="11" width="20" height="20"/>
+                                            <mask key="constraints">
+                                                <include reference="OFc-28-4Rr"/>
+                                                <include reference="vhv-fl-QZu"/>
+                                            </mask>
+                                        </variation>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1722,10 +1742,30 @@ You may now start using the app for your favourite restaurant.</string>
                                     <constraint firstItem="XLB-8Q-53y" firstAttribute="height" secondItem="Edi-dF-Jro" secondAttribute="height" id="KUg-mC-3O4"/>
                                     <constraint firstItem="XLB-8Q-53y" firstAttribute="centerY" secondItem="Jfm-hB-mgX" secondAttribute="centerY" id="MvP-Fw-fs6"/>
                                     <constraint firstAttribute="trailing" secondItem="XLB-8Q-53y" secondAttribute="trailing" id="QnM-2Q-qdS"/>
+                                    <constraint firstAttribute="bottom" secondItem="6sO-lr-rRf" secondAttribute="bottom" constant="12" id="f0j-tR-irF"/>
                                     <constraint firstItem="XLB-8Q-53y" firstAttribute="width" secondItem="Edi-dF-Jro" secondAttribute="width" id="ggG-Tm-OEw"/>
                                     <constraint firstItem="Edi-dF-Jro" firstAttribute="centerY" secondItem="Jfm-hB-mgX" secondAttribute="centerY" id="hFO-xT-tNZ"/>
                                     <constraint firstItem="XLB-8Q-53y" firstAttribute="leading" secondItem="Edi-dF-Jro" secondAttribute="trailing" id="nmc-h9-cIm"/>
+                                    <constraint firstItem="XLB-8Q-53y" firstAttribute="leading" secondItem="6sO-lr-rRf" secondAttribute="trailing" constant="-43" id="tQZ-MC-aHF"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="6sO-lr-rRf"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="tQZ-MC-aHF"/>
+                                        <exclude reference="f0j-tR-irF"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="subviews">
+                                        <include reference="6sO-lr-rRf"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <include reference="tQZ-MC-aHF"/>
+                                        <include reference="f0j-tR-irF"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1803,6 +1843,7 @@ You may now start using the app for your favourite restaurant.</string>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="mWb-I8-UsP"/>
                     <connections>
+                        <outlet property="activityIndicatorTotalAmount" destination="6sO-lr-rRf" id="M4R-6n-cbo"/>
                         <outlet property="imageViewBackground" destination="Ufi-wl-mh7" id="Lae-yt-D5s"/>
                         <outlet property="loadedControllerView" destination="hBB-BI-RNz" id="fi1-ch-vH0"/>
                         <outlet property="orderCheckoutView" destination="Jfm-hB-mgX" id="bMn-q1-HyT"/>

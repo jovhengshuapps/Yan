@@ -641,21 +641,25 @@
 
 - (void) addMenuItem:(MenuItem*)menu tableNumber:(NSString*)tableNumber{
     
+    Account *user = [self userLoggedIn];
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND user_id == %@ AND restaurant_id == %@", user.current_tableNumber, user.identifier, user.current_restaurantID]];
     [request setReturnsObjectsAsFaults:NO];
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     
-    Account *user = [self userLoggedIn];
     if (result.count == 0) {
         NSDictionary *item = [self menuItemToDictionary:menu itemNumber:1];
-        NSDictionary *bundle = @{@"identifier":item[@"identifier"],
-                                  @"details":@[item],
-                                  @"quantity":@1
-                                  };
+        NSString *options = [NSString stringWithFormat:@"%@(%@);",item[@"name"],item[@"option_choices"]];
+        NSDictionary *bundle = @{@"menu_id":item[@"identifier"],
+                                 @"menu_name":item[@"name"],
+                                 @"options":options,
+                                 @"total_amount":item[@"price"],
+                                 @"quantity":@1
+                                 };
         NSArray *orderItems = [NSArray arrayWithObjects:bundle, nil];
         
         OrderList *order = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
@@ -690,19 +694,20 @@
         [newOrderList addObjectsFromArray:decodedList];
         
         for (NSInteger index = 0; index < decodedList.count; index++) {
-            NSMutableDictionary *bundle = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
-            if ([bundle[@"identifier"] integerValue] == [menu.identifier integerValue]) {
+            NSMutableDictionary *item = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
+            if ([item[@"identifier"] integerValue] == [menu.identifier integerValue]) {
                 isNewIdentifier = NO;
-                NSInteger sum = [bundle[@"quantity"] integerValue] + 1;
-                
-                NSMutableArray *itemDetails = [NSMutableArray arrayWithArray:(NSArray*)bundle[@"details"]];
-                NSDictionary *item = [self menuItemToDictionary:menu itemNumber:sum];
-                [itemDetails addObject:item];
-                
-                [bundle setObject:itemDetails forKey:@"details"];
-                
+                NSInteger sum = [item[@"quantity"] integerValue] + 1;
                 NSNumber *quantity = [NSNumber numberWithInteger:sum];
-                [bundle setObject:quantity forKey:@"quantity"];
+                NSNumber *total_amount = [NSNumber numberWithFloat:((float)sum) * [menu.price floatValue]];
+                
+                NSString *options = [NSString stringWithFormat:@"%@(%@);",item[@"name"],item[@"option_choices"]];
+                NSDictionary *bundle = @{@"menu_id":item[@"identifier"],
+                                         @"menu_name":item[@"name"],
+                                         @"options":options,
+                                         @"total_amount":total_amount,
+                                         @"quantity":quantity
+                                         };
                 
                 [newOrderList replaceObjectAtIndex:index withObject:bundle];
             }
@@ -711,8 +716,11 @@
         
         if (isNewIdentifier == YES) {
             NSDictionary *item = [self menuItemToDictionary:menu itemNumber:1];
-            NSDictionary *bundle = @{@"identifier":item[@"identifier"],
-                                     @"details":@[item],
+            NSString *options = [NSString stringWithFormat:@"%@(%@);",item[@"name"],item[@"option_choices"]];
+            NSDictionary *bundle = @{@"menu_id":item[@"identifier"],
+                                     @"menu_name":item[@"name"],
+                                     @"options":options,
+                                     @"total_amount":item[@"price"],
                                      @"quantity":@1
                                      };
             [newOrderList addObject:bundle];

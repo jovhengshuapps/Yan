@@ -131,7 +131,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     [request setReturnsObjectsAsFaults:NO];
     Account *userAccount = [self userLoggedIn];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND user_id == %@ AND restaurant_id == %@", userAccount.current_tableNumber, userAccount.identifier, userAccount.current_restaurantID]];
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
@@ -141,21 +141,26 @@
         
         NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
         
-        _arrayOrders = [NSMutableArray new];
+        self.arrayOrders = [NSMutableArray new];
         
-        for (NSDictionary *bundle in storedOrders) {
-            for (NSDictionary *item in bundle[@"details"]) {
-                if([self.item.identifier isEqualToNumber:item[@"identifier"]]){
-                    [_arrayOrders addObject:item];                    
-                }
+        for (NSDictionary *item in storedOrders) {
+            if([self.item.identifier integerValue] == [item[@"menu_id"] integerValue]){
+                [self.arrayOrders addObject:item];
             }
         }
+//        for (NSDictionary *bundle in storedOrders) {
+//            for (NSDictionary *item in bundle[@"details"]) {
+//                if([self.item.identifier isEqualToNumber:item[@"identifier"]]){
+//                    [_arrayOrders addObject:item];                    
+//                }
+//            }
+//        }
     }
     
     
     
     
-    [_detailsTable reloadData];
+    [self.detailsTable reloadData];
 //    [_detailsTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
 //    
 //    _detailsTable.contentSize = CGSizeMake(_detailsTable.contentSize.width, _detailsTable.contentSize.height + 110.0f); //allowance for the menu and checkout
@@ -169,7 +174,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _arrayOrders.count;
+    return self.arrayOrders.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -178,13 +183,13 @@
     
     MenuOptionTableViewCell *cell = (MenuOptionTableViewCell*)[tableView dequeueReusableCellWithIdentifier:identifier];
     cell.delegateOptionCell = self;
-    NSDictionary *item = (NSDictionary*)_arrayOrders[indexPath.row];
+    NSDictionary *item = (NSDictionary*)self.arrayOrders[indexPath.row];
 //    NSLog(@"items:%@",item);
-    cell.labelMenuName.text = [item[@"name"] uppercaseString];
-    NSString *choices = item[@"option_choices"];
-    if ([choices rangeOfString:@","].location != NSNotFound) {
-        choices = [choices substringToIndex:choices.length-1];
-    }
+    cell.labelMenuName.text = [item[@"menu_name"] uppercaseString];
+    NSString *choices = item[@"options"];
+//    if ([choices rangeOfString:@","].location != NSNotFound) {
+//        choices = [choices substringToIndex:choices.length-1];
+//    }
     cell.labelMenuOptions.text = [choices capitalizedString];
     cell.index = indexPath.row;
 
@@ -207,7 +212,7 @@
     UILabel *labelName = [[UILabel alloc] initWithFrame:CGRectMake(15.0f, 5.0f, nameHeaderView.bounds.size.width - 15.0f - 40.0f, 44.0f)];
     labelName.adjustsFontSizeToFitWidth = YES;
     labelName.minimumScaleFactor = -15.0f;
-    NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[_item.name uppercaseString],_item.price];
+    NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[self.item.name uppercaseString],self.item.price];
     
     CGFloat nameSize = 20.0f;//labelName.frame.size.height - 10.0f;
     CGFloat priceSize = nameSize / 2.0f;
@@ -323,12 +328,12 @@
 //    
 //    [context save:&error];
     
-    [self addMenuItem:_item tableNumber:_tableNumber];
+    [self addMenuItem:self.item tableNumber:self.tableNumber];
     
-    [self.delegate resolveTotalPrice:[_item.price integerValue]];
+    [self.delegate resolveTotalPrice:[self.item.price integerValue]];
     [self fetchOrderData];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:_arrayOrders.count-1 inSection:0];
-    [_detailsTable scrollToRowAtIndexPath:indexPath
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.arrayOrders.count-1 inSection:0];
+    [self.detailsTable scrollToRowAtIndexPath:indexPath
                           atScrollPosition:UITableViewScrollPositionTop
                                   animated:YES];
 }

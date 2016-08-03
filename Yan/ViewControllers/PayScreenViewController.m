@@ -329,7 +329,7 @@
 }
 
 - (void) sendPaymentToCounter:(NSNotification*)notification {
-    NSLog(@"response:%@",notification.object);
+//    NSLog(@"response:%@",notification.object);
     AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Our restaurant representative will see you to receive payment.\n\n Thank you!" delegate:self buttons:@[@"CLOSE"]];
     [alert showAlertView];
 }

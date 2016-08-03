@@ -509,6 +509,8 @@ typedef enum {
             
         }else if ([sender tag] == AffiliatedRestoOptionFavorites) {
             _tabBarOption = AffiliatedRestoOptionFavorites;
+            _drawerBarItemRecents.frame = CGRectZero;
+            _drawerBarItemFavorites.frame = CGRectMake(0.0f, _drawerBarItemFavorites.frame.origin.y, self.mainTableView.frame.size.width, _drawerBarItemFavorites.frame.size.height);
                 [_drawerBarItemRecents setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
                 [_drawerBarItemFavorites setBackgroundColor:UIColorFromRGB(0xFF7B3C)];
             

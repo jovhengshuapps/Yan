@@ -59,8 +59,9 @@
     
     _titlesArray = @[/*([self userLoggedIn])?@"LOGOUT":@"LOGIN",*/
                      @"SETTINGS",
-                     @"FAVORITES",
-                     @"RECENT"];
+                     @"RESTAURANTS",
+                     @"PRIVACY POLICY",
+                     @"TERMS OF USE"];
     
     [self.tableView reloadData];
 }
@@ -143,12 +144,12 @@
             
         }];
     }
-    else if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"RECENT"]) {
-        AffiliatedRestoViewController *affiliated = (AffiliatedRestoViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"affiliatedResto"];
-        affiliated.showAffiliatedRestaurant = AffiliatedRestaurantsRecents;
-        [((UINavigationController*)self.frostedViewController.contentViewController) pushViewController:affiliated animated:YES];
-    }
-    else if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"FAVORITES"]) {
+//    else if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"RECENT"]) {
+//        AffiliatedRestoViewController *affiliated = (AffiliatedRestoViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"affiliatedResto"];
+//        affiliated.showAffiliatedRestaurant = AffiliatedRestaurantsRecents;
+//        [((UINavigationController*)self.frostedViewController.contentViewController) pushViewController:affiliated animated:YES];
+//    }
+    else if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"RESTAURANTS"]) {
         AffiliatedRestoViewController *affiliated = (AffiliatedRestoViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"affiliatedResto"];
         affiliated.showAffiliatedRestaurant = AffiliatedRestaurantsFavorites;
         [((UINavigationController*)self.frostedViewController.contentViewController) pushViewController:affiliated animated:YES];

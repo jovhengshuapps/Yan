@@ -43,7 +43,10 @@
     
     Account *account = [self userLoggedIn];
     NSString *recentRestaurants = account.recent_restaurant;
-    account.recent_restaurant = [NSString stringWithFormat:@"%@,%@",recentRestaurants, self.restaurantID];
+    
+    if ([account.recent_restaurant rangeOfString:@","].location == NSNotFound) {        
+        account.recent_restaurant = [NSString stringWithFormat:@"%@,%@",recentRestaurants, self.restaurantID];
+    }
     
     NSError *error = nil;
     if (![context save:&error]) {

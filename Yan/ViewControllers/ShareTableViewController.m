@@ -8,6 +8,7 @@
 
 #import "ShareTableViewController.h"
 
+
 @interface ShareTableViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *labelTableNumber;
 @property (weak, nonatomic) IBOutlet UILabel *labelRestaurant;
@@ -49,9 +50,9 @@
         // TODO: publish content.
         
         FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-        content.contentDescription = [NSString stringWithFormat:@"We are at table %@ at %@",_tableNumber, _restaurant];
-        content.contentTitle = @"Share a Table";
-        content.contentURL = [NSURL URLWithString:_restaurantURL];//[NSURL URLWithString:@"http://yan.bilinear.ph"];
+        content.contentDescription = [NSString stringWithFormat:@"We are dining at %@. Join us! Download Yan! now.", _restaurant];
+        content.contentTitle = @"Share Yan!";
+        content.contentURL = /*[NSURL URLWithString:_restaurantURL];*/[NSURL URLWithString:@"http://yan.bilinear.ph"];
         
         //    FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
         //    dialog.fromViewController = self;
@@ -86,10 +87,14 @@
 
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
     
+    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Successfully shared link on Facebook." delegate:self buttons:@[@"CLOSE"]];
+    [alert showAlertView];
 }
 
 - (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error {
     
+    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Failed to shared link on Facebook." delegate:self buttons:@[@"CLOSE"]];
+    [alert showAlertView];
 }
 
 

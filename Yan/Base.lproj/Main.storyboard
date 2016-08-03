@@ -4054,7 +4054,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     <constraint firstAttribute="height" constant="40" id="T8x-0p-vCD"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="18"/>
-                                <state key="normal" title="Share this with Friends"/>
+                                <state key="normal" title="Share App on Facebook"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="T8x-0p-vCD"/>

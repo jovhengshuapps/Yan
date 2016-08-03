@@ -136,49 +136,88 @@
         
             if ([order.user_id integerValue] == [userAccount.identifier integerValue]) {
                 
+//                NSMutableArray *newOrderList = [NSMutableArray new];
+//                NSArray *decodedList = (NSArray*)[self decodeData:order.items forKey:@"orderItems"];
+//                
+//                
+//                [newOrderList addObjectsFromArray:decodedList];
+//                
+//                BOOL isNewVariant = YES;
+//                
+//                for (NSInteger index = 0; index < decodedList.count; index++) {
+//                    NSMutableDictionary *bundle = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
+//                    if ([bundle[@"menu_id"] integerValue] == [self.itemDetails[@"identifier"] integerValue]
+//                        && [bundle[@"options"] isEqualToString:self.selectedOptions]) {
+//                        isNewVariant = NO;
+//                        NSInteger updatedQuantity = [bundle[@"quantity"] integerValue] + 1;
+//                        
+//                        [bundle setObject:[NSNumber numberWithInteger:updatedQuantity] forKey:@"quantity"];
+//                        [newOrderList replaceObjectAtIndex:index withObject:bundle];
+//                        break;
+//                    }
+//                }
+//                
+//                if (isNewVariant) {
+//                    
+//                    for (NSInteger index = 0; index < decodedList.count; index++) {
+//                        NSMutableDictionary *bundle = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
+//                        if ([bundle[@"menu_id"] integerValue] == [self.itemDetails[@"identifier"] integerValue]
+//                            && [bundle[@"options"] isEqualToString:@"Basic"]) {
+//                            NSInteger updatedQuantity = [bundle[@"quantity"] integerValue] - 1;
+//                            
+//                            //                NSLog(@"[%li]newOrderList:%@",(long)index,newOrderList);
+//                            if (updatedQuantity == 0) {
+//                                [newOrderList removeObjectAtIndex:index];
+//                            }
+//                            else {
+//                                [bundle setObject:[NSNumber numberWithInteger:updatedQuantity] forKey:@"quantity"];
+//                                [newOrderList replaceObjectAtIndex:index withObject:bundle];
+//                            }
+//                            
+//                            
+//                            NSDictionary *newVariant = @{@"menu_id":bundle[@"menu_id"],
+//                                                         @"menu_name":bundle[@"menu_name"],
+//                                                         @"options":self.selectedOptions,
+//                                                         @"price":bundle[@"price"],
+//                                                         @"quantity":@1
+//                                                         };
+//                            
+//                            [newOrderList addObject:newVariant];
+//                            
+//                            //                NSLog(@"newOrderList:%@",newOrderList);
+//                            break;
+//                        }
+//                    }
+//                    
+//                }
+                
+                
                 //check if billout
                 self.billoutOrder = [order.orderSent boolValue];
                 
                 NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
-                
+//                NSLog(@"storedOrders:%@",storedOrders);
                 for (NSDictionary *bundle in storedOrders) {
-                    self.totalValue += [bundle[@"total_amount"] floatValue];
-//                    if (self.billoutOrder) {
-//                        if (bundle[@"details"]) {
-//                            self.totalValue += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
-//                        }
-//                        else {
-//                            self.totalValue += ([bundle[@"total_amount"] floatValue] * [bundle[@"quantity"] floatValue]);
-//                        }
-//                    }
-//                    else {
-//                        self.totalValue += ([bundle[@"details"][0][@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
-//                    }
+                    self.totalValue += ([bundle[@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
                 }
                 
                 self.arrayOrderList = [NSMutableArray array];
-                self.arrayBilloutList = [NSMutableArray array];
-                
-                if (self.billoutOrder) {
-                    for (NSDictionary *bundle in storedOrders) {
-                        [self.arrayBilloutList addObject:bundle];
-                    }
-                }
-                else {
+//                self.arrayBilloutList = [NSMutableArray array];
+//                
+//                if (self.billoutOrder) {
+//                    for (NSDictionary *bundle in storedOrders) {
+//                        [self.arrayBilloutList addObject:bundle];
+//                    }
+//                }
+//                else {
                     for (NSDictionary *item in storedOrders) {
                         [self.arrayOrderList addObject:item];
                     }
-//                    for (NSDictionary *bundle in storedOrders) {
-//                        for (NSDictionary *item in bundle[@"details"]) {
-//                            [self.arrayOrderList addObject:item];
-//                        }
-//                    }
-                    
                     NSArray *arrayToSort = [NSArray arrayWithArray:self.arrayOrderList];
                     NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"menu_name" ascending:YES];
                     NSArray *sortDescriptors = [NSArray arrayWithObject:nameDescriptor];
                     self.arrayOrderList = [[arrayToSort sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
-                }
+//                }
             }
             else {
                 
@@ -190,7 +229,7 @@
                 NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
                 
                 for (NSDictionary *menuOrder in storedOrders) {
-                    self.totalValue += [menuOrder[@"total_amount"] floatValue];
+                    self.totalValue += ([menuOrder[@"price"] floatValue] * [menuOrder[@"quantity"] floatValue]);
                 }
                 
                 NSDictionary *otherList = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",order.user_name],@"name",storedOrders,@"items", nil];
@@ -309,62 +348,55 @@
 
 - (void) orderSentToServer {
     //call api
+//    [self.mainTable setEditing:YES animated:YES];
     
-//    NSLog(@"####orderList:%@",_arrayOrderList);
+    ///something wrong herer??????
     
-    /*
-     {
-     "order_date": "4/26/2016",
-     "table": "9",
-     "notes": "2 extra rice",
-     "menus":[{"menu_id": 1,"quantity": 1,"total_amount": 120},{"menu_id": 2,"quantity": 1,"total_amount": 120}]
-     }
-     */
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM/dd/yyyy"];
     
     NSString *order_date = [dateFormatter stringFromDate:[NSDate date]];
 //    NSMutableString *notes = [NSMutableString stringWithString:@""];
-    NSMutableArray *menus = [NSMutableArray array];
-    
-    for (NSDictionary *items in self.arrayOrderList) {
-//        if (![items[@"option_choices"] isEqualToString:@"Basic"] && ((NSString*)items[@"option_choices"]).length) {
-//            [notes appendString:[NSString stringWithFormat:@"%@(%@),",items[@"name"],items[@"option_choices"]]];
+//    NSMutableArray *menus = [NSMutableArray array];
+//    
+//    for (NSDictionary *items in self.arrayOrderList) {
+////        if (![items[@"option_choices"] isEqualToString:@"Basic"] && ((NSString*)items[@"option_choices"]).length) {
+////            [notes appendString:[NSString stringWithFormat:@"%@(%@),",items[@"name"],items[@"option_choices"]]];
+////        }
+//        
+//        
+//        if (menus.count) {
+//            BOOL isNew = YES;
+//            for (NSInteger i = 0; i < menus.count; i++) {
+//                if ([(menus[i][@"menu_id"]) integerValue] == [items[@"identifier"] integerValue]) {
+//                    isNew = NO;
+//                    NSLog(@"menu:%@",menus[i]);
+//                    NSInteger qty = [menus[i][@"quantity"] integerValue] + 1;
+//                    NSInteger total = items[@"price"];//[items[@"price"] integerValue] * qty;
+//                    
+//                    NSString *options = [NSString stringWithFormat:@"%@, %@(%@);",menus[i][@"options"],items[@"name"],items[@"option_choices"]];
+//                    [menus replaceObjectAtIndex:i withObject:@{@"menu_id":items[@"identifier"],@"quantity":[NSNumber numberWithInteger:qty],@"price":[NSNumber numberWithInteger:total],@"options":options}];
+//                    
+//                    break;
+//                }
+//            }
+//            
+//            if (isNew) {
+//                NSString *options = [NSString stringWithFormat:@"%@(%@);",items[@"name"],items[@"option_choices"]];
+//                [menus addObject:@{@"menu_id":items[@"identifier"],@"quantity":@1,@"price":items[@"price"], @"options":options}];
+//            }
 //        }
-        
-        
-        if (menus.count) {
-            BOOL isNew = YES;
-            for (NSInteger i = 0; i < menus.count; i++) {
-                if ([(menus[i][@"menu_id"]) integerValue] == [items[@"identifier"] integerValue]) {
-                    isNew = NO;
-                    NSLog(@"menu:%@",menus[i]);
-                    NSInteger qty = [menus[i][@"quantity"] integerValue] + 1;
-                    NSInteger total = [items[@"price"] integerValue] * qty;
-                    
-                    NSString *options = [NSString stringWithFormat:@"%@, %@(%@);",menus[i][@"options"],items[@"name"],items[@"option_choices"]];
-                    [menus replaceObjectAtIndex:i withObject:@{@"menu_id":items[@"identifier"],@"quantity":[NSNumber numberWithInteger:qty],@"total_amount":[NSNumber numberWithInteger:total],@"options":options}];
-                    
-                    break;
-                }
-            }
-            
-            if (isNew) {
-                NSString *options = [NSString stringWithFormat:@"%@(%@);",items[@"name"],items[@"option_choices"]];
-                [menus addObject:@{@"menu_id":items[@"identifier"],@"quantity":@1,@"total_amount":items[@"price"], @"options":options}];
-            }
-        }
-        else {
-            NSString *options = [NSString stringWithFormat:@"%@(%@);",items[@"name"],items[@"option_choices"]];
-            [menus addObject:@{@"menu_id":items[@"identifier"],@"quantity":@1,@"total_amount":items[@"price"], @"options":options}];
-        }
-        
-        
-        
-    }
+//        else {
+//            NSString *options = [NSString stringWithFormat:@"%@(%@);",items[@"name"],items[@"option_choices"]];
+//            [menus addObject:@{@"menu_id":items[@"identifier"],@"quantity":@1,@"price":items[@"price"], @"options":options}];
+//        }
+//        
+//        
+//        
+//    }
     
-    NSLog(@"MENU ORDER:%@",menus);
+    NSLog(@"MENU ORDER:%@",self.arrayOrderList);
     Account *account = [self userLoggedIn];
     
     if (account.current_orderID.length) {
@@ -375,7 +407,7 @@
                                                                                                        @"order_date": order_date,
                                                                                                        @"table": account.current_tableNumber,
                                                                                                        /*@"notes": notes,*/
-                                                                                                       @"menus":menus
+                                                                                                       @"menus":self.arrayOrderList
                                                                                                        } completionNotification:@"submitOrder"];
     }
     else {
@@ -385,7 +417,7 @@
                                                                                                        @"order_date": order_date,
                                                                                                        @"table": account.current_tableNumber,
                                                                                                        /*@"notes": notes,*/
-                                                                                                       @"menus":menus
+                                                                                                       @"menus":self.arrayOrderList
                                                                                                        } completionNotification:@"submitOrder"];
     }
     
@@ -446,7 +478,7 @@
 }
 
 - (void) lockOrderList {
-    
+    //something wrong here?????????
     Account *userAccount = [self userLoggedIn];
     
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
@@ -517,9 +549,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        if (self.billoutOrder) {
-            return self.arrayBilloutList.count;
-        }
+//        if (self.billoutOrder) {
+//            return self.arrayBilloutList.count;
+//        }
         return self.arrayOrderList.count;
     }
     else {
@@ -627,31 +659,31 @@
     CGFloat subTotal = 0.0f;
     
     if (section == 0) {
-        if (self.arrayBilloutList && [self.arrayBilloutList count]) {
-//            for (NSDictionary *bundle in self.arrayBilloutList) {
+//        if (self.arrayBilloutList && [self.arrayBilloutList count]) {
+////            for (NSDictionary *bundle in self.arrayBilloutList) {
+////                
+////                NSArray *details = bundle[@"details"];
+////                NSDictionary *item = details[0];//doesn't matter which one
+////                
+////                subTotal += ([item[@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
+////            }
+//            
+//            for (NSDictionary *item in self.arrayBilloutList) {
 //                
-//                NSArray *details = bundle[@"details"];
-//                NSDictionary *item = details[0];//doesn't matter which one
-//                
-//                subTotal += ([item[@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
+//                subTotal += ([item[@"price"] floatValue] * [item[@"quantity"] floatValue]);
 //            }
-            
-            for (NSDictionary *item in self.arrayBilloutList) {
-                
-                subTotal += ([item[@"total_amount"] floatValue] * [item[@"quantity"] floatValue]);
-            }
-        }
-        else {
-            
+//        }
+//        else {
+        
             for (NSDictionary *item in self.arrayOrderList) {
                 
-                subTotal += ([item[@"total_amount"] floatValue]);
+                subTotal += ([item[@"price"] floatValue]);
             }
 //            for (NSDictionary *item in self.arrayOrderList) {
 //                
 //                subTotal += ([item[@"price"] floatValue]);
 //            }
-        }
+//        }
     }
     else {
         
@@ -659,7 +691,7 @@
         NSArray *items = [self.dictionaryOtherOrders objectForKey:user_id][@"items"];
         
         for (NSDictionary *menuItem in items) {
-            subTotal += [menuItem[@"total_amount"] floatValue];
+            subTotal += [menuItem[@"price"] floatValue];
         }
     }
     
@@ -675,88 +707,52 @@
     NSInteger section = indexPath.section;
     
     if (section == 0) {
-        if (self.billoutOrder) {
-            
-            OrderListTableViewCell *cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"billoutListCell"];
-            
-            NSDictionary *item = self.arrayBilloutList[indexPath.row];
-            NSString *name = @"";
-            NSString *price = @"";
-            if (item[@"details"]) {
-                name = item[@"details"][0][@"name"];
-                price = item[@"details"][0][@"price"];
-            }
-            else {
-                name = item[@"menu_name"];
-                price = item[@"total_amount"];
-            }
-            NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[name uppercaseString],price];
-            
-            CGFloat nameSize = cell.labelItemNamePrice.font.pointSize;
-            CGFloat priceSize = nameSize / 2.0f;
-            
-            NSArray *components = [text componentsSeparatedByString:@" PHP"];
-            NSRange nameRange = [text rangeOfString:[components objectAtIndex:0]];
-            NSRange priceRange = [text rangeOfString:[components objectAtIndex:1]];
-            
-            nameRange = NSMakeRange(nameRange.location, nameRange.length - 3);
-            priceRange = NSMakeRange(priceRange.location-3, priceRange.length+3);
-            
-            NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text];
-            
-            [attrString beginEditing];
-            [attrString addAttribute: NSFontAttributeName
-                               value:[UIFont fontWithName:@"LucidaGrande" size:nameSize]
-                               range:nameRange];
-            
-            [attrString addAttribute: NSFontAttributeName
-                               value:[UIFont fontWithName:@"LucidaGrande" size:priceSize]
-                               range:priceRange];
-            
-            [attrString endEditing];
-            
-            cell.labelItemNamePrice.attributedText = attrString;
-            cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",item[@"quantity"]];
-            
-            
-            return cell;
+        OrderListTableViewCell *cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"orderListCell"];
+        if (self.billoutOrder) {            
+            cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"billoutListCell"];
+        }
+        NSDictionary *item = self.arrayOrderList[indexPath.row];
+        NSString *name = @"";
+        NSString *price = @"";
+        if (item[@"details"]) {
+            name = item[@"details"][0][@"name"];
+            price = item[@"details"][0][@"price"];
         }
         else {
-            OrderListTableViewCell *cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"orderListCell"];
-            
-            NSDictionary *item = self.arrayOrderList[indexPath.row];
-            NSLog(@"item:%@",item);
-            NSString *text = [NSString stringWithFormat:@"%@ PHP%.2f",[item[@"menu_name"] uppercaseString],[item[@"total_amount"] floatValue] / [item[@"quantity"] floatValue]];
-            
-            CGFloat nameSize = cell.labelItemNamePrice.font.pointSize;
-            CGFloat priceSize = nameSize / 2.0f;
-            
-            NSArray *components = [text componentsSeparatedByString:@" PHP"];
-            NSRange nameRange = [text rangeOfString:[components objectAtIndex:0]];
-            NSRange priceRange = [text rangeOfString:[components objectAtIndex:1]];
-            
-            nameRange = NSMakeRange(nameRange.location, nameRange.length - 3);
-            priceRange = NSMakeRange(priceRange.location-3, priceRange.length+3);
-            
-            NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text];
-            
-            [attrString beginEditing];
-            [attrString addAttribute: NSFontAttributeName
-                               value:[UIFont fontWithName:@"LucidaGrande" size:nameSize]
-                               range:nameRange];
-            
-            [attrString addAttribute: NSFontAttributeName
-                               value:[UIFont fontWithName:@"LucidaGrande" size:priceSize]
-                               range:priceRange];
-            
-            [attrString endEditing];
-            
-            cell.labelItemNamePrice.attributedText = attrString;
-            NSString *choices = item[@"options"];
-//            if ([choices rangeOfString:@","].location != NSNotFound) {
-//                choices = [choices substringToIndex:choices.length-1];
-//            }
-            cell.labelItemOptions.text = [choices capitalizedString];
+            name = item[@"menu_name"];
+            price = item[@"price"];
+        }
+        NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[name uppercaseString],price];
+        
+        CGFloat nameSize = cell.labelItemNamePrice.font.pointSize;
+        CGFloat priceSize = nameSize / 2.0f;
+        
+        NSArray *components = [text componentsSeparatedByString:@" PHP"];
+        NSRange nameRange = [text rangeOfString:[components objectAtIndex:0]];
+        NSRange priceRange = [text rangeOfString:[components objectAtIndex:1]];
+        
+        nameRange = NSMakeRange(nameRange.location, nameRange.length - 3);
+        priceRange = NSMakeRange(priceRange.location-3, priceRange.length+3);
+        
+        NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:text];
+        
+        [attrString beginEditing];
+        [attrString addAttribute: NSFontAttributeName
+                           value:[UIFont fontWithName:@"LucidaGrande" size:nameSize]
+                           range:nameRange];
+        
+        [attrString addAttribute: NSFontAttributeName
+                           value:[UIFont fontWithName:@"LucidaGrande" size:priceSize]
+                           range:priceRange];
+        
+        [attrString endEditing];
+        
+        cell.labelItemNamePrice.attributedText = attrString;
+        NSString *choices = item[@"options"];
+        cell.labelItemOptions.text = [choices capitalizedString];
+        cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",item[@"quantity"]];
+        
+        if (!self.billoutOrder){
             cell.index = indexPath.row;
             cell.delegateCell = self;
             
@@ -770,8 +766,10 @@
             }
             
             
-            return cell;
         }
+        
+        return cell;
+        
     }
     else {
         
@@ -780,7 +778,7 @@
         NSString *user_id = self.arrayOtherUsers[section-1];
         NSArray *itemOrders = [self.dictionaryOtherOrders objectForKey:user_id][@"items"];
         NSDictionary *item = itemOrders[indexPath.row];
-        NSString *text = [NSString stringWithFormat:@"%@ PHP%.2f",[item[@"menu_name"] uppercaseString],([item[@"total_amount"] floatValue] / [item[@"quantity"] floatValue])];
+        NSString *text = [NSString stringWithFormat:@"%@ PHP%.2f",[item[@"menu_name"] uppercaseString],([item[@"price"] floatValue])];
         
         CGFloat nameSize = cell.labelItemNamePrice.font.pointSize;
         CGFloat priceSize = nameSize / 2.0f;
@@ -814,6 +812,18 @@
     
     
 }
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
 
 - (NSInteger)newItemNumber:(NSInteger)identifier {
     NSInteger newItemNumber = 0;

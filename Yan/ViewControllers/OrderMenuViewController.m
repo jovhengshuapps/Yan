@@ -240,8 +240,8 @@ BOOL hackFromLoad = NO;
 }
 
 - (void) saveTableOrders:(NSNotification*)notification {
-    //    NSLog(@"response:%@",notification.object);
-    
+        NSLog(@"response:%@",notification.object);
+//something wrong here. data[orders] should be parsed.
     NSArray *orderList = (NSArray*)notification.object;
     
     for (NSDictionary *data in orderList) {
@@ -308,14 +308,17 @@ BOOL hackFromLoad = NO;
     [self.activityIndicatorTotalAmount startAnimating];
     self.activityIndicatorTotalAmount.hidden = NO;
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-    [request setReturnsObjectsAsFaults:NO];
+//    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+//    [request setReturnsObjectsAsFaults:NO];
+//    Account *userAccount = [self userLoggedIn];
+//    [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND user_id == %@ AND restaurant_id == %@", userAccount.current_tableNumber, userAccount.identifier, userAccount.current_restaurantID]];
+//    NSError *error = nil;
+//    
+//    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    
     Account *userAccount = [self userLoggedIn];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND user_id == %@ AND restaurant_id == %@", userAccount.current_tableNumber, userAccount.identifier, userAccount.current_restaurantID]];
-    NSError *error = nil;
-    
-    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
-    
+    NSArray *result = [self orderListFromUser:userAccount onContext:context];
+//    NSLog(@"results:%@",result);
     self.totalOrderPrice = 0.0f;
     
     if (result.count) {
@@ -327,7 +330,7 @@ BOOL hackFromLoad = NO;
                 
                 
                 for (NSDictionary *bundle in storedOrders) {
-                    self.totalOrderPrice += [bundle[@"total_amount"] floatValue];
+                    self.totalOrderPrice += ([bundle[@"price"] floatValue] * [bundle[@"quantity"] floatValue]);
                 }
                 
 //                if ([order.orderSent boolValue]) {
@@ -361,7 +364,7 @@ BOOL hackFromLoad = NO;
                 
                 for (NSDictionary *menuOrder in storedOrders) {
 //                    NSLog(@"totalPrice:%f << %f",self.totalOrderPrice, [menuOrder[@"total_amount"] floatValue]);
-                    self.totalOrderPrice += [menuOrder[@"total_amount"] floatValue];
+                    self.totalOrderPrice += ([menuOrder[@"price"] floatValue] * [menuOrder[@"quantity"] floatValue]);
                 }
                 
             }

@@ -145,7 +145,11 @@
         
         for (NSDictionary *item in storedOrders) {
             if([self.item.identifier integerValue] == [item[@"menu_id"] integerValue]){
-                [self.arrayOrders addObject:item];
+                NSInteger count = [item[@"quantity"] integerValue];
+                while (count > 0) {
+                    [self.arrayOrders addObject:item];
+                    count -= 1;
+                }
             }
         }
 //        for (NSDictionary *bundle in storedOrders) {

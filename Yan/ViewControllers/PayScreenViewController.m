@@ -121,13 +121,19 @@
     self.arrayOtherUsers = [NSMutableArray array];
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-    [request setReturnsObjectsAsFaults:NO];
     Account *userAccount = [self userLoggedIn];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"restaurant_id == %@", userAccount.current_restaurantID]];
-    NSError *error = nil;
+//    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+//    [request setReturnsObjectsAsFaults:NO];
+//    [request setPredicate:[NSPredicate predicateWithFormat:@"restaurant_id == %@", userAccount.current_restaurantID]];
+//    NSError *error = nil;
+//    
+//    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     
-    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    
+//    NSError *error = nil;
+    
+    NSArray *result = [self orderListFromUser:userAccount onContext:context];
+    
     if (result.count) {
         for (OrderList *order in result) {
             
@@ -170,7 +176,7 @@
 //                        [menus addObject:@{@"menu_id":item[@"details"][0][@"identifier"],@"quantity":@1,@"total_amount":item[@"details"][0][@"price"], @"options":options}];
 //                    }
                     
-                    self.totalValue += ([item[@"total_amount"] floatValue] * [item[@"quantity"] floatValue]);
+                    self.totalValue += ([item[@"price"] floatValue] * [item[@"quantity"] floatValue]);
                     [self.arrayOrderList addObject:item];
                     
                 }
@@ -190,7 +196,7 @@
                 NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
                 
                 for (NSDictionary *menuOrder in storedOrders) {
-                    self.totalValue += [menuOrder[@"total_amount"] floatValue];
+                    self.totalValue += ([menuOrder[@"price"] floatValue] * [menuOrder[@"quantity"] floatValue]);
                 }
                 
                 NSDictionary *otherList = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",order.user_name],@"name",storedOrders,@"items", nil];
@@ -422,7 +428,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44.0f;
+    return 65.0f;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -500,7 +506,7 @@
         
         for (NSDictionary *item in self.arrayOrderList) {
             
-            subTotal += ([item[@"total_amount"] floatValue] * [item[@"quantity"] floatValue]);
+            subTotal += ([item[@"price"] floatValue] * [item[@"quantity"] floatValue]);
         }
     }
     else {
@@ -509,7 +515,7 @@
         NSArray *items = [self.dictionaryOtherOrders objectForKey:user_id][@"items"];
         
         for (NSDictionary *menuItem in items) {
-            subTotal += [menuItem[@"total_amount"] floatValue];
+            subTotal += [menuItem[@"price"] floatValue];
         }
     }
     
@@ -533,14 +539,14 @@
         
         if (indexPath.section == 0) {
             item = self.arrayOrderList[indexPath.row];
-            text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"menu_name"] uppercaseString],item[@"total_amount"]];
+            text = [NSString stringWithFormat:@"%@ PHP%@",[item[@"menu_name"] uppercaseString],item[@"price"]];
             
         }
         else {
             NSString *user_id = self.arrayOtherUsers[indexPath.section-1];
             NSArray *itemOrders = [self.dictionaryOtherOrders objectForKey:user_id][@"items"];
             item = itemOrders[indexPath.row];
-            text = [NSString stringWithFormat:@"%@ PHP%.2f",[item[@"menu_name"] uppercaseString],([item[@"total_amount"] floatValue] / [item[@"quantity"] floatValue])];
+            text = [NSString stringWithFormat:@"%@ PHP%.2f",[item[@"menu_name"] uppercaseString],[item[@"price"] floatValue]];
         }
         
         
@@ -568,6 +574,7 @@
         [attrString endEditing];
         
         cell.labelItemNamePrice.attributedText = attrString;
+        cell.labelItemOptions.text = item[@"options"];
         if (indexPath.section == 0) {
             cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",item[@"quantity"]];
             

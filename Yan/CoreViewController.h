@@ -34,6 +34,7 @@
 
 - ( nullable id)decodeData:( nullable NSData*)data forKey:( nullable NSString*)key;
 
+- (NSArray*) orderListFromUser:(Account*)userAccount onContext:(NSManagedObjectContext *)context;
 
 //- (NSData*)encodeMenuList:(NSArray*)list withKey:(NSString*)key;
 //- (NSArray*)decodeMenuList:(NSData*)data forKey:(NSString*)key;

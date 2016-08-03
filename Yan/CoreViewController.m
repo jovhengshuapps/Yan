@@ -362,7 +362,7 @@
     
     NETWORK_INDICATOR(YES)
     
-//    NSLog(@"parameters:%@",parameters);
+    NSLog(@"parameters:%@",parameters);
     [manager POST:method parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
 //        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
@@ -643,35 +643,40 @@
     
     Account *user = [self userLoggedIn];
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
-    
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND user_id == %@ AND restaurant_id == %@", user.current_tableNumber, user.identifier, user.current_restaurantID]];
-    [request setReturnsObjectsAsFaults:NO];
+//    
+//    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+//    [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND user_id == %@ AND restaurant_id == %@", user.current_tableNumber, user.identifier, user.current_restaurantID]];
+//    [request setReturnsObjectsAsFaults:NO];
     NSError *error = nil;
+//    
+//    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     
-    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    
+    NSArray *result = [self orderListFromUser:user onContext:context];
     
     if (result.count == 0) {
         NSDictionary *item = [self menuItemToDictionary:menu itemNumber:1];
-        NSString *options = [NSString stringWithFormat:@"%@(%@);",item[@"name"],item[@"option_choices"]];
         NSDictionary *bundle = @{@"menu_id":item[@"identifier"],
                                  @"menu_name":item[@"name"],
-                                 @"options":options,
-                                 @"total_amount":item[@"price"],
+                                 @"options":item[@"option_choices"],
+                                 @"price":item[@"price"],
                                  @"quantity":@1
                                  };
         NSArray *orderItems = [NSArray arrayWithObjects:bundle, nil];
-        
+//        NSLog(@"orderItems:%@",orderItems);
         OrderList *order = [[OrderList alloc] initWithEntity:[NSEntityDescription entityForName:@"OrderList" inManagedObjectContext:context]  insertIntoManagedObjectContext:context];
 
         order.items = [self encodeData:orderItems withKey:@"orderItems"];
         order.orderSent = @NO;
-        order.tableNumber = tableNumber;
+        order.tableNumber = user.current_tableNumber;
         order.user_id = user.identifier;
+        order.user_name = user.username;
         order.restaurant_id = user.current_restaurantID;
         
         error = nil;
-        if (![context save:&error]) {
+        if ([context save:&error]) {
+            NSLog(@"DATA SAVED!");
+        }else {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                 [alert dismissViewControllerAnimated:YES completion:nil];
@@ -695,17 +700,16 @@
         
         for (NSInteger index = 0; index < decodedList.count; index++) {
             NSMutableDictionary *item = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
-            if ([item[@"identifier"] integerValue] == [menu.identifier integerValue]) {
+            if ([item[@"menu_id"] integerValue] == [menu.identifier integerValue]) {
                 isNewIdentifier = NO;
                 NSInteger sum = [item[@"quantity"] integerValue] + 1;
                 NSNumber *quantity = [NSNumber numberWithInteger:sum];
-                NSNumber *total_amount = [NSNumber numberWithFloat:((float)sum) * [menu.price floatValue]];
+//                NSNumber *total_amount = [NSNumber numberWithFloat:((float)sum) * [menu.price floatValue]];
                 
-                NSString *options = [NSString stringWithFormat:@"%@(%@);",item[@"name"],item[@"option_choices"]];
-                NSDictionary *bundle = @{@"menu_id":item[@"identifier"],
-                                         @"menu_name":item[@"name"],
-                                         @"options":options,
-                                         @"total_amount":total_amount,
+                NSDictionary *bundle = @{@"menu_id":item[@"menu_id"],
+                                         @"menu_name":item[@"menu_name"],
+                                         @"options":item[@"options"],
+                                         @"price":item[@"price"],
                                          @"quantity":quantity
                                          };
                 
@@ -716,16 +720,15 @@
         
         if (isNewIdentifier == YES) {
             NSDictionary *item = [self menuItemToDictionary:menu itemNumber:1];
-            NSString *options = [NSString stringWithFormat:@"%@(%@);",item[@"name"],item[@"option_choices"]];
             NSDictionary *bundle = @{@"menu_id":item[@"identifier"],
                                      @"menu_name":item[@"name"],
-                                     @"options":options,
-                                     @"total_amount":item[@"price"],
+                                     @"options":item[@"option_choices"],
+                                     @"price":item[@"price"],
                                      @"quantity":@1
                                      };
             [newOrderList addObject:bundle];
         }
-        
+        NSLog(@"orderItems:%@",newOrderList);
         order.items = [self encodeData:newOrderList withKey:@"orderItems"];
         order.orderSent = @NO;
         order.tableNumber = tableNumber;
@@ -764,5 +767,18 @@
         
     }
 }
+
+
+- (NSArray*) orderListFromUser:(Account*)userAccount onContext:(NSManagedObjectContext *)context{
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+    [request setReturnsObjectsAsFaults:NO];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND user_id == %@ AND restaurant_id == %@", userAccount.current_tableNumber, userAccount.identifier, userAccount.current_restaurantID]];
+    NSError *error = nil;
+    
+    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    return result;
+}
+
 
 @end

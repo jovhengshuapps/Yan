@@ -21,7 +21,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.labelRestaurantAddress.text = _restaurantDetails.location;
+    self.title = _restaurantDetails.name;
+    
+    NSMutableParagraphStyle *style =  [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+    style.alignment = NSTextAlignmentCenter;
+    style.firstLineHeadIndent = 10.0f;
+    style.headIndent = 10.0f;
+    style.tailIndent = -10.0f;
+    
+    NSAttributedString *attrText = [[NSAttributedString alloc] initWithString:_restaurantDetails.location attributes:@{ NSParagraphStyleAttributeName : style}];
+    
+    self.labelRestaurantAddress.numberOfLines = 0;
+    self.labelRestaurantAddress.attributedText = attrText;
+    self.labelRestaurantAddress.minimumScaleFactor = -5.0f;
+    self.labelRestaurantAddress.adjustsFontSizeToFitWidth = YES;
+    
+//    self.labelRestaurantAddress.text = _restaurantDetails.location;
     self.labelRestaurantOpeningHoursDays.text = _restaurantDetails.operating;
     if ([_restaurantDetails.latitude doubleValue] != 0 && [_restaurantDetails.longitude doubleValue] != 0) {
         
@@ -94,8 +109,8 @@
 }
 - (IBAction)callRestaurant:(id)sender {
     NSString *phNo = _restaurantDetails.contact;
+    phNo = [phNo stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSURL *phoneUrl = [NSURL URLWithString:[NSString  stringWithFormat:@"tel://%@",phNo]];
-    
     if ([[UIApplication sharedApplication] canOpenURL:phoneUrl]) {
         [[UIApplication sharedApplication] openURL:phoneUrl];
     } else

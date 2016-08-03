@@ -128,11 +128,7 @@
     
     completionHandler(UIBackgroundFetchResultNewData);
     
-    if (self.notificationUserInfo == nil) {
-        return;
-    }
     
-    [self showNoticationScreen:self.notificationUserInfo];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
@@ -395,6 +391,7 @@ didDisconnectWithUser:(GIDGoogleUser *)user
     }
     
     
+    [self showNoticationScreen:self.notificationUserInfo];
     
     
 }

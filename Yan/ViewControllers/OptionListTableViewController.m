@@ -55,16 +55,21 @@
 
 - (void) viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    
-    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
-    
-    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-    [request setReturnsObjectsAsFaults:NO];
+    if (self.selectedOptions.length == 0) {
+        return;
+    }
+//    NSLog(@"SelectedOptions:%@",self.selectedOptions);
     Account *userAccount = [self userLoggedIn];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND user_id == %@ AND restaurant_id == %@", userAccount.current_tableNumber, userAccount.identifier, userAccount.current_restaurantID]];
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+//    
+//    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+//    [request setReturnsObjectsAsFaults:NO];
+//    [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND user_id == %@ AND restaurant_id == %@", userAccount.current_tableNumber, userAccount.identifier, userAccount.current_restaurantID]];
     NSError *error = nil;
+//    
+//    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     
-    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    NSArray *result = [self orderListFromUser:userAccount onContext:context];
     
     OrderList *order = (OrderList*)result[0];
     NSMutableArray *newOrderList = [NSMutableArray new];
@@ -73,33 +78,65 @@
     
     [newOrderList addObjectsFromArray:decodedList];
     
+    BOOL isNewVariant = YES;
+    
     for (NSInteger index = 0; index < decodedList.count; index++) {
         NSMutableDictionary *bundle = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
-        if ([bundle[@"menu_id"] integerValue] == [self.itemDetails[@"identifier"] integerValue]) {
+        if ([bundle[@"menu_id"] integerValue] == [self.itemDetails[@"identifier"] integerValue]
+            && [bundle[@"options"] isEqualToString:self.selectedOptions]) {
+            isNewVariant = NO;
+            NSInteger updatedQuantity = [bundle[@"quantity"] integerValue] + 1;
             
-            NSMutableArray *details = [NSMutableArray arrayWithArray:(NSArray*)bundle[@"details"]];
-            for (NSInteger i = 0; i < details.count; i++) {
-                NSDictionary *item = (NSDictionary*)details[i];
-                if ([item[@"itemnumber"] isEqualToNumber:self.itemDetails[@"itemnumber"]]) {
-//                    NSLog(@"%@-ITEM:%@",self.selectedOptions,item);
-                    NSMutableDictionary *updatedItem = [item mutableCopy];
-                    [updatedItem setObject:self.selectedOptions forKey:@"option_choices"];
-                    [details replaceObjectAtIndex:i withObject:updatedItem];
-                    break;
-                }
-            }
-//            NSLog(@"details:%@",details);
-            [bundle setObject:details forKey:@"details"];
+            [bundle setObject:[NSNumber numberWithInteger:updatedQuantity] forKey:@"quantity"];
             [newOrderList replaceObjectAtIndex:index withObject:bundle];
+            break;
         }
     }
+
+    if (isNewVariant) {
+        
+        for (NSInteger index = 0; index < decodedList.count; index++) {
+            NSMutableDictionary *bundle = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
+            if ([bundle[@"menu_id"] integerValue] == [self.itemDetails[@"identifier"] integerValue]
+                && [bundle[@"options"] isEqualToString:@"Basic"]) {
+                NSInteger updatedQuantity = [bundle[@"quantity"] integerValue] - 1;
+                
+//                NSLog(@"[%li]newOrderList:%@",(long)index,newOrderList);
+                if (updatedQuantity == 0) {
+                    [newOrderList removeObjectAtIndex:index];
+                }
+                else {
+                    [bundle setObject:[NSNumber numberWithInteger:updatedQuantity] forKey:@"quantity"];
+                    [newOrderList replaceObjectAtIndex:index withObject:bundle];
+                }
+                
+                
+                NSDictionary *newVariant = @{@"menu_id":bundle[@"menu_id"],
+                                             @"menu_name":bundle[@"menu_name"],
+                                             @"options":self.selectedOptions,
+                                             @"price":bundle[@"price"],
+                                             @"quantity":@1
+                                             };
+                
+                [newOrderList addObject:newVariant];
+                
+//                NSLog(@"newOrderList:%@",newOrderList);
+                break;
+            }
+        }
+        
+    }
+    
     
     order.items = [self encodeData:newOrderList withKey:@"orderItems"];
     order.orderSent = @NO;
-    order.tableNumber = self.tableNumber;
     
     error = nil;
-    if (![context save:&error]) {
+    if ([context save:&error]) {
+        NSLog(@"options saved");
+    }
+    else{
+        NSLog(@"options fail in saving");
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             [alert dismissViewControllerAnimated:YES completion:nil];

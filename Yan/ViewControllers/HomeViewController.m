@@ -20,6 +20,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *loginButton; //facebook
 @property (weak, nonatomic) IBOutlet UIButton *googleLoginButton; //google
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewBackground;
 
 @property (strong, nonatomic) NSMutableDictionary *socialAccount;
 @property (assign, nonatomic) NSInteger restaurantID;
@@ -46,6 +47,55 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    Account *loggedUSER = [self userLoggedIn];
+    self.imageViewBackground.contentMode = UIViewContentModeScaleAspectFill;
+    self.imageViewBackground.clipsToBounds = YES;
+    if (loggedUSER.restaurant_logo_data) {
+        UIImage *image = [UIImage imageWithData:loggedUSER.restaurant_logo_data];
+        
+        self.imageViewBackground.image = image;
+        //        self.progressView.hidden = YES;
+    }
+    else {
+        //        self.progressView.hidden = NO;
+        //        [self.progressView setProgress:0.0f];
+        CABasicAnimation *theAnimation;
+        
+        theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
+        theAnimation.duration=1.0;
+        theAnimation.repeatCount=HUGE_VALF;
+        theAnimation.autoreverses=YES;
+        theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
+        theAnimation.toValue=[NSNumber numberWithFloat:0.0];
+        
+        //        NSLog(@"URL_LOGO:%@",loggedUSER.restaurant_logo_url);
+        [self.imageViewBackground.layer addAnimation:theAnimation forKey:@"animateOpacity"];
+        [self getImageFromURL:loggedUSER.restaurant_logo_url completionHandler:^(NSURLResponse * _Nullable response, id  _Nullable responseObject, NSError * _Nullable error) {
+            if (!error) {
+                loggedUSER.restaurant_logo_data = UIImageJPEGRepresentation((UIImage*)responseObject, 100.0f);
+                
+                NSError *saveError = nil;
+                if([context save:&saveError]) {
+                    UIImage *image = (UIImage*)responseObject;
+                    
+                    
+                    
+                    
+                    self.imageViewBackground.image = image;
+                    [self.imageViewBackground.layer removeAllAnimations];
+                }
+            }
+            else {
+                NSLog(@"error:%@",[error description]);
+            }
+        } andProgress:^(NSInteger expectedBytesToReceive, NSInteger receivedBytes) {
+            //            [self.progressView setProgress:(CGFloat)receivedBytes / (CGFloat)expectedBytesToReceive];
+            //            NSLog(@"progress:%f",(CGFloat)receivedBytes / (CGFloat)expectedBytesToReceive);
+        }];
+    }
+    
     if ([self userLoggedIn]) {
         UIBarButtonItem *menuBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"app-menu.png"] style:UIBarButtonItemStyleDone target:self action:@selector(openMenu)];
         
@@ -54,12 +104,18 @@
             
             self.frostedViewController.panGestureEnabled = YES;
             _viewDefaultHome.hidden = NO;
+            _viewLogin.hidden = YES;
+            _viewNotificationReminder.hidden = YES;
+            _viewRegistrationComplete.hidden = YES;
         }
     }
     else {
         [self.navigationItem setLeftBarButtonItem:nil];
         self.frostedViewController.panGestureEnabled = NO;
         _viewLogin.hidden = NO;
+        _viewDefaultHome.hidden = YES;
+        _viewNotificationReminder.hidden = YES;
+        _viewRegistrationComplete.hidden = YES;
         
         
         if ([FBSDKAccessToken currentAccessToken]) {

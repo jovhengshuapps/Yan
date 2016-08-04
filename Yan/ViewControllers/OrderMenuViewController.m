@@ -44,7 +44,7 @@ BOOL hackFromLoad = NO;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveTableOrders:) name:@"get_table_orders" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retrieveOtherUserOrders) name:@"get_table_orders" object:nil];
     
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
@@ -118,9 +118,9 @@ BOOL hackFromLoad = NO;
     _orderTableNumber = @"1";
     [self.orderTableButton setTitle:[NSString stringWithFormat:@"Order Table: %@",_orderTableNumber] forState:UIControlStateNormal];
     
-    [self retrieveOtherUserOrders];
+//    [self retrieveOtherUserOrders];
     
-    [self computeTotalOrderPrice];
+//    [self computeTotalOrderPrice];
     
     
     _orderTableButton.titleLabel.adjustsFontSizeToFitWidth = YES;
@@ -197,6 +197,7 @@ BOOL hackFromLoad = NO;
         hackFromLoad = NO;
 //    }
     
+    [self retrieveOtherUserOrders];
     [self computeTotalOrderPrice];
     
 //    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
@@ -240,7 +241,7 @@ BOOL hackFromLoad = NO;
 }
 
 - (void) saveTableOrders:(NSNotification*)notification {
-        NSLog(@"response:%@",notification.object);
+//        NSLog(@"response:%@",notification.object);
 //something wrong here. data[orders] should be parsed.
     NSArray *orderList = (NSArray*)notification.object;
     
@@ -252,14 +253,19 @@ BOOL hackFromLoad = NO;
         NSError *error = nil;
         
         NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
-        //        NSLog(@"orderlist:%@",result);
+//        NSLog(@"orderlist:%@",result);
+        
+        Account *user = [self userLoggedIn];
+        
         BOOL isNewOrder = YES;
         if (result.count) {
             for (OrderList *orderItem in result) {
                 if ([orderItem.user_id isEqualToString:data[@"user_id"]]) {
-                    //update order
-                    NSLog(@"update to orderlist");
-                    orderItem.items = [self encodeData:[NSArray arrayWithArray:data[@"orders"]] withKey:@"orderItems"];
+                    //update order ?????
+//                    NSLog(@"update to orderlist");
+                    if ([orderItem.orderSent boolValue] && ![orderItem.user_id isEqualToString:user.identifier]) {
+                        orderItem.items = [self encodeData:[NSArray arrayWithArray:data[@"orders"]] withKey:@"orderItems"];
+                    }
                     isNewOrder = NO;
                     break;
                 }
@@ -308,17 +314,15 @@ BOOL hackFromLoad = NO;
     [self.activityIndicatorTotalAmount startAnimating];
     self.activityIndicatorTotalAmount.hidden = NO;
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
-//    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-//    [request setReturnsObjectsAsFaults:NO];
-//    Account *userAccount = [self userLoggedIn];
-//    [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND user_id == %@ AND restaurant_id == %@", userAccount.current_tableNumber, userAccount.identifier, userAccount.current_restaurantID]];
-//    NSError *error = nil;
-//    
-//    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
-    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+    [request setReturnsObjectsAsFaults:NO];
     Account *userAccount = [self userLoggedIn];
-    NSArray *result = [self orderListFromUser:userAccount onContext:context];
-//    NSLog(@"results:%@",result);
+    [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND restaurant_id == %@", userAccount.current_tableNumber, userAccount.current_restaurantID]];
+    NSError *error = nil;
+    
+    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    
+    NSLog(@"results:%@",result);
     self.totalOrderPrice = 0.0f;
     
     if (result.count) {
@@ -363,8 +367,8 @@ BOOL hackFromLoad = NO;
                 NSArray *storedOrders = [self decodeData:order.items forKey:@"orderItems"];
                 
                 for (NSDictionary *menuOrder in storedOrders) {
-//                    NSLog(@"totalPrice:%f << %f",self.totalOrderPrice, [menuOrder[@"total_amount"] floatValue]);
                     self.totalOrderPrice += ([menuOrder[@"price"] floatValue] * [menuOrder[@"quantity"] floatValue]);
+                    NSLog(@"total:%f",self.totalOrderPrice);
                 }
                 
             }

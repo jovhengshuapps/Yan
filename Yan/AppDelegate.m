@@ -116,7 +116,7 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
-    //    NSLog(@"received notification:%@",userInfo);
+        NSLog(@"received notification:%@",userInfo);
     [self saveNotificationData:userInfo[@"aps"][@"alert"]];
     [UIApplication sharedApplication].applicationIconBadgeNumber += [[[userInfo objectForKey:@"aps"] objectForKey: @"badge"] intValue];
 }
@@ -318,24 +318,20 @@ didDisconnectWithUser:(GIDGoogleUser *)user
     else if (data[@"billout"]) {
         self.notificationUserInfo = nil;
         
-        AlertView *alert = [[AlertView alloc] initAlertWithMessage:[NSString stringWithFormat:@"%@ has requested to bill out the orders from your table.",data[@"user_name"]] delegate:self buttons:@[@"CLOSE"]];
+        AlertView *alert = [[AlertView alloc] initAlertWithMessage:[NSString stringWithFormat:@"%@ has requested to bill out the orders from your table.\n\nTable %@",data[@"name"],data[@"table_number"]] delegate:self buttons:@[@"CLOSE"]];
         [alert showAlertView];
         
         NSManagedObjectContext *context = self.managedObjectContext;
         
         NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
         NSError *error = nil;
-        [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@", data[@"table_number"]]];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND restaurant_id == %@", data[@"table_number"], data[@"restaurant_id"]]];
         
         NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
-        
-        for (OrderList *order in result) {
-            if([order.orderSent boolValue]) {
-                [context deleteObject:order];
-            }
-            
+        if (result.count) {
+            OrderList *order = (OrderList*)result[0];
+            [context deleteObject:order];
         }
-        
         
         error = nil;
         if ([context save:&error]) {
@@ -347,22 +343,20 @@ didDisconnectWithUser:(GIDGoogleUser *)user
             error = nil;
             
             NSArray *accounts = [contextAccount executeFetchRequest:requestAccount error:&error];
-            
             Account *loggedUSER = (Account*)accounts[0];
-            
             loggedUSER.current_restaurantID = @"";
             loggedUSER.current_tableNumber = @"";
             loggedUSER.current_restaurantName = @"";
             
             error = nil;
-            if ([context save:&error]) {
+            if ([contextAccount save:&error]) {
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"billoutRequestedOrdersClearedObserver"  object:@""];
-                
             }
             
             
         }
+        
     }
     else {
         
@@ -415,10 +409,10 @@ didDisconnectWithUser:(GIDGoogleUser *)user
             reminder.title = self.notificationUserInfo[@"title"];
             reminder.bodyText = self.notificationUserInfo[@"body"];
             
-            if([self.notificationUserInfo[@"title"] rangeOfString:@"order"].location != NSNotFound) {
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"lockOrderListObserver"  object:@""];
-            }
+//            if([self.notificationUserInfo[@"title"] rangeOfString:@"order"].location != NSNotFound) {
+//                
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"lockOrderListObserver"  object:@""];
+//            }
         }
         
         [self.window addSubview:reminder.view];

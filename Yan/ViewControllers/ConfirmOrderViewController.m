@@ -35,8 +35,8 @@
     
     self.totalValue = 0.0f;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveTableOrders:) name:@"get_table_orders" object:nil];
-//    [self fetchOrderDataList];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retrieveOtherUserOrders) name:@"get_table_orders" object:nil];
+    //    [self fetchOrderDataList];
     [self reloadOrderList];
     
     UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, KEYWINDOW.frame.size.width+5.0f, 110.0f)];
@@ -105,8 +105,10 @@
     [super viewWillAppear:animated];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadOrderList) name:@"reloadOrderListObserver" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockOrderList) name:@"lockOrderListObserver" object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockOrderList) name:@"lockOrderListObserver" object:nil];
     [self showTitleBar:[NSString stringWithFormat:@"Orders: Table %@",_tableNumber]];
+    
+    
 }
 
 
@@ -115,7 +117,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"get_table_orders" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"reloadOrderListObserver" object:@""];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"lockOrderListObserver" object:@""];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"lockOrderListObserver" object:@""];
 }
 
 - (void) fetchOrderDataList {
@@ -127,7 +129,7 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
     [request setReturnsObjectsAsFaults:NO];
     Account *userAccount = [self userLoggedIn];
-    [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND user_id == %@ AND restaurant_id == %@", userAccount.current_tableNumber, userAccount.identifier, userAccount.current_restaurantID]];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND restaurant_id == %@", userAccount.current_tableNumber, userAccount.current_restaurantID]];
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
@@ -244,8 +246,9 @@
 
     }
     
-        
-        
+    
+    self.labelTotalValue.text = [NSString stringWithFormat:@"PHP: %.2f",self.totalValue];
+    
         
 }
 
@@ -270,13 +273,18 @@
         
         NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
         //        NSLog(@"orderlist:%@",result);
+        
+        Account *user  = [self userLoggedIn];
+        
         BOOL isNewOrder = YES;
         if (result.count) {
             for (OrderList *orderItem in result) {
                 if ([orderItem.user_id isEqualToString:data[@"user_id"]]) {
                     //update order
-//                    NSLog(@"update to orderlist");
-                    orderItem.items = [self encodeData:[NSArray arrayWithArray:data[@"orders"]] withKey:@"orderItems"];
+                    //                    NSLog(@"update to orderlist");
+                    if ([orderItem.orderSent boolValue] && ![orderItem.user_id isEqualToString:user.identifier]) {
+                        orderItem.items = [self encodeData:[NSArray arrayWithArray:data[@"orders"]] withKey:@"orderItems"];
+                    }
                     isNewOrder = NO;
                     break;
                 }
@@ -396,7 +404,7 @@
 //        
 //    }
     
-    NSLog(@"MENU ORDER:%@",self.arrayOrderList);
+//    NSLog(@"MENU ORDER:%@",self.arrayOrderList);
     Account *account = [self userLoggedIn];
     
     if (account.current_orderID.length) {
@@ -433,13 +441,29 @@
         NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
         [request setReturnsObjectsAsFaults:NO];
         
-        [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
+        [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND tableNumber == %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_tableNumber, userAccount.current_restaurantID]];
         
         NSError *error = nil;
         
         NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
         OrderList *order = (OrderList*)result[0];
         
+        NSMutableArray *newOrderList = [NSMutableArray new];
+        NSArray *decodedList = (NSArray*)[self decodeData:order.items forKey:@"orderItems"];
+        
+        
+        [newOrderList addObjectsFromArray:decodedList];
+        
+        for (NSInteger index = 0; index < decodedList.count; index++) {
+            NSMutableDictionary *bundle = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
+            
+            [bundle setObject:@YES forKey:@"is_locked"];
+            
+            [newOrderList replaceObjectAtIndex:index withObject:bundle];
+        }
+        
+//        NSLog(@"newOrderList:%@",newOrderList);
+        order.items = [self encodeData:newOrderList withKey:@"orderItems"];
         order.orderSent = @YES;
         order.orderSubmitID = [NSString stringWithFormat:@"%@",response[@"id"]];
         
@@ -677,7 +701,7 @@
         
             for (NSDictionary *item in self.arrayOrderList) {
                 
-                subTotal += ([item[@"price"] floatValue]);
+                subTotal += ([item[@"price"] floatValue] * [item[@"quantity"] floatValue]);
             }
 //            for (NSDictionary *item in self.arrayOrderList) {
 //                
@@ -691,7 +715,7 @@
         NSArray *items = [self.dictionaryOtherOrders objectForKey:user_id][@"items"];
         
         for (NSDictionary *menuItem in items) {
-            subTotal += [menuItem[@"price"] floatValue];
+            subTotal += ([menuItem[@"price"] floatValue] * [menuItem[@"quantity"] floatValue]);
         }
     }
     
@@ -707,21 +731,20 @@
     NSInteger section = indexPath.section;
     
     if (section == 0) {
+        NSDictionary *item = self.arrayOrderList[indexPath.row];
+        NSLog(@"item:%@",item);
         OrderListTableViewCell *cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"orderListCell"];
-        if (self.billoutOrder) {            
+        if (self.billoutOrder || [item[@"is_locked"] boolValue]) {
             cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"billoutListCell"];
         }
-        NSDictionary *item = self.arrayOrderList[indexPath.row];
-        NSString *name = @"";
-        NSString *price = @"";
-        if (item[@"details"]) {
-            name = item[@"details"][0][@"name"];
-            price = item[@"details"][0][@"price"];
-        }
         else {
-            name = item[@"menu_name"];
-            price = item[@"price"];
+            
+            cell.index = indexPath.row;
+            cell.delegateCell = self;
         }
+        NSString *name = item[@"menu_name"];
+        NSString *price = item[@"price"];
+        
         NSString *text = [NSString stringWithFormat:@"%@ PHP%@",[name uppercaseString],price];
         
         CGFloat nameSize = cell.labelItemNamePrice.font.pointSize;
@@ -752,21 +775,6 @@
         cell.labelItemOptions.text = [choices capitalizedString];
         cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",item[@"quantity"]];
         
-        if (!self.billoutOrder){
-            cell.index = indexPath.row;
-            cell.delegateCell = self;
-            
-            if ([[item allKeys] containsObject:@"is_locked"]) {
-                cell.removeButton.userInteractionEnabled = NO;
-                cell.removeButton.enabled = NO;
-            }
-            else {
-                cell.removeButton.userInteractionEnabled = YES;
-                cell.removeButton.enabled = YES;
-            }
-            
-            
-        }
         
         return cell;
         
@@ -804,6 +812,8 @@
         [attrString endEditing];
         
         cell.labelItemNamePrice.attributedText = attrString;
+        NSString *choices = item[@"options"];
+        cell.labelItemOptions.text = [choices capitalizedString];
         cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",item[@"quantity"]];
         
         

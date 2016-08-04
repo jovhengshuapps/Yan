@@ -63,17 +63,23 @@
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
-            <string>LucidaGrande-Bold</string>
-            <string>LucidaGrande-Bold</string>
-            <string>LucidaGrande-Bold</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande-Bold</string>
+            <string>LucidaGrande-Bold</string>
+            <string>LucidaGrande-Bold</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande-Bold</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande-Bold</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
@@ -1471,7 +1477,7 @@ You may now start using the app for your favourite restaurant.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q1d-eH-eDm">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q1d-eH-eDm">
                                 <rect key="frame" x="35" y="530" width="530" height="50"/>
                                 <connections>
                                     <action selector="buttonContinuePressed:" destination="Fyn-LN-nGQ" eventType="touchUpInside" id="FFG-do-6GD"/>
@@ -1518,14 +1524,14 @@ You may now start using the app for your favourite restaurant.</string>
                                 <exclude reference="O2P-Fe-9Pm"/>
                                 <exclude reference="bBB-eo-kPD"/>
                                 <exclude reference="kVh-Nu-owG"/>
-                                <exclude reference="Lgt-E5-Jr1"/>
-                                <exclude reference="PlQ-yK-vl3"/>
-                                <exclude reference="t7A-XU-bWT"/>
+                                <exclude reference="L8S-Xj-FOg"/>
+                                <exclude reference="FuX-BL-wmM"/>
                                 <exclude reference="ChK-9v-hxG"/>
                                 <exclude reference="IoF-r0-5Di"/>
                                 <exclude reference="yw1-ed-GF2"/>
-                                <exclude reference="FuX-BL-wmM"/>
-                                <exclude reference="L8S-Xj-FOg"/>
+                                <exclude reference="Lgt-E5-Jr1"/>
+                                <exclude reference="PlQ-yK-vl3"/>
+                                <exclude reference="t7A-XU-bWT"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -1538,14 +1544,14 @@ You may now start using the app for your favourite restaurant.</string>
                                 <include reference="O2P-Fe-9Pm"/>
                                 <include reference="bBB-eo-kPD"/>
                                 <include reference="kVh-Nu-owG"/>
-                                <include reference="Lgt-E5-Jr1"/>
-                                <include reference="PlQ-yK-vl3"/>
-                                <include reference="t7A-XU-bWT"/>
+                                <include reference="L8S-Xj-FOg"/>
+                                <include reference="FuX-BL-wmM"/>
                                 <include reference="ChK-9v-hxG"/>
                                 <include reference="IoF-r0-5Di"/>
                                 <include reference="yw1-ed-GF2"/>
-                                <include reference="FuX-BL-wmM"/>
-                                <include reference="L8S-Xj-FOg"/>
+                                <include reference="Lgt-E5-Jr1"/>
+                                <include reference="PlQ-yK-vl3"/>
+                                <include reference="t7A-XU-bWT"/>
                             </mask>
                         </variation>
                     </view>
@@ -2547,7 +2553,7 @@ You may now start using the app for your favourite restaurant.</string>
                                                         </mask>
                                                     </variation>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MENU ITEM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TS2-BH-aDm">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MENU ITEM" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TS2-BH-aDm">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -2639,13 +2645,13 @@ You may now start using the app for your favourite restaurant.</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="billoutListCell" rowHeight="65" id="bL7-9m-pH2" customClass="OrderListTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="65"/>
+                                        <rect key="frame" x="0.0" y="93" width="600" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bL7-9m-pH2" id="zc5-UD-8xN">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MENU ITEM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xMW-wK-cTG">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MENU ITEM" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xMW-wK-cTG">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -2677,14 +2683,14 @@ You may now start using the app for your favourite restaurant.</string>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="eiQ-fJ-R2Z"/>
                                                             <exclude reference="6n2-jq-bOS"/>
+                                                            <exclude reference="eiQ-fJ-R2Z"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
-                                                            <include reference="eiQ-fJ-R2Z"/>
                                                             <include reference="6n2-jq-bOS"/>
+                                                            <include reference="eiQ-fJ-R2Z"/>
                                                         </mask>
                                                     </variation>
                                                 </label>
@@ -2726,14 +2732,14 @@ You may now start using the app for your favourite restaurant.</string>
                                                     <exclude reference="oWd-1A-Rfp"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <exclude reference="dfe-6E-i5H"/>
-                                                    <exclude reference="gH5-Sy-Mpg"/>
                                                     <exclude reference="6jv-D6-oSG"/>
                                                     <exclude reference="Jxc-FX-7JM"/>
                                                     <exclude reference="gw2-xZ-dhT"/>
                                                     <exclude reference="FV5-Lz-kzT"/>
                                                     <exclude reference="IZp-4z-Bcb"/>
                                                     <exclude reference="fK1-gW-FC1"/>
+                                                    <exclude reference="dfe-6E-i5H"/>
+                                                    <exclude reference="gH5-Sy-Mpg"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -2743,14 +2749,14 @@ You may now start using the app for your favourite restaurant.</string>
                                                     <include reference="oWd-1A-Rfp"/>
                                                 </mask>
                                                 <mask key="constraints">
-                                                    <include reference="dfe-6E-i5H"/>
-                                                    <include reference="gH5-Sy-Mpg"/>
                                                     <include reference="6jv-D6-oSG"/>
                                                     <include reference="Jxc-FX-7JM"/>
                                                     <include reference="gw2-xZ-dhT"/>
                                                     <include reference="FV5-Lz-kzT"/>
                                                     <include reference="IZp-4z-Bcb"/>
                                                     <include reference="fK1-gW-FC1"/>
+                                                    <include reference="dfe-6E-i5H"/>
+                                                    <include reference="gH5-Sy-Mpg"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -2859,7 +2865,7 @@ You may now start using the app for your favourite restaurant.</string>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="49" y="10" width="142" height="21"/>
+                                                        <rect key="frame" x="49" y="10" width="302" height="21"/>
                                                     </variation>
                                                 </label>
                                                 <button opaque="NO" contentMode="right" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="My0-xl-csU" customClass="CustomButton">
@@ -2878,7 +2884,7 @@ You may now start using the app for your favourite restaurant.</string>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="-30" y="36" width="300" height="30"/>
+                                                        <rect key="frame" x="50" y="36" width="300" height="30"/>
                                                         <mask key="constraints">
                                                             <include reference="UoY-08-w2G"/>
                                                         </mask>
@@ -6652,7 +6658,7 @@ You may now start using the app for your favourite restaurant.</string>
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MENU ITEM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8LN-W0-GrQ">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MENU ITEM" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8LN-W0-GrQ">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -6684,14 +6690,14 @@ You may now start using the app for your favourite restaurant.</string>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="z2U-w5-tnZ"/>
                                                             <exclude reference="iiB-rp-mjP"/>
+                                                            <exclude reference="z2U-w5-tnZ"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=compact">
                                                         <mask key="constraints">
-                                                            <include reference="z2U-w5-tnZ"/>
                                                             <include reference="iiB-rp-mjP"/>
+                                                            <include reference="z2U-w5-tnZ"/>
                                                         </mask>
                                                     </variation>
                                                 </label>
@@ -6733,14 +6739,14 @@ You may now start using the app for your favourite restaurant.</string>
                                                     <exclude reference="uP3-wN-27L"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <exclude reference="8pG-XL-uGL"/>
+                                                    <exclude reference="Q91-n0-mev"/>
+                                                    <exclude reference="Qc9-QB-tkK"/>
                                                     <exclude reference="ABb-aS-bch"/>
                                                     <exclude reference="LOM-Gt-0cB"/>
+                                                    <exclude reference="3QB-34-9xG"/>
                                                     <exclude reference="Whj-Aa-XGD"/>
                                                     <exclude reference="e7w-XY-W92"/>
-                                                    <exclude reference="3QB-34-9xG"/>
-                                                    <exclude reference="Qc9-QB-tkK"/>
-                                                    <exclude reference="Q91-n0-mev"/>
-                                                    <exclude reference="8pG-XL-uGL"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=compact">
@@ -6750,14 +6756,14 @@ You may now start using the app for your favourite restaurant.</string>
                                                     <include reference="uP3-wN-27L"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <include reference="8pG-XL-uGL"/>
+                                                    <include reference="Q91-n0-mev"/>
+                                                    <include reference="Qc9-QB-tkK"/>
                                                     <include reference="ABb-aS-bch"/>
                                                     <include reference="LOM-Gt-0cB"/>
+                                                    <include reference="3QB-34-9xG"/>
                                                     <include reference="Whj-Aa-XGD"/>
                                                     <include reference="e7w-XY-W92"/>
-                                                    <include reference="3QB-34-9xG"/>
-                                                    <include reference="Qc9-QB-tkK"/>
-                                                    <include reference="Q91-n0-mev"/>
-                                                    <include reference="8pG-XL-uGL"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -6768,7 +6774,7 @@ You may now start using the app for your favourite restaurant.</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="discountListCell" id="BrI-0s-zb5" customClass="DiscountListTableViewCell">
-                                        <rect key="frame" x="0.0" y="72" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="93" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BrI-0s-zb5" id="pj2-Yn-86Q">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>

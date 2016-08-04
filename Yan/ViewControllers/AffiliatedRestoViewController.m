@@ -576,7 +576,7 @@ typedef enum {
                      CLLocation *restaurantLocation = [[CLLocation alloc] initWithLatitude:restaurantLatitude longitude:restaurantLongitude];
                      CLLocationDistance meters = [restaurantLocation distanceFromLocation:currentLocation];
                      //            NSLog(@"meters: %f",meters);
-                     if (meters <= 30) {
+                     if (meters <= 5000) {
                          [self.dataListNearby addObject:restaurant];
                      }
                      

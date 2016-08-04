@@ -362,7 +362,7 @@
     
     NETWORK_INDICATOR(YES)
     
-    NSLog(@"parameters:%@",parameters);
+//    NSLog(@"parameters:%@",parameters);
     [manager POST:method parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
 //        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
@@ -372,8 +372,6 @@
 //        NSLog(@"response:%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject allKeys] containsObject:@"error"]) {
             if([responseObject[@"error"] integerValue] == 404 && [notificationName isEqualToString:@"socialLoginObserver"]){
-                [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
-            }else {
                 [self resolveErrorResponse:responseObject withNotification:notificationName];
             }
             
@@ -413,8 +411,6 @@
 //        NSLog(@"response:%@",responseObject);
         if ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject allKeys] containsObject:@"error"]) {
             if([responseObject[@"error"] integerValue] == 404 && [notificationName isEqualToString:@"socialLoginObserver"]){
-                [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
-            }else {
                 [self resolveErrorResponse:responseObject withNotification:notificationName];
             }
         }
@@ -489,7 +485,10 @@
         message = response[@"message"];
         
     }
-    else {}
+    else {
+        title = [NSString stringWithFormat:@"Error Code [%li]",[response[@"error"] integerValue]];
+        message = response[@"message"];
+    }
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
     if ([response[@"error"] integerValue] == 404) {

@@ -22,6 +22,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    Account *account = [self userLoggedIn];
+    NSString *favoriteRestaurant = isNIL(account.favorite_restaurant);
+    
+    if ([favoriteRestaurant rangeOfString:self.restaurantDetails.identifier].location == NSNotFound) {
+//        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"favorite-off-resize"] style:UIBarButtonItemStylePlain target:self action:nil];
+    }
+    else {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"favorite-on-resize"] style:UIBarButtonItemStylePlain target:self action:nil];
+    }
+    
+    
     NSMutableParagraphStyle *style =  [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
     style.alignment = NSTextAlignmentCenter;
     style.firstLineHeadIndent = 10.0f;

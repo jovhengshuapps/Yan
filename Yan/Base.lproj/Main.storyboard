@@ -65,6 +65,8 @@
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
             <string>LucidaGrande-Bold</string>
             <string>LucidaGrande-Bold</string>
             <string>LucidaGrande-Bold</string>
@@ -2141,6 +2143,160 @@ You may now start using the app for your favourite restaurant.</string>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6ea-dD-7p4">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="restaurantCell" rowHeight="44" id="ul3-yw-dOb" customClass="RestaurantCell">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ul3-yw-dOb" id="8gz-Pv-zNW">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bTN-IF-nUi">
+                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="43" id="tYR-P2-RXy"/>
+                                                    </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="tYR-P2-RXy"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="tYR-P2-RXy"/>
+                                                        </mask>
+                                                    </variation>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0b5-yg-TSw">
+                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="aT6-1J-6de"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="20"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="aT6-1J-6de"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="aT6-1J-6de"/>
+                                                        </mask>
+                                                    </variation>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPU-Yc-lhg">
+                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="14" id="hn1-Mf-kgz"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="12"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="hn1-Mf-kgz"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="hn1-Mf-kgz"/>
+                                                        </mask>
+                                                    </variation>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wBv-yT-ZEp">
+                                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="32" id="PxX-iV-clt"/>
+                                                        <constraint firstAttribute="height" constant="32" id="vB7-ms-fwN"/>
+                                                    </constraints>
+                                                    <state key="normal" image="favorite-off"/>
+                                                    <state key="selected" image="favorite-on"/>
+                                                    <state key="highlighted" image="favorite-on"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="PxX-iV-clt"/>
+                                                            <exclude reference="vB7-ms-fwN"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                        <mask key="constraints">
+                                                            <include reference="PxX-iV-clt"/>
+                                                            <include reference="vB7-ms-fwN"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <connections>
+                                                        <action selector="buttonFavoritesPressed:" destination="ul3-yw-dOb" eventType="touchUpInside" id="isZ-1A-UoP"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="bTN-IF-nUi" secondAttribute="bottom" constant="-8" id="4NT-B3-HXO"/>
+                                                <constraint firstItem="0b5-yg-TSw" firstAttribute="leading" secondItem="bTN-IF-nUi" secondAttribute="trailing" constant="8" id="4x4-Km-SbJ"/>
+                                                <constraint firstItem="wBv-yT-ZEp" firstAttribute="leading" secondItem="nPU-Yc-lhg" secondAttribute="trailing" constant="19" id="9eD-V5-khw"/>
+                                                <constraint firstItem="bTN-IF-nUi" firstAttribute="top" secondItem="8gz-Pv-zNW" secondAttribute="topMargin" constant="-8" id="B0B-w5-AoN"/>
+                                                <constraint firstItem="nPU-Yc-lhg" firstAttribute="top" secondItem="0b5-yg-TSw" secondAttribute="bottom" constant="1" id="FhZ-9D-frS"/>
+                                                <constraint firstItem="nPU-Yc-lhg" firstAttribute="leading" secondItem="bTN-IF-nUi" secondAttribute="trailing" constant="8" id="RVL-mR-Qxm"/>
+                                                <constraint firstItem="nPU-Yc-lhg" firstAttribute="leading" secondItem="bTN-IF-nUi" secondAttribute="trailing" constant="8" id="UPA-85-eXW"/>
+                                                <constraint firstItem="wBv-yT-ZEp" firstAttribute="top" secondItem="8gz-Pv-zNW" secondAttribute="topMargin" constant="-8" id="Wbh-X5-6P6"/>
+                                                <constraint firstItem="wBv-yT-ZEp" firstAttribute="leading" secondItem="0b5-yg-TSw" secondAttribute="trailing" constant="20" id="hhP-aA-qAk"/>
+                                                <constraint firstItem="bTN-IF-nUi" firstAttribute="leading" secondItem="8gz-Pv-zNW" secondAttribute="leadingMargin" id="i6J-ma-TFy"/>
+                                                <constraint firstItem="0b5-yg-TSw" firstAttribute="top" secondItem="8gz-Pv-zNW" secondAttribute="topMargin" constant="-8" id="nS6-A7-3dQ"/>
+                                                <constraint firstItem="wBv-yT-ZEp" firstAttribute="trailing" secondItem="8gz-Pv-zNW" secondAttribute="trailingMargin" id="p61-dd-ABv"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="bTN-IF-nUi"/>
+                                                    <exclude reference="0b5-yg-TSw"/>
+                                                    <exclude reference="nPU-Yc-lhg"/>
+                                                    <exclude reference="wBv-yT-ZEp"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="4NT-B3-HXO"/>
+                                                    <exclude reference="B0B-w5-AoN"/>
+                                                    <exclude reference="i6J-ma-TFy"/>
+                                                    <exclude reference="4x4-Km-SbJ"/>
+                                                    <exclude reference="nS6-A7-3dQ"/>
+                                                    <exclude reference="FhZ-9D-frS"/>
+                                                    <exclude reference="RVL-mR-Qxm"/>
+                                                    <exclude reference="UPA-85-eXW"/>
+                                                    <exclude reference="9eD-V5-khw"/>
+                                                    <exclude reference="Wbh-X5-6P6"/>
+                                                    <exclude reference="hhP-aA-qAk"/>
+                                                    <exclude reference="p61-dd-ABv"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular-widthClass=compact">
+                                                <mask key="subviews">
+                                                    <include reference="bTN-IF-nUi"/>
+                                                    <include reference="0b5-yg-TSw"/>
+                                                    <include reference="nPU-Yc-lhg"/>
+                                                    <include reference="wBv-yT-ZEp"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="4NT-B3-HXO"/>
+                                                    <include reference="B0B-w5-AoN"/>
+                                                    <include reference="i6J-ma-TFy"/>
+                                                    <include reference="4x4-Km-SbJ"/>
+                                                    <include reference="nS6-A7-3dQ"/>
+                                                    <include reference="FhZ-9D-frS"/>
+                                                    <include reference="RVL-mR-Qxm"/>
+                                                    <include reference="UPA-85-eXW"/>
+                                                    <include reference="9eD-V5-khw"/>
+                                                    <include reference="Wbh-X5-6P6"/>
+                                                    <include reference="hhP-aA-qAk"/>
+                                                    <include reference="p61-dd-ABv"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="buttonFavorites" destination="wBv-yT-ZEp" id="P2R-hg-x9Y"/>
+                                            <outlet property="imageViewLogo" destination="bTN-IF-nUi" id="wff-no-cTU"/>
+                                            <outlet property="labelRestaurantDetails" destination="nPU-Yc-lhg" id="MJb-5u-uC2"/>
+                                            <outlet property="labelRestaurantName" destination="0b5-yg-TSw" id="Ns6-74-huY"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="H2H-42-bZB" id="Tmi-WJ-fah"/>
                                     <outlet property="delegate" destination="H2H-42-bZB" id="rJG-Sc-Z3b"/>
@@ -3743,7 +3899,7 @@ You may now start using the app for your favourite restaurant.</string>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="3" maxX="0.0" maxY="0.0"/>
                                         <size key="titleShadowOffset" width="0.0" height="2.2250738585072014e-308"/>
                                         <state key="normal" title=" Restaurant Policy" image="uncheck">
-                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="showRestaurantPolicy:" destination="FR8-OO-KIF" eventType="touchUpInside" id="lgL-U5-m5M"/>
@@ -7598,6 +7754,8 @@ You may now start using the app for your favourite restaurant.</string>
         <image name="box_tableNumber" width="300" height="293"/>
         <image name="check" width="32" height="32"/>
         <image name="drop" width="300" height="30"/>
+        <image name="favorite-off" width="278" height="244"/>
+        <image name="favorite-on" width="278" height="244"/>
         <image name="minus-icon-resized" width="44" height="44"/>
         <image name="option-icon-resized" width="44" height="44"/>
         <image name="orLine" width="1272" height="219"/>

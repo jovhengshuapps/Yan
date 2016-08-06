@@ -55,6 +55,7 @@
 		335AB9031CCE4B4F0037D66F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335AB9021CCE4B4F0037D66F /* CoreGraphics.framework */; };
 		335B7AC91CD76C48000E9D9F /* MenuListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335B7AC81CD76C48000E9D9F /* MenuListTableViewCell.m */; };
 		335B7ACC1CD7A156000E9D9F /* MenuOptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335B7ACB1CD7A156000E9D9F /* MenuOptionTableViewCell.m */; };
+		335DB8651D558A380049EACB /* RestaurantCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 335DB8641D558A380049EACB /* RestaurantCell.m */; };
 		335DC0F51CEDEFCB001183DD /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335DC0F41CEDEFCB001183DD /* Accelerate.framework */; };
 		335DC0F71CEDEFD4001183DD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335DC0F61CEDEFD4001183DD /* UIKit.framework */; };
 		335DC0F91CEDEFE3001183DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335DC0F81CEDEFE3001183DD /* Foundation.framework */; };
@@ -240,6 +241,8 @@
 		335B7AC81CD76C48000E9D9F /* MenuListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuListTableViewCell.m; sourceTree = "<group>"; };
 		335B7ACA1CD7A156000E9D9F /* MenuOptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuOptionTableViewCell.h; sourceTree = "<group>"; };
 		335B7ACB1CD7A156000E9D9F /* MenuOptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuOptionTableViewCell.m; sourceTree = "<group>"; };
+		335DB8631D558A380049EACB /* RestaurantCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantCell.h; sourceTree = "<group>"; };
+		335DB8641D558A380049EACB /* RestaurantCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantCell.m; sourceTree = "<group>"; };
 		335DC0E91CEDEE67001183DD /* DeepBelief.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DeepBelief.framework; sourceTree = "<group>"; };
 		335DC0EA1CEDEE67001183DD /* jetpac.ntwk */ = {isa = PBXFileReference; lastKnownFileType = file; path = jetpac.ntwk; sourceTree = "<group>"; };
 		335DC0ED1CEDEE67001183DD /* SquareCamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SquareCamViewController.h; sourceTree = "<group>"; };
@@ -775,6 +778,8 @@
 			children = (
 				335834621CC4F1B4008606C8 /* AffiliatedRestoViewController.h */,
 				335834631CC4F1B4008606C8 /* AffiliatedRestoViewController.m */,
+				335DB8631D558A380049EACB /* RestaurantCell.h */,
+				335DB8641D558A380049EACB /* RestaurantCell.m */,
 				33B36F071CC65CD900AB30C6 /* ReserveRestoViewController.h */,
 				33B36F081CC65CD900AB30C6 /* ReserveRestoViewController.m */,
 				33B36F0A1CC663BC00AB30C6 /* ReserveCompleteViewController.h */,
@@ -1120,6 +1125,7 @@
 				33C6E67D1CC7A1D9001690ED /* CustomButton.m in Sources */,
 				3394A3A21CADF66300472030 /* UIView+REFrostedViewController.m in Sources */,
 				336424BB1CAE313A00E0E156 /* AFImageDownloader.m in Sources */,
+				335DB8651D558A380049EACB /* RestaurantCell.m in Sources */,
 				33E2C5981CE222FB00B28935 /* ShareTableViewController.m in Sources */,
 				339E3F2E1CEB49F10073873B /* ProfilePasswordViewController.m in Sources */,
 				335B7AC91CD76C48000E9D9F /* MenuListTableViewCell.m in Sources */,

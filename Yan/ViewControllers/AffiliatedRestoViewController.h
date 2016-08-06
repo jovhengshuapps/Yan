@@ -7,6 +7,7 @@
 //
 
 #import "CoreViewController.h"
+#import "RestaurantCell.h"
 
 typedef enum {
     AffiliatedRestaurantsAll,
@@ -14,7 +15,7 @@ typedef enum {
     AffiliatedRestaurantsFavorites
 } AffiliatedRestaurants;
 
-@interface AffiliatedRestoViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate>
+@interface AffiliatedRestoViewController : CoreViewController <UITableViewDataSource, UITableViewDelegate, CLLocationManagerDelegate, RestaurantCellDelegate>
 
 @property (assign, nonatomic) AffiliatedRestaurants showAffiliatedRestaurant;
 

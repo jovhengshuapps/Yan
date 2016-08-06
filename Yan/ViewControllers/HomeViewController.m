@@ -42,61 +42,15 @@
     
     
     
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
-    
-    Account *loggedUSER = [self userLoggedIn];
-    self.imageViewBackground.contentMode = UIViewContentModeScaleAspectFill;
-    self.imageViewBackground.clipsToBounds = YES;
-    if (loggedUSER.restaurant_logo_data) {
-        UIImage *image = [UIImage imageWithData:loggedUSER.restaurant_logo_data];
-        
-        self.imageViewBackground.image = image;
-        //        self.progressView.hidden = YES;
-    }
-    else {
-        //        self.progressView.hidden = NO;
-        //        [self.progressView setProgress:0.0f];
-        CABasicAnimation *theAnimation;
-        
-        theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
-        theAnimation.duration=1.0;
-        theAnimation.repeatCount=HUGE_VALF;
-        theAnimation.autoreverses=YES;
-        theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
-        theAnimation.toValue=[NSNumber numberWithFloat:0.0];
-        
-        //        NSLog(@"URL_LOGO:%@",loggedUSER.restaurant_logo_url);
-        [self.imageViewBackground.layer addAnimation:theAnimation forKey:@"animateOpacity"];
-        [self getImageFromURL:loggedUSER.restaurant_logo_url completionHandler:^(NSURLResponse * _Nullable response, id  _Nullable responseObject, NSError * _Nullable error) {
-            if (!error) {
-                loggedUSER.restaurant_logo_data = UIImageJPEGRepresentation((UIImage*)responseObject, 100.0f);
-                
-                NSError *saveError = nil;
-                if([context save:&saveError]) {
-                    UIImage *image = (UIImage*)responseObject;
-                    
-                    
-                    
-                    
-                    self.imageViewBackground.image = image;
-                    [self.imageViewBackground.layer removeAllAnimations];
-                }
-            }
-            else {
-                NSLog(@"error:%@",[error description]);
-            }
-        } andProgress:^(NSInteger expectedBytesToReceive, NSInteger receivedBytes) {
-            //            [self.progressView setProgress:(CGFloat)receivedBytes / (CGFloat)expectedBytesToReceive];
-            //            NSLog(@"progress:%f",(CGFloat)receivedBytes / (CGFloat)expectedBytesToReceive);
-        }];
-    }
     
     if ([self userLoggedIn]) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"qrIcon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(rescanQR)];
         UIBarButtonItem *menuBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"app-menu.png"] style:UIBarButtonItemStyleDone target:self action:@selector(openMenu)];
         
         [[self navigationItem] setLeftBarButtonItem:menuBarItem];
@@ -127,6 +81,40 @@
     }
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    
+    NSData *backgroundData = [[NSUserDefaults standardUserDefaults] dataForKey:@"ImageBackground"];
+    
+    self.imageViewBackground.contentMode = UIViewContentModeScaleAspectFill;
+    self.imageViewBackground.clipsToBounds = NO;
+    if (backgroundData) {
+        UIImage *image = [UIImage imageWithData:backgroundData];
+        
+        self.imageViewBackground.image = image;
+        //        self.progressView.hidden = YES;
+    }
+    else {
+        //        self.progressView.hidden = NO;
+        //        [self.progressView setProgress:0.0f];
+        CABasicAnimation *theAnimation;
+        
+        theAnimation=[CABasicAnimation animationWithKeyPath:@"opacity"];
+        theAnimation.duration=1.0;
+        theAnimation.repeatCount=HUGE_VALF;
+        theAnimation.autoreverses=YES;
+        theAnimation.fromValue=[NSNumber numberWithFloat:1.0];
+        theAnimation.toValue=[NSNumber numberWithFloat:0.0];
+        
+        //        NSLog(@"URL_LOGO:%@",loggedUSER.restaurant_logo_url);
+        [self.imageViewBackground.layer addAnimation:theAnimation forKey:@"animateOpacity"];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getBackgroundImage:) name:@"getBackgroundImage_Observer" object:nil];
+        [self callGETAPI:API_GETBACKGROUND_IMAGE withParameters:@{} completionNotification:@"getBackgroundImage_Observer"];
+    }
+}
+
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
@@ -138,6 +126,44 @@
             
     }
     
+}
+
+
+- (void) getBackgroundImage:(NSNotification*)notification {
+    if ([notification.object isKindOfClass:[NSError class]]) {
+        
+        NSError *error = (NSError*)notification.object;
+        
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)error.code] message:error.description preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:^{
+            }];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
+    else {
+        NSDictionary *response = (NSDictionary*)notification.object;
+        [self getImageFromURL:response[@"img_url"] completionHandler:^(NSURLResponse * _Nullable response, id  _Nullable responseObject, NSError * _Nullable error) {
+//            NSLog(@"responseObject:%@",responseObject);
+            if (!error) {
+                NSData *backgroundDataFromServer = UIImageJPEGRepresentation((UIImage*)responseObject, 100.0f);
+                [[NSUserDefaults standardUserDefaults] setObject:backgroundDataFromServer forKey:@"ImageBackground"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                UIImage *image = (UIImage*)responseObject;
+                self.imageViewBackground.image = image;
+                [self.imageViewBackground.layer removeAllAnimations];
+            }
+        } andProgress:^(NSInteger expectedBytesToReceive, NSInteger receivedBytes) {
+            
+        }];
+    }
+
 }
 
 - (void) changeView:(NSNotification*)notification {
@@ -536,6 +562,46 @@
             
         }];
     }
+}
+
+- (void) rescanQR {
+    self.restaurantID = 0;
+    self.tableNumber = 0;
+    NSString *orderID = @"";
+    NSError *error = nil;
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    Account *loggedUSER = [self userLoggedIn];
+    orderID = loggedUSER.current_orderID;
+    loggedUSER.current_tableNumber = @"";
+    loggedUSER.current_restaurantID = @"";
+    loggedUSER.current_restaurantName = @"";
+    loggedUSER.current_orderID = @"";
+    
+    if ([context save:&error]) {
+        
+        error = nil;
+        
+        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+        [request setReturnsObjectsAsFaults:NO];
+        NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+        
+        for (OrderList *orders in result) {
+            [context deleteObject:orders];
+        }
+        
+        if ([context save:&error]) {
+            
+            QRReaderViewController *scanLogo = [self.storyboard instantiateViewControllerWithIdentifier:@"qrReader"];
+            scanLogo.modalPresentationStyle = UIModalPresentationOverFullScreen;
+            scanLogo.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self presentViewController:scanLogo animated:NO completion:^{
+                
+            }];
+        }
+        
+    }
+    
 }
 
 @end

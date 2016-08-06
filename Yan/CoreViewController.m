@@ -370,10 +370,29 @@
         
         NETWORK_INDICATOR(NO)
 //        NSLog(@"response:%@",responseObject);
-        if ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject allKeys] containsObject:@"error"]) {
-            if([responseObject[@"error"] integerValue] == 404 && [notificationName isEqualToString:@"socialLoginObserver"]){
+        if ([responseObject isKindOfClass:[NSError class]] || ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject allKeys] containsObject:@"error"])) {
+            if ([responseObject isKindOfClass:[NSError class]]) {
+                
+                NSError *error = (NSError*)responseObject;
+                
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)error.code] message:error.description preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    [alert dismissViewControllerAnimated:YES completion:^{
+                    }];
+                }];
+                [alert addAction:actionOK];
+                
+                [self presentViewController:alert animated:YES completion:^{
+                    
+                }];
+            }
+            else {
+                
                 [self resolveErrorResponse:responseObject withNotification:notificationName];
             }
+//            if([responseObject[@"error"] integerValue] == 404 && [notificationName isEqualToString:@"socialLoginObserver"]){
+//                [self resolveErrorResponse:responseObject withNotification:notificationName];
+//            }
             
         }
         else if ([responseObject isKindOfClass:[NSArray class]] || [responseObject isKindOfClass:[NSDictionary class]]) {
@@ -381,7 +400,6 @@
         }
         else {
             [self resolveErrorResponse:responseObject withNotification:notificationName];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
 //        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
@@ -403,23 +421,42 @@
     
     NETWORK_INDICATOR(YES)
     
+    NSLog(@"[123]method:%@",method);
     [manager GET:method parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
 //        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NETWORK_INDICATOR(NO)
-//        NSLog(@"response:%@",responseObject);
-        if ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject allKeys] containsObject:@"error"]) {
-            if([responseObject[@"error"] integerValue] == 404 && [notificationName isEqualToString:@"socialLoginObserver"]){
+        if ([responseObject isKindOfClass:[NSError class]] || ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject allKeys] containsObject:@"error"])) {
+            if ([responseObject isKindOfClass:[NSError class]]) {
+                
+                NSError *error = (NSError*)responseObject;
+                
+                
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)error.code] message:error.description preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    [alert dismissViewControllerAnimated:YES completion:^{
+                    }];
+                }];
+                [alert addAction:actionOK];
+                
+                [self presentViewController:alert animated:YES completion:^{
+                    
+                }];
+            }
+            else {
+                
                 [self resolveErrorResponse:responseObject withNotification:notificationName];
             }
+//            if([responseObject[@"error"] integerValue] == 404 && [notificationName isEqualToString:@"socialLoginObserver"]){
+//                [self resolveErrorResponse:responseObject withNotification:notificationName];
+//            }
         }
         else if ([responseObject isKindOfClass:[NSArray class]] || [responseObject isKindOfClass:[NSDictionary class]]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
         }
         else {
             [self resolveErrorResponse:responseObject withNotification:notificationName];
-//            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:responseObject];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
 //        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);

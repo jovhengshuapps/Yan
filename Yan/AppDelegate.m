@@ -318,7 +318,7 @@ didDisconnectWithUser:(GIDGoogleUser *)user
     else if (data[@"billout"]) {
         self.notificationUserInfo = nil;
         
-        AlertView *alert = [[AlertView alloc] initAlertWithMessage:[NSString stringWithFormat:@"%@ has requested to bill out the orders from your table.\n\nTable %@",data[@"name"],data[@"table_number"]] delegate:self buttons:@[@"CLOSE"]];
+        AlertView *alert = [[AlertView alloc] initAlertWithMessage:[NSString stringWithFormat:@"%@ has requested to bill out the orders from your table.\n\nTable %@",data[@"name"],data[@"table_number"]] delegate:self buttons:nil];
         [alert showAlertView];
         
         NSManagedObjectContext *context = self.managedObjectContext;
@@ -406,8 +406,20 @@ didDisconnectWithUser:(GIDGoogleUser *)user
         else {
             
             reminder.type = @"notification";
-            reminder.title = self.notificationUserInfo[@"title"];
+            reminder.notificationTitle = self.notificationUserInfo[@"title"];
             reminder.bodyText = self.notificationUserInfo[@"body"];
+            
+            
+            NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+            NSDate *currentDate = [NSDate date];
+            NSDateComponents *comps = [[NSDateComponents alloc] init];
+            //        [comps setDay:1];
+            [comps setHour:5];
+            NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+            
+            
+            
+            reminder.reservationDateTime = minDate;
             
 //            if([self.notificationUserInfo[@"title"] rangeOfString:@"order"].location != NSNotFound) {
 //                
@@ -416,6 +428,9 @@ didDisconnectWithUser:(GIDGoogleUser *)user
         }
         
         [self.window addSubview:reminder.view];
+        [self.window.rootViewController addChildViewController:reminder];
+        [reminder didMoveToParentViewController:self.window.rootViewController];
+        
         
         //remove notifications
         NSManagedObjectContext *context = self.managedObjectContext;

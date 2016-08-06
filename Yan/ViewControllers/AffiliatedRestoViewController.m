@@ -56,7 +56,7 @@ typedef enum {
     [_resultsBarView addSubview:_resultsBarLabel];
     
 
-    
+    CGFloat defaultTableHeight = self.mainTableView.frame.size.height;
     if (_showAffiliatedRestaurant == AffiliatedRestaurantsAll) {
         
         [_barItemRestaurants setTitleEdgeInsets:UIEdgeInsetsMake(0.0f, 5.0f, 0.0f, 5.0f)];
@@ -77,11 +77,19 @@ typedef enum {
         
         self.viewMainBar.hidden = NO;
         self.viewFromDrawerBar.hidden = YES;
+        
+        CGRect frame = self.mainTableView.frame;
+        frame.size.height = defaultTableHeight;
+        self.mainTableView.frame = frame;
+        
     }
     else {
         
         self.viewMainBar.hidden = YES;
-        self.viewFromDrawerBar.hidden = NO;
+        self.viewFromDrawerBar.hidden = YES;
+        CGRect frame = self.mainTableView.frame;
+        frame.size.height = defaultTableHeight + 44.0f;
+        self.mainTableView.frame = frame;
     }
     
     
@@ -93,7 +101,9 @@ typedef enum {
     
     [self showTitleBar:@"RESTAURANTS"];
     
+    
 }
+
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -119,10 +129,16 @@ typedef enum {
         [self showTitleBar:@"RESTAURANTS"];
         return;
     }
-//    NSLog(@"response:%@",response);
+    NSLog(@"response:%@",response);
 //    _dataListAll = [NSMutableArray arrayWithArray:((NSArray*) response)];
 
     _dataListAll = [NSMutableArray new];
+    _dataListNearby = [NSMutableArray new];
+    _dataListRecent = [NSMutableArray new];
+    _dataListFavorites = [NSMutableArray new];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.tag = _showAffiliatedRestaurant;
+    [self reloadTableWithButton:button];
     
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
@@ -166,6 +182,7 @@ typedef enum {
         restaurant.website = isNIL(restaurantDetails[@"website"]);
         restaurant.logo_model = isNIL(restaurantDetails[@"logo_model"]);
         restaurant.operating = isNIL(restaurantDetails[@"operating"]);
+        restaurant.policy = isNIL(restaurantDetails[@"policy"]);
         
 //        NSData *imageData = _item.imageData;
 //        if (imageData) {
@@ -187,8 +204,18 @@ typedef enum {
         
         NSError *error = nil;
         if ([context save:&error]) {
+            NSManagedObjectContext *context1 = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
             
-            [_dataListAll addObject:restaurant];
+            NSFetchRequest *request1 = [[NSFetchRequest alloc] initWithEntityName:@"Restaurant"];
+            [request1 setReturnsObjectsAsFaults:NO];
+            NSError *error1 = nil;
+            
+            NSArray *result1 = [NSArray arrayWithArray:[context1 executeFetchRequest:request1 error:&error1]];
+            
+            for (Restaurant *restaurant in result1) {
+                [_dataListAll addObject:restaurant];
+            }
+            
             
         }
         else {
@@ -223,15 +250,77 @@ typedef enum {
 //    
 //    
 //    _dataListAll = [NSMutableArray arrayWithArray:dummy];
-    
-    _dataListNearby = [NSMutableArray new];
-    _dataListRecent = [NSMutableArray new];
-    _dataListFavorites = [NSMutableArray new];
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.tag = _showAffiliatedRestaurant;
-    [self reloadTableWithButton:button];
+    [self.mainTableView reloadData];
 }
 
+
+- (void) detailButtonTapped: (UIControl *) button withEvent: (UIEvent *) event
+{
+    NSIndexPath * indexPath = [self.mainTableView indexPathForRowAtPoint: [[[event touchesForView: button] anyObject] locationInView: self.mainTableView]];
+    if ( indexPath == nil )
+        return;
+    
+    [self.mainTableView.delegate tableView: self.mainTableView accessoryButtonTappedForRowWithIndexPath: indexPath];
+}
+
+# pragma mark Delegate
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    //add to order list
+    
+    UITableViewCell *cell = [self.mainTableView cellForRowAtIndexPath:indexPath];
+    
+    
+    UIButton *accessoryButton = [(UIButton*)cell.accessoryView viewWithTag:46];
+//    [accessoryButton setSelected:!accessoryButton.selected];
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    Account *account = [self userLoggedIn];
+    NSString *favoriteRestaurants = isNIL(account.favorite_restaurant);
+    
+    NSArray *dataList = nil;
+    
+    if (_tabBarOption == AffiliatedRestoOptionAll) {
+        dataList = _dataListAll;
+    }
+    else if (_tabBarOption == AffiliatedRestoOptionRecent) {
+        dataList = _dataListRecent;
+    }
+    else if (_tabBarOption == AffiliatedRestoOptionNearby) {
+        dataList = _dataListNearby;
+    }
+    else if (_tabBarOption == AffiliatedRestoOptionFavorites) {
+        dataList = _dataListFavorites;
+    }
+    
+    if (cell.tag == 0) {
+        
+        account.favorite_restaurant = [NSString stringWithFormat:@"%@,%@",favoriteRestaurants, ((Restaurant*)dataList[indexPath.row]).identifier];
+    }
+    else {
+        account.favorite_restaurant = [account.favorite_restaurant stringByReplacingOccurrencesOfString:((Restaurant*)dataList[indexPath.row]).identifier withString:@""];
+    }
+    
+    
+    
+    NSError *error = nil;
+    if (![context save:&error]) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
+
+//    [self.mainTableView reloadData];
+
+    
+}
 
 # pragma mark UITableView DataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -292,15 +381,25 @@ typedef enum {
         imgView.contentMode = UIViewContentModeScaleAspectFit;
         [cell.contentView addSubview:imgView];
         
+        UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [detailButton addTarget:self action:@selector(detailButtonTapped:withEvent:) forControlEvents:UIControlEventTouchUpInside];
+        detailButton.tag = 46;
+        [detailButton setImage:[UIImage imageNamed:@"favorite-off"] forState:UIControlStateNormal];
+        [detailButton setFrame:CGRectMake(0.0f, 0.0f, 32.0f, 32.0f)];
+        cell.accessoryView = detailButton;
+        
+        cell.tag = 0;
     }
     
     NSString *name = @"";
     NSString *details = @"";
     NSData *imageData = nil;
+    NSArray *dataList = nil;
     
     if (_tabBarOption == AffiliatedRestoOptionAll) {
         name = ((Restaurant*)_dataListAll[indexPath.row]).name;
         details = [NSString stringWithFormat:@"%@ | %@",((Restaurant*)_dataListAll[indexPath.row]).location,((Restaurant*)_dataListAll[indexPath.row]).website];
+        dataList = _dataListAll;
         if (((Restaurant*)_dataListAll[indexPath.row]).imageData) {
             imageData = ((Restaurant*)_dataListAll[indexPath.row]).imageData;
         }
@@ -330,6 +429,7 @@ typedef enum {
     else if (_tabBarOption == AffiliatedRestoOptionRecent) {
         name = ((Restaurant*)_dataListRecent[indexPath.row]).name;
         details = [NSString stringWithFormat:@"%@ | %@",((Restaurant*)_dataListRecent[indexPath.row]).location,((Restaurant*)_dataListRecent[indexPath.row]).website];
+        dataList = _dataListRecent;
         if (((Restaurant*)_dataListRecent[indexPath.row]).imageData) {
             imageData = ((Restaurant*)_dataListRecent[indexPath.row]).imageData;
         }
@@ -338,6 +438,7 @@ typedef enum {
     else if (_tabBarOption == AffiliatedRestoOptionNearby) {
         name = ((Restaurant*)_dataListNearby[indexPath.row]).name;
         details = [NSString stringWithFormat:@"%@ | %@",((Restaurant*)_dataListNearby[indexPath.row]).location,((Restaurant*)_dataListNearby[indexPath.row]).website];
+        dataList = _dataListNearby;
         if (((Restaurant*)_dataListNearby[indexPath.row]).imageData) {
             imageData = ((Restaurant*)_dataListNearby[indexPath.row]).imageData;
         }
@@ -346,10 +447,10 @@ typedef enum {
     else if (_tabBarOption == AffiliatedRestoOptionFavorites) {
         name = ((Restaurant*)_dataListFavorites[indexPath.row]).name;
         details = [NSString stringWithFormat:@"%@ | %@",((Restaurant*)_dataListFavorites[indexPath.row]).location,((Restaurant*)_dataListFavorites[indexPath.row]).website];
+        dataList = _dataListFavorites;
         if (((Restaurant*)_dataListFavorites[indexPath.row]).imageData) {
             imageData = ((Restaurant*)_dataListFavorites[indexPath.row]).imageData;
         }
-        
     }
     cell.textLabel.text = name;
     cell.detailTextLabel.text = details;
@@ -359,12 +460,29 @@ typedef enum {
 //        cell.imageView.image = [UIImage imageWithData:imageData];
     }
     
+    if (cell.tag == 1) {
+        [((UIButton*)[cell.contentView viewWithTag:46]) setImage:[UIImage imageNamed:@"favorite-on"] forState:UIControlStateNormal];
+    }
+    else {
+        [((UIButton*)[cell.contentView viewWithTag:46]) setImage:[UIImage imageNamed:@"favorite-off"] forState:UIControlStateNormal];
+    }
+    
+//    Account *account = [self userLoggedIn];
+//    for (NSString *restaurantID in [account.favorite_restaurant componentsSeparatedByString:@","]) {
+//        if ([((Restaurant*)dataList[indexPath.row]).identifier isEqualToString:restaurantID]) {
+//            NSLog(@"FAVORITE:%@",((Restaurant*)dataList[indexPath.row]).identifier);
+//            ((UIButton*)[cell.accessoryView viewWithTag:46]).selected = YES;
+//            break;
+//        }
+//    }
+//    
 //    cell.textLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:name attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), 24.0f)];
 //    cell.detailTextLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:details attributes:TextAttributes(@"LucidaGrande", (0xFFFFFF), 24.0f)];
     
     return cell;
     
 }
+
 
 #pragma mark UITable Delegate
 
@@ -488,14 +606,15 @@ typedef enum {
             if (self.dataListRecent.count == 0) {
                 
                 Account *account = [self userLoggedIn];
-                if ([account.recent_restaurant rangeOfString:@","].location == NSNotFound) {
-                    for (id restaurant in self.dataListAll) {
-                        if ([((Restaurant*)restaurant).identifier isEqualToString:account.recent_restaurant]) {
-                            [self.dataListRecent addObject:restaurant];
-                        }
-                    }
-                }
-                else {
+                
+//                if ([account.recent_restaurant rangeOfString:@","].location == NSNotFound) {
+//                    for (id restaurant in self.dataListAll) {
+//                        if ([((Restaurant*)restaurant).identifier isEqualToString:account.recent_restaurant]) {
+//                            [self.dataListRecent addObject:restaurant];
+//                        }
+//                    }
+//                }
+//                else {
                     for (NSString *restaurantID in [account.recent_restaurant componentsSeparatedByString:@","]) {
                         for (id restaurant in self.dataListAll) {
                             if ([((Restaurant*)restaurant).identifier isEqualToString:restaurantID]) {
@@ -503,7 +622,7 @@ typedef enum {
                             }
                         }
                     }
-                }
+//                }
             }
             
             
@@ -513,6 +632,20 @@ typedef enum {
             _drawerBarItemFavorites.frame = CGRectMake(0.0f, _drawerBarItemFavorites.frame.origin.y, self.mainTableView.frame.size.width, _drawerBarItemFavorites.frame.size.height);
                 [_drawerBarItemRecents setBackgroundColor:UIColorFromRGB(0xDFDFDF)];
                 [_drawerBarItemFavorites setBackgroundColor:UIColorFromRGB(0xFF7B3C)];
+            
+            
+            if (self.dataListFavorites.count == 0) {
+                
+                Account *account = [self userLoggedIn];
+                
+                for (NSString *restaurantID in [account.favorite_restaurant componentsSeparatedByString:@","]) {
+                    for (id restaurant in self.dataListAll) {
+                        if ([((Restaurant*)restaurant).identifier isEqualToString:restaurantID]) {
+                            [self.dataListFavorites addObject:restaurant];
+                        }
+                    }
+                }
+            }
             
         }
         else {

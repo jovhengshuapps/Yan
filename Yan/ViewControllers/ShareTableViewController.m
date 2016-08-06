@@ -87,13 +87,13 @@
 
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
     
-    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Successfully shared link on Facebook." delegate:self buttons:@[@"CLOSE"]];
+    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Successfully shared link on Facebook." delegate:self buttons:nil];
     [alert showAlertView];
 }
 
 - (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error {
     
-    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Failed to shared link on Facebook." delegate:self buttons:@[@"CLOSE"]];
+    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Failed to shared link on Facebook." delegate:self buttons:nil];
     [alert showAlertView];
 }
 

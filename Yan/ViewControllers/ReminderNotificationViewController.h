@@ -7,14 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Config.h"
 
 @interface ReminderNotificationViewController : UIViewController
 
 @property (strong, nonatomic) NSString *restaurantName;
+@property (strong, nonatomic) NSString *numberOfPerson;
 @property (strong, nonatomic) NSString *reservationTimeFrom;
 @property (strong, nonatomic) NSString *reservationTimeTo;
 @property (strong, nonatomic) NSString *type;
-@property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSString *notificationTitle;
 @property (strong, nonatomic) NSString *bodyText;
+
+@property (strong, nonatomic) NSDate *reservationDateTime;
+@property (strong, nonatomic) NSString *restaurantAddress;
+@property (strong, nonatomic) NSString *restaurantContact;
+@property (strong, nonatomic) NSString *restaurantOperation;
 
 @end

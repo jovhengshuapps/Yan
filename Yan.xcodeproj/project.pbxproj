@@ -11,6 +11,7 @@
 		3302B0501CF1FE970033BAA1 /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 3302B04E1CF1FE970033BAA1 /* Restaurant.m */; };
 		33038B471D09779400637A0A /* ReminderNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33038B461D09779400637A0A /* ReminderNotificationViewController.m */; };
 		33038B4A1D098BEF00637A0A /* DayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33038B491D098BEF00637A0A /* DayTableViewController.m */; };
+		3315E1981D554E4300ED8867 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3315E1971D554E4300ED8867 /* EventKit.framework */; };
 		3338AE8E1D1F588F002B12F1 /* Notification+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3338AE8B1D1F588F002B12F1 /* Notification+CoreDataProperties.m */; };
 		3338AE8F1D1F588F002B12F1 /* Notification.m in Sources */ = {isa = PBXBuildFile; fileRef = 3338AE8D1D1F588F002B12F1 /* Notification.m */; };
 		333FEEF71CCF7205004D4B5B /* MenuListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FEEF61CCF7205004D4B5B /* MenuListViewController.m */; };
@@ -156,6 +157,7 @@
 		33038B461D09779400637A0A /* ReminderNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderNotificationViewController.m; sourceTree = "<group>"; };
 		33038B481D098BEF00637A0A /* DayTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayTableViewController.h; sourceTree = "<group>"; };
 		33038B491D098BEF00637A0A /* DayTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayTableViewController.m; sourceTree = "<group>"; };
+		3315E1971D554E4300ED8867 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		3338AE8A1D1F588F002B12F1 /* Notification+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Notification+CoreDataProperties.h"; sourceTree = "<group>"; };
 		3338AE8B1D1F588F002B12F1 /* Notification+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Notification+CoreDataProperties.m"; sourceTree = "<group>"; };
 		3338AE8C1D1F588F002B12F1 /* Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notification.h; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3315E1981D554E4300ED8867 /* EventKit.framework in Frameworks */,
 				335DC0F91CEDEFE3001183DD /* Foundation.framework in Frameworks */,
 				335DC0F71CEDEFD4001183DD /* UIKit.framework in Frameworks */,
 				335DC0F51CEDEFCB001183DD /* Accelerate.framework in Frameworks */,
@@ -861,6 +864,7 @@
 		B34B5C970B55F0D232BFF620 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3315E1971D554E4300ED8867 /* EventKit.framework */,
 				33DE2E141D12E205008F4AC6 /* MapKit.framework */,
 				335DC0F81CEDEFE3001183DD /* Foundation.framework */,
 				335DC0F61CEDEFD4001183DD /* UIKit.framework */,

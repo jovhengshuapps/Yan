@@ -61,7 +61,8 @@
                      @"SETTINGS",
                      @"RESTAURANTS",
                      @"PRIVACY POLICY",
-                     @"TERMS OF USE"];
+                     @"TERMS OF USE",
+                     @"SHARE"];
     
     [self.tableView reloadData];
 }
@@ -159,6 +160,12 @@
         
         [((UINavigationController*)self.frostedViewController.contentViewController) pushViewController:settings animated:YES];
     }
+    else if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"SHARE"]) {
+//        AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Successfully shared link on Facebook." delegate:nil buttons:nil];
+//        [alert showAlertView];
+        NETWORK_INDICATOR(YES)
+        [self postOnFacebook];
+    }
     
 }
 
@@ -192,6 +199,10 @@
     
     cell.textLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:[_titlesArray objectAtIndex:indexPath.row] attributes:TextAttributes(@"LucidaGrande", 0x333333, 20.0f)];
     
+    if ([[self.titlesArray objectAtIndex:indexPath.row] isEqualToString:@"SHARE"]) {
+        cell.imageView.image = [UIImage imageNamed:@"fb.png"];
+    }
+    
     return cell;
 }
 
@@ -214,5 +225,59 @@
     return nil;
     
 }
+
+
+- (void)postOnFacebook {
+    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
+        // TODO: publish content.
+        
+        FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+        content.contentDescription = [NSString stringWithFormat:@"Download Yan! now!"];
+        content.contentTitle = @"Join us here!";
+        content.contentURL = /*[NSURL URLWithString:_restaurantURL];*/[NSURL URLWithString:@"http://yan.bilinear.ph"];
+        
+        //    FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
+        //    dialog.fromViewController = self;
+        //    dialog.shareContent = content;
+        //    dialog.mode = FBSDKShareDialogModeShareSheet;
+        //    [dialog show];
+        //
+        
+        FBSDKShareAPI *share = [FBSDKShareAPI shareWithContent:content delegate:self];
+        [share share];
+    } else {
+        FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
+        loginManager.loginBehavior = FBSDKLoginBehaviorWeb;
+        [loginManager logInWithPublishPermissions:@[@"publish_actions"]
+                               fromViewController:self
+                                          handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+                                              //TODO: process error or result.
+                                          }];
+    }
+    
+    
+}
+
+
+- (void)sharerDidCancel:(id<FBSDKSharing>)sharer {
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
+    
+    NETWORK_INDICATOR(NO)
+    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Successfully shared link on Facebook." delegate:nil buttons:nil];
+    [alert showAlertView];
+}
+
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error {
+    
+    NETWORK_INDICATOR(NO)
+    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Failed to shared link on Facebook." delegate:nil buttons:nil];
+    [alert showAlertView];
+}
+
+
 
 @end

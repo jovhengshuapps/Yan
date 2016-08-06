@@ -25,5 +25,6 @@
 @dynamic website;
 @dynamic logo_model;
 @dynamic operating;
+@dynamic policy;
 
 @end

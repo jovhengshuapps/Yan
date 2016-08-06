@@ -19,6 +19,10 @@
 @property (strong, nonatomic) NSMutableArray *arrayAvailableDays;
 @property (strong, nonatomic) NSMutableArray *arrayAvailableTimes;
 @property (strong, nonatomic) FPPopoverController *popover;
+@property (weak, nonatomic) IBOutlet UITextView *textViewPolicy;
+@property (weak, nonatomic) IBOutlet UIButton *buttonPolicy;
+
+@property (assign, nonatomic) BOOL policyAccepted;
 
 @end
 
@@ -27,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.policyAccepted = NO;
     UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoLight];
     
     [button addTarget:self action:@selector(showRestaurantDetails) forControlEvents:UIControlEventTouchUpInside];
@@ -46,6 +50,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkReservationTimes:) name:@"checkReservationTimes" object:nil];
     [self callGETAPI:API_RESERVATION_CHECKTIME(self.restaurantDetails.identifier) withParameters:@{} completionNotification:@"checkReservationTimes"];
     
+    self.textViewPolicy.text = self.restaurantDetails.policy;
 
     
 }
@@ -67,7 +72,7 @@
 - (void) checkReservationTimes:(NSNotification*)notification {
 //    NSLog(@"Available Times:%@",notification.object);
     
-    self.textFieldDate.placeholder = @"Date";
+    self.textFieldDate.placeholder = @"DATE";
     NSArray *response = notification.object;
     self.arrayAvailableDays = [NSMutableArray array];
     self.arrayAvailableTimes = [NSMutableArray array];
@@ -86,6 +91,21 @@
 - (BOOL) shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     if ([identifier isEqualToString:@"reservationComplete"]){
         if (_textFieldDate.text.length && _textFieldTime.text.length && /*_textFieldTableNumber.text.length &&*/ _textFieldNumberPerson.text.length) {
+            
+            if (!self.policyAccepted) {
+                
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Restaurant Policy" message:@"Please accept the restaurant policy to continue with the reservation." preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                    [alert dismissViewControllerAnimated:YES completion:nil];
+                }];
+                [alert addAction:actionOK];
+                
+                [self presentViewController:alert animated:YES completion:^{
+                    
+                }];
+                
+                return NO;
+            }
             
             Account *account = (Account*)[self userLoggedIn];
             //        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(completeReservation:) name:@"reservationRequest" object:nil];
@@ -106,7 +126,7 @@
             //                                     @"persons":@"12"
             //                                     };
             self.buttonReserve.enabled = NO;
-            [self.buttonReserve setTitle:@"Sending Reservation" forState:UIControlStateNormal];
+            [self.buttonReserve setTitle:@"SENDING RESERVATION" forState:UIControlStateNormal];
             [self callPOSTAPI:API_RESERVATION(_restaurantDetails.identifier, account.identifier) withParameters:parameters completionHandler:^(id  _Nullable response) {
                 self.buttonReserve.enabled = YES;
                 [self.buttonReserve setTitle:@"RESERVE" forState:UIControlStateNormal];
@@ -198,6 +218,12 @@
     details.reservedTableNumber = _textFieldTableNumber.text;
     [self.navigationController pushViewController:details animated:YES];
 }
+- (IBAction)showRestaurantPolicy:(id)sender {
+    
+    AlertView *alert = [[AlertView alloc] initAlertWithMessage:self.restaurantDetails.policy delegate:self buttons:@[@"ACCEPT",@"DECLINE"]];
+    [alert showAlertView];
+    
+}
 
 - (IBAction)selectDate:(id)sender {
     [self.textFieldDate resignFirstResponder];
@@ -225,6 +251,20 @@
     self.textFieldDate.text = [NSString stringWithFormat:@"%@ - %@",day[@"day"],day[@"date"]];
     self.textFieldTime.text = @"";
     [self.popover dismissPopoverAnimated:YES];
+}
+
+
+- (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0) {
+        [self.buttonPolicy setImage:[UIImage imageNamed:@"check.png"] forState:UIControlStateNormal];
+        self.policyAccepted = YES;
+    }
+    else {
+        [self.buttonPolicy setImage:[UIImage imageNamed:@"uncheck.png"] forState:UIControlStateNormal];
+        self.policyAccepted = NO;
+    }
+    
+    [alertView dismissAlertView];
 }
 
 @end

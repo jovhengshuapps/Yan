@@ -42,11 +42,12 @@
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     Account *account = [self userLoggedIn];
-    NSString *recentRestaurants = account.recent_restaurant;
+    NSString *recentRestaurants = isNIL(account.recent_restaurant);
     
-    if ([account.recent_restaurant rangeOfString:@","].location == NSNotFound) {        
+//    if ([account.recent_restaurant rangeOfString:@","].location == NSNotFound) {        
         account.recent_restaurant = [NSString stringWithFormat:@"%@,%@",recentRestaurants, self.restaurantID];
-    }
+//    }
+    
     
     NSError *error = nil;
     if (![context save:&error]) {

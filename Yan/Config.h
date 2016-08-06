@@ -100,4 +100,7 @@
 
 #define API_GETTABLEORDERS(RESTAURANT_ID,TABLE_NUMBER)                          [NSString stringWithFormat:@"table_orders/%@/table/%@",RESTAURANT_ID,TABLE_NUMBER]
 
+
+#define API_GETBACKGROUND_IMAGE                                         [NSString stringWithFormat:@"admin/background/image"]
+
 #endif /* Config_h */

@@ -79,7 +79,7 @@
 
 - (void)setupAlertView:(nullable id)aDelegate :(nullable NSString*)aMessage :(nullable NSArray*)aButtonsArray {
     
-    CGFloat defaultHeight =  300.0f;
+    CGFloat defaultHeight =  KEYWINDOW.bounds.size.height - 40.0f;
 //    CGFloat maxHeight = KEYWINDOW.bounds.size.height - 60.0f;
     CGFloat buttonHeight = 30.0f;
     
@@ -88,7 +88,7 @@
     _background.center = KEYWINDOW.center;
     
     
-    _container = [[UIView alloc ] initWithFrame:CGRectMake(0.0f, 0.0f, _background.frame.size.width - 60.0f, defaultHeight)];
+    _container = [[UIView alloc ] initWithFrame:CGRectMake(0.0f, 0.0f, _background.frame.size.width - 20.0f, defaultHeight)];
     _container.center = _background.center;
     _container.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
     
@@ -118,12 +118,12 @@
         UIButton *close = [UIButton buttonWithType:UIButtonTypeCustom];
         close.backgroundColor = UIColorFromRGB(0x959595);
         
-        close.layer.borderColor = [UIColorFromRGB(0x727272) CGColor];
+        close.layer.borderColor = [UIColorFromRGB(0x959595) CGColor];
         close.layer.borderWidth = 1.0f;
         
         close.layer.cornerRadius = 5.0f;
         
-        [close setTitle:@"Close" forState:UIControlStateNormal];
+        [close setTitle:@"CLOSE" forState:UIControlStateNormal];
         [close setTitleColor:UIColorFromRGB(0x333333) forState:UIControlStateNormal];
         [close setTitleColor:UIColorFromRGB(0xFFFFFF) forState:UIControlStateHighlighted];
         

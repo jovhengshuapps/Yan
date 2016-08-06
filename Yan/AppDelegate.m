@@ -404,12 +404,12 @@ didDisconnectWithUser:(GIDGoogleUser *)user
             reminder.type = @"reminder";
         }
         else {
-            
+//            NSLog(@"notification:%@",self.notificationUserInfo);
             reminder.type = @"notification";
             reminder.notificationTitle = self.notificationUserInfo[@"title"];
             reminder.bodyText = self.notificationUserInfo[@"body"];
             reminder.restaurantName = self.notificationUserInfo[@"restaurant-name"];
-            reminder.numberOfPerson = self.notificationUserInfo[@"number-of-person"];
+            reminder.numberOfPerson = [NSString stringWithFormat:@"%@",self.notificationUserInfo[@"number-of-person"]];
             reminder.restaurantAddress = self.notificationUserInfo[@"restaurant-address"];
             reminder.restaurantContact = self.notificationUserInfo[@"restaurant-contacts"];
             reminder.restaurantOperation = self.notificationUserInfo[@"restaurant-hours"];
@@ -423,7 +423,7 @@ didDisconnectWithUser:(GIDGoogleUser *)user
             
             
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"MM/dd/yyyy hh:mm"];
+            [dateFormatter setDateFormat:@"MM/dd/yyyy HH:mm a"];
             
             NSDate *reservationDate = [dateFormatter dateFromString:[NSString stringWithFormat:@"%@ %@",self.notificationUserInfo[@"reservation-date"],self.notificationUserInfo[@"reservation-time"]]];
             

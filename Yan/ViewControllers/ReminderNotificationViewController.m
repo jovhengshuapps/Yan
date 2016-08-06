@@ -91,16 +91,53 @@
 //        AlertView *alert = [[AlertView alloc] initAlertWithMessage:message delegate:self buttons:nil];        
 //        [alert showAlertView];
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Would you like to save the date on your calendar?"
-                                                            message:message delegate:self
-                                                  cancelButtonTitle:@"NO" otherButtonTitles:@"YES"];
-        [alertView show];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Would you like to save the date on your calendar?" message:message preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionYES = [UIAlertAction actionWithTitle:@"YES" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            EKEvent *event = [EKEvent eventWithEventStore:self.eventStore];
+            event.title = [NSString stringWithFormat:@"%@ Reservation for %@",self.restaurantName, self.numberOfPerson];
+            event.startDate = self.reservationDateTime;
+            event.endDate = [event.startDate dateByAddingTimeInterval:60*60];  //set 1 hour meeting
+            event.calendar = [self.eventStore defaultCalendarForNewEvents];
+            event.notes = [NSString stringWithFormat:@"Restaurant Details:\nAddress:%@\nContacts:%@\nOperation Hours:%@",self.restaurantAddress,self.restaurantContact,self.restaurantOperation];
+            NSError *err = nil;
+            BOOL success = [self.eventStore saveEvent:event span:EKSpanThisEvent commit:YES error:&err];
+            
+            //        EKReminder *reminder = [EKReminder reminderWithEventStore:self.eventStore];
+            //        reminder.title = @"Yan! App Reminder!";
+            //        reminder.calendar = self.calendar;
+            //        reminder.startDateComponents = self.reservationDateTime;
+            //
+            //        NSError *error = nil;
+            //        BOOL success = [self.eventStore saveReminder:reminder commit:YES error:&error];
+            //        if (!success) {
+            //            // Handle error.
+            //        }
+            
+            NSString *message = (success) ? @"Event was successfully added!" : [NSString stringWithFormat:@"Failed to add Calendar Event!\n\n%@",[err description]];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Dismiss", nil];
+            [alertView show];
+        }];
+        [alert addAction:actionYES];
+        UIAlertAction *actionNO = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionNO];
+        [self presentViewController:alert animated:YES completion:^{
+            NSLog(@"ALERT CONTROLLER PRESENTED");
+        }];
+
+        
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Would you like to save the date on your calendar?"
+//                                                            message:message delegate:self
+//                                                  cancelButtonTitle:@"NO" otherButtonTitles:@"YES"];
+//        [alertView show];
         
     }
     [self.view removeFromSuperview];
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+//    [self dismissViewControllerAnimated:YES completion:^{
+//        
+//    }];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {

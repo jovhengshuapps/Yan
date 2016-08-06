@@ -409,6 +409,7 @@ didDisconnectWithUser:(GIDGoogleUser *)user
             reminder.notificationTitle = self.notificationUserInfo[@"title"];
             reminder.bodyText = self.notificationUserInfo[@"body"];
             reminder.restaurantName = self.notificationUserInfo[@"restaurant-name"];
+            reminder.numberOfPerson = self.notificationUserInfo[@"number-of-person"];
             reminder.restaurantAddress = self.notificationUserInfo[@"restaurant-address"];
             reminder.restaurantContact = self.notificationUserInfo[@"restaurant-contacts"];
             reminder.restaurantOperation = self.notificationUserInfo[@"restaurant-hours"];

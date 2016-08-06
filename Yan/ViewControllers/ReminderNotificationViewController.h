@@ -6,10 +6,9 @@
 //  Copyright © 2016 JoVhengshua Apps. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "Config.h"
 
-@interface ReminderNotificationViewController : UIViewController
+@interface ReminderNotificationViewController : UIViewController <UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSString *restaurantName;
 @property (strong, nonatomic) NSString *numberOfPerson;

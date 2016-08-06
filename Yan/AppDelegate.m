@@ -408,16 +408,31 @@ didDisconnectWithUser:(GIDGoogleUser *)user
             reminder.type = @"notification";
             reminder.notificationTitle = self.notificationUserInfo[@"title"];
             reminder.bodyText = self.notificationUserInfo[@"body"];
+            reminder.restaurantName = self.notificationUserInfo[@"restaurant-name"];
+            reminder.restaurantAddress = self.notificationUserInfo[@"restaurant-address"];
+            reminder.restaurantContact = self.notificationUserInfo[@"restaurant-contacts"];
+            reminder.restaurantOperation = self.notificationUserInfo[@"restaurant-hours"];
             
+//            NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+//            NSDate *currentDate = [NSDate date];
+//            NSDateComponents *comps = [[NSDateComponents alloc] init];
+//            //        [comps setDay:1];
+//            [comps setHour:5];
+//            NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+            
+            
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"MM/dd/yyyy hh:mm"];
+            
+            NSDate *reservationDate = [dateFormatter dateFromString:[NSString stringWithFormat:@"%@ %@",self.notificationUserInfo[@"reservation-date"],self.notificationUserInfo[@"reservation-time"]]];
             
             NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-            NSDate *currentDate = [NSDate date];
+            
             NSDateComponents *comps = [[NSDateComponents alloc] init];
-            //        [comps setDay:1];
-            [comps setHour:5];
-            NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
             
-            
+            [comps setHour:-1];
+            NSDate *minDate = [calendar dateByAddingComponents:comps toDate:reservationDate options:0];
+
             
             reminder.reservationDateTime = minDate;
             

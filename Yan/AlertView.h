@@ -10,17 +10,22 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 
-@interface AlertView : UIView
+@interface AlertView : UIView <UIWebViewDelegate>
 
 @property(nullable,nonatomic,weak) id  delegate;
 @property(nullable,nonatomic,copy) NSString *message;
 @property(nullable, nonatomic, copy) NSURL *videoURLstring;
 @property(nullable, nonatomic,copy) NSArray *buttonsArray;
 @property(nullable, nonatomic) NSURL *imageGIFURL;
+@property(nullable, nonatomic) NSURL *webURL;
 
 - (nonnull instancetype) initAlertWithMessage:(nullable NSString*)aMessage delegate:(nullable id)aDelegate buttons:(nullable NSArray*)aButtonsArray;
 
 - (nonnull instancetype) initVideoAd:(nullable NSURL*)videoURL delegate:(nullable id)aDelegate;
+
+- (nonnull instancetype) initAlertWithWebURL:(nullable NSURL*)awebURL delegate:(nullable id)aDelegate;
+
+- (nonnull instancetype) initAlertWithWebURL:(nullable NSString*)awebURL delegate:(nullable id)aDelegate buttons:(nullable NSArray*)aButtonsArray;
 
 //- (nonnull instancetype) initWithImageGIF:(nullable NSURL*)url duration:(CGFloat)duration delegate:(nullable id)aDelegate;
 
@@ -30,11 +35,10 @@
 
 @end
 @protocol AlertViewDelegate <NSObject>
-@required
+@optional
 
 - (void)alertView:(nonnull AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 
-@optional
 - (void)videoAdPlayer:(nonnull AlertView*)alertView;
 
 - (void) alertViewDismissed:(nonnull AlertView*)alertView;

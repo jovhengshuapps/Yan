@@ -20,7 +20,9 @@
 @property (strong, nonatomic) NSMutableArray *arrayAvailableTimes;
 @property (strong, nonatomic) FPPopoverController *popover;
 @property (weak, nonatomic) IBOutlet UITextView *textViewPolicy;
+@property (weak, nonatomic) IBOutlet UIWebView *webViewPolicy;
 @property (weak, nonatomic) IBOutlet UIButton *buttonPolicy;
+@property (assign, nonatomic) BOOL policyLoaded;
 
 @property (assign, nonatomic) BOOL policyAccepted;
 
@@ -32,6 +34,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.policyAccepted = NO;
+    self.policyLoaded = NO;
     UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoLight];
     
     [button addTarget:self action:@selector(showRestaurantDetails) forControlEvents:UIControlEventTouchUpInside];
@@ -51,7 +54,6 @@
     [self callGETAPI:API_RESERVATION_CHECKTIME(self.restaurantDetails.identifier) withParameters:@{} completionNotification:@"checkReservationTimes"];
     
     self.textViewPolicy.text = self.restaurantDetails.policy;
-
     
 }
 
@@ -61,6 +63,28 @@
     
     [self showTitleBar:@"RESERVATION"];
     self.title = self.restaurantDetails.name;
+    
+    self.policyLoaded = NO;
+    if ([self.restaurantDetails.policy rangeOfString:@"</p>"].location != NSNotFound) {
+        self.textViewPolicy.hidden = YES;
+        self.webViewPolicy.hidden = NO;
+        [self.webViewPolicy loadHTMLString:self.restaurantDetails.policy baseURL:nil];
+        
+    }
+    else if ([self.restaurantDetails.policy rangeOfString:@"http://"].location != NSNotFound) {
+        self.textViewPolicy.hidden = YES;
+        self.webViewPolicy.hidden = NO;
+        [self.webViewPolicy loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.restaurantDetails.policy]]];
+        
+    }
+    else {
+        self.textViewPolicy.hidden = NO;
+        self.webViewPolicy.hidden = YES;
+        
+        
+        self.policyLoaded = YES;
+    }
+    
 }
 
 
@@ -219,9 +243,16 @@
     [self.navigationController pushViewController:details animated:YES];
 }
 - (IBAction)showRestaurantPolicy:(id)sender {
+
+    if ([self.restaurantDetails.policy rangeOfString:@"</p>"].location != NSNotFound) {
+        AlertView *alert = [[AlertView alloc] initAlertWithWebURL:self.restaurantDetails.policy delegate:self buttons:@[@"ACCEPT",@"DECLINE"]];
+
+    }
+    else {
+        AlertView *alert = [[AlertView alloc] initAlertWithMessage:self.restaurantDetails.policy delegate:self buttons:@[@"ACCEPT",@"DECLINE"]];
+        [alert showAlertView];
+    }
     
-    AlertView *alert = [[AlertView alloc] initAlertWithMessage:self.restaurantDetails.policy delegate:self buttons:@[@"ACCEPT",@"DECLINE"]];
-    [alert showAlertView];
     
 }
 
@@ -255,6 +286,7 @@
 
 
 - (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    self.policyLoaded = YES;
     if (buttonIndex == 0) {
         [self.buttonPolicy setImage:[UIImage imageNamed:@"check.png"] forState:UIControlStateNormal];
         self.policyAccepted = YES;
@@ -265,6 +297,24 @@
     }
     
     [alertView dismissAlertView];
+}
+
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    NSLog(@"start");
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    NSLog(@"finish");
+    self.policyLoaded = YES;
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    NSLog(@"error:%@",[error description]);
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    return YES;
 }
 
 @end

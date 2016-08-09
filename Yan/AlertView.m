@@ -59,6 +59,45 @@
     return object;
 }
 
+
+- (nonnull instancetype) initAlertWithWebURL:(nullable NSURL*)awebURL delegate:(nullable id)aDelegate {
+    id object = [self init];
+    if (!object) {
+        return nil;
+    }
+    
+    //initialize
+    
+    _delegate = aDelegate;
+    _webURL = awebURL;
+    _instance = object;
+    
+    [object setupWebView:aDelegate :awebURL];
+    
+    return object;
+    
+}
+
+- (nonnull instancetype) initAlertWithWebURL:(nullable NSString*)awebURL delegate:(nullable id)aDelegate buttons:(nullable NSArray*)aButtonsArray {
+    id object = [self init];
+    if (!object) {
+        return nil;
+    }
+    
+    //initialize
+    
+    _delegate = aDelegate;
+    _message = awebURL;
+    _instance = object;
+    _buttonsArray = aButtonsArray;
+    
+    [object setupWebView:aDelegate :awebURL :aButtonsArray];
+    
+    return object;
+    
+}
+
+
 //- (nonnull instancetype) initWithImageGIF:(nullable NSURL*)url duration:(CGFloat)duration delegate:(nullable id)aDelegate {
 //    id object = [self init];
 //    if (!object) {
@@ -229,6 +268,139 @@
     [self showAlertView];
 }
 
+- (void)setupWebView:(nullable id)aDelegate :(nullable NSURL*)awebURL {
+    
+    CGFloat height = KEYWINDOW.bounds.size.height;
+    
+    _background = [[UIView alloc] initWithFrame:KEYWINDOW.bounds];
+    _background.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.8f];
+    _background.center = KEYWINDOW.center;
+    
+    
+    _container = [[UIView alloc ] initWithFrame:CGRectMake(5.0f, 35.0f, _background.frame.size.width - 10.0f, height - 50.0f)];
+//    _container.center = _background.center;
+    _container.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
+    
+    _container.layer.borderColor = [UIColorFromRGB(0x959595) CGColor];
+    _container.layer.borderWidth = 2.0f;
+    
+    [_background addSubview:_container];
+    
+    _background.userInteractionEnabled = NO;
+    _container.userInteractionEnabled = NO;
+    
+    //setup video
+    
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, _container.frame.size.width, _container.frame.size.height)];
+    [webView loadRequest:[NSURLRequest requestWithURL:awebURL]];
+    [webView setDelegate:self];
+    [_container addSubview:webView];
+    
+    
+    UIButton *close = [UIButton buttonWithType:UIButtonTypeCustom];
+    [close setImage:[UIImage imageNamed:@"plus-icon-resized"] forState:UIControlStateNormal];
+    [close setFrame:CGRectMake(0.0f, 20.0f, 28.0f, 28.0f)];
+    close.transform = CGAffineTransformMakeRotation(M_PI_4);
+    
+    [close addTarget:_instance action:@selector(closeAlertView) forControlEvents:UIControlEventTouchUpInside];
+    
+    [_background addSubview:close];
+    
+    //    UITapGestureRecognizer *tapClose = [[UITapGestureRecognizer alloc] initWithTarget:_instance action:@selector(closeAlertView)];
+    //    [_background addGestureRecognizer:tapClose];
+    
+    
+    _container.transform = CGAffineTransformMakeScale(0.1, 0.1);
+    [KEYWINDOW addSubview:_background];
+    
+    [self showAlertView];
+}
+
+- (void)setupWebView:(nullable id)aDelegate :(nullable NSString*)urlString :(nullable NSArray*)aButtonsArray {
+    
+    CGFloat height = KEYWINDOW.bounds.size.height;
+    
+    _background = [[UIView alloc] initWithFrame:KEYWINDOW.bounds];
+    _background.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.8f];
+    _background.center = KEYWINDOW.center;
+    
+    
+    _container = [[UIView alloc ] initWithFrame:CGRectMake(5.0f, 35.0f, _background.frame.size.width - 10.0f, height - 50.0f)];
+    //    _container.center = _background.center;
+    _container.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
+    
+    _container.layer.borderColor = [UIColorFromRGB(0x959595) CGColor];
+    _container.layer.borderWidth = 2.0f;
+    
+    [_background addSubview:_container];
+    
+    _background.userInteractionEnabled = NO;
+    _container.userInteractionEnabled = NO;
+    
+    //setup video
+    
+    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, _container.frame.size.width, _container.frame.size.height)];
+    [webView loadHTMLString:urlString baseURL:nil];
+    [webView setDelegate:self];
+    [_container addSubview:webView];
+    
+    
+    
+    
+    //setup buttons
+    if (_buttonsArray == nil) {
+        
+        UIButton *close = [UIButton buttonWithType:UIButtonTypeCustom];
+        [close setImage:[UIImage imageNamed:@"plus-icon-resized"] forState:UIControlStateNormal];
+        [close setFrame:CGRectMake(0.0f, 20.0f, 28.0f, 28.0f)];
+        close.transform = CGAffineTransformMakeRotation(M_PI_4);
+        
+        [close addTarget:_instance action:@selector(closeAlertView) forControlEvents:UIControlEventTouchUpInside];
+        
+        [_background addSubview:close];
+    }
+    else {
+        webView.frame = CGRectMake(webView.frame.origin.x, webView.frame.origin.y, webView.frame.size.width, webView.frame.size.height - 40.0f);
+        for (NSInteger i = 0; i < _buttonsArray.count; i++) {
+            if (![[_buttonsArray objectAtIndex:i] isKindOfClass:[NSString class]]) {
+                break;
+            }
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            button.backgroundColor = UIColorFromRGB(0x959595);
+            
+            button.layer.borderColor = [UIColorFromRGB(0x959595) CGColor];
+            button.layer.borderWidth = 1.0f;
+            
+            [button setTitle:[_buttonsArray objectAtIndex:i] forState:UIControlStateNormal];
+            [button setTitleColor:UIColorFromRGB(0x333333) forState:UIControlStateNormal];
+            [button setTitleColor:UIColorFromRGB(0xFFFFFF) forState:UIControlStateHighlighted];
+            
+            CGFloat buttonWidth = (_container.bounds.size.width - 15.0f)/(_buttonsArray.count);
+            
+            button.frame = CGRectMake(10.0f + ((buttonWidth + 5.0f) * i), webView.bounds.size.height + webView.bounds.origin.y + 8.0f, buttonWidth - (5.0f * i), 28.0f);
+            button.tag = i;
+            
+            [button addTarget:_instance action:@selector(clickedAtIndex:) forControlEvents:UIControlEventTouchUpInside];
+            
+            [_container addSubview:button];
+            
+        }
+    }
+    
+    
+    
+    //    UITapGestureRecognizer *tapClose = [[UITapGestureRecognizer alloc] initWithTarget:_instance action:@selector(closeAlertView)];
+    //    [_background addGestureRecognizer:tapClose];
+    
+    
+    _container.transform = CGAffineTransformMakeScale(0.1, 0.1);
+    [KEYWINDOW addSubview:_background];
+    
+    [self showAlertView];
+}
+
+
+
 //- (void)setupImage:(nullable id)aDelegate :(nullable NSURL*)imageURL :(CGFloat)duration {
 //    
 //    CGFloat height = KEYWINDOW.bounds.size.height - 60.0f;
@@ -363,6 +535,22 @@
     
 }
 
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    NSLog(@"start");
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    NSLog(@"finish");
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    NSLog(@"error:%@",[error description]);
+}
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
+    return YES;
+}
 
 
 @end

@@ -61,7 +61,7 @@
                      @"SETTINGS",
                      @"RESTAURANTS",
                      @"PRIVACY POLICY",
-                     @"TERMS OF USE",
+                     @"TERMS AND CONDITION",
                      @"SHARE"];
     
     [self.tableView reloadData];
@@ -165,6 +165,12 @@
 //        [alert showAlertView];
         NETWORK_INDICATOR(YES)
         [self postOnFacebook];
+    }
+    else if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"PRIVACY POLICY"]) {
+        AlertView *alert = [[AlertView alloc] initAlertWithWebURL:[NSURL URLWithString:@"http://mavenhive.net/privacy-policy.html"] delegate:nil];
+    }
+    else if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"TERMS AND CONDITION"]) {
+        AlertView *alert = [[AlertView alloc] initAlertWithWebURL:[NSURL URLWithString:@"http://mavenhive.net/yan/terms-conditions.html"] delegate:nil];
     }
     
 }

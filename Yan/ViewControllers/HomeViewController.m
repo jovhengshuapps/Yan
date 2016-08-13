@@ -48,9 +48,14 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    
-    if ([self userLoggedIn]) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"qrIcon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(rescanQR)];
+    Account *account = [self userLoggedIn];
+    if (account) {
+        if ([account.current_restaurantID integerValue] + [account.current_restaurantName integerValue] + [account.current_tableNumber integerValue] == 0) {
+            self.navigationItem.rightBarButtonItem = nil;
+        }
+        else {
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"qrIcon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(rescanQR)];
+        }
         UIBarButtonItem *menuBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"app-menu.png"] style:UIBarButtonItemStyleDone target:self action:@selector(openMenu)];
         
         [[self navigationItem] setLeftBarButtonItem:menuBarItem];

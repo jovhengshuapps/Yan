@@ -90,6 +90,9 @@
         ((ShareTableViewController*)segue.destinationViewController).tableNumber = _reservedTableNumber.length?_reservedTableNumber:@"??";
         ((ShareTableViewController*)segue.destinationViewController).restaurant = _restaurantDetails.name;
         ((ShareTableViewController*)segue.destinationViewController).restaurantURL = _restaurantDetails.website;
+        ((ShareTableViewController*)segue.destinationViewController).imageLogoURL = _restaurantDetails.imageURL;
+        ((ShareTableViewController*)segue.destinationViewController).imageLogo = [UIImage imageWithData:_restaurantDetails.imageData];
+        
         
     }
 }

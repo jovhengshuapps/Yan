@@ -12,6 +12,7 @@
 		33038B471D09779400637A0A /* ReminderNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33038B461D09779400637A0A /* ReminderNotificationViewController.m */; };
 		33038B4A1D098BEF00637A0A /* DayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33038B491D098BEF00637A0A /* DayTableViewController.m */; };
 		3315E1981D554E4300ED8867 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3315E1971D554E4300ED8867 /* EventKit.framework */; };
+		3323DBEB1D5EC7ED009CD782 /* RestaurantsListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3323DBEA1D5EC7ED009CD782 /* RestaurantsListTableViewController.m */; };
 		3338AE8E1D1F588F002B12F1 /* Notification+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3338AE8B1D1F588F002B12F1 /* Notification+CoreDataProperties.m */; };
 		3338AE8F1D1F588F002B12F1 /* Notification.m in Sources */ = {isa = PBXBuildFile; fileRef = 3338AE8D1D1F588F002B12F1 /* Notification.m */; };
 		333FEEF71CCF7205004D4B5B /* MenuListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 333FEEF61CCF7205004D4B5B /* MenuListViewController.m */; };
@@ -159,6 +160,8 @@
 		33038B481D098BEF00637A0A /* DayTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayTableViewController.h; sourceTree = "<group>"; };
 		33038B491D098BEF00637A0A /* DayTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayTableViewController.m; sourceTree = "<group>"; };
 		3315E1971D554E4300ED8867 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		3323DBE91D5EC7ED009CD782 /* RestaurantsListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantsListTableViewController.h; sourceTree = "<group>"; };
+		3323DBEA1D5EC7ED009CD782 /* RestaurantsListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantsListTableViewController.m; sourceTree = "<group>"; };
 		3338AE8A1D1F588F002B12F1 /* Notification+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Notification+CoreDataProperties.h"; sourceTree = "<group>"; };
 		3338AE8B1D1F588F002B12F1 /* Notification+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Notification+CoreDataProperties.m"; sourceTree = "<group>"; };
 		3338AE8C1D1F588F002B12F1 /* Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Notification.h; sourceTree = "<group>"; };
@@ -814,6 +817,8 @@
 			children = (
 				33599BB41CAD2E9A00366C34 /* DrawerTableViewController.h */,
 				33599BB51CAD2E9A00366C34 /* DrawerTableViewController.m */,
+				3323DBE91D5EC7ED009CD782 /* RestaurantsListTableViewController.h */,
+				3323DBEA1D5EC7ED009CD782 /* RestaurantsListTableViewController.m */,
 				339E3F231CEB35C30073873B /* SettingTableViewController.h */,
 				339E3F241CEB35C30073873B /* SettingTableViewController.m */,
 				339E3F261CEB49B00073873B /* ProfileBirthdayViewController.h */,
@@ -1129,6 +1134,7 @@
 				33E2C5981CE222FB00B28935 /* ShareTableViewController.m in Sources */,
 				339E3F2E1CEB49F10073873B /* ProfilePasswordViewController.m in Sources */,
 				335B7AC91CD76C48000E9D9F /* MenuListTableViewCell.m in Sources */,
+				3323DBEB1D5EC7ED009CD782 /* RestaurantsListTableViewController.m in Sources */,
 				33ED27811CD22F5E0013FADD /* ConfirmOrderViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

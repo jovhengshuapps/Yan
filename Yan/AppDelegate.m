@@ -41,6 +41,8 @@
     
     [[UINavigationBar appearance] setTitleTextAttributes:TextAttributes(@"LucidaGrande",0xFFFFFF,25.0f)];
     
+    [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:3.0f forBarMetrics:UIBarMetricsDefault];
+    
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     
     [GIDSignIn sharedInstance].clientID = GOOGLE_CLIENT_ID;

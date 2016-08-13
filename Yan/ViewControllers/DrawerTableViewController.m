@@ -9,7 +9,8 @@
 #import "DrawerTableViewController.h"
 #import "LoginViewController.h"
 #import "SettingTableViewController.h"
-#import "AffiliatedRestoViewController.h"
+#import "RestaurantsListTableViewController.h"
+
 
 
 @interface DrawerTableViewController ()
@@ -31,22 +32,25 @@
     self.tableView.opaque = NO;
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.tableHeaderView = ({
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(8.0f, 28.0f, 190.0f, 184.0f)];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(8.0f, 28.0f, 240.0f, 184.0f)];
+        [view setBackgroundColor:[UIColor clearColor]];
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(20.0f, 20.0f, view.frame.size.width, view.frame.size.height - 44.0f);
-        [button setImage:[UIImage imageNamed:@"back.png"] forState:UIControlStateNormal];
-        [button setContentMode:UIViewContentModeTopLeft];
+        button.frame = CGRectMake(0.0f, 20.0f, view.frame.size.width, view.frame.size.height - 2.0f);
+        [button setBackgroundImage:[UIImage imageNamed:@"yan-new-logo"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"yan-new-logo"] forState:UIControlStateSelected];
+        [button setBackgroundImage:[UIImage imageNamed:@"yan-new-logo"] forState:UIControlStateHighlighted];
+        [button setContentMode:UIViewContentModeScaleAspectFit];
         [button addTarget:self.frostedViewController action:@selector(hideMenuViewController) forControlEvents:UIControlEventTouchUpInside];
         [button setBackgroundColor:[UIColor clearColor]];
         [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
         [button setContentVerticalAlignment:UIControlContentVerticalAlignmentTop];
+        [view addSubview:button];
         
-        UIView *bottomBorderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, view.frame.size.height - 2.0f, view.frame.size.width, 1.0f)];
+        UIView *bottomBorderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, view.frame.size.height - 2.0f, 500.0f, 1.0f)];
         bottomBorderView.backgroundColor = UIColorFromRGB(0x898989);
         [view addSubview:bottomBorderView];
         
-        [view addSubview:button];
     
         view;
     });
@@ -59,6 +63,7 @@
     
     _titlesArray = @[/*([self userLoggedIn])?@"LOGOUT":@"LOGIN",*/
                      @"SETTINGS",
+                     @"FAVORITES",
                      @"RESTAURANTS",
                      @"PRIVACY POLICY",
                      @"TERMS AND CONDITION",
@@ -150,10 +155,15 @@
 //        affiliated.showAffiliatedRestaurant = AffiliatedRestaurantsRecents;
 //        [((UINavigationController*)self.frostedViewController.contentViewController) pushViewController:affiliated animated:YES];
 //    }
+    else if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"FAVORITES"]) {
+        RestaurantsListTableViewController *list = (RestaurantsListTableViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"restoList"];
+        list.showFavoritesOnly = YES;
+        [((UINavigationController*)self.frostedViewController.contentViewController) pushViewController:list animated:YES];
+    }
     else if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"RESTAURANTS"]) {
-        AffiliatedRestoViewController *affiliated = (AffiliatedRestoViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"affiliatedResto"];
-        affiliated.showAffiliatedRestaurant = AffiliatedRestaurantsFavorites;
-        [((UINavigationController*)self.frostedViewController.contentViewController) pushViewController:affiliated animated:YES];
+        RestaurantsListTableViewController *list = (RestaurantsListTableViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"restoList"];
+        list.showFavoritesOnly = NO;
+        [((UINavigationController*)self.frostedViewController.contentViewController) pushViewController:list animated:YES];
     }
     else if ([[tableView cellForRowAtIndexPath:indexPath].textLabel.text isEqualToString:@"SETTINGS"]) {
         SettingTableViewController *settings = (SettingTableViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"settingTable"];
@@ -205,6 +215,11 @@
     
     cell.textLabel.attributedText = [[NSMutableAttributedString alloc] initWithString:[_titlesArray objectAtIndex:indexPath.row] attributes:TextAttributes(@"LucidaGrande", 0x333333, 20.0f)];
     
+//    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+//    cell.textLabel.numberOfLines = 2;
+//    cell.textLabel.adjustsFontSizeToFitWidth = YES;
+//    cell.textLabel.minimumScaleFactor = -5.0f;
+    
     if ([[self.titlesArray objectAtIndex:indexPath.row] isEqualToString:@"SHARE"]) {
         cell.imageView.image = [UIImage imageNamed:@"fb.png"];
     }
@@ -242,15 +257,16 @@
         content.contentTitle = @"Join us here!";
         content.contentURL = /*[NSURL URLWithString:_restaurantURL];*/[NSURL URLWithString:@"http://yan.bilinear.ph"];
         
-        //    FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
-        //    dialog.fromViewController = self;
-        //    dialog.shareContent = content;
-        //    dialog.mode = FBSDKShareDialogModeShareSheet;
-        //    [dialog show];
-        //
+            FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
+            dialog.fromViewController = self;
+        dialog.shareContent = content;
+        dialog.delegate = self;
+            dialog.mode = FBSDKShareDialogModeFeedWeb;
+            [dialog show];
         
-        FBSDKShareAPI *share = [FBSDKShareAPI shareWithContent:content delegate:self];
-        [share share];
+        
+//        FBSDKShareAPI *share = [FBSDKShareAPI shareWithContent:content delegate:self];
+//        [share share];
     } else {
         FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
         loginManager.loginBehavior = FBSDKLoginBehaviorWeb;

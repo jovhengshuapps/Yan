@@ -12,6 +12,7 @@
 @interface ShareTableViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *labelTableNumber;
 @property (weak, nonatomic) IBOutlet UILabel *labelRestaurant;
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewBox;
 
 @end
 
@@ -21,7 +22,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.labelRestaurant.text = [NSString stringWithFormat:@"at %@",_restaurant];
-    self.labelTableNumber.text = _tableNumber;
+    self.labelTableNumber.text = @"";
+    self.imageViewBox.image = self.imageLogo;
+    self.imageViewBox.contentMode = UIViewContentModeScaleAspectFit;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,19 +53,21 @@
         // TODO: publish content.
         
         FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-        content.contentDescription = [NSString stringWithFormat:@"We are dining at %@. Join us! Download Yan! now.", _restaurant];
-        content.contentTitle = @"Share Yan!";
-        content.contentURL = /*[NSURL URLWithString:_restaurantURL];*/[NSURL URLWithString:@"http://yan.bilinear.ph"];
+        content.contentDescription = [NSString stringWithFormat:@"We are dining at %@.\n\n Join us! Download Yan! now.", _restaurant];
+        content.contentTitle = @"Yan!";
+        content.contentURL = [NSURL URLWithString:_restaurantURL];
+        content.imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",BASE_URL,_imageLogoURL]];
         
-        //    FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
-        //    dialog.fromViewController = self;
-        //    dialog.shareContent = content;
-        //    dialog.mode = FBSDKShareDialogModeShareSheet;
-        //    [dialog show];
-        //
+            FBSDKShareDialog *dialog = [[FBSDKShareDialog alloc] init];
+           dialog.fromViewController = self;
+            dialog.shareContent = content;
+        dialog.delegate = self;
+           dialog.mode = FBSDKShareDialogModeFeedWeb;
+            [dialog show];
         
-        FBSDKShareAPI *share = [FBSDKShareAPI shareWithContent:content delegate:self];
-        [share share];
+        
+//        FBSDKShareAPI *share = [FBSDKShareAPI shareWithContent:content delegate:self];
+//        [share share];
     } else {
         FBSDKLoginManager *loginManager = [[FBSDKLoginManager alloc] init];
         loginManager.loginBehavior = FBSDKLoginBehaviorWeb;
@@ -87,14 +92,14 @@
 
 - (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
     
-    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Successfully shared link on Facebook." delegate:self buttons:nil];
-    [alert showAlertView];
+    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Successfully shared restaurant on Facebook." delegate:self buttons:nil];
+//    [alert showAlertView];
 }
 
 - (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error {
     
-    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Failed to shared link on Facebook." delegate:self buttons:nil];
-    [alert showAlertView];
+    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Failed to shared restaurant on Facebook." delegate:self buttons:nil];
+//    [alert showAlertView];
 }
 
 

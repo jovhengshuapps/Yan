@@ -36,7 +36,7 @@
     [super viewWillAppear:animated];
     [self hideTitleBar];
 //    [self showTitleBar:(self.showFavoritesOnly)?@"FAVORITES":@"RESTAURANTS"];
-    self.title = (self.showFavoritesOnly)?@"FAVORITES":@"RESTAURANTS";
+    self.title = (self.showFavoritesOnly)?@"Favorites":@"Restaurants";
     
 }
 

@@ -84,6 +84,7 @@
         [GIDSignIn sharedInstance].uiDelegate = self;
         
     }
+    self.title = @"Home";
 }
 
 - (void) viewDidAppear:(BOOL)animated {

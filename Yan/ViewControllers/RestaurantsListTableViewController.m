@@ -34,9 +34,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    [self showTitleBar:(self.showFavoritesOnly)?@"FAVORITES":@"RESTAURANTS"];
-    
+    [self hideTitleBar];
+//    [self showTitleBar:(self.showFavoritesOnly)?@"FAVORITES":@"RESTAURANTS"];
+    self.title = (self.showFavoritesOnly)?@"FAVORITES":@"RESTAURANTS";
     
 }
 

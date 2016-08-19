@@ -87,7 +87,11 @@
     if (self.notificationTitle && [self.notificationTitle rangeOfString:@"Accepted"].location != NSNotFound) {
         if (!self.isAccessToEventStoreGranted)
             return;
-        NSString *message = [NSString stringWithFormat:@"Reservation at %@ for %@.\n\nDetails:\nAddress:%@\nContacts:%@\nOperation Hours:%@",self.restaurantName,self.numberOfPerson,self.restaurantAddress,self.restaurantContact,self.restaurantOperation];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        NSLocale *twelveHourLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+        dateFormatter.locale = twelveHourLocale;
+        [dateFormatter setDateFormat:@"MM/dd/yyyy hh:mm a"];
+        NSString *message = [NSString stringWithFormat:@"Reservation at %@ for %@.\n%@\n\nDetails:\nAddress:%@\nContacts:%@\nOperation Hours:%@",self.restaurantName,self.numberOfPerson,[dateFormatter stringFromDate:self.reservationDateTime],self.restaurantAddress,self.restaurantContact,self.restaurantOperation];
 //        AlertView *alert = [[AlertView alloc] initAlertWithMessage:message delegate:self buttons:nil];        
 //        [alert showAlertView];
         

@@ -37,6 +37,9 @@
 #import "Restaurant.h"
 #import "Notification.h"
 
+
+#import "SocketIOManager.h"
+
 // MACROS
 
 #define UIColorFromRGB(rgbValue)                                        [UIColor \

@@ -772,7 +772,7 @@
         
         cell.labelItemNamePrice.attributedText = attrString;
         NSString *choices = item[@"options"];
-        cell.labelItemOptions.text = [choices capitalizedString];
+        cell.labelItemOptions.text = ([choices rangeOfString:@","].location == NSNotFound)?[choices capitalizedString]:[[choices substringToIndex:choices.length-1] capitalizedString];
         cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",item[@"quantity"]];
         
         
@@ -813,7 +813,7 @@
         
         cell.labelItemNamePrice.attributedText = attrString;
         NSString *choices = item[@"options"];
-        cell.labelItemOptions.text = [choices capitalizedString];
+        cell.labelItemOptions.text = ([choices rangeOfString:@","].location == NSNotFound)?[choices capitalizedString]:[[choices substringToIndex:choices.length-1] capitalizedString];
         cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",item[@"quantity"]];
         
         

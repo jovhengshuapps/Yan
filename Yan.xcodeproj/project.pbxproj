@@ -11,6 +11,30 @@
 		3302B0501CF1FE970033BAA1 /* Restaurant.m in Sources */ = {isa = PBXBuildFile; fileRef = 3302B04E1CF1FE970033BAA1 /* Restaurant.m */; };
 		33038B471D09779400637A0A /* ReminderNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33038B461D09779400637A0A /* ReminderNotificationViewController.m */; };
 		33038B4A1D098BEF00637A0A /* DayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 33038B491D098BEF00637A0A /* DayTableViewController.m */; };
+		3304AB171D65E1C000A847D0 /* SocketAckEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB001D65E1C000A847D0 /* SocketAckEmitter.swift */; };
+		3304AB181D65E1C000A847D0 /* SocketAckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB011D65E1C000A847D0 /* SocketAckManager.swift */; };
+		3304AB191D65E1C000A847D0 /* SocketAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB021D65E1C000A847D0 /* SocketAnyEvent.swift */; };
+		3304AB1A1D65E1C000A847D0 /* SocketClientManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB031D65E1C000A847D0 /* SocketClientManager.swift */; };
+		3304AB1B1D65E1C000A847D0 /* SocketEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB041D65E1C000A847D0 /* SocketEngine.swift */; };
+		3304AB1C1D65E1C000A847D0 /* SocketEngineClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB051D65E1C000A847D0 /* SocketEngineClient.swift */; };
+		3304AB1D1D65E1C000A847D0 /* SocketEnginePacketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB061D65E1C000A847D0 /* SocketEnginePacketType.swift */; };
+		3304AB1E1D65E1C000A847D0 /* SocketEnginePollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB071D65E1C000A847D0 /* SocketEnginePollable.swift */; };
+		3304AB1F1D65E1C000A847D0 /* SocketEngineSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB081D65E1C000A847D0 /* SocketEngineSpec.swift */; };
+		3304AB201D65E1C000A847D0 /* SocketEngineWebsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB091D65E1C000A847D0 /* SocketEngineWebsocket.swift */; };
+		3304AB211D65E1C000A847D0 /* SocketEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB0A1D65E1C000A847D0 /* SocketEventHandler.swift */; };
+		3304AB221D65E1C000A847D0 /* SocketExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB0B1D65E1C000A847D0 /* SocketExtensions.swift */; };
+		3304AB231D65E1C000A847D0 /* SocketIOClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB0C1D65E1C000A847D0 /* SocketIOClient.swift */; };
+		3304AB241D65E1C000A847D0 /* SocketIOClientOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB0D1D65E1C000A847D0 /* SocketIOClientOption.swift */; };
+		3304AB251D65E1C000A847D0 /* SocketIOClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB0E1D65E1C000A847D0 /* SocketIOClientSpec.swift */; };
+		3304AB261D65E1C000A847D0 /* SocketIOClientStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB0F1D65E1C000A847D0 /* SocketIOClientStatus.swift */; };
+		3304AB271D65E1C000A847D0 /* SocketLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB101D65E1C000A847D0 /* SocketLogger.swift */; };
+		3304AB281D65E1C000A847D0 /* SocketPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB111D65E1C000A847D0 /* SocketPacket.swift */; };
+		3304AB291D65E1C000A847D0 /* SocketParsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB121D65E1C000A847D0 /* SocketParsable.swift */; };
+		3304AB2A1D65E1C000A847D0 /* SocketStringReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB131D65E1C000A847D0 /* SocketStringReader.swift */; };
+		3304AB2B1D65E1C000A847D0 /* SocketTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB141D65E1C000A847D0 /* SocketTypes.swift */; };
+		3304AB2C1D65E1C000A847D0 /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB151D65E1C000A847D0 /* SSLSecurity.swift */; };
+		3304AB2D1D65E1C000A847D0 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB161D65E1C000A847D0 /* WebSocket.swift */; };
+		3304AB321D65FA9A00A847D0 /* SocketIOManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3304AB311D65FA9A00A847D0 /* SocketIOManager.m */; };
 		3315E1981D554E4300ED8867 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3315E1971D554E4300ED8867 /* EventKit.framework */; };
 		3323DBEB1D5EC7ED009CD782 /* RestaurantsListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3323DBEA1D5EC7ED009CD782 /* RestaurantsListTableViewController.m */; };
 		3338AE8E1D1F588F002B12F1 /* Notification+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3338AE8B1D1F588F002B12F1 /* Notification+CoreDataProperties.m */; };
@@ -159,6 +183,31 @@
 		33038B461D09779400637A0A /* ReminderNotificationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderNotificationViewController.m; sourceTree = "<group>"; };
 		33038B481D098BEF00637A0A /* DayTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayTableViewController.h; sourceTree = "<group>"; };
 		33038B491D098BEF00637A0A /* DayTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayTableViewController.m; sourceTree = "<group>"; };
+		3304AB001D65E1C000A847D0 /* SocketAckEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckEmitter.swift; sourceTree = "<group>"; };
+		3304AB011D65E1C000A847D0 /* SocketAckManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckManager.swift; sourceTree = "<group>"; };
+		3304AB021D65E1C000A847D0 /* SocketAnyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAnyEvent.swift; sourceTree = "<group>"; };
+		3304AB031D65E1C000A847D0 /* SocketClientManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketClientManager.swift; sourceTree = "<group>"; };
+		3304AB041D65E1C000A847D0 /* SocketEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEngine.swift; sourceTree = "<group>"; };
+		3304AB051D65E1C000A847D0 /* SocketEngineClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEngineClient.swift; sourceTree = "<group>"; };
+		3304AB061D65E1C000A847D0 /* SocketEnginePacketType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEnginePacketType.swift; sourceTree = "<group>"; };
+		3304AB071D65E1C000A847D0 /* SocketEnginePollable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEnginePollable.swift; sourceTree = "<group>"; };
+		3304AB081D65E1C000A847D0 /* SocketEngineSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEngineSpec.swift; sourceTree = "<group>"; };
+		3304AB091D65E1C000A847D0 /* SocketEngineWebsocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEngineWebsocket.swift; sourceTree = "<group>"; };
+		3304AB0A1D65E1C000A847D0 /* SocketEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEventHandler.swift; sourceTree = "<group>"; };
+		3304AB0B1D65E1C000A847D0 /* SocketExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketExtensions.swift; sourceTree = "<group>"; };
+		3304AB0C1D65E1C000A847D0 /* SocketIOClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOClient.swift; sourceTree = "<group>"; };
+		3304AB0D1D65E1C000A847D0 /* SocketIOClientOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOClientOption.swift; sourceTree = "<group>"; };
+		3304AB0E1D65E1C000A847D0 /* SocketIOClientSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOClientSpec.swift; sourceTree = "<group>"; };
+		3304AB0F1D65E1C000A847D0 /* SocketIOClientStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOClientStatus.swift; sourceTree = "<group>"; };
+		3304AB101D65E1C000A847D0 /* SocketLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketLogger.swift; sourceTree = "<group>"; };
+		3304AB111D65E1C000A847D0 /* SocketPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketPacket.swift; sourceTree = "<group>"; };
+		3304AB121D65E1C000A847D0 /* SocketParsable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketParsable.swift; sourceTree = "<group>"; };
+		3304AB131D65E1C000A847D0 /* SocketStringReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketStringReader.swift; sourceTree = "<group>"; };
+		3304AB141D65E1C000A847D0 /* SocketTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketTypes.swift; sourceTree = "<group>"; };
+		3304AB151D65E1C000A847D0 /* SSLSecurity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSLSecurity.swift; sourceTree = "<group>"; };
+		3304AB161D65E1C000A847D0 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
+		3304AB301D65FA9A00A847D0 /* SocketIOManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketIOManager.h; sourceTree = "<group>"; };
+		3304AB311D65FA9A00A847D0 /* SocketIOManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketIOManager.m; sourceTree = "<group>"; };
 		3315E1971D554E4300ED8867 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		3323DBE91D5EC7ED009CD782 /* RestaurantsListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantsListTableViewController.h; sourceTree = "<group>"; };
 		3323DBEA1D5EC7ED009CD782 /* RestaurantsListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantsListTableViewController.m; sourceTree = "<group>"; };
@@ -436,6 +485,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3304AAFF1D65E1C000A847D0 /* SocketIO */ = {
+			isa = PBXGroup;
+			children = (
+				3304AB001D65E1C000A847D0 /* SocketAckEmitter.swift */,
+				3304AB011D65E1C000A847D0 /* SocketAckManager.swift */,
+				3304AB021D65E1C000A847D0 /* SocketAnyEvent.swift */,
+				3304AB031D65E1C000A847D0 /* SocketClientManager.swift */,
+				3304AB041D65E1C000A847D0 /* SocketEngine.swift */,
+				3304AB051D65E1C000A847D0 /* SocketEngineClient.swift */,
+				3304AB061D65E1C000A847D0 /* SocketEnginePacketType.swift */,
+				3304AB071D65E1C000A847D0 /* SocketEnginePollable.swift */,
+				3304AB081D65E1C000A847D0 /* SocketEngineSpec.swift */,
+				3304AB091D65E1C000A847D0 /* SocketEngineWebsocket.swift */,
+				3304AB0A1D65E1C000A847D0 /* SocketEventHandler.swift */,
+				3304AB0B1D65E1C000A847D0 /* SocketExtensions.swift */,
+				3304AB0C1D65E1C000A847D0 /* SocketIOClient.swift */,
+				3304AB0D1D65E1C000A847D0 /* SocketIOClientOption.swift */,
+				3304AB0E1D65E1C000A847D0 /* SocketIOClientSpec.swift */,
+				3304AB0F1D65E1C000A847D0 /* SocketIOClientStatus.swift */,
+				3304AB101D65E1C000A847D0 /* SocketLogger.swift */,
+				3304AB111D65E1C000A847D0 /* SocketPacket.swift */,
+				3304AB121D65E1C000A847D0 /* SocketParsable.swift */,
+				3304AB131D65E1C000A847D0 /* SocketStringReader.swift */,
+				3304AB141D65E1C000A847D0 /* SocketTypes.swift */,
+				3304AB151D65E1C000A847D0 /* SSLSecurity.swift */,
+				3304AB161D65E1C000A847D0 /* WebSocket.swift */,
+			);
+			path = SocketIO;
+			sourceTree = "<group>";
+		};
 		3346B3161CE49F6C008E8B96 /* FPPopover */ = {
 			isa = PBXGroup;
 			children = (
@@ -517,6 +596,7 @@
 		33599B791CAD26A900366C34 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				3304AAFF1D65E1C000A847D0 /* SocketIO */,
 				33EF615A1CFF134200162224 /* QRCodeReaderViewController */,
 				335DC0E81CEDEE67001183DD /* DeepBelief */,
 				3346B3161CE49F6C008E8B96 /* FPPopover */,
@@ -653,6 +733,8 @@
 				33599BAD1CAD274E00366C34 /* CoreViewController.m */,
 				33599BC01CAD4CD600366C34 /* NavigationController.h */,
 				33599BC11CAD4CD600366C34 /* NavigationController.m */,
+				3304AB301D65FA9A00A847D0 /* SocketIOManager.h */,
+				3304AB311D65FA9A00A847D0 /* SocketIOManager.m */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -1049,12 +1131,19 @@
 				336424BE1CAE313A00E0E156 /* UIButton+AFNetworking.m in Sources */,
 				33EF61691CFF134200162224 /* QRCodeReaderViewController.m in Sources */,
 				33599BBF1CAD444500366C34 /* LoginViewController.m in Sources */,
+				3304AB261D65E1C000A847D0 /* SocketIOClientStatus.swift in Sources */,
+				3304AB2A1D65E1C000A847D0 /* SocketStringReader.swift in Sources */,
+				3304AB291D65E1C000A847D0 /* SocketParsable.swift in Sources */,
+				3304AB211D65E1C000A847D0 /* SocketEventHandler.swift in Sources */,
 				33446AF21CDB524100F46EE1 /* CustomPickerViewController.m in Sources */,
 				442160931CB3760A00BB387F /* OrderMenuViewController.m in Sources */,
 				33EF61681CFF134200162224 /* QRCodeReaderView.m in Sources */,
+				3304AB321D65FA9A00A847D0 /* SocketIOManager.m in Sources */,
 				33038B4A1D098BEF00637A0A /* DayTableViewController.m in Sources */,
 				33446B021CDB613300F46EE1 /* MenuItem.m in Sources */,
+				3304AB1B1D65E1C000A847D0 /* SocketEngine.swift in Sources */,
 				3394A39F1CADF66300472030 /* REFrostedContainerViewController.m in Sources */,
+				3304AB2D1D65E1C000A847D0 /* WebSocket.swift in Sources */,
 				33599B511CAD259100366C34 /* Yan.xcdatamodeld in Sources */,
 				3338AE8F1D1F588F002B12F1 /* Notification.m in Sources */,
 				3381D35D1CDD84D7006BBAEF /* WaiterTableViewController.m in Sources */,
@@ -1066,6 +1155,7 @@
 				336424B91CAE313A00E0E156 /* AFURLSessionManager.m in Sources */,
 				33446B031CDB613300F46EE1 /* OrderList+CoreDataProperties.m in Sources */,
 				336424BD1CAE313A00E0E156 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				3304AB231D65E1C000A847D0 /* SocketIOClient.swift in Sources */,
 				338567ED1CD0FC310099BDD0 /* Account+CoreDataProperties.m in Sources */,
 				336424E81CAE354F00E0E156 /* XMLReader.m in Sources */,
 				333FEEF71CCF7205004D4B5B /* MenuListViewController.m in Sources */,
@@ -1075,6 +1165,7 @@
 				33EF61591CFF103500162224 /* QRReaderViewController.m in Sources */,
 				336424B51CAE313A00E0E156 /* AFNetworkReachabilityManager.m in Sources */,
 				3346B3201CE49F6C008E8B96 /* FPTouchView.m in Sources */,
+				3304AB1A1D65E1C000A847D0 /* SocketClientManager.swift in Sources */,
 				33599B481CAD259100366C34 /* AppDelegate.m in Sources */,
 				3394A3A01CADF66300472030 /* REFrostedViewController.m in Sources */,
 				336424B81CAE313A00E0E156 /* AFURLResponseSerialization.m in Sources */,
@@ -1087,8 +1178,10 @@
 				336424BC1CAE313A00E0E156 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				3346B3231CE4B52C008E8B96 /* DiscountViewController.m in Sources */,
 				33EF61661CFF134200162224 /* QRCameraSwitchButton.m in Sources */,
+				3304AB221D65E1C000A847D0 /* SocketExtensions.swift in Sources */,
 				333FEEFA1CCF7AFE004D4B5B /* MenuDetailsViewController.m in Sources */,
 				33446AFF1CDB613300F46EE1 /* Reservation+CoreDataProperties.m in Sources */,
+				3304AB241D65E1C000A847D0 /* SocketIOClientOption.swift in Sources */,
 				3346B31E1CE49F6C008E8B96 /* FPPopoverController.m in Sources */,
 				339E3F251CEB35C30073873B /* SettingTableViewController.m in Sources */,
 				336424BA1CAE313A00E0E156 /* AFAutoPurgingImageCache.m in Sources */,
@@ -1097,9 +1190,13 @@
 				33599BAE1CAD274E00366C34 /* CoreViewController.m in Sources */,
 				33446AEC1CDB486F00F46EE1 /* OptionListTableViewController.m in Sources */,
 				3346B3291CE4CDC7008E8B96 /* CardTypeTableViewCell.m in Sources */,
+				3304AB281D65E1C000A847D0 /* SocketPacket.swift in Sources */,
 				33599B451CAD259100366C34 /* main.m in Sources */,
 				33599BB31CAD2D9000366C34 /* RootViewController.m in Sources */,
+				3304AB1D1D65E1C000A847D0 /* SocketEnginePacketType.swift in Sources */,
+				3304AB1C1D65E1C000A847D0 /* SocketEngineClient.swift in Sources */,
 				3346B31F1CE49F6C008E8B96 /* FPPopoverView.m in Sources */,
+				3304AB171D65E1C000A847D0 /* SocketAckEmitter.swift in Sources */,
 				442160881CB32C5800BB387F /* CollapseMenuView.m in Sources */,
 				33038B471D09779400637A0A /* ReminderNotificationViewController.m in Sources */,
 				33A5BCE51CE80E2A00FB7A17 /* OrderListTableViewCell.m in Sources */,
@@ -1116,6 +1213,8 @@
 				33C6E6801CC7C6CD001690ED /* ScanLogoViewController.m in Sources */,
 				33B36F091CC65CD900AB30C6 /* ReserveRestoViewController.m in Sources */,
 				336424C01CAE313A00E0E156 /* UIProgressView+AFNetworking.m in Sources */,
+				3304AB251D65E1C000A847D0 /* SocketIOClientSpec.swift in Sources */,
+				3304AB2C1D65E1C000A847D0 /* SSLSecurity.swift in Sources */,
 				336424B41CAE313A00E0E156 /* AFHTTPSessionManager.m in Sources */,
 				339E3F281CEB49B00073873B /* ProfileBirthdayViewController.m in Sources */,
 				33A5BCE81CE80E8100FB7A17 /* DiscountListTableViewCell.m in Sources */,
@@ -1123,19 +1222,26 @@
 				33F9FB401CB6841700637A02 /* RegisterViewController.m in Sources */,
 				336424C21CAE313A00E0E156 /* UIWebView+AFNetworking.m in Sources */,
 				33B36F0C1CC663BC00AB30C6 /* ReserveCompleteViewController.m in Sources */,
+				3304AB201D65E1C000A847D0 /* SocketEngineWebsocket.swift in Sources */,
 				33599BC21CAD4CD600366C34 /* NavigationController.m in Sources */,
 				33446B041CDB613300F46EE1 /* OrderList.m in Sources */,
+				3304AB2B1D65E1C000A847D0 /* SocketTypes.swift in Sources */,
 				33EF616A1CFF134200162224 /* QRToggleTorchButton.m in Sources */,
 				33E44CE31CE3442C002272EA /* UIImage+animatedGIF.m in Sources */,
+				3304AB271D65E1C000A847D0 /* SocketLogger.swift in Sources */,
 				33C6E67D1CC7A1D9001690ED /* CustomButton.m in Sources */,
+				3304AB1F1D65E1C000A847D0 /* SocketEngineSpec.swift in Sources */,
 				3394A3A21CADF66300472030 /* UIView+REFrostedViewController.m in Sources */,
+				3304AB181D65E1C000A847D0 /* SocketAckManager.swift in Sources */,
 				336424BB1CAE313A00E0E156 /* AFImageDownloader.m in Sources */,
+				3304AB191D65E1C000A847D0 /* SocketAnyEvent.swift in Sources */,
 				335DB8651D558A380049EACB /* RestaurantCell.m in Sources */,
 				33E2C5981CE222FB00B28935 /* ShareTableViewController.m in Sources */,
 				339E3F2E1CEB49F10073873B /* ProfilePasswordViewController.m in Sources */,
 				335B7AC91CD76C48000E9D9F /* MenuListTableViewCell.m in Sources */,
 				3323DBEB1D5EC7ED009CD782 /* RestaurantsListTableViewController.m in Sources */,
 				33ED27811CD22F5E0013FADD /* ConfirmOrderViewController.m in Sources */,
+				3304AB1E1D65E1C000A847D0 /* SocketEnginePollable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1274,6 +1380,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1298,6 +1405,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bilinear Inc. (YSNGH6HTET)";
+				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

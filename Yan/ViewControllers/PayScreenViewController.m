@@ -329,61 +329,37 @@
 
 - (void) sendPaymentToCounter:(NSNotification*)notification {
 //    NSLog(@"response:%@",notification.object);
-    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Our restaurant representative will see you to receive payment.\n\n Thank you!" delegate:self buttons:nil];
+    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Our restaurant representative will see you to receive payment.\n\n Thank you!" delegate:self buttons:@[@"CLOSE"]];
     alert.tag = 1111;
     [alert showAlertView];
 }
 
 - (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    if (alertView.tag == 1111) {
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+    NSError *error = nil;
+    Account *loggedUSER = [self userLoggedIn];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND restaurant_id == %@", loggedUSER.current_tableNumber, loggedUSER.current_restaurantID]];
+    
+    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    if (result.count) {
+        OrderList *order = (OrderList*)result[0];
+        [context deleteObject:order];
+    }
+    
+    error = nil;
+    if ([context save:&error]) {
         
         NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
         
-        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-        NSError *error = nil;
-        Account *loggedUSER = [self userLoggedIn];
-        [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND restaurant_id == %@", loggedUSER.current_tableNumber, loggedUSER.current_restaurantID]];
-        
-        NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
-        if (result.count) {
-            OrderList *order = (OrderList*)result[0];
-            [context deleteObject:order];
-        }
+        loggedUSER.current_restaurantID = @"";
+        loggedUSER.current_tableNumber = @"";
+        loggedUSER.current_restaurantName = @"";
         
         error = nil;
-        if ([context save:&error]) {
-            
-            NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
-            
-            loggedUSER.current_restaurantID = @"";
-            loggedUSER.current_tableNumber = @"";
-            loggedUSER.current_restaurantName = @"";
-            
-            error = nil;
-            if (![context save:&error]) {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                    [alert dismissViewControllerAnimated:YES completion:nil];
-                }];
-                [alert addAction:actionOK];
-                
-                [self presentViewController:alert animated:YES completion:^{
-                    
-                }];
-            }
-            else {
-                
-                [self.navigationController popToRootViewControllerAnimated:YES];
-                
-                AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Thank you for dining with us! See you soon!" delegate:self buttons:nil];
-                [alert showAlertView];
-            }
-            
-            
-        }
-        else {
-            
+        if (![context save:&error]) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                 [alert dismissViewControllerAnimated:YES completion:nil];
@@ -394,6 +370,27 @@
                 
             }];
         }
+        else {
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+            AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Thank you for dining with us! See you soon!" delegate:nil buttons:nil];
+            [alert showAlertView];
+        }
+        
+        
+    }
+    else {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
     }
     
 }
@@ -581,7 +578,8 @@
         [attrString endEditing];
         
         cell.labelItemNamePrice.attributedText = attrString;
-        cell.labelItemOptions.text = item[@"options"];
+        NSString *choices = item[@"options"];
+        cell.labelItemOptions.text = ([choices rangeOfString:@","].location == NSNotFound)?[choices capitalizedString]:[[choices substringToIndex:choices.length-1] capitalizedString];
         if (indexPath.section == 0) {
             cell.labelItemQuantity.text = [NSString stringWithFormat:@"x%@",item[@"quantity"]];
             

@@ -2711,7 +2711,7 @@ You may now start using the app for your favourite restaurant.</string>
                                                         <constraint firstAttribute="height" constant="16" id="O1b-J4-gpo"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="10"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
@@ -2747,7 +2747,7 @@ You may now start using the app for your favourite restaurant.</string>
                                                     </variation>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.87450980389999999" green="0.87450980389999999" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="backgroundColor" red="0.17647058823529349" green="0.63623342803030303" blue="0.17647058823529349" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="kHk-E3-8Ci" firstAttribute="top" secondItem="FJ2-KL-52i" secondAttribute="topMargin" id="8ha-Ff-l5p"/>
                                                 <constraint firstItem="mDd-rV-ZGj" firstAttribute="leading" secondItem="FJ2-KL-52i" secondAttribute="leadingMargin" constant="10" id="C3B-36-NZp"/>
@@ -7809,7 +7809,8 @@ You may now start using the app for your favourite restaurant.</string>
                                                             <exclude reference="Zyq-p8-gTK"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="59" y="0.0" width="121" height="24"/>
                                                         <mask key="constraints">
                                                             <include reference="Zyq-p8-gTK"/>
                                                         </mask>
@@ -7828,7 +7829,8 @@ You may now start using the app for your favourite restaurant.</string>
                                                             <exclude reference="zxR-ee-Hut"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="59" y="25" width="122" height="14"/>
                                                         <mask key="constraints">
                                                             <include reference="zxR-ee-Hut"/>
                                                         </mask>
@@ -7849,7 +7851,8 @@ You may now start using the app for your favourite restaurant.</string>
                                                             <exclude reference="YJW-vq-0Be"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="200" y="0.0" width="32" height="32"/>
                                                         <mask key="constraints">
                                                             <include reference="NaM-Cd-srm"/>
                                                             <include reference="YJW-vq-0Be"/>
@@ -7945,10 +7948,10 @@ You may now start using the app for your favourite restaurant.</string>
                                 <exclude reference="pAR-d1-kH4"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="GBS-Gx-Kks"/>
                                 <exclude reference="7p5-cv-GlT"/>
                                 <exclude reference="REg-YA-6Kr"/>
                                 <exclude reference="WKq-yn-YWE"/>
-                                <exclude reference="GBS-Gx-Kks"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -7956,10 +7959,10 @@ You may now start using the app for your favourite restaurant.</string>
                                 <include reference="pAR-d1-kH4"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="GBS-Gx-Kks"/>
                                 <include reference="7p5-cv-GlT"/>
                                 <include reference="REg-YA-6Kr"/>
                                 <include reference="WKq-yn-YWE"/>
-                                <include reference="GBS-Gx-Kks"/>
                             </mask>
                         </variation>
                     </view>

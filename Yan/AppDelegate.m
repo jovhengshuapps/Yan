@@ -112,7 +112,7 @@
         [tokenString appendFormat:@"%02.2hhx", tokenChars[i]];
     }
     
-    NSLog(@"tokenString:%@",tokenString);
+//    NSLog(@"tokenString:%@",tokenString);
     self.deviceToken = tokenString;
 }
 
@@ -425,7 +425,9 @@ didDisconnectWithUser:(GIDGoogleUser *)user
             
             
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            [dateFormatter setDateFormat:@"MM/dd/yyyy HH:mm a"];
+            NSLocale *twelveHourLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
+            dateFormatter.locale = twelveHourLocale;
+            [dateFormatter setDateFormat:@"MM/dd/yyyy hh:mm a"];
             
             NSDate *reservationDate = [dateFormatter dateFromString:[NSString stringWithFormat:@"%@ %@",self.notificationUserInfo[@"reservation-date"],self.notificationUserInfo[@"reservation-time"]]];
             
@@ -433,9 +435,13 @@ didDisconnectWithUser:(GIDGoogleUser *)user
             
             NSDateComponents *comps = [[NSDateComponents alloc] init];
             
+//            NSLog(@"reservation:%@", [dateFormatter stringFromDate:reservationDate]);
+            
             [comps setHour:-1];
             NSDate *minDate = [calendar dateByAddingComponents:comps toDate:reservationDate options:0];
 
+            
+//            NSLog(@"mindate:%@", [dateFormatter stringFromDate:minDate]);
             
             reminder.reservationDateTime = minDate;
             

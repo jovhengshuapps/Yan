@@ -193,8 +193,8 @@
     NSString *choices = item[@"options"];
 //    if ([choices rangeOfString:@","].location != NSNotFound) {
 //        choices = [choices substringToIndex:choices.length-1];
-//    }
-    cell.labelMenuOptions.text = [choices capitalizedString];
+    //    }
+    cell.labelMenuOptions.text = ([choices rangeOfString:@","].location == NSNotFound)?[choices capitalizedString]:[[choices substringToIndex:choices.length-1] capitalizedString];
     cell.index = indexPath.row;
 
     return cell;

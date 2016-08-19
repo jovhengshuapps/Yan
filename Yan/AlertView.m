@@ -118,8 +118,8 @@
 
 - (void)setupAlertView:(nullable id)aDelegate :(nullable NSString*)aMessage :(nullable NSArray*)aButtonsArray {
     
-    CGFloat defaultHeight =  KEYWINDOW.bounds.size.height - 40.0f;
-//    CGFloat maxHeight = KEYWINDOW.bounds.size.height - 60.0f;
+    CGFloat defaultHeight =  200.0f;
+    CGFloat maxHeight = KEYWINDOW.bounds.size.height - 40.0f;
     CGFloat buttonHeight = 30.0f;
     
     _background = [[UIView alloc] initWithFrame:KEYWINDOW.bounds];
@@ -127,7 +127,7 @@
     _background.center = KEYWINDOW.center;
     
     
-    _container = [[UIView alloc ] initWithFrame:CGRectMake(0.0f, 0.0f, _background.frame.size.width - 20.0f, defaultHeight)];
+    _container = [[UIView alloc ] initWithFrame:CGRectMake(0.0f, 20.0f, _background.frame.size.width - 20.0f, defaultHeight)];
     _container.center = _background.center;
     _container.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
     
@@ -148,6 +148,32 @@
     contentText.editable = NO;
     contentText.backgroundColor = [UIColor clearColor];
     [_container addSubview:contentText];
+    
+    CGFloat contentSizeHeight = contentText.contentSize.height + 5.0f;
+    
+    if (contentSizeHeight >= maxHeight) {
+        
+        CGRect rect      = _container.frame;
+        rect.size.height = maxHeight;
+        _container.frame   = rect;
+        
+        
+        rect      = contentText.frame;
+        rect.size.height = _container.frame.size.height - 10.0f - (28.0f + buttonHeight);
+        contentText.frame   = rect;
+    }
+    else if (contentSizeHeight > defaultHeight) {
+        
+        CGRect rect      = contentText.frame;
+        rect.size.height = contentSizeHeight;
+        contentText.frame   = rect;
+        
+        
+        rect      = _container.frame;
+        rect.size.height = contentText.frame.size.height + 10.0f + (28.0f + buttonHeight);
+        _container.frame   = rect;
+    }
+    
     
     
     
@@ -206,7 +232,7 @@
     _container.transform = CGAffineTransformMakeScale(0.1, 0.1);
     [KEYWINDOW addSubview:_background];
     
-    [self showAlertView];
+//    [self showAlertView];
 }
 
 - (void)setupVideoAd:(nullable id)aDelegate :(nullable NSURL*)videoURL {

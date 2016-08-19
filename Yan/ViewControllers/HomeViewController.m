@@ -12,6 +12,7 @@
 #import "OrderMenuViewController.h"
 #import "QRReaderViewController.h"
 
+
 @interface HomeViewController()
 @property (weak, nonatomic) IBOutlet UIView *viewDefaultHome;
 @property (weak, nonatomic) IBOutlet UIView *viewRegistrationComplete;
@@ -54,7 +55,7 @@
             self.navigationItem.rightBarButtonItem = nil;
         }
         else {
-            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"qrIcon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(rescanQR)];
+            self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"out"] style:UIBarButtonItemStylePlain target:self action:@selector(rescanQR)];
         }
         UIBarButtonItem *menuBarItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"app-menu.png"] style:UIBarButtonItemStyleDone target:self action:@selector(openMenu)];
         
@@ -66,6 +67,7 @@
             _viewLogin.hidden = YES;
             _viewNotificationReminder.hidden = YES;
             _viewRegistrationComplete.hidden = YES;
+            
         }
     }
     else {
@@ -244,7 +246,52 @@
 }
 
 - (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    [alertView dismissAlertView];
+    if (alertView.tag == 1990 && buttonIndex == 0) {
+        
+        self.restaurantID = 0;
+        self.tableNumber = 0;
+        NSString *orderID = @"";
+        NSError *error = nil;
+        
+        NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+        Account *loggedUSER = [self userLoggedIn];
+        orderID = loggedUSER.current_orderID;
+        loggedUSER.current_tableNumber = @"";
+        loggedUSER.current_restaurantID = @"";
+        loggedUSER.current_restaurantName = @"";
+        loggedUSER.current_orderID = @"";
+        
+        if ([context save:&error]) {
+            
+            error = nil;
+            
+            NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+            [request setReturnsObjectsAsFaults:NO];
+            NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+            
+            for (OrderList *orders in result) {
+                [context deleteObject:orders];
+            }
+            
+            if ([context save:&error]) {
+                
+                self.navigationItem.rightBarButtonItem = nil;
+                
+//                QRReaderViewController *scanLogo = [self.storyboard instantiateViewControllerWithIdentifier:@"qrReader"];
+//                scanLogo.modalPresentationStyle = UIModalPresentationOverFullScreen;
+//                scanLogo.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//                [self presentViewController:scanLogo animated:NO completion:^{
+//                    
+//                }];
+            }
+            
+        }
+
+    }
+    else {
+        
+        [alertView dismissAlertView];
+    }
 }
 - (void)videoAdPlayer:(AlertView *)alertView{
     [alertView dismissAlertView];
@@ -571,43 +618,13 @@
 }
 
 - (void) rescanQR {
-    self.restaurantID = 0;
-    self.tableNumber = 0;
-    NSString *orderID = @"";
-    NSError *error = nil;
     
-    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     Account *loggedUSER = [self userLoggedIn];
-    orderID = loggedUSER.current_orderID;
-    loggedUSER.current_tableNumber = @"";
-    loggedUSER.current_restaurantID = @"";
-    loggedUSER.current_restaurantName = @"";
-    loggedUSER.current_orderID = @"";
+    NSString *message = [NSString stringWithFormat:@"Are you sure you wanna leave table %@, %@?",loggedUSER.current_tableNumber, loggedUSER.current_restaurantName];
     
-    if ([context save:&error]) {
-        
-        error = nil;
-        
-        NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-        [request setReturnsObjectsAsFaults:NO];
-        NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
-        
-        for (OrderList *orders in result) {
-            [context deleteObject:orders];
-        }
-        
-        if ([context save:&error]) {
-            
-            QRReaderViewController *scanLogo = [self.storyboard instantiateViewControllerWithIdentifier:@"qrReader"];
-            scanLogo.modalPresentationStyle = UIModalPresentationOverFullScreen;
-            scanLogo.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-            [self presentViewController:scanLogo animated:NO completion:^{
-                
-            }];
-        }
-        
-    }
-    
+    AlertView *alert = [[AlertView alloc] initAlertWithMessage:message delegate:self buttons:@[@"YES",@"NO"]];
+    alert.tag = 1990;
+    [alert showAlertView];
 }
 
 @end

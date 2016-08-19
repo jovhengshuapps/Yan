@@ -44,6 +44,8 @@ BOOL hackFromLoad = NO;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+//    [[SocketIOManager sharedInstance] establishConnection];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(retrieveOtherUserOrders) name:@"get_table_orders" object:nil];
     
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
@@ -230,6 +232,11 @@ BOOL hackFromLoad = NO;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"computeTotalOrderPriceObserver" object:@""];
 }
 
+- (void)dealloc {
+    
+    [[SocketIOManager sharedInstance] closeConnection];
+}
+
 
 - (void) retrieveOtherUserOrders {
     
@@ -322,7 +329,7 @@ BOOL hackFromLoad = NO;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     
-    NSLog(@"results:%@",result);
+//    NSLog(@"results:%@",result);
     self.totalOrderPrice = 0.0f;
     
     if (result.count) {
@@ -368,7 +375,7 @@ BOOL hackFromLoad = NO;
                 
                 for (NSDictionary *menuOrder in storedOrders) {
                     self.totalOrderPrice += ([menuOrder[@"price"] floatValue] * [menuOrder[@"quantity"] floatValue]);
-                    NSLog(@"total:%f",self.totalOrderPrice);
+//                    NSLog(@"total:%f",self.totalOrderPrice);
                 }
                 
             }
@@ -403,6 +410,12 @@ BOOL hackFromLoad = NO;
         self.menuIsLoading = NO;
         [self.mainTableView reloadData];
         [self showMenu];
+        
+//        Account *account = [self userLoggedIn];
+        
+//        [[SocketIOManager sharedInstance] connectToServerWithNickname:account.username restaurant:account.current_restaurantID table:account.current_tableNumber ];
+        
+        
     }
 }
 

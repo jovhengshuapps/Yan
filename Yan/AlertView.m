@@ -149,7 +149,7 @@
     contentText.backgroundColor = [UIColor clearColor];
     [_container addSubview:contentText];
     
-    CGFloat contentSizeHeight = contentText.contentSize.height + 5.0f;
+    CGFloat contentSizeHeight = contentText.contentSize.height + 25.0f;
     
     if (contentSizeHeight >= maxHeight) {
         
@@ -162,7 +162,7 @@
         rect.size.height = _container.frame.size.height - 10.0f - (28.0f + buttonHeight);
         contentText.frame   = rect;
     }
-    else if (contentSizeHeight > defaultHeight) {
+    else if (contentSizeHeight > defaultHeight - 25.0f) {
         
         CGRect rect      = contentText.frame;
         rect.size.height = contentSizeHeight;

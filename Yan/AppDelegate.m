@@ -112,7 +112,7 @@
         [tokenString appendFormat:@"%02.2hhx", tokenChars[i]];
     }
     
-//    NSLog(@"tokenString:%@",tokenString);
+    NSLog(@"tokenString:%@",tokenString);
     self.deviceToken = tokenString;
 }
 
@@ -320,15 +320,26 @@ didDisconnectWithUser:(GIDGoogleUser *)user
     else if (data[@"billout"]) {
         self.notificationUserInfo = nil;
         
-        AlertView *alert = [[AlertView alloc] initAlertWithMessage:[NSString stringWithFormat:@"%@ has requested to bill out the orders from your table.\n\nTable %@",data[@"name"],data[@"table_number"]] delegate:self buttons:nil];
+        NSManagedObjectContext *contextAccount = self.managedObjectContext;
+        
+        NSFetchRequest *requestAccount = [[NSFetchRequest alloc] initWithEntityName:@"Account"];
+        NSError *error = nil;
+        
+        NSArray *accounts = [contextAccount executeFetchRequest:requestAccount error:&error];
+        Account *loggedUSER = (Account*)accounts[0];
+        
+        
+        AlertView *alert = [[AlertView alloc] initAlertWithMessage:[NSString stringWithFormat:@"%@ has requested to bill out the orders from your table.\n\nTable %@",data[@"billout"][@"name"],data[@"billout"][@"table_number"]] delegate:nil buttons:nil];
         [alert showAlertView];
+        
         
         NSManagedObjectContext *context = self.managedObjectContext;
         
         NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
-        NSError *error = nil;
-        [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND restaurant_id == %@", data[@"table_number"], data[@"restaurant_id"]]];
         
+        [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND restaurant_id == %@", loggedUSER.current_tableNumber, loggedUSER.current_restaurantID]];
+        
+        error = nil;
         NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
         if (result.count) {
             OrderList *order = (OrderList*)result[0];
@@ -338,14 +349,14 @@ didDisconnectWithUser:(GIDGoogleUser *)user
         error = nil;
         if ([context save:&error]) {
             
-            NSManagedObjectContext *contextAccount = self.managedObjectContext;
-            
-            NSFetchRequest *requestAccount = [[NSFetchRequest alloc] initWithEntityName:@"Account"];
-            
-            error = nil;
-            
-            NSArray *accounts = [contextAccount executeFetchRequest:requestAccount error:&error];
-            Account *loggedUSER = (Account*)accounts[0];
+//            NSManagedObjectContext *contextAccount = self.managedObjectContext;
+//            
+//            NSFetchRequest *requestAccount = [[NSFetchRequest alloc] initWithEntityName:@"Account"];
+//            
+//            error = nil;
+//            
+//            NSArray *accounts = [contextAccount executeFetchRequest:requestAccount error:&error];
+//            Account *loggedUSER = (Account*)accounts[0];
             loggedUSER.current_restaurantID = @"";
             loggedUSER.current_tableNumber = @"";
             loggedUSER.current_restaurantName = @"";

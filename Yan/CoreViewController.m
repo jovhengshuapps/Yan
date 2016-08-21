@@ -336,7 +336,7 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     Account *user = [self userLoggedIn];
     if (user.token) {
-        
+        NSLog(@"DEVICE TOKEN:%@",user.token);
         [manager.requestSerializer setValue:user.token forHTTPHeaderField:@"x-yan-resto-api"];
     }
     
@@ -421,7 +421,7 @@
     
     NETWORK_INDICATOR(YES)
     
-    NSLog(@"[123]method:%@",method);
+//    NSLog(@"[123]method:%@",method);
     [manager GET:method parameters:parameters progress:^(NSProgress * _Nonnull uploadProgress) {
         
 //        NSLog(@"progress:%f",[uploadProgress fractionCompleted]);
@@ -552,10 +552,17 @@
     
     [alert addAction:actionOK];
     
-    [self presentViewController:alert animated:YES completion:^{
-        
+    if ([notificationName isEqualToString:@"socialLoginObserver"] == YES && [response[@"error"] integerValue] == 404) {
         [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:response];
-    }];
+        //do nothing
+    }
+    else {
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:response];
+        }];
+    }
 }
 
 - (void) logoutUser {

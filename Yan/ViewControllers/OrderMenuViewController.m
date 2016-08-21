@@ -37,6 +37,9 @@ BOOL hackFromLoad = NO;
 @property (strong, nonatomic) MenuDetailsViewController *menuDetailsController;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatorTotalAmount;
 
+@property (strong, nonatomic) UIImageView *arrowMainMenu1;
+@property (strong, nonatomic) UIImageView *arrowMainMenu2;
+
 @end
 
 @implementation OrderMenuViewController
@@ -173,7 +176,6 @@ BOOL hackFromLoad = NO;
     _categoryString = @"";
     
     
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showOrderSentView) name:@"OrderSentNotification" object:nil];
     
 }
@@ -234,7 +236,7 @@ BOOL hackFromLoad = NO;
 
 - (void)dealloc {
     
-    [[SocketIOManager sharedInstance] closeConnection];
+//    [[SocketIOManager sharedInstance] closeConnection];
 }
 
 
@@ -245,6 +247,7 @@ BOOL hackFromLoad = NO;
     [self callGETAPI:API_GETTABLEORDERS(account.current_restaurantID, account.current_tableNumber) withParameters:@{} completionNotification:@"getCurrentTableOrder"];
     [self.activityIndicatorTotalAmount startAnimating];
     self.activityIndicatorTotalAmount.hidden = NO;
+    [self.navigationItem setPrompt:@"Updating Orderlist"];
 }
 
 - (void) saveTableOrders:(NSNotification*)notification {
@@ -252,6 +255,7 @@ BOOL hackFromLoad = NO;
 //something wrong here. data[orders] should be parsed.
     NSArray *orderList = (NSArray*)notification.object;
     
+    [self.navigationItem setPrompt:nil];
     for (NSDictionary *data in orderList) {
         NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
         
@@ -511,6 +515,8 @@ BOOL hackFromLoad = NO;
     
     
     [UIView animateWithDuration:0.2f animations:^{
+//        self.arrowMainMenu1.transform = CGAffineTransformMakeRotation(M_PI_2);
+//        self.arrowMainMenu2.transform = CGAffineTransformMakeRotation(M_PI_2);
         _mainTableView.frame = CGRectMake(_mainTableView.frame.origin.x, positionY, _mainTableView.frame.size.width, sizeHeight);
     } completion:^(BOOL finished) {
         _menuShown = NO;
@@ -522,21 +528,27 @@ BOOL hackFromLoad = NO;
     self.orderSentView.hidden = YES;
     [self showTitleBar:_categoryString];
     
-    CGFloat hackHeight = self.view.frame.size.height - 64.0f; //nav plus status bar
+    CGFloat hackHeight = self.view.frame.size.height ; //nav plus status bar
     
     CGFloat positionY = hackHeight - (self.orderCheckoutView.bounds.origin.y +  self.orderCheckoutView.bounds.size.height);
     CGFloat sizeHeight = (44.0f * self.arrayCategories.count) + 44.0f; /*height of row and section*/
     positionY -= sizeHeight;
     
-    CGFloat maxY = self.loadedControllerView.bounds.origin.y - 10.0f;
-    CGFloat maxHeight = hackHeight - (44.0f + (hackFromLoad?20.0f:-44.0f));
+    CGFloat minY = self.loadedControllerView.bounds.origin.y - 10.0f;
+    CGFloat maxHeight = self.loadedControllerView.bounds.size.height + 32.0f;//hackHeight - (44.0f + (hackFromLoad?20.0f:-44.0f));
     
-    if (positionY < maxY) {
-        positionY = maxY + 10.0f;
+    if (positionY < minY) {
+        positionY = minY + 10.0f;
+    }
+    
+    if (sizeHeight > maxHeight) {
         sizeHeight = maxHeight + 20.0f;
     }
     
+    
     [UIView animateWithDuration:0.2f animations:^{
+//        self.arrowMainMenu1.transform = CGAffineTransformMakeRotation(-M_PI_2);
+//        self.arrowMainMenu2.transform = CGAffineTransformMakeRotation(-M_PI_2);
         _mainTableView.frame = CGRectMake(0.0f, positionY,  self.view.frame.size.width, sizeHeight);
     } completion:^(BOOL finished) {
         _menuShown = YES;
@@ -602,6 +614,8 @@ BOOL hackFromLoad = NO;
     [buttonMenu setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [buttonMenu setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     
+    
+    
     buttonMenu.titleLabel.textAlignment = NSTextAlignmentCenter;
     buttonMenu.titleLabel.font = [UIFont fontWithName:@"LucidaGrande" size:16.0f];
     buttonMenu.titleLabel.textColor = [UIColor whiteColor];
@@ -634,6 +648,19 @@ BOOL hackFromLoad = NO;
         self.activityIndicator.hidden = YES;
         [self.activityIndicator stopAnimating];
     }
+    
+    UIImage *arrow = [UIImage imageNamed:@"back-resized"];
+    self.arrowMainMenu1 = [[UIImageView alloc] initWithImage:arrow];
+    self.arrowMainMenu1.frame = CGRectMake(20.0f, 0.0f, arrow.size.width, arrow.size.height);
+    self.arrowMainMenu1.transform = CGAffineTransformMakeRotation((self.menuShown)?-M_PI_2:M_PI_2);
+    self.arrowMainMenu1.alpha = 0.4f;
+    [buttonMenu addSubview:self.arrowMainMenu1];
+    
+    self.arrowMainMenu2 = [[UIImageView alloc] initWithImage:arrow];
+    self.arrowMainMenu2.frame = CGRectMake(buttonMenu.frame.size.width - 20.0f - arrow.size.width, 0.0f, arrow.size.width, arrow.size.height);
+    self.arrowMainMenu2.transform = CGAffineTransformMakeRotation((self.menuShown)?-M_PI_2:M_PI_2);
+    self.arrowMainMenu2.alpha = 0.4f;
+    [buttonMenu addSubview:self.arrowMainMenu2];
     
     return buttonMenu;
 }

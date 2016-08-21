@@ -65,7 +65,7 @@
     self.title = self.restaurantDetails.name;
     
     self.policyLoaded = NO;
-    if ([self.restaurantDetails.policy rangeOfString:@"</p>"].location != NSNotFound) {
+    if ([self.restaurantDetails.policy rangeOfString:@"</p>"].location != NSNotFound || [self.restaurantDetails.policy rangeOfString:@"</div>"].location != NSNotFound || [self.restaurantDetails.policy rangeOfString:@"<br>"].location != NSNotFound || [self.restaurantDetails.policy rangeOfString:@"</br>"].location != NSNotFound) {
         self.textViewPolicy.hidden = YES;
         self.webViewPolicy.hidden = NO;
         [self.webViewPolicy loadHTMLString:self.restaurantDetails.policy baseURL:nil];
@@ -200,9 +200,10 @@
         DatePickerViewController *destNav = segue.destinationViewController;
         destNav.delegate = self;
         destNav.datePickerMode = UIDatePickerModeTime;
+        
         destNav.todayValidation = YES;
         NSString *daySelected = [self.textFieldDate.text componentsSeparatedByString:@" - "][0];
-        NSLog(@"selected:%@",daySelected);
+//        NSLog(@"selected:%@",daySelected);
         for (NSDictionary *dateAndTimes in self.arrayAvailableTimes) {
             if ([daySelected isEqualToString:dateAndTimes[@"day"]]) {
                 destNav.dateRange = @{@"from":dateAndTimes[@"from"], @"to":dateAndTimes[@"to"]};
@@ -244,7 +245,7 @@
 }
 - (IBAction)showRestaurantPolicy:(id)sender {
 
-    if ([self.restaurantDetails.policy rangeOfString:@"</p>"].location != NSNotFound) {
+    if ([self.restaurantDetails.policy rangeOfString:@"</p>"].location != NSNotFound || [self.restaurantDetails.policy rangeOfString:@"</div>"].location != NSNotFound || [self.restaurantDetails.policy rangeOfString:@"<br>"].location != NSNotFound || [self.restaurantDetails.policy rangeOfString:@"</br>"].location != NSNotFound) {
         AlertView *alert = [[AlertView alloc] initAlertWithWebURL:self.restaurantDetails.policy delegate:self buttons:@[@"ACCEPT",@"DECLINE"]];
 
     }

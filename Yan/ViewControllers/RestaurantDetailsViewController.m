@@ -104,7 +104,8 @@
 // http://waze.to/?ll=latitude,longitude&navigate=yes
     
     NSString *parameters = [NSString stringWithFormat:@"?ll=%@,%@&navigate=yes",_restaurantDetails.latitude, _restaurantDetails.longitude];
-    NSURL *wazeURL = [NSURL URLWithString:[NSString  stringWithFormat:@"http://waze.to/%@",parameters]];
+//    NSURL *wazeURL = [NSURL URLWithString:[NSString  stringWithFormat:@"http://waze.to/%@",parameters]];
+    NSURL *wazeURL = [NSURL URLWithString:[NSString  stringWithFormat:@"waze://%@",parameters]];
     
     if ([[UIApplication sharedApplication] canOpenURL:wazeURL]) {
         [[UIApplication sharedApplication] openURL:wazeURL];
@@ -118,6 +119,9 @@
         
         [self presentViewController:alert animated:YES completion:^{
             
+            // Waze is not installed. Launch AppStore to install Waze app
+            [[UIApplication sharedApplication] openURL:[NSURL
+                                                        URLWithString:@"http://itunes.apple.com/us/app/id323229106"]];
         }];
     }
 }

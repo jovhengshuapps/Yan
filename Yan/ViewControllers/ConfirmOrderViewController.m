@@ -257,6 +257,7 @@
     Account *account = [self userLoggedIn];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveTableOrders:) name:@"getCurrentTableOrder" object:nil];
     [self callGETAPI:API_GETTABLEORDERS(account.current_restaurantID, account.current_tableNumber) withParameters:@{} completionNotification:@"getCurrentTableOrder"];
+    [self.navigationItem setPrompt:@"Updating Orderlist"];
 }
 
 - (void) saveTableOrders:(NSNotification*)notification {
@@ -264,6 +265,7 @@
     
     NSArray *orderList = (NSArray*)notification.object;
     
+    [self.navigationItem setPrompt:nil];
     for (NSDictionary *data in orderList) {
         NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
         
@@ -732,7 +734,7 @@
     
     if (section == 0) {
         NSDictionary *item = self.arrayOrderList[indexPath.row];
-        NSLog(@"item:%@",item);
+//        NSLog(@"item:%@",item);
         OrderListTableViewCell *cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"orderListCell"];
         if (self.billoutOrder || [item[@"is_locked"] boolValue]) {
             cell = (OrderListTableViewCell*)[tableView dequeueReusableCellWithIdentifier:@"billoutListCell"];

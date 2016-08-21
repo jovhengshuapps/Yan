@@ -72,6 +72,7 @@
     }
     else {
         [self.navigationItem setLeftBarButtonItem:nil];
+        [self.navigationItem setRightBarButtonItem:nil];
         self.frostedViewController.panGestureEnabled = NO;
         _viewLogin.hidden = NO;
         _viewDefaultHome.hidden = YES;

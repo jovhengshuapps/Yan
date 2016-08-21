@@ -112,20 +112,20 @@
         [tokenString appendFormat:@"%02.2hhx", tokenChars[i]];
     }
     
-    NSLog(@"tokenString:%@",tokenString);
+//    NSLog(@"tokenString:%@",tokenString);
     self.deviceToken = tokenString;
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     
-        NSLog(@"received notification:%@",userInfo);
+//        NSLog(@"received notification:%@",userInfo);
     [self saveNotificationData:userInfo[@"aps"][@"alert"]];
     [UIApplication sharedApplication].applicationIconBadgeNumber += [[[userInfo objectForKey:@"aps"] objectForKey: @"badge"] intValue];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     
-    NSLog(@"completion received notification:%@",userInfo);
+//    NSLog(@"completion received notification:%@",userInfo);
     [self saveNotificationData:userInfo[@"aps"][@"alert"]];
     
     completionHandler(UIBackgroundFetchResultNewData);

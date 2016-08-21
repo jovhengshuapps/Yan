@@ -112,16 +112,21 @@
     } else
     {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Alert"] message:@"Please install the Waze App." preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [alert dismissViewControllerAnimated:YES completion:nil];
-        }];
-        [alert addAction:actionOK];
-        
-        [self presentViewController:alert animated:YES completion:^{
-            
             // Waze is not installed. Launch AppStore to install Waze app
             [[UIApplication sharedApplication] openURL:[NSURL
                                                         URLWithString:@"http://itunes.apple.com/us/app/id323229106"]];
+        }];
+        [alert addAction:actionOK];
+        
+        UIAlertAction *actionNO = [UIAlertAction actionWithTitle:@"NO" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionNO];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
         }];
     }
 }

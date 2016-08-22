@@ -442,19 +442,14 @@ didDisconnectWithUser:(GIDGoogleUser *)user
             
             NSDate *reservationDate = [dateFormatter dateFromString:[NSString stringWithFormat:@"%@ %@",self.notificationUserInfo[@"reservation-date"],self.notificationUserInfo[@"reservation-time"]]];
             
-            NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+//            NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+//            
+//            NSDateComponents *comps = [[NSDateComponents alloc] init];
             
-            NSDateComponents *comps = [[NSDateComponents alloc] init];
-            
-//            NSLog(@"reservation:%@", [dateFormatter stringFromDate:reservationDate]);
-            
-            [comps setHour:-1];
-            NSDate *minDate = [calendar dateByAddingComponents:comps toDate:reservationDate options:0];
-
-            
-//            NSLog(@"mindate:%@", [dateFormatter stringFromDate:minDate]);
-            
-            reminder.reservationDateTime = minDate;
+//            [comps setHour:-1];
+//            NSDate *minDate = [calendar dateByAddingComponents:comps toDate:reservationDate options:0];
+//            reminder.reservationDateTime = minDate;
+            reminder.reservationDateTime = reservationDate;
             
 //            if([self.notificationUserInfo[@"title"] rangeOfString:@"order"].location != NSNotFound) {
 //                

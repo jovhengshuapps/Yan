@@ -104,8 +104,83 @@
             event.endDate = [event.startDate dateByAddingTimeInterval:60*60];  //set 1 hour meeting
             event.calendar = [self.eventStore defaultCalendarForNewEvents];
             event.notes = [NSString stringWithFormat:@"Restaurant Details:\nAddress:%@\nContacts:%@\nOperation Hours:%@",self.restaurantAddress,self.restaurantContact,self.restaurantOperation];
+            NSTimeInterval aInterval = -1 * 60 * 60;
+            EKAlarm *alaram = [EKAlarm alarmWithRelativeOffset:aInterval];
+            [event addAlarm:alaram];
+
             NSError *err = nil;
             BOOL success = [self.eventStore saveEvent:event span:EKSpanThisEvent commit:YES error:&err];
+            
+            
+//            switch (evetReminder) {   //set alaram for 5mins, 15mins ,20mins etc
+//                case 0:
+//                    self.selectedAlertSetting = @"None";
+//                    break;
+//                    
+//                case 1:
+//                {
+//                    EKAlarm *alaram = [[EKAlarm alloc]init];
+//                    [alaram setAbsoluteDate:eventStartDate];
+//                    [event addAlarm:alaram];
+//                    [alaram release];
+//                    break;
+//                }
+//                    
+//                    
+//                case 2:
+//                {
+//                    NSTimeInterval aInterval = -5 *60;
+//                    EKAlarm *alaram = [EKAlarm alarmWithRelativeOffset:aInterval];
+//                    [event addAlarm:alaram];
+//                    break;
+//                }
+//                case 3:
+//                {
+//                    NSTimeInterval aInterval = -15 * 60;
+//                    EKAlarm *alaram = [EKAlarm alarmWithRelativeOffset:aInterval];
+//                    [event addAlarm:alaram];
+//                    break;
+//                }
+//                case 4:
+//                {
+//                    NSTimeInterval aInterval = -30 * 60;
+//                    EKAlarm *alaram = [EKAlarm alarmWithRelativeOffset:aInterval];
+//                    [event addAlarm:alaram];
+//                    break;
+//                }
+//                case 5:
+//                {
+//                    NSTimeInterval aInterval = -1 * 60 * 60;
+//                    EKAlarm *alaram = [EKAlarm alarmWithRelativeOffset:aInterval];
+//                    [event addAlarm:alaram];
+//                    break;
+//                }
+//                case 6:
+//                {
+//                    NSTimeInterval aInterval = -2 * 60 * 60;
+//                    EKAlarm *alaram = [EKAlarm alarmWithRelativeOffset:aInterval];
+//                    [event addAlarm:alaram];
+//                    break;
+//                }
+//                    
+//                case 7:
+//                {
+//                    NSTimeInterval aInterval = -1 * 24 * 60 * 60;
+//                    EKAlarm *alaram = [EKAlarm alarmWithRelativeOffset:aInterval];
+//                    [event addAlarm:alaram];
+//                    break;
+//                }
+//                case 8:
+//                {
+//                    NSTimeInterval aInterval = -2 * 24 * 60 * 60;
+//                    EKAlarm *alaram = [EKAlarm alarmWithRelativeOffset:aInterval];
+//                    [event addAlarm:alaram];
+//                    break;
+//                }
+//                default:
+//                    break;
+            
+            
             
             //        EKReminder *reminder = [EKReminder reminderWithEventStore:self.eventStore];
             //        reminder.title = @"Yan! App Reminder!";

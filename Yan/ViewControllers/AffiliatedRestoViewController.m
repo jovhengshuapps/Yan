@@ -728,7 +728,11 @@ typedef enum {
                      CLLocationDistance meters = [restaurantLocation distanceFromLocation:currentLocation];
                      //            NSLog(@"meters: %f",meters);
                      if (meters <= 5000) {
-                         [self.dataListNearby addObject:restaurant];
+                         if(![self.dataListNearby containsObject:restaurant]){
+                             [self.dataListNearby addObject:restaurant];
+                             
+                         }
+                         
                      }
                      
                  }
@@ -736,7 +740,11 @@ typedef enum {
                      //use location
                      for (NSString *location in userCurrentAddressLine) {
                          if ([[location lowercaseString] isEqualToString:[((Restaurant*)restaurant).location lowercaseString]]) {
-                             [self.dataListNearby addObject:restaurant];
+                             
+                             if(![self.dataListNearby containsObject:restaurant]){
+                                 [self.dataListNearby addObject:restaurant];
+                                 break;
+                             }
                          }
                      }
                  }

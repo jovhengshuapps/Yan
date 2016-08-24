@@ -694,7 +694,6 @@
 //    
 //    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
     
-    
     NSArray *result = [self orderListFromUser:user onContext:context];
     
     if (result.count == 0) {
@@ -741,9 +740,12 @@
         
         [newOrderList addObjectsFromArray:decodedList];
         
+        NSDictionary *menuItem = [self menuItemToDictionary:menu itemNumber:1];
+        NSLog(@"decoded:%@",decodedList);
+        
         for (NSInteger index = 0; index < decodedList.count; index++) {
             NSMutableDictionary *item = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
-            if ([item[@"menu_id"] integerValue] == [menu.identifier integerValue]) {
+            if ([item[@"menu_id"] integerValue] == [menuItem[@"identifier"] integerValue] && [item[@"options"] isEqualToString:menuItem[@"option_choices"]]) {
                 isNewIdentifier = NO;
                 NSInteger sum = [item[@"quantity"] integerValue] + 1;
                 NSNumber *quantity = [NSNumber numberWithInteger:sum];

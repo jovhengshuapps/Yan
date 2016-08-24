@@ -45,6 +45,8 @@
         }
     }
     
+    NSLog(@"initial:%@",self.initialOptions);
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -85,10 +87,30 @@
         if ([bundle[@"menu_id"] integerValue] == [self.itemDetails[@"identifier"] integerValue]
             && [bundle[@"options"] isEqualToString:self.selectedOptions]) {
             isNewVariant = NO;
+            
             NSInteger updatedQuantity = [bundle[@"quantity"] integerValue] + 1;
             
             [bundle setObject:[NSNumber numberWithInteger:updatedQuantity] forKey:@"quantity"];
             [newOrderList replaceObjectAtIndex:index withObject:bundle];
+            
+            for (NSInteger indexFind = 0; indexFind < decodedList.count; indexFind++) {
+                NSMutableDictionary *bundleFind = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[indexFind]];
+                if ([bundleFind[@"menu_id"] integerValue] == [self.itemDetails[@"identifier"] integerValue]
+                    && [bundleFind[@"options"] isEqualToString:self.initialOptions]) {
+                    NSInteger updatedQuantity = [bundleFind[@"quantity"] integerValue] - 1;
+                    
+                    if (updatedQuantity == 0) {
+                        [newOrderList removeObjectAtIndex:indexFind];
+                    }
+                    else {
+                        [bundle setObject:[NSNumber numberWithInteger:updatedQuantity] forKey:@"quantity"];
+                        [newOrderList replaceObjectAtIndex:indexFind withObject:bundleFind];
+                    }
+                    break;
+                }
+            }
+            
+            
             break;
         }
     }
@@ -97,11 +119,11 @@
         
         for (NSInteger index = 0; index < decodedList.count; index++) {
             NSMutableDictionary *bundle = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
+            
             if ([bundle[@"menu_id"] integerValue] == [self.itemDetails[@"identifier"] integerValue]
-                && [bundle[@"options"] isEqualToString:@"Basic"]) {
+                && [bundle[@"options"] isEqualToString:self.initialOptions]) {
                 NSInteger updatedQuantity = [bundle[@"quantity"] integerValue] - 1;
                 
-//                NSLog(@"[%li]newOrderList:%@",(long)index,newOrderList);
                 if (updatedQuantity == 0) {
                     [newOrderList removeObjectAtIndex:index];
                 }

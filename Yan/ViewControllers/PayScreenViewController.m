@@ -329,7 +329,7 @@
 
 - (void) sendPaymentToCounter:(NSNotification*)notification {
 //    NSLog(@"response:%@",notification.object);
-    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Our restaurant representative will see you to receive payment.\n\n Thank you!" delegate:self buttons:@[@"CLOSE"]];
+    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Our representative will process the bill and payment.\n\nThank you for dining with us. Please come again." delegate:self buttons:@[@"CLOSE"]];
     alert.tag = 1111;
     [alert showAlertView];
 }
@@ -374,8 +374,8 @@
             
             [self.navigationController popToRootViewControllerAnimated:YES];
             
-            AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Thank you for dining with us! See you soon!" delegate:nil buttons:nil];
-            [alert showAlertView];
+//            AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Thank you for dining with us! See you soon!" delegate:nil buttons:nil];
+//            [alert showAlertView];
         }
         
         

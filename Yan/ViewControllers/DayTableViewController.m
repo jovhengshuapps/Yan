@@ -85,7 +85,7 @@
     NSDate *currentDate = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"EEEE|MMM dd, yyyy"];
-    for (NSInteger day = 0; day < 7; day++) {
+    for (NSInteger day = 0; day < /*7*/30; day++) {
         NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
         dayComponent.day = day;
         
@@ -287,6 +287,11 @@
         cell.textLabel.textColor = [UIColor grayColor];
         cell.userInteractionEnabled = NO;
         cell.contentView.backgroundColor = UIColorFromRGB(0xC9C9C9);
+    }
+    else {
+        cell.textLabel.textColor = [UIColor blackColor];
+        cell.userInteractionEnabled = YES;
+        cell.contentView.backgroundColor = UIColorFromRGB(0xFFFFFF);
     }
     
     // Configure the cell...

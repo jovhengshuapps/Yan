@@ -15,5 +15,6 @@
 //@property (strong,nonatomic) NSDictionary *optionList;
 @property (strong,nonatomic) NSDictionary *itemDetails;
 @property (strong, nonatomic) NSString *tableNumber;
+@property (strong, nonatomic) NSString *initialOptions;
 
 @end

@@ -874,28 +874,30 @@
         
         for (NSInteger index = 0; index < decodedList.count; index++) {
             NSMutableDictionary *bundle = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
-            if ([bundle[@"identifier"] integerValue] == [itemToDuplicate[@"identifier"] integerValue]) {
+            if ([bundle[@"menu_id"] integerValue] == [itemToDuplicate[@"menu_id"] integerValue] && [bundle[@"options"] isEqualToString:itemToDuplicate[@"options"]]) {
                
                 NSInteger sum = [bundle[@"quantity"] integerValue] + 1;
                 
-                NSMutableArray *itemDetails = [NSMutableArray arrayWithArray:(NSArray*)bundle[@"details"]];
-                
-                NSNumber *itemNumber = [NSNumber numberWithInteger:sum];
-                [itemToDuplicate setObject:itemNumber forKey:@"itemnumber"];
-                
-                NSDictionary *item = itemToDuplicate;
-                [itemDetails addObject:item];
-                
-                [bundle setObject:itemDetails forKey:@"details"];
+//                NSMutableArray *itemDetails = [NSMutableArray arrayWithArray:(NSArray*)bundle[@"details"]];
+//                
+//                NSNumber *itemNumber = [NSNumber numberWithInteger:sum];
+//                [itemToDuplicate setObject:itemNumber forKey:@"itemnumber"];
+//                
+//                NSDictionary *item = itemToDuplicate;
+//                [itemDetails addObject:item];
+//                
+//                [bundle setObject:itemDetails forKey:@"details"];
                 
                 NSNumber *quantity = [NSNumber numberWithInteger:sum];
                 [bundle setObject:quantity forKey:@"quantity"];
                 
                 [newOrderList replaceObjectAtIndex:index withObject:bundle];
+                break;
             }
         }
         
         
+//        NSLog(@"item:%@\n\n%@",itemToDuplicate,self.arrayOrderList);
         order.items = [self encodeData:newOrderList withKey:@"orderItems"];
         order.orderSent = @NO;
         order.tableNumber = self.tableNumber;
@@ -914,7 +916,32 @@
         }
         else {
             
-            [self.arrayOrderList addObject:itemToDuplicate];
+            for (NSInteger index = 0; index < self.arrayOrderList.count; index++) {
+                NSMutableDictionary *bundle = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)self.arrayOrderList[index]];
+                if ([bundle[@"menu_id"] integerValue] == [itemToDuplicate[@"menu_id"] integerValue] && [bundle[@"options"] isEqualToString:itemToDuplicate[@"options"]]) {
+                    
+                    NSInteger sum = [bundle[@"quantity"] integerValue] + 1;
+                    
+                    //                NSMutableArray *itemDetails = [NSMutableArray arrayWithArray:(NSArray*)bundle[@"details"]];
+                    //
+                    //                NSNumber *itemNumber = [NSNumber numberWithInteger:sum];
+                    //                [itemToDuplicate setObject:itemNumber forKey:@"itemnumber"];
+                    //
+                    //                NSDictionary *item = itemToDuplicate;
+                    //                [itemDetails addObject:item];
+                    //
+                    //                [bundle setObject:itemDetails forKey:@"details"];
+                    
+                    NSNumber *quantity = [NSNumber numberWithInteger:sum];
+                    [bundle setObject:quantity forKey:@"quantity"];
+                    
+                    [self.arrayOrderList replaceObjectAtIndex:index withObject:bundle];
+                    break;
+                }
+            }
+            
+            
+//            [self.arrayOrderList addObject:itemToDuplicate];
             
             NSArray *arrayToSort = [NSArray arrayWithArray:self.arrayOrderList];
             NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
@@ -934,8 +961,11 @@
 }
 
 - (void)removeSelectedIndex:(NSInteger)index {
-    NSDictionary *itemToRemove = [_arrayOrderList objectAtIndex:index];
-//    NSLog(@"item:%@",itemToRemove);
+    NSMutableDictionary *itemToRemove = [[_arrayOrderList objectAtIndex:index] mutableCopy];
+    //    NSNumber *itemNumber = [NSNumber numberWithInteger:[self newItemNumber:[itemToDuplicate[@"identifier"] integerValue]]];
+    //    [itemToDuplicate setObject:itemNumber forKey:@"itemnumber"];
+    //    NSLog(@"DUPLICATE:%@",itemToDuplicate);
+    
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
@@ -945,6 +975,7 @@
     NSError *error = nil;
     
     NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    
     if (result.count) {
         OrderList *order = (OrderList*)result[0];
         NSMutableArray *newOrderList = [NSMutableArray new];
@@ -955,34 +986,40 @@
         
         for (NSInteger index = 0; index < decodedList.count; index++) {
             NSMutableDictionary *bundle = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];
-            
-            if ([bundle[@"identifier"] integerValue] == [itemToRemove[@"identifier"] integerValue]) {
-                
-                NSMutableArray *itemDetails = [NSMutableArray arrayWithArray:(NSArray*)bundle[@"details"]];
-                
-                [itemDetails removeObject:itemToRemove];
-                
-                [bundle setObject:itemDetails forKey:@"details"];
+            if ([bundle[@"menu_id"] integerValue] == [itemToRemove[@"menu_id"] integerValue] && [bundle[@"options"] isEqualToString:itemToRemove[@"options"]]) {
                 
                 NSInteger diff = [bundle[@"quantity"] integerValue] - 1;
+                
+                //                NSMutableArray *itemDetails = [NSMutableArray arrayWithArray:(NSArray*)bundle[@"details"]];
+                //
+                //                NSNumber *itemNumber = [NSNumber numberWithInteger:sum];
+                //                [itemToDuplicate setObject:itemNumber forKey:@"itemnumber"];
+                //
+                //                NSDictionary *item = itemToDuplicate;
+                //                [itemDetails addObject:item];
+                //
+                //                [bundle setObject:itemDetails forKey:@"details"];
+                
                 if (diff > 0) {
                     NSNumber *quantity = [NSNumber numberWithInteger:diff];
                     [bundle setObject:quantity forKey:@"quantity"];
                     
                     [newOrderList replaceObjectAtIndex:index withObject:bundle];
+                    
                 }
                 else {
-                    [newOrderList removeObjectAtIndex:index];
+                    [newOrderList removeObject:bundle];
                 }
+                
                 break;
             }
         }
         
         
+        //        NSLog(@"item:%@\n\n%@",itemToDuplicate,self.arrayOrderList);
         order.items = [self encodeData:newOrderList withKey:@"orderItems"];
-        
         order.orderSent = @NO;
-        order.tableNumber = _tableNumber;
+        order.tableNumber = self.tableNumber;
         
         error = nil;
         if (![context save:&error]) {
@@ -998,11 +1035,49 @@
         }
         else {
             
-            [_arrayOrderList removeObjectAtIndex:index];
+            for (NSInteger index = 0; index < self.arrayOrderList.count; index++) {
+                NSMutableDictionary *bundle = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)self.arrayOrderList[index]];
+                if ([bundle[@"menu_id"] integerValue] == [itemToRemove[@"menu_id"] integerValue] && [bundle[@"options"] isEqualToString:itemToRemove[@"options"]]) {
+                    
+                    NSInteger diff = [bundle[@"quantity"] integerValue] - 1;
+                    
+                    //                NSMutableArray *itemDetails = [NSMutableArray arrayWithArray:(NSArray*)bundle[@"details"]];
+                    //
+                    //                NSNumber *itemNumber = [NSNumber numberWithInteger:sum];
+                    //                [itemToDuplicate setObject:itemNumber forKey:@"itemnumber"];
+                    //
+                    //                NSDictionary *item = itemToDuplicate;
+                    //                [itemDetails addObject:item];
+                    //
+                    //                [bundle setObject:itemDetails forKey:@"details"];
+                    
+                    if (diff > 0) {
+                        NSNumber *quantity = [NSNumber numberWithInteger:diff];
+                        [bundle setObject:quantity forKey:@"quantity"];
+                        
+                        [self.arrayOrderList replaceObjectAtIndex:index withObject:bundle];
+                        
+                    }
+                    else {
+                        [self.arrayOrderList removeObject:bundle];
+                    
+                    }
+                    
+                    break;
+                }
+            }
+            
+            
+            //            [self.arrayOrderList addObject:itemToDuplicate];
+            
+            NSArray *arrayToSort = [NSArray arrayWithArray:self.arrayOrderList];
+            NSSortDescriptor *nameDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:YES];
+            NSArray *sortDescriptors = [NSArray arrayWithObject:nameDescriptor];
+            self.arrayOrderList = [[arrayToSort sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
             
             [_mainTable reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
-            
         }
+        
     }
     
     self.totalValue -= [itemToRemove[@"price"] floatValue];

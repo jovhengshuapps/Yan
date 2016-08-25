@@ -103,7 +103,7 @@
                         [newOrderList removeObjectAtIndex:indexFind];
                     }
                     else {
-                        [bundle setObject:[NSNumber numberWithInteger:updatedQuantity] forKey:@"quantity"];
+                        [bundleFind setObject:[NSNumber numberWithInteger:updatedQuantity] forKey:@"quantity"];
                         [newOrderList replaceObjectAtIndex:indexFind withObject:bundleFind];
                     }
                     break;
@@ -282,7 +282,7 @@
     }
     
     
-//    NSLog(@"options;%@",self.selectedOptions);
+    NSLog(@"options;%@",self.selectedOptions);
     
     [button setTitle:item forState:UIControlStateNormal];
     [self.popover dismissPopoverAnimated:YES];

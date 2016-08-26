@@ -406,8 +406,14 @@
 //        
 //    }
     
-//    NSLog(@"MENU ORDER:%@",self.arrayOrderList);
     Account *account = [self userLoggedIn];
+//    NSLog(@"MENU ORDER:%@",@{
+//                             @"order_date": order_date,
+//                             @"table": account.current_tableNumber,
+//                             /*@"notes": notes,*/
+//                             @"menus":self.arrayOrderList
+//                             } );
+//    Account *account = [self userLoggedIn];
     
     if (account.current_orderID.length) {
         
@@ -553,14 +559,14 @@
     
     
     
-    PayScreenViewController *paymentSelect = (PayScreenViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"payScreenView"];
-    paymentSelect.tableNumber = _tableNumber;
-//    paymentSelect.discountDetails = @{@"senior":self.discountDetails[@"senior"],
-//                                      @"gc":self.discountDetails[@"gc"],
-//                                      @"diners":self.discountDetails[@"diners"]};
-    paymentSelect.paymentType = @"CA";
-    [self.navigationController pushViewController:paymentSelect animated:YES];
+//    PayScreenViewController *paymentSelect = (PayScreenViewController*)[self.storyboard instantiateViewControllerWithIdentifier:@"payScreenView"];
+//    paymentSelect.tableNumber = _tableNumber;
+//    
+//    paymentSelect.paymentType = @"CA";
+//    [self.navigationController pushViewController:paymentSelect animated:YES];
     
+    
+    [self submitPayment];
     
 }
 
@@ -1086,5 +1092,98 @@
     
 }
 
+
+- (void) submitPayment {
+    
+    
+    Account *account = [self userLoggedIn];
+    
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+    [request setReturnsObjectsAsFaults:NO];
+    Account *userAccount = [self userLoggedIn];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"user_id == %@ AND restaurant_id == %@", userAccount.identifier, userAccount.current_restaurantID]];
+    
+    NSError *error = nil;
+    
+    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    OrderList *order = (OrderList*)result[0];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendPaymentToCounter:) name:@"sendPaymentToCounter" object:nil];
+    [self callAPI:API_BILLOUT(account.current_restaurantID, order.orderSubmitID) withParameters:@{ @"pay_type": @"CA", @"total_amount": [NSString stringWithFormat:@"%.2f",self.totalValue] }completionNotification:@"sendPaymentToCounter"];
+    
+    
+}
+
+- (void) sendPaymentToCounter:(NSNotification*)notification {
+    //    NSLog(@"response:%@",notification.object);
+    AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Our representative will process the bill and payment.\n\nThank you for dining with us. Please come again." delegate:self buttons:@[@"CLOSE"]];
+    alert.tag = 1111;
+    [alert showAlertView];
+}
+
+- (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
+    NSError *error = nil;
+    Account *loggedUSER = [self userLoggedIn];
+    [request setPredicate:[NSPredicate predicateWithFormat:@"tableNumber == %@ AND restaurant_id == %@", loggedUSER.current_tableNumber, loggedUSER.current_restaurantID]];
+    
+    NSArray *result = [NSArray arrayWithArray:[context executeFetchRequest:request error:&error]];
+    if (result.count) {
+        OrderList *order = (OrderList*)result[0];
+        [context deleteObject:order];
+    }
+    
+    error = nil;
+    if ([context save:&error]) {
+        
+        NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+        
+        loggedUSER.current_restaurantID = @"";
+        loggedUSER.current_tableNumber = @"";
+        loggedUSER.current_restaurantName = @"";
+        
+        error = nil;
+        if (![context save:&error]) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alert dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [alert addAction:actionOK];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+        }
+        else {
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+            //            AlertView *alert = [[AlertView alloc] initAlertWithMessage:@"Thank you for dining with us! See you soon!" delegate:nil buttons:nil];
+            //            [alert showAlertView];
+        }
+        
+        
+    }
+    else {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
+    
+}
 
 @end

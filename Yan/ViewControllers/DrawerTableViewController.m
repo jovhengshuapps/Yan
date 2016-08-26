@@ -32,11 +32,11 @@
     self.tableView.opaque = NO;
     self.tableView.backgroundColor = [UIColor clearColor];
     self.tableView.tableHeaderView = ({
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(8.0f, 28.0f, 240.0f, 184.0f)];
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(8.0f, 28.0f, 240.0f, 220.0f)];
         [view setBackgroundColor:[UIColor clearColor]];
         
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(0.0f, 20.0f, view.frame.size.width, view.frame.size.height - 2.0f);
+        button.frame = CGRectMake(0.0f, 10.0f, view.frame.size.width, view.frame.size.height - 2.0f);
         [button setBackgroundImage:[UIImage imageNamed:@"yan-new-logo"] forState:UIControlStateNormal];
         [button setBackgroundImage:[UIImage imageNamed:@"yan-new-logo"] forState:UIControlStateSelected];
         [button setBackgroundImage:[UIImage imageNamed:@"yan-new-logo"] forState:UIControlStateHighlighted];

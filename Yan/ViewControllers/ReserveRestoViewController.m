@@ -65,25 +65,39 @@
     self.title = self.restaurantDetails.name;
     
     self.policyLoaded = NO;
-    if ([self.restaurantDetails.policy rangeOfString:@"</p>"].location != NSNotFound || [self.restaurantDetails.policy rangeOfString:@"</div>"].location != NSNotFound || [self.restaurantDetails.policy rangeOfString:@"<br>"].location != NSNotFound || [self.restaurantDetails.policy rangeOfString:@"</br>"].location != NSNotFound) {
-        self.textViewPolicy.hidden = YES;
-        self.webViewPolicy.hidden = NO;
-        [self.webViewPolicy loadHTMLString:self.restaurantDetails.policy baseURL:nil];
-        
-    }
-    else if ([self.restaurantDetails.policy rangeOfString:@"http://"].location != NSNotFound) {
+    
+    if ([self.restaurantDetails.policy rangeOfString:@"http://"].location != NSNotFound) {
         self.textViewPolicy.hidden = YES;
         self.webViewPolicy.hidden = NO;
         [self.webViewPolicy loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.restaurantDetails.policy]]];
         
     }
     else {
-        self.textViewPolicy.hidden = NO;
-        self.webViewPolicy.hidden = YES;
+        self.textViewPolicy.hidden = YES;
+        self.webViewPolicy.hidden = NO;
+        [self.webViewPolicy loadHTMLString:self.restaurantDetails.policy baseURL:nil];
         
-        
-        self.policyLoaded = YES;
     }
+    
+//    if ([self.restaurantDetails.policy rangeOfString:@"</p>"].location != NSNotFound || [self.restaurantDetails.policy rangeOfString:@"</div>"].location != NSNotFound || [self.restaurantDetails.policy rangeOfString:@"<br>"].location != NSNotFound || [self.restaurantDetails.policy rangeOfString:@"</br>"].location != NSNotFound) {
+//        self.textViewPolicy.hidden = YES;
+//        self.webViewPolicy.hidden = NO;
+//        [self.webViewPolicy loadHTMLString:self.restaurantDetails.policy baseURL:nil];
+//        
+//    }
+//    else if ([self.restaurantDetails.policy rangeOfString:@"http://"].location != NSNotFound) {
+//        self.textViewPolicy.hidden = YES;
+//        self.webViewPolicy.hidden = NO;
+//        [self.webViewPolicy loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.restaurantDetails.policy]]];
+//        
+//    }
+//    else {
+//        self.textViewPolicy.hidden = NO;
+//        self.webViewPolicy.hidden = YES;
+//        
+//        
+//        self.policyLoaded = YES;
+//    }
     
 }
 
@@ -245,14 +259,14 @@
 }
 - (IBAction)showRestaurantPolicy:(id)sender {
 
-    if ([self.restaurantDetails.policy rangeOfString:@"</p>"].location != NSNotFound || [self.restaurantDetails.policy rangeOfString:@"</div>"].location != NSNotFound || [self.restaurantDetails.policy rangeOfString:@"<br>"].location != NSNotFound || [self.restaurantDetails.policy rangeOfString:@"</br>"].location != NSNotFound) {
+//    if ([self.restaurantDetails.policy rangeOfString:@"</p>"].location != NSNotFound || [self.restaurantDetails.policy rangeOfString:@"</div>"].location != NSNotFound || [self.restaurantDetails.policy rangeOfString:@"<br>"].location != NSNotFound || [self.restaurantDetails.policy rangeOfString:@"</br>"].location != NSNotFound) {
         AlertView *alert = [[AlertView alloc] initAlertWithWebURL:self.restaurantDetails.policy delegate:self buttons:@[@"ACCEPT",@"DECLINE"]];
 
-    }
-    else {
-        AlertView *alert = [[AlertView alloc] initAlertWithMessage:self.restaurantDetails.policy delegate:self buttons:@[@"ACCEPT",@"DECLINE"]];
-        [alert showAlertView];
-    }
+//    }
+//    else {
+//        AlertView *alert = [[AlertView alloc] initAlertWithMessage:self.restaurantDetails.policy delegate:self buttons:@[@"ACCEPT",@"DECLINE"]];
+//        [alert showAlertView];
+//    }
     
     
 }

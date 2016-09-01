@@ -741,7 +741,7 @@
         [newOrderList addObjectsFromArray:decodedList];
         
         NSDictionary *menuItem = [self menuItemToDictionary:menu itemNumber:1];
-        NSLog(@"decoded:%@",decodedList);
+//        NSLog(@"decoded:%@",decodedList);
         
         for (NSInteger index = 0; index < decodedList.count; index++) {
             NSMutableDictionary *item = [NSMutableDictionary dictionaryWithDictionary:(NSDictionary*)decodedList[index]];

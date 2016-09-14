@@ -93,6 +93,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"billoutRequestedOrdersClearedObserver" object:nil];
     [self hideTitleBar];
+    [self.navigationItem setPrompt:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -105,6 +106,7 @@
     if (loggedUSER && loggedUSER.current_restaurantName && loggedUSER.current_restaurantName.length > 0) {
         self.title = loggedUSER.current_restaurantName;
     }
+    
     
     
 }
@@ -369,7 +371,7 @@
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NETWORK_INDICATOR(NO)
-//        NSLog(@"response:%@",responseObject);
+        NSLog(@"response:%@",responseObject);
         if ([responseObject isKindOfClass:[NSError class]] || ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject allKeys] containsObject:@"error"])) {
             if ([responseObject isKindOfClass:[NSError class]]) {
                 
@@ -773,7 +775,7 @@
                                      };
             [newOrderList addObject:bundle];
         }
-        NSLog(@"orderItems:%@",newOrderList);
+//        NSLog(@"orderItems:%@",newOrderList);
         order.items = [self encodeData:newOrderList withKey:@"orderItems"];
         order.orderSent = @NO;
         order.tableNumber = tableNumber;

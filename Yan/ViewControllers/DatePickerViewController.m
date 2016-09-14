@@ -137,20 +137,23 @@
     }
     NSString *stringDate = [dateFormat stringFromDate:myDate];
     
-    //convert to 12hour format
-    if ([stringDate rangeOfString:@"AM"].location == NSNotFound && [stringDate rangeOfString:@"PM"].location == NSNotFound) {
-        NSString *hour = [stringDate componentsSeparatedByString:@":"][0];
-        NSString *minute = [stringDate componentsSeparatedByString:@":"][1];
-        if ([hour integerValue] == 12) {
-            stringDate = [NSString stringWithFormat:@"12:%@ PM",minute];
-        }
-        else if ([hour integerValue] > 11) {
-            stringDate = [NSString stringWithFormat:@"%li:%@ PM",(long)([hour integerValue]-12),minute];
-        }
-        else {
-            stringDate = [NSString stringWithFormat:@"%@:%@ AM",hour,minute];
+    if ([stringDate rangeOfString:@":"].location != NSNotFound) {
+        //convert to 12hour format
+        if ([stringDate rangeOfString:@"AM"].location == NSNotFound && [stringDate rangeOfString:@"PM"].location == NSNotFound) {
+            NSString *hour = [stringDate componentsSeparatedByString:@":"][0];
+            NSString *minute = [stringDate componentsSeparatedByString:@":"][1];
+            if ([hour integerValue] == 12) {
+                stringDate = [NSString stringWithFormat:@"12:%@ PM",minute];
+            }
+            else if ([hour integerValue] > 11) {
+                stringDate = [NSString stringWithFormat:@"%li:%@ PM",(long)([hour integerValue]-12),minute];
+            }
+            else {
+                stringDate = [NSString stringWithFormat:@"%@:%@ AM",hour,minute];
+            }
         }
     }
+    
     
     [self dismissViewControllerAnimated:YES completion:^{
         [self.delegate dateSelected:stringDate mode:_datePickerMode];

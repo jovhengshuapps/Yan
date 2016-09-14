@@ -301,7 +301,7 @@ BOOL hackFromLoad = NO;
         error = nil;
         
         if([context save:&error]) {
-            NSLog(@"orders saved");
+//            NSLog(@"orders saved");
             
             
             [self computeTotalOrderPrice];
@@ -313,7 +313,7 @@ BOOL hackFromLoad = NO;
             
         }
         else {
-            NSLog(@"order saving failed");
+//            NSLog(@"order saving failed");
         }
         
     }

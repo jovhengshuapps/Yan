@@ -258,6 +258,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveTableOrders:) name:@"getCurrentTableOrder" object:nil];
     [self callGETAPI:API_GETTABLEORDERS(account.current_restaurantID, account.current_tableNumber) withParameters:@{} completionNotification:@"getCurrentTableOrder"];
     [self.navigationItem setPrompt:@"Updating Orderlist"];
+    self.mainTable.tableFooterView.userInteractionEnabled = NO;
 }
 
 - (void) saveTableOrders:(NSNotification*)notification {
@@ -311,9 +312,10 @@
         error = nil;
         
         if([context save:&error]) {
-            NSLog(@"orders saved");
+//            NSLog(@"orders saved");
             
             
+            self.mainTable.tableFooterView.userInteractionEnabled = YES;
             [self fetchOrderDataList];
             [self.mainTable reloadData];
             
@@ -324,7 +326,7 @@
             
         }
         else {
-            NSLog(@"order saving failed");
+//            NSLog(@"order saving failed");
         }
     }
     
@@ -362,6 +364,7 @@
     
     ///something wrong herer??????
     
+    self.mainTable.userInteractionEnabled = NO;
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"MM/dd/yyyy"];
@@ -413,21 +416,23 @@
 //                             /*@"notes": notes,*/
 //                             @"menus":self.arrayOrderList
 //                             } );
-//    Account *account = [self userLoggedIn];
     
-    if (account.current_orderID.length) {
-        
+    
+    if (account.current_orderID && ![account.current_orderID isEqualToString:@""]) {
+//        NSLog(@"order update:%@",account.current_orderID);
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(submitOrder:) name:@"submitOrder" object:nil];
         [self callAPI:API_SENDORDERUPDATE(account.current_restaurantID, account.identifier,account.current_orderID) withParameters:@{
                                                                                                        @"order_date": order_date,
                                                                                                        @"table": account.current_tableNumber,
-                                                                                                       /*@"notes": notes,*/
+                                                                                                       /*@"notes": 
+                                                                                                        notes,*/
                                                                                                        @"menus":self.arrayOrderList
                                                                                                        } completionNotification:@"submitOrder"];
     }
     else {
         
+//        NSLog(@"NEW order ");
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(submitOrder:) name:@"submitOrder" object:nil];
         [self callAPI:API_SENDORDER(account.current_restaurantID, account.identifier) withParameters:@{
                                                                                                        @"order_date": order_date,
@@ -440,6 +445,7 @@
 }
 
 - (void) submitOrder:(NSNotification*)notification {
+    self.mainTable.userInteractionEnabled = YES;
     NSDictionary *response = notification.object;
     if (response[@"success"] && response[@"id"]) {
         Account *userAccount = [self userLoggedIn];
@@ -1148,6 +1154,7 @@
         loggedUSER.current_restaurantID = @"";
         loggedUSER.current_tableNumber = @"";
         loggedUSER.current_restaurantName = @"";
+        loggedUSER.current_orderID = @"";
         
         error = nil;
         if (![context save:&error]) {

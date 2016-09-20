@@ -40,6 +40,8 @@ BOOL hackFromLoad = NO;
 @property (strong, nonatomic) UIImageView *arrowMainMenu1;
 @property (strong, nonatomic) UIImageView *arrowMainMenu2;
 
+@property (strong, nonatomic) UILabel *labelTextStatus;
+
 @end
 
 @implementation OrderMenuViewController
@@ -247,7 +249,16 @@ BOOL hackFromLoad = NO;
     [self callGETAPI:API_GETTABLEORDERS(account.current_restaurantID, account.current_tableNumber) withParameters:@{} completionNotification:@"getCurrentTableOrder"];
     [self.activityIndicatorTotalAmount startAnimating];
     self.activityIndicatorTotalAmount.hidden = NO;
-    [self.navigationItem setPrompt:@"Updating Orderlist"];
+//    [self.navigationItem setPrompt:@"Updating Orderlist"];
+    
+    KEYWINDOW.windowLevel = UIWindowLevelStatusBar;
+    
+    _labelTextStatus = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, KEYWINDOW.frame.size.width, 20.0f)];
+    _labelTextStatus.backgroundColor = [UIColor clearColor];
+    _labelTextStatus.text = @"Updating Order List...";
+    _labelTextStatus.textColor = [UIColor whiteColor];
+    [KEYWINDOW addSubview:self.labelTextStatus];
+    
 }
 
 - (void) saveTableOrders:(NSNotification*)notification {
@@ -255,7 +266,11 @@ BOOL hackFromLoad = NO;
 //something wrong here. data[orders] should be parsed.
     NSArray *orderList = (NSArray*)notification.object;
     
-    [self.navigationItem setPrompt:nil];
+    KEYWINDOW.windowLevel = UIWindowLevelNormal;
+    [_labelTextStatus removeFromSuperview];
+    
+    
+//    [self.navigationItem setPrompt:nil];
     for (NSDictionary *data in orderList) {
         NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
         
@@ -784,4 +799,5 @@ BOOL hackFromLoad = NO;
         }
     }
 }
+
 @end

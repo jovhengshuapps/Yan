@@ -22,6 +22,8 @@
 @property (strong, nonatomic) NSMutableDictionary *dictionaryOtherOrders;
 @property (strong, nonatomic) NSMutableArray *arrayOtherUsers;
 
+@property (strong, nonatomic) UILabel *labelTextStatus;
+
 @end
 
 @implementation ConfirmOrderViewController
@@ -257,8 +259,17 @@
     Account *account = [self userLoggedIn];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveTableOrders:) name:@"getCurrentTableOrder" object:nil];
     [self callGETAPI:API_GETTABLEORDERS(account.current_restaurantID, account.current_tableNumber) withParameters:@{} completionNotification:@"getCurrentTableOrder"];
-    [self.navigationItem setPrompt:@"Updating Orderlist"];
+//    [self.navigationItem setPrompt:@"Updating Orderlist"];
     self.mainTable.tableFooterView.userInteractionEnabled = NO;
+    
+    
+    KEYWINDOW.windowLevel = UIWindowLevelStatusBar;
+    
+    _labelTextStatus = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, KEYWINDOW.frame.size.width, 20.0f)];
+    _labelTextStatus.backgroundColor = [UIColor clearColor];
+    _labelTextStatus.text = @"Updating Order List...";
+    _labelTextStatus.textColor = [UIColor whiteColor];
+    [KEYWINDOW addSubview:self.labelTextStatus];
 }
 
 - (void) saveTableOrders:(NSNotification*)notification {
@@ -266,7 +277,9 @@
     
     NSArray *orderList = (NSArray*)notification.object;
     
-    [self.navigationItem setPrompt:nil];
+    KEYWINDOW.windowLevel = UIWindowLevelNormal;
+    [_labelTextStatus removeFromSuperview];
+//    [self.navigationItem setPrompt:nil];
     for (NSDictionary *data in orderList) {
         NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
         

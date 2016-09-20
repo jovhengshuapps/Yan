@@ -26,6 +26,9 @@
 @property (strong, nonatomic) NSMutableDictionary *socialAccount;
 @property (assign, nonatomic) NSInteger restaurantID;
 @property (assign, nonatomic) NSInteger tableNumber;
+
+@property (strong, nonatomic) UILabel *labelTextStatus;
+
 @end
 
 @implementation HomeViewController
@@ -176,7 +179,11 @@
 }
 
 - (void) changeView:(NSNotification*)notification {
-    [self.navigationItem setPrompt:nil];
+//    [self.navigationItem setPrompt:nil];
+    
+    
+    KEYWINDOW.windowLevel = UIWindowLevelNormal;
+    [_labelTextStatus removeFromSuperview];
     
     if ([notification.object isEqualToString:@"ProceedToMenu"]) {
         _viewDefaultHome.hidden = NO;
@@ -352,7 +359,19 @@
             
             //            NSLog(@"fetched user:%@\n\naccount:%@", result,_socialAccount);
 //            [self showTitleBar:@"Logging in to Yan!"];
-            [self.navigationItem setPrompt:@"Logging in to Yan!"];
+//            [self.navigationItem setPrompt:@"Logging in to Yan!"];
+            
+            
+            KEYWINDOW.windowLevel = UIWindowLevelStatusBar;
+            
+            if (!self.labelTextStatus) {
+                _labelTextStatus = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, KEYWINDOW.frame.size.width, 20.0f)];
+                _labelTextStatus.backgroundColor = [UIColor clearColor];
+                _labelTextStatus.textColor = [UIColor whiteColor];
+                [KEYWINDOW addSubview:self.labelTextStatus];
+            }
+            _labelTextStatus.text = @"Logging in to Yan!";
+            
             self.view.userInteractionEnabled = NO;
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessful:) name:@"socialLoginObserver" object:nil];
             NSString *deviceToken = ((AppDelegate*)[UIApplication sharedApplication].delegate).deviceToken;
@@ -391,7 +410,18 @@
     _socialAccount[@"password"] = [self passwordForName:user.profile.name email:user.profile.email birthday:@"01/01/1970" gender:@"unknown"];
     
 //    NSLog(@"account:%@", _socialAccount);
-    [self.navigationItem setPrompt:@"Logging in to Yan!"];
+//    [self.navigationItem setPrompt:@"Logging in to Yan!"];
+    
+    KEYWINDOW.windowLevel = UIWindowLevelStatusBar;
+    
+    if (!self.labelTextStatus) {
+        _labelTextStatus = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, KEYWINDOW.frame.size.width, 20.0f)];
+        _labelTextStatus.backgroundColor = [UIColor clearColor];
+        _labelTextStatus.textColor = [UIColor whiteColor];
+        [KEYWINDOW addSubview:self.labelTextStatus];
+    }
+    _labelTextStatus.text = @"Logging in to Yan!";
+    
     self.view.userInteractionEnabled = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gloginSuccessful:) name:@"socialLoginObserver" object:nil];
     NSString *deviceToken = ((AppDelegate*)[UIApplication sharedApplication].delegate).deviceToken;
@@ -421,7 +451,19 @@
         }
     } else {
         
-        [self.navigationItem setPrompt:@"Creating Yan! account"];
+//        [self.navigationItem setPrompt:@"Creating Yan! account"];
+        
+        
+        KEYWINDOW.windowLevel = UIWindowLevelStatusBar;
+        
+        if (!self.labelTextStatus) {
+            _labelTextStatus = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, KEYWINDOW.frame.size.width, 20.0f)];
+            _labelTextStatus.backgroundColor = [UIColor clearColor];
+            _labelTextStatus.textColor = [UIColor whiteColor];
+            [KEYWINDOW addSubview:self.labelTextStatus];
+        }
+        _labelTextStatus.text = @"Logging in to Yan!";
+        
         self.view.userInteractionEnabled = NO;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerCompletedMethod:) name:@"registerCompletedObserver" object:nil];
@@ -440,7 +482,11 @@
 - (void)registerCompletedMethod:(NSNotification*)notification {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     id response = notification.object;
-    [self.navigationItem setPrompt:nil];
+//    [self.navigationItem setPrompt:nil];
+    
+    KEYWINDOW.windowLevel = UIWindowLevelNormal;
+    [_labelTextStatus removeFromSuperview];
+    
     if ([response isKindOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
         
         //        [self showTitleBar:@"SIGN IN"];
@@ -472,7 +518,19 @@
         }
     } else {
         
-        [self.navigationItem setPrompt:@"Creating Yan! account"];
+//        [self.navigationItem setPrompt:@"Creating Yan! account"];
+        
+        
+        KEYWINDOW.windowLevel = UIWindowLevelStatusBar;
+        
+        if (!self.labelTextStatus) {
+            _labelTextStatus = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, KEYWINDOW.frame.size.width, 20.0f)];
+            _labelTextStatus.backgroundColor = [UIColor clearColor];
+            _labelTextStatus.textColor = [UIColor whiteColor];
+            [KEYWINDOW addSubview:self.labelTextStatus];
+        }
+        _labelTextStatus.text = @"Logging in to Yan!";
+        
         self.view.userInteractionEnabled = NO;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gregisterCompletedMethod:) name:@"registerCompletedObserver" object:nil];
@@ -491,7 +549,11 @@
 - (void)gregisterCompletedMethod:(NSNotification*)notification {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     id response = notification.object;
-    [self.navigationItem setPrompt:nil];
+    
+    KEYWINDOW.windowLevel = UIWindowLevelNormal;
+    [_labelTextStatus removeFromSuperview];
+    
+//    [self.navigationItem setPrompt:nil];
     if ([response isKindOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
         
         //        [self showTitleBar:@"SIGN IN"];

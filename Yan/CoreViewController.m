@@ -338,7 +338,7 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     Account *user = [self userLoggedIn];
     if (user.token) {
-        NSLog(@"DEVICE TOKEN:%@",user.token);
+//        NSLog(@"DEVICE TOKEN:%@",user.token);
         [manager.requestSerializer setValue:user.token forHTTPHeaderField:@"x-yan-resto-api"];
     }
     
@@ -371,7 +371,7 @@
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NETWORK_INDICATOR(NO)
-        NSLog(@"response:%@",responseObject);
+//        NSLog(@"response:%@",responseObject);
         if ([responseObject isKindOfClass:[NSError class]] || ([responseObject isKindOfClass:[NSDictionary class]] && [[responseObject allKeys] containsObject:@"error"])) {
             if ([responseObject isKindOfClass:[NSError class]]) {
                 
@@ -406,7 +406,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
 //        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
         NETWORK_INDICATOR(NO)
-        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:error];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:error];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             [alert dismissViewControllerAnimated:YES completion:nil];
@@ -463,7 +463,7 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
 //        NSLog(@"task:%@\n\n[%@]%@",task,[error description],[error localizedDescription]);
         NETWORK_INDICATOR(NO)
-        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:error];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:error];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             [alert dismissViewControllerAnimated:YES completion:nil];
@@ -562,7 +562,7 @@
         
         [self presentViewController:alert animated:YES completion:^{
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:response];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:response];
         }];
     }
 }

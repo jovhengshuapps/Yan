@@ -33,7 +33,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>360</string>
+	<string>365</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -100,11 +100,23 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Please enable the app to use Camera to scan for Restaurant QR Codes</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Please enable the app to use Calendar to save Restaurant Reservations</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>Please enable the app to use Reminders to save Restaurant Reservations</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Bluetooth Services is required</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Yan would like to access your Photos</string>
 </dict>
 </plist>

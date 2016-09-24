@@ -33,7 +33,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>365</string>
+	<string>368</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -79,10 +79,20 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Bluetooth Services is required</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Please enable the app to use Calendar to save Restaurant Reservations</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Please enable the app to use Camera to scan for Restaurant QR Codes</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Localization Services is required</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Localization Services is required</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Yan would like to access your Photos</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>Please enable the app to use Reminders to save Restaurant Reservations</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>LucidaGrande.ttc</string>
@@ -108,15 +118,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>NSCameraUsageDescription</key>
-	<string>Please enable the app to use Camera to scan for Restaurant QR Codes</string>
-	<key>NSCalendarsUsageDescription</key>
-	<string>Please enable the app to use Calendar to save Restaurant Reservations</string>
-	<key>NSRemindersUsageDescription</key>
-	<string>Please enable the app to use Reminders to save Restaurant Reservations</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Bluetooth Services is required</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Yan would like to access your Photos</string>
 </dict>
 </plist>

@@ -104,4 +104,8 @@
 
 #define API_GETBACKGROUND_IMAGE                                         [NSString stringWithFormat:@"admin/background/image"]
 
+#define API_FORGOT_PASSWORD(EMAIL)                                        [NSString stringWithFormat:@"user/change_pass/%@",EMAIL]
+
+#define API_USER_UPDATE_PROFILE                                               @"user/update_profile"
+
 #endif /* Config_h */

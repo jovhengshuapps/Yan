@@ -14,6 +14,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *textFieldBirthday;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldEmail;
 @property (weak, nonatomic) IBOutlet UITextField *textFieldPassword;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UIButton *buttonPrivacy;
+@property (weak, nonatomic) IBOutlet UIButton *buttonTerms;
 
 @end
 
@@ -25,6 +28,13 @@
     [self addDoneToolbar:_textFieldName];
     [self addDoneToolbar:_textFieldEmail];
     [self addDoneToolbar:_textFieldPassword];
+    
+    self.buttonPrivacy.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.buttonTerms.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.buttonPrivacy.titleLabel.minimumScaleFactor = -5.0f;
+    self.buttonTerms.titleLabel.minimumScaleFactor = -5.0f;
+    
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://mavenhive.net/privacy-policy.html"]]];
 }
 
 
@@ -183,5 +193,32 @@
     if (mode == UIDatePickerModeDate) {
         self.textFieldBirthday.text = dateString;
     }
+}
+- (IBAction)loadWebViewFromSelected:(id)sender {
+    [self.webView stopLoading];
+    if (sender == self.buttonPrivacy) {
+        
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://mavenhive.net/privacy-policy.html"]]];
+    }
+    else {
+        
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://mavenhive.net/yan/terms-conditions.html"]]];
+    }
+    
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.webView.bounds.size.width, self.webView.bounds.size.height)];
+    view.backgroundColor = [UIColor colorWithWhite:0.3 alpha:0.3];
+    view.tag = 1199;
+    UIActivityIndicatorView *av = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [view addSubview:av];
+    [av startAnimating];
+    
+    [self.webView addSubview:view];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    [[self.webView viewWithTag:1199] removeFromSuperview];
 }
 @end

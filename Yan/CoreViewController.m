@@ -338,7 +338,6 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     Account *user = [self userLoggedIn];
     if (user.token) {
-//        NSLog(@"DEVICE TOKEN:%@",user.token);
         [manager.requestSerializer setValue:user.token forHTTPHeaderField:@"x-yan-resto-api"];
     }
     

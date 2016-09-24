@@ -15,6 +15,7 @@
 @property (strong, nonatomic) UIView *container;
 @property (strong, nonatomic) AVPlayer *moviePlayer;
 @property (strong, nonatomic) AVPlayerViewController *moviePlayerController;
+@property (strong, nonatomic) UITextField *textBoxField;
 
 @end
 
@@ -23,6 +24,7 @@
 @synthesize message = _message;
 @synthesize buttonsArray = _buttonsArray;
 @synthesize videoURLstring = _videoURLstring;
+@synthesize textBoxText = _textBoxText;
 
 - (instancetype) initAlertWithMessage:(nullable NSString*)aMessage delegate:(nullable id)aDelegate buttons:(nullable NSArray*)aButtonsArray {
     id object = [self init];
@@ -38,6 +40,26 @@
     _instance = object;
     
     [object setupAlertView:aDelegate:aMessage:aButtonsArray];
+    
+    return object;
+}
+
+
+- (instancetype) initAlertWithTextbox:(nullable NSString*)text Message:(nullable NSString*)aMessage delegate:(nullable id)aDelegate {
+    id object = [self init];
+    if (!object) {
+        return nil;
+    }
+    
+    //initialize
+    
+    _delegate = aDelegate;
+    _message = aMessage;
+    _instance = object;
+    _buttonsArray = @[@"CANCEL",@"OK"];
+    _textBoxText = text;
+    
+    [object setupAlertViewWithTextbox:aDelegate:text:aMessage:@[@"CANCEL",@"OK"]];
     
     return object;
 }
@@ -233,6 +255,113 @@
     [KEYWINDOW addSubview:_background];
     
 //    [self showAlertView];
+}
+
+- (void)setupAlertViewWithTextbox:(nullable id)aDelegate :(nullable NSString*)textBoxT :(nullable NSString*)aMessage :(nullable NSArray*)aButtonsArray {
+    
+    CGFloat defaultHeight =  200.0f;
+    CGFloat maxHeight = KEYWINDOW.bounds.size.height - 40.0f;
+    CGFloat buttonHeight = 30.0f;
+    
+    _background = [[UIView alloc] initWithFrame:KEYWINDOW.bounds];
+    _background.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.3f];
+    _background.center = KEYWINDOW.center;
+    
+    
+    _container = [[UIView alloc ] initWithFrame:CGRectMake(0.0f, 20.0f, _background.frame.size.width - 20.0f, defaultHeight)];
+    _container.center = _background.center;
+    _container.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
+    
+    _container.layer.borderColor = [UIColorFromRGB(0x959595) CGColor];
+    _container.layer.borderWidth = 2.0f;
+    
+    [_background addSubview:_container];
+    
+    _background.userInteractionEnabled = NO;
+    _container.userInteractionEnabled = NO;
+    
+    //setup text
+    UITextView *contentText = [[UITextView alloc] initWithFrame:CGRectMake(10.0f, 10.0f, _container.frame.size.width - 20.0f, _container.frame.size.height - (28.0f + (buttonHeight*2)))];
+    contentText.text = _message;
+    contentText.textColor = UIColorFromRGB(0x333333);
+    contentText.font = [UIFont fontWithName:@"LucidaGrande" size:24.0f];
+    contentText.textAlignment = NSTextAlignmentCenter;
+    contentText.editable = NO;
+    contentText.backgroundColor = [UIColor clearColor];
+    [_container addSubview:contentText];
+    
+    CGFloat contentSizeHeight = contentText.contentSize.height + 25.0f;
+    
+    if (contentSizeHeight >= maxHeight) {
+        
+        CGRect rect      = _container.frame;
+        rect.size.height = maxHeight;
+        _container.frame   = rect;
+        
+        
+        rect      = contentText.frame;
+        rect.size.height = _container.frame.size.height - 10.0f - (28.0f + (buttonHeight*2));
+        contentText.frame   = rect;
+    }
+    else if (contentSizeHeight > defaultHeight - 25.0f) {
+        
+        CGRect rect      = contentText.frame;
+        rect.size.height = contentSizeHeight;
+        contentText.frame   = rect;
+        
+        
+        rect      = _container.frame;
+        rect.size.height = contentText.frame.size.height + 10.0f + (28.0f + (buttonHeight*2));
+        _container.frame   = rect;
+    }
+    
+    //setup textbox
+    self.textBoxField = [[UITextField alloc] initWithFrame:CGRectMake(15.0f, contentText.bounds.size.height + contentText.bounds.origin.y + 8.0f, _container.frame.size.width - 30.0f, buttonHeight)];
+    self.textBoxField.placeholder = @"Email";
+    self.textBoxField.text = textBoxT;
+    self.textBoxField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.textBoxField.delegate = self;
+    [_container addSubview:self.textBoxField];
+    
+    
+    
+    //setup buttons
+    for (NSInteger i = 0; i < _buttonsArray.count; i++) {
+        if (![[_buttonsArray objectAtIndex:i] isKindOfClass:[NSString class]]) {
+            break;
+        }
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.backgroundColor = UIColorFromRGB(0x959595);
+        
+        button.layer.borderColor = [UIColorFromRGB(0x959595) CGColor];
+        button.layer.borderWidth = 1.0f;
+        
+        [button setTitle:[_buttonsArray objectAtIndex:i] forState:UIControlStateNormal];
+        [button setTitleColor:UIColorFromRGB(0x333333) forState:UIControlStateNormal];
+        [button setTitleColor:UIColorFromRGB(0xFFFFFF) forState:UIControlStateHighlighted];
+        
+        CGFloat buttonWidth = contentText.bounds.size.width/(_buttonsArray.count);
+        
+        button.frame = CGRectMake(10.0f + ((buttonWidth + 5.0f) * i), _container.bounds.size.height - 7.0f - buttonHeight, buttonWidth - (5.0f * i), buttonHeight);
+        button.tag = i;
+        
+        [button addTarget:_instance action:@selector(clickedAtIndex:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [_container addSubview:button];
+        
+    }
+    
+    
+    
+    
+    UITapGestureRecognizer *tapClose = [[UITapGestureRecognizer alloc] initWithTarget:_instance action:@selector(closeAlertView)];
+    [_background addGestureRecognizer:tapClose];
+    
+    
+    _container.transform = CGAffineTransformMakeScale(0.1, 0.1);
+    [KEYWINDOW addSubview:_background];
+    
+    //    [self showAlertView];
 }
 
 - (void)setupVideoAd:(nullable id)aDelegate :(nullable NSURL*)videoURL {
@@ -546,6 +675,9 @@
 - (void) clickedAtIndex:(UIButton*)sender {
     NSInteger index = sender.tag;
     if ([_delegate respondsToSelector:@selector(alertView:clickedButtonAtIndex:)]) {
+        if (self.textBoxField) {
+            self.textBoxText = self.textBoxField.text;
+        }
         [_delegate alertView:_instance clickedButtonAtIndex:index];
     }
     if (index == 0) {
@@ -578,5 +710,18 @@
     return YES;
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    self.container.center = CGPointMake(self.container.center.x, self.container.center.y - 80.0f);
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    self.container.center = CGPointMake(self.container.center.x, self.container.center.y + 80.0f);
+    return YES;
+}
 
 @end

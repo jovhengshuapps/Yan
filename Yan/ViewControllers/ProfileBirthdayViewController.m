@@ -64,6 +64,25 @@
 }
 - (IBAction)saveProfile:(id)sender {
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProfile:) name:@"updateProfileObserver" object:nil];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM/dd/YYYY"];
+    
+    //    NSLog(@"formattedDate:%@",[dateFormatter stringFromDate:formattedDate]);
+    [self callAPI:API_USER_UPDATE_PROFILE withParameters:@{
+                                                     @"user_email": @"",
+                                                     @"user_password": @"",
+                                                     @"full_name": @"",
+                                                     @"birthday": [dateFormatter stringFromDate:self.datePicker.date]
+                                                     } completionNotification:@"updateProfileObserver"];
+    
+    
+    
+    
+}
+
+- (void) updateProfile:(NSNotification*)notification {
+    
     Account *account = (Account*)[self userLoggedIn];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -88,11 +107,16 @@
         }];
     }
     else {
+        
+        
+        
+        
         [self.navigationController popViewControllerAnimated:YES];
     }
-    
-    
 }
+
+
+
 - (IBAction)cancelPressed:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }

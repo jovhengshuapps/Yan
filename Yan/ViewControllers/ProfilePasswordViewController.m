@@ -37,33 +37,32 @@
 }
 
 - (IBAction)saveProfile:(id)sender {
+    
     if ([_textFieldOldPassword.text isEqualToString:_currentPassword]) {
         
-        if ([_textFieldOldPassword.text isEqualToString:_textFieldNewPassword.text]) {
+        if (![_textFieldOldPassword.text isEqualToString:_textFieldNewPassword.text]) {
+            
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProfile:) name:@"updateProfileObserver" object:nil];
+            
+            
             Account *account = (Account*)[self userLoggedIn];
             
-            NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
-            account.password = _textFieldNewPassword.text;
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"MM/dd/YYYY"];
             
-            NSError *error = nil;
-            if (![context save:&error]) {
-                
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error Saving Profile [%li]",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                    [alert dismissViewControllerAnimated:YES completion:nil];
-                }];
-                [alert addAction:actionOK];
-                
-                [self presentViewController:alert animated:YES completion:^{
-                    
-                }];
-            }
-            else {
-                [self.navigationController popViewControllerAnimated:YES];
-            }
+            NSDate *formattedDate = [dateFormatter dateFromString:account.birthday];
+            
+            [self callAPI:API_USER_UPDATE_PROFILE withParameters:@{
+                                                                   @"user_email": @"",
+                                                                   @"user_password": _textFieldNewPassword.text,
+                                                                   @"full_name": @"",
+                                                                   @"birthday": [dateFormatter stringFromDate:formattedDate]
+                                                                   } completionNotification:@"updateProfileObserver"];
+            
+            
         }
         else {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Wrong Password" message:@"Old Password and New Password Field should be the same." preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid Password" message:@"Old Password and New Password Field should NOT be the same." preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                 [alert dismissViewControllerAnimated:YES completion:nil];
             }];
@@ -88,6 +87,32 @@
         }];
     }
     
+    
+}
+
+- (void) updateProfile:(NSNotification*)notification {
+    
+    Account *account = (Account*)[self userLoggedIn];
+    
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    account.password = _textFieldNewPassword.text;
+    
+    NSError *error = nil;
+    if (![context save:&error]) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error Saving Profile [%li]",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
+    else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 - (IBAction)cancelPressed:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];

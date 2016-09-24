@@ -63,7 +63,45 @@
 }
 
 - (void)alertView:(AlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-//    NSLog(@"Clicked index:%li",(long)buttonIndex);
+    if (buttonIndex == 1) {
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(forgotPasswordResponse:) name:@"forgotPasswordResponseObserver" object:nil];
+        [self callAPI:API_FORGOT_PASSWORD(alertView.textBoxText) withParameters:@{} completionNotification:@"forgotPasswordResponseObserver"];
+        [alertView dismissAlertView];
+    }
+}
+
+- (void) forgotPasswordResponse:(NSNotification*)notification {
+    NSLog(@"response:%@",notification.object);
+    NSDictionary *response = (NSDictionary*)notification.object;
+    if ([response isKindOfClass:[NSDictionary class]]) {
+        if ([[response objectForKey:@"success"] integerValue] == 1) {
+            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Success" message:[response objectForKey:@"message"] preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alert dismissViewControllerAnimated:YES completion:^{
+                }];
+            }];
+            [alert addAction:actionOK];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+        }
+        else if ([[response objectForKey:@"error"] integerValue] == 503) {
+            
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:[response objectForKey:@"message"] preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                [alert dismissViewControllerAnimated:YES completion:^{
+                }];
+            }];
+            [alert addAction:actionOK];
+            
+            [self presentViewController:alert animated:YES completion:^{
+                
+            }];
+        }
+    }
 }
 
 - (IBAction)showRegister:(id)sender {
@@ -71,6 +109,9 @@
 //    [self.navigationController pushViewController:registerViewController animated:YES];
 }
 - (IBAction)showForgotPassword:(id)sender {
+    
+    AlertView *alertText = [[AlertView alloc] initAlertWithTextbox:@"" Message:@"You will receive a new password on this email" delegate:self];
+    [alertText showAlertView];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

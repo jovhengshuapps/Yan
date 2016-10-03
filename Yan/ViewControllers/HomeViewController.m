@@ -423,7 +423,7 @@
     _labelTextStatus.text = @"Logging in to Yan!";
     
     self.view.userInteractionEnabled = NO;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gloginSuccessful:) name:@"socialLoginObserver" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loginSuccessful:) name:@"socialLoginObserver" object:nil];
     NSString *deviceToken = ((AppDelegate*)[UIApplication sharedApplication].delegate).deviceToken;
     [self callAPI:API_USER_LOGIN withParameters:@{
                                                   @"username": _socialAccount[@"username"],
@@ -437,6 +437,7 @@
 - (void)loginSuccessful:(NSNotification*)notification {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     id response = notification.object;
+//    NSLog(@"login response:%@",response);
     if ([response isKindOfClass:[NSError class]]) {
         
         //        [self showTitleBar:@"SIGN IN"];
@@ -444,7 +445,7 @@
         return;
     }
     if (response[@"token"]){
-        if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"] :response[@"uid"]]) {
+        if ([self saveSocialLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :response[@"name"] :response[@"birthday"] :response[@"token"] :response[@"uid"]]) {
             [self.navigationController popToRootViewControllerAnimated:YES];
             self.view.userInteractionEnabled = YES;
             [self changeView:nil];
@@ -493,7 +494,7 @@
         self.view.userInteractionEnabled = YES;
         return;
     }
-    if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"] :response[@"uid"]]) {
+    if ([self saveSocialLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"] :response[@"uid"]]) {
         self.view.userInteractionEnabled = YES;
         [self.navigationController popToRootViewControllerAnimated:YES];
         self.view.userInteractionEnabled = YES;

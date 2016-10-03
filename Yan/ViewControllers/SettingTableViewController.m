@@ -15,6 +15,7 @@
 @interface SettingTableViewController ()
 @property (strong, nonatomic) NSArray *arraySettings;
 @property (strong, nonatomic) NSDictionary *settingDetails;
+@property (assign, nonatomic) BOOL isSocial;
 @end
 
 @implementation SettingTableViewController
@@ -35,6 +36,7 @@
     [super viewWillAppear:animated];
     
     self.title = @"Settings";
+    self.isSocial = NO;
     [self refreshAccountDetails];
 }
 
@@ -67,6 +69,7 @@
     self.arraySettings = nil;
     if (result.count) {
         Account *account = ((Account*)result[0]);
+        self.isSocial = [account.is_social boolValue];
         
         self.settingDetails = @{@"fullname":account.fullname,
                                 @"birthday":account.birthday,
@@ -139,10 +142,22 @@
     }
     else {
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"profileInfoCell" forIndexPath:indexPath];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"profileInfoCell"];
+        UITableViewCell *cell = nil;
+        if (self.isSocial && ([_arraySettings[indexPath.row] isEqualToString:@"email"] || [_arraySettings[indexPath.row] isEqualToString:@"password"])) {
+            
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+            }
         }
+        else {
+            
+            cell = [tableView dequeueReusableCellWithIdentifier:@"profileInfoCell" forIndexPath:indexPath];
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"profileInfoCell"];
+            }
+        }
+        
         
         if ([_arraySettings[indexPath.row] isEqualToString:@"password"]) {
             cell.textLabel.text = @"Password";
@@ -259,6 +274,10 @@
         
         [switchControl setOn:![switchControl isOn]];
         [self changeNotification:switchControl];
+    }
+    
+    else if (self.isSocial && ([_arraySettings[indexPath.row] isEqualToString:@"email"] || [_arraySettings[indexPath.row] isEqualToString:@"password"])) {
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }
     else {
         if ([_arraySettings[indexPath.row] isEqualToString:@"fullname"] || [_arraySettings[indexPath.row] isEqualToString:@"email"]) {

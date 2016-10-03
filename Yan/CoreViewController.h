@@ -21,6 +21,8 @@
 
 - (void)callPOSTAPI:( nullable NSString*)method withParameters:( nullable NSDictionary*)parameters completionHandler:(void  (^_Nullable)(id _Nullable response))completion;
 
+- (BOOL)saveSocialLoggedInAccount:( nullable NSString*)username :( nullable NSString*)password :( nullable NSString*)fullname :( nullable NSString*)birthday :( nullable NSString*)token :( nullable NSNumber*)identifier;
+
 - (BOOL)saveLoggedInAccount:( nullable NSString*)username :( nullable NSString*)password :( nullable NSString*)fullname :( nullable NSString*)birthday :( nullable NSString*)token :( nullable NSNumber*)identifier;
 -(void) openMenu;
 

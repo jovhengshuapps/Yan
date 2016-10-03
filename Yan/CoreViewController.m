@@ -475,6 +475,37 @@
     }];
 }
 
+- (BOOL)saveSocialLoggedInAccount:(NSString*)username :(NSString*)password :(NSString*)fullname :(NSString*)birthday :(NSString*)token :(NSNumber*)identifier {
+    NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    Account *account = [[Account alloc] initWithEntity:[NSEntityDescription entityForName:@"Account" inManagedObjectContext:context] insertIntoManagedObjectContext:context];
+    account.username = isNIL(username);
+    account.password = isNIL(password);
+    account.birthday = isNIL(birthday);
+    account.fullname = isNIL(fullname);
+    account.token = isNIL(token);
+    account.identifier = [NSString stringWithFormat:@"%@",identifier];
+    account.is_social = @"1";
+    //    NSLog(@"identifier USER:%@",identifier);
+    NSError *error = nil;
+    if ([context save:&error]) {
+        return YES;
+    }
+    else {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Error %li",(long)[error code]] message:[error localizedDescription] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+        }];
+        [alert addAction:actionOK];
+        
+        [self presentViewController:alert animated:YES completion:^{
+            
+        }];
+    }
+    return NO;
+}
+
 - (BOOL)saveLoggedInAccount:(NSString*)username :(NSString*)password :(NSString*)fullname :(NSString*)birthday :(NSString*)token :(NSNumber*)identifier {
     NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;
     
@@ -485,6 +516,7 @@
     account.fullname = isNIL(fullname);
     account.token = isNIL(token);
     account.identifier = [NSString stringWithFormat:@"%@",identifier];
+    account.is_social = @"0";
 //    NSLog(@"identifier USER:%@",identifier);
     NSError *error = nil;
     if ([context save:&error]) {

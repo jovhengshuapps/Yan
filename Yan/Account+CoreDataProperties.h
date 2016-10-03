@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *restaurant_logo_url;
 @property (nullable, nonatomic, retain) NSData *restaurant_logo_data;
 @property (nullable, nonatomic, retain) NSString *current_orderID;
+@property (nullable, nonatomic, retain) NSString *is_social;
 
 @end
 

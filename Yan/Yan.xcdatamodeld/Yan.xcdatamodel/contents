@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15G31" minimumToolsVersion="Automatic">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11232" systemVersion="15G1004" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Account" representedClassName="Account" syncable="YES">
         <attribute name="birthday" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="current_orderID" optional="YES" attributeType="String" syncable="YES"/>
@@ -9,6 +9,7 @@
         <attribute name="favorite_restaurant" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="fullname" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="is_social" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recent_restaurant" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="restaurant_logo_data" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -18,13 +19,13 @@
     </entity>
     <entity name="MenuItem" representedClassName="MenuItem" syncable="YES">
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="options" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="restaurantID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="restaurantID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <entity name="Notification" representedClassName="Notification" syncable="YES">
         <attribute name="body_text" optional="YES" attributeType="String" syncable="YES"/>
@@ -35,7 +36,7 @@
     </entity>
     <entity name="OrderList" representedClassName="OrderList" syncable="YES">
         <attribute name="items" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="orderSent" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="orderSent" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="orderSubmitID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="restaurant_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tableNumber" optional="YES" attributeType="String" syncable="YES"/>
@@ -65,7 +66,7 @@
         <attribute name="website" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Account" positionX="-63" positionY="-18" width="128" height="255"/>
+        <element name="Account" positionX="-63" positionY="-18" width="128" height="270"/>
         <element name="MenuItem" positionX="-63" positionY="18" width="128" height="165"/>
         <element name="Notification" positionX="-45" positionY="117" width="128" height="120"/>
         <element name="OrderList" positionX="-54" positionY="45" width="128" height="150"/>

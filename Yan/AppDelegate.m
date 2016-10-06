@@ -39,7 +39,7 @@
     
     [[UINavigationBar appearance] addSubview:statusBarView];
     
-    [[UINavigationBar appearance] setTitleTextAttributes:TextAttributes(@"LucidaGrande",0xFFFFFF,25.0f)];
+    [[UINavigationBar appearance] setTitleTextAttributes:TextAttributes(@"LucidaGrande",0xFFFFFF,18.0f)];
     
     [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:3.0f forBarMetrics:UIBarMetricsDefault];
     

@@ -966,7 +966,7 @@
 				TargetAttributes = {
 					33599B3F1CAD259000366C34 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = YSNGH6HTET;
+						DevelopmentTeam = 6X6XKTG7F6;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
 								enabled = 1;
@@ -1277,9 +1277,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Yan/Yan.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eugene Leoncio (9GZUYUT7E4)";
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = YSNGH6HTET;
+				DEVELOPMENT_TEAM = 6X6XKTG7F6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1295,8 +1294,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.yan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3b9b180-19a2-402c-99f7-12f154d81030";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "YanMavenhive-Dev";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1307,8 +1305,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Yan/Yan.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bilinear Inc. (YSNGH6HTET)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 6X6XKTG7F6;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1324,7 +1323,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = ph.bilinear.yan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3b9b180-19a2-402c-99f7-12f154d81030";
+				PROVISIONING_PROFILE = "43d54535-8a17-422a-90fe-7e402d23bf68";
+				PROVISIONING_PROFILE_SPECIFIER = YanMavenhive;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

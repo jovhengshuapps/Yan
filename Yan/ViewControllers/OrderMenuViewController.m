@@ -57,7 +57,7 @@ BOOL hackFromLoad = NO;
     
     
     Account *loggedUSER = [self userLoggedIn];
-    self.imageViewBackground.contentMode = UIViewContentModeScaleAspectFill;
+    self.imageViewBackground.contentMode = UIViewContentModeScaleAspectFit;
     self.imageViewBackground.clipsToBounds = YES;
     if (loggedUSER.restaurant_logo_data) {
         UIImage *image = [UIImage imageWithData:loggedUSER.restaurant_logo_data];

@@ -354,7 +354,7 @@
             _socialAccount = [[NSMutableDictionary alloc] init];
             _socialAccount[@"fullname"] = result[@"name"];
             _socialAccount[@"username"] = result[@"email"];
-            _socialAccount[@"birthday"] = result[@"birthday"];
+            _socialAccount[@"birthday"] = (result[@"birthday"])?result[@"birthday"]:@"01/01/1970";
             _socialAccount[@"password"] = [self passwordForName:result[@"name"] email:result[@"email"] birthday:result[@"birthday"] gender:result[@"gender"]];
             
             //            NSLog(@"fetched user:%@\n\naccount:%@", result,_socialAccount);
@@ -437,7 +437,7 @@
 - (void)loginSuccessful:(NSNotification*)notification {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     id response = notification.object;
-//    NSLog(@"login response:%@",response);
+    NSLog(@"login response:%@",response);
     if ([response isKindOfClass:[NSError class]]) {
         
         //        [self showTitleBar:@"SIGN IN"];
@@ -463,7 +463,7 @@
             _labelTextStatus.textColor = [UIColor whiteColor];
             [KEYWINDOW addSubview:self.labelTextStatus];
         }
-        _labelTextStatus.text = @"Logging in to Yan!";
+        _labelTextStatus.text = @"Creating Yan! account";
         
         self.view.userInteractionEnabled = NO;
         

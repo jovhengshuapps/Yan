@@ -41,7 +41,7 @@
     //    [self fetchOrderDataList];
     [self reloadOrderList];
     
-    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, KEYWINDOW.frame.size.width+5.0f, 110.0f)];
+    UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, KEYWINDOW.frame.size.width+5.0f, 140.0f)];
     footerView.backgroundColor = UIColorFromRGB(0xDFDFDF);
     
     UIView *totalView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, footerView.bounds.size.width, 44.0f)];
@@ -66,7 +66,7 @@
     [footerView addSubview:totalView];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setFrame:CGRectMake(20.0f, footerView.bounds.size.height - 44.0f - 10.0f, footerView.bounds.size.width - 20.0f - 20.0f, 44.0f)];
+    [button setFrame:CGRectMake(20.0f, footerView.bounds.size.height - 44.0f - 10.0f - 35.0f, footerView.bounds.size.width - 20.0f - 20.0f, 44.0f)];
     
     if (self.arrayOrderList.count == 0 && self.arrayBilloutList.count == 0) {
         button.enabled = NO;
@@ -91,6 +91,13 @@
     
     [footerView addSubview:button];
     
+    UILabel *labelSubText = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, button.frame.origin.y + 44.0f + 5.0f, footerView.bounds.size.width, 30.0f)];
+    labelSubText.backgroundColor = [UIColor clearColor];
+    labelSubText.font = [UIFont fontWithName:@"LucidaGrande" size:16.0f];
+    labelSubText.textColor = UIColorFromRGB(0x666666);
+    labelSubText.textAlignment = NSTextAlignmentCenter;
+    labelSubText.text = @"Service charge is not yet included.";
+    [footerView addSubview:labelSubText];
     
     [_mainTable setTableFooterView:footerView];
     

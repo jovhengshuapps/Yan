@@ -400,9 +400,6 @@
         
         error = nil;
         if ([context save:&error]) {
-            //            [[GIDSignIn sharedInstance] signOut];
-            //            FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-            //            [login logOut];
             
             //remove orders
             NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];
@@ -418,6 +415,9 @@
             
             error = nil;
             if ([context save:&error]) {
+                [[GIDSignIn sharedInstance] signOut];
+                FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+                [login logOut];
                 
                 [[NSNotificationCenter defaultCenter] postNotificationName:ChangeHomeViewToShow object:@"HomeViewLogin"];
                 [self.navigationController popToRootViewControllerAnimated:YES];

@@ -268,6 +268,8 @@
         loggedUSER.current_restaurantID = @"";
         loggedUSER.current_restaurantName = @"";
         loggedUSER.current_orderID = @"";
+        loggedUSER.restaurant_logo_url = @"";
+        loggedUSER.restaurant_logo_data = nil;
         
         if ([context save:&error]) {
             

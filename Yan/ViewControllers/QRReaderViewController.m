@@ -80,7 +80,7 @@
         [vc startScanning];
     }
     else {
-        self.restaurantID = @"5";
+        self.restaurantID = @"6";
         self.restaurantName = @"Artsy Café";
         self.tableNumber = @"1";
 //        self.logoURL = ARTSY_LOGO_URL;

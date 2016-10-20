@@ -25,7 +25,7 @@
 			<string>ph.bilinear.yan</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1209936165691687</string>
+				<string>fb1710956335889739</string>
 				<string>fbauth2</string>
 				<string>ph.bilinear.yan</string>
 				<string>com.googleusercontent.apps.668953075234-bf7f3vasveo0dj919fp75aj0saoa4vc9</string>
@@ -33,14 +33,14 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>372</string>
+	<string>373</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
 		<string>557d18c9674f8d3ef2ff56ffa38e06ed5639ee1e</string>
 	</dict>
 	<key>FacebookAppID</key>
-	<string>1209936165691687</string>
+	<string>1710956335889739</string>
 	<key>FacebookDisplayName</key>
 	<string>Yan-Sample</string>
 	<key>LSApplicationQueriesSchemes</key>

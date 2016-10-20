@@ -439,7 +439,7 @@
 - (void)loginSuccessful:(NSNotification*)notification {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
     id response = notification.object;
-    NSLog(@"login response:%@",response);
+//    NSLog(@"login response:%@",response);
     if ([response isKindOfClass:[NSError class]]) {
         
         //        [self showTitleBar:@"SIGN IN"];

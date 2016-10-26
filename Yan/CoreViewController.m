@@ -593,7 +593,7 @@
         
         [self presentViewController:alert animated:YES completion:^{
             
-//            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:response];
+            [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:response];
         }];
     }
 }

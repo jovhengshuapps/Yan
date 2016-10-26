@@ -267,7 +267,8 @@ BOOL hackFromLoad = NO;
     NSArray *orderList = (NSArray*)notification.object;
     
     KEYWINDOW.windowLevel = UIWindowLevelNormal;
-    [_labelTextStatus removeFromSuperview];
+    [self.labelTextStatus removeFromSuperview];
+    self.labelTextStatus = nil;
     
     
 //    [self.navigationItem setPrompt:nil];

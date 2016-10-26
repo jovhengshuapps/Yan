@@ -285,7 +285,8 @@
     NSArray *orderList = (NSArray*)notification.object;
     
     KEYWINDOW.windowLevel = UIWindowLevelNormal;
-    [_labelTextStatus removeFromSuperview];
+    [self.labelTextStatus removeFromSuperview];
+    self.labelTextStatus = nil;
 //    [self.navigationItem setPrompt:nil];
     for (NSDictionary *data in orderList) {
         NSManagedObjectContext *context = ((AppDelegate*)[UIApplication sharedApplication].delegate).managedObjectContext;

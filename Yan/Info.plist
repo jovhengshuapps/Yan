@@ -15,7 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.01</string>
+	<string>1.03</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -33,7 +33,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>373</string>
+	<string>375</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -86,9 +86,11 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Please enable the app to use Camera to scan for Restaurant QR Codes</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Localization Services is required</string>
+	<string>Location Services is required</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Location Services is required</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Localization Services is required</string>
+	<string>Location Services is required</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Yan would like to access your Photos</string>
 	<key>NSRemindersUsageDescription</key>

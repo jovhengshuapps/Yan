@@ -9,6 +9,6 @@
 #import "CoreViewController.h"
 #import "QRCodeReaderDelegate.h"
 
-@interface QRReaderViewController : CoreViewController <QRCodeReaderDelegate>
+@interface QRReaderViewController : CoreViewController <QRCodeReaderDelegate, CLLocationManagerDelegate>
 
 @end

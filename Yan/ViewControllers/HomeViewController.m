@@ -183,7 +183,8 @@
     
     
     KEYWINDOW.windowLevel = UIWindowLevelNormal;
-    [_labelTextStatus removeFromSuperview];
+    [self.labelTextStatus removeFromSuperview];
+    self.labelTextStatus = nil;
     
     if ([notification.object isEqualToString:@"ProceedToMenu"]) {
         _viewDefaultHome.hidden = NO;
@@ -488,7 +489,8 @@
 //    [self.navigationItem setPrompt:nil];
     
     KEYWINDOW.windowLevel = UIWindowLevelNormal;
-    [_labelTextStatus removeFromSuperview];
+    [self.labelTextStatus removeFromSuperview];
+    self.labelTextStatus = nil;
     
     if ([response isKindOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
         
@@ -554,7 +556,8 @@
     id response = notification.object;
     
     KEYWINDOW.windowLevel = UIWindowLevelNormal;
-    [_labelTextStatus removeFromSuperview];
+    [self.labelTextStatus removeFromSuperview];
+    self.labelTextStatus = nil;
     
 //    [self.navigationItem setPrompt:nil];
     if ([response isKindOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {

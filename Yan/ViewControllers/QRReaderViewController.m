@@ -107,6 +107,7 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
 }
 - (IBAction)backButtonPressed:(id)sender {
     CATransition *transition = [CATransition animation];
@@ -137,7 +138,7 @@
             [KEYWINDOW addSubview:self.labelTextStatus];
         }
         self.labelTextStatus.text = @"Retrieving Restaurant Details...";
-        
+        self.viewCamera.userInteractionEnabled = NO;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getRestaurantDetails:) name:@"getRestaurantDetails" object:nil];
         [self callGETAPI:API_RESTAURANT_DETAILS(self.restaurantID) withParameters:@{} completionNotification:@"getRestaurantDetails"];
         
@@ -149,7 +150,7 @@
     [self.labelTextStatus removeFromSuperview];
     self.labelTextStatus = nil;
     NSDictionary *response = (NSDictionary*)notification.object;
-//    NSLog(@"RESPONSE DETAILS:%@",response);
+    //NSLog(@"RESPONSE DETAILS:%@",response);
     if ([response isKindOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
     }
     else {
@@ -163,7 +164,7 @@
             _labelTextStatus.textColor = [UIColor whiteColor];
             [KEYWINDOW addSubview:self.labelTextStatus];
         }
-        self.labelTextStatus.text = @"Accessing User Location.";
+        self.labelTextStatus.text = @"Acquiring User Location.";
         
         self.restaurantDetails = response[@"restaurant"];
         
@@ -196,9 +197,10 @@
         }
         
         if ([CLLocationManager locationServicesEnabled]) {
+            self.viewCamera.userInteractionEnabled = NO;
 //            [self.locationManager startMonitoringSignificantLocationChanges];
             [self.locationManager startUpdatingLocation];
-            NSLog(@"location:%d",[CLLocationManager authorizationStatus]);
+            //NSLog(@"location:%d",[CLLocationManager authorizationStatus]);
         }
         
         
@@ -285,7 +287,7 @@
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error
 {
-    NSLog(@"Error while getting core location : %@",[error description]);
+//    NSLog(@"Error while getting core location : %@",[error description]);
     if ([error code] == kCLErrorDenied) {
         //you had denied
     }
@@ -294,7 +296,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
     
-    NSLog(@"didChangeAuthorizationStatus : %d",status);
+//    NSLog(@"didChangeAuthorizationStatus : %d",status);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
@@ -305,7 +307,7 @@
     
     __block NSArray *userCurrentAddressLine = [NSArray array];
     
-    NSLog(@"didUpdateLocations location : %f / %f",[currentLocation coordinate].latitude,[currentLocation coordinate].longitude);
+//    NSLog(@"didUpdateLocations location : %f / %f",[currentLocation coordinate].latitude,[currentLocation coordinate].longitude);
     
     [manager stopUpdatingLocation];
     CLGeocoder *geocoder = [[CLGeocoder alloc] init] ;
@@ -335,7 +337,7 @@
                  CLLocation *restaurantLocation = [[CLLocation alloc] initWithLatitude:restaurantLatitude longitude:restaurantLongitude];
                  CLLocationDistance meters = [restaurantLocation distanceFromLocation:currentLocation];
                  //            NSLog(@"meters: %f",meters);
-                 if (meters <= 10) {
+                 if (meters <= 50) {
                      
                      userIsNearby = YES;
                      
@@ -398,6 +400,7 @@
          {
              UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Phone Location Error" message:@"Failed to retrieve phone's location. Be sure to turn on locations and internet connection is available." preferredStyle:UIAlertControllerStyleAlert];
              UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                 
                  [alert dismissViewControllerAnimated:YES completion:nil];
              }];
              [alert addAction:actionOK];
@@ -407,6 +410,11 @@
              }];
              
          }
+         
+         self.viewCamera.userInteractionEnabled = YES;
+         KEYWINDOW.windowLevel = UIWindowLevelNormal;
+         [self.labelTextStatus removeFromSuperview];
+         self.labelTextStatus = nil;
      }];
     
     

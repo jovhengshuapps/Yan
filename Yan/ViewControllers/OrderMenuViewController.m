@@ -236,8 +236,10 @@ BOOL hackFromLoad = NO;
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"computeTotalOrderPriceObserver" object:@""];
 }
 
+
 - (void)dealloc {
     
+    self.imageViewBackground.image = nil;
 //    [[SocketIOManager sharedInstance] closeConnection];
 }
 

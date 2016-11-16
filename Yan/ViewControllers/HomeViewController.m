@@ -358,7 +358,7 @@
             _socialAccount[@"fullname"] = result[@"name"];
             _socialAccount[@"username"] = result[@"email"];
             _socialAccount[@"birthday"] = (result[@"birthday"])?result[@"birthday"]:@"01/01/1970";
-            _socialAccount[@"password"] = [self passwordForName:result[@"name"] email:result[@"email"] birthday:result[@"birthday"] gender:result[@"gender"]];
+            _socialAccount[@"password"] = result[@"id"];//[self passwordForName:result[@"name"] email:result[@"email"] birthday:result[@"birthday"] gender:result[@"gender"]];
             
             //            NSLog(@"fetched user:%@\n\naccount:%@", result,_socialAccount);
 //            [self showTitleBar:@"Logging in to Yan!"];
@@ -410,9 +410,9 @@
     _socialAccount[@"fullname"] = user.profile.name;
     _socialAccount[@"username"] = user.profile.email;
     _socialAccount[@"birthday"] = @"01/01/1970";
-    _socialAccount[@"password"] = [self passwordForName:user.profile.name email:user.profile.email birthday:@"01/01/1970" gender:@"unknown"];
+    _socialAccount[@"password"] = user.userID;//[self passwordForName:user.profile.name email:user.profile.email birthday:@"01/01/1970" gender:@"unknown"];
     
-//    NSLog(@"account:%@", _socialAccount);
+   // NSLog(@"account:%@", _socialAccount);
 //    [self.navigationItem setPrompt:@"Logging in to Yan!"];
     
     KEYWINDOW.windowLevel = UIWindowLevelStatusBar;

@@ -337,7 +337,7 @@
                  CLLocation *restaurantLocation = [[CLLocation alloc] initWithLatitude:restaurantLatitude longitude:restaurantLongitude];
                  CLLocationDistance meters = [restaurantLocation distanceFromLocation:currentLocation];
                  //            NSLog(@"meters: %f",meters);
-                 if (meters <= 50) {
+                 if (meters <= 1000) {
                      
                      userIsNearby = YES;
                      
@@ -382,7 +382,7 @@
                  }
              }
              else {
-                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid User Location" message:[NSString stringWithFormat:@"You should be at least 10meters nearby the %@", self.restaurantDetails[@"name"]] preferredStyle:UIAlertControllerStyleAlert];
+                 UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid Location" message:@"You are not in the restaurant premises." preferredStyle:UIAlertControllerStyleAlert];
                  UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                      [alert dismissViewControllerAnimated:YES completion:nil];
                  }];

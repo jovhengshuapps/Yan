@@ -299,6 +299,13 @@
         }
 
     }
+    else if (alertView.tag == 1900 && buttonIndex == 0) {
+        
+        BOOL is_DEBUG = [[[NSUserDefaults standardUserDefaults] objectForKey:@"isDEBUG"] boolValue];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:!is_DEBUG] forKey:@"isDEBUG"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
     else {
         
         [alertView dismissAlertView];
@@ -693,6 +700,18 @@
     
     AlertView *alert = [[AlertView alloc] initAlertWithMessage:message delegate:self buttons:@[@"YES",@"NO"]];
     alert.tag = 1990;
+    [alert showAlertView];
+}
+- (IBAction)switchAPI:(id)sender {
+    
+    BOOL is_DEBUG = [[[NSUserDefaults standardUserDefaults] objectForKey:@"isDEBUG"] boolValue];
+    
+    
+    
+    NSString *message = [NSString stringWithFormat:@"Are you sure you wanna switch to %@?",is_DEBUG?@"PROD SERVER":@"DEV SERVER"];
+    
+    AlertView *alert = [[AlertView alloc] initAlertWithMessage:message delegate:self buttons:@[@"YES",@"NO"]];
+    alert.tag = 1900;
     [alert showAlertView];
 }
 

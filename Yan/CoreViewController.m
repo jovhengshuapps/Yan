@@ -340,7 +340,7 @@
     if (user.token) {
         [manager.requestSerializer setValue:user.token forHTTPHeaderField:@"x-yan-resto-api"];
     }
-    
+    NSLog(@"base:%@ method:%@",baseURL,method);
     [self callGetSessionManager:manager :method :parameters :notificationName];
 }
 
@@ -355,7 +355,9 @@
         
         [manager.requestSerializer setValue:user.token forHTTPHeaderField:@"x-yan-resto-api"];
     }
-//    NSLog(@"METHOD:%@",method);
+    
+    
+    NSLog(@"base:%@ method:%@",baseURL,method);
     [self callPostSessionManager:manager :method :parameters :notificationName];
 }
 

@@ -70,9 +70,13 @@
 //#define ARTSY_LOGO_URL                                                  @"/yan-uploads/yan_uploads/J9TN1GDYYN8U/image_JABGsi1.jpeg"
 
 // API CALLS
-#define BASE_URL                                                        @"http://yan.bilinear.ph"
+//#define BASE_URL                                                        @"http://yan.bilinear.ph"
+//
+//#define BASE_API_URL                                                    [NSString stringWithFormat:@"%@%@",BASE_URL,@"/api_v1/"]
 
-#define BASE_API_URL                                                    [NSString stringWithFormat:@"%@%@",BASE_URL,@"/api_v1/"]
+#define BASE_URL                                                        [NSString stringWithFormat:@"http://%@.yan.com.ph/",[[[NSUserDefaults standardUserDefaults] objectForKey:@"isDEBUG"] boolValue]?@"dev":@"prod"]
+
+#define BASE_API_URL                                                    [NSString stringWithFormat:@"http://%@.yan.com.ph/",[[[NSUserDefaults standardUserDefaults] objectForKey:@"isDEBUG"] boolValue]?@"dev":@"prod"]
 
 #define API_USER_REGISTER                                               @"user/register"
 

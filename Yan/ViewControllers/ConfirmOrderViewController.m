@@ -1176,6 +1176,8 @@
         loggedUSER.current_tableNumber = @"";
         loggedUSER.current_restaurantName = @"";
         loggedUSER.current_orderID = @"";
+        loggedUSER.restaurant_logo_data = nil;
+        loggedUSER.restaurant_logo_url = @"";
         
         error = nil;
         if (![context save:&error]) {

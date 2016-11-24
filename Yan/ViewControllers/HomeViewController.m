@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *loginButton; //facebook
 @property (weak, nonatomic) IBOutlet UIButton *googleLoginButton; //google
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewBackground;
+@property (weak, nonatomic) IBOutlet UIButton *buttonSwitchAPI;
 
 @property (strong, nonatomic) NSMutableDictionary *socialAccount;
 @property (assign, nonatomic) NSInteger restaurantID;
@@ -44,7 +45,9 @@
     
     [super viewDidLoad];
     
-    
+    UITapGestureRecognizer *tapThree = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchAPI:)];
+    tapThree.numberOfTapsRequired = 3;
+    [self.buttonSwitchAPI addGestureRecognizer:tapThree];
     
     
 }

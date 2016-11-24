@@ -210,7 +210,7 @@
     NSURL *baseURL = [NSURL URLWithString:BASE_URL];
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseURL];
     manager.responseSerializer = [AFImageResponseSerializer serializer];
-    
+    NSLog(@"base:%@ url:%@",baseURL,urlPath);
     NSURLSessionDataTask *task = [manager dataTaskWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlPath relativeToURL:baseURL]] completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         NETWORK_INDICATOR(NO)
         
@@ -340,7 +340,7 @@
     if (user.token) {
         [manager.requestSerializer setValue:user.token forHTTPHeaderField:@"x-yan-resto-api"];
     }
-    NSLog(@"base:%@ method:%@",baseURL,method);
+//    NSLog(@"base:%@ method:%@",baseURL,method);
     [self callGetSessionManager:manager :method :parameters :notificationName];
 }
 
@@ -357,7 +357,7 @@
     }
     
     
-    NSLog(@"base:%@ method:%@",baseURL,method);
+//    NSLog(@"base:%@ method:%@",baseURL,method);
     [self callPostSessionManager:manager :method :parameters :notificationName];
 }
 

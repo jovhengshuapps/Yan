@@ -76,7 +76,7 @@
 
 #define BASE_URL                                                        [NSString stringWithFormat:@"http://%@.yan.com.ph/",[[[NSUserDefaults standardUserDefaults] objectForKey:@"isDEBUG"] boolValue]?@"dev":@"prod"]
 
-#define BASE_API_URL                                                    [NSString stringWithFormat:@"http://%@.yan.com.ph/",[[[NSUserDefaults standardUserDefaults] objectForKey:@"isDEBUG"] boolValue]?@"dev":@"prod"]
+#define BASE_API_URL                                                    [NSString stringWithFormat:@"http://%@.yan.com.ph/api_v1/",[[[NSUserDefaults standardUserDefaults] objectForKey:@"isDEBUG"] boolValue]?@"dev":@"prod"]
 
 #define API_USER_REGISTER                                               @"user/register"
 

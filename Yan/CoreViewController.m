@@ -586,7 +586,7 @@
     
     
     [alert addAction:actionOK];
-    
+//    NSLog(@"socialOBS:%@",response);
     if ([notificationName isEqualToString:@"socialLoginObserver"] == YES && [response[@"error"] integerValue] == 404) {
         [[NSNotificationCenter defaultCenter] postNotificationName:notificationName object:response];
         //do nothing

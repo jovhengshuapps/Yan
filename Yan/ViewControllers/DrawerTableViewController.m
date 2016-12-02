@@ -117,9 +117,9 @@
             
             error = nil;
             if ([context save:&error]) {
-                //            [[GIDSignIn sharedInstance] signOut];
-                //            FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-                //            [login logOut];
+                            [[GIDSignIn sharedInstance] signOut];
+                            FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+                            [login logOut];
                 
                 //remove orders
                 NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:@"OrderList"];

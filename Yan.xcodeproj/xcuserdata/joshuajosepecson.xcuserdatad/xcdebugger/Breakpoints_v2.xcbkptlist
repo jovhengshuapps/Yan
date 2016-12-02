@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Yan/ViewControllers/HomeViewController.m"
-            timestampString = "501671304.531441"
+            timestampString = "502372709.188547"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "391"
-            endingLineNumber = "391"
+            startingLineNumber = "392"
+            endingLineNumber = "392"
             landmarkName = "-getYanAccountFromFacebook"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Yan/ViewControllers/HomeViewController.m"
-            timestampString = "501671304.531441"
+            timestampString = "502372709.188547"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "452"
-            endingLineNumber = "452"
+            startingLineNumber = "453"
+            endingLineNumber = "453"
             landmarkName = "-loginSuccessful:"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Yan/ViewControllers/HomeViewController.m"
-            timestampString = "501671304.531441"
+            timestampString = "502372709.188547"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "483"
-            endingLineNumber = "483"
+            startingLineNumber = "484"
+            endingLineNumber = "484"
             landmarkName = "-loginSuccessful:"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Yan/ViewControllers/HomeViewController.m"
-            timestampString = "501671304.531441"
+            timestampString = "502372709.188547"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "500"
-            endingLineNumber = "500"
+            startingLineNumber = "501"
+            endingLineNumber = "501"
             landmarkName = "-registerCompletedMethod:"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,7 +122,7 @@
                   moduleName = "Yan"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/joshuajosepecson/Projects/Arbie%20Team/Yan/Yan/ViewControllers/QRReaderViewController.m"
-                  timestampString = "499256437.865378"
+                  timestampString = "502282890.928658"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "308"
@@ -137,7 +137,7 @@
                   moduleName = "Yan"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/joshuajosepecson/Projects/Arbie%20Team/Yan/Yan/ViewControllers/QRReaderViewController.m"
-                  timestampString = "499256437.866751"
+                  timestampString = "502282890.929981"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "308"
@@ -152,7 +152,7 @@
                   moduleName = "Yan"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/joshuajosepecson/Projects/Arbie%20Team/Yan/Yan/ViewControllers/QRReaderViewController.m"
-                  timestampString = "499256437.868068"
+                  timestampString = "502282890.931775"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "308"
@@ -239,6 +239,22 @@
             startingLineNumber = "177"
             endingLineNumber = "177"
             landmarkName = "-getRestaurantDetails:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Yan/ViewControllers/HomeViewController.m"
+            timestampString = "502372709.188547"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "505"
+            endingLineNumber = "505"
+            landmarkName = "-registerCompletedMethod:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

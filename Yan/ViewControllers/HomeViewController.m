@@ -22,7 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *loginButton; //facebook
 @property (weak, nonatomic) IBOutlet UIButton *googleLoginButton; //google
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewBackground;
-@property (weak, nonatomic) IBOutlet UIButton *buttonSwitchAPI;
+//@property (weak, nonatomic) IBOutlet UIButton *buttonSwitchAPI;
+@property (weak, nonatomic) IBOutlet UIImageView *logoYanImageView;
 
 @property (strong, nonatomic) NSMutableDictionary *socialAccount;
 @property (assign, nonatomic) NSInteger restaurantID;
@@ -47,7 +48,7 @@
     
     UITapGestureRecognizer *tapThree = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchAPI:)];
     tapThree.numberOfTapsRequired = 3;
-    [self.buttonSwitchAPI addGestureRecognizer:tapThree];
+    [self.logoYanImageView addGestureRecognizer:tapThree];
     
     
 }
@@ -370,7 +371,7 @@
             _socialAccount[@"birthday"] = (result[@"birthday"])?result[@"birthday"]:@"01/01/1970";
             _socialAccount[@"password"] = result[@"id"];//[self passwordForName:result[@"name"] email:result[@"email"] birthday:result[@"birthday"] gender:result[@"gender"]];
             
-            //            NSLog(@"fetched user:%@\n\naccount:%@", result,_socialAccount);
+//                        NSLog(@"fetched user:%@\n\naccount:%@", result,_socialAccount);
 //            [self showTitleBar:@"Logging in to Yan!"];
 //            [self.navigationItem setPrompt:@"Logging in to Yan!"];
             
@@ -505,6 +506,13 @@
     if ([response isKindOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
         
         //        [self showTitleBar:@"SIGN IN"];
+        
+        [[GIDSignIn sharedInstance] signOut];
+        FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+        [login logOut];
+        
+        
+        
         self.view.userInteractionEnabled = YES;
         return;
     }
@@ -516,73 +524,74 @@
     }
 }
 
-- (void)gloginSuccessful:(NSNotification*)notification {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
-    id response = notification.object;
-    if ([response isKindOfClass:[NSError class]]) {
-        
-//        [self showTitleBar:@"SIGN IN"];
-        self.view.userInteractionEnabled = YES;
-        return;
-    }
-    if (response[@"token"]){
-        if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"] :response[@"uid"]]) {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-            self.view.userInteractionEnabled = YES;
-            [self changeView:nil];
-        }
-    } else {
-        
-//        [self.navigationItem setPrompt:@"Creating Yan! account"];
-        
-        
-        KEYWINDOW.windowLevel = UIWindowLevelStatusBar;
-        
-        if (!self.labelTextStatus) {
-            _labelTextStatus = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, KEYWINDOW.frame.size.width, 20.0f)];
-            _labelTextStatus.backgroundColor = [UIColor clearColor];
-            _labelTextStatus.textColor = [UIColor whiteColor];
-            [KEYWINDOW addSubview:self.labelTextStatus];
-        }
-        _labelTextStatus.text = @"Logging in to Yan!";
-        
-        self.view.userInteractionEnabled = NO;
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gregisterCompletedMethod:) name:@"registerCompletedObserver" object:nil];
-        [self callAPI:API_USER_REGISTER withParameters:@{
-                                                         @"user_email": _socialAccount[@"username"],
-                                                         @"user_password": _socialAccount[@"password"],
-                                                         @"full_name": _socialAccount[@"fullname"],
-                                                         @"birthday": _socialAccount[@"birthday"]
-                                                         } completionNotification:@"registerCompletedObserver"];
-    }
-    
-    
-}
-
-
-- (void)gregisterCompletedMethod:(NSNotification*)notification {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
-    id response = notification.object;
-    
-    KEYWINDOW.windowLevel = UIWindowLevelNormal;
-    [self.labelTextStatus removeFromSuperview];
-    self.labelTextStatus = nil;
-    
-//    [self.navigationItem setPrompt:nil];
-    if ([response isKindOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
-        
-        //        [self showTitleBar:@"SIGN IN"];
-        self.view.userInteractionEnabled = YES;
-        return;
-    }
-    if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"] :response[@"uid"]]) {
-        self.view.userInteractionEnabled = YES;
-        [self.navigationController popToRootViewControllerAnimated:YES];
-        self.view.userInteractionEnabled = YES;
-        [self changeView:nil];
-    }
-}
+//- (void)gloginSuccessful:(NSNotification*)notification {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
+//    id response = notification.object;
+//    if ([response isKindOfClass:[NSError class]]) {
+//        
+////        [self showTitleBar:@"SIGN IN"];
+//        self.view.userInteractionEnabled = YES;
+//        return;
+//    }
+//    if (response[@"token"]){
+//        if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"] :response[@"uid"]]) {
+//            [self.navigationController popToRootViewControllerAnimated:YES];
+//            self.view.userInteractionEnabled = YES;
+//            [self changeView:nil];
+//        }
+//    } else {
+//        
+////        [self.navigationItem setPrompt:@"Creating Yan! account"];
+//        
+//        
+//        KEYWINDOW.windowLevel = UIWindowLevelStatusBar;
+//        
+//        if (!self.labelTextStatus) {
+//            _labelTextStatus = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, KEYWINDOW.frame.size.width, 20.0f)];
+//            _labelTextStatus.backgroundColor = [UIColor clearColor];
+//            _labelTextStatus.textColor = [UIColor whiteColor];
+//            [KEYWINDOW addSubview:self.labelTextStatus];
+//        }
+//        _labelTextStatus.text = @"Logging in to Yan!";
+//        
+//        self.view.userInteractionEnabled = NO;
+//        
+//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(gregisterCompletedMethod:) name:@"registerCompletedObserver" object:nil];
+//        [self callAPI:API_USER_REGISTER withParameters:@{
+//                                                         @"user_email": _socialAccount[@"username"],
+//                                                         @"user_password": _socialAccount[@"password"],
+//                                                         @"full_name": _socialAccount[@"fullname"],
+//                                                         @"birthday": _socialAccount[@"birthday"]
+//                                                         } completionNotification:@"registerCompletedObserver"];
+//    }
+//    
+//    
+//}
+//
+//
+//- (void)gregisterCompletedMethod:(NSNotification*)notification {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:notification.name object:nil];
+//    id response = notification.object;
+//    
+//    KEYWINDOW.windowLevel = UIWindowLevelNormal;
+//    [self.labelTextStatus removeFromSuperview];
+//    self.labelTextStatus = nil;
+//    
+////    [self.navigationItem setPrompt:nil];
+//    if ([response isKindOfClass:[NSError class]] || ([response isKindOfClass:[NSDictionary class]] && [[response allKeys] containsObject:@"error"])) {
+//        
+//        //        [self showTitleBar:@"SIGN IN"];
+//        self.view.userInteractionEnabled = YES;
+//        
+//        return;
+//    }
+//    if ([self saveLoggedInAccount:_socialAccount[@"username"] :_socialAccount[@"password"] :_socialAccount[@"fullname"] :_socialAccount[@"birthday"] :response[@"token"] :response[@"uid"]]) {
+//        self.view.userInteractionEnabled = YES;
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+//        self.view.userInteractionEnabled = YES;
+//        [self changeView:nil];
+//    }
+//}
 
 - (NSString*)passwordForName:(NSString*)name email:(NSString*)email birthday:(NSString*)birthday gender:(NSString*)gender{
     NSMutableString * password = [NSMutableString new];

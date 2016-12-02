@@ -816,7 +816,7 @@ You may now start using the app for your favourite restaurant.</string>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tgp-Gg-M5s">
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yan-red-gold" translatesAutoresizingMaskIntoConstraints="NO" id="Tb7-qF-VlY">
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yan-red-gold" translatesAutoresizingMaskIntoConstraints="NO" id="Tb7-qF-VlY">
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="350" id="Q8y-7W-UMq">
                                                 <variation key="heightClass=regular-widthClass=compact" constant="300"/>
@@ -946,12 +946,6 @@ You may now start using the app for your favourite restaurant.</string>
                                             <segue destination="9eW-Mt-EhP" kind="show" identifier="viewLoginToRegister" id="YJZ-bv-B1B"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m4V-HS-7nM">
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="10" id="Nh4-PZ-gAQ"/>
-                                        </constraints>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -959,9 +953,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     <constraint firstItem="ys0-bx-rZi" firstAttribute="trailing" secondItem="ijs-HE-ZE3" secondAttribute="trailing" id="5dW-7C-vmz"/>
                                     <constraint firstItem="6Qm-A0-viu" firstAttribute="leading" secondItem="tgp-Gg-M5s" secondAttribute="leading" constant="20" id="AQy-5P-zS8"/>
                                     <constraint firstAttribute="trailing" secondItem="NB5-Ks-W5G" secondAttribute="trailing" constant="20" id="AmT-wM-cLa"/>
-                                    <constraint firstAttribute="trailing" secondItem="m4V-HS-7nM" secondAttribute="trailing" id="FAM-Cl-fxN"/>
                                     <constraint firstAttribute="trailing" secondItem="T9G-O8-pvI" secondAttribute="trailing" constant="20" id="Ju7-e5-o04"/>
-                                    <constraint firstItem="m4V-HS-7nM" firstAttribute="leading" secondItem="tgp-Gg-M5s" secondAttribute="leading" id="OUC-cd-Iyu"/>
                                     <constraint firstItem="ijs-HE-ZE3" firstAttribute="leading" secondItem="tgp-Gg-M5s" secondAttribute="leading" constant="20" id="PbD-FQ-Tev"/>
                                     <constraint firstItem="6Qm-A0-viu" firstAttribute="top" secondItem="NB5-Ks-W5G" secondAttribute="bottom" constant="8" id="Qds-JW-jQT"/>
                                     <constraint firstAttribute="trailing" secondItem="jl4-oh-96a" secondAttribute="trailing" constant="20" id="Rhc-R0-7bQ"/>
@@ -978,7 +970,6 @@ You may now start using the app for your favourite restaurant.</string>
                                     <constraint firstItem="Tb7-qF-VlY" firstAttribute="centerX" secondItem="tgp-Gg-M5s" secondAttribute="centerX" id="qmp-xO-25g"/>
                                     <constraint firstItem="Tb7-qF-VlY" firstAttribute="leading" secondItem="tgp-Gg-M5s" secondAttribute="leading" constant="15" id="rlT-Hh-I7q"/>
                                     <constraint firstItem="Tb7-qF-VlY" firstAttribute="top" secondItem="tgp-Gg-M5s" secondAttribute="top" constant="8" id="sQY-d0-9RO"/>
-                                    <constraint firstAttribute="bottom" secondItem="m4V-HS-7nM" secondAttribute="bottom" id="sxY-gc-41z"/>
                                     <constraint firstItem="jl4-oh-96a" firstAttribute="leading" secondItem="tgp-Gg-M5s" secondAttribute="leading" constant="20" id="ufv-Ks-6YE"/>
                                     <constraint firstItem="ijs-HE-ZE3" firstAttribute="top" secondItem="T9G-O8-pvI" secondAttribute="bottom" constant="8" id="vWZ-B8-iYY"/>
                                 </constraints>
@@ -1148,10 +1139,10 @@ You may now start using the app for your favourite restaurant.</string>
                     </view>
                     <navigationItem key="navigationItem" id="P7h-xG-Rai"/>
                     <connections>
-                        <outlet property="buttonSwitchAPI" destination="m4V-HS-7nM" id="iiq-1Q-Hba"/>
                         <outlet property="googleLoginButton" destination="NB5-Ks-W5G" id="qOA-l0-9oV"/>
                         <outlet property="imageViewBackground" destination="3sK-bI-OC4" id="bYU-no-V6H"/>
                         <outlet property="loginButton" destination="jl4-oh-96a" id="uLb-D8-jGm"/>
+                        <outlet property="logoYanImageView" destination="Tb7-qF-VlY" id="MtI-Yj-AYO"/>
                         <outlet property="view" destination="bMm-dl-bE7" id="o5a-iK-0HO"/>
                         <outlet property="viewDefaultHome" destination="zuP-t9-tV0" id="LqA-em-Rv2"/>
                         <outlet property="viewLogin" destination="tgp-Gg-M5s" id="ptK-r8-szj"/>
@@ -1998,7 +1989,7 @@ You may now start using the app for your favourite restaurant.</string>
                                         <rect key="frame" x="0.0" y="28" width="383" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ul3-yw-dOb" id="8gz-Pv-zNW">
-                                            <frame key="frameInset" width="383" height="43.5"/>
+                                            <frame key="frameInset" width="383" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bTN-IF-nUi">
@@ -2467,7 +2458,7 @@ You may now start using the app for your favourite restaurant.</string>
                                         <rect key="frame" x="0.0" y="28" width="383" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CVN-mn-2SH" id="FJ2-KL-52i">
-                                            <frame key="frameInset" width="383" height="64.5"/>
+                                            <frame key="frameInset" width="383" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="x100" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5q-Z2-vbS">
@@ -2656,7 +2647,7 @@ You may now start using the app for your favourite restaurant.</string>
                                         <rect key="frame" x="0.0" y="93" width="383" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bL7-9m-pH2" id="zc5-UD-8xN">
-                                            <frame key="frameInset" width="383" height="64.5"/>
+                                            <frame key="frameInset" width="383" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="MENU ITEM" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xMW-wK-cTG">
@@ -2862,7 +2853,7 @@ You may now start using the app for your favourite restaurant.</string>
                                         <rect key="frame" x="0.0" y="28" width="383" height="88"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="igG-4U-lpd" id="lLU-C8-Y3t">
-                                            <frame key="frameInset" width="383" height="87.5"/>
+                                            <frame key="frameInset" width="383" height="87"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGm-l4-7sY">
@@ -3173,7 +3164,7 @@ You may now start using the app for your favourite restaurant.</string>
                                         <rect key="frame" x="0.0" y="358" width="383" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o88-XA-LM2" id="gqA-3e-MuO">
-                                            <frame key="frameInset" width="383" height="59.5"/>
+                                            <frame key="frameInset" width="383" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleAspectFit" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rgO-Sd-TDr">
@@ -3415,7 +3406,7 @@ You may now start using the app for your favourite restaurant.</string>
                                         <rect key="frame" x="0.0" y="28" width="383" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sgw-sN-Jpc" id="ngS-pn-uOb">
-                                            <frame key="frameInset" width="383" height="43.5"/>
+                                            <frame key="frameInset" width="383" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTO-yN-fJ0">
@@ -4918,11 +4909,11 @@ You may now start using the app for your favourite restaurant.</string>
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0nA-UJ-sdm" id="KUO-9P-rY6">
-                                    <frame key="frameInset" width="342" height="43.5"/>
+                                    <frame key="frameInset" width="342" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gfM-Gv-6S2">
-                                            <frame key="frameInset" minX="15" width="325" height="43.5"/>
+                                            <frame key="frameInset" minX="15" width="325" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -4938,7 +4929,7 @@ You may now start using the app for your favourite restaurant.</string>
                                 <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CkX-0o-piw" id="SDI-K5-qYz">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNe-6V-zpd">
@@ -5022,11 +5013,11 @@ You may now start using the app for your favourite restaurant.</string>
                                 <rect key="frame" x="0.0" y="116" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kqn-tF-YVf" id="kaW-Cb-eld">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MWo-0N-jiY">
-                                            <frame key="frameInset" minX="15" width="345" height="43.5"/>
+                                            <frame key="frameInset" minX="15" width="345" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -5693,7 +5684,7 @@ You may now start using the app for your favourite restaurant.</string>
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F2c-AR-6Uj" id="dNz-C2-Xbc">
-                                    <frame key="frameInset" width="375" height="43.5"/>
+                                    <frame key="frameInset" width="375" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 </tableViewCellContentView>
@@ -5858,7 +5849,7 @@ You may now start using the app for your favourite restaurant.</string>
                                         <rect key="frame" x="0.0" y="28" width="383" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ccZ-gA-a5Y" id="7Fv-Rd-JfO">
-                                            <frame key="frameInset" width="383" height="54.5"/>
+                                            <frame key="frameInset" width="383" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O6v-eB-Xfp">
@@ -5973,7 +5964,7 @@ You may now start using the app for your favourite restaurant.</string>
                                         <rect key="frame" x="0.0" y="83" width="383" height="75"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zkc-Gi-6Ae" id="SIu-cX-pDp">
-                                            <frame key="frameInset" width="383" height="74.5"/>
+                                            <frame key="frameInset" width="383" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Exc-aB-fsy">
@@ -6119,7 +6110,7 @@ You may now start using the app for your favourite restaurant.</string>
                                         <rect key="frame" x="0.0" y="158" width="383" height="75"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kb3-Lq-KMm" id="DTv-NL-zH6">
-                                            <frame key="frameInset" width="383" height="74.5"/>
+                                            <frame key="frameInset" width="383" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zcI-Nq-zPc">
@@ -6377,7 +6368,7 @@ You may now start using the app for your favourite restaurant.</string>
                                         <rect key="frame" x="0.0" y="233" width="383" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cUN-gc-O61" id="ge0-Mw-Q1A">
-                                            <frame key="frameInset" width="383" height="74.5"/>
+                                            <frame key="frameInset" width="383" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6lj-wJ-DHG">
@@ -6578,7 +6569,7 @@ You may now start using the app for your favourite restaurant.</string>
                                         <rect key="frame" x="0.0" y="28" width="383" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PKe-ix-u7M" id="An3-hD-fKZ">
-                                            <frame key="frameInset" width="383" height="64.5"/>
+                                            <frame key="frameInset" width="383" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="MENU ITEM" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8LN-W0-GrQ">
@@ -6700,7 +6691,7 @@ You may now start using the app for your favourite restaurant.</string>
                                         <rect key="frame" x="0.0" y="93" width="383" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BrI-0s-zb5" id="pj2-Yn-86Q">
-                                            <frame key="frameInset" width="383" height="43.5"/>
+                                            <frame key="frameInset" width="383" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Gift Certificate: x100" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="noV-Dq-U2x">
@@ -6868,7 +6859,7 @@ You may now start using the app for your favourite restaurant.</string>
                                         <rect key="frame" x="0.0" y="28" width="383" height="115"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FSJ-Cc-AGs" id="Y0f-Ou-EGf">
-                                            <frame key="frameInset" width="383" height="114.5"/>
+                                            <frame key="frameInset" width="383" height="114"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UL7-FK-3YK">
@@ -7477,7 +7468,7 @@ You may now start using the app for your favourite restaurant.</string>
                                         <rect key="frame" x="0.0" y="28" width="383" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xRs-CM-2Me" id="LuR-yN-3Bx">
-                                            <frame key="frameInset" width="383" height="43.5"/>
+                                            <frame key="frameInset" width="383" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wPe-di-STK">

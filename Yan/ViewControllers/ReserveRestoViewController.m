@@ -128,7 +128,7 @@
 
 - (BOOL) shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender {
     if ([identifier isEqualToString:@"reservationComplete"]){
-        if (_textFieldDate.text.length && _textFieldTime.text.length && /*_textFieldTableNumber.text.length &&*/ _textFieldNumberPerson.text.length) {
+        if (_textFieldDate.text.length && _textFieldTime.text.length && _textFieldTableNumber.text.length && _textFieldNumberPerson.text.length) {
             
             if (!self.policyAccepted) {
                 
@@ -172,7 +172,7 @@
             }];
         }
         else {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Incomplete Details" message:@"Date, Time and Number of Person fields are required." preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Incomplete Details" message:@"All fields are required." preferredStyle:UIAlertControllerStyleAlert];
             UIAlertAction *actionOK = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                 [alert dismissViewControllerAnimated:YES completion:nil];
             }];

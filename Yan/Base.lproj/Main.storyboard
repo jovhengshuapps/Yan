@@ -3623,7 +3623,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     <outlet property="delegate" destination="FR8-OO-KIF" id="rUN-30-u2E"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="REQUEST (OPTIONAL)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JdI-dd-xhF">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CONTACT NUMBER" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JdI-dd-xhF">
                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92156862750000001" blue="0.92156862750000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ofT-Wj-ub8">
@@ -3631,7 +3631,7 @@ You may now start using the app for your favourite restaurant.</string>
                                     </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                 <connections>
                                     <outlet property="delegate" destination="FR8-OO-KIF" id="zki-eK-GIZ"/>
                                 </connections>
@@ -7685,6 +7685,6 @@ You may now start using the app for your favourite restaurant.</string>
         <segue reference="YJZ-bv-B1B"/>
         <segue reference="iwi-F0-UhZ"/>
         <segue reference="Y4r-v0-sWo"/>
-        <segue reference="Jyy-jT-Sb2"/>
+        <segue reference="Q3B-uT-Aey"/>
     </inferredMetricsTieBreakers>
 </document>

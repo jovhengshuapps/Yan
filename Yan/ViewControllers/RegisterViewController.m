@@ -54,7 +54,7 @@
 //    AlertView *alert = [[AlertView alloc] initVideoAd:@"https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" delegate:self];
 //    alert.tag = 1;
 //    [alert showAlertView];
-    if (self.textFieldName.text.length && self.textFieldBirthday.text.length && self.textFieldEmail.text.length && self.textFieldPassword.text.length) {
+    if (self.textFieldName.text.length /*&& self.textFieldBirthday.text.length*/ && self.textFieldEmail.text.length && self.textFieldPassword.text.length) {
 //        
 //        NSURL *url = [[NSBundle mainBundle] URLForResource:@"apple" withExtension:@"mp4"];
 //        AlertView *alert = [[AlertView alloc] initVideoAd:url delegate:self];
@@ -66,7 +66,11 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(registerCompletedMethod:) name:@"registerCompletedObserver" object:nil];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"MM/dd/YYYY"];
-        NSDate *formattedDate = [dateFormatter dateFromString:self.textFieldBirthday.text];
+        NSString *bday = self.textFieldBirthday.text;
+        if (self.textFieldBirthday.text.length < 1) {
+            bday = @"01/01/1970";
+        }
+        NSDate *formattedDate = [dateFormatter dateFromString:bday];
         //    NSLog(@"formattedDate:%@",[dateFormatter stringFromDate:formattedDate]);
         [self callAPI:API_USER_REGISTER withParameters:@{
                                                          @"user_email": self.textFieldEmail.text,
